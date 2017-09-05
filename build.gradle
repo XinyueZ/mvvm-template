@@ -13,7 +13,7 @@ ext {
 
     appId = "com.example.android.architecture.blueprints.todomvvmlive"
     versionCode = 1
-    versionName = "1.0"
+    versionName = "v0.1"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 }
 
