@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MVVMTemplate</string>
+    <string name="click">Click</string>
+    <string name="greeting">Hello, MVVM template!</string>
 </resources>
