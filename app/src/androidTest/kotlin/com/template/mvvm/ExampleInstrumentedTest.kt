@@ -1,4 +1,4 @@
-package com.template.mvvn
+package com.template.mvvm
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

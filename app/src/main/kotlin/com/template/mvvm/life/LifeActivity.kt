@@ -1,11 +1,11 @@
-package com.template.mvvn.life
+package com.template.mvvm.life
 
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.LifecycleRegistry
 import android.arch.lifecycle.LifecycleRegistryOwner
 import android.support.v7.app.AppCompatActivity
-import com.example.android.architecture.blueprints.todoapp.util.obtainViewModel
+import com.template.mvvm.ext.obtainViewModel
 
 abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
 

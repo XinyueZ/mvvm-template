@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.architecture.blueprints.todoapp.util
-
+package com.template.mvvm.ext
 /**
  * Various extension functions for AppCompatActivity.
  */
@@ -27,7 +26,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
-import com.template.mvvn.life.ViewModelFactory
+import com.template.mvvm.life.ViewModelFactory
 
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is

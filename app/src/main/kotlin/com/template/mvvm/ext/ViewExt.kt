@@ -23,7 +23,7 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.support.design.widget.Snackbar
 import android.view.View
-import com.template.mvvn.life.SingleLiveData
+import com.template.mvvm.life.SingleLiveData
 
 /**
  * Transforms static java function Snackbar.make() to an extension function on View.

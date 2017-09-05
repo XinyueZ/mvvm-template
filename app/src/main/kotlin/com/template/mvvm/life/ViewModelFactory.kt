@@ -1,10 +1,10 @@
-package com.template.mvvn.life
+package com.template.mvvm.life
 
 import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.template.mvvn.home.HomeViewModel
+import com.template.mvvm.home.HomeViewModel
 
 /**
  * A creator is used to inject the product ID into the ViewModel

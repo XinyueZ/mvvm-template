@@ -11,7 +11,7 @@ ext {
     constraint = "1+"
     multiDex = "1+"
 
-    appId = "com.example.android.architecture.blueprints.todomvvmlive"
+    appId = "com.template.mvvm"
     versionCode = 1
     versionName = "v0.1"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"

@@ -1,4 +1,4 @@
-package com.template.mvvn.home
+package com.template.mvvm.home
 
 import android.content.Context
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.template.mvvn.R
-import com.template.mvvn.databinding.FragmentHomeBinding
-import com.template.mvvn.life.LifeFragment
+import com.template.mvvm.R
+import com.template.mvvm.databinding.FragmentHomeBinding
+import com.template.mvvm.life.LifeFragment
 
 class HomeFragment : LifeFragment() {
 

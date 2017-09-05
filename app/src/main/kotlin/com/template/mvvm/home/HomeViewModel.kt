@@ -1,4 +1,4 @@
-package com.template.mvvn.home
+package com.template.mvvm.home
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

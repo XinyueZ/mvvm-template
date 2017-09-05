@@ -1,11 +1,11 @@
-package com.template.mvvn.home
+package com.template.mvvm.home
 
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleFragment
 import android.os.Bundle
-import com.example.android.architecture.blueprints.todoapp.util.replaceFragmentInActivity
-import com.template.mvvn.R
-import com.template.mvvn.life.LifeActivity
+import com.template.mvvm.R
+import com.template.mvvm.ext.replaceFragmentInActivity
+import com.template.mvvm.life.LifeActivity
 
 class HomeActivity : LifeActivity() {
     override fun createViewModel(): Class<out AndroidViewModel> = HomeViewModel::class.java

@@ -1,4 +1,4 @@
-package com.template.mvvn.life
+package com.template.mvvm.life
 
 import android.arch.lifecycle.LifecycleFragment
 
