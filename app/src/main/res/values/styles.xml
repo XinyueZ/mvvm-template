@@ -1,4 +1,0 @@
-<resources>
-
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-</resources>
