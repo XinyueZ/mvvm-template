@@ -19,7 +19,6 @@ package com.example.android.architecture.blueprints.todoapp.util
  * Various extension functions for AppCompatActivity.
  */
 
-import android.app.Activity
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.support.annotation.IdRes
@@ -28,9 +27,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
-import com.example.android.architecture.blueprints.todoapp.ViewModelFactory
-
-
+import com.template.mvvn.life.ViewModelFactory
 
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is
