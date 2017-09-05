@@ -8,6 +8,7 @@ ext {
     // App dependencies
     supportLibraryVersion = '26.0.2'
     archLifecycleVersion = "1.0.0-alpha9"
+    constraint = "1+"
 
     appId = "com.example.android.architecture.blueprints.todomvvmlive"
     versionCode = 1
