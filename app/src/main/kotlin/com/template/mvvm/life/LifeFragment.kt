@@ -11,9 +11,10 @@ import android.view.ViewGroup
 abstract class LifeFragment : LifecycleFragment() {
     internal abstract fun obtainViewModel(): AndroidViewModel
     protected abstract fun getLayout(): Int
-    protected abstract fun applyViewInflation(inflater: LayoutInflater, container: ViewGroup): ViewDataBinding
+    protected abstract fun bindingView(view: View): ViewDataBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return applyViewInflation(inflater, container!!).root
+        val view = inflater.inflate(getLayout(), container, false)
+        return bindingView(view).root
     }
 }

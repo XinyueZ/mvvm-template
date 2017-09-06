@@ -1,14 +1,11 @@
 package com.template.mvvm.home
 
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.android.architecture.blueprints.todoapp.util.setupSnackbar
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentHomeBinding
@@ -35,8 +32,8 @@ class HomeFragment : LifeFragment() {
         }
     }
 
-    override fun applyViewInflation(inflater: LayoutInflater, container: ViewGroup): ViewDataBinding {
-        binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, getLayout(), container, false)
+    override fun bindingView(view: View): ViewDataBinding {
+        binding = FragmentHomeBinding.bind(view)
                 .apply {
                     vm = obtainViewModel()
                 }
