@@ -11,6 +11,12 @@ ext {
     constraint = "1+"
     multiDex = "1+"
 
+    //Rx
+    rx = "2+"
+    rxAdapter = "1+"
+    rxAndroid = "2+"
+
+
     appId = "com.template.mvvm"
     versionCode = 2
     versionName = "v0.2"

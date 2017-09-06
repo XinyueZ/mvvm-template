@@ -5,6 +5,7 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.template.mvvm.home.HomeViewModel
+import com.template.mvvm.splash.SplashViewModel
 
 /**
  * A creator is used to inject the product ID into the ViewModel
@@ -20,6 +21,7 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>) =
             with(modelClass) {
                 when {
+                    isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(application)
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
