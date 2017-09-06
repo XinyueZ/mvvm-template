@@ -9,4 +9,15 @@
     </style>
 
     <style name="AppTheme" parent="BaseTheme"/>
+
+    <style name="SplashThemeBase" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="colorPrimary">@color/colorSplashPrimary</item>
+        <item name="colorPrimaryDark">@color/colorSplashPrimary</item>
+        <item name="colorAccent">@color/colorSplashPrimary</item>
+    </style>
+
+    <style name="SplashTheme" parent="SplashThemeBase"/>
+
+    <style name="HomeTheme" parent="AppTheme"/>
 </resources>

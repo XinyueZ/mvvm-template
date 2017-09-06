@@ -5,6 +5,7 @@ import com.template.mvvm.R
 import com.template.mvvm.life.LifeActivity
 
 class SplashActivity : LifeActivity() {
+
     override fun createViewModel() = SplashViewModel::class.java
 
     override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:

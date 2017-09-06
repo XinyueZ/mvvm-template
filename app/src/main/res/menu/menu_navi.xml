@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:icon="@drawable/ic_placeholder"
+            android:title="@string/navi_menu_item_1"/>
+
+        <item
+            android:icon="@drawable/ic_placeholder"
+            android:title="@string/navi_menu_item_2"/>
+
+        <item
+            android:icon="@drawable/ic_placeholder"
+            android:title="@string/navi_menu_item_3"/>
+
+
+    </group>
+
+    <item android:title="@string/navi_group_other">
+        <menu>
+            <item
+                android:icon="@drawable/ic_placeholder"
+                android:title="@string/navi_menu_item_4"/>
+
+            <item
+                android:icon="@drawable/ic_placeholder"
+                android:title="@string/navi_menu_item_5"/>
+
+            <item
+                android:icon="@drawable/ic_placeholder"
+                android:title="@string/navi_menu_item_6"/>
+
+        </menu>
+    </item>
+</menu>
