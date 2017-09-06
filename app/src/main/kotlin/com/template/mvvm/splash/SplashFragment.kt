@@ -18,7 +18,7 @@ class SplashFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSplashBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { onVmAttached(this@SplashFragment) }
+                    vm = obtainViewModel().apply { registerLifecycleOwner(this@SplashFragment) }
                 }
         return binding
     }

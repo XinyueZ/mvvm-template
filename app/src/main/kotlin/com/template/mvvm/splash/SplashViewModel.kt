@@ -25,7 +25,7 @@ class SplashViewModel(app: Application) : LifeViewModel(app) {
 
     }
 
-    fun onVmAttached(lifecycleRegistryOwner: LifecycleRegistryOwner) {
+    override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
         Interactor.start(lifecycleRegistryOwner)
                 .subscribe(GoToHome::class, this::goHome)
                 .subscribeError(this::onActorError)
@@ -34,5 +34,6 @@ class SplashViewModel(app: Application) : LifeViewModel(app) {
         Handler().postDelayed({
             Interactor.post(GoToHome())
         }, 5000)
+        return true
     }
 }
