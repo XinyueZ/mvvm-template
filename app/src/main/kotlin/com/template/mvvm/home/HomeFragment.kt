@@ -1,6 +1,8 @@
 package com.template.mvvm.home
 
 import android.content.Context
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -26,19 +28,21 @@ class HomeFragment : LifeFragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        binding = FragmentHomeBinding.bind(root).apply {
-            vm = (activity as HomeActivity).obtainViewModel() as HomeViewModel
-        }
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm ?.let {
+        binding.vm?.let {
             view.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
         }
     }
+
+    override fun applyViewInflation(inflater: LayoutInflater, container: ViewGroup): ViewDataBinding {
+        binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, getLayout(), container, false)
+                .apply {
+                    vm = obtainViewModel()
+                }
+        return binding
+    }
+
+    override fun getLayout(): Int = R.layout.fragment_home
+    override fun obtainViewModel() = (activity as HomeActivity).obtainViewModel() as HomeViewModel
 }
