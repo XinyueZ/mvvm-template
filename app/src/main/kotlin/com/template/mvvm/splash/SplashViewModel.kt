@@ -1,6 +1,7 @@
 package com.template.mvvm.splash
 
 import android.app.Application
+import android.arch.lifecycle.LifecycleRegistryOwner
 import android.databinding.ObservableBoolean
 import android.os.Handler
 import android.util.Log
@@ -21,10 +22,11 @@ class SplashViewModel(app: Application) : LifeViewModel(app) {
 
     private fun onActorError(error: Throwable) {
         Log.d(TAG, "onActorError $error")
+
     }
 
-    fun onVmAttached() {
-        Interactor.start(this)
+    fun onVmAttached(lifecycleRegistryOwner: LifecycleRegistryOwner) {
+        Interactor.start(lifecycleRegistryOwner)
                 .subscribe(GoToHome::class, this::goHome)
                 .subscribeError(this::onActorError)
                 .register()
