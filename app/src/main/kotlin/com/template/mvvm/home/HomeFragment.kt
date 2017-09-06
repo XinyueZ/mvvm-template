@@ -40,6 +40,6 @@ class HomeFragment : LifeFragment() {
         return binding
     }
 
-    override fun getLayout(): Int = R.layout.fragment_home
+    override fun getLayout() = R.layout.fragment_home
     override fun obtainViewModel() = (activity as HomeActivity).obtainViewModel() as HomeViewModel
 }
