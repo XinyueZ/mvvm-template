@@ -35,5 +35,5 @@
         <item name="android:navigationBarColor">@color/colorSplashPrimary</item>
     </style>
 
-    <style name="HomeTheme" parent="AppTheme"/>
+    <style name="HomeTheme" parent="HomeThemeBase"/>
 </resources>

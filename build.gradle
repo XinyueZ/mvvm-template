@@ -1,6 +1,6 @@
 ext {
     // Sdk and tools
-    minSdkVersion = 14
+    minSdkVersion = 16
     targetSdkVersion = 26
     compileSdkVersion = 26
     buildToolsVersion = '26.0.1'
@@ -16,6 +16,8 @@ ext {
     rxAdapter = "1+"
     rxAndroid = "2+"
 
+    //Material Design Guideline
+    guideline = "1.0.4"
 
     appId = "com.template.mvvm"
     versionCode = 3

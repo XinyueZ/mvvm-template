@@ -19,5 +19,15 @@
 
     <style name="SplashTheme" parent="SplashThemeBase"/>
 
-    <style name="HomeTheme" parent="AppTheme"/>
+
+    <style name="HomeThemeBase" parent="AppTheme"/>
+
+    <style name="HomeTheme" parent="HomeThemeBase"/>
+
+
+    <style name="NavigationViewTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="itemIconTint">@color/naviMenuItemIconTint</item>
+        <item name="itemTextColor">@color/naviItemTextColor</item>
+        <item name="android:background">?android:attr/windowBackground</item>
+    </style>
 </resources>

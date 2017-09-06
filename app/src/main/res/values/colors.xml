@@ -3,7 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorSplashPrimary">@color/colorWhite</color>
     <color name="colorWhite">@android:color/white</color>
     <color name="colorTransparent">@android:color/transparent</color>
+
+
+    <!--Splash-->
+    <color name="colorSplashPrimary">@color/colorWhite</color>
+
+    <!--Drawer-->
+    <color name="naviItemTextColor">@color/material_grey600</color>
+    <color name="naviMenuItemIconTint">@color/material_grey800</color>
 </resources>
