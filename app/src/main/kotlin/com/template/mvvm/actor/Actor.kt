@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleRegistryOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import android.support.v4.util.SimpleArrayMap
+import android.util.Log
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import kotlin.reflect.KClass
@@ -18,11 +19,12 @@ abstract class Actor<T> {
 
     fun start(subject: LifecycleRegistryOwner) = Factory(subject, publisher)
 
-    class MyLifecycleObserver<T> internal constructor(
+    class LifecycleObserverForActor<T> internal constructor(
             private val publisher: PublishSubject<Message<T>>,
             private val successMap: SimpleArrayMap<KClass<*>, (Message<T>) -> Unit>,
             private val error: ((Throwable) -> Unit)?) : LifecycleObserver {
 
+        private val TAG = "ForActor"
         private var disposable: Disposable? = null
 
         private fun onSuccess(msg: Message<T>) {
@@ -35,11 +37,13 @@ abstract class Actor<T> {
 
         @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
         fun onResume() {
+            Log.d(TAG, "onResume")
             disposable = publisher.subscribe({ this.onSuccess(it) }) { this.onError(it) }
         }
 
         @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
         fun onPause() {
+            Log.d(TAG, "onPause")
             disposable?.let {
                 it.apply { dispose() }.also { disposable = null }
             }
@@ -47,6 +51,7 @@ abstract class Actor<T> {
 
         @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         fun onDestroy() {
+            Log.d(TAG, "onDestroy")
             successMap.clear()
         }
     }
@@ -69,7 +74,7 @@ abstract class Actor<T> {
         }
 
         fun register() {
-            val observer = MyLifecycleObserver(publisher, success, error)
+            val observer = LifecycleObserverForActor(publisher, success, error)
             subject.lifecycle
                     .addObserver(observer)
         }
