@@ -23,6 +23,6 @@ class SplashFragment : LifeFragment() {
         return binding
     }
 
-    override fun getLayout(): Int = R.layout.fragment_splash
+    override fun getLayout() = R.layout.fragment_splash
     override fun obtainViewModel() = (activity as SplashActivity).obtainViewModel() as SplashViewModel
 }
