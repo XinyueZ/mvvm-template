@@ -2,7 +2,7 @@
 
 This repository provides templates which would be based on MVVM for Android application development.
 
-The code-base will be from very begin to complicate use-cases. The purpose of the template is to ease starting Android application development with MVVM. Because of MVVM the templates uese Android [databinding](https://developer.android.com/topic/libraries/data-binding/index.html) which can help us to write declarative layouts and minimize the glue code necessary to bind your application logic and layouts. 
+The code-base will be from very begin to complicate use-cases. The purpose of the template is to ease starting Android application development with MVVM. Because of MVVM the templates use Android [databinding](https://developer.android.com/topic/libraries/data-binding/index.html) which can help us to write declarative layouts and minimize the glue code necessary to bind your application logic and layouts. 
 
 # Pattern included
 
@@ -11,7 +11,7 @@ The code-base will be from very begin to complicate use-cases. The purpose of th
 
 # Kotlin
 
-Since the official announcement of the Kotlin langauge on Android at Google I/O 2017 the Android Studio provides stable plugIn for this language and can be very confirmed that the Kotlin would be main language on Android platform. 
+Since the official announcement of the Kotlin langauge on Android at Google I/O 2017 the Android Studio has provided stable plugIn for this language and can be very confirmed that the Kotlin would be main language on Android platform. 
 
 All templates would/have been written in *Kotlin* in order to fellow new tech.
 
