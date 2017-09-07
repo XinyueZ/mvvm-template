@@ -12,6 +12,13 @@ abstract class LifeFragment : LifecycleFragment() {
     internal abstract fun obtainViewModel(): AndroidViewModel
     protected abstract fun getLayout(): Int
     protected abstract fun bindingView(view: View): ViewDataBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        retainInstance = false
+        setHasOptionsMenu(false)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(getLayout(), container, false)
