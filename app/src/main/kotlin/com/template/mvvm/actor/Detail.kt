@@ -1,8 +1,9 @@
 package com.template.mvvm.actor
 
-open class Detail(private val body: (() -> Unit)? = null) {
+open class Detail<out T>(val thing: T? = null, private val body: (() -> Unit)? = null) {
+
     companion object {
-        val DEFAULT = object: Detail() {
+        val DEFAULT = object : Detail<Any>() {
             override fun toString(): String {
                 return "Default detail of some actor."
             }
@@ -14,4 +15,10 @@ open class Detail(private val body: (() -> Unit)? = null) {
             it()
         }
     }
+
+    override fun toString() =
+            when (thing) {
+                null -> super.toString()
+                else -> thing.toString()
+            }
 }

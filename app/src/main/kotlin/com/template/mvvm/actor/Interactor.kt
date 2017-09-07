@@ -1,3 +1,3 @@
 package com.template.mvvm.actor
 
-object Interactor : Actor<Detail>()
+object Interactor : Actor<Detail<Any>>()
