@@ -19,4 +19,5 @@
     <!--Drawer-->
     <color name="naviItemTextColor">@color/material_grey600</color>
     <color name="naviMenuItemIconTint">@color/material_grey800</color>
+    <color name="naviMenuBurg">@color/colorWhite</color>
 </resources>
