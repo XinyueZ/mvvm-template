@@ -33,7 +33,7 @@ class SplashViewModel(app: Application) : LifeViewModel(app) {
 
         Handler().postDelayed({
             Interactor.post(GoHome("Go home message as demo"))
-        }, 5000)
+        }, 1500)
         return true
     }
 }
