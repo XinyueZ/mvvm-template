@@ -6,6 +6,8 @@
     <color name="colorWhite">@android:color/white</color>
     <color name="colorTransparent">@android:color/transparent</color>
 
+    <!--System-ui-->
+    <color name="colorSystemUi">@color/material_grey500</color>
 
     <!--Splash-->
     <color name="colorSplashPrimary">@color/colorWhite</color>

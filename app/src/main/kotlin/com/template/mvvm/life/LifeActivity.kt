@@ -6,6 +6,7 @@ import android.arch.lifecycle.LifecycleRegistry
 import android.arch.lifecycle.LifecycleRegistryOwner
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MotionEvent
 import com.template.mvvm.R
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.replaceFragmentInActivity
@@ -38,5 +39,12 @@ abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         uiHelper.hide()
         super.onWindowFocusChanged(hasFocus)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_UP -> uiHelper.hide()
+        }
+        return super.onTouchEvent(event)
     }
 }

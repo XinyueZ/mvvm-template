@@ -15,12 +15,10 @@
     <style name="SplashThemeBase" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
     </style>
-
     <style name="SplashTheme" parent="SplashThemeBase"/>
 
 
     <style name="HomeThemeBase" parent="AppTheme"/>
-
     <style name="HomeTheme" parent="HomeThemeBase"/>
 
 

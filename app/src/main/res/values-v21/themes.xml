@@ -5,9 +5,10 @@
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementsUseOverlay">false</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
 
-        <item name="android:statusBarColor">@color/colorTransparent</item>
+        <!--System-ui-->
+        <item name="android:navigationBarColor">@color/colorSystemUi</item>
+        <item name="android:statusBarColor">@color/colorSystemUi</item>
 
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowSharedElementEnterTransition">
@@ -31,9 +32,6 @@
     </style>
 
 
-    <style name="SplashTheme" parent="SplashThemeBase">
-        <item name="android:navigationBarColor">@color/colorSplashPrimary</item>
-    </style>
-
+    <style name="SplashTheme" parent="SplashThemeBase"/>
     <style name="HomeTheme" parent="HomeThemeBase"/>
 </resources>
