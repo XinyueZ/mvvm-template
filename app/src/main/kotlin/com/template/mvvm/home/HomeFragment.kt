@@ -21,7 +21,7 @@ class HomeFragment : LifeFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retainInstance = true
+        retainInstance = false
         setHasOptionsMenu(true)
     }
 
