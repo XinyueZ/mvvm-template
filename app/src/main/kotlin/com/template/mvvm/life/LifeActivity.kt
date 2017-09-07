@@ -22,10 +22,11 @@ abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
     abstract fun obtainViewModelView(): LifecycleFragment
 
+    abstract fun getLayout(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(getLayout())
         replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
     }
 }
