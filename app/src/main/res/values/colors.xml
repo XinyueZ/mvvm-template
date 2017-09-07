@@ -8,7 +8,7 @@
 
     <!--The main app background-->
     <!--System-ui-->
-    <color name="mainBackground">@color/material_grey50</color>
+    <color name="mainBackground">@color/colorWhite</color>
 
     <!--System-ui-->
     <color name="colorSystemUi">#80000000</color>

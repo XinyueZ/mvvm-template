@@ -3,9 +3,11 @@ package com.template.mvvm.home
 import android.app.Activity
 import android.arch.lifecycle.LifecycleFragment
 import android.content.Intent
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.R
+import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.life.LifeActivity
 
 class HomeActivity : LifeActivity() {
@@ -21,4 +23,9 @@ class HomeActivity : LifeActivity() {
     override fun getLayout() = R.layout.activity_home
     override fun createViewModel() = HomeViewModel::class.java
     override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: HomeFragment.newInstance(application)) as LifecycleFragment
+
+    lateinit var binding: ActivityHomeBinding
+    override fun setViewDataBinding(binding: ViewDataBinding) {
+        this.binding = binding as ActivityHomeBinding
+    }
 }

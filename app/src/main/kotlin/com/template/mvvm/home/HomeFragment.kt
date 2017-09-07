@@ -29,7 +29,9 @@ class HomeFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentHomeBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel()
+                    vm = obtainViewModel().apply {
+                        (activity as HomeActivity).binding.vm = drawerSubViewModel
+                    }
                 }
         return binding
     }

@@ -4,6 +4,8 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.LifecycleRegistry
 import android.arch.lifecycle.LifecycleRegistryOwner
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
@@ -26,13 +28,15 @@ abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
     abstract fun getLayout(): Int
 
+    abstract fun setViewDataBinding(binding: ViewDataBinding)
+
     private lateinit var uiHelper: SystemUiHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
         uiHelper.hide()
         super.onCreate(savedInstanceState)
-        setContentView(getLayout())
+        setViewDataBinding(DataBindingUtil.setContentView(this, getLayout()))
         replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
     }
 

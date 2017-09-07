@@ -10,9 +10,15 @@ import com.template.mvvm.life.SingleLiveData
 class HomeViewModel(app: Application) : LifeViewModel(app) {
     val title = ObservableField<String>("Home")
     val description = ObservableField<String>("The home of this application.")
+    val drawerSubViewModel = DrawerSubViewModel(getApplication())
+
     internal val snackbarMessage = SingleLiveData<String>()
 
     fun showClickFeedback() {
         snackbarMessage.value = getApplication<App>().getString(R.string.greeting)
+    }
+
+    fun toggleDrawer() {
+        drawerSubViewModel.toggleDrawer()
     }
 }

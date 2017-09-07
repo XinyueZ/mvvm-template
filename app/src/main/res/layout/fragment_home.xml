@@ -21,10 +21,11 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_menu"
+            app:onIndicatorClick="@{ vm::toggleDrawer }"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@{vm.title}"/>
 
