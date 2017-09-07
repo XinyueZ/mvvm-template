@@ -17,12 +17,13 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
-- [v0.2](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.2/splash-actor-imported): Very early with MVVM, just a home screen.
+- [v0.2](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.2/splash-actor-imported): Very early with MVVM, just a home screen. (>=API 14)
+
   1. Added a splash screen.
 
   2. Use actor model to navigate app from splash to home.
 
-- [v0.1](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.1/very-early-code-base): Very early with MVVM, just a home screen.
+- [v0.1](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.1/very-early-code-base): Very early with MVVM, just a home screen. (>=API 14)
 
 # Reference
 
