@@ -21,4 +21,8 @@
     <color name="naviMenuItemIconTint">@color/material_grey800</color>
     <color name="naviMenuBurg">@color/colorWhite</color>
     <color name="naviHeaderBackground">@color/colorPrimary</color>
+    <color name="naviDrawerBackground">@color/material_grey100</color>
+
+    <!--Bottom navi-->
+    <color name="naviBottomBackground">@color/material_grey100</color>
 </resources>

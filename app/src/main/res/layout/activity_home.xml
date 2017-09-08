@@ -18,15 +18,24 @@
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/contentFrame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_navi_height"
+                android:layout_gravity="start|bottom"
+                android:theme="@style/BottomNavigationViewTheme"
+                app:menu="@menu/menu_navi_bottom"/>
+        </android.support.design.widget.CoordinatorLayout>
 
         <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
             android:layout_width="wrap_content"
-            android:layout_height="91111dp"
+            android:layout_height="@dimen/drawer_navi_height"
             android:layout_gravity="start"
-            android:theme="@style/NavigationViewTheme"
+            android:theme="@style/DrawerNavigationViewTheme"
             app:headerLayout="@layout/layout_drawer_header"
-            app:menu="@menu/menu_navi"/>
+            app:menu="@menu/menu_navi_drawer"/>
+
+
     </android.support.v4.widget.DrawerLayout>
 </layout>

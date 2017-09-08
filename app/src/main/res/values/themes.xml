@@ -15,16 +15,26 @@
     <style name="SplashThemeBase" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
     <style name="SplashTheme" parent="SplashThemeBase"/>
 
 
     <style name="HomeThemeBase" parent="AppTheme"/>
+
     <style name="HomeTheme" parent="HomeThemeBase"/>
 
 
-    <style name="NavigationViewTheme" parent="@style/Theme.AppCompat.Light">
-        <item name="itemIconTint">@color/naviMenuItemIconTint</item>
+    <style name="DrawerNavigationViewTheme" parent="@style/Theme.AppCompat.Light">
         <item name="itemTextColor">@color/naviItemTextColor</item>
-        <item name="android:background">?android:attr/windowBackground</item>
+        <item name="itemIconTint">@color/naviMenuItemIconTint</item>
+        <item name="itemBackground">@color/naviDrawerBackground</item>
+        <item name="android:background">@color/naviDrawerBackground</item>
+    </style>
+
+    <style name="BottomNavigationViewTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="itemTextColor">@color/naviItemTextColor</item>
+        <item name="itemIconTint">@color/naviMenuItemIconTint</item>
+        <item name="itemBackground">@color/naviDrawerBackground</item>
+        <item name="android:background">@color/naviBottomBackground</item>
     </style>
 </resources>
