@@ -28,7 +28,7 @@ import com.template.mvvm.life.SingleLiveData
 /**
  * Transforms static java function Snackbar.make() to an extension function on View.
  */
-fun View.showSnackbar(snackbarText: String, timeLength: Int) {
+fun View.showSnackbar(snackbarText: String, timeLength: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(this, snackbarText, timeLength).show()
 }
 
@@ -36,7 +36,7 @@ fun View.showSnackbar(snackbarText: String, timeLength: Int) {
  * Triggers a snackbar message when the value contained by snackbarTaskMessageLiveEvent is modified.
  */
 fun View.setupSnackbar(lifecycleOwner: LifecycleOwner,
-                       liveData: SingleLiveData<String>, timeLength: Int) {
+                       liveData: SingleLiveData<String>, timeLength: Int = Snackbar.LENGTH_SHORT) {
     liveData.observe(lifecycleOwner, Observer {
         it?.let { showSnackbar(it, timeLength) }
     })

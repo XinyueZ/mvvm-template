@@ -3,7 +3,6 @@ package com.template.mvvm.home
 import android.content.Context
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.View
 import com.example.android.architecture.blueprints.todoapp.util.setupSnackbar
@@ -22,7 +21,7 @@ class HomeFragment : LifeFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm?.let {
-            view.setupSnackbar(this, it.snackbarMessage, Snackbar.LENGTH_LONG)
+            view.setupSnackbar(this, it.snackbarMessage)
         }
     }
 
