@@ -16,8 +16,10 @@
     <!--Splash-->
     <color name="colorSplashPrimary">@color/colorWhite</color>
 
-    <!--Drawer-->
+
+
     <color name="naviItemTextColor">@color/material_grey600</color>
+    <!--Drawer-->
     <color name="naviMenuItemIconTint">@color/material_grey800</color>
     <color name="naviMenuBurg">@color/colorWhite</color>
     <color name="naviHeaderBackground">@color/colorPrimary</color>
@@ -25,4 +27,5 @@
 
     <!--Bottom navi-->
     <color name="naviBottomBackground">@color/material_grey100</color>
+    <color name="naviBottomItemBackground">@color/colorTransparent</color>
 </resources>

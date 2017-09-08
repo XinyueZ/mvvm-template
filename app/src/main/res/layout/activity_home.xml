@@ -20,6 +20,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!--
+            Bottom navigation provides quick navigation between top-level views of an app. It is primarily designed for use on mobile.
+            Larger displays, like desktop, may achieve a similar effect by using side navigation.
+            For instance, the compact “rail” treatment displays navigational icons by default.
+
+
+            If your top-level navigation has more than six destinations,
+            provide access to destinations not covered in bottom navigation
+            through alternative locations, such as a navigation drawer.
+
+
+            When the view is in focus, display that view’s icon and text label
+            When there are only three actions, display both icons and text labels at all times
+            If there are four or five actions, display inactive views as icons only
+
+            !!!!!On Android, the Back button does not navigate between bottom navigation bar views.
+            -->
             <android.support.design.widget.BottomNavigationView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_navi_height"

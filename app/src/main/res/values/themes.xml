@@ -32,9 +32,9 @@
     </style>
 
     <style name="BottomNavigationViewTheme" parent="@style/Theme.AppCompat.Light">
-        <item name="itemTextColor">@color/naviItemTextColor</item>
-        <item name="itemIconTint">@color/naviMenuItemIconTint</item>
-        <item name="itemBackground">@color/naviDrawerBackground</item>
+        <item name="itemTextColor">@color/selector_bottom_navi_tint</item>
+        <item name="itemIconTint">@color/selector_bottom_navi_tint</item>
+        <item name="itemBackground">@color/naviBottomItemBackground</item>
         <item name="android:background">@color/naviBottomBackground</item>
     </style>
 </resources>
