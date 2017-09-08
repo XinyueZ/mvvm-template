@@ -3,7 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorWhite">@android:color/white</color>
+    <color name="colorWhite">@color/material_white</color>
+    <color name="colorBlack">@color/material_black</color>
     <color name="colorTransparent">@android:color/transparent</color>
 
     <!--The main app background-->
@@ -17,8 +18,7 @@
     <color name="colorSplashPrimary">@color/colorWhite</color>
 
 
-
-    <color name="naviItemTextColor">@color/material_grey600</color>
+    <color name="naviItemTextColor">@color/material_grey500</color>
     <!--Drawer-->
     <color name="naviMenuItemIconTint">@color/material_grey800</color>
     <color name="naviMenuBurg">@color/colorWhite</color>
@@ -26,6 +26,6 @@
     <color name="naviDrawerBackground">@color/material_grey100</color>
 
     <!--Bottom navi-->
-    <color name="naviBottomBackground">@color/material_grey100</color>
+    <color name="naviBottomBackground">@color/material_grey200</color>
     <color name="naviBottomItemBackground">@color/colorTransparent</color>
 </resources>

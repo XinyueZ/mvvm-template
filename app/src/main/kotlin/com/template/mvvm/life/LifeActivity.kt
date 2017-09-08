@@ -33,7 +33,7 @@ abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
     private lateinit var uiHelper: SystemUiHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
+        uiHelper = SystemUiHelper(this, SystemUiHelper.FLAG_IMMERSIVE_STICKY or SystemUiHelper.LEVEL_IMMERSIVE, 0)
         uiHelper.hide()
         super.onCreate(savedInstanceState)
         setViewDataBinding(DataBindingUtil.setContentView(this, getLayout()))
