@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import com.example.android.architecture.blueprints.todoapp.util.showSnackbar
+import com.template.mvvm.ext.showToast
 
 interface OnIndicatorClickListener {
     fun onIndicatorClick()
@@ -36,6 +37,7 @@ fun cmdNaviHandler(view: NavigationView, l: OnCommandListener?) {
             view.showSnackbar(
                     "cmdNaviHandler drawer"
             )
+            view.context.applicationContext.showToast("cmdNaviHandler bottom")
             true
         }
     }
@@ -49,6 +51,7 @@ fun cmdNaviHandler(view: BottomNavigationView, l: OnCommandListener?) {
             view.showSnackbar(
                     "cmdNaviHandler bottom"
             )
+            view.context.applicationContext.showToast("cmdNaviHandler bottom")
             true
         }
     }

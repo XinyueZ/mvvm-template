@@ -15,26 +15,16 @@
  */
 package com.example.android.architecture.blueprints.todoapp.util
 
-/**
- * Extension functions for View and subclasses of View.
- */
-
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.support.design.widget.Snackbar
 import android.view.View
 import com.template.mvvm.life.SingleLiveData
 
-/**
- * Transforms static java function Snackbar.make() to an extension function on View.
- */
 fun View.showSnackbar(snackbarText: String, timeLength: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(this, snackbarText, timeLength).show()
 }
 
-/**
- * Triggers a snackbar message when the value contained by snackbarTaskMessageLiveEvent is modified.
- */
 fun View.setupSnackbar(lifecycleOwner: LifecycleOwner,
                        liveData: SingleLiveData<String>, timeLength: Int = Snackbar.LENGTH_SHORT) {
     liveData.observe(lifecycleOwner, Observer {

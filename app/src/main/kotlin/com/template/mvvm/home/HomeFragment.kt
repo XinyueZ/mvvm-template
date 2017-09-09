@@ -8,6 +8,7 @@ import android.view.View
 import com.example.android.architecture.blueprints.todoapp.util.setupSnackbar
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentHomeBinding
+import com.template.mvvm.ext.setupToast
 import com.template.mvvm.life.LifeFragment
 
 class HomeFragment : LifeFragment() {
@@ -22,6 +23,7 @@ class HomeFragment : LifeFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.vm?.let {
             view.setupSnackbar(this, it.snackbarMessage)
+            view.context.setupToast(this, it.snackbarMessage)
         }
     }
 
