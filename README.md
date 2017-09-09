@@ -17,6 +17,22 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
+- [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom): Added application navigation driving through drawer and bottom-bar
+
+1. Support full-screen app. See https://gist.github.com/chrisbanes/73de18faffca571f7292
+
+2. Added drawer-layout for menu and header, also bottom-bar as navigation-view.
+
+3. Support Rx, imported the libraries.
+
+4. minAPI upper to 16 for the library of [Material Design Guideline](https://github.com/TheKhaeng/material-design-guideline).
+
+5. Supported basic transition between activities after platform v21.
+
+6. The ```ViewModel``` can contain some ```ViewModel```s, i.e the ```HomeViewModel``` which can contain ```DrawerSubViewModel``` to handle logical about the navigation-drawer.
+
+7. The ```LifeActivity``` would be created by using binding, the sub-classes of ```LifeActivity``` can now use data-binding.
+
 - [v0.2](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.2/splash-actor-imported): Very early with MVVM, just a home screen. (>=API 14)
 
   1. Added a splash screen.
