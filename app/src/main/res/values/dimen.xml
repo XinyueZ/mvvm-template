@@ -2,4 +2,5 @@
 <resources>
     <dimen name="drawer_navi_height">91111dp</dimen>
     <dimen name="bottom_navi_height">56dp</dimen>
+    <dimen name="item_image_size">80dp</dimen>
 </resources>

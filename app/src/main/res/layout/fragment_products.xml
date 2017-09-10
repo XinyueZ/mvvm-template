@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="com.template.mvvm.binding.recycler.LayoutManagerTypeKt"/>
+
         <variable
             name="vm"
             type="com.template.mvvm.products.ProductsViewModel"/>
@@ -32,6 +34,10 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:binding="@{vm.listBinding}"
+            app:factory="@{vm.listFactory}"
+            app:items="@{vm.productList}"
+            app:layoutManager="@{LayoutManagerTypeKt.LINEAR_VERTICAL_REVERSE}"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
     </android.support.constraint.ConstraintLayout>
 </layout>
