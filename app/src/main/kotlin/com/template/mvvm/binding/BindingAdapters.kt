@@ -44,10 +44,7 @@ fun cmdNaviHandler(view: NavigationView, l: OnCommandListener?) {
         view.setNavigationItemSelectedListener {
             it.isChecked = true
             l.onCommand(it.itemId)
-            view.showSnackbar(
-                    "cmdNaviHandler drawer"
-            )
-            view.context.applicationContext.showToast("cmdNaviHandler drawer")
+
             true
         }
     }
