@@ -33,11 +33,12 @@ fun drawerStatus(drawer: DrawerLayout, drawerToggle: Boolean) {
 fun cmdNaviHandler(view: NavigationView, l: OnCommandListener?) {
     l?.let {
         view.setNavigationItemSelectedListener {
+            it.isChecked = true
             l.onCommand(it.itemId)
             view.showSnackbar(
                     "cmdNaviHandler drawer"
             )
-            view.context.applicationContext.showToast("cmdNaviHandler bottom")
+            view.context.applicationContext.showToast("cmdNaviHandler drawer")
             true
         }
     }
