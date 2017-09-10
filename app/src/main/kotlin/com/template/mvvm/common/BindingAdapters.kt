@@ -1,24 +1,21 @@
-package com.template.mvvm.home
+package com.template.mvvm.common
 
+import android.app.Activity
 import android.databinding.BindingAdapter
+import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
+import android.widget.ImageView
 import com.example.android.architecture.blueprints.todoapp.util.showSnackbar
 import com.template.mvvm.ext.showToast
-
-interface OnIndicatorClickListener {
-    fun onIndicatorClick()
-}
-
-interface OnCommandListener {
-    fun onCommand(id: Int)
-}
+import com.template.mvvm.home.HomeActivity
 
 @BindingAdapter("drawerToggle")
-fun drawerStatus(drawer: DrawerLayout, drawerToggle: Boolean) {
+fun drawerToggle(drawer: DrawerLayout, drawerToggle: Boolean) {
     if (drawerToggle) {
         with(drawer) {
             when (isDrawerOpen(GravityCompat.START)) {
@@ -27,6 +24,18 @@ fun drawerStatus(drawer: DrawerLayout, drawerToggle: Boolean) {
             }
         }
     }
+}
+
+@BindingAdapter("onIndicatorClick")
+fun toolbarOnIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
+    l?.let {
+        toolbar.setNavigationOnClickListener { l.onIndicatorClick() }
+    }
+}
+
+@BindingAdapter("goBack")
+fun goBack(view: ConstraintLayout, goBack: Boolean) {
+    if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("command")
@@ -58,9 +67,14 @@ fun cmdNaviHandler(view: BottomNavigationView, l: OnCommandListener?) {
     }
 }
 
-@BindingAdapter("onIndicatorClick")
-fun toolbarOnIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
-    l?.let {
-        toolbar.setNavigationOnClickListener { l.onIndicatorClick() }
+@BindingAdapter("startHome")
+fun startHome(view: ImageView, startHome: Boolean) {
+    when (startHome) {
+        true -> {
+            with(view.context as Activity) {
+                HomeActivity.showInstance(this)
+                finish()
+            }
+        }
     }
 }

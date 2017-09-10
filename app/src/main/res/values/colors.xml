@@ -19,9 +19,11 @@
 
 
     <color name="naviItemTextColor">@color/material_grey500</color>
+    <!--Toolbar, appbar-->
+    <color name="naviMenuBurg">@color/colorWhite</color>
+    <color name="naviMenuBack">@color/colorWhite</color>
     <!--Drawer-->
     <color name="naviMenuItemIconTint">@color/material_grey800</color>
-    <color name="naviMenuBurg">@color/colorWhite</color>
     <color name="naviHeaderBackground">@color/colorPrimary</color>
     <color name="naviDrawerBackground">@color/material_grey100</color>
 

@@ -6,4 +6,5 @@ import android.arch.lifecycle.LifecycleRegistryOwner
 
 abstract class LifeViewModel(context: Application) : AndroidViewModel(context) {
     open fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner) = true
+
 }

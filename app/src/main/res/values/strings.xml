@@ -10,4 +10,8 @@
     <string name="navi_group_other">Other</string>
     <string name="navi_menu_item_5">item 5</string>
     <string name="navi_menu_item_6">item 6</string>
+
+
+    <string name="product_list_title">Products</string>
+    <string name="action_products">Products</string>
 </resources>
