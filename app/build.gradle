@@ -1,8 +1,17 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
@@ -65,7 +74,7 @@ dependencies {
 
     //ARCH
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
 
     //KOTLIN
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -77,7 +86,7 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.rxAdapter"
 
     //MATERIAL DESIGN GUIDELINE
-    compile ("com.github.thekhaeng:material-design-guideline:$rootProject.guideline") {
+    implementation ("com.github.thekhaeng:material-design-guideline:$rootProject.guideline") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 }

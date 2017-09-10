@@ -16,7 +16,7 @@ import de.immowelt.mobile.livestream.core.ui.binding.recycler.LayoutManagerType
 import de.immowelt.mobile.livestream.core.ui.binding.recycler.RecyclerAdapter
 
 @BindingAdapter(value = *arrayOf("items", "binding", "factory", "onItemClicked", "onItemBound", "showLoading"), requireAll = false)
-fun <T> bindItems(view: RecyclerView, items: ObservableList<T>?, binding: Binding.OnBind<T>, factory: RecyclerAdapter.ViewBindingFactory, onItemClicked: RecyclerAdapter.ItemClickListener?, onItemBound: RecyclerAdapter.ItemBoundListener?, showLoading: Boolean) {
+fun <T> bindItems(view: RecyclerView, items: ObservableList<T>?, binding: Binding.OnBind<T>?, factory: RecyclerAdapter.ViewBindingFactory?, onItemClicked: RecyclerAdapter.ItemClickListener?, onItemBound: RecyclerAdapter.ItemBoundListener?, showLoading: Boolean?) {
     if (items == null) {
         return
     }
@@ -29,7 +29,9 @@ fun <T> bindItems(view: RecyclerView, items: ObservableList<T>?, binding: Bindin
                 RecyclerAdapter(view.context)
 
     with(adapter) {
-        showLoadingIndicator(showLoading)
+        showLoading?.let {
+            showLoadingIndicator(it)
+        }
 
         bindingFactory = factory
 
@@ -37,7 +39,9 @@ fun <T> bindItems(view: RecyclerView, items: ObservableList<T>?, binding: Bindin
             this.items = items as? ObservableArrayList<T> ?: ObservableArrayList()
         }
 
-        this.binding = Binding(binding)
+        binding?.let {
+            this.binding = Binding(it)
+        }
 
         itemBound = onItemBound
         itemClick = onItemClicked
@@ -51,7 +55,7 @@ fun <T> bindItems(view: RecyclerView, items: ObservableList<T>?, binding: Bindin
 }
 
 @BindingAdapter("layoutManager")
-fun layoutManager(view: RecyclerView, @LayoutManagerType type: Long) {
+fun layoutManager(view: RecyclerView, @LayoutManagerType type: Long?) {
     val layoutManager = when (type) {
         LINEAR_VERTICAL_REVERSE -> LayoutManager.linear(LinearLayoutManager.VERTICAL, true)
         else -> LayoutManager.linear(LinearLayoutManager.VERTICAL, false)
@@ -60,8 +64,8 @@ fun layoutManager(view: RecyclerView, @LayoutManagerType type: Long) {
 }
 
 @BindingAdapter("verticalItemDivider")
-fun verticalItemDivider(view: RecyclerView, @DrawableRes verticalItemDivider: Int) {
-    if (verticalItemDivider <= 0) {
+fun verticalItemDivider(view: RecyclerView, @DrawableRes verticalItemDivider: Int?) {
+    if (verticalItemDivider == null || verticalItemDivider <= 0) {
         return
     }
 
