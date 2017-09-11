@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
+import android.view.View
 import android.widget.ImageView
 import com.example.android.architecture.blueprints.todoapp.util.showSnackbar
 import com.template.mvvm.ext.showToast
@@ -73,5 +74,14 @@ fun startHome(view: ImageView, startHome: Boolean) {
                 finish()
             }
         }
+    }
+}
+
+@BindingAdapter("dataLoaded")
+fun setLoaded(view: View, loaded: Boolean) {
+    view.visibility = if (loaded) {
+        View.GONE
+    } else {
+        View.VISIBLE
     }
 }

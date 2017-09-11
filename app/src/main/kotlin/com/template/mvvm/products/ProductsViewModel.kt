@@ -20,8 +20,10 @@ import com.template.mvvm.products.msg.LoadProductList
 class ProductsViewModel(app: Application) : LifeViewModel(app) {
     private val TAG = "ProductsViewModel"
 
+    val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
     val goBack = ObservableBoolean(false)
+    val dataLoaded = ObservableBoolean(false)
 
     //For recyclerview data
     val productList = ObservableArrayList<ProductItemViewModel>()
@@ -46,6 +48,7 @@ class ProductsViewModel(app: Application) : LifeViewModel(app) {
                 ProductItemViewModel.from(getApplication(), Product("PICK", "PICK POCKET TX - Trainers - black"))
         )
         productList.addAll(data)
+        dataLoaded.set(true)
     }
 
     private fun onActorError(error: Throwable) {

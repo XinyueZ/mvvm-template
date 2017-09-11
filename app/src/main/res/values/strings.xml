@@ -14,4 +14,5 @@
 
     <string name="product_list_title">Products</string>
     <string name="action_products">Products</string>
+    <string name="loading_products">Loading products…</string>
 </resources>
