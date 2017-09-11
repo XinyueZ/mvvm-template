@@ -2,8 +2,8 @@ package com.template.mvvm.common
 
 import android.app.Activity
 import android.databinding.BindingAdapter
-import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
@@ -35,7 +35,7 @@ fun toolbarOnIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
 }
 
 @BindingAdapter("goBack")
-fun goBack(view: ConstraintLayout, goBack: Boolean) {
+fun goBack(view: CoordinatorLayout, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
