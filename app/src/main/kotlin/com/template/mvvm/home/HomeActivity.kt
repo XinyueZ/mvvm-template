@@ -42,7 +42,7 @@ class HomeActivity : LifeActivity() {
     private fun registerOnActor() {
         Interactor.start(this)
                 .subscribe(OpenProducts::class, this::openProducts)
-                .subscribeError(this::onError)
+                .subscribeError(this::onActorError)
                 .register()
     }
 
@@ -50,7 +50,7 @@ class HomeActivity : LifeActivity() {
         ProductsActivity.showInstance(this)
     }
 
-    private fun onError(e: Throwable) {
+    private fun onActorError(e: Throwable) {
         Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
     }
 }

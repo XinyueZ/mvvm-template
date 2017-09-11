@@ -133,7 +133,7 @@ class RecyclerAdapter<T> constructor(context: Context) : RecyclerView.Adapter<Re
             return VIEW_TYPE_LOADING
         }
 
-        binding?.onItemBind(position, items.get(position))
+        binding?.onItemBind(position, items[position])
         return binding?.type ?: Binding.TYPE_DEFAULT
     }
 

@@ -1,4 +1,4 @@
-package com.template.mvvm.products.list
+package com.template.mvvm.domain
 
 data class Product(
         val title: String = "title",
