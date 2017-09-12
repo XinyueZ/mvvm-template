@@ -19,7 +19,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 - [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom): 
 
-> Added application navigation driving through drawer and bottom-bar. Show a list of dummy data with RecyclerView.
+> Added application navigation driving through drawer and bottom-bar. Show a list of dummy data with RecyclerView. Added dummy static page "about" .
 
 1. Support full-screen app. See https://gist.github.com/chrisbanes/73de18faffca571f7292
 
