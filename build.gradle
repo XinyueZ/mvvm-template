@@ -20,8 +20,8 @@ ext {
     guideline = "1.0.4"
 
     appId = "com.template.mvvm"
-    versionCode = 3
-    versionName = "v0.3"
+    versionCode = 4
+    versionName = "v0.4"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 }
 
