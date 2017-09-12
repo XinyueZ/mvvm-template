@@ -12,6 +12,7 @@ import com.template.mvvm.actor.Interactor
 import com.template.mvvm.actor.Message
 import com.template.mvvm.domain.Product
 import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.life.SingleLiveData
 import com.template.mvvm.products.list.ListBinding
 import com.template.mvvm.products.list.ListViewFactory
 import com.template.mvvm.products.list.ProductItemViewModel
@@ -23,6 +24,7 @@ class ProductsViewModel(app: Application) : LifeViewModel(app) {
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
+    internal val pageStill = SingleLiveData<Boolean>()
 
     //For recyclerview data
     val productList = ObservableArrayList<ProductItemViewModel>()
@@ -51,6 +53,7 @@ class ProductsViewModel(app: Application) : LifeViewModel(app) {
         )
         productList.addAll(data)
         dataLoaded.set(true)
+        pageStill.value = true
     }
 
     private fun onActorError(error: Throwable) {

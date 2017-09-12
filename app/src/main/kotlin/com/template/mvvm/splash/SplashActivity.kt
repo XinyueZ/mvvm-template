@@ -2,6 +2,7 @@ package com.template.mvvm.splash
 
 import android.arch.lifecycle.LifecycleFragment
 import android.databinding.ViewDataBinding
+import android.os.Bundle
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivitySplashBinding
 import com.template.mvvm.life.LifeActivity
@@ -14,5 +15,9 @@ class SplashActivity : LifeActivity() {
     lateinit var binding: ActivitySplashBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {
         this.binding = binding as ActivitySplashBinding
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        hideSystemUi(0)
     }
 }

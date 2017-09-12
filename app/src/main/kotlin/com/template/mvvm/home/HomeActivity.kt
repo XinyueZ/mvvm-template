@@ -39,6 +39,7 @@ class HomeActivity : LifeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         registerOnActor()
+        hideSystemUi(0)
     }
 
     private fun registerOnActor() {

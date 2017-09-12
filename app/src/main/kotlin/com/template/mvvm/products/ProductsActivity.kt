@@ -2,6 +2,7 @@ package com.template.mvvm.products
 
 import android.app.Activity
 import android.arch.lifecycle.LifecycleFragment
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -27,5 +28,11 @@ class ProductsActivity : LifeActivity() {
     lateinit var binding: ActivityProductsBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {
         this.binding = binding as ActivityProductsBinding
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val vm = obtainViewModel() as ProductsViewModel
+        vm.pageStill.observe(this, Observer { hideSystemUi(1500) })
     }
 }

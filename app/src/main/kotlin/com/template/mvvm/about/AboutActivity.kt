@@ -28,6 +28,10 @@ class AboutActivity : LifeActivity() {
     override fun setViewDataBinding(binding: ViewDataBinding) {
         this.binding = binding as ActivityAboutBinding
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        hideSystemUi(0)
+    }
 
 
 

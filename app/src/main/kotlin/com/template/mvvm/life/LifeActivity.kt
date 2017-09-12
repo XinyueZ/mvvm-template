@@ -34,16 +34,23 @@ abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
-        uiHelper.delayHide(3000)
         super.onCreate(savedInstanceState)
         setViewDataBinding(DataBindingUtil.setContentView(this, getLayout()))
         replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_UP -> uiHelper.hide()
+    protected fun hideSystemUi(length: Long = 0) {
+        if (length <= 0) uiHelper.hide() else uiHelper.delayHide(length)
+    }
+
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        event?.let {
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    hideSystemUi()
+                }
+            }
         }
-        return super.onTouchEvent(event)
+        return super.dispatchTouchEvent(event)
     }
 }
