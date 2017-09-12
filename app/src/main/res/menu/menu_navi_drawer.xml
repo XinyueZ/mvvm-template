@@ -8,31 +8,21 @@
             android:icon="@drawable/ic_list"
             android:title="@string/action_products"/>
 
-        <item
-            android:id="@+id/action_about"
-            android:icon="@drawable/ic_info"
-            android:title="@string/action_about"/>
 
-        <item
-            android:icon="@drawable/ic_placeholder"
-            android:title="@string/navi_menu_item_3"/>
+
 
 
     </group>
 
     <item android:title="@string/navi_group_other">
         <menu>
-            <item
-                android:icon="@drawable/ic_placeholder"
-                android:title="@string/navi_menu_item_4"/>
 
             <item
-                android:icon="@drawable/ic_placeholder"
-                android:title="@string/navi_menu_item_5"/>
+                android:id="@+id/action_about"
+                android:icon="@drawable/ic_info"
+                android:title="@string/action_about"/>
 
-            <item
-                android:icon="@drawable/ic_placeholder"
-                android:title="@string/navi_menu_item_6"/>
+
 
         </menu>
     </item>
