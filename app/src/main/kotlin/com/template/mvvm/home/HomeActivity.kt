@@ -1,9 +1,11 @@
 package com.template.mvvm.home
 
+import CustomTabUtils
 import android.app.Activity
 import android.arch.lifecycle.LifecycleFragment
 import android.content.Intent
 import android.databinding.ViewDataBinding
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.widget.Toast
@@ -13,9 +15,11 @@ import com.template.mvvm.actor.Interactor
 import com.template.mvvm.actor.Message
 import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.home.msg.OpenAbout
+import com.template.mvvm.home.msg.OpenInternet
 import com.template.mvvm.home.msg.OpenProducts
 import com.template.mvvm.life.LifeActivity
 import com.template.mvvm.products.ProductsActivity
+import de.immowelt.mobile.livestream.core.utils.customtab.CustomTabConfig
 
 class HomeActivity : LifeActivity() {
 
@@ -42,9 +46,20 @@ class HomeActivity : LifeActivity() {
         hideSystemUi(0)
     }
 
+    override fun onStart() {
+        super.onStart()
+        CustomTabUtils.warmUp(this, Uri.parse(getString(R.string.internet_url)))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        CustomTabUtils.clean(this)
+    }
+
     private fun registerOnActor() {
         Interactor.start(this)
                 .subscribe(OpenProducts::class, this::openProducts)
+                .subscribe(OpenInternet::class, this::openInternet)
                 .subscribe(OpenAbout::class, this::openAbout)
                 .subscribeError(this::onActorError)
                 .register()
@@ -56,6 +71,10 @@ class HomeActivity : LifeActivity() {
 
     private fun openProducts(msg: Message<Any>) {
         ProductsActivity.showInstance(this)
+    }
+
+    private fun openInternet(msg: Message<Any>) {
+        CustomTabUtils.openWeb(this, Uri.parse(getString(R.string.internet_url)), CustomTabConfig.builder)
     }
 
     private fun openAbout(msg: Message<Any>) {

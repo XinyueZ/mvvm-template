@@ -24,4 +24,8 @@
     <string name="about_version_content"> Version: %s</string>
     <string name="about_description_title">Description</string>
     <string name="about_description_content">This is a template project for MVVM, Android Architecture Components and Data-Binding. Use this template for improvement of project launch.</string>
+
+    <string name="action_internet">Internet</string>
+    <string name="internet_title">Internet</string>
+    <string name="internet_url">http://g.cn</string>
 </resources>
