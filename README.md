@@ -19,7 +19,9 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 - [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom): 
 
-> Added application navigation driving through drawer and bottom-bar. Show a list of dummy data with RecyclerView. Added dummy static page "about" .
+> Added application navigation driving through drawer and bottom-bar. In this version there're two dummy menu-items that will open a products and about-me view.
+
+> To bottom-bar. According to material design the bar always navigate the app between top-level views, well, here I defined item1, item2, item3 and opening fragments for them.
 
 1. Support full-screen app. See https://gist.github.com/chrisbanes/73de18faffca571f7292
 
