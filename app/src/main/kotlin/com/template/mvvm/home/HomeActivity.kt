@@ -14,8 +14,10 @@ import com.template.mvvm.about.AboutActivity
 import com.template.mvvm.actor.Interactor
 import com.template.mvvm.actor.Message
 import com.template.mvvm.databinding.ActivityHomeBinding
+import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.home.msg.OpenAbout
 import com.template.mvvm.home.msg.OpenInternet
+import com.template.mvvm.home.msg.OpenItem
 import com.template.mvvm.home.msg.OpenProducts
 import com.template.mvvm.life.LifeActivity
 import com.template.mvvm.products.ProductsActivity
@@ -33,7 +35,7 @@ class HomeActivity : LifeActivity() {
 
     override fun getLayout() = R.layout.activity_home
     override fun createViewModel() = HomeViewModel::class.java
-    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: HomeFragment.newInstance(application)) as LifecycleFragment
+    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: Item1Fragment.newInstance(application)) as LifecycleFragment
 
     lateinit var binding: ActivityHomeBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {
@@ -61,6 +63,7 @@ class HomeActivity : LifeActivity() {
                 .subscribe(OpenProducts::class, this::openProducts)
                 .subscribe(OpenInternet::class, this::openInternet)
                 .subscribe(OpenAbout::class, this::openAbout)
+                .subscribe(OpenItem::class, this::openItem)
                 .subscribeError(this::onActorError)
                 .register()
     }
@@ -79,5 +82,14 @@ class HomeActivity : LifeActivity() {
 
     private fun openAbout(msg: Message<Any>) {
         AboutActivity.showInstance(this)
+    }
+
+    private fun openItem(msg: Message<Any>) {
+        val ev = msg as OpenItem
+        when (ev.getDetail().thing) {
+            1 -> replaceFragmentInActivity(Item1Fragment.newInstance(this), R.id.contentFrame)
+            2 -> replaceFragmentInActivity(Item2Fragment.newInstance(this), R.id.contentFrame)
+            3 -> replaceFragmentInActivity(Item3Fragment.newInstance(this), R.id.contentFrame)
+        }
     }
 }

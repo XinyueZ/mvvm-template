@@ -15,7 +15,6 @@
             android:title="@string/action_internet"/>
 
 
-
     </group>
 
     <item android:title="@string/navi_group_other">

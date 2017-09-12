@@ -1,21 +1,24 @@
 package com.template.mvvm.home
 
 import android.app.Application
+import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import com.template.mvvm.App
+import android.text.TextUtils
 import com.template.mvvm.R
 import com.template.mvvm.life.LifeViewModel
 import com.template.mvvm.life.SingleLiveData
 
 class HomeViewModel(app: Application) : LifeViewModel(app) {
     val title = ObservableInt(R.string.home_title)
-    val description = ObservableInt(R.string.home_description)
+    val description = ObservableField<String>()
     val drawerSubViewModel = NaviSubViewModel(getApplication())
 
     internal val snackbarMessage = SingleLiveData<String>()
 
-    fun showClickFeedback() {
-        snackbarMessage.value = getApplication<App>().getString(R.string.greeting)
+    fun showClickFeedback(str: CharSequence) {
+        when (!TextUtils.isEmpty(str)) {
+            true -> snackbarMessage.value = str.toString()
+        }
     }
 
     fun toggleDrawer() {
