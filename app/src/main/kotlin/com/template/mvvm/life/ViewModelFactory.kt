@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.template.mvvm.about.AboutViewModel
 import com.template.mvvm.home.HomeViewModel
 import com.template.mvvm.products.ProductsViewModel
 import com.template.mvvm.splash.SplashViewModel
@@ -25,6 +26,7 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(application)
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application)
                     isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(application)
+                    isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel(application)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

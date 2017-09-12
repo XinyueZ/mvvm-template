@@ -8,9 +8,11 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.widget.Toast
 import com.template.mvvm.R
+import com.template.mvvm.about.AboutActivity
 import com.template.mvvm.actor.Interactor
 import com.template.mvvm.actor.Message
 import com.template.mvvm.databinding.ActivityHomeBinding
+import com.template.mvvm.home.msg.OpenAbout
 import com.template.mvvm.home.msg.OpenProducts
 import com.template.mvvm.life.LifeActivity
 import com.template.mvvm.products.ProductsActivity
@@ -42,15 +44,20 @@ class HomeActivity : LifeActivity() {
     private fun registerOnActor() {
         Interactor.start(this)
                 .subscribe(OpenProducts::class, this::openProducts)
+                .subscribe(OpenAbout::class, this::openAbout)
                 .subscribeError(this::onActorError)
                 .register()
+    }
+
+    private fun onActorError(e: Throwable) {
+        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun openProducts(msg: Message<Any>) {
         ProductsActivity.showInstance(this)
     }
 
-    private fun onActorError(e: Throwable) {
-        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+    private fun openAbout(msg: Message<Any>) {
+        AboutActivity.showInstance(this)
     }
 }

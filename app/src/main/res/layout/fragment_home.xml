@@ -27,7 +27,7 @@
             app:navigationIcon="@drawable/ic_menu"
             app:onIndicatorClick="@{ vm::toggleDrawer }"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@{vm.title}"/>
+            app:title="@{safeUnbox(vm.title)}"/>
 
         <TextView
             android:id="@+id/description"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="@{vm.description}"
+            android:text="@{safeUnbox(vm.description)}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guidelineCenterVertical"/>

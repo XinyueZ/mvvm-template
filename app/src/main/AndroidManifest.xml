@@ -26,5 +26,9 @@
         <activity
             android:name=".products.ProductsActivity"
             android:theme="@style/HomeTheme"/>
+
+        <activity
+            android:name=".about.AboutActivity"
+            android:theme="@style/HomeTheme"/>
     </application>
 </manifest>

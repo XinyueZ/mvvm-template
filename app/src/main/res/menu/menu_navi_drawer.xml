@@ -9,8 +9,9 @@
             android:title="@string/action_products"/>
 
         <item
-            android:icon="@drawable/ic_placeholder"
-            android:title="@string/navi_menu_item_2"/>
+            android:id="@+id/action_about"
+            android:icon="@drawable/ic_info"
+            android:title="@string/action_about"/>
 
         <item
             android:icon="@drawable/ic_placeholder"

@@ -22,7 +22,6 @@ class ProductsViewModel(app: Application) : LifeViewModel(app) {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
-    val goBack = ObservableBoolean(false)
     val dataLoaded = ObservableBoolean(false)
 
     //For recyclerview data
@@ -30,6 +29,9 @@ class ProductsViewModel(app: Application) : LifeViewModel(app) {
     val listFactory = ListViewFactory()
     val listBinding = ListBinding()
 
+
+    //Return this view to home
+    val goBack = ObservableBoolean(false)
     fun toggleBack() {
         goBack.set(true)
     }
