@@ -34,15 +34,10 @@ abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
-        uiHelper.hide()
+        uiHelper.delayHide(3000)
         super.onCreate(savedInstanceState)
         setViewDataBinding(DataBindingUtil.setContentView(this, getLayout()))
         replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        uiHelper.hide()
-        super.onWindowFocusChanged(hasFocus)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
