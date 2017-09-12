@@ -34,7 +34,7 @@
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="@style/Toolbar"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:layout_scrollFlags="enterAlways|snap"
                 app:navigationIcon="@drawable/ic_arrow_back"
                 app:onIndicatorClick="@{ vm::toggleBack }"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
