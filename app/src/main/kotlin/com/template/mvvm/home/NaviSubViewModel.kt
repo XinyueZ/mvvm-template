@@ -1,41 +1,37 @@
 package com.template.mvvm.home
 
 import android.app.Application
-import android.databinding.ObservableBoolean
 import com.template.mvvm.R
-import com.template.mvvm.actor.Interactor
-import com.template.mvvm.common.OnCommandListener
-import com.template.mvvm.home.msg.OpenAbout
-import com.template.mvvm.home.msg.OpenInternet
-import com.template.mvvm.home.msg.OpenItem
-import com.template.mvvm.home.msg.OpenProducts
 import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.life.SingleLiveData
 
-class NaviSubViewModel(context: Application) : LifeViewModel(context), OnCommandListener {
-    var drawerToggle = ObservableBoolean(false)
+class NaviSubViewModel(context: Application) : LifeViewModel(context) {
+    internal val openProduct = SingleLiveData<Boolean>()
+    internal val openInternet = SingleLiveData<Boolean>()
+    internal val openAbout = SingleLiveData<Boolean>()
+    internal val openItem1 = SingleLiveData<Boolean>()
+    internal val openItem2 = SingleLiveData<Boolean>()
+    internal val openItem3 = SingleLiveData<Boolean>()
 
-    internal fun toggleDrawer() {
-        drawerToggle.set(true)
-        drawerToggle.notifyChange()
-    }
+    internal val drawerToggle = SingleLiveData<Boolean>()
 
-    override fun onCommand(id: Int) {
+    fun onCommand(id: Int) {
         when (id) {
             R.id.action_products -> {
-                Interactor.post(OpenProducts("Open product-list"))
-                toggleDrawer()
-            }
-            R.id.action_about -> {
-                Interactor.post(OpenAbout("Open about"))
-                toggleDrawer()
+                drawerToggle.value = false
+                openProduct.value = true
             }
             R.id.action_internet -> {
-                Interactor.post(OpenInternet("Open internet"))
-                toggleDrawer()
+                drawerToggle.value = false
+                openInternet.value = true
             }
-            R.id.action_1 -> Interactor.post(OpenItem(1))
-            R.id.action_2 -> Interactor.post(OpenItem(2))
-            R.id.action_3 -> Interactor.post(OpenItem(3))
+            R.id.action_about -> {
+                drawerToggle.value = false
+                openAbout.value = true
+            }
+            R.id.action_1 -> openItem1.value = true
+            R.id.action_2 -> openItem2.value = true
+            R.id.action_3 -> openItem3.value = true
         }
     }
 }

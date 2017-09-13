@@ -10,10 +10,10 @@
     </data>
 
     <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/windowBackground"
-        app:drawerToggle="@{vm.drawerToggle}">
+        android:background="?android:attr/windowBackground">
 
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/contentFrame"
@@ -42,7 +42,7 @@
                 android:layout_height="@dimen/bottom_navi_height"
                 android:layout_gravity="start|bottom"
                 android:theme="@style/BottomNavigationViewTheme"
-                app:command="@{vm}"
+                app:command="@{vm::onCommand}"
                 app:menu="@menu/menu_navi_bottom"/>
         </android.support.design.widget.CoordinatorLayout>
 
@@ -51,7 +51,7 @@
             android:layout_height="@dimen/drawer_navi_height"
             android:layout_gravity="start"
             android:theme="@style/DrawerNavigationViewTheme"
-            app:command="@{vm}"
+            app:command="@{vm::onCommand}"
             app:headerLayout="@layout/layout_drawer_header"
             app:menu="@menu/menu_navi_drawer"/>
 

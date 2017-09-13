@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="com.template.mvvm.R"/>
+
         <variable
             name="vm"
             type="com.template.mvvm.home.HomeViewModel"/>
@@ -25,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_menu"
-            app:onIndicatorClick="@{ vm::toggleDrawer }"
+            app:onIndicatorClick="@{ vm::onIndicator }"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="@{safeUnbox(vm.title)}"/>
 
