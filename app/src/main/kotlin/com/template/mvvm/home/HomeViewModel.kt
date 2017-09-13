@@ -21,7 +21,7 @@ class HomeViewModel(app: Application) : LifeViewModel(app) {
         }
     }
 
-    fun toggleDrawer() {
-        drawerSubViewModel.toggleDrawer()
+    fun onIndicator() {
+        drawerSubViewModel.drawerToggle.value = true
     }
 }

@@ -1,41 +1,62 @@
 package com.template.mvvm.home
 
 import android.app.Application
-import android.databinding.ObservableBoolean
 import com.template.mvvm.R
-import com.template.mvvm.actor.Interactor
-import com.template.mvvm.common.OnCommandListener
-import com.template.mvvm.home.msg.OpenAbout
-import com.template.mvvm.home.msg.OpenItem
-import com.template.mvvm.home.msg.OpenProducts
 import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.life.SingleLiveData
 
-class NaviSubViewModel(context: Application) : LifeViewModel(context), OnCommandListener {
-    var drawerToggle = ObservableBoolean(false)
+class NaviSubViewModel(context: Application) : LifeViewModel(context) {
+    internal val openProduct = SingleLiveData<Boolean>()
+    internal val openAbout = SingleLiveData<Boolean>()
+    internal val openItem1 = SingleLiveData<Boolean>()
+    internal val openItem2 = SingleLiveData<Boolean>()
+    internal val openItem3 = SingleLiveData<Boolean>()
 
-    internal fun toggleDrawer() {
-        drawerToggle.set(true)
-        drawerToggle.notifyChange()
-    }
+    internal val drawerToggle = SingleLiveData<Boolean>()
 
-    override fun onCommand(id: Int) {
+    fun onCommand(id: Int) {
         when (id) {
             R.id.action_products -> {
-                Interactor.post(OpenProducts("Open product-list"))
-                toggleDrawer()
+
+                //Use the actor to info activity to open next stage.
+                //Interactor.post(OpenProducts("Open product-list"))
+
+                //Use LiveData to open next stage.
+                drawerToggle.value = false
+                openProduct.value = true
             }
             R.id.action_about -> {
-                Interactor.post(OpenAbout("Open about"))
-                toggleDrawer()
+
+                //Use the actor to info activity to open next stage.
+                //Interactor.post(OpenAbout("Open about"))
+
+                //Use LiveData to open next stage.
+                drawerToggle.value = false
+                openAbout.value = true
             }
             R.id.action_1 -> {
-                Interactor.post(OpenItem(1))
+
+                //Use the actor to info activity to open next stage.
+                // Interactor.post(OpenItem(1))
+
+                //Use LiveData to open next stage.
+                openItem1.value = true
             }
             R.id.action_2 -> {
-                Interactor.post(OpenItem(2))
+
+                //Use the actor to info activity to open next stage.
+                // Interactor.post(OpenItem(2))
+
+                //Use LiveData to open next stage.
+                openItem2.value = true
             }
             R.id.action_3 -> {
-                Interactor.post(OpenItem(3))
+
+                //Use the actor to info activity to open next stage.
+                //Interactor.post(OpenItem(3))
+
+                //Use LiveData to open next stage.
+                openItem3.value = true
             }
         }
     }

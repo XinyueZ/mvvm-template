@@ -2,6 +2,7 @@ package com.template.mvvm.home
 
 import android.app.Activity
 import android.arch.lifecycle.LifecycleFragment
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.template.mvvm.actor.Interactor
 import com.template.mvvm.actor.Message
 import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.ext.replaceFragmentInActivity
+import com.template.mvvm.ext.setup
 import com.template.mvvm.home.msg.OpenAbout
 import com.template.mvvm.home.msg.OpenItem
 import com.template.mvvm.home.msg.OpenProducts
@@ -42,9 +44,34 @@ class HomeActivity : LifeActivity() {
         super.onCreate(savedInstanceState)
         registerOnActor()
         hideSystemUi(0)
+
+        setUpHomeNavi()
+
+    }
+
+    private fun setUpHomeNavi() {
+        with((obtainViewModel() as HomeViewModel).drawerSubViewModel) {
+            binding.drawer.setup(this@HomeActivity, drawerToggle)
+            openProduct.observe(this@HomeActivity, Observer {
+                openProducts(OpenProducts("open product"))
+            })
+            openAbout.observe(this@HomeActivity, Observer {
+                openAbout(OpenAbout("open about"))
+            })
+            openItem1.observe(this@HomeActivity, Observer {
+                openItem(OpenItem(1))
+            })
+            openItem2.observe(this@HomeActivity, Observer {
+                openItem(OpenItem(2))
+            })
+            openItem3.observe(this@HomeActivity, Observer {
+                openItem(OpenItem(3))
+            })
+        }
     }
 
     private fun registerOnActor() {
+        //NO NEED more , use LiveData to drive opening stages.
         Interactor.start(this)
                 .subscribe(OpenProducts::class, this::openProducts)
                 .subscribe(OpenAbout::class, this::openAbout)
@@ -57,15 +84,15 @@ class HomeActivity : LifeActivity() {
         Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
     }
 
-    private fun openProducts(msg: Message<Any>) {
+    internal fun openProducts(msg: Message<Any>) {
         ProductsActivity.showInstance(this)
     }
 
-    private fun openAbout(msg: Message<Any>) {
+    internal fun openAbout(msg: Message<Any>) {
         AboutActivity.showInstance(this)
     }
 
-    private fun openItem(msg: Message<Any>) {
+    internal fun openItem(msg: Message<Any>) {
         val ev = msg as OpenItem
         when (ev.getDetail().thing) {
             1 -> replaceFragmentInActivity(Item1Fragment.newInstance(this), R.id.contentFrame)

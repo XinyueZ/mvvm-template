@@ -5,24 +5,11 @@ import android.databinding.BindingAdapter
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
 import com.template.mvvm.home.HomeActivity
 
-@BindingAdapter("drawerToggle")
-fun drawerToggle(drawer: DrawerLayout, drawerToggle: Boolean) {
-    if (drawerToggle) {
-        with(drawer) {
-            when (isDrawerOpen(GravityCompat.START)) {
-                false -> openDrawer(GravityCompat.START)
-                else -> closeDrawer(GravityCompat.START)
-            }
-        }
-    }
-}
 
 @BindingAdapter("onIndicatorClick")
 fun toolbarOnIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
