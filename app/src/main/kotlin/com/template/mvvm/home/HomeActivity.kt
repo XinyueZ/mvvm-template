@@ -84,15 +84,15 @@ class HomeActivity : LifeActivity() {
         Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
     }
 
-    internal fun openProducts(msg: Message<Any>) {
+    private fun openProducts(msg: Message<Any>) {
         ProductsActivity.showInstance(this)
     }
 
-    internal fun openAbout(msg: Message<Any>) {
+    private fun openAbout(msg: Message<Any>) {
         AboutActivity.showInstance(this)
     }
 
-    internal fun openItem(msg: Message<Any>) {
+    private fun openItem(msg: Message<Any>) {
         val ev = msg as OpenItem
         when (ev.getDetail().thing) {
             1 -> replaceFragmentInActivity(Item1Fragment.newInstance(this), R.id.contentFrame)
