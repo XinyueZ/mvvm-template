@@ -5,25 +5,21 @@ import android.arch.lifecycle.LifecycleRegistryOwner
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
-import android.os.Handler
-import android.util.Log
 import com.template.mvvm.R
-import com.template.mvvm.actor.Interactor
-import com.template.mvvm.actor.Message
-import com.template.mvvm.domain.Product
+import com.template.mvvm.data.ProductsRepository
 import com.template.mvvm.life.LifeViewModel
 import com.template.mvvm.life.SingleLiveData
 import com.template.mvvm.products.list.ListBinding
 import com.template.mvvm.products.list.ListViewFactory
 import com.template.mvvm.products.list.ProductItemViewModel
-import com.template.mvvm.products.msg.LoadProductList
 
-class ProductsViewModel(app: Application) : LifeViewModel(app) {
-    private val TAG = "ProductsViewModel"
+class ProductsViewModel(app: Application, private val productsRepository: ProductsRepository = ProductsRepository()) : LifeViewModel(app) {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
+
+    // True when the data have been loaded.
     internal val pageStill = SingleLiveData<Boolean>()
 
     //For recyclerview data
@@ -31,44 +27,23 @@ class ProductsViewModel(app: Application) : LifeViewModel(app) {
     val listFactory = ListViewFactory()
     val listBinding = ListBinding()
 
-
     //Return this view to home
     val goBack = ObservableBoolean(false)
+
     fun toggleBack() {
         goBack.set(true)
     }
 
-    private fun loadProductList(msg: Message<Any>) {
-        val data = arrayListOf(
-                ProductItemViewModel.from(getApplication(), Product("BIOM", "BIOM FJUEL - Trainers - aquatic")),
-                ProductItemViewModel.from(getApplication(), Product("FOGGY", "FOGGY - Trainers - brown/beige")),
-                ProductItemViewModel.from(getApplication(), Product("Sports", "Sports socks - blue")),
-                ProductItemViewModel.from(getApplication(), Product("PALERMO", "PALERMO - Trainers - oliv/rost")),
-                ProductItemViewModel.from(getApplication(), Product("JFWLAFAYETTE", "JFWLAFAYETTE  - Trainers - ivy green")),
-                ProductItemViewModel.from(getApplication(), Product("STRIKER", "STRIKER - Trainers - dress blues")),
-                ProductItemViewModel.from(getApplication(), Product("JFWLAFAYETTE", "JFWLAFAYETTE - Trainers - anthracite")),
-                ProductItemViewModel.from(getApplication(), Product("BILBAO II SUN", "BILBAO II SUN - Trainers - blue/lime")),
-                ProductItemViewModel.from(getApplication(), Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white")),
-                ProductItemViewModel.from(getApplication(), Product("PICK", "PICK POCKET TX - Trainers - black"))
-        )
-        productList.addAll(data)
-        dataLoaded.set(true)
-        pageStill.value = true
-    }
-
-    private fun onActorError(error: Throwable) {
-        Log.d(TAG, "onActorError $error")
-    }
-
     override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
-        Interactor.start(lifecycleRegistryOwner)
-                .subscribe(LoadProductList::class, this::loadProductList)
-                .subscribeError(this::onActorError)
-                .register()
-
-        Handler().postDelayed({
-            Interactor.post(LoadProductList("Load products into a list"))
-        }, 1500)
+        productsRepository.getAllProducts().apply {
+            switchMapViewModelList(lifecycleRegistryOwner) {
+                it?.let {
+                    productList.addAll(it)
+                    dataLoaded.set(true)
+                    pageStill.value = true
+                }
+            }
+        }
         return true
     }
 }

@@ -1,5 +1,6 @@
 package com.template.mvvm.products
 
+import android.arch.lifecycle.LifecycleRegistryOwner
 import android.content.Context
 import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
@@ -18,7 +19,7 @@ class ProductsFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(this@ProductsFragment) }
+                    vm = obtainViewModel().apply { registerLifecycleOwner(activity as LifecycleRegistryOwner) }
                 }
         return binding
     }
