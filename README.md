@@ -19,7 +19,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
-- [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4/repository): 
+- [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4/repository): in dev
 
 > Use repository to populate data instead hard coding in [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom)
 
