@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -30,9 +30,9 @@
 
     <style name="AboutTheme" parent="AboutThemeBase"/>
 
-    <style name="LicensesThemeBase" parent="AppTheme"/>
+    <style name="SoftwareLicensesThemeBase" parent="AppTheme"/>
 
-    <style name="LicensesTheme" parent="LicensesThemeBase"/>
+    <style name="SoftwareLicensesTheme" parent="SoftwareLicensesThemeBase"/>
 
 
     <style name="DrawerNavigationViewTheme" parent="@style/Theme.AppCompat.Light">

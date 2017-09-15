@@ -32,5 +32,12 @@
 
 
     <style name="SplashTheme" parent="SplashThemeBase"/>
+
     <style name="HomeTheme" parent="HomeThemeBase"/>
+
+    <style name="ProductsTheme" parent="ProductsThemeBase"/>
+
+    <style name="AboutTheme" parent="AboutThemeBase"/>
+
+    <style name="SoftwareLicensesTheme" parent="SoftwareLicensesThemeBase"/>
 </resources>

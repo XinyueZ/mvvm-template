@@ -1,12 +1,12 @@
-package licenses
+package com.template.mvvm.data.feeds.licenses
 
 import com.google.gson.annotations.SerializedName
 
-data class License(
+data class LicenseData(
         @SerializedName("name")
         var name: String,
         @SerializedName("description")
         var description: String,
         @SerializedName("libraries")
-        var libraries: List<Library>
+        var libraries: List<LibraryData>
 )

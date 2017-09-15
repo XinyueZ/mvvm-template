@@ -1,7 +1,8 @@
 package com.template.mvvm.data
 
-import com.template.mvvm.data.domain.ProductList
+import com.template.mvvm.data.domain.products.ProductList
+import io.reactivex.Single
 
 interface ProductsDataSource {
-    fun getAllProducts(): ProductList
+    fun getAllProducts(): Single<ProductList>
 }

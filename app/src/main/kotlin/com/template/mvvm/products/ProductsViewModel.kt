@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
+import android.widget.Toast
 import com.template.mvvm.R
 import com.template.mvvm.data.ProductsRepository
 import com.template.mvvm.life.LifeViewModel
@@ -35,15 +36,17 @@ class ProductsViewModel(app: Application, private val productsRepository: Produc
     }
 
     override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
-        productsRepository.getAllProducts().apply {
-            switchMapViewModelList(lifecycleRegistryOwner) {
-                it?.let {
-                    productList.addAll(it)
-                    dataLoaded.set(true)
-                    pageStill.value = true
-                }
-            }
-        }
+        addToAutoDispose(
+                productsRepository.getAllProducts().subscribe({
+                    it.switchMapViewModelList(lifecycleRegistryOwner) {
+                        it?.let {
+                            productList.addAll(it)
+                            dataLoaded.set(true)
+                            pageStill.value = true
+                        }
+                    }
+                }, { Toast.makeText(getApplication(), "Cannot load products.", Toast.LENGTH_SHORT).show() })
+        )
         return true
     }
 }

@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.products.ProductsViewModel"/>
+            type="com.template.mvvm.licenses.SoftwareLicensesViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             app:binding="@{vm.listBinding}"
             app:factory="@{vm.listFactory}"
-            app:items="@{vm.productList}"
+            app:items="@{vm.librarytList}"
             app:layoutManager="@{LayoutManagerTypeKt.LINEAR_VERTICAL}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />

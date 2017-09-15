@@ -34,7 +34,7 @@
 
 
         <activity
-            android:name="licenses.LicensesActivity"
-            android:theme="@style/LicensesTheme"/>
+            android:name=".licenses.SoftwareLicensesActivity"
+            android:theme="@style/SoftwareLicensesTheme"/>
     </application>
 </manifest>

@@ -5,8 +5,10 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.template.mvvm.about.AboutViewModel
+import com.template.mvvm.data.LicensesRepository
 import com.template.mvvm.data.ProductsRepository
 import com.template.mvvm.home.HomeViewModel
+import com.template.mvvm.licenses.SoftwareLicensesViewModel
 import com.template.mvvm.products.ProductsViewModel
 import com.template.mvvm.splash.SplashViewModel
 
@@ -28,6 +30,7 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application)
                     isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(application, ProductsRepository())
                     isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel(application)
+                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(application, LicensesRepository(application))
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
