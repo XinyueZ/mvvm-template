@@ -2,7 +2,7 @@ package com.template.mvvm.products.list
 
 import android.app.Application
 import android.databinding.ObservableField
-import com.template.mvvm.domain.Product
+import com.template.mvvm.data.domain.Product
 import com.template.mvvm.life.LifeViewModel
 
 class ProductItemViewModel(app: Application) : LifeViewModel(app) {

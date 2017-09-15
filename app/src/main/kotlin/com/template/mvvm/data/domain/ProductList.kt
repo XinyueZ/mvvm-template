@@ -5,7 +5,6 @@ import android.arch.lifecycle.LifecycleRegistryOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations.switchMap
 import android.content.Context
-import com.template.mvvm.domain.Product
 import com.template.mvvm.life.SingleLiveData
 import com.template.mvvm.products.list.ProductItemViewModel
 

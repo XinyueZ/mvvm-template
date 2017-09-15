@@ -3,7 +3,7 @@ package com.template.mvvm.data.remote
 import android.os.Handler
 import com.template.mvvm.data.ProductsDataSource
 import com.template.mvvm.data.domain.ProductList
-import com.template.mvvm.domain.Product
+import com.template.mvvm.data.domain.Product
 import com.template.mvvm.utils.LL
 
 class ProductsRemote : ProductsDataSource {
