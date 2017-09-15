@@ -30,7 +30,8 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                         })
                     })
                 }
-                emitter.onSuccess(this)
+                if (!emitter.isDisposed)
+                    emitter.onSuccess(this)
             }
         })
     }

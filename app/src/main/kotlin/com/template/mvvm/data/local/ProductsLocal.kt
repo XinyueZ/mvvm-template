@@ -21,7 +21,8 @@ class ProductsLocal : ProductsDataSource {
                         Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white"),
                         Product("PICK", "PICK POCKET TX - Trainers - black")
                 )
-                emitter.onSuccess(this)
+                if (!emitter.isDisposed)
+                    emitter.onSuccess(this)
             }
         })
     }
