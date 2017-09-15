@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.home.NaviSubViewModel"/>
+            type="com.template.mvvm.home.AppNavigationViewModel"/>
     </data>
 
     <android.support.v4.widget.DrawerLayout

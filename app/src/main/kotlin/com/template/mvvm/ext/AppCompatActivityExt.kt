@@ -23,6 +23,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import com.template.mvvm.life.ViewModelFactory
 
 fun AppCompatActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
@@ -37,8 +38,8 @@ fun AppCompatActivity.addFragmentToActivity(fragment: Fragment, tag: String) {
     }
 }
 
-fun AppCompatActivity.setupActionBar(@IdRes toolbarId: Int, action: ActionBar.() -> Unit) {
-    setSupportActionBar(findViewById(toolbarId))
+fun AppCompatActivity.setupActionBar(@IdRes toolbar: Toolbar, action: ActionBar.() -> Unit) {
+    setSupportActionBar(toolbar)
     supportActionBar?.run {
         action()
     }

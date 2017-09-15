@@ -57,6 +57,8 @@ i.e
 
 7. The ```LifeActivity``` would be created by using binding, the sub-classes of ```LifeActivity``` can now use data-binding.
 
+8. Added a software-license view.
+
 - [v0.2](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.2/splash-actor-imported): Very early with MVVM, just a home screen. (>=API 14)
 
   1. Added a splash screen.

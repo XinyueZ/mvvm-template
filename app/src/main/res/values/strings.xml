@@ -24,4 +24,8 @@
     <string name="action_internet">Internet</string>
     <string name="internet_title">Internet</string>
     <string name="internet_url">http://g.cn</string>
+
+    <string name="software_licenses_title">Licenses</string>
+    <string name="action_software_licenses">Licenses</string>
+    <string name="software_licenses_count">Total %1$d licenses for %2$d libraries and software.</string>
 </resources>

@@ -7,6 +7,7 @@ import android.support.annotation.MainThread
 import android.util.Log
 import java.util.concurrent.atomic.AtomicBoolean
 
+
 open class SingleLiveData<T> : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)

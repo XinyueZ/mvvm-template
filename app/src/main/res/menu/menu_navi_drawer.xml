@@ -20,6 +20,11 @@
     <item android:title="@string/navi_group_other">
         <menu>
             <item
+                android:id="@id/action_software_licenses"
+                android:icon="@drawable/ic_assignment"
+                android:title="@string/action_software_licenses"/>
+
+            <item
                 android:id="@id/action_about"
                 android:icon="@drawable/ic_info"
                 android:title="@string/action_about"/>

@@ -17,6 +17,7 @@ import com.template.mvvm.ext.setup
 import com.template.mvvm.life.LifeActivity
 import com.template.mvvm.products.ProductsActivity
 import de.immowelt.mobile.livestream.core.utils.customtab.CustomTabConfig
+import licenses.LicensesActivity
 
 class HomeActivity : LifeActivity() {
 
@@ -51,6 +52,9 @@ class HomeActivity : LifeActivity() {
             })
             openInternet.observe(this@HomeActivity, Observer {
                 CustomTabUtils.openWeb(this@HomeActivity, Uri.parse(getString(R.string.internet_url)), CustomTabConfig.builder)
+            })
+            openLicenses.observe(this@HomeActivity, Observer {
+                LicensesActivity.showInstance(this@HomeActivity)
             })
             openAbout.observe(this@HomeActivity, Observer {
                 AboutActivity.showInstance(this@HomeActivity)

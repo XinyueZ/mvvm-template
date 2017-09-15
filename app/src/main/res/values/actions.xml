@@ -7,4 +7,5 @@
     <item name="action_3" type="id"/>
     <item name="action_drawer" type="id"/>
     <item name="action_internet" type="id"/>
+    <item name="action_software_licenses" type="id"/>
 </resources>
