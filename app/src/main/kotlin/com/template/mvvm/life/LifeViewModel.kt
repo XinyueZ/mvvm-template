@@ -3,6 +3,7 @@ package com.template.mvvm.life
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleRegistryOwner
+import com.template.mvvm.utils.LL
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -16,5 +17,6 @@ abstract class LifeViewModel(context: Application) : AndroidViewModel(context) {
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
+        LL.d("${this.javaClass.name}::onCleared")
     }
 }

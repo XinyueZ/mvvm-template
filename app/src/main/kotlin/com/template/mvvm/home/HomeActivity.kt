@@ -45,29 +45,32 @@ class HomeActivity : LifeActivity() {
     }
 
     private fun setUpHomeNavi() {
-        with((obtainViewModel() as HomeViewModel).drawerSubViewModel) {
-            binding.drawer.setup(this@HomeActivity, drawerToggle)
-            openProduct.observe(this@HomeActivity, Observer {
-                ProductsActivity.showInstance(this@HomeActivity)
-            })
-            openInternet.observe(this@HomeActivity, Observer {
-                CustomTabUtils.openWeb(this@HomeActivity, Uri.parse(getString(R.string.internet_url)), CustomTabConfig.builder)
-            })
-            openLicenses.observe(this@HomeActivity, Observer {
-                SoftwareLicensesActivity.showInstance(this@HomeActivity)
-            })
-            openAbout.observe(this@HomeActivity, Observer {
-                AboutActivity.showInstance(this@HomeActivity)
-            })
-            openItem1.observe(this@HomeActivity, Observer {
-                replaceFragmentInActivity(Item1Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
-            })
-            openItem2.observe(this@HomeActivity, Observer {
-                replaceFragmentInActivity(Item2Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
-            })
-            openItem3.observe(this@HomeActivity, Observer {
-                replaceFragmentInActivity(Item3Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
-            })
+        with((obtainViewModel() as HomeViewModel)) {
+            registerLifecycleOwner(this@HomeActivity)
+            with((obtainViewModel() as HomeViewModel).drawerSubViewModel) {
+                binding.drawer.setup(this@HomeActivity, drawerToggle)
+                openProduct.observe(this@HomeActivity, Observer {
+                    ProductsActivity.showInstance(this@HomeActivity)
+                })
+                openInternet.observe(this@HomeActivity, Observer {
+                    CustomTabUtils.openWeb(this@HomeActivity, Uri.parse(getString(R.string.internet_url)), CustomTabConfig.builder)
+                })
+                openLicenses.observe(this@HomeActivity, Observer {
+                    SoftwareLicensesActivity.showInstance(this@HomeActivity)
+                })
+                openAbout.observe(this@HomeActivity, Observer {
+                    AboutActivity.showInstance(this@HomeActivity)
+                })
+                openItem1.observe(this@HomeActivity, Observer {
+                    replaceFragmentInActivity(Item1Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
+                })
+                openItem2.observe(this@HomeActivity, Observer {
+                    replaceFragmentInActivity(Item2Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
+                })
+                openItem3.observe(this@HomeActivity, Observer {
+                    replaceFragmentInActivity(Item3Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
+                })
+            }
         }
     }
 

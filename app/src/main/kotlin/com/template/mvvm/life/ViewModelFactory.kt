@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.template.mvvm.about.AboutViewModel
 import com.template.mvvm.data.LicensesRepository
 import com.template.mvvm.data.ProductsRepository
+import com.template.mvvm.home.AppNavigationViewModel
 import com.template.mvvm.home.HomeViewModel
 import com.template.mvvm.licenses.SoftwareLicensesViewModel
 import com.template.mvvm.products.ProductsViewModel
@@ -28,6 +29,7 @@ class ViewModelFactory private constructor(
                 when {
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(application)
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application)
+                    isAssignableFrom(AppNavigationViewModel::class.java) ->  AppNavigationViewModel(application)
                     isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(application, ProductsRepository())
                     isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel(application)
                     isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(application, LicensesRepository(application))
