@@ -18,10 +18,21 @@
 
     <style name="SplashTheme" parent="SplashThemeBase"/>
 
-
     <style name="HomeThemeBase" parent="AppTheme"/>
 
     <style name="HomeTheme" parent="HomeThemeBase"/>
+
+    <style name="ProductsThemeBase" parent="AppTheme"/>
+
+    <style name="ProductsTheme" parent="ProductsThemeBase"/>
+
+    <style name="AboutThemeBase" parent="AppTheme"/>
+
+    <style name="AboutTheme" parent="AboutThemeBase"/>
+
+    <style name="LicensesThemeBase" parent="AppTheme"/>
+
+    <style name="LicensesTheme" parent="LicensesThemeBase"/>
 
 
     <style name="DrawerNavigationViewTheme" parent="@style/Theme.AppCompat.Light">

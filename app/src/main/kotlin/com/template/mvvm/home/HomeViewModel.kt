@@ -11,7 +11,7 @@ import com.template.mvvm.life.SingleLiveData
 class HomeViewModel(app: Application) : LifeViewModel(app) {
     val title = ObservableInt(R.string.home_title)
     val description = ObservableField<String>()
-    val drawerSubViewModel = NaviSubViewModel(getApplication())
+    val drawerSubViewModel = AppNavigationViewModel(getApplication())
 
     internal val snackbarMessage = SingleLiveData<String>()
 

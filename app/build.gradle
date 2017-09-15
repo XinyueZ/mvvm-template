@@ -69,6 +69,9 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraint"
     implementation "com.android.support:multidex:$rootProject.multiDex"
 
+    //JSON
+    implementation "com.google.code.gson:gson:$rootProject.gson"
+
     //ARCH
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"

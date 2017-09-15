@@ -25,10 +25,15 @@
 
         <activity
             android:name=".products.ProductsActivity"
-            android:theme="@style/HomeTheme"/>
+            android:theme="@style/ProductsTheme"/>
 
         <activity
             android:name=".about.AboutActivity"
-            android:theme="@style/HomeTheme"/>
+            android:theme="@style/AboutTheme"/>
+
+
+        <activity
+            android:name="licenses.LicensesActivity"
+            android:theme="@style/LicensesTheme"/>
     </application>
 </manifest>

@@ -19,6 +19,9 @@ ext {
     //Material Design Guideline
     guideline = "1.0.4"
 
+    //Json
+    gson = "2+"
+
     appId = "com.template.mvvm"
     versionCode = 3
     versionName = "v0.3"

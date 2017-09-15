@@ -20,6 +20,7 @@ import com.template.mvvm.home.msg.OpenItem
 import com.template.mvvm.home.msg.OpenProducts
 import com.template.mvvm.life.LifeActivity
 import com.template.mvvm.products.ProductsActivity
+import licenses.LicensesActivity
 
 class HomeActivity : LifeActivity() {
 
@@ -54,6 +55,9 @@ class HomeActivity : LifeActivity() {
             binding.drawer.setup(this@HomeActivity, drawerToggle)
             openProduct.observe(this@HomeActivity, Observer {
                 openProducts(OpenProducts("open product"))
+            })
+            openLicenses.observe(this@HomeActivity, Observer {
+                LicensesActivity.showInstance(this@HomeActivity)
             })
             openAbout.observe(this@HomeActivity, Observer {
                 openAbout(OpenAbout("open about"))

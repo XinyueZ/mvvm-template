@@ -5,8 +5,9 @@ import com.template.mvvm.R
 import com.template.mvvm.life.LifeViewModel
 import com.template.mvvm.life.SingleLiveData
 
-class NaviSubViewModel(context: Application) : LifeViewModel(context) {
+class AppNavigationViewModel(context: Application) : LifeViewModel(context) {
     internal val openProduct = SingleLiveData<Boolean>()
+    internal val openLicenses = SingleLiveData<Boolean>()
     internal val openAbout = SingleLiveData<Boolean>()
     internal val openItem1 = SingleLiveData<Boolean>()
     internal val openItem2 = SingleLiveData<Boolean>()
@@ -24,6 +25,11 @@ class NaviSubViewModel(context: Application) : LifeViewModel(context) {
                 //Use LiveData to open next stage.
                 drawerToggle.value = false
                 openProduct.value = true
+            }
+            R.id.action_software_licenses -> {
+
+                drawerToggle.value = false
+                openLicenses.value = true
             }
             R.id.action_about -> {
 
