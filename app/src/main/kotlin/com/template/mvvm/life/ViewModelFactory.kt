@@ -5,8 +5,8 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.template.mvvm.about.AboutViewModel
-import com.template.mvvm.data.LicensesRepository
-import com.template.mvvm.data.ProductsRepository
+import com.template.mvvm.data.repository.LicensesRepository
+import com.template.mvvm.data.repository.ProductsRepository
 import com.template.mvvm.home.AppNavigationViewModel
 import com.template.mvvm.home.HomeViewModel
 import com.template.mvvm.licenses.SoftwareLicensesViewModel

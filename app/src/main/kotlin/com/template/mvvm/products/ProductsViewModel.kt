@@ -7,7 +7,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
 import android.widget.Toast
 import com.template.mvvm.R
-import com.template.mvvm.data.ProductsRepository
+import com.template.mvvm.data.repository.ProductsRepository
 import com.template.mvvm.life.LifeViewModel
 import com.template.mvvm.life.SingleLiveData
 import com.template.mvvm.products.list.ListBinding

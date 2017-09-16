@@ -1,4 +1,4 @@
-package com.template.mvvm.data
+package com.template.mvvm.data.repository
 
 import android.app.Application
 import com.template.mvvm.data.cache.LicensesCache

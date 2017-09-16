@@ -1,6 +1,6 @@
 package com.template.mvvm.data.remote
 
-import com.template.mvvm.data.ProductsDataSource
+import com.template.mvvm.data.repository.ProductsDataSource
 import com.template.mvvm.data.domain.products.ProductList
 import io.reactivex.Single
 

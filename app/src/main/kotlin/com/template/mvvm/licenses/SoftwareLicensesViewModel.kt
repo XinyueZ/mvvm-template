@@ -7,7 +7,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
 import android.widget.Toast
 import com.template.mvvm.R
-import com.template.mvvm.data.LicensesRepository
+import com.template.mvvm.data.repository.LicensesRepository
 import com.template.mvvm.licenses.list.ListBinding
 import com.template.mvvm.licenses.list.ListViewFactory
 import com.template.mvvm.licenses.list.SoftwareLicenseItemViewModel
