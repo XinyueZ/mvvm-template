@@ -29,10 +29,10 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         })
     }
 
-    private fun LibraryList.loadLicenses() {
+    private fun loadLicenses() {
         val licensesData = gson.fromJson(InputStreamReader(app.assets
                 .open(LICENCES_LIST_JSON)), LicensesData::class.java)
-        value = arrayListOf<Library>().apply {
+        libraryList.value = arrayListOf<Library>().apply {
             licensesData.licenses.forEach({ licenseData ->
                 licenseData.libraries.forEach({ libraryData ->
                     this@apply.add(Library.from(libraryData, licenseData))

@@ -48,6 +48,11 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
+
+    lintOptions {
+        htmlReport false
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -87,8 +92,8 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.rxAdapter"
 
     //RETROFIT
-    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
-    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
 
     //MATERIAL DESIGN GUIDELINE
     implementation("com.github.thekhaeng:material-design-guideline:$rootProject.guideline") {

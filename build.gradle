@@ -13,9 +13,9 @@ ext {
 
     //Rx, Retrofit
     rx = "2+"
-    rxAdapter = "2+"
     rxAndroid = "2+"
-    retrofit = "2+"
+    rxAdapter = "2.3.0"
+    retrofit = "2.3.0"
 
     //Material Design Guideline
     guideline = "1.0.4"

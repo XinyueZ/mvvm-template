@@ -19,9 +19,9 @@ class ProductsLocal : ProductsDataSource {
         })
     }
 
-    private fun ProductList.loadProducts() {
+    private fun loadProducts() {
         Handler().postDelayed({
-            value = arrayListOf(
+            productList.value = arrayListOf(
                     Product("BIOM", "BIOM FJUEL - Trainers - aquatic"),
                     Product("FOGGY", "FOGGY - Trainers - brown/beige"),
                     Product("Sports", "Sports socks - blue"),

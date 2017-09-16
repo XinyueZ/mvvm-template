@@ -12,6 +12,6 @@ class ProductsRepository(private val remote: ProductsDataSource = ProductsRemote
 ) : ProductsDataSource {
 
     override fun getAllProducts(): Single<ProductList> {
-        return local.getAllProducts()
+        return remote.getAllProducts()
     }
 }
