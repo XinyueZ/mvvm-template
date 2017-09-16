@@ -11,7 +11,8 @@ import io.reactivex.schedulers.Schedulers
 class ProductsRemote : ProductsDataSource {
     private val productList = ProductList()
     override fun getAllProducts(): Single<ProductList> {
-        return ProductsApi.service.getArticles().observeOn(Schedulers.io()).flatMap {
+        return ProductsApi.service.getArticles().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).flatMap {
             val list = arrayListOf<Product>()
 
             val ret: Single<ProductList> = Single.create({ emitter ->
@@ -30,6 +31,6 @@ class ProductsRemote : ProductsDataSource {
             productList.value = list
 
             ret
-        }.subscribeOn(AndroidSchedulers.mainThread())
+        }
     }
 }
