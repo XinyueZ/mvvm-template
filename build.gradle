@@ -11,10 +11,11 @@ ext {
     constraint = "1+"
     multiDex = "1+"
 
-    //Rx
+    //Rx, Retrofit
     rx = "2+"
-    rxAdapter = "1+"
+    rxAdapter = "2+"
     rxAndroid = "2+"
+    retrofit = "2+"
 
     //Material Design Guideline
     guideline = "1.0.4"

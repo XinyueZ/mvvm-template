@@ -84,7 +84,11 @@ dependencies {
     //RX
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid"
-    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.rxAdapter"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.rxAdapter"
+
+    //RETROFIT
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
 
     //MATERIAL DESIGN GUIDELINE
     implementation("com.github.thekhaeng:material-design-guideline:$rootProject.guideline") {
