@@ -8,7 +8,7 @@ import io.reactivex.Single
 
 class LicensesCache : LicensesDataSource {
 
-    override fun getAllLibraries(lifecycleOwner: LifecycleRegistryOwner): Single<LibraryList> {
+    override fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -1,6 +1,6 @@
 package com.template.mvvm.licenses
 
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
@@ -19,7 +19,7 @@ class SoftwareLicensesFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSoftwareLicensesBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(activity as LifecycleRegistryOwner) }
+                    vm = obtainViewModel().apply { registerLifecycleOwner(activity as LifecycleOwner) }
                 }
         return binding
     }

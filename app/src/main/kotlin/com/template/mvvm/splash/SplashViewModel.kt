@@ -1,7 +1,7 @@
 package com.template.mvvm.splash
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.databinding.ObservableBoolean
 import android.os.Handler
 import android.util.Log
@@ -25,8 +25,8 @@ class SplashViewModel(app: Application) : LifeViewModel(app) {
 
     }
 
-    override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
-        Interactor.start(lifecycleRegistryOwner)
+    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        Interactor.start(lifecycleOwner)
                 .subscribe(GoHome::class, this::goHome)
                 .subscribeError(this::onActorError)
                 .register()

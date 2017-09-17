@@ -2,7 +2,7 @@ package com.template.mvvm.actor
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import android.support.v4.util.SimpleArrayMap
 import android.util.Log
@@ -17,7 +17,7 @@ abstract class Actor<T> {
         publisher.onNext(msg)
     }
 
-    fun start(subject: LifecycleRegistryOwner) = Factory(subject, publisher)
+    fun start(subject: LifecycleOwner) = Factory(subject, publisher)
 
     class LifecycleObserverForActor<T> internal constructor(
             private val publisher: PublishSubject<Message<T>>,
@@ -56,7 +56,7 @@ abstract class Actor<T> {
         }
     }
 
-    class Factory<T> internal constructor(private val subject: LifecycleRegistryOwner, private val publisher: PublishSubject<Message<T>>) {
+    class Factory<T> internal constructor(private val subject: LifecycleOwner, private val publisher: PublishSubject<Message<T>>) {
         private var error: ((Throwable) -> Unit)? = null
         private val success = SimpleArrayMap<KClass<*>, (Message<T>) -> Unit>()
 

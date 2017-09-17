@@ -1,7 +1,7 @@
 package com.template.mvvm.licenses
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
@@ -35,11 +35,11 @@ class SoftwareLicensesViewModel(app: Application, private val repository: Licens
     val listFactory = ListViewFactory()
     val listBinding = ListBinding()
 
-    override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
+    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         addToAutoDispose(
-                repository.getAllLibraries(lifecycleRegistryOwner).subscribe(
+                repository.getAllLibraries(lifecycleOwner).subscribe(
                         {
-                            it.switchMapViewModelList(lifecycleRegistryOwner) {
+                            it.switchMapViewModelList(lifecycleOwner) {
                                 it?.let {
                                     libraryList.addAll(it)
                                     dataLoaded.set(true)

@@ -1,7 +1,6 @@
 package com.template.mvvm.about
 
 import android.app.Activity
-import android.arch.lifecycle.LifecycleFragment
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivityAboutBinding
 import com.template.mvvm.life.LifeActivity
+import com.template.mvvm.life.LifeFragment
 
 class AboutActivity : LifeActivity() {
 
@@ -22,7 +22,7 @@ class AboutActivity : LifeActivity() {
 
     override fun getLayout() = R.layout.activity_about
     override fun createViewModel() = AboutViewModel::class.java
-    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: AboutFragment.newInstance(application)) as LifecycleFragment
+    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: AboutFragment.newInstance(application)) as LifeFragment
 
     lateinit var binding: ActivityAboutBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {

@@ -1,7 +1,7 @@
 package com.template.mvvm.data.domain.licenses
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations
 import android.content.Context
@@ -9,10 +9,10 @@ import com.template.mvvm.licenses.list.SoftwareLicenseItemViewModel
 import com.template.mvvm.life.SingleLiveData
 
 class LibraryList : SingleLiveData<List<Library>>() {
-    inline fun switchMapViewModelList(lifecycleRegistryOwner: LifecycleRegistryOwner, crossinline body: (t: List<SoftwareLicenseItemViewModel>?) -> Unit) {
-        when (lifecycleRegistryOwner is Context) {
+    inline fun switchMapViewModelList(lifecycleOwner: LifecycleOwner, crossinline body: (t: List<SoftwareLicenseItemViewModel>?) -> Unit) {
+        when (lifecycleOwner is Context) {
             true -> {
-                with((lifecycleRegistryOwner as Context).applicationContext as Application) {
+                with((lifecycleOwner as Context).applicationContext as Application) {
                     Transformations.switchMap(this@LibraryList) {
                         val itemVmList = arrayListOf<SoftwareLicenseItemViewModel>().apply {
                             it.mapTo(this) {
@@ -23,7 +23,7 @@ class LibraryList : SingleLiveData<List<Library>>() {
                             value = itemVmList
                             return@switchMap this
                         }
-                    }.observe(lifecycleRegistryOwner, Observer { body(it) })
+                    }.observe(lifecycleOwner, Observer { body(it) })
                 }
             }
         }

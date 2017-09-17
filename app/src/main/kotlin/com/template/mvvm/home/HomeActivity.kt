@@ -2,7 +2,6 @@ package com.template.mvvm.home
 
 import CustomTabUtils
 import android.app.Activity
-import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
@@ -16,6 +15,7 @@ import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.ext.setup
 import com.template.mvvm.licenses.SoftwareLicensesActivity
 import com.template.mvvm.life.LifeActivity
+import com.template.mvvm.life.LifeFragment
 import com.template.mvvm.products.ProductsActivity
 import de.immowelt.mobile.livestream.core.utils.customtab.CustomTabConfig
 
@@ -31,7 +31,7 @@ class HomeActivity : LifeActivity() {
 
     override fun getLayout() = R.layout.activity_home
     override fun createViewModel() = HomeViewModel::class.java
-    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: Item1Fragment.newInstance(application)) as LifecycleFragment
+    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: Item1Fragment.newInstance(application)) as LifeFragment
 
     lateinit var binding: ActivityHomeBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {

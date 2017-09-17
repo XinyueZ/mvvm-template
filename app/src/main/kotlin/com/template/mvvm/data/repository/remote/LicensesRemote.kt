@@ -1,5 +1,6 @@
 package com.template.mvvm.data.repository.remote
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistryOwner
 import com.template.mvvm.data.domain.licenses.Library
 import com.template.mvvm.data.domain.licenses.LibraryList
@@ -11,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 
 class LicensesRemote : LicensesDataSource {
     private val libraryList = LibraryList()
-    override fun getAllLibraries(lifecycleOwner: LifecycleRegistryOwner): Single<LibraryList> {
+    override fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList> {
         return Single.zip(Single.just(libraryList), LicensesApi.service.getLibraries().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()), BiFunction({ p1, p2 ->
             libraryList.apply {
                 value = arrayListOf<Library>().apply {

@@ -1,9 +1,7 @@
 package com.template.mvvm.life
 
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.LifecycleRegistry
-import android.arch.lifecycle.LifecycleRegistryOwner
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -14,7 +12,7 @@ import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.utils.SystemUiHelper
 
-abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
+abstract class LifeActivity : AppCompatActivity() {
 
     private val registry = LifecycleRegistry(this)
 
@@ -24,7 +22,7 @@ abstract class LifeActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
     abstract fun createViewModel(): Class<out AndroidViewModel>
 
-    abstract fun obtainViewModelView(): LifecycleFragment
+    abstract fun obtainViewModelView(): LifeFragment
 
     abstract fun getLayout(): Int
 

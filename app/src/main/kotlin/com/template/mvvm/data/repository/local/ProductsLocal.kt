@@ -1,5 +1,6 @@
 package com.template.mvvm.data.repository.local
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistryOwner
 import com.template.mvvm.data.domain.products.Product
 import com.template.mvvm.data.domain.products.ProductList
@@ -9,7 +10,7 @@ import io.reactivex.Single
 class ProductsLocal : ProductsDataSource {
     private val productList = ProductList()
 
-    override fun getAllProducts(lifecycleOwner: LifecycleRegistryOwner): Single<ProductList> {
+    override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> {
         return Single.create({ emitter ->
             with(productList) {
                 loadProducts()

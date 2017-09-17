@@ -1,7 +1,6 @@
 package com.template.mvvm.licenses
 
 import android.app.Activity
-import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
@@ -10,6 +9,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivitySoftwareLicensesBinding
 import com.template.mvvm.life.LifeActivity
+import com.template.mvvm.life.LifeFragment
 
 class SoftwareLicensesActivity : LifeActivity() {
     companion object {
@@ -23,7 +23,7 @@ class SoftwareLicensesActivity : LifeActivity() {
     override fun getLayout() = R.layout.activity_software_licenses
     override fun createViewModel() = SoftwareLicensesViewModel::class.java
     override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-            SoftwareLicensesFragment.newInstance(application)) as LifecycleFragment
+            SoftwareLicensesFragment.newInstance(application)) as LifeFragment
 
     lateinit var binding: ActivitySoftwareLicensesBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {

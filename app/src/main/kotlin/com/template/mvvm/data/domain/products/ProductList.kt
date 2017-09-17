@@ -1,7 +1,7 @@
 package com.template.mvvm.data.domain.products
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations.switchMap
 import android.content.Context
@@ -9,10 +9,10 @@ import com.template.mvvm.life.SingleLiveData
 import com.template.mvvm.products.list.ProductItemViewModel
 
 class ProductList : SingleLiveData<List<Product>>() {
-    inline fun switchMapViewModelList(lifecycleRegistryOwner: LifecycleRegistryOwner, crossinline body: (t: List<ProductItemViewModel>?) -> Unit) {
-        when (lifecycleRegistryOwner is Context) {
+    inline fun switchMapViewModelList(lifecycleOwner: LifecycleOwner, crossinline body: (t: List<ProductItemViewModel>?) -> Unit) {
+        when (lifecycleOwner is Context) {
             true -> {
-                with((lifecycleRegistryOwner as Context).applicationContext as Application) {
+                with((lifecycleOwner as Context).applicationContext as Application) {
                     switchMap(this@ProductList) {
                         val itemVmList = arrayListOf<ProductItemViewModel>().apply {
                             it.mapTo(this) {
@@ -23,7 +23,7 @@ class ProductList : SingleLiveData<List<Product>>() {
                             value = itemVmList
                             return@switchMap this
                         }
-                    }.observe(lifecycleRegistryOwner, Observer { body(it) })
+                    }.observe(lifecycleOwner, Observer { body(it) })
                 }
             }
         }

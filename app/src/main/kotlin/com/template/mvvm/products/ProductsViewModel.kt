@@ -1,7 +1,7 @@
 package com.template.mvvm.products
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
@@ -35,10 +35,10 @@ class ProductsViewModel(app: Application, private val productsRepository: Produc
         goBack.set(true)
     }
 
-    override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
+    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         addToAutoDispose(
-                productsRepository.getAllProducts(lifecycleRegistryOwner).subscribe({
-                    it.switchMapViewModelList(lifecycleRegistryOwner) {
+                productsRepository.getAllProducts(lifecycleOwner).subscribe({
+                    it.switchMapViewModelList(lifecycleOwner) {
                         it?.let {
                             productList.addAll(it)
                             dataLoaded.set(true)

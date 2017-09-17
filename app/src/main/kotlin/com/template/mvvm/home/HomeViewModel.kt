@@ -1,7 +1,7 @@
 package com.template.mvvm.home
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.LifecycleOwner
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.support.v4.app.Fragment
@@ -28,13 +28,13 @@ class HomeViewModel(app: Application) : LifeViewModel(app) {
         drawerSubViewModel.drawerToggle.value = true
     }
 
-    override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
-        when (lifecycleRegistryOwner) {
+    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        when (lifecycleOwner) {
             is Fragment -> {
-                drawerSubViewModel = this@HomeViewModel.obtainViewModel(lifecycleRegistryOwner, AppNavigationViewModel::class.java)
+                drawerSubViewModel = this@HomeViewModel.obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
             }
             is FragmentActivity -> {
-                drawerSubViewModel = this@HomeViewModel.obtainViewModel(lifecycleRegistryOwner, AppNavigationViewModel::class.java)
+                drawerSubViewModel = this@HomeViewModel.obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
             }
         }
         return true
