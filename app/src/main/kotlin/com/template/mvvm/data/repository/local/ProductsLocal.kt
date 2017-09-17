@@ -1,6 +1,5 @@
 package com.template.mvvm.data.repository.local
 
-import android.os.Handler
 import com.template.mvvm.data.domain.products.Product
 import com.template.mvvm.data.domain.products.ProductList
 import com.template.mvvm.data.repository.ProductsDataSource
@@ -20,19 +19,16 @@ class ProductsLocal : ProductsDataSource {
     }
 
     private fun loadProducts() {
-        Handler().postDelayed({
-            productList.value = arrayListOf(
-                    Product("BIOM", "BIOM FJUEL - Trainers - aquatic"),
-                    Product("FOGGY", "FOGGY - Trainers - brown/beige"),
-                    Product("Sports", "Sports socks - blue"),
-                    Product("PALERMO", "PALERMO - Trainers - oliv/rost"),
-                    Product("JFWLAFAYETTE", "JFWLAFAYETTE  - Trainers - ivy green"),
-                    Product("STRIKER", "STRIKER - Trainers - dress blues"),
-                    Product("JFWLAFAYETTE", "JFWLAFAYETTE - Trainers - anthracite"),
-                    Product("BILBAO II SUN", "BILBAO II SUN - Trainers - blue/lime"),
-                    Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white"),
-                    Product("PICK", "PICK POCKET TX - Trainers - black")
-            )
-        }, 5000)
+        productList.value = arrayListOf(
+                Product("BIOM", "BIOM FJUEL - Trainers - aquatic"),
+                Product("FOGGY", "FOGGY - Trainers - brown/beige"),
+                Product("Sports", "Sports socks - blue"),
+                Product("PALERMO", "PALERMO - Trainers - oliv/rost"),
+                Product("JFWLAFAYETTE", "JFWLAFAYETTE  - Trainers - ivy green"),
+                Product("STRIKER", "STRIKER - Trainers - dress blues"),
+                Product("JFWLAFAYETTE", "JFWLAFAYETTE - Trainers - anthracite"),
+                Product("BILBAO II SUN", "BILBAO II SUN - Trainers - blue/lime"),
+                Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white"),
+                Product("PICK", "PICK POCKET TX - Trainers - black")
     }
 }
