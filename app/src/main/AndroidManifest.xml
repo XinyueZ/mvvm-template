@@ -10,6 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.template.mvvm.ExAppGlideModule"
+            android:value="ExAppGlideModule" />
+
         <activity
             android:name=".splash.SplashActivity"
             android:theme="@style/SplashTheme">

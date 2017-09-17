@@ -99,6 +99,10 @@ dependencies {
     implementation("com.github.thekhaeng:material-design-guideline:$rootProject.guideline") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+
+    //IMAGE-LOADER
+    implementation "com.github.bumptech.glide:glide:$rootProject.imageLoader"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.imageLoader"
 }
 
 

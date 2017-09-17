@@ -23,6 +23,9 @@ ext {
     //Json
     gson = "2+"
 
+    //Image-loader
+    imageLoader = "4+"
+
     appId = "com.template.mvvm"
     versionCode = 4
     versionName = "v0.4"
@@ -36,6 +39,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
     }
     dependencies {
@@ -51,6 +55,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
     }
 }

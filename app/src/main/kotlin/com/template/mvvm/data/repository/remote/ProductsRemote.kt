@@ -1,5 +1,6 @@
 package com.template.mvvm.data.repository.remote
 
+import android.net.Uri
 import com.template.mvvm.data.domain.products.Product
 import com.template.mvvm.data.domain.products.ProductList
 import com.template.mvvm.data.repository.ProductsDataSource
@@ -13,12 +14,15 @@ class ProductsRemote : ProductsDataSource {
     override fun getAllProducts(): Single<ProductList> {
         return Single.just(productList).doFinally {
             ProductsApi.service.getArticles().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(Consumer {
-                val list = arrayListOf<Product>()
-                it.products.forEach {
-                    val product = Product(it.name, it.name + "----" + it.name)
-                    list.add(product)
+                arrayListOf<Product>().apply {
+                    it.products.forEach {
+                        add(Product(
+                                it.name,
+                                String.format("%s//%s//%s", it.brand.name, it.genders.joinToString(), it.ageGroups.joinToString()),
+                                Uri.parse(it.media.images.first().largeHdUrl)))
+                    }
+                    productList.value = this
                 }
-                productList.value = list
             })
         }
     }

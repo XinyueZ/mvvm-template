@@ -2,14 +2,22 @@ package com.template.mvvm.common
 
 import android.app.Activity
 import android.databinding.BindingAdapter
+import android.net.Uri
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
+import com.template.mvvm.ext.loadRemoteImage
 import com.template.mvvm.home.HomeActivity
 
+@BindingAdapter("remoteImageUri")
+fun setRemoteImage(view: ImageView, uri: Uri?) {
+    uri?.let {
+        view.loadRemoteImage(uri)
+    }
+}
 
 @BindingAdapter("onIndicatorClick")
 fun toolbarOnIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
