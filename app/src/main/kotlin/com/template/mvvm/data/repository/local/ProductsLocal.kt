@@ -29,6 +29,6 @@ class ProductsLocal : ProductsDataSource {
                 Product("JFWLAFAYETTE", "JFWLAFAYETTE - Trainers - anthracite"),
                 Product("BILBAO II SUN", "BILBAO II SUN - Trainers - blue/lime"),
                 Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white"),
-                Product("PICK", "PICK POCKET TX - Trainers - black")
+                Product("PICK", "PICK POCKET TX - Trainers - black"))
     }
 }
