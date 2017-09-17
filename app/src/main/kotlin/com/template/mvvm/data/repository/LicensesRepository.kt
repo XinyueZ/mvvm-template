@@ -14,6 +14,6 @@ class LicensesRepository(app: Application,
 ) : LicensesDataSource {
 
     override fun getAllLibraries(): Single<LibraryList> {
-        return local.getAllLibraries()
+        return remote.getAllLibraries()
     }
 }

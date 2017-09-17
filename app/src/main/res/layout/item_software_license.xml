@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -16,72 +15,42 @@
         android:layout_height="wrap_content"
         android:transitionGroup="false">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/thumnailIv"
-                android:layout_width="@dimen/item_thumbnail_size"
-                android:layout_height="@dimen/item_thumbnail_size"
-                android:src="@mipmap/ic_launcher"
-                tools:src="@mipmap/ic_launcher"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginStart="5dp"
                 android:ellipsize="end"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|left|start"
                 android:inputType="textMultiLine|textNoSuggestions"
-                android:maxLines="2"
-                android:minLines="2"
-                android:singleLine="false"
                 android:text="@{vm.title}"
-                android:textAppearance="@style/MaterialTextView.LightTheme.Caption"
+                android:textAppearance="@style/MaterialTextView.LightTheme.Title"
                 android:textColor="@color/colorBlack"
-                app:layout_constraintBottom_toTopOf="@+id/guidelineCenterVertical"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toRightOf="@id/thumnailIv"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:text="title"/>
 
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guidelineCenterVertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5"/>
-
-
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginStart="5dp"
                 android:ellipsize="end"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|left|start"
                 android:inputType="textMultiLine|textNoSuggestions"
-                android:maxLines="2"
-                android:minLines="2"
-                android:singleLine="false"
                 android:text="@{vm.description}"
                 android:textAppearance="@style/MaterialTextView.LightTheme.Caption"
                 android:textColor="@color/colorBlack"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toRightOf="@id/thumnailIv"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guidelineCenterVertical"
                 tools:text="description"/>
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>
