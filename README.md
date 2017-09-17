@@ -6,10 +6,11 @@ The code-base will be from very begin to complicate use-cases. The purpose of th
 
 # Pattern included
 
+- General [GOF](https://en.wikipedia.org/wiki/Design_Patterns) patterns
+- Repository pattern to provide data
 - [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
 -- An implementation of actor model based on [Rx-Android](https://github.com/ReactiveX/RxAndroid)
 
-- Repository pattern to provide data
 
 # Kotlin
 
@@ -21,12 +22,13 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 - [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4/repository): in [dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
 
+> The template is using ```product```, ```software licenses``` to demonstrate how to use MVVM to load data and show them on UI. For your own use-case, you can reset them and build your own features.  
+
 > Use repository to populate data instead hard coding in [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom)
 
 1. Don't use actors to drive screen. Use LiveData to change different fragments or views.
 2. Use actors only for internal interaction in view-models.
 3. Added ```LL``` which is a easy "logcat" to logout with filter "#!#!", you can see line-number in output directly 
-
 i.e 
 
 ```
@@ -36,6 +38,9 @@ i.e
 
 4. Added ```ProductsRepository```, the repository-pattern has been imported firsly. Using ```handler``` to simulate network calling.
 5. Use feature of  ```LiveData```(switchMap, observe) to populate data. (https://developer.android.com/topic/libraries/architecture/livedata.html)
+6. The repository would populate data with ```remote```, ```local``` and  ```cache``` .
+7. Added [Retrofit](http://square.github.io/retrofit/) to load data, use [Room](https://developer.android.com/topic/libraries/architecture/room.html) to persistent data.
+8. Added [Rx-Android](https://github.com/ReactiveX/RxAndroid) to process data from source i.e ```remote``` to the [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html).
 
 - [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom): 
 
