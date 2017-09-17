@@ -1,6 +1,7 @@
 package com.template.mvvm.data.repository.local
 
 import android.app.Application
+import android.arch.lifecycle.LifecycleRegistryOwner
 import com.google.gson.Gson
 import com.template.mvvm.data.domain.licenses.Library
 import com.template.mvvm.data.domain.licenses.LibraryList
@@ -19,7 +20,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
     private val gson = Gson()
     private val libraryList = LibraryList()
 
-    override fun getAllLibraries(): Single<LibraryList> {
+    override fun getAllLibraries(lifecycleOwner: LifecycleRegistryOwner): Single<LibraryList> {
         return Single.create({ emitter ->
             with(libraryList) {
                 loadLicenses()

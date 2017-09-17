@@ -37,7 +37,7 @@ class ProductsViewModel(app: Application, private val productsRepository: Produc
 
     override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
         addToAutoDispose(
-                productsRepository.getAllProducts().subscribe({
+                productsRepository.getAllProducts(lifecycleRegistryOwner).subscribe({
                     it.switchMapViewModelList(lifecycleRegistryOwner) {
                         it?.let {
                             productList.addAll(it)

@@ -1,5 +1,6 @@
 package com.template.mvvm.data.repository.remote
 
+import android.arch.lifecycle.LifecycleRegistryOwner
 import android.net.Uri
 import com.template.mvvm.data.domain.products.Product
 import com.template.mvvm.data.domain.products.ProductList
@@ -11,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 
 class ProductsRemote : ProductsDataSource {
     private val productList = ProductList()
-    override fun getAllProducts(): Single<ProductList> {
+    override fun getAllProducts(lifecycleOwner: LifecycleRegistryOwner): Single<ProductList> {
         return Single.just(productList).doFinally {
             ProductsApi.service.getArticles().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(Consumer {
                 arrayListOf<Product>().apply {

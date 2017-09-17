@@ -37,7 +37,7 @@ class SoftwareLicensesViewModel(app: Application, private val repository: Licens
 
     override fun registerLifecycleOwner(lifecycleRegistryOwner: LifecycleRegistryOwner): Boolean {
         addToAutoDispose(
-                repository.getAllLibraries().subscribe(
+                repository.getAllLibraries(lifecycleRegistryOwner).subscribe(
                         {
                             it.switchMapViewModelList(lifecycleRegistryOwner) {
                                 it?.let {
