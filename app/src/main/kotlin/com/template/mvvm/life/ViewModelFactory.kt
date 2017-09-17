@@ -4,9 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.template.mvvm.Injection
 import com.template.mvvm.about.AboutViewModel
-import com.template.mvvm.data.repository.LicensesRepository
-import com.template.mvvm.data.repository.ProductsRepository
 import com.template.mvvm.home.AppNavigationViewModel
 import com.template.mvvm.home.HomeViewModel
 import com.template.mvvm.licenses.SoftwareLicensesViewModel
@@ -29,10 +28,10 @@ class ViewModelFactory private constructor(
                 when {
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(application)
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application)
-                    isAssignableFrom(AppNavigationViewModel::class.java) ->  AppNavigationViewModel(application)
-                    isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(application, ProductsRepository())
+                    isAssignableFrom(AppNavigationViewModel::class.java) -> AppNavigationViewModel(application)
+                    isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(application, Injection.provideProductsRepository())
                     isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel(application)
-                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(application, LicensesRepository(application))
+                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(application, Injection.provideLicensesRepository(application))
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

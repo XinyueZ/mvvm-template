@@ -14,7 +14,7 @@ import com.template.mvvm.products.list.ListBinding
 import com.template.mvvm.products.list.ListViewFactory
 import com.template.mvvm.products.list.ProductItemViewModel
 
-class ProductsViewModel(app: Application, private val productsRepository: ProductsRepository = ProductsRepository()) : LifeViewModel(app) {
+class ProductsViewModel(app: Application, private val productsRepository: ProductsRepository) : LifeViewModel(app) {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
