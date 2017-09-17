@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             app:binding="@{vm.listBinding}"
             app:factory="@{vm.listFactory}"
-            app:items="@{vm.librarytList}"
+            app:items="@{vm.libraryList}"
             app:layoutManager="@{LayoutManagerTypeKt.LINEAR_VERTICAL}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
