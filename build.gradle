@@ -6,8 +6,8 @@ ext {
     buildToolsVersion = '26.0.1'
 
     // App dependencies
-    supportLibraryVersion = '26.0.2'
-    archLifecycleVersion = "1.0.0-alpha9"
+    supportLibraryVersion = '26.1.0'
+    archLifecycleVersion = "1.0.0-alpha9-1"
     constraint = "1+"
     multiDex = "1+"
 
