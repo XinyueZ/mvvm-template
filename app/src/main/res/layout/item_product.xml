@@ -21,13 +21,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/thumnailIv"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/item_image_size"
-                android:contentDescription="@null"
-                app:remoteImageUri="@{vm.thumbnail}"
-                tools:src="@mipmap/ic_launcher"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/thumnailIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_thumbnail_size"
+                    android:contentDescription="@null"
+                    app:remoteImageUri="@{vm.thumbnail}"
+                    tools:src="@mipmap/ic_launcher"/>
+
+
+                <ImageView
+                    android:id="@+id/brandLogoIv"
+                    android:layout_width="@dimen/item_brand_logo_size"
+                    android:layout_height="@dimen/item_brand_logo_size"
+                    android:layout_gravity="top|end|right"
+                    android:contentDescription="@null"
+                    app:remoteImageUri="@{vm.brandLogo}"
+                    tools:src="@mipmap/ic_launcher"/>
+            </FrameLayout>
 
             <TextView
                 android:layout_width="match_parent"

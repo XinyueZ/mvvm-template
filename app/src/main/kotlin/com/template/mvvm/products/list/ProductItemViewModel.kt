@@ -11,6 +11,8 @@ class ProductItemViewModel(app: Application) : LifeViewModel(app) {
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
+    val brandLogo: ObservableField<Uri> = ObservableField()
+
 
     companion object {
         fun from(app: Application, product: Product): ProductItemViewModel {
@@ -18,6 +20,7 @@ class ProductItemViewModel(app: Application) : LifeViewModel(app) {
                 title.set(product.title)
                 description.set(product.description)
                 thumbnail.set(product.thumbnail)
+                brandLogo.set(product.brandLogo)
             }
         }
     }

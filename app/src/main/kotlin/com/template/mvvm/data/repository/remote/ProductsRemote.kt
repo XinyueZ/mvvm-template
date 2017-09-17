@@ -19,7 +19,8 @@ class ProductsRemote : ProductsDataSource {
                         add(Product(
                                 it.name,
                                 String.format("%s//%s//%s", it.brand.name, it.genders.joinToString(), it.ageGroups.joinToString()),
-                                Uri.parse(it.media.images.first().largeHdUrl)))
+                                Uri.parse(it.media.images.first().largeHdUrl),
+                                if (it.brand.logo != null) Uri.parse(it.brand.logo) else Uri.EMPTY))
                     }
                     productList.value = this
                 }
