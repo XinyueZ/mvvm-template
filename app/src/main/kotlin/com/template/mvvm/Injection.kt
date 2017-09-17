@@ -8,8 +8,13 @@ import com.template.mvvm.data.repository.cache.LicensesCache
 import com.template.mvvm.data.repository.cache.ProductsCache
 import com.template.mvvm.data.repository.local.LicensesLocal
 import com.template.mvvm.data.repository.local.ProductsLocal
+import com.template.mvvm.data.repository.remote.LicensesApi
 import com.template.mvvm.data.repository.remote.LicensesRemote
+import com.template.mvvm.data.repository.remote.ProductsApi
 import com.template.mvvm.data.repository.remote.ProductsRemote
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 object Injection {
 
@@ -35,4 +40,11 @@ object Injection {
     private fun provideRemoteLicensesRepository(): LicensesDataSource = LicensesRemote()
     private fun provideLocalLicensesRepository(application: Application) = LicensesLocal(application)
     private fun provideCacheLicensesRepository() = LicensesCache()
+
+    //Provides API
+    fun provideProductsApiService() = Retrofit.Builder().baseUrl("https://api.zalando.com/").addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
+
+    fun provideLicensesApiService() = Retrofit.Builder().baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(LicensesApi::class.java)
 }
