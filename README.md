@@ -9,6 +9,8 @@ The code-base will be from very begin to complicate use-cases. The purpose of th
 - [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
 -- An implementation of actor model based on [Rx-Android](https://github.com/ReactiveX/RxAndroid)
 
+- Repository pattern to provide data
+
 # Kotlin
 
 Since the official announcement of the Kotlin langauge on Android at Google I/O 2017 the Android Studio has provided stable plugIn for this language and can be very confirmed that the Kotlin would be main language on Android platform. 
@@ -16,6 +18,24 @@ Since the official announcement of the Kotlin langauge on Android at Google I/O 
 All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
+
+- [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4/repository): in dev
+
+> Use repository to populate data instead hard coding in [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom)
+
+1. Don't use actors to drive screen. Use LiveData to change different fragments or views.
+2. Use actors only for internal interaction in view-models.
+3. Added ```LL``` which is a easy "logcat" to logout with filter "#!#!", you can see line-number in output directly 
+
+i.e 
+
+```
+09-14 22:38:05.873 14776-14776/com.template.mvvm D/LL$Companion.d @line: 155: #!#!ProductsRepository::getAllProducts#!#!
+09-14 22:38:05.874 14776-14776/com.template.mvvm D/LL$Companion.d @line: 155: #!#!ProductsRemote::getAllProducts#!#!
+```
+
+4. Added ```ProductsRepository```, the repository-pattern has been imported firsly. Using ```handler``` to simulate network calling.
+5. Use feature of  ```LiveData```(switchMap, observe) to populate data. (https://developer.android.com/topic/libraries/architecture/livedata.html)
 
 - [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom): 
 
@@ -36,6 +56,8 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 6. The ```ViewModel``` can contain some ```ViewModel```s, i.e the ```HomeViewModel``` which can contain ```DrawerSubViewModel``` to handle logical about the navigation-drawer.
 
 7. The ```LifeActivity``` would be created by using binding, the sub-classes of ```LifeActivity``` can now use data-binding.
+
+8. Added a software-license view.
 
 - [v0.2](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.2/splash-actor-imported): Very early with MVVM, just a home screen. (>=API 14)
 
