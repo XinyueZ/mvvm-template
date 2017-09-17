@@ -26,7 +26,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 > Use repository to populate data instead hard coding in [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom)
 
-1. Don't use actors to drive screen. Use LiveData to change different fragments or views.
+1. Don't use actors to drive screen. Use [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html) to change different fragments or views.
 2. Use actors only for internal interaction in view-models.
 3. Added ```LL``` which is a easy "logcat" to logout with filter "#!#!", you can see line-number in output directly 
 i.e 
@@ -36,11 +36,10 @@ i.e
 09-14 22:38:05.874 14776-14776/com.template.mvvm D/LL$Companion.d @line: 155: #!#!ProductsRemote::getAllProducts#!#!
 ```
 
-4. Added ```ProductsRepository```, the repository-pattern has been imported firsly. Using ```handler``` to simulate network calling.
-5. Use feature of  ```LiveData```(switchMap, observe) to populate data. (https://developer.android.com/topic/libraries/architecture/livedata.html)
-6. The repository would populate data with ```remote```, ```local``` and  ```cache``` .
-7. Added [Retrofit](http://square.github.io/retrofit/) to load data, use [Room](https://developer.android.com/topic/libraries/architecture/room.html) to persistent data.
-8. Added [Rx-Android](https://github.com/ReactiveX/RxAndroid) to process data from source i.e ```remote``` to the [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html).
+4. Use feature of  [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html) like switchMap, observe to populate data. (https://developer.android.com/topic/libraries/architecture/livedata.html)
+5. The repository would populate data with ```remote```, ```local``` and  ```cache``` .
+6. Added [Retrofit](http://square.github.io/retrofit/) to load data, use [Room](https://developer.android.com/topic/libraries/architecture/room.html) to persistent data.
+7. Added [Rx-Android](https://github.com/ReactiveX/RxAndroid) to process data from source i.e ```remote``` to the [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html).
 
 - [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom): 
 
