@@ -12,6 +12,9 @@ import com.template.mvvm.data.repository.remote.LicensesApi
 import com.template.mvvm.data.repository.remote.LicensesRemote
 import com.template.mvvm.data.repository.remote.ProductsApi
 import com.template.mvvm.data.repository.remote.ProductsRemote
+import com.template.mvvm.data.repository.remote.interceptors.NetworkConnectionInterceptor
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -42,9 +45,12 @@ object Injection {
     private fun provideCacheLicensesRepository() = LicensesCache()
 
     //Provides API
-    fun provideProductsApiService() = Retrofit.Builder().baseUrl("https://api.zalando.com/").addConverterFactory(GsonConverterFactory.create())
+    val networkConnectionInterceptor: Interceptor  = NetworkConnectionInterceptor(App.connectivityManager!!)
+    val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(networkConnectionInterceptor).build() }
+
+    fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
 
-    fun provideLicensesApiService() = Retrofit.Builder().baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(GsonConverterFactory.create())
+    fun provideLicensesApiService() = Retrofit.Builder().client(client).baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(LicensesApi::class.java)
 }
