@@ -31,7 +31,7 @@ class SoftwareLicensesViewModel(app: Application, private val repository: Licens
     internal val pageStill = SingleLiveData<Boolean>()
 
     //For recyclerview data
-    val librarytList = ObservableArrayList<SoftwareLicenseItemViewModel>()
+    val libraryList = ObservableArrayList<SoftwareLicenseItemViewModel>()
     val listFactory = ListViewFactory()
     val listBinding = ListBinding()
 
@@ -41,7 +41,7 @@ class SoftwareLicensesViewModel(app: Application, private val repository: Licens
                         {
                             it.switchMapViewModelList(lifecycleRegistryOwner) {
                                 it?.let {
-                                    librarytList.addAll(it)
+                                    libraryList.addAll(it)
                                     dataLoaded.set(true)
                                     pageStill.value = true
                                 }
