@@ -1,7 +1,7 @@
-package com.template.mvvm.data.remote
+package com.template.mvvm.data.repository.remote
 
-import com.template.mvvm.data.repository.LicensesDataSource
 import com.template.mvvm.data.domain.licenses.LibraryList
+import com.template.mvvm.data.repository.LicensesDataSource
 import io.reactivex.Single
 
 class LicensesRemote : LicensesDataSource {

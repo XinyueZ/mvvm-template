@@ -1,7 +1,7 @@
-package com.template.mvvm.data.cache
+package com.template.mvvm.data.repository.cache
 
-import com.template.mvvm.data.repository.LicensesDataSource
 import com.template.mvvm.data.domain.licenses.LibraryList
+import com.template.mvvm.data.repository.LicensesDataSource
 import io.reactivex.Single
 
 class LicensesCache : LicensesDataSource {

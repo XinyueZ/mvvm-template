@@ -1,4 +1,4 @@
-package com.template.mvvm.data.local
+package com.template.mvvm.data.repository.local
 
 import android.app.Application
 import com.google.gson.Gson

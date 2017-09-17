@@ -1,4 +1,4 @@
-package com.template.mvvm.data.local
+package com.template.mvvm.data.repository.local
 
 import android.os.Handler
 import com.template.mvvm.data.domain.products.Product
