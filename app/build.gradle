@@ -107,6 +107,9 @@ dependencies {
     //IMAGE-LOADER
     implementation "com.github.bumptech.glide:glide:$rootProject.imageLoader"
     kapt "com.github.bumptech.glide:compiler:$rootProject.imageLoader"
+
+    //DEBUG TOOL
+    implementation "com.github.grapesnberries:curlloggerinterceptor:$rootProject.curl"
 }
 
 

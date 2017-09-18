@@ -26,6 +26,9 @@ ext {
     //Image-loader
     imageLoader = "4+"
 
+    //Debug tool
+    curl  = "0.1"
+
     appId = "com.template.mvvm"
     versionCode = 4
     versionName = "v0.4"
