@@ -62,6 +62,11 @@
           "name": "material-design-guideline",
           "owner": "TheKhaeng",
           "copyright": "2017"
+        },
+        {
+          "name": "Curl-Logger-interceptor",
+          "owner": "Grapes 'n' Berries",
+          "copyright": "2016"
         }
       ]
     }
