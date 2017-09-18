@@ -40,6 +40,14 @@ i.e
 5. The repository would populate data with ```remote```, ```local``` and  ```cache``` .
 6. Added [Retrofit](http://square.github.io/retrofit/) to load data, use [Room](https://developer.android.com/topic/libraries/architecture/room.html) to persistent data.
 7. Added [Rx-Android](https://github.com/ReactiveX/RxAndroid) to process data from source i.e ```remote``` to the [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html).
+8. *NEW LIB FOR DEBUG* [Curl-Logger-interceptor](https://github.com/grapesnberries/Curl-Logger-interceptor). Use "#!#!" in output like ```LL``` to filter out what you've requested.
+i.e
+```
+09-18 10:47:02.963 15354-16507/com.template.mvvm D/#!#!: URL: https://dl.dropboxusercontent.com/s/dxf7rgkcrsezbsw/licenses-list.json
+                                                         ────────────────────────────────────────────
+                                                         cURL -X GET  "https://dl.dropboxusercontent.com/s/dxf7rgkcrsezbsw/licenses-list.json" -L  
+                                                         ──────────────────────────────────────────── 
+```
 
 - [v0.3](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.3/navi-drawer-bottom): 
 
