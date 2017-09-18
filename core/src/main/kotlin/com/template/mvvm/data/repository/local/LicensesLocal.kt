@@ -5,8 +5,8 @@ import android.arch.lifecycle.LifecycleOwner
 import com.google.gson.Gson
 import com.template.mvvm.data.feeds.licenses.LicensesData
 import com.template.mvvm.data.repository.LicensesDataSource
-import com.template.mvvm.vm.domain.licenses.Library
-import com.template.mvvm.vm.domain.licenses.LibraryList
+import com.template.mvvm.domain.licenses.Library
+import com.template.mvvm.domain.licenses.LibraryList
 import io.reactivex.Single
 import java.io.InputStreamReader
 

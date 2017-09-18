@@ -2,7 +2,7 @@ package com.template.mvvm.data.repository.cache
 
 import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.data.repository.ProductsDataSource
-import com.template.mvvm.vm.domain.products.ProductList
+import com.template.mvvm.domain.products.ProductList
 import io.reactivex.Single
 
 class ProductsCache : ProductsDataSource {

@@ -11,11 +11,11 @@ import com.template.mvvm.R
 import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.repository.LicensesRepository
-import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.vm.AbstractViewModel
 import com.template.mvvm.life.SingleLiveData
-import com.template.mvvm.vm.domain.licenses.Library
+import com.template.mvvm.domain.licenses.Library
 
-class SoftwareLicensesViewModel(app: Application, private val repository: LicensesRepository) : LifeViewModel(app) {
+class SoftwareLicensesViewModel(app: Application, private val repository: LicensesRepository) : AbstractViewModel(app) {
 
     val loadingText = ObservableInt(R.string.loading_software_licenses)
     val title = ObservableInt(R.string.software_licenses_title)
@@ -70,7 +70,7 @@ class SoftwareLicensesViewModel(app: Application, private val repository: Licens
 private const val DEFAULT_BINDING_ITEM = 0
 private val FALLBACK_LAYOUT = R.layout.item_default
 
-class SoftwareLicenseItemViewModel(app: Application) : LifeViewModel(app) {
+class SoftwareLicenseItemViewModel(app: Application) : AbstractViewModel(app) {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()

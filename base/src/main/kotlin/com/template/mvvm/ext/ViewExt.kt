@@ -16,17 +16,17 @@
 package com.template.mvvm.ext
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.design.widget.Snackbar
 import android.view.View
-import com.template.mvvm.life.SingleLiveData
 
 fun View.showSnackbar(snackbarText: String, timeLength: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(this, snackbarText, timeLength).show()
 }
 
 fun View.setupSnackbar(lifecycleOwner: LifecycleOwner,
-                       liveData: SingleLiveData<String>, timeLength: Int = Snackbar.LENGTH_SHORT) {
+                       liveData: LiveData<String>, timeLength: Int = Snackbar.LENGTH_SHORT) {
     liveData.observe(lifecycleOwner, Observer {
         it?.let { showSnackbar(it, timeLength) }
     })

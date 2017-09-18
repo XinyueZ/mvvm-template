@@ -8,9 +8,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import com.template.mvvm.R
-import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.utils.SystemUiHelper
+import com.template.mvvm.vm.obtainViewModel
 
 abstract class LifeActivity : AppCompatActivity() {
 

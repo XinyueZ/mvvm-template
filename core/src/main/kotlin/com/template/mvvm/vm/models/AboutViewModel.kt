@@ -6,9 +6,9 @@ import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import com.template.mvvm.BuildConfig
 import com.template.mvvm.R
-import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.vm.AbstractViewModel
 
-class AboutViewModel(app: Application) : LifeViewModel(app) {
+class AboutViewModel(app: Application) : AbstractViewModel(app) {
     val title = ObservableInt(R.string.about_title)
     val versionTitle = ObservableField<String>()
     val versionContent = ObservableField<String>()

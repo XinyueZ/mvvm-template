@@ -17,6 +17,3 @@ open class TemplateApp : MultiDexApplication() {
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 }
-
-@GlideModule
-class ExAppGlideModule : AppGlideModule()

@@ -59,7 +59,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':base')
+
     //TEST LIB
     testImplementation "junit:junit:$rootProject.junit"
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.espresso", {

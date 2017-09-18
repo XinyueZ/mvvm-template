@@ -8,11 +8,11 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.template.mvvm.R
-import com.template.mvvm.ext.obtainViewModel
-import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.vm.obtainViewModel
+import com.template.mvvm.vm.AbstractViewModel
 import com.template.mvvm.life.SingleLiveData
 
-class HomeViewModel(app: Application) : LifeViewModel(app) {
+class HomeViewModel(app: Application) : AbstractViewModel(app) {
     val title = ObservableInt(R.string.home_title)
     val description = ObservableField<String>()
     lateinit var drawerSubViewModel: AppNavigationViewModel

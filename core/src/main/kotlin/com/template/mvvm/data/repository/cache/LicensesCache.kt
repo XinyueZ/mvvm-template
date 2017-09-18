@@ -2,7 +2,7 @@ package com.template.mvvm.data.repository.cache
 
 import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.data.repository.LicensesDataSource
-import com.template.mvvm.vm.domain.licenses.LibraryList
+import com.template.mvvm.domain.licenses.LibraryList
 import io.reactivex.Single
 
 class LicensesCache : LicensesDataSource {

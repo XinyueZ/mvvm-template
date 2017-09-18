@@ -1,25 +1,25 @@
-package com.template.mvvm.vm.domain.products
+package com.template.mvvm.domain.licenses
 
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations.switchMap
+import android.arch.lifecycle.Transformations
 import android.content.Context
 import com.template.mvvm.life.SingleLiveData
-import com.template.mvvm.vm.models.ProductItemViewModel
+import com.template.mvvm.vm.models.SoftwareLicenseItemViewModel
 
-class ProductList : SingleLiveData<List<Product>>() {
-    inline fun switchMapViewModelList(lifecycleOwner: LifecycleOwner, crossinline body: (t: List<ProductItemViewModel>?) -> Unit) {
+class LibraryList : SingleLiveData<List<Library>>() {
+    inline fun switchMapViewModelList(lifecycleOwner: LifecycleOwner, crossinline body: (t: List<SoftwareLicenseItemViewModel>?) -> Unit) {
         when (lifecycleOwner is Context) {
             true -> {
                 with((lifecycleOwner as Context).applicationContext as Application) {
-                    switchMap(this@ProductList) {
-                        val itemVmList = arrayListOf<ProductItemViewModel>().apply {
+                    Transformations.switchMap(this@LibraryList) {
+                        val itemVmList = arrayListOf<SoftwareLicenseItemViewModel>().apply {
                             it.mapTo(this) {
-                                ProductItemViewModel.from(this@with, it)
+                                SoftwareLicenseItemViewModel.from(this@with, it)
                             }
                         }
-                        SingleLiveData<List<ProductItemViewModel>>().apply {
+                        SingleLiveData<List<SoftwareLicenseItemViewModel>>().apply {
                             value = itemVmList
                             return@switchMap this
                         }

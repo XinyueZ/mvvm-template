@@ -6,11 +6,11 @@ import android.os.Handler
 import android.util.Log
 import com.template.mvvm.actor.Interactor
 import com.template.mvvm.actor.Message
-import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.vm.AbstractViewModel
 import com.template.mvvm.life.SingleLiveData
 import com.template.mvvm.msg.GoHome
 
-class SplashViewModel(app: Application) : LifeViewModel(app) {
+class SplashViewModel(app: Application) : AbstractViewModel(app) {
     private val TAG = "SplashViewModel"
 
     val startHome = SingleLiveData<Boolean>()

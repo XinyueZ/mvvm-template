@@ -1,4 +1,4 @@
-package com.template.mvvm.vm.domain.products
+package com.template.mvvm.domain.products
 
 import android.net.Uri
 

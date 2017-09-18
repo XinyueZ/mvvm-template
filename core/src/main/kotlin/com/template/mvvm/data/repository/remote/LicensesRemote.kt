@@ -2,8 +2,8 @@ package com.template.mvvm.data.repository.remote
 
 import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.data.repository.LicensesDataSource
-import com.template.mvvm.vm.domain.licenses.Library
-import com.template.mvvm.vm.domain.licenses.LibraryList
+import com.template.mvvm.domain.licenses.Library
+import com.template.mvvm.domain.licenses.LibraryList
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction

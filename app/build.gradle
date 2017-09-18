@@ -58,6 +58,7 @@ android {
 dependencies {
     //STANDALONE
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':base')
     implementation project(':core')
 
     //TEST LIB

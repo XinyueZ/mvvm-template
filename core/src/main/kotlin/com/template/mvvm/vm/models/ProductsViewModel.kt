@@ -12,11 +12,11 @@ import com.template.mvvm.R
 import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.repository.ProductsRepository
-import com.template.mvvm.life.LifeViewModel
+import com.template.mvvm.vm.AbstractViewModel
 import com.template.mvvm.life.SingleLiveData
-import com.template.mvvm.vm.domain.products.Product
+import com.template.mvvm.domain.products.Product
 
-class ProductsViewModel(app: Application, private val productsRepository: ProductsRepository) : LifeViewModel(app) {
+class ProductsViewModel(app: Application, private val productsRepository: ProductsRepository) : AbstractViewModel(app) {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
@@ -66,7 +66,7 @@ class ProductsViewModel(app: Application, private val productsRepository: Produc
 private const val DEFAULT_BINDING_ITEM = 0
 private val FALLBACK_LAYOUT = R.layout.item_default
 
-class ProductItemViewModel(app: Application) : LifeViewModel(app) {
+class ProductItemViewModel(app: Application) : AbstractViewModel(app) {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()

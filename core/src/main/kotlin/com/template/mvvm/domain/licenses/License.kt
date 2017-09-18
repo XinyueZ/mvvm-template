@@ -1,4 +1,4 @@
-package com.template.mvvm.vm.domain.licenses
+package com.template.mvvm.domain.licenses
 
 data class License(
         var name: String?,

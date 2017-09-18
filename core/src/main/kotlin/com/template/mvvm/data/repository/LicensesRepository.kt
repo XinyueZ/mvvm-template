@@ -3,7 +3,7 @@ package com.template.mvvm.data.repository
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
-import com.template.mvvm.vm.domain.licenses.LibraryList
+import com.template.mvvm.domain.licenses.LibraryList
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 

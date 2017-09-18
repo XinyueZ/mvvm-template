@@ -1,4 +1,4 @@
-package com.template.mvvm.vm.domain.licenses
+package com.template.mvvm.domain.licenses
 
 import com.template.mvvm.data.feeds.licenses.LibraryData
 import com.template.mvvm.data.feeds.licenses.LicenseData
