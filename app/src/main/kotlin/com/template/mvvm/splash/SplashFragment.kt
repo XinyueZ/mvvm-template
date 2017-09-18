@@ -7,6 +7,7 @@ import android.view.View
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentSplashBinding
 import com.template.mvvm.life.LifeFragment
+import com.template.mvvm.vm.models.SplashViewModel
 
 class SplashFragment : LifeFragment() {
     companion object {

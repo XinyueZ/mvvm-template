@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.home.AppNavigationViewModel"/>
+            type="com.template.mvvm.vm.models.AppNavigationViewModel"/>
     </data>
 
     <android.support.v4.widget.DrawerLayout
@@ -16,7 +16,7 @@
         android:background="?android:attr/windowBackground">
 
         <android.support.design.widget.CoordinatorLayout
-            android:id="@+id/contentFrame"
+            android:id="@id/contentFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

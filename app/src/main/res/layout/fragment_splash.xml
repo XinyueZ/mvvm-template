@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.splash.SplashViewModel"/>
+            type="com.template.mvvm.vm.models.SplashViewModel"/>
     </data>
 
 
@@ -16,8 +16,7 @@
         android:layout_gravity="center"
         android:contentDescription="@null"
         android:fitsSystemWindows="true"
-        android:src="@mipmap/ic_launcher"
-        bind:startHome="@{vm.startHome}"/>
+        android:src="@mipmap/ic_launcher" />
 
 
 </layout>

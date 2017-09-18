@@ -8,6 +8,7 @@ import android.view.View
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
 import com.template.mvvm.life.LifeFragment
+import com.template.mvvm.vm.models.ProductsViewModel
 
 class ProductsFragment : LifeFragment() {
     companion object {

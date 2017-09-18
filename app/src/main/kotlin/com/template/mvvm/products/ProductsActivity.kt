@@ -10,6 +10,7 @@ import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivityProductsBinding
 import com.template.mvvm.life.LifeActivity
 import com.template.mvvm.life.LifeFragment
+import com.template.mvvm.vm.models.ProductsViewModel
 
 class ProductsActivity : LifeActivity() {
     companion object {

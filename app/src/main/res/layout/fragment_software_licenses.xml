@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="de.immowelt.mobile.livestream.core.ui.binding.recycler.LayoutManagerTypeKt"/>
+        <import type="com.template.mvvm.binding.recycler.LayoutManagerTypeKt"/>
 
         <variable
             name="vm"
-            type="com.template.mvvm.licenses.SoftwareLicensesViewModel"/>
+            type="com.template.mvvm.vm.models.SoftwareLicensesViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout

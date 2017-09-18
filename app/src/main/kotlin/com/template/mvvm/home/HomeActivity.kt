@@ -1,6 +1,5 @@
 package com.template.mvvm.home
 
-import CustomTabUtils
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.content.Intent
@@ -10,6 +9,8 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.R
 import com.template.mvvm.about.AboutActivity
+import com.template.mvvm.customtabs.CustomTabConfig
+import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.ext.setup
@@ -17,7 +18,7 @@ import com.template.mvvm.licenses.SoftwareLicensesActivity
 import com.template.mvvm.life.LifeActivity
 import com.template.mvvm.life.LifeFragment
 import com.template.mvvm.products.ProductsActivity
-import de.immowelt.mobile.livestream.core.utils.customtab.CustomTabConfig
+import com.template.mvvm.vm.models.HomeViewModel
 
 class HomeActivity : LifeActivity() {
 

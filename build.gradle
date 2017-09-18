@@ -32,6 +32,8 @@ ext {
     appId = "com.template.mvvm"
     versionCode = 4
     versionName = "v0.4"
+    espresso = "3.0.1"
+    junit = "4.12"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 }
 

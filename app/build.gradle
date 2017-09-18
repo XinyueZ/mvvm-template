@@ -58,10 +58,11 @@ android {
 dependencies {
     //STANDALONE
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
 
     //TEST LIB
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
@@ -78,7 +79,7 @@ dependencies {
     //JSON
     implementation "com.google.code.gson:gson:$rootProject.gson"
 
-    //ARCH 
+    //ARCH
     implementation "android.arch.lifecycle:runtime:$rootProject.archLifecycleVersion"
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"

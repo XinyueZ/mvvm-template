@@ -5,11 +5,12 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
-import com.example.android.architecture.blueprints.todoapp.util.setupSnackbar
+import com.template.mvvm.ext.setupSnackbar
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentItem3Binding
 import com.template.mvvm.ext.setupToast
 import com.template.mvvm.life.LifeFragment
+import com.template.mvvm.vm.models.HomeViewModel
 
 class Item3Fragment : LifeFragment() {
 

@@ -1,31 +1,3 @@
 <resources>
-    <string name="app_name">MVVM</string>
-    <string name="click">Click</string>
 
-    <string name="navi_menu_item_1">item 1</string>
-    <string name="navi_menu_item_2">item 2</string>
-    <string name="navi_menu_item_3">item 3</string>
-    <string name="navi_group_other">Other</string>
-
-    <string name="home_title">@string/app_name</string>
-    <string name="home_description">Description</string>
-
-    <string name="product_list_title">Products</string>
-    <string name="action_products">Products</string>
-    <string name="loading_products">Loading products…</string>
-
-    <string name="about_title">About</string>
-    <string name="action_about">About</string>
-    <string name="about_version_title">Version</string>
-    <string name="about_version_content"> Version: %s</string>
-    <string name="about_description_title">Description</string>
-    <string name="about_description_content">This is a template project for MVVM, Android Architecture Components and Data-Binding. Use this template for improvement of project launch.</string>
-
-    <string name="action_internet">Internet</string>
-    <string name="internet_title">Internet</string>
-    <string name="internet_url">http://g.cn</string>
-
-    <string name="software_licenses_title">Licenses</string>
-    <string name="action_software_licenses">Licenses</string>
-    <string name="loading_software_licenses">Loading licenses…</string>
 </resources>

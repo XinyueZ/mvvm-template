@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_thumbnail_size">100dp</dimen>
+    <dimen name="item_brand_logo_size">50dp</dimen>
+    <dimen name="general_padding">16dp</dimen>
+</resources>
