@@ -1,7 +1,6 @@
 package com.template.mvvm.data.repository.remote
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LifecycleRegistryOwner
 import android.net.Uri
 import com.template.mvvm.data.domain.products.Product
 import com.template.mvvm.data.domain.products.ProductList
@@ -21,8 +20,8 @@ class ProductsRemote : ProductsDataSource {
                         add(Product(
                                 it.name,
                                 String.format("%s//%s//%s", it.brand.name, it.genders.joinToString(), it.ageGroups.joinToString()),
-                                Uri.parse(it.media.images.first().largeHdUrl),
-                                if (it.brand.logo != null) Uri.parse(it.brand.logo) else Uri.EMPTY))
+                                it.media.images.first().largeHdUrl,
+                                it.brand.logo ?: Uri.EMPTY))
                     }
                 }
             }

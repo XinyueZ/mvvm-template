@@ -1,6 +1,11 @@
 package com.template.mvvm
 
 import android.app.Application
+import android.net.Uri
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
 import com.grapesnberries.curllogger.CurlLoggerInterceptor
 import com.template.mvvm.data.repository.LicensesDataSource
 import com.template.mvvm.data.repository.LicensesRepository
@@ -19,6 +24,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.reflect.Type
 
 object Injection {
 
@@ -46,12 +52,31 @@ object Injection {
     private fun provideCacheLicensesRepository() = LicensesCache()
 
     //Provides API
-    val networkConnectionInterceptor: Interceptor = NetworkConnectionInterceptor(App.connectivityManager!!)
-    val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(CurlLoggerInterceptor("#!#!")).addInterceptor(networkConnectionInterceptor).build() }
+    private val networkConnectionInterceptor: Interceptor = NetworkConnectionInterceptor(App.connectivityManager!!)
+    private val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(CurlLoggerInterceptor("#!#!")).addInterceptor(networkConnectionInterceptor).build() }
+    private val gsonFactory: GsonConverterFactory by lazy {
+        GsonConverterFactory.create(
+                GsonBuilder()
+                        .registerTypeAdapter(Uri::class.java, UriAdapter)
+                        .create()
+        )
+    }
 
-    fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(GsonConverterFactory.create())
+    fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(gsonFactory)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
 
-    fun provideLicensesApiService() = Retrofit.Builder().client(client).baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(GsonConverterFactory.create())
+    fun provideLicensesApiService() = Retrofit.Builder().client(client).baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(gsonFactory)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(LicensesApi::class.java)
+}
+
+private object UriAdapter : JsonDeserializer<Uri> {
+    @Throws(exceptionClasses = *arrayOf(Exception::class))
+    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): Uri {
+        if (json == null) {
+            throw IllegalArgumentException("Deserialization failed: null")
+        }
+
+        val jsObject = json.asString
+        return Uri.parse(jsObject)
+    }
 }
