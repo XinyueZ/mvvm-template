@@ -8,9 +8,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.template.mvvm.R
-import com.template.mvvm.vm.obtainViewModel
+import com.template.mvvm.domain.SingleLiveData
 import com.template.mvvm.vm.AbstractViewModel
-import com.template.mvvm.life.SingleLiveData
+import com.template.mvvm.vm.obtainViewModel
 
 class HomeViewModel(app: Application) : AbstractViewModel(app) {
     val title = ObservableInt(R.string.home_title)
@@ -31,10 +31,10 @@ class HomeViewModel(app: Application) : AbstractViewModel(app) {
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         when (lifecycleOwner) {
             is Fragment -> {
-                drawerSubViewModel = this@HomeViewModel.obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
+                drawerSubViewModel = obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
             }
             is FragmentActivity -> {
-                drawerSubViewModel = this@HomeViewModel.obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
+                drawerSubViewModel = obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
             }
         }
         return true

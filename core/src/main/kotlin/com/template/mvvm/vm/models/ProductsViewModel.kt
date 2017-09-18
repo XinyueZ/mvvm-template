@@ -13,7 +13,7 @@ import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.repository.ProductsRepository
 import com.template.mvvm.vm.AbstractViewModel
-import com.template.mvvm.life.SingleLiveData
+import com.template.mvvm.domain.SingleLiveData
 import com.template.mvvm.domain.products.Product
 
 class ProductsViewModel(app: Application, private val productsRepository: ProductsRepository) : AbstractViewModel(app) {

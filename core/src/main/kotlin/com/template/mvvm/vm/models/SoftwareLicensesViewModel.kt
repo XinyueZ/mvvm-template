@@ -12,7 +12,7 @@ import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.repository.LicensesRepository
 import com.template.mvvm.vm.AbstractViewModel
-import com.template.mvvm.life.SingleLiveData
+import com.template.mvvm.domain.SingleLiveData
 import com.template.mvvm.domain.licenses.Library
 
 class SoftwareLicensesViewModel(app: Application, private val repository: LicensesRepository) : AbstractViewModel(app) {

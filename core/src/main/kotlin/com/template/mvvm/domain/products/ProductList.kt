@@ -5,7 +5,7 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations.switchMap
 import android.content.Context
-import com.template.mvvm.life.SingleLiveData
+import com.template.mvvm.domain.SingleLiveData
 import com.template.mvvm.vm.models.ProductItemViewModel
 
 class ProductList : SingleLiveData<List<Product>>() {

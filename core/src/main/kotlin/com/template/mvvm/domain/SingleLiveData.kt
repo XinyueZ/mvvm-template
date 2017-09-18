@@ -1,4 +1,4 @@
-package com.template.mvvm.life
+package com.template.mvvm.domain
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData

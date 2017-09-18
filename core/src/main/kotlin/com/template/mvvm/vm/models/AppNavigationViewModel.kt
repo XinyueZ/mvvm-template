@@ -3,7 +3,7 @@ package com.template.mvvm.vm.models
 import android.app.Application
 import com.template.mvvm.R
 import com.template.mvvm.vm.AbstractViewModel
-import com.template.mvvm.life.SingleLiveData
+import com.template.mvvm.domain.SingleLiveData
 
 class AppNavigationViewModel(context: Application) : AbstractViewModel(context) {
     val openProduct = SingleLiveData<Boolean>()
