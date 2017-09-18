@@ -1,6 +1,7 @@
 package com.template.mvvm
 
 import android.app.Application
+import com.grapesnberries.curllogger.CurlLoggerInterceptor
 import com.template.mvvm.data.repository.LicensesDataSource
 import com.template.mvvm.data.repository.LicensesRepository
 import com.template.mvvm.data.repository.ProductsRepository
@@ -45,8 +46,8 @@ object Injection {
     private fun provideCacheLicensesRepository() = LicensesCache()
 
     //Provides API
-    val networkConnectionInterceptor: Interceptor  = NetworkConnectionInterceptor(App.connectivityManager!!)
-    val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(networkConnectionInterceptor).build() }
+    val networkConnectionInterceptor: Interceptor = NetworkConnectionInterceptor(App.connectivityManager!!)
+    val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(CurlLoggerInterceptor("#!#!")).addInterceptor(networkConnectionInterceptor).build() }
 
     fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
