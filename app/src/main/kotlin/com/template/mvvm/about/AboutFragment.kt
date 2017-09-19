@@ -4,12 +4,12 @@ import android.content.Context
 import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
 import android.view.View
+import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentAboutBinding
-import com.template.mvvm.life.LifeFragment
 import com.template.mvvm.vm.models.AboutViewModel
 
-class AboutFragment : LifeFragment() {
+class AboutFragment : AppBaseFragment<AboutViewModel>() {
 
     companion object {
         fun newInstance(cxt: Context) = Fragment.instantiate(cxt, AboutFragment::class.java.name) as AboutFragment
@@ -22,7 +22,7 @@ class AboutFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentAboutBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel() as AboutViewModel
+                    vm = obtainViewModel()
                 }
         return binding
     }

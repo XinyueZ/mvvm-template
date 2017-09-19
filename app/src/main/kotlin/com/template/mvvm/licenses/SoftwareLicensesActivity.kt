@@ -6,13 +6,12 @@ import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivitySoftwareLicensesBinding
-import com.template.mvvm.life.LifeActivity
-import com.template.mvvm.life.LifeFragment
 import com.template.mvvm.vm.models.SoftwareLicensesViewModel
 
-class SoftwareLicensesActivity : LifeActivity() {
+class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
     companion object {
         fun showInstance(cxt: Activity) {
             val intent = Intent(cxt, SoftwareLicensesActivity::class.java)
@@ -23,8 +22,7 @@ class SoftwareLicensesActivity : LifeActivity() {
 
     override fun getLayout() = R.layout.activity_software_licenses
     override fun createViewModel() = SoftwareLicensesViewModel::class.java
-    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-            SoftwareLicensesFragment.newInstance(application)) as LifeFragment
+    override fun createViewModelView() = SoftwareLicensesFragment.newInstance(application)
 
     lateinit var binding: ActivitySoftwareLicensesBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {

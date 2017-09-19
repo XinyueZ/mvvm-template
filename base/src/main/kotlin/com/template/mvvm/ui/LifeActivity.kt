@@ -1,4 +1,4 @@
-package com.template.mvvm.life
+package com.template.mvvm.ui
 
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleRegistry
@@ -10,19 +10,21 @@ import android.view.MotionEvent
 import com.template.mvvm.R
 import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.utils.SystemUiHelper
-import com.template.mvvm.vm.obtainViewModel
 
-abstract class LifeActivity : AppCompatActivity() {
+abstract class LifeActivity<out T : AndroidViewModel> : AppCompatActivity() {
 
     private val registry = LifecycleRegistry(this)
 
     override fun getLifecycle(): LifecycleRegistry = registry
 
-    fun obtainViewModel(): AndroidViewModel = obtainViewModel(createViewModel())
+    abstract fun obtainViewModel(): AndroidViewModel
 
     abstract fun createViewModel(): Class<out AndroidViewModel>
 
-    abstract fun obtainViewModelView(): LifeFragment
+    private fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
+             createViewModelView()) as LifeFragment<T>
+
+    abstract fun createViewModelView(): LifeFragment<T>
 
     abstract fun getLayout(): Int
 

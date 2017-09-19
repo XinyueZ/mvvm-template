@@ -6,13 +6,12 @@ import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivityProductsBinding
-import com.template.mvvm.life.LifeActivity
-import com.template.mvvm.life.LifeFragment
 import com.template.mvvm.vm.models.ProductsViewModel
 
-class ProductsActivity : LifeActivity() {
+class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
     companion object {
         fun showInstance(cxt: Activity) {
             val intent = Intent(cxt, ProductsActivity::class.java)
@@ -23,8 +22,7 @@ class ProductsActivity : LifeActivity() {
 
     override fun getLayout() = R.layout.activity_products
     override fun createViewModel() = ProductsViewModel::class.java
-    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-            ProductsFragment.newInstance(application)) as LifeFragment
+    override fun createViewModelView() = ProductsFragment.newInstance(application)
 
     lateinit var binding: ActivityProductsBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {

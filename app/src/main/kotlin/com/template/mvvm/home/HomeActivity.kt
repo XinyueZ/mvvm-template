@@ -7,6 +7,7 @@ import android.databinding.ViewDataBinding
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.about.AboutActivity
 import com.template.mvvm.customtabs.CustomTabConfig
@@ -15,12 +16,10 @@ import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.ext.setup
 import com.template.mvvm.licenses.SoftwareLicensesActivity
-import com.template.mvvm.life.LifeActivity
-import com.template.mvvm.life.LifeFragment
 import com.template.mvvm.products.ProductsActivity
 import com.template.mvvm.vm.models.HomeViewModel
 
-class HomeActivity : LifeActivity() {
+class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
     companion object {
         fun showInstance(cxt: Activity) {
@@ -32,8 +31,7 @@ class HomeActivity : LifeActivity() {
 
     override fun getLayout() = R.layout.activity_home
     override fun createViewModel() = HomeViewModel::class.java
-    override fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?: Item1Fragment.newInstance(application)) as LifeFragment
-
+    override fun createViewModelView() = Item1Fragment.newInstance(application)
     lateinit var binding: ActivityHomeBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {
         this.binding = binding as ActivityHomeBinding
