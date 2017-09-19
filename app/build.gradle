@@ -22,18 +22,18 @@ android {
 
         vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         debug {
-            minifyEnabled true
-            // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
-            useProguard false
+            minifyEnabled rootProject.minifyEnabled
+            useProguard !rootProject.useProguard
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
 
         release {
-            minifyEnabled true
-            useProguard true
+            minifyEnabled rootProject.minifyEnabled
+            useProguard rootProject.useProguard
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
@@ -44,9 +44,9 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        main.java.srcDirs += rootProject.mainSrcDirs
+        test.java.srcDirs += rootProject.testSrcDirs
+        androidTest.java.srcDirs += rootProject.androidTestSrcDirs
     }
 
     lintOptions {
