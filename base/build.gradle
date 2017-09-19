@@ -56,7 +56,7 @@ android {
 
 
 dependencies {
-    rootProject.brokerDependencies.each {
+    rootProject.baseDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
 }

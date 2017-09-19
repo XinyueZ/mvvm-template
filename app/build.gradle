@@ -59,7 +59,7 @@ dependencies {
     //STANDALONE
     implementation project(':base')
     implementation project(':core')
-    rootProject.brokerDependencies.each {
+    rootProject.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
 }

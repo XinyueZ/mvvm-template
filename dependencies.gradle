@@ -187,5 +187,5 @@ ext {
     ]
 
     coreDependencies = baseDependencies
-    brokerDependencies = coreDependencies
+    appDependencies = coreDependencies
 }
