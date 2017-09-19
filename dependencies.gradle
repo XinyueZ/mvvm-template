@@ -1,0 +1,191 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+ext {
+    // App dependencies
+    def supportLibraryVersion = '26.1.0'
+    def archLifecycleVersion = "1.0.0-alpha9-1"
+    def constraint = "1+"
+    def multiDex = "1+"
+
+    //Rx, Retrofit
+    def rx = "2+"
+    def rxAndroid = "2+"
+    def rxAdapter = "2.3.0"
+    def retrofit = "2.3.0"
+
+    //Material Design Guideline
+    def guideline = "1.0.4"
+
+    //Json
+    def gson = "2+"
+
+    //Image-loader
+    def imageLoader = "4+"
+
+    //Debug tool
+    def curl = "0.1"
+
+    //Test
+    def espresso = "3.0.1"
+    def junit = "4.12"
+
+    //Kotlin
+    def kotlin = ext.kotlin_version
+
+    //Gradle
+    def gradle = ext.gradleVersion
+
+    libs = [
+            //TEST
+            junit                  : [group: "junit", name: "junit", version: junit],
+            espresso               : [group: "com.android.support.test.espresso", name: "espresso-core", version: espresso],
+
+            //SUPPORT
+            appcompatV7            : [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion],
+            cardviewV7             : [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion],
+            design                 : [group: "com.android.support", name: "design", version: supportLibraryVersion],
+            customtabs             : [group: "com.android.support", name: "customtabs", version: supportLibraryVersion],
+            recyclerviewV7         : [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion],
+            supportV4              : [group: "com.android.support", name: "support-v4", version: supportLibraryVersion],
+            constraintLayout       : [group: "com.android.support.constraint", name: "constraint-layout", version: constraint],
+            multidex               : [group: "com.android.support", name: "multidex", version: multiDex],
+
+            //JSON
+            gson                   : [group: "com.google.code.gson", name: "gson", version: gson],
+
+            //ARCH
+            lifeCycleRuntime       : [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion],
+            lifeCycleExtensions    : [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion],
+            lifeCycleCompiler      : [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion],
+            roomRuntime            : [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion],
+            roomCompiler           : [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion],
+            roomRx                 : [group: "android.arch.persistence.room", name: "rxjava2", version: archLifecycleVersion],
+
+            //KOTLIN
+            kotlinStdLib           : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
+            databindingCompiler    : [group: "com.android.databinding", name: "compiler", version: gradle],
+
+            //RX
+            rxJava                 : [group: "io.reactivex.rxjava2", name: "rxjava", version: rx],
+            rxAndroid              : [group: "io.reactivex.rxjava2", name: "rxandroid", version: rxAndroid],
+
+            //RETROFIT
+            retrofit               : [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit],
+            converterGson          : [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit],
+            adapterRxJava2         : [group: "com.squareup.retrofit2", name: "adapter-rxjava2", version: rxAdapter],
+
+            //MATERIAL DESIGN GUIDELINE
+            materialDesignGuideline: [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
+
+            //IMAGE-LOADER
+            glide                  : [group: "com.github.bumptech.glide", name: "glide", version: imageLoader],
+            glideCompiler          : [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader],
+
+            //DEBUG TOOL
+            curlLoggerInterceptor  : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
+    ]
+
+    plugins = [
+            androidApp: "com.android.application",
+            androidLib: "com.android.library",
+            kotlin    : "kotlin-android",
+            kotlinExt : "kotlin-android-extensions",
+            kapt      : "kotlin-kapt"
+    ]
+
+
+    modules = [
+            base: ":base",
+            core: ":core"
+    ]
+
+
+    corePlugins = [
+            plugins.androidLib,
+            plugins.kotlin,
+            plugins.kotlinExt,
+            plugins.kapt,
+    ]
+
+    basePlugins = [
+            plugins.androidLib,
+            plugins.kotlin,
+            plugins.kotlinExt,
+            plugins.kapt,
+    ]
+
+    appPlugins = [
+            plugins.androidApp,
+            plugins.kotlin,
+            plugins.kotlinExt,
+            plugins.kapt,
+    ]
+
+
+    baseDependencies = [
+            [configuration: "implementation", dependency: fileTree(dir: 'libs', include: ['*.jar'])],
+            //TEST LIB
+            [configuration: "testImplementation", dependency: libs.junit],
+            [configuration: "androidTestImplementation", dependency: libs.espresso,
+             options      : {
+                 exclude group: 'com.android.support', module: 'support-annotations'
+             }],
+
+            //SUPPORT
+            [configuration: "implementation", dependency: libs.appcompatV7],
+            [configuration: "implementation", dependency: libs.cardviewV7],
+            [configuration: "implementation", dependency: libs.design],
+            [configuration: "implementation", dependency: libs.customtabs],
+            [configuration: "implementation", dependency: libs.recyclerviewV7],
+            [configuration: "implementation", dependency: libs.supportV4],
+            [configuration: "implementation", dependency: libs.constraintLayout],
+            [configuration: "implementation", dependency: libs.multidex],
+
+            //JSON
+            [configuration: "implementation", dependency: libs.gson],
+
+            //ARCH
+            [configuration: "implementation", dependency: libs.lifeCycleRuntime],
+            [configuration: "implementation", dependency: libs.lifeCycleExtensions],
+            [configuration: "kapt", dependency: libs.lifeCycleCompiler],
+            [configuration: "implementation", dependency: libs.roomRuntime],
+            [configuration: "kapt", dependency: libs.roomCompiler],
+            [configuration: "implementation", dependency: libs.roomRx],
+
+            //KOTLIN
+            [configuration: "implementation", dependency: libs.kotlinStdLib],
+            [configuration: "kapt", dependency: libs.databindingCompiler],
+
+            //RX
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+
+            //RETROFIT
+            [configuration: "implementation", dependency: libs.retrofit],
+            [configuration: "implementation", dependency: libs.converterGson],
+            [configuration: "implementation", dependency: libs.adapterRxJava2],
+
+            //MATERIAL DESIGN GUIDELINE
+            [configuration: "implementation", dependency: libs.materialDesignGuideline,
+             options      : {
+                 exclude group: 'com.android.support', module: 'support-annotations'
+             }],
+
+            //IMAGE-LOADER
+            [configuration: "implementation", dependency: libs.glide],
+            [configuration: "kapt", dependency: libs.glideCompiler],
+
+            //DEBUG TOOL
+            [configuration: "debugImplementation", dependency: libs.curlLoggerInterceptor],
+    ]
+
+    coreDependencies = baseDependencies
+    brokerDependencies = coreDependencies
+}

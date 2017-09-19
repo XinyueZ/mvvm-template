@@ -5,37 +5,12 @@ ext {
     compileSdkVersion = 26
     buildToolsVersion = '26.0.1'
 
-    // App dependencies
-    supportLibraryVersion = '26.1.0'
-    archLifecycleVersion = "1.0.0-alpha9-1"
-    constraint = "1+"
-    multiDex = "1+"
-
-    //Rx, Retrofit
-    rx = "2+"
-    rxAndroid = "2+"
-    rxAdapter = "2.3.0"
-    retrofit = "2.3.0"
-
-    //Material Design Guideline
-    guideline = "1.0.4"
-
-    //Json
-    gson = "2+"
-
-    //Image-loader
-    imageLoader = "4+"
-
-    //Debug tool
-    curl  = "0.1"
-
     appId = "com.template.mvvm"
     versionCode = 4
     versionName = "v0.4"
-    espresso = "3.0.1"
-    junit = "4.12"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 }
+
 
 buildscript {
     ext.kotlin_version = '1.1.4-3'
@@ -68,3 +43,6 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+apply from: 'dependencies.gradle'

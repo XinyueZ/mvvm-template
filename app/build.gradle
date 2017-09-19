@@ -1,7 +1,7 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+rootProject.appPlugins.each {
+    apply plugin: it
+}
+
 
 android {
     compileOptions {
@@ -57,63 +57,12 @@ android {
 
 dependencies {
     //STANDALONE
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
     implementation project(':core')
-
-    //TEST LIB
-    testImplementation "junit:junit:$rootProject.junit"
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.espresso", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-    //SUPPORT
-    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:customtabs:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraint"
-    implementation "com.android.support:multidex:$rootProject.multiDex"
-
-    //JSON
-    implementation "com.google.code.gson:gson:$rootProject.gson"
-
-    //ARCH
-    implementation "android.arch.lifecycle:runtime:$rootProject.archLifecycleVersion"
-    implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
-    implementation "android.arch.persistence.room:runtime:$rootProject.archLifecycleVersion"
-    kapt "android.arch.persistence.room:compiler:$rootProject.archLifecycleVersion"
-    implementation "android.arch.persistence.room:rxjava2:$rootProject.archLifecycleVersion"
-
-    //KOTLIN
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    kapt "com.android.databinding:compiler:$gradleVersion"
-
-    //RX
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.rxAdapter"
-
-    //RETROFIT
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
-
-    //MATERIAL DESIGN GUIDELINE
-    implementation("com.github.thekhaeng:material-design-guideline:$rootProject.guideline") {
-        exclude group: 'com.android.support', module: 'support-annotations'
+    rootProject.brokerDependencies.each {
+        add(it.configuration, it.dependency, it.options)
     }
-
-    //IMAGE-LOADER
-    implementation "com.github.bumptech.glide:glide:$rootProject.imageLoader"
-    kapt "com.github.bumptech.glide:compiler:$rootProject.imageLoader"
-
-    //DEBUG TOOL
-    debugImplementation "com.github.grapesnberries:curlloggerinterceptor:$rootProject.curl"
 }
-
 
 kapt {
     generateStubs = true
