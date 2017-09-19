@@ -32,7 +32,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 |:-------------:|:-------------:|
 |  app | Almost the activities, fragments which extend from the ```LiveActivity``` and ```LiveFragment``` in ```base-module```   |
 | base  | Tne Components would be reused by ```core``` or ```app```. |
-|  core | All ```view-model```s and extension of them, include business logical, domain object, and data-source ie. repository  |
+|  core | All ```view-model```s and extensions of them, include business logical, domain object, and data-source ie. repository  |
 
 
 > The template is using ```product```, ```software licenses``` to demonstrate how to use MVVM to load data and show them on UI. For your own use-case, you can reset them and build your own features.  
