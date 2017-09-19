@@ -9,7 +9,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivityProductsBinding
-import com.template.mvvm.vm.models.ProductsViewModel
+import com.template.mvvm.models.ProductsViewModel
 
 class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
     companion object {

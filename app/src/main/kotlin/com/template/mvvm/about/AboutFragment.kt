@@ -7,7 +7,7 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentAboutBinding
-import com.template.mvvm.vm.models.AboutViewModel
+import com.template.mvvm.models.AboutViewModel
 
 class AboutFragment : AppBaseFragment<AboutViewModel>() {
 

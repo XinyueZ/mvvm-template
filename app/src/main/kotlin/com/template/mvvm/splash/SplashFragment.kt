@@ -7,7 +7,7 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentSplashBinding
-import com.template.mvvm.vm.models.SplashViewModel
+import com.template.mvvm.models.SplashViewModel
 
 class SplashFragment : AppBaseFragment<SplashViewModel>() {
     companion object {

@@ -17,7 +17,7 @@ import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.ext.setup
 import com.template.mvvm.licenses.SoftwareLicensesActivity
 import com.template.mvvm.products.ProductsActivity
-import com.template.mvvm.vm.models.HomeViewModel
+import com.template.mvvm.models.HomeViewModel
 
 class HomeActivity : AppBaseActivity<HomeViewModel>() {
 

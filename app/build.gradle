@@ -57,13 +57,9 @@ android {
 
 dependencies {
     //STANDALONE
-    implementation project(':base')
     implementation project(':core')
+    implementation project(':base')
     rootProject.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
-}
-
-kapt {
-    generateStubs = true
 }

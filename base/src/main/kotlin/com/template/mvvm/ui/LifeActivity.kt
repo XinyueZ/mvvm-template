@@ -2,6 +2,7 @@ package com.template.mvvm.ui
 
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleRegistry
+import android.arch.lifecycle.ViewModel
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -11,18 +12,18 @@ import com.template.mvvm.R
 import com.template.mvvm.ext.replaceFragmentInActivity
 import com.template.mvvm.utils.SystemUiHelper
 
-abstract class LifeActivity<out T : AndroidViewModel> : AppCompatActivity() {
+abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
 
     private val registry = LifecycleRegistry(this)
 
     override fun getLifecycle(): LifecycleRegistry = registry
 
-    abstract fun obtainViewModel(): AndroidViewModel
+    abstract fun obtainViewModel(): ViewModel
 
     abstract fun createViewModel(): Class<out AndroidViewModel>
 
     private fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-             createViewModelView()) as LifeFragment<T>
+            createViewModelView()) as LifeFragment<T>
 
     abstract fun createViewModelView(): LifeFragment<T>
 

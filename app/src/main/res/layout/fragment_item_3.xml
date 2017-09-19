@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.vm.models.HomeViewModel"/>
+            type="com.template.mvvm.models.HomeViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

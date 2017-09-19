@@ -7,7 +7,7 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.grapesnberries.curllogger.CurlLoggerInterceptor
-import com.template.mvvm.data.repository.LicensesDataSource
+import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.data.repository.LicensesRepository
 import com.template.mvvm.data.repository.ProductsRepository
 import com.template.mvvm.data.repository.cache.LicensesCache
@@ -61,7 +61,6 @@ object Injection {
                         .create()
         )
     }
-
     fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(gsonFactory)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
 

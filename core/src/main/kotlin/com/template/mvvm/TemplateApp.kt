@@ -3,8 +3,8 @@ package com.template.mvvm
 import android.content.Context
 import android.net.ConnectivityManager
 import android.support.multidex.MultiDexApplication
-import com.bumptech.glide.annotation.GlideModule
-import com.bumptech.glide.module.AppGlideModule
+import com.template.mvvm.data.repository.remote.LicensesApi
+import com.template.mvvm.data.repository.remote.ProductsApi
 
 open class TemplateApp : MultiDexApplication() {
 
@@ -15,5 +15,8 @@ open class TemplateApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        ProductsApi.service = Injection.provideProductsApiService()
+        LicensesApi.service = Injection.provideLicensesApiService()
     }
 }

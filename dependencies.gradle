@@ -103,7 +103,8 @@ ext {
 
     modules = [
             base: ":base",
-            core: ":core"
+            core: ":core",
+            repository: ":repository"
     ]
 
 
@@ -115,6 +116,13 @@ ext {
     ]
 
     basePlugins = [
+            plugins.androidLib,
+            plugins.kotlin,
+            plugins.kotlinExt,
+            plugins.kapt,
+    ]
+
+    repositoryPlugins = [
             plugins.androidLib,
             plugins.kotlin,
             plugins.kotlinExt,
@@ -187,5 +195,6 @@ ext {
     ]
 
     coreDependencies = baseDependencies
+    repositoryDependencies = baseDependencies
     appDependencies = coreDependencies
 }

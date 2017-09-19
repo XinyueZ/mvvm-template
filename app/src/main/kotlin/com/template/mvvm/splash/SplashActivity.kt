@@ -7,7 +7,7 @@ import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivitySplashBinding
 import com.template.mvvm.home.HomeActivity
-import com.template.mvvm.vm.models.SplashViewModel
+import com.template.mvvm.models.SplashViewModel
 
 class SplashActivity : AppBaseActivity<SplashViewModel>() {
     override fun getLayout() = R.layout.activity_splash

@@ -8,7 +8,7 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentSoftwareLicensesBinding
-import com.template.mvvm.vm.models.SoftwareLicensesViewModel
+import com.template.mvvm.models.SoftwareLicensesViewModel
 
 class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
     companion object {

@@ -12,26 +12,26 @@ import android.widget.ImageView
 import com.template.mvvm.ext.loadRemoteImage
 
 @BindingAdapter("remoteImageUri")
-fun setRemoteImage(view: ImageView, uri: Uri?) {
+fun a(view: ImageView, uri: Uri?) {
     uri?.let {
         view.loadRemoteImage(uri)
     }
 }
 
 @BindingAdapter("onIndicatorClick")
-fun toolbarOnIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
+fun b(toolbar: Toolbar, l: OnIndicatorClickListener?) {
     l?.let {
         toolbar.setNavigationOnClickListener { l.onIndicatorClick() }
     }
 }
 
 @BindingAdapter("goBack")
-fun goBack(view: View, goBack: Boolean) {
+fun c(view: View, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("command")
-fun cmdNaviHandler(view: NavigationView, l: OnCommandListener?) {
+fun d(view: NavigationView, l: OnCommandListener?) {
     l?.let {
         view.setNavigationItemSelectedListener {
             it.isChecked = true
@@ -43,7 +43,7 @@ fun cmdNaviHandler(view: NavigationView, l: OnCommandListener?) {
 }
 
 @BindingAdapter("command")
-fun cmdNaviHandler(view: BottomNavigationView, l: OnCommandListener?) {
+fun e(view: BottomNavigationView, l: OnCommandListener?) {
     l?.let {
         view.setOnNavigationItemSelectedListener {
             l.onCommand(it.itemId)
@@ -54,7 +54,7 @@ fun cmdNaviHandler(view: BottomNavigationView, l: OnCommandListener?) {
 }
 
 @BindingAdapter("dataLoaded")
-fun setLoaded(view: View, loaded: Boolean) {
+fun f(view: View, loaded: Boolean) {
     view.visibility = if (loaded) {
         View.GONE
     } else {

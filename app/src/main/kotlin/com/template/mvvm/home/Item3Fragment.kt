@@ -10,7 +10,7 @@ import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentItem3Binding
 import com.template.mvvm.ext.setupSnackbar
 import com.template.mvvm.ext.setupToast
-import com.template.mvvm.vm.models.HomeViewModel
+import com.template.mvvm.models.HomeViewModel
 
 class Item3Fragment : AppBaseFragment<HomeViewModel>() {
 
