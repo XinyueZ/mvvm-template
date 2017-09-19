@@ -22,11 +22,10 @@ class AboutFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentAboutBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel()
+                    vm = obtainViewModel() as AboutViewModel
                 }
         return binding
     }
 
     override fun getLayout() = R.layout.fragment_about
-    override fun obtainViewModel() = (activity as AboutActivity).obtainViewModel() as AboutViewModel
 }

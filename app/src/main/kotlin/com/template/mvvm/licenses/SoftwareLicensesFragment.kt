@@ -20,11 +20,10 @@ class SoftwareLicensesFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSoftwareLicensesBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(activity as LifecycleOwner) }
+                    vm = (obtainViewModel() as SoftwareLicensesViewModel).apply { registerLifecycleOwner(activity as LifecycleOwner) }
                 }
         return binding
     }
 
     override fun getLayout() = R.layout.fragment_software_licenses
-    override fun obtainViewModel() = (activity as SoftwareLicensesActivity).obtainViewModel() as SoftwareLicensesViewModel
 }

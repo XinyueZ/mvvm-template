@@ -20,11 +20,10 @@ class ProductsFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(activity as LifecycleOwner) }
+                    vm = (obtainViewModel() as ProductsViewModel).apply { registerLifecycleOwner(activity as LifecycleOwner) }
                 }
         return binding
     }
 
     override fun getLayout() = R.layout.fragment_products
-    override fun obtainViewModel() = (activity as ProductsActivity).obtainViewModel() as ProductsViewModel
 }

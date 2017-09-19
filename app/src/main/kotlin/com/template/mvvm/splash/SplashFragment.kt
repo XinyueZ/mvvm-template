@@ -19,11 +19,10 @@ class SplashFragment : LifeFragment() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSplashBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(this@SplashFragment) }
+                    vm = (obtainViewModel() as SplashViewModel).apply { registerLifecycleOwner(this@SplashFragment) }
                 }
         return binding
     }
 
     override fun getLayout() = R.layout.fragment_splash
-    override fun obtainViewModel() = (activity as SplashActivity).obtainViewModel() as SplashViewModel
 }

@@ -25,6 +25,7 @@ class SplashActivity : LifeActivity() {
         with((obtainViewModel() as SplashViewModel)) {
             startHome.observe(this@SplashActivity, Observer {
                 HomeActivity.showInstance(this@SplashActivity)
+                this@SplashActivity.finish()
             })
         }
     }
