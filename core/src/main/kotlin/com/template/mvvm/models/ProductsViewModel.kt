@@ -1,23 +1,21 @@
 package com.template.mvvm.models
 
-import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.databinding.*
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
-import com.template.mvvm.data.repository.ProductsRepository
+import com.template.mvvm.data.source.ProductsRepository
 import com.template.mvvm.databinding.ProductItemBinding
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.ext.switchMapViewModelList
 
-class ProductsViewModel(app: Application, private val productsRepository: ProductsRepository) : AbstractViewModel(app) {
+class ProductsViewModel(private val productsRepository: ProductsRepository) : AbstractViewModel() {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
@@ -54,13 +52,16 @@ class ProductsViewModel(app: Application, private val productsRepository: Produc
                             pageStill.value = true
                         }
                     }
-                }, { Toast.makeText(getApplication(), "Cannot load products.", Toast.LENGTH_SHORT).show() })
+                },
+                        {
+                            //TODO Error-handling
+                        })
         )
         return true
     }
 }
 
-class ProductItemViewModel(app: Application) : AbstractViewModel(app) {
+class ProductItemViewModel : AbstractViewModel() {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()
@@ -68,8 +69,8 @@ class ProductItemViewModel(app: Application) : AbstractViewModel(app) {
     val brandLogo: ObservableField<Uri> = ObservableField()
 
     companion object {
-        fun from(app: Application, product: Product): ProductItemViewModel {
-            return ProductItemViewModel(app).apply {
+        fun from(product: Product): ProductItemViewModel {
+            return ProductItemViewModel().apply {
                 title.set(product.title)
                 description.set(product.description)
                 thumbnail.set(product.thumbnail)

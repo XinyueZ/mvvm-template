@@ -1,6 +1,5 @@
 package com.template.mvvm.ui
 
-import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleRegistry
 import android.arch.lifecycle.ViewModel
 import android.databinding.DataBindingUtil
@@ -20,7 +19,7 @@ abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
 
     abstract fun obtainViewModel(): ViewModel
 
-    abstract fun createViewModel(): Class<out AndroidViewModel>
+    abstract fun createViewModel(): Class<out ViewModel>
 
     private fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
             createViewModelView()) as LifeFragment<T>

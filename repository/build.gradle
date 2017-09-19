@@ -56,8 +56,6 @@ android {
 
 
 dependencies {
-    //STANDALONE
-    implementation project(':base')
     rootProject.repositoryDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }

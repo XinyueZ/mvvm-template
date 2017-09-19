@@ -1,10 +1,9 @@
 package com.template.mvvm.models
 
-import android.app.Application
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
 
-class AppNavigationViewModel(context: Application) : AbstractViewModel(context) {
+class AppNavigationViewModel : AbstractViewModel() {
     val openProduct = SingleLiveData<Boolean>()
     val openInternet = SingleLiveData<Boolean>()
     val openLicenses = SingleLiveData<Boolean>()

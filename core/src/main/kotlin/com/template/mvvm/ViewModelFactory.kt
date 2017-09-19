@@ -20,12 +20,12 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>) =
             with(modelClass) {
                 when {
-                    isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(application)
-                    isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application)
-                    isAssignableFrom(AppNavigationViewModel::class.java) -> AppNavigationViewModel(application)
-                    isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(application, Injection.provideProductsRepository())
-                    isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel(application)
-                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(application, Injection.provideLicensesRepository(application))
+                    isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
+                    isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
+                    isAssignableFrom(AppNavigationViewModel::class.java) -> AppNavigationViewModel()
+                    isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(Injection.provideProductsRepository())
+                    isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel()
+                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(Injection.provideLicensesRepository(application))
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

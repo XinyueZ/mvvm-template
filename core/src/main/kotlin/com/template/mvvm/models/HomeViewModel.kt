@@ -1,6 +1,5 @@
 package com.template.mvvm.models
 
-import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
@@ -11,7 +10,8 @@ import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.ext.obtainViewModel
 
-class HomeViewModel(app: Application) : AbstractViewModel(app) {
+
+class HomeViewModel : AbstractViewModel() {
     val title = ObservableInt(R.string.home_title)
     val description = ObservableField<String>()
     lateinit var drawerSubViewModel: AppNavigationViewModel

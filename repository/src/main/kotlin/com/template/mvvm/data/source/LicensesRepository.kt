@@ -1,4 +1,4 @@
-package com.template.mvvm.data.repository
+package com.template.mvvm.data.source
 
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner

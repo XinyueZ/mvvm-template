@@ -1,22 +1,20 @@
 package com.template.mvvm.models
 
-import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.databinding.*
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
-import com.template.mvvm.data.repository.LicensesRepository
+import com.template.mvvm.data.source.LicensesRepository
 import com.template.mvvm.databinding.LicenseItemBinding
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.ext.switchMapViewModelList
 
-class SoftwareLicensesViewModel(app: Application, private val repository: LicensesRepository) : AbstractViewModel(app) {
+class SoftwareLicensesViewModel(private val repository: LicensesRepository) : AbstractViewModel() {
 
     val loadingText = ObservableInt(R.string.loading_software_licenses)
     val title = ObservableInt(R.string.software_licenses_title)
@@ -56,7 +54,7 @@ class SoftwareLicensesViewModel(app: Application, private val repository: Licens
                             }
                         },
                         {
-                            Toast.makeText(getApplication(), "Cannot load licenses.", Toast.LENGTH_SHORT).show()
+                            //TODO Error-handling
                         }
                 )
         )
@@ -64,14 +62,14 @@ class SoftwareLicensesViewModel(app: Application, private val repository: Licens
     }
 }
 
-class SoftwareLicenseItemViewModel(app: Application) : AbstractViewModel(app) {
+class SoftwareLicenseItemViewModel : AbstractViewModel() {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()
 
     companion object {
-        fun from(app: Application, library: Library): SoftwareLicenseItemViewModel {
-            return SoftwareLicenseItemViewModel(app).apply {
+        fun from(library: Library): SoftwareLicenseItemViewModel {
+            return SoftwareLicenseItemViewModel().apply {
                 title.set(library.name)
                 description.set(library.license.description)
             }

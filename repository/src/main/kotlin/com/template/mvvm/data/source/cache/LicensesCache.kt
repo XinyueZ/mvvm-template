@@ -1,4 +1,4 @@
-package com.template.mvvm.data.repository.cache
+package com.template.mvvm.data.source.cache
 
 import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.contract.LicensesDataSource

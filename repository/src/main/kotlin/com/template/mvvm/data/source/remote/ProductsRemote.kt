@@ -1,4 +1,4 @@
-package com.template.mvvm.data.repository.remote
+package com.template.mvvm.data.source.remote
 
 import android.arch.lifecycle.LifecycleOwner
 import android.net.Uri

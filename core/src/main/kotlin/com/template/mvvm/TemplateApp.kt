@@ -3,8 +3,8 @@ package com.template.mvvm
 import android.content.Context
 import android.net.ConnectivityManager
 import android.support.multidex.MultiDexApplication
-import com.template.mvvm.data.repository.remote.LicensesApi
-import com.template.mvvm.data.repository.remote.ProductsApi
+import com.template.mvvm.data.source.remote.LicensesApi
+import com.template.mvvm.data.source.remote.ProductsApi
 
 open class TemplateApp : MultiDexApplication() {
 

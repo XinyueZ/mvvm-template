@@ -1,13 +1,12 @@
 package com.template.mvvm.models
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleOwner
-import com.template.mvvm.utils.LL
+import android.arch.lifecycle.ViewModel
+import android.util.Log
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class AbstractViewModel(context: Application) : AndroidViewModel(context) {
+abstract class AbstractViewModel : ViewModel() {
     open fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner) = true
     private val compositeDisposable = CompositeDisposable()
     protected fun addToAutoDispose(vararg disposables: Disposable) {
@@ -17,6 +16,6 @@ abstract class AbstractViewModel(context: Application) : AndroidViewModel(contex
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
-        LL.d("${this.javaClass.name}::onCleared")
+        Log.d("${this.javaClass.name}", "${this.javaClass.name}::onCleared")
     }
 }
