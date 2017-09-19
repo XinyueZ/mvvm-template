@@ -26,13 +26,14 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 - [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4/repository): in [dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
 
-#### Great update for modularization. App based on ```app```, ```core```, ```base``` and ```dependencies.gradle``` would define all libraries used in the application.
+#### Great update for modularization. App based on ```app```, ```core```, ```base```, ```repository``` and ```dependencies.gradle``` would define all libraries used in the application.
 
 |  Module | Description  |
 |:-------------:|:-------------:|
 |  app | Almost the activities, fragments which extend from the ```LiveActivity``` and ```LiveFragment``` in ```base-module```   |
 | base  | Tne Components would be reused by ```core``` or ```app```. |
-|  core | All ```view-model```s and extensions of them, include business logical, domain object, data-source ie. repository and data-binding (adapters, recyclerview-binding) |
+|  core | All ```view-model```s and extensions of them, include business logical, domain object, and data-binding (adapters, recyclerview-binding) |
+| repository|The repository is data-center of an application. The data-center provides data remote, local or cache.|
 
 
 > The template is using ```product```, ```software licenses``` to demonstrate how to use MVVM to load data and show them on UI. For your own use-case, you can reset them and build your own features.  
