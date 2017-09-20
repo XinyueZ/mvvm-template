@@ -10,9 +10,10 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.template.mvvm.models.AbstractItemViewModel
 
 @BindingAdapter(value = *arrayOf("items", "binding", "factory", "onItemClicked", "onItemBound", "showLoading"), requireAll = false)
-fun <T> bindItems(view: RecyclerView, items: ObservableList<T>?, binding: Binding.OnBind<T>?, factory: RecyclerAdapter.ViewBindingFactory?, onItemClicked: RecyclerAdapter.ItemClickListener?, onItemBound: RecyclerAdapter.ItemBoundListener?, showLoading: Boolean?) {
+fun <T : AbstractItemViewModel> bindItems(view: RecyclerView, items: ObservableList<T>?, binding: Binding.OnBind<T>?, factory: RecyclerAdapter.ViewBindingFactory?, onItemClicked: RecyclerAdapter.ItemClickListener?, onItemBound: RecyclerAdapter.ItemBoundListener?, showLoading: Boolean?) {
     if (items == null) {
         return
     }

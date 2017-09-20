@@ -60,7 +60,7 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Ab
     }
 }
 
-class ProductItemViewModel : AbstractViewModel() {
+class ProductItemViewModel : AbstractItemViewModel() {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()

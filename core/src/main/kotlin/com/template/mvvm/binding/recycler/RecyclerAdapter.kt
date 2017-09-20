@@ -9,16 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.template.mvvm.R
+import com.template.mvvm.models.AbstractItemViewModel
 
 private const val VIEW_TYPE_LOADING = Int.MAX_VALUE
 
-class RecyclerAdapter<T> constructor(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerAdapter<T : AbstractItemViewModel> constructor(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val inflater: LayoutInflater = LayoutInflater.from(context)
     var onListChanged: OnListChangedCallback<ObservableList<T>>? = null
     var binding: Binding<T>? = null
     var recyclerView: RecyclerView? = null
-    var holderFactory: ViewHolderFactory? = null
+    private var holderFactory: ViewHolderFactory? = null
     var bindingFactory: ViewBindingFactory? = null
 
     var items = ObservableArrayList<T>()
@@ -41,11 +42,15 @@ class RecyclerAdapter<T> constructor(context: Context) : RecyclerView.Adapter<Re
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         binding?.let {
-            val item = items[position]
-            val bind: ViewDataBinding = DataBindingUtil.getBinding(holder.itemView)
-            bind.root.setOnClickListener { itemClick?.onItemClicked(it, holder.adapterPosition) }
-            onBindBinding(bind, item)
+            with(items[position]){
+                val bind: ViewDataBinding = DataBindingUtil.getBinding(holder.itemView)
+                bind.root.setOnClickListener { itemClick?.onItemClicked(it, holder.adapterPosition) }
+
+                it.onItemBind(position, this)
+                onBindBinding(bind, this)
+            }
         }
+
 
         itemBound?.onItemBound(position)
     }
@@ -108,7 +113,7 @@ class RecyclerAdapter<T> constructor(context: Context) : RecyclerView.Adapter<Re
         return holder
     }
 
-    fun onCreateViewHolder(binding: ViewDataBinding): ViewHolder {
+    private fun onCreateViewHolder(binding: ViewDataBinding): ViewHolder {
         holderFactory?.let {
             return it.create(binding)
         }
@@ -116,7 +121,7 @@ class RecyclerAdapter<T> constructor(context: Context) : RecyclerView.Adapter<Re
         return BindingViewHolder(binding)
     }
 
-    fun onCreateBinding(inflater: LayoutInflater, type: Int, viewGroup: ViewGroup): ViewDataBinding {
+    private fun onCreateBinding(inflater: LayoutInflater, type: Int, viewGroup: ViewGroup): ViewDataBinding {
         bindingFactory?.let {
             return it.create(type, inflater, viewGroup)
         }
@@ -133,11 +138,16 @@ class RecyclerAdapter<T> constructor(context: Context) : RecyclerView.Adapter<Re
             return VIEW_TYPE_LOADING
         }
 
-        binding?.onItemBind(position, items[position])
-        return binding?.type ?: Binding.TYPE_DEFAULT
+        with(items[position]) {
+            if (isEmpty()) {
+                return emptyType()
+            }
+        }
+
+        return Binding.TYPE_DEFAULT
     }
 
-    fun onBindBinding(dataBinding: ViewDataBinding, data: T) {
+    private fun onBindBinding(dataBinding: ViewDataBinding, data: T) {
         binding?.bind(dataBinding, data)
         dataBinding.executePendingBindings()
     }
@@ -216,7 +226,7 @@ class RecyclerAdapter<T> constructor(context: Context) : RecyclerView.Adapter<Re
     /**
      * Can be overwritten to use custom view binding (layout) for loading indicator.
      */
-    fun createLoadingViewDataBinding(inflater: LayoutInflater, parent: ViewGroup): ViewDataBinding {
+    private fun createLoadingViewDataBinding(inflater: LayoutInflater, parent: ViewGroup): ViewDataBinding {
         return DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.item_loading, parent, false)
     }
 }

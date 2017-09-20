@@ -19,3 +19,8 @@ abstract class AbstractViewModel : ViewModel() {
         Log.d("${this.javaClass.name}", "${this.javaClass.name}::onCleared")
     }
 }
+
+abstract class AbstractItemViewModel : AbstractViewModel() {
+    open fun isEmpty() = false
+    open fun emptyType() = Int.MIN_VALUE
+}

@@ -61,7 +61,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesRepository) : Ab
     }
 }
 
-class SoftwareLicenseItemViewModel : AbstractViewModel() {
+class SoftwareLicenseItemViewModel : AbstractItemViewModel() {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()

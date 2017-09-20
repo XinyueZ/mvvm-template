@@ -3,9 +3,10 @@ package com.template.mvvm.binding.recycler
 import android.databinding.ObservableList
 import android.os.Looper
 import android.util.Log
+import com.template.mvvm.models.AbstractItemViewModel
 import java.lang.ref.WeakReference
 
-class OnListChanged<T>(adapter: RecyclerAdapter<T>, val items: ObservableList<T>) : ObservableList.OnListChangedCallback<ObservableList<T>>() {
+class OnListChanged<T : AbstractItemViewModel>(adapter: RecyclerAdapter<T>, val items: ObservableList<T>) : ObservableList.OnListChangedCallback<ObservableList<T>>() {
 
 
     val reference = WeakReference(adapter)
