@@ -1,1 +1,4 @@
 include ':app',  ':core', ':base', ':repository'
+project(':core').projectDir = new File('core')
+project(':base').projectDir = new File('base')
+project(':repository').projectDir = new File('repository')

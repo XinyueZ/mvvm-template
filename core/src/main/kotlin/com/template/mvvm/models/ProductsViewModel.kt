@@ -11,7 +11,6 @@ import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.source.ProductsRepository
-import com.template.mvvm.databinding.ProductItemBinding
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.ext.switchMapViewModelList
 
@@ -27,7 +26,7 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Ab
     //For recyclerview data
     val productList = ObservableArrayList<ProductItemViewModel>()
     val listFactory = object : RecyclerAdapter.ViewBindingFactory {
-        override fun create(type: Int, inflater: LayoutInflater, parent: ViewGroup) = DataBindingUtil.inflate<ProductItemBinding>(inflater, R.layout.item_product, parent, false)
+        override fun create(type: Int, inflater: LayoutInflater, parent: ViewGroup) = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.item_product, parent, false)
     }
     val listBinding = object : Binding.OnBind<ProductItemViewModel> {
         override fun onBind(binding: Binding<ProductItemViewModel>, position: Int, data: ProductItemViewModel) {

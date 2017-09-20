@@ -10,7 +10,6 @@ import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.binding.recycler.Binding
 import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.source.LicensesRepository
-import com.template.mvvm.databinding.LicenseItemBinding
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.ext.switchMapViewModelList
 
@@ -33,7 +32,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesRepository) : Ab
     //For recyclerview data
     val libraryList = ObservableArrayList<SoftwareLicenseItemViewModel>()
     val listFactory = object : RecyclerAdapter.ViewBindingFactory {
-        override fun create(type: Int, inflater: LayoutInflater, parent: ViewGroup) = DataBindingUtil.inflate<LicenseItemBinding>(inflater, R.layout.item_software_license, parent, false)
+        override fun create(type: Int, inflater: LayoutInflater, parent: ViewGroup) = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.item_software_license, parent, false)
     }
     val listBinding = object : Binding.OnBind<SoftwareLicenseItemViewModel> {
         override fun onBind(binding: Binding<SoftwareLicenseItemViewModel>, position: Int, data: SoftwareLicenseItemViewModel) {

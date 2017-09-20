@@ -138,7 +138,6 @@ ext {
 
 
     baseDependencies = [
-            [configuration: "implementation", dependency: fileTree(dir: 'libs', include: ['*.jar'])],
             //TEST LIB
             [configuration: "testImplementation", dependency: libs.junit],
             [configuration: "androidTestImplementation", dependency: libs.espresso,
