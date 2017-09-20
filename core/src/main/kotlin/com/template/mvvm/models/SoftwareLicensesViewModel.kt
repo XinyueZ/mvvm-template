@@ -10,6 +10,7 @@ import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.data.source.LicensesRepository
 import com.template.mvvm.domain.licenses.Library
+import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.switchMapViewModelList
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
@@ -29,29 +30,51 @@ class SoftwareLicensesViewModel(private val repository: LicensesRepository) : Ab
     // True when the data have been loaded.
     val pageStill = SingleLiveData<Boolean>()
 
+    // Error
+    var onError = SingleLiveData<ErrorViewModel>()
 
     //For recyclerview data
     val libraryList = ObservableArrayList<SoftwareLicenseItemViewModel>()
     val itemBinding = ItemBinding.of<SoftwareLicenseItemViewModel>(BR.vm, R.layout.item_software_license)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        loadAllLicenses(lifecycleOwner)
+        return true
+    }
+
+    private fun loadAllLicenses(lifecycleOwner: LifecycleOwner) {
         addToAutoDispose(
-                repository.getAllLibraries(lifecycleOwner).subscribe(
+                repository.getAllLibraries(lifecycleOwner).doFinally {
+                    onLoadLicensesCompletely()
+                }.subscribe(
                         {
-                            it.switchMapViewModelList(lifecycleOwner) {
-                                it?.let {
-                                    libraryList.addAll(it)
-                                    dataLoaded.set(true)
-                                    pageStill.value = true
-                                }
-                            }
+                            loadedLicensesSuccessfully(it, lifecycleOwner)
                         },
                         {
-                            //TODO Error-handling
+                            canNotLoadLicenses(it, lifecycleOwner)
                         }
                 )
         )
-        return true
+    }
+    private fun onLoadLicensesCompletely() {
+        dataLoaded.set(true)
+    }
+
+    private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
+        onError.value = ErrorViewModel(it, R.string.error_load_all_licenses, R.string.error_retry) {
+            loadAllLicenses(lifecycleOwner)
+            pageStill.value = false
+            dataLoaded.set(false)
+        }
+    }
+
+    private fun loadedLicensesSuccessfully(it: LibraryList, lifecycleOwner: LifecycleOwner) {
+        it.switchMapViewModelList(lifecycleOwner) {
+            it?.let {
+                libraryList.addAll(it)
+                pageStill.value = true
+            }
+        }
     }
 }
 

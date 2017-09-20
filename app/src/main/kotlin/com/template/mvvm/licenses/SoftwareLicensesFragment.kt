@@ -8,6 +8,7 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentSoftwareLicensesBinding
+import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.SoftwareLicensesViewModel
 
 class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
@@ -20,7 +21,10 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSoftwareLicensesBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(activity as LifecycleOwner) }
+                    vm = obtainViewModel().apply {
+                        registerLifecycleOwner(activity as LifecycleOwner)
+                        view.setupErrorSnackbar(this@SoftwareLicensesFragment, this.onError)
+                    }
                 }
         return binding
     }

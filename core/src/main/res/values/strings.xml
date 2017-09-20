@@ -28,4 +28,9 @@
     <string name="software_licenses_title">Licenses</string>
     <string name="action_software_licenses">Licenses</string>
     <string name="loading_software_licenses">Loading licenses…</string>
+
+
+    <string name="error_retry">Retry</string>
+    <string name="error_load_all_products">Cannot load products, something goes wrong.</string>
+    <string name="error_load_all_licenses">Cannot load licenses, something goes wrong.</string>
 </resources>

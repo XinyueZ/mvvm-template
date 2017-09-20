@@ -8,6 +8,7 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
+import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.ProductsViewModel
 
 class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
@@ -20,7 +21,10 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(activity as LifecycleOwner) }
+                    vm = obtainViewModel().apply {
+                        registerLifecycleOwner(activity as LifecycleOwner)
+                        view.setupErrorSnackbar(this@ProductsFragment, this.onError)
+                    }
                 }
         return binding
     }

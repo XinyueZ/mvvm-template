@@ -43,6 +43,10 @@ abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
         if (length <= 0) uiHelper.hide() else uiHelper.delayHide(length)
     }
 
+    protected fun showSystemUi() {
+        uiHelper.show()
+    }
+
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         event?.let {
             when (event.action) {
