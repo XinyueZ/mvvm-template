@@ -42,54 +42,61 @@ ext {
     //Gradle
     def gradle = ext.gradleVersion
 
+    //Recycler-view data-binding
+    def bindingCollectionAdapter = "2.2.0"
+
     libs = [
             //TEST
-            junit                  : [group: "junit", name: "junit", version: junit],
-            espresso               : [group: "com.android.support.test.espresso", name: "espresso-core", version: espresso],
+            junit                               : [group: "junit", name: "junit", version: junit],
+            espresso                            : [group: "com.android.support.test.espresso", name: "espresso-core", version: espresso],
 
             //SUPPORT
-            appcompatV7            : [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion],
-            cardviewV7             : [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion],
-            design                 : [group: "com.android.support", name: "design", version: supportLibraryVersion],
-            customtabs             : [group: "com.android.support", name: "customtabs", version: supportLibraryVersion],
-            recyclerviewV7         : [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion],
-            supportV4              : [group: "com.android.support", name: "support-v4", version: supportLibraryVersion],
-            constraintLayout       : [group: "com.android.support.constraint", name: "constraint-layout", version: constraint],
-            multidex               : [group: "com.android.support", name: "multidex", version: multiDex],
+            appcompatV7                         : [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion],
+            cardviewV7                          : [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion],
+            design                              : [group: "com.android.support", name: "design", version: supportLibraryVersion],
+            customtabs                          : [group: "com.android.support", name: "customtabs", version: supportLibraryVersion],
+            recyclerviewV7                      : [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion],
+            supportV4                           : [group: "com.android.support", name: "support-v4", version: supportLibraryVersion],
+            constraintLayout                    : [group: "com.android.support.constraint", name: "constraint-layout", version: constraint],
+            multidex                            : [group: "com.android.support", name: "multidex", version: multiDex],
 
             //JSON
-            gson                   : [group: "com.google.code.gson", name: "gson", version: gson],
+            gson                                : [group: "com.google.code.gson", name: "gson", version: gson],
 
             //ARCH
-            lifeCycleRuntime       : [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion],
-            lifeCycleExtensions    : [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion],
-            lifeCycleCompiler      : [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion],
-            roomRuntime            : [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion],
-            roomCompiler           : [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion],
-            roomRx                 : [group: "android.arch.persistence.room", name: "rxjava2", version: archLifecycleVersion],
+            lifeCycleRuntime                    : [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion],
+            lifeCycleExtensions                 : [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion],
+            lifeCycleCompiler                   : [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion],
+            roomRuntime                         : [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion],
+            roomCompiler                        : [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion],
+            roomRx                              : [group: "android.arch.persistence.room", name: "rxjava2", version: archLifecycleVersion],
 
             //KOTLIN
-            kotlinStdLib           : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
-            databindingCompiler    : [group: "com.android.databinding", name: "compiler", version: gradle],
+            kotlinStdLib                        : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
+            databindingCompiler                 : [group: "com.android.databinding", name: "compiler", version: gradle],
 
             //RX
-            rxJava                 : [group: "io.reactivex.rxjava2", name: "rxjava", version: rx],
-            rxAndroid              : [group: "io.reactivex.rxjava2", name: "rxandroid", version: rxAndroid],
+            rxJava                              : [group: "io.reactivex.rxjava2", name: "rxjava", version: rx],
+            rxAndroid                           : [group: "io.reactivex.rxjava2", name: "rxandroid", version: rxAndroid],
 
             //RETROFIT
-            retrofit               : [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit],
-            converterGson          : [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit],
-            adapterRxJava2         : [group: "com.squareup.retrofit2", name: "adapter-rxjava2", version: rxAdapter],
+            retrofit                            : [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit],
+            converterGson                       : [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit],
+            adapterRxJava2                      : [group: "com.squareup.retrofit2", name: "adapter-rxjava2", version: rxAdapter],
 
             //MATERIAL DESIGN GUIDELINE
-            materialDesignGuideline: [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
+            materialDesignGuideline             : [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
 
             //IMAGE-LOADER
-            glide                  : [group: "com.github.bumptech.glide", name: "glide", version: imageLoader],
-            glideCompiler          : [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader],
+            glide                               : [group: "com.github.bumptech.glide", name: "glide", version: imageLoader],
+            glideCompiler                       : [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader],
 
             //DEBUG TOOL
-            curlLoggerInterceptor  : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
+            curlLoggerInterceptor               : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
+
+            //RECYCLER-VIEW DATA-BINDING
+            bindingCollectionAdapter            : [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter", version: bindingCollectionAdapter],
+            bindingCollectionAdapterRecyclerView: [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter-recyclerview", version: bindingCollectionAdapter],
     ]
 
     plugins = [
@@ -102,8 +109,8 @@ ext {
 
 
     modules = [
-            base: ":base",
-            core: ":core",
+            base      : ":base",
+            core      : ":core",
             repository: ":repository"
     ]
 
@@ -191,6 +198,10 @@ ext {
 
             //DEBUG TOOL
             [configuration: "debugImplementation", dependency: libs.curlLoggerInterceptor],
+
+            //RECYCLER-VIEW DATA-BINDING
+            [configuration: "implementation", dependency: libs.bindingCollectionAdapter],
+            [configuration: "implementation", dependency: libs.bindingCollectionAdapterRecyclerView],
     ]
 
     coreDependencies = baseDependencies

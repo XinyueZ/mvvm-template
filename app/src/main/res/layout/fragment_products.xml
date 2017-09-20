@@ -5,8 +5,7 @@
 
     <data>
 
-        <import type="com.template.mvvm.binding.recycler.LayoutManagerTypeKt"/>
-
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
         <variable
             name="vm"
             type="com.template.mvvm.models.ProductsViewModel"/>
@@ -45,10 +44,9 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:binding="@{vm.listBinding}"
-            app:factory="@{vm.listFactory}"
             app:items="@{vm.productList}"
-            app:layoutManager="@{LayoutManagerTypeKt.LINEAR_VERTICAL}"
+            app:layoutManager="@{LayoutManagers.linear()}"
+            app:itemBinding="@{vm.itemBinding}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 

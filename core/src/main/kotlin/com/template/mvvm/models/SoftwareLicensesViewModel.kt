@@ -1,17 +1,17 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
-import android.databinding.*
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.databinding.ObservableArrayList
+import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
+import android.databinding.ObservableInt
 import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
-import com.template.mvvm.binding.recycler.Binding
-import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.source.LicensesRepository
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.ext.switchMapViewModelList
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class SoftwareLicensesViewModel(private val repository: LicensesRepository) : AbstractViewModel() {
 
@@ -29,16 +29,10 @@ class SoftwareLicensesViewModel(private val repository: LicensesRepository) : Ab
     // True when the data have been loaded.
     val pageStill = SingleLiveData<Boolean>()
 
+
     //For recyclerview data
     val libraryList = ObservableArrayList<SoftwareLicenseItemViewModel>()
-    val listFactory = object : RecyclerAdapter.ViewBindingFactory {
-        override fun create(type: Int, inflater: LayoutInflater, parent: ViewGroup) = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.item_software_license, parent, false)
-    }
-    val listBinding = object : Binding.OnBind<SoftwareLicenseItemViewModel> {
-        override fun onBind(binding: Binding<SoftwareLicenseItemViewModel>, position: Int, data: SoftwareLicenseItemViewModel) {
-            binding.set(BR.vm, 0)
-        }
-    }
+    val itemBinding = ItemBinding.of<SoftwareLicenseItemViewModel>(BR.vm, R.layout.item_software_license)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         addToAutoDispose(
@@ -61,7 +55,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesRepository) : Ab
     }
 }
 
-class SoftwareLicenseItemViewModel : AbstractItemViewModel() {
+class SoftwareLicenseItemViewModel : AbstractViewModel() {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()

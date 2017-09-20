@@ -67,6 +67,11 @@
           "name": "Curl-Logger-interceptor",
           "owner": "Grapes 'n' Berries",
           "copyright": "2016"
+        },
+        {
+          "name": "binding-collection-adapter",
+          "owner": "Evan Tatarka",
+          "copyright": "2015"
         }
       ]
     }

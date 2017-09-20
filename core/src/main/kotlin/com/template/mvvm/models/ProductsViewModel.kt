@@ -1,18 +1,18 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
-import android.databinding.*
+import android.databinding.ObservableArrayList
+import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
+import android.databinding.ObservableInt
 import android.net.Uri
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
-import com.template.mvvm.binding.recycler.Binding
-import com.template.mvvm.binding.recycler.RecyclerAdapter
 import com.template.mvvm.data.source.ProductsRepository
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.ext.switchMapViewModelList
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class ProductsViewModel(private val productsRepository: ProductsRepository) : AbstractViewModel() {
 
@@ -25,14 +25,7 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Ab
 
     //For recyclerview data
     val productList = ObservableArrayList<ProductItemViewModel>()
-    val listFactory = object : RecyclerAdapter.ViewBindingFactory {
-        override fun create(type: Int, inflater: LayoutInflater, parent: ViewGroup) = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.item_product, parent, false)
-    }
-    val listBinding = object : Binding.OnBind<ProductItemViewModel> {
-        override fun onBind(binding: Binding<ProductItemViewModel>, position: Int, data: ProductItemViewModel) {
-            binding.set(BR.vm, 0)
-        }
-    }
+    val itemBinding = ItemBinding.of<ProductItemViewModel>(BR.vm, R.layout.item_product)
 
     //Return this view to home
     val goBack = ObservableBoolean(false)
@@ -43,24 +36,27 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Ab
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         addToAutoDispose(
-                productsRepository.getAllProducts(lifecycleOwner).subscribe({
-                    it.switchMapViewModelList(lifecycleOwner) {
-                        it?.let {
-                            productList.addAll(it)
-                            dataLoaded.set(true)
-                            pageStill.value = true
-                        }
-                    }
-                },
+                productsRepository.getAllProducts(lifecycleOwner).subscribe(
+                        {
+                            it.switchMapViewModelList(lifecycleOwner)
+                            {
+                                it?.let {
+                                    productList.addAll(it)
+                                    dataLoaded.set(true)
+                                    pageStill.value = true
+                                }
+                            }
+                        },
                         {
                             //TODO Error-handling
-                        })
+                        }
+                )
         )
         return true
     }
 }
 
-class ProductItemViewModel : AbstractItemViewModel() {
+class ProductItemViewModel : AbstractViewModel() {
 
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()
