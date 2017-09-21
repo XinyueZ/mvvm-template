@@ -9,13 +9,14 @@ import android.net.Uri
 import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
+import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.data.source.ProductsRepository
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.switchMapViewModelList
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class ProductsViewModel(private val productsRepository: ProductsRepository) : AbstractViewModel() {
+class ProductsViewModel(private val productsRepository: ProductsDataSource) : AbstractViewModel() {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)

@@ -8,13 +8,14 @@ import android.databinding.ObservableInt
 import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
+import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.data.source.LicensesRepository
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.switchMapViewModelList
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class SoftwareLicensesViewModel(private val repository: LicensesRepository) : AbstractViewModel() {
+class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : AbstractViewModel() {
 
     val loadingText = ObservableInt(R.string.loading_software_licenses)
     val title = ObservableInt(R.string.software_licenses_title)

@@ -10,6 +10,7 @@ import com.grapesnberries.curllogger.CurlLoggerInterceptor
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.data.source.LicensesRepository
 import com.template.mvvm.data.source.ProductsRepository
+import com.template.mvvm.data.source.Repository
 import com.template.mvvm.data.source.cache.LicensesCache
 import com.template.mvvm.data.source.cache.ProductsCache
 import com.template.mvvm.data.source.local.LicensesLocal
@@ -27,9 +28,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 
 object Injection {
+    //Provides whole repository
+    fun provideRepository(application: Application)
+            = Repository(provideLicensesRepository(application), provideProductsRepository())
 
     //Provides repository for products
-    fun provideProductsRepository() = ProductsRepository(
+    private fun provideProductsRepository() = ProductsRepository(
             provideRemoteProductsRepository(),
             provideLocalProductsRepository(),
             provideCacheProductsRepository()
@@ -40,7 +44,7 @@ object Injection {
     private fun provideCacheProductsRepository() = ProductsCache()
 
     //Provides repository for licenses
-    fun provideLicensesRepository(application: Application) = LicensesRepository(
+    private fun provideLicensesRepository(application: Application) = LicensesRepository(
             application,
             provideRemoteLicensesRepository(),
             provideLocalLicensesRepository(application),
@@ -61,6 +65,7 @@ object Injection {
                         .create()
         )
     }
+
     fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(gsonFactory)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
 
