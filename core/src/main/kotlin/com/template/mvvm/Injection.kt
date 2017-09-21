@@ -28,11 +28,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 
 object Injection {
-    //Provides whole repository
+    // Provides whole repository
     fun provideRepository(application: Application)
             = Repository(provideLicensesRepository(application), provideProductsRepository())
 
-    //Provides repository for products
+    // Provides repository for products
     private fun provideProductsRepository() = ProductsRepository(
             provideRemoteProductsRepository(),
             provideLocalProductsRepository(),
@@ -43,7 +43,7 @@ object Injection {
     private fun provideLocalProductsRepository() = ProductsLocal()
     private fun provideCacheProductsRepository() = ProductsCache()
 
-    //Provides repository for licenses
+    // Provides repository for licenses
     private fun provideLicensesRepository(application: Application) = LicensesRepository(
             application,
             provideRemoteLicensesRepository(),
@@ -55,8 +55,12 @@ object Injection {
     private fun provideLocalLicensesRepository(application: Application) = LicensesLocal(application)
     private fun provideCacheLicensesRepository() = LicensesCache()
 
-    //Provides API
+    // Provides API: Interceptors, client, providers of APIs
+
+    // Interceptors
     private val networkConnectionInterceptor: Interceptor = NetworkConnectionInterceptor(TemplateApp.connectivityManager!!)
+
+    // Http-Client
     private val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(CurlLoggerInterceptor("#!#!")).addInterceptor(networkConnectionInterceptor).build() }
     private val gsonFactory: GsonConverterFactory by lazy {
         GsonConverterFactory.create(
