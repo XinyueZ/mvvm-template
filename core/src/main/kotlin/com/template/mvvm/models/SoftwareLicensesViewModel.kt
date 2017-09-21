@@ -31,7 +31,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesRepository) : Ab
     val pageStill = SingleLiveData<Boolean>()
 
     // Error
-    var onError = SingleLiveData<ErrorViewModel>()
+    var onError = ErrorViewModel()
 
     //For recyclerview data
     val libraryList = ObservableArrayList<SoftwareLicenseItemViewModel>()
@@ -56,12 +56,13 @@ class SoftwareLicensesViewModel(private val repository: LicensesRepository) : Ab
                 )
         )
     }
+
     private fun onLoadLicensesCompletely() {
         dataLoaded.set(true)
     }
 
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
-        onError.value = ErrorViewModel(it, R.string.error_load_all_licenses, R.string.error_retry) {
+        onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner)
             pageStill.value = false
             dataLoaded.set(false)

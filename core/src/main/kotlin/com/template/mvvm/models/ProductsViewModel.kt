@@ -25,7 +25,7 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Ab
     val pageStill = SingleLiveData<Boolean>()
 
     // Error
-    var onError = SingleLiveData<ErrorViewModel>()
+    var onError = ErrorViewModel()
 
     //For recyclerview data
     val productList = ObservableArrayList<ProductItemViewModel>()
@@ -63,7 +63,7 @@ class ProductsViewModel(private val productsRepository: ProductsRepository) : Ab
     }
 
     private fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
-        onError.value = ErrorViewModel(it, R.string.error_load_all_licenses, R.string.error_retry) {
+        onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner)
             pageStill.value = false
             dataLoaded.set(false)
