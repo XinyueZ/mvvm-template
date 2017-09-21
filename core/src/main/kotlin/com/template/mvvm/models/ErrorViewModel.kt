@@ -1,9 +1,9 @@
 package com.template.mvvm.models
 
+import android.arch.lifecycle.MutableLiveData
 import android.support.annotation.StringRes
-import com.template.mvvm.arch.SingleLiveData
 
-class ErrorViewModel : SingleLiveData<Error>() {
+class ErrorViewModel : MutableLiveData<Error>() {
     val t: Throwable? = value?.t
     @StringRes
     val wording: Int? = value?.wording

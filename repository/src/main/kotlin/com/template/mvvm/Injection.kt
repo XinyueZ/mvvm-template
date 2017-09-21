@@ -1,6 +1,9 @@
 package com.template.mvvm
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import android.net.Uri
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
@@ -27,10 +30,28 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 
-object Injection {
+class Injection internal constructor(application: Application) {
+    companion object {
+
+        @SuppressLint("StaticFieldLeak")
+        @Volatile private var INSTANCE: Injection? = null
+
+        fun getInstance(application: Application) =
+                INSTANCE ?: synchronized(Injection::class.java) {
+                    INSTANCE ?: Injection(application)
+                            .also { INSTANCE = it }
+                }
+
+        fun destroyInstance() {
+            INSTANCE = null
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @Volatile private var DS_INSTANCE: Repository = Repository(provideLicensesRepository(application), provideProductsRepository())
+
     // Provides whole repository
-    fun provideRepository(application: Application)
-            = Repository(provideLicensesRepository(application), provideProductsRepository())
+    fun provideRepository() = DS_INSTANCE
 
     // Provides repository for products
     private fun provideProductsRepository() = ProductsRepository(
@@ -55,10 +76,11 @@ object Injection {
     private fun provideLocalLicensesRepository(application: Application) = LicensesLocal(application)
     private fun provideCacheLicensesRepository() = LicensesCache()
 
+    //
     // Provides API: Interceptors, client, providers of APIs
-
+    //
     // Interceptors
-    private val networkConnectionInterceptor: Interceptor = NetworkConnectionInterceptor(TemplateApp.connectivityManager!!)
+    private val networkConnectionInterceptor: Interceptor = NetworkConnectionInterceptor(application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
 
     // Http-Client
     private val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(CurlLoggerInterceptor("#!#!")).addInterceptor(networkConnectionInterceptor).build() }

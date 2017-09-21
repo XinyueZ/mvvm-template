@@ -18,7 +18,6 @@ fun ProductList.switchMapViewModelList(lifecycleOwner: LifecycleOwner, body: (t:
         }
         SingleLiveData<List<ProductItemViewModel>>().apply {
             value = itemVmList
-            return@switchMap this
         }
     }.observe(lifecycleOwner, Observer { body(it) })
 }
@@ -32,7 +31,6 @@ fun LibraryList.switchMapViewModelList(lifecycleOwner: LifecycleOwner, body: (t:
         }
         SingleLiveData<List<SoftwareLicenseItemViewModel>>().apply {
             value = itemVmList
-            return@switchMap this
         }
     }.observe(lifecycleOwner, Observer { body(it) })
 }

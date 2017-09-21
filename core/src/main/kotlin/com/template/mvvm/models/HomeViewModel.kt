@@ -6,10 +6,11 @@ import android.databinding.ObservableInt
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
+import com.template.mvvm.Injection
 import com.template.mvvm.R
+import com.template.mvvm.ViewModelFactory
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.ext.obtainViewModel
-
 
 class HomeViewModel : AbstractViewModel() {
     val title = ObservableInt(R.string.home_title)
@@ -37,5 +38,11 @@ class HomeViewModel : AbstractViewModel() {
             }
         }
         return true
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        ViewModelFactory.destroyInstance()
+        Injection.destroyInstance()
     }
 }

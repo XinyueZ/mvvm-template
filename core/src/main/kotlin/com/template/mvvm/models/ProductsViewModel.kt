@@ -10,7 +10,6 @@ import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.data.source.ProductsRepository
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.switchMapViewModelList

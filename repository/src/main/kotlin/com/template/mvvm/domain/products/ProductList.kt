@@ -1,6 +1,6 @@
 package com.template.mvvm.domain.products
 
-import com.template.mvvm.arch.SingleLiveData
+import android.arch.lifecycle.MutableLiveData
 
-class ProductList : SingleLiveData<List<Product>>()
+class ProductList : MutableLiveData<List<Product>>()
 

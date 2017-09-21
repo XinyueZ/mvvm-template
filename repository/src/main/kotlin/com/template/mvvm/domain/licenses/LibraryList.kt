@@ -1,6 +1,6 @@
 package com.template.mvvm.domain.licenses
 
-import com.template.mvvm.arch.SingleLiveData
+import android.arch.lifecycle.MutableLiveData
 
-class LibraryList : SingleLiveData<List<Library>>()
+class LibraryList : MutableLiveData<List<Library>>()
 
