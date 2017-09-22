@@ -43,8 +43,11 @@ class Injection internal constructor(application: Application) {
                 }
 
         fun destroyInstance() {
-            INSTANCE?.DS_INSTANCE = null
-            INSTANCE = null
+            INSTANCE?.let {
+                it.DS_INSTANCE?.clear()
+                it.DS_INSTANCE = null
+                INSTANCE = null
+            }
         }
     }
 

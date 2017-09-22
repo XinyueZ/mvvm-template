@@ -24,8 +24,12 @@ class LicensesRepository(app: Application,
             p1
         }))
         ret.doFinally({
-            libraryList = null
+            clear()
         })
         return ret
+    }
+
+    override fun clear() {
+        libraryList = null
     }
 }

@@ -42,7 +42,7 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
 
 
     //For recyclerview data
-    val productList = ObservableArrayList<ProductItemViewModel>()
+    val productItemVmList = ObservableArrayList<ProductItemViewModel>()
     val itemBinding = ItemBinding.of<ProductItemViewModel>(BR.vm, R.layout.item_product)
 
 
@@ -84,7 +84,7 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
                 productListSource = ProductList().apply {
                     switchMapViewModelList(lifecycleOwner) {
                         it?.let {
-                            productList.addAll(it)
+                            productItemVmList.addAll(it)
                             pageStill.value = true
                         }
                     }

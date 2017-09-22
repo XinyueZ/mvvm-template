@@ -29,7 +29,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
             }
         })
         ret.doFinally({
-            libraryList = null
+            clear()
         })
         return ret
     }
@@ -44,5 +44,9 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                 })
             })
         }
+    }
+
+    override fun clear() {
+        libraryList = null
     }
 }

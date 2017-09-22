@@ -18,7 +18,7 @@ class ProductsLocal : ProductsDataSource {
             }
         })
         ret.doFinally({
-            productList = null
+            clear()
         })
         return ret
     }
@@ -35,5 +35,9 @@ class ProductsLocal : ProductsDataSource {
                 Product("BILBAO II SUN", "BILBAO II SUN - Trainers - blue/lime"),
                 Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white"),
                 Product("PICK", "PICK POCKET TX - Trainers - black"))
+    }
+
+    override fun clear() {
+        productList = null
     }
 }

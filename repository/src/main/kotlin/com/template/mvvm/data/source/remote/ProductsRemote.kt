@@ -29,8 +29,12 @@ class ProductsRemote : ProductsDataSource {
             }
         }))
         ret.doFinally({
-            productList = null
+            clear()
         })
         return ret
+    }
+
+    override fun clear() {
+        productList = null
     }
 }

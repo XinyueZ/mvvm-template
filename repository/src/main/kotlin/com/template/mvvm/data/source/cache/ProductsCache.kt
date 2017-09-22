@@ -10,4 +10,8 @@ class ProductsCache : ProductsDataSource {
     override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun clear() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

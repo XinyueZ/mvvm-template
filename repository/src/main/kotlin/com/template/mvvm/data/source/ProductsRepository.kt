@@ -22,8 +22,12 @@ class ProductsRepository(private val remote: ProductsDataSource,
             p1
         }))
         ret.doFinally({
-            productList = null
+            clear()
         })
         return ret
+    }
+
+    override fun clear() {
+        productList = null
     }
 }

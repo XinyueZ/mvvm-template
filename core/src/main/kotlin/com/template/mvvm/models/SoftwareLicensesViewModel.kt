@@ -38,7 +38,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
     private var libraryListSource: LibraryList? = null
 
     //For recyclerview data
-    val libraryList = ObservableArrayList<SoftwareLicenseItemViewModel>()
+    val libraryItemVmList = ObservableArrayList<SoftwareLicenseItemViewModel>()
     val itemBinding = ItemBinding.of<SoftwareLicenseItemViewModel>(BR.vm, R.layout.item_software_license)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
@@ -79,7 +79,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
                 libraryListSource = LibraryList().apply {
                     switchMapViewModelList(lifecycleOwner) {
                         it?.let {
-                            libraryList.addAll(it)
+                            libraryItemVmList.addAll(it)
                             pageStill.value = true
                         }
                     }

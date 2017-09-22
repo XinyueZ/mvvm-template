@@ -9,4 +9,8 @@ import io.reactivex.Single
 class Repository(private val licensesRepository: LicensesRepository, private val productsRepository: ProductsRepository) : LicensesDataSource, ProductsDataSource {
     override fun getAllLibraries(lifecycleOwner: LifecycleOwner) = licensesRepository.getAllLibraries(lifecycleOwner)
     override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> = productsRepository.getAllProducts(lifecycleOwner)
+    override fun clear() {
+        licensesRepository.clear()
+        productsRepository.clear()
+    }
 }

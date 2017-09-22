@@ -26,8 +26,12 @@ class LicensesRemote : LicensesDataSource {
             }
         }))
         ret.doFinally({
-            libraryList = null
+            clear()
         })
         return ret
+    }
+
+    override fun clear() {
+        libraryList = null
     }
 }

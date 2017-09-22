@@ -44,7 +44,7 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:items="@{vm.libraryList}"
+            app:items="@{vm.libraryItemVmList}"
             app:layoutManager="@{LayoutManagers.linear()}"
             app:itemBinding="@{vm.itemBinding}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
