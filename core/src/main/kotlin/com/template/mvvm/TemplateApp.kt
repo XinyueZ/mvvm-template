@@ -1,3 +1,10 @@
 package com.template.mvvm
 
-abstract class TemplateApp : RepositoryApp()
+import android.support.multidex.MultiDexApplication
+
+abstract class TemplateApp : MultiDexApplication() {
+    override fun onCreate() {
+        super.onCreate()
+        RepositoryModule(this)
+    }
+}

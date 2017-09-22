@@ -1,6 +1,7 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
@@ -9,7 +10,6 @@ import android.databinding.ObservableInt
 import android.net.Uri
 import com.template.mvvm.BR
 import com.template.mvvm.R
-import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
@@ -23,7 +23,7 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
     val dataLoaded = ObservableBoolean(false)
 
     // True when the data have been loaded.
-    val pageStill = SingleLiveData<Boolean>()
+    val pageStill = MutableLiveData<Boolean>()
 
     // Error
     var onError = ErrorViewModel()

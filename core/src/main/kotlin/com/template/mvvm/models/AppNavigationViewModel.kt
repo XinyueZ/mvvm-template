@@ -1,18 +1,18 @@
 package com.template.mvvm.models
 
+import android.arch.lifecycle.MutableLiveData
 import com.template.mvvm.R
-import com.template.mvvm.arch.SingleLiveData
 
 class AppNavigationViewModel : AbstractViewModel() {
-    val openProduct = SingleLiveData<Boolean>()
-    val openInternet = SingleLiveData<Boolean>()
-    val openLicenses = SingleLiveData<Boolean>()
-    val openAbout = SingleLiveData<Boolean>()
-    val openItem1 = SingleLiveData<Boolean>()
-    val openItem2 = SingleLiveData<Boolean>()
-    val openItem3 = SingleLiveData<Boolean>()
+    val openProduct = MutableLiveData<Boolean>()
+    val openInternet = MutableLiveData<Boolean>()
+    val openLicenses = MutableLiveData<Boolean>()
+    val openAbout = MutableLiveData<Boolean>()
+    val openItem1 = MutableLiveData<Boolean>()
+    val openItem2 = MutableLiveData<Boolean>()
+    val openItem3 = MutableLiveData<Boolean>()
 
-    val drawerToggle = SingleLiveData<Boolean>()
+    val drawerToggle = MutableLiveData<Boolean>()
 
     fun onCommand(id: Int) {
         when (id) {

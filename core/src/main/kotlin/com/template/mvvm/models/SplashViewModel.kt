@@ -1,13 +1,13 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.MutableLiveData
 import android.os.Handler
-import com.template.mvvm.arch.SingleLiveData
 
 class SplashViewModel : AbstractViewModel() {
     private val TAG = "SplashViewModel"
 
-    val startHome = SingleLiveData<Boolean>()
+    val startHome = MutableLiveData<Boolean>()
 
 
 

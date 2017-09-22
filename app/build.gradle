@@ -59,7 +59,6 @@ dependencies {
     //STANDALONE
     implementation project(':core')
     implementation project(':base')
-    implementation project(':repository')
     rootProject.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
