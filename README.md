@@ -4,6 +4,9 @@ This repository provides templates which would be based on MVVM for Android appl
 
 The code-base will be from very begin to complicate use-cases. The purpose of the template is to ease starting Android application development with MVVM. Because of MVVM the templates use Android [databinding](https://developer.android.com/topic/libraries/data-binding/index.html) which can help us to write declarative layouts and minimize the glue code necessary to bind your application logic and layouts. 
 
+> The code-base based on [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html).
+ 
+ 
 # This is not a library
 
 Don't think that you can include it and build with your code directly. These codes here are template that you can replace and build your own features.
