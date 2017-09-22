@@ -35,6 +35,10 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 |  core | All ```view-model```s and extensions of them, include business logical, domain object, and data-binding (adapters, recyclerview-binding) |
 | repository|The repository is data-center of an application. The data-center provides data remote, local or cache.|
 
+See:
+
+![arch](media/arch.png)
+
 
 > The template is using ```product```, ```software licenses``` to demonstrate how to use MVVM to load data and show them on UI. For your own use-case, you can reset them and build your own features.  
 
