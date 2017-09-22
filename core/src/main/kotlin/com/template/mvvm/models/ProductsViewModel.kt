@@ -1,6 +1,7 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -27,16 +28,23 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
     // Error
     var onError = ErrorViewModel()
 
-    //For recyclerview data
-    val productList = ObservableArrayList<ProductItemViewModel>()
-    val itemBinding = ItemBinding.of<ProductItemViewModel>(BR.vm, R.layout.item_product)
-
     //Return this view to home
     val goBack = ObservableBoolean(false)
 
     fun toggleBack() {
         goBack.set(true)
     }
+
+
+
+    //Data of this view-model
+    private var productListSource: ProductList? = null
+
+
+    //For recyclerview data
+    val productList = ObservableArrayList<ProductItemViewModel>()
+    val itemBinding = ItemBinding.of<ProductItemViewModel>(BR.vm, R.layout.item_product)
+
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         loadAllProducts(lifecycleOwner)
@@ -70,14 +78,25 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
         }
     }
 
-    private fun loadProductsSuccessfully(it: ProductList, lifecycleOwner: LifecycleOwner) {
-        it.switchMapViewModelList(lifecycleOwner)
-        {
-            it?.let {
-                productList.addAll(it)
-                pageStill.value = true
+    private fun loadProductsSuccessfully(source: ProductList, lifecycleOwner: LifecycleOwner) {
+        source.observe(lifecycleOwner, Observer {
+            if (productListSource == null) {
+                productListSource = ProductList().apply {
+                    switchMapViewModelList(lifecycleOwner) {
+                        it?.let {
+                            productList.addAll(it)
+                            pageStill.value = true
+                        }
+                    }
+                }
             }
-        }
+            productListSource?.value = it
+        })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        productListSource = null
     }
 }
 

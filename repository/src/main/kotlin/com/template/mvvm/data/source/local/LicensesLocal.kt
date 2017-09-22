@@ -3,8 +3,8 @@ package com.template.mvvm.data.source.local
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import com.google.gson.Gson
-import com.template.mvvm.data.feeds.licenses.LicensesData
 import com.template.mvvm.contract.LicensesDataSource
+import com.template.mvvm.data.feeds.licenses.LicensesData
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
 import io.reactivex.Single
@@ -18,22 +18,26 @@ private const val LICENCE_BOX_LOCATION_FORMAT = "%s/%s.txt"
 
 class LicensesLocal(private val app: Application) : LicensesDataSource {
     private val gson = Gson()
-    private val libraryList = LibraryList()
+    private var libraryList: LibraryList? = null
 
     override fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList> {
-        return Single.create({ emitter ->
-            with(libraryList) {
-                loadLicenses()
+        val ret: Single<LibraryList> = Single.create({ emitter ->
+            libraryList = (libraryList ?: LibraryList()).apply {
+                loadLicenses(this)
                 if (!emitter.isDisposed)
                     emitter.onSuccess(this)
             }
         })
+        ret.doFinally({
+            libraryList = null
+        })
+        return ret
     }
 
-    private fun loadLicenses() {
+    private fun loadLicenses(list: LibraryList) {
         val licensesData = gson.fromJson(InputStreamReader(app.assets
                 .open(LICENCES_LIST_JSON)), LicensesData::class.java)
-        libraryList.value = arrayListOf<Library>().apply {
+        list.value = arrayListOf<Library>().apply {
             licensesData.licenses.forEach({ licenseData ->
                 licenseData.libraries.forEach({ libraryData ->
                     this@apply.add(Library.from(libraryData, licenseData))

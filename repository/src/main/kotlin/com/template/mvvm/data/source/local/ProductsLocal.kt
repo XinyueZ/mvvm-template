@@ -7,20 +7,24 @@ import com.template.mvvm.domain.products.ProductList
 import io.reactivex.Single
 
 class ProductsLocal : ProductsDataSource {
-    private val productList = ProductList()
+    private var productList: ProductList? = null
 
     override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> {
-        return Single.create({ emitter ->
-            with(productList) {
-                loadProducts()
+        val ret: Single<ProductList> = Single.create({ emitter ->
+            productList = (productList ?: ProductList()).apply {
+                loadProducts(this)
                 if (!emitter.isDisposed)
                     emitter.onSuccess(this)
             }
         })
+        ret.doFinally({
+            productList = null
+        })
+        return ret
     }
 
-    private fun loadProducts() {
-        productList.value = arrayListOf(
+    private fun loadProducts(list: ProductList) {
+        list.value = arrayListOf(
                 Product("BIOM", "BIOM FJUEL - Trainers - aquatic"),
                 Product("FOGGY", "FOGGY - Trainers - brown/beige"),
                 Product("Sports", "Sports socks - blue"),

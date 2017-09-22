@@ -1,6 +1,7 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -20,6 +21,12 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
 
+    // True when the data have been loaded.
+    val pageStill = SingleLiveData<Boolean>()
+
+    // Error
+    var onError = ErrorViewModel()
+
     //Return this view to home
     val goBack = ObservableBoolean(false)
 
@@ -27,11 +34,8 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
         goBack.set(true)
     }
 
-    // True when the data have been loaded.
-    val pageStill = SingleLiveData<Boolean>()
-
-    // Error
-    var onError = ErrorViewModel()
+    //Data of this view-model
+    private var libraryListSource: LibraryList? = null
 
     //For recyclerview data
     val libraryList = ObservableArrayList<SoftwareLicenseItemViewModel>()
@@ -69,13 +73,25 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
         }
     }
 
-    private fun loadedLicensesSuccessfully(it: LibraryList, lifecycleOwner: LifecycleOwner) {
-        it.switchMapViewModelList(lifecycleOwner) {
-            it?.let {
-                libraryList.addAll(it)
-                pageStill.value = true
+    private fun loadedLicensesSuccessfully(source: LibraryList, lifecycleOwner: LifecycleOwner) {
+        source.observe(lifecycleOwner, Observer {
+            if (libraryListSource == null) {
+                libraryListSource = LibraryList().apply {
+                    switchMapViewModelList(lifecycleOwner) {
+                        it?.let {
+                            libraryList.addAll(it)
+                            pageStill.value = true
+                        }
+                    }
+                }
             }
-        }
+            libraryListSource?.value = it
+        })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        libraryListSource = null
     }
 }
 

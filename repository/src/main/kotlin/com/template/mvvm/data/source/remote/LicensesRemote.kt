@@ -10,10 +10,12 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
 class LicensesRemote : LicensesDataSource {
-    private val libraryList = LibraryList()
+    private var libraryList: LibraryList? = null
+
     override fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList> {
-        return Single.zip(Single.just(libraryList), LicensesApi.service?.getLibraries()?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread()), BiFunction({ p1, p2 ->
-            libraryList.apply {
+        libraryList = libraryList ?: LibraryList()
+        val ret: Single<LibraryList> = Single.zip(Single.just(libraryList), LicensesApi.service?.getLibraries()?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread()), BiFunction({ p1, p2 ->
+            p1.apply {
                 value = arrayListOf<Library>().apply {
                     p2.licenses.forEach({ licenseData ->
                         licenseData.libraries.forEach({ libraryData ->
@@ -23,5 +25,9 @@ class LicensesRemote : LicensesDataSource {
                 }
             }
         }))
+        ret.doFinally({
+            libraryList = null
+        })
+        return ret
     }
 }

@@ -13,14 +13,19 @@ class LicensesRepository(app: Application,
                          private val local: LicensesDataSource,
                          private val cache: LicensesDataSource
 ) : LicensesDataSource {
-    private val libraryList = LibraryList()
+    private var libraryList: LibraryList? = null
 
     override fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList> {
-        return Single.zip(Single.just(libraryList), remote.getAllLibraries(lifecycleOwner), BiFunction({ p1, p2 ->
+        libraryList = libraryList ?: LibraryList()
+        val ret: Single<LibraryList> = Single.zip(Single.just(libraryList), remote.getAllLibraries(lifecycleOwner), BiFunction({ p1, p2 ->
             p2.observe(lifecycleOwner, Observer {
                 p1.value = it
             })
-            libraryList
+            p1
         }))
+        ret.doFinally({
+            libraryList = null
+        })
+        return ret
     }
 }

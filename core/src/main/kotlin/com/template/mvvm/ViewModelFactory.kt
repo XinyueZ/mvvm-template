@@ -23,9 +23,9 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
                     isAssignableFrom(AppNavigationViewModel::class.java) -> AppNavigationViewModel()
-                    isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(Injection.getInstance(application).provideRepository())
+                    isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(Injection.getInstance(application).provideRepository(application))
                     isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel()
-                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(Injection.getInstance(application).provideRepository())
+                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(Injection.getInstance(application).provideRepository(application))
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

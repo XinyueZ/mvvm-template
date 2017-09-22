@@ -43,15 +43,19 @@ class Injection internal constructor(application: Application) {
                 }
 
         fun destroyInstance() {
+            INSTANCE?.DS_INSTANCE = null
             INSTANCE = null
         }
     }
 
     @SuppressLint("StaticFieldLeak")
-    @Volatile private var DS_INSTANCE: Repository = Repository(provideLicensesRepository(application), provideProductsRepository())
+    @Volatile private var DS_INSTANCE: Repository? = null
 
     // Provides whole repository
-    fun provideRepository() = DS_INSTANCE
+    fun provideRepository(application: Application) = DS_INSTANCE ?: synchronized(this) {
+        DS_INSTANCE ?: Repository(provideLicensesRepository(application), provideProductsRepository())
+                .also { DS_INSTANCE = it }
+    }
 
     // Provides repository for products
     private fun provideProductsRepository() = ProductsRepository(

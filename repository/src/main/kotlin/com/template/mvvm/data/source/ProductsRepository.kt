@@ -11,14 +11,19 @@ class ProductsRepository(private val remote: ProductsDataSource,
                          private val local: ProductsDataSource,
                          private val cache: ProductsDataSource
 ) : ProductsDataSource {
-    private val productList = ProductList()
+    private var productList: ProductList? = null
 
     override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> {
-        return Single.zip(Single.just(productList), remote.getAllProducts(lifecycleOwner), BiFunction({ p1, p2 ->
+        productList = productList ?: ProductList()
+        val ret: Single<ProductList> = Single.zip(Single.just(productList), remote.getAllProducts(lifecycleOwner), BiFunction({ p1, p2 ->
             p2.observe(lifecycleOwner, Observer {
                 p1.value = it
             })
-            productList
+            p1
         }))
+        ret.doFinally({
+            productList = null
+        })
+        return ret
     }
 }

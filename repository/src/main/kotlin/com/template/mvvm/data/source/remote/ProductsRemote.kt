@@ -11,9 +11,11 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
 class ProductsRemote : ProductsDataSource {
-    private val productList = ProductList()
+    private var productList: ProductList? = null
+
     override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> {
-        return Single.zip(Single.just(productList), ProductsApi.service?.getArticles()?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread()), BiFunction({ p1, p2 ->
+        productList = productList ?: ProductList()
+        val ret: Single<ProductList> = Single.zip(Single.just(productList), ProductsApi.service?.getArticles()?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread()), BiFunction({ p1, p2 ->
             p1.apply {
                 value = (arrayListOf<Product>()).apply {
                     p2.products.forEach {
@@ -26,5 +28,9 @@ class ProductsRemote : ProductsDataSource {
                 }
             }
         }))
+        ret.doFinally({
+            productList = null
+        })
+        return ret
     }
 }
