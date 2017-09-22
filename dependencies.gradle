@@ -31,6 +31,7 @@ ext {
 
     //Debug tool
     def curl = "0.1"
+    def stetho = "1.5.0"
 
     //Test
     def espresso = "3.0.1"
@@ -92,6 +93,7 @@ ext {
             glideCompiler                       : [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader],
 
             //DEBUG TOOL
+            stetho                              : [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho],
             curlLoggerInterceptor               : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
 
             //RECYCLER-VIEW DATA-BINDING
@@ -197,6 +199,7 @@ ext {
             [configuration: "kapt", dependency: libs.glideCompiler],
 
             //DEBUG TOOL
+            [configuration: "implementation", dependency: libs.stetho],
             [configuration: "debugImplementation", dependency: libs.curlLoggerInterceptor],
 
             //RECYCLER-VIEW DATA-BINDING

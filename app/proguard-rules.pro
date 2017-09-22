@@ -33,6 +33,7 @@
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 -dontwarn okio.**
+-dontwarn javax.annotation.**
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.AppGlideModule
