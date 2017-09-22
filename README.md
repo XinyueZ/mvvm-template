@@ -40,7 +40,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 See:
 
-![arch](media/arch.png =100x100)
+![arch](media/arch.png=100x100)
 
 
 > The template is using ```product```, ```software licenses``` to demonstrate how to use MVVM to load data and show them on UI. For your own use-case, you can reset them and build your own features.  
