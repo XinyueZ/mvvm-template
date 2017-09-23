@@ -9,6 +9,7 @@ import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
 import com.template.mvvm.BR
+import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
@@ -71,6 +72,7 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
     }
 
     private fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
+        LL.e(it.toString())
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner)
             pageStill.value = false

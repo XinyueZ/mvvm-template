@@ -8,6 +8,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import com.template.mvvm.BR
+import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
@@ -66,6 +67,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
     }
 
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
+        LL.e(it.toString())
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner)
             pageStill.value = false
