@@ -2,6 +2,7 @@ package com.template.mvvm.data.source.local
 
 import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.contract.ProductsDataSource
+import com.template.mvvm.data.feeds.products.ProductData
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
 import io.reactivex.Single
@@ -35,6 +36,10 @@ class ProductsLocal : ProductsDataSource {
                 Product("BILBAO II SUN", "BILBAO II SUN - Trainers - blue/lime"),
                 Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white"),
                 Product("PICK", "PICK POCKET TX - Trainers - black"))
+    }
+
+    override fun addProduct(productData: ProductData) {
+
     }
 
     override fun clear() {

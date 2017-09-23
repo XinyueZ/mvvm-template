@@ -3,6 +3,7 @@ package com.template.mvvm.data.source
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import com.template.mvvm.contract.ProductsDataSource
+import com.template.mvvm.data.feeds.products.ProductData
 import com.template.mvvm.domain.products.ProductList
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
@@ -25,6 +26,10 @@ class ProductsRepository(private val remote: ProductsDataSource,
             clear()
         })
         return ret
+    }
+
+    override fun addProduct(productData: ProductData) {
+        local.addProduct(productData)
     }
 
     override fun clear() {

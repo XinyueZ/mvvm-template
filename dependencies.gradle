@@ -93,7 +93,8 @@ ext {
             glideCompiler                       : [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader],
 
             //DEBUG TOOL
-            stetho                              : [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho],
+            stetho                              : [group: "com.facebook.stetho", name: "stetho", version: stetho],
+            stethoHelper                        : [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho],
             curlLoggerInterceptor               : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
 
             //RECYCLER-VIEW DATA-BINDING
@@ -200,6 +201,7 @@ ext {
 
             //DEBUG TOOL
             [configuration: "implementation", dependency: libs.stetho],
+            [configuration: "implementation", dependency: libs.stethoHelper],
             [configuration: "debugImplementation", dependency: libs.curlLoggerInterceptor],
 
             //RECYCLER-VIEW DATA-BINDING
