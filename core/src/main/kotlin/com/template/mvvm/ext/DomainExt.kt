@@ -9,7 +9,7 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.models.ProductItemViewModel
 import com.template.mvvm.models.SoftwareLicenseItemViewModel
 
-fun ProductList.switchMapViewModelList(lifecycleOwner: LifecycleOwner, body: (t: List<ProductItemViewModel>?) -> Unit) {
+fun ProductList.setUpTransform(lifecycleOwner: LifecycleOwner, body: (t: List<ProductItemViewModel>?) -> Unit) {
     Transformations.switchMap(this) {
         val itemVmList = arrayListOf<ProductItemViewModel>().apply {
             it.mapTo(this) {
@@ -22,7 +22,7 @@ fun ProductList.switchMapViewModelList(lifecycleOwner: LifecycleOwner, body: (t:
     }.observe(lifecycleOwner, Observer { body(it) })
 }
 
-fun LibraryList.switchMapViewModelList(lifecycleOwner: LifecycleOwner, body: (t: List<SoftwareLicenseItemViewModel>?) -> Unit) {
+fun LibraryList.setUpTransform(lifecycleOwner: LifecycleOwner, body: (t: List<SoftwareLicenseItemViewModel>?) -> Unit) {
     Transformations.switchMap(this) {
         val itemVmList = arrayListOf<SoftwareLicenseItemViewModel>().apply {
             it.mapTo(this) {

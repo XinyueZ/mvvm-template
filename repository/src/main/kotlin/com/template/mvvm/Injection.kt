@@ -2,27 +2,30 @@ package com.template.mvvm
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Uri
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.grapesnberries.curllogger.CurlLoggerInterceptor
 import com.template.mvvm.contract.LicensesDataSource
-import com.template.mvvm.data.source.LicensesRepository
-import com.template.mvvm.data.source.ProductsRepository
-import com.template.mvvm.data.source.Repository
-import com.template.mvvm.data.source.cache.LicensesCache
-import com.template.mvvm.data.source.cache.ProductsCache
-import com.template.mvvm.data.source.local.LicensesLocal
-import com.template.mvvm.data.source.local.ProductsLocal
-import com.template.mvvm.data.source.remote.LicensesApi
-import com.template.mvvm.data.source.remote.LicensesRemote
-import com.template.mvvm.data.source.remote.ProductsApi
-import com.template.mvvm.data.source.remote.ProductsRemote
-import com.template.mvvm.data.source.remote.interceptors.NetworkConnectionInterceptor
+import com.template.mvvm.source.LicensesRepository
+import com.template.mvvm.source.ProductsRepository
+import com.template.mvvm.source.Repository
+import com.template.mvvm.source.cache.LicensesCache
+import com.template.mvvm.source.cache.ProductsCache
+import com.template.mvvm.source.local.LicensesLocal
+import com.template.mvvm.source.local.ProductsLocal
+import com.template.mvvm.source.local.dao.DB
+import com.template.mvvm.source.remote.LicensesApi
+import com.template.mvvm.source.remote.LicensesRemote
+import com.template.mvvm.source.remote.ProductsApi
+import com.template.mvvm.source.remote.ProductsRemote
+import com.template.mvvm.source.remote.interceptors.NetworkConnectionInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -44,17 +47,32 @@ class Injection internal constructor(application: Application) {
 
         fun destroyInstance() {
             INSTANCE?.let {
-                it.DS_INSTANCE?.clear()
-                it.DS_INSTANCE = null
+                with(it) {
+                    DB_INSTANCE = null
+                    DS_INSTANCE?.clear()
+                    DS_INSTANCE = null
+                }
                 INSTANCE = null
             }
         }
     }
 
+    // Provide database
+
+    @SuppressLint("StaticFieldLeak")
+    @Volatile private var DB_INSTANCE: DB? = null
+
+    fun provideDatabase(application: Application) = DB_INSTANCE ?: synchronized(this) {
+        DB_INSTANCE ?: buildDatabase(application).also { DB_INSTANCE = it }
+    }
+
+    private fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, DB::class.java, "mvvm.db").build()
+
+    // Provides whole repository
+
     @SuppressLint("StaticFieldLeak")
     @Volatile private var DS_INSTANCE: Repository? = null
 
-    // Provides whole repository
     fun provideRepository(application: Application) = DS_INSTANCE ?: synchronized(this) {
         DS_INSTANCE ?: Repository(provideLicensesRepository(application), provideProductsRepository())
                 .also { DS_INSTANCE = it }
@@ -90,7 +108,9 @@ class Injection internal constructor(application: Application) {
     private val networkConnectionInterceptor: Interceptor = NetworkConnectionInterceptor(application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
 
     // Http-Client
-    private val client: OkHttpClient by lazy { OkHttpClient.Builder().addInterceptor(CurlLoggerInterceptor("#!#!")).addInterceptor(networkConnectionInterceptor).build() }
+    private val client: OkHttpClient by lazy {
+        OkHttpClient.Builder().addNetworkInterceptor(StethoInterceptor()).addInterceptor(CurlLoggerInterceptor("#!#!")).addInterceptor(networkConnectionInterceptor).build()
+    }
     private val gsonFactory: GsonConverterFactory by lazy {
         GsonConverterFactory.create(
                 GsonBuilder()

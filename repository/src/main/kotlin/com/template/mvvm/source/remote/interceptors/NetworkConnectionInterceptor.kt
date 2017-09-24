@@ -1,4 +1,4 @@
-package com.template.mvvm.data.source.remote.interceptors
+package com.template.mvvm.source.remote.interceptors
 
 import android.annotation.SuppressLint
 import android.net.ConnectivityManager

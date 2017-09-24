@@ -2,7 +2,6 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -13,7 +12,7 @@ import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
-import com.template.mvvm.ext.switchMapViewModelList
+import com.template.mvvm.ext.setUpTransform
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : AbstractViewModel() {
@@ -43,23 +42,28 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
     val itemBinding = ItemBinding.of<SoftwareLicenseItemViewModel>(BR.vm, R.layout.item_software_license)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        if (libraryListSource == null) {
+            libraryListSource = LibraryList().apply {
+                setUpTransform(lifecycleOwner) {
+                    it?.let {
+                        libraryItemVmList.addAll(it)
+                        pageStill.value = true
+                    }
+                }
+            }
+        }
         loadAllLicenses(lifecycleOwner)
         return true
     }
 
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner) {
-        addToAutoDispose(
-                repository.getAllLibraries(lifecycleOwner).doFinally {
-                    onLoadLicensesCompletely()
-                }.subscribe(
-                        {
-                            loadedLicensesSuccessfully(it, lifecycleOwner)
-                        },
-                        {
-                            canNotLoadLicenses(it, lifecycleOwner)
-                        }
-                )
-        )
+        libraryListSource?.let {
+            addToAutoDispose(
+                    repository.getAllLibraries(it).doFinally {
+                        onLoadLicensesCompletely()
+                    }.subscribe({}, { canNotLoadLicenses(it, lifecycleOwner) })
+            )
+        }
     }
 
     private fun onLoadLicensesCompletely() {
@@ -73,22 +77,6 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
             pageStill.value = false
             dataLoaded.set(false)
         }
-    }
-
-    private fun loadedLicensesSuccessfully(source: LibraryList, lifecycleOwner: LifecycleOwner) {
-        source.observe(lifecycleOwner, Observer {
-            if (libraryListSource == null) {
-                libraryListSource = LibraryList().apply {
-                    switchMapViewModelList(lifecycleOwner) {
-                        it?.let {
-                            libraryItemVmList.addAll(it)
-                            pageStill.value = true
-                        }
-                    }
-                }
-            }
-            libraryListSource?.value = it
-        })
     }
 
     override fun onCleared() {

@@ -1,13 +1,12 @@
-package com.template.mvvm.data.source.local
+package com.template.mvvm.source.local
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleOwner
 import com.google.gson.Gson
 import com.template.mvvm.contract.LicensesDataSource
-import com.template.mvvm.data.feeds.licenses.LicensesData
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
-import io.reactivex.Single
+import com.template.mvvm.feeds.licenses.LicensesData
+import io.reactivex.Completable
 import java.io.InputStreamReader
 
 private const val LICENCES_LIST_JSON = "licenses-list.json"
@@ -18,20 +17,11 @@ private const val LICENCE_BOX_LOCATION_FORMAT = "%s/%s.txt"
 
 class LicensesLocal(private val app: Application) : LicensesDataSource {
     private val gson = Gson()
-    private var libraryList: LibraryList? = null
 
-    override fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList> {
-        val ret: Single<LibraryList> = Single.create({ emitter ->
-            libraryList = (libraryList ?: LibraryList()).apply {
-                loadLicenses(this)
-                if (!emitter.isDisposed)
-                    emitter.onSuccess(this)
-            }
-        })
-        ret.doFinally({
-            clear()
-        })
-        return ret
+    override fun getAllLibraries(source: LibraryList) = Completable.create { sub ->
+        loadLicenses(source)
+        sub.onComplete()
+        return@create
     }
 
     private fun loadLicenses(list: LibraryList) {
@@ -47,6 +37,6 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
     }
 
     override fun clear() {
-        libraryList = null
+        //TODO Some resource information should be freed here.
     }
 }

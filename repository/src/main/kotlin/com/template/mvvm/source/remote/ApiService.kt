@@ -1,7 +1,7 @@
-package com.template.mvvm.data.source.remote
+package com.template.mvvm.source.remote
 
-import com.template.mvvm.data.feeds.licenses.LicensesData
-import com.template.mvvm.data.feeds.products.ProductsData
+import com.template.mvvm.feeds.licenses.LicensesData
+import com.template.mvvm.feeds.products.ProductsData
 import io.reactivex.Single
 import retrofit2.http.GET
 

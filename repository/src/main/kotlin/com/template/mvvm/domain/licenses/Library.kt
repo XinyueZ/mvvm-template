@@ -1,7 +1,7 @@
 package com.template.mvvm.domain.licenses
 
-import com.template.mvvm.data.feeds.licenses.LibraryData
-import com.template.mvvm.data.feeds.licenses.LicenseData
+import com.template.mvvm.feeds.licenses.LibraryData
+import com.template.mvvm.feeds.licenses.LicenseData
 
 data class Library(var name: String?,
                    var owner: String?,

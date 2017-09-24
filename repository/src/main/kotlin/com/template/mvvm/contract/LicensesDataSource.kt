@@ -1,9 +1,8 @@
 package com.template.mvvm.contract
 
-import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.domain.licenses.LibraryList
-import io.reactivex.Single
+import io.reactivex.Completable
 
 interface LicensesDataSource : DataSource {
-    fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList>
+    fun getAllLibraries(source: LibraryList): Completable
 }

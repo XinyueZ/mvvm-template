@@ -1,4 +1,4 @@
-package com.template.mvvm.data.feeds.licenses
+package com.template.mvvm.feeds.licenses
 
 import com.google.gson.annotations.SerializedName
 

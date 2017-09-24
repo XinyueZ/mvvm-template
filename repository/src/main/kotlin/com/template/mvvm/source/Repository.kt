@@ -1,21 +1,16 @@
-package com.template.mvvm.data.source
+package com.template.mvvm.source
 
-import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.data.feeds.products.ProductData
+import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.domain.products.ProductList
-import io.reactivex.Single
+import io.reactivex.Completable
 
 class Repository(private val licensesRepository: LicensesRepository, private val productsRepository: ProductsRepository) : LicensesDataSource, ProductsDataSource {
-    override fun getAllLibraries(lifecycleOwner: LifecycleOwner) = licensesRepository.getAllLibraries(lifecycleOwner)
-    override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> = productsRepository.getAllProducts(lifecycleOwner)
+    override fun getAllLibraries(source: LibraryList) = licensesRepository.getAllLibraries(source)
+    override fun getAllProducts(source: ProductList): Completable = productsRepository.getAllProducts(source)
     override fun clear() {
         licensesRepository.clear()
         productsRepository.clear()
-    }
-
-    override fun addProduct(productData: ProductData) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

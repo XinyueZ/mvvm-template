@@ -1,13 +1,12 @@
-package com.template.mvvm.data.source.cache
+package com.template.mvvm.source.cache
 
-import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.LibraryList
-import io.reactivex.Single
+import io.reactivex.Completable
 
 class LicensesCache : LicensesDataSource {
 
-    override fun getAllLibraries(lifecycleOwner: LifecycleOwner): Single<LibraryList> {
+    override fun getAllLibraries(source: LibraryList): Completable {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

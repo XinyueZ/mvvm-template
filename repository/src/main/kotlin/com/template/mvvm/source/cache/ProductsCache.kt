@@ -1,18 +1,12 @@
-package com.template.mvvm.data.source.cache
+package com.template.mvvm.source.cache
 
-import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.data.feeds.products.ProductData
 import com.template.mvvm.domain.products.ProductList
-import io.reactivex.Single
+import io.reactivex.Completable
 
 class ProductsCache : ProductsDataSource {
 
-    override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun addProduct(productData: ProductData) {
+    override fun getAllProducts(source: ProductList): Completable {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

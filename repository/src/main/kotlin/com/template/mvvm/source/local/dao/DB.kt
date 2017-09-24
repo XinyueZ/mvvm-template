@@ -1,0 +1,42 @@
+package com.template.mvvm.source.local.dao
+
+import android.arch.persistence.room.Database
+import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.TypeConverter
+import android.arch.persistence.room.TypeConverters
+import android.net.Uri
+import com.template.mvvm.source.local.entities.licenses.LibraryEntity
+import com.template.mvvm.source.local.entities.licenses.LicenseEntity
+import com.template.mvvm.source.local.entities.products.ProductEntity
+
+@Database(entities = arrayOf(LicenseEntity::class, LibraryEntity::class, ProductEntity::class), version = 1)
+@TypeConverters(FieldConverter::class)
+abstract class DB : RoomDatabase() {
+
+    abstract fun licensesLibrariesDao(): LicensesLibrariesDao
+    abstract fun productDao(): ProductDao
+
+    companion object {
+        @Volatile lateinit var INSTANCE: DB
+    }
+}
+
+class FieldConverter {
+    companion object {
+        @TypeConverter
+        @JvmStatic
+        fun fromUri(uri: Uri) = uri.toString()
+
+        @TypeConverter
+        @JvmStatic
+        fun toUri(uriStr: String) = Uri.parse(uriStr)
+
+        @TypeConverter
+        @JvmStatic
+        fun fromArray(array: Array<String>) = array.joinToString()
+
+        @TypeConverter
+        @JvmStatic
+        fun toArray(arrayStr: String) = arrayStr.split(",").toTypedArray()
+    }
+}

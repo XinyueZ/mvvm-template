@@ -1,4 +1,4 @@
-package com.template.mvvm.data.feeds.products
+package com.template.mvvm.feeds.products
 
 import com.google.gson.annotations.SerializedName
 data

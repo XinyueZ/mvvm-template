@@ -2,7 +2,6 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -14,7 +13,7 @@ import com.template.mvvm.R
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
-import com.template.mvvm.ext.switchMapViewModelList
+import com.template.mvvm.ext.setUpTransform
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class ProductsViewModel(private val productsRepository: ProductsDataSource) : AbstractViewModel() {
@@ -36,35 +35,36 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
         goBack.set(true)
     }
 
-
-
     //Data of this view-model
     private var productListSource: ProductList? = null
-
 
     //For recyclerview data
     val productItemVmList = ObservableArrayList<ProductItemViewModel>()
     val itemBinding = ItemBinding.of<ProductItemViewModel>(BR.vm, R.layout.item_product)
 
-
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        if (productListSource == null) {
+            productListSource = ProductList().apply {
+                setUpTransform(lifecycleOwner) {
+                    it?.let {
+                        productItemVmList.addAll(it)
+                        pageStill.value = true
+                    }
+                }
+            }
+        }
         loadAllProducts(lifecycleOwner)
         return true
     }
 
     private fun loadAllProducts(lifecycleOwner: LifecycleOwner) {
-        addToAutoDispose(
-                productsRepository.getAllProducts(lifecycleOwner).doFinally {
-                    onLoadProductsCompletely()
-                }.subscribe(
-                        {
-                            loadProductsSuccessfully(it, lifecycleOwner)
-                        },
-                        {
-                            canNotLoadProducts(it, lifecycleOwner)
-                        }
-                )
-        )
+        productListSource?.let {
+            addToAutoDispose(
+                    productsRepository.getAllProducts(it).doFinally {
+                        onLoadProductsCompletely()
+                    }.subscribe({}, { canNotLoadProducts(it, lifecycleOwner) })
+            )
+        }
     }
 
     private fun onLoadProductsCompletely() {
@@ -78,22 +78,6 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
             pageStill.value = false
             dataLoaded.set(false)
         }
-    }
-
-    private fun loadProductsSuccessfully(source: ProductList, lifecycleOwner: LifecycleOwner) {
-        source.observe(lifecycleOwner, Observer {
-            if (productListSource == null) {
-                productListSource = ProductList().apply {
-                    switchMapViewModelList(lifecycleOwner) {
-                        it?.let {
-                            productItemVmList.addAll(it)
-                            pageStill.value = true
-                        }
-                    }
-                }
-            }
-            productListSource?.value = it
-        })
     }
 
     override fun onCleared() {

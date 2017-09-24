@@ -1,27 +1,18 @@
-package com.template.mvvm.data.source.local
+package com.template.mvvm.source.local
 
-import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.data.feeds.products.ProductData
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
-import io.reactivex.Single
+import com.template.mvvm.source.local.dao.DB
+import com.template.mvvm.source.local.entities.products.ProductEntity
+import io.reactivex.Completable
 
 class ProductsLocal : ProductsDataSource {
-    private var productList: ProductList? = null
 
-    override fun getAllProducts(lifecycleOwner: LifecycleOwner): Single<ProductList> {
-        val ret: Single<ProductList> = Single.create({ emitter ->
-            productList = (productList ?: ProductList()).apply {
-                loadProducts(this)
-                if (!emitter.isDisposed)
-                    emitter.onSuccess(this)
-            }
-        })
-        ret.doFinally({
-            clear()
-        })
-        return ret
+    override fun getAllProducts(source: ProductList) = Completable.create { sub ->
+        loadProducts(source)
+        sub.onComplete()
+        return@create
     }
 
     private fun loadProducts(list: ProductList) {
@@ -38,11 +29,19 @@ class ProductsLocal : ProductsDataSource {
                 Product("PICK", "PICK POCKET TX - Trainers - black"))
     }
 
-    override fun addProduct(productData: ProductData) {
-
+    fun addProduct(listOfProduct: List<Product>): Completable {
+        return Completable.create { sub ->
+            listOfProduct.forEach {
+                DB.INSTANCE.productDao().insertProduct(
+                        ProductEntity(it.title, it.description, it.thumbnail, it.brandLogo)
+                )
+            }
+            sub.onComplete()
+            return@create
+        }
     }
 
     override fun clear() {
-        productList = null
+        //TODO Some resource information should be freed here.
     }
 }
