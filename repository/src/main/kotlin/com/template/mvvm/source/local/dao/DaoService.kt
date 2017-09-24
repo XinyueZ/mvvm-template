@@ -14,11 +14,14 @@ interface LicensesLibrariesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLicense(licenseEntity: LicenseEntity)
 
-    @Query("SELECT * FROM licenses")
-    fun getLicenseList(): Flowable<List<LicenseEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLibrary(libraryEntity: LibraryEntity)
+
+
+    @Query("SELECT * FROM licenses")
+    fun getLicenseList(): Flowable<List<LicenseEntity>>
+
 
     @Query("SELECT * FROM libraries")
     fun getLibraryList(): Flowable<List<LibraryEntity>>

@@ -6,6 +6,7 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.source.local.dao.DB
 import com.template.mvvm.source.local.entities.products.ProductEntity
 import io.reactivex.Completable
+import io.reactivex.schedulers.Schedulers
 
 class ProductsLocal : ProductsDataSource {
 
@@ -29,17 +30,15 @@ class ProductsLocal : ProductsDataSource {
                 Product("PICK", "PICK POCKET TX - Trainers - black"))
     }
 
-    override fun saveListOfProduct(listOfProduct: List<Product>): Completable {
-        return Completable.create { sub ->
-            listOfProduct.forEach {
-                DB.INSTANCE.productDao().insertProduct(
-                        ProductEntity(it.title, it.description, it.thumbnail, it.brandLogo)
-                )
-            }
-            sub.onComplete()
-            return@create
+    override fun saveListOfProduct(listOfProduct: List<Product>) = Completable.create { sub ->
+        listOfProduct.forEach {
+            DB.INSTANCE.productDao().insertProduct(
+                    ProductEntity.from(it)
+            )
         }
-    }
+        sub.onComplete()
+        return@create
+    }.subscribeOn(Schedulers.io())
 
     override fun clear() {
         //TODO Some resource information should be freed here.

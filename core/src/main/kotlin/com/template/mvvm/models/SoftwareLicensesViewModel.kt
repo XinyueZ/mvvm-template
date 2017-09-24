@@ -2,6 +2,7 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -49,6 +50,12 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
                     pageStill.value = true
                 }
             }
+
+            observe(lifecycleOwner, Observer {
+                value?.let {
+                    addToAutoDispose(repository.saveListOfLibrary(it).subscribe({}, { canNotLoadLicenses(it, lifecycleOwner) }))
+                }
+            })
         }
         loadAllLicenses(lifecycleOwner)
         return true

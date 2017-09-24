@@ -3,7 +3,7 @@ package com.template.mvvm.domain.licenses
 import com.template.mvvm.feeds.licenses.LibraryData
 import com.template.mvvm.feeds.licenses.LicenseData
 
-data class Library(var name: String?,
+data class Library(var name: String,
                    var owner: String?,
                    var copyright: String?,
                    var license: License) {

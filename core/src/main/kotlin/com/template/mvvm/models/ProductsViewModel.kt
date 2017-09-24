@@ -17,7 +17,7 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class ProductsViewModel(private val productsRepository: ProductsDataSource) : AbstractViewModel() {
+class ProductsViewModel(private val repository: ProductsDataSource) : AbstractViewModel() {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
@@ -54,7 +54,7 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
 
             observe(lifecycleOwner, Observer {
                 value?.let {
-                    addToAutoDispose(productsRepository.saveListOfProduct(it).subscribe())
+                    addToAutoDispose(repository.saveListOfProduct(it).subscribe({}, { canNotLoadProducts(it, lifecycleOwner) }))
                 }
             })
         }
@@ -65,7 +65,7 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
     private fun loadAllProducts(lifecycleOwner: LifecycleOwner) {
         productListSource?.let {
             addToAutoDispose(
-                    productsRepository.getAllProducts(it).doFinally {
+                    repository.getAllProducts(it).doFinally {
                         onLoadProductsCompletely()
                     }.subscribe({}, { canNotLoadProducts(it, lifecycleOwner) })
             )

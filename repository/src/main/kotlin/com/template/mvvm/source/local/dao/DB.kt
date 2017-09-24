@@ -30,13 +30,5 @@ class FieldConverter {
         @TypeConverter
         @JvmStatic
         fun toUri(uriStr: String) = Uri.parse(uriStr)
-
-        @TypeConverter
-        @JvmStatic
-        fun fromArray(array: Array<String>) = array.joinToString()
-
-        @TypeConverter
-        @JvmStatic
-        fun toArray(arrayStr: String) = arrayStr.split(",").toTypedArray()
     }
 }

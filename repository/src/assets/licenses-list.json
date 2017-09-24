@@ -5,10 +5,12 @@
       "description": "The Android Open Source Project",
       "libraries": [
         {
-          "name": "Android Support-*"
+          "name": "Android Support-*",
+          "owner": "Google"
         },
         {
-          "name": "Android Play-Service-*"
+          "name": "Android Play-Service-*",
+          "owner": "Google"
         }
       ]
     },
