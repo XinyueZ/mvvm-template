@@ -2,6 +2,7 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -44,6 +45,7 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         productListSource = productListSource ?: ProductList().apply {
+            observe(lifecycleOwner, Observer { value?.let { addToAutoDispose(productsRepository.saveListOfProduct(it).subscribe()) } })
             setUpTransform(lifecycleOwner) {
                 it?.let {
                     productItemVmList.addAll(it)
