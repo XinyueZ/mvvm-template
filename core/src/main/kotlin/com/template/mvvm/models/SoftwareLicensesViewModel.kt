@@ -42,13 +42,11 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
     val itemBinding = ItemBinding.of<SoftwareLicenseItemViewModel>(BR.vm, R.layout.item_software_license)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
-        if (libraryListSource == null) {
-            libraryListSource = LibraryList().apply {
-                setUpTransform(lifecycleOwner) {
-                    it?.let {
-                        libraryItemVmList.addAll(it)
-                        pageStill.value = true
-                    }
+        libraryListSource = libraryListSource ?: LibraryList().apply {
+            setUpTransform(lifecycleOwner) {
+                it?.let {
+                    libraryItemVmList.addAll(it)
+                    pageStill.value = true
                 }
             }
         }

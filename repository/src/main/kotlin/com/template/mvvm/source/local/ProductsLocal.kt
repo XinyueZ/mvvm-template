@@ -29,7 +29,7 @@ class ProductsLocal : ProductsDataSource {
                 Product("PICK", "PICK POCKET TX - Trainers - black"))
     }
 
-    fun addProduct(listOfProduct: List<Product>): Completable {
+    override fun saveListOfProduct(listOfProduct: List<Product>): Completable {
         return Completable.create { sub ->
             listOfProduct.forEach {
                 DB.INSTANCE.productDao().insertProduct(

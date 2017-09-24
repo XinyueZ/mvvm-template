@@ -43,13 +43,11 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
     val itemBinding = ItemBinding.of<ProductItemViewModel>(BR.vm, R.layout.item_product)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
-        if (productListSource == null) {
-            productListSource = ProductList().apply {
-                setUpTransform(lifecycleOwner) {
-                    it?.let {
-                        productItemVmList.addAll(it)
-                        pageStill.value = true
-                    }
+        productListSource = productListSource ?: ProductList().apply {
+            setUpTransform(lifecycleOwner) {
+                it?.let {
+                    productItemVmList.addAll(it)
+                    pageStill.value = true
                 }
             }
         }
