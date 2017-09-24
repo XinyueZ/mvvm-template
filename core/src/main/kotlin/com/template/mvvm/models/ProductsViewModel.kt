@@ -45,13 +45,18 @@ class ProductsViewModel(private val productsRepository: ProductsDataSource) : Ab
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         productListSource = productListSource ?: ProductList().apply {
-            observe(lifecycleOwner, Observer { value?.let { addToAutoDispose(productsRepository.saveListOfProduct(it).subscribe()) } })
             setUpTransform(lifecycleOwner) {
                 it?.let {
                     productItemVmList.addAll(it)
                     pageStill.value = true
                 }
             }
+
+            observe(lifecycleOwner, Observer {
+                value?.let {
+                    addToAutoDispose(productsRepository.saveListOfProduct(it).subscribe())
+                }
+            })
         }
         loadAllProducts(lifecycleOwner)
         return true
