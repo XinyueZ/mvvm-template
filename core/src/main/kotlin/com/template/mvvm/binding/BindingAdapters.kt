@@ -20,19 +20,19 @@ fun remoteImageUri(view: View, uri: Uri?) {
 }
 
 @BindingAdapter("onIndicatorClick")
-fun b(toolbar: Toolbar, l: OnIndicatorClickListener?) {
+fun onIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
     l?.let {
         toolbar.setNavigationOnClickListener { l.onIndicatorClick() }
     }
 }
 
 @BindingAdapter("goBack")
-fun c(view: View, goBack: Boolean) {
+fun goBack(view: View, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("command")
-fun d(view: NavigationView, l: OnCommandListener?) {
+fun command(view: NavigationView, l: OnCommandListener?) {
     l?.let {
         view.setNavigationItemSelectedListener {
             it.isChecked = true
@@ -44,7 +44,7 @@ fun d(view: NavigationView, l: OnCommandListener?) {
 }
 
 @BindingAdapter("command")
-fun e(view: BottomNavigationView, l: OnCommandListener?) {
+fun command(view: BottomNavigationView, l: OnCommandListener?) {
     l?.let {
         view.setOnNavigationItemSelectedListener {
             l.onCommand(it.itemId)

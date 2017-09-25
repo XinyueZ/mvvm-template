@@ -8,7 +8,6 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
-import com.template.mvvm.BR
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.ProductsDataSource
@@ -41,7 +40,7 @@ class ProductsViewModel(private val repository: ProductsDataSource) : AbstractVi
 
     //For recyclerview data
     val productItemVmList = ObservableArrayList<ProductItemViewModel>()
-    val itemBinding = ItemBinding.of<ProductItemViewModel>(BR.vm, R.layout.item_product)
+    var itemBinding: ItemBinding<ProductItemViewModel>? = null
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         productListSource = productListSource ?: ProductList().apply {

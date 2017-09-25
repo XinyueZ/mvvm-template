@@ -7,7 +7,6 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import com.template.mvvm.BR
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
@@ -40,7 +39,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
 
     //For recyclerview data
     val libraryItemVmList = ObservableArrayList<SoftwareLicenseItemViewModel>()
-    val itemBinding = ItemBinding.of<SoftwareLicenseItemViewModel>(BR.vm, R.layout.item_software_license)
+    var itemBinding: ItemBinding<SoftwareLicenseItemViewModel>? = null
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         libraryListSource = libraryListSource ?: LibraryList().apply {

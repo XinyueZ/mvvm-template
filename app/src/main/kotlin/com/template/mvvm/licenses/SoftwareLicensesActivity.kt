@@ -7,9 +7,12 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
+import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivitySoftwareLicensesBinding
+import com.template.mvvm.models.SoftwareLicenseItemViewModel
 import com.template.mvvm.models.SoftwareLicensesViewModel
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
     companion object {
@@ -32,6 +35,7 @@ class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (obtainViewModel() as SoftwareLicensesViewModel).apply {
+            itemBinding = ItemBinding.of<SoftwareLicenseItemViewModel>(BR.vm, R.layout.item_software_license)
             pageStill.observe(this@SoftwareLicensesActivity, Observer {
                 when (it) {
                     true -> hideSystemUi(1500)
