@@ -26,14 +26,16 @@ import com.template.mvvm.source.remote.LicensesRemote
 import com.template.mvvm.source.remote.ProductsApi
 import com.template.mvvm.source.remote.ProductsRemote
 import com.template.mvvm.source.remote.interceptors.NetworkConnectionInterceptor
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
+import java.util.*
 
-class Injection internal constructor(application: Application) {
+class Injection private constructor(application: Application) {
     companion object {
 
         @SuppressLint("StaticFieldLeak")
@@ -100,6 +102,13 @@ class Injection internal constructor(application: Application) {
     private fun provideRemoteLicensesRepository(): LicensesDataSource = LicensesRemote()
     private fun provideLocalLicensesRepository(application: Application) = LicensesLocal(application)
     private fun provideCacheLicensesRepository() = LicensesCache()
+
+    private val itemClassMap =  HashMap<String, ItemBinding<*>>()
+    fun addItemBindingOf(modelClass: Class<*>, itemBinding: ItemBinding<*>) {
+        itemClassMap.put(modelClass.name, itemBinding)
+    }
+
+    fun itemOf(modelClass: Class<*>) = itemClassMap[modelClass.name]
 
     //
     // Provides API: Interceptors, client, providers of APIs

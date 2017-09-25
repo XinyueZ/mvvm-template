@@ -5,6 +5,7 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.template.mvvm.models.*
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 /**
  * A creator is used to inject the product ID into the ViewModel
@@ -23,9 +24,13 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
                     isAssignableFrom(AppNavigationViewModel::class.java) -> AppNavigationViewModel()
-                    isAssignableFrom(ProductsViewModel::class.java) -> ProductsViewModel(Injection.getInstance(application).provideRepository(application))
+                    isAssignableFrom(ProductsViewModel::class.java) ->
+                        ProductsViewModel(Injection.getInstance(application).provideRepository(application),
+                                Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>)
                     isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel()
-                    isAssignableFrom(SoftwareLicensesViewModel::class.java) -> SoftwareLicensesViewModel(Injection.getInstance(application).provideRepository(application))
+                    isAssignableFrom(SoftwareLicensesViewModel::class.java) ->
+                        SoftwareLicensesViewModel(Injection.getInstance(application).provideRepository(application),
+                                Injection.getInstance(application).itemOf(SoftwareLicenseItemViewModel::class.java) as ItemBinding<SoftwareLicenseItemViewModel>)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

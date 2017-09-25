@@ -15,7 +15,7 @@ import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.setUpTransform
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : AbstractViewModel() {
+class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val itemBinding: ItemBinding<SoftwareLicenseItemViewModel>) : AbstractViewModel() {
 
     val loadingText = ObservableInt(R.string.loading_software_licenses)
     val title = ObservableInt(R.string.software_licenses_title)
@@ -39,7 +39,6 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
 
     //For recyclerview data
     val libraryItemVmList = ObservableArrayList<SoftwareLicenseItemViewModel>()
-    var itemBinding: ItemBinding<SoftwareLicenseItemViewModel>? = null
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         libraryListSource = libraryListSource ?: LibraryList().apply {

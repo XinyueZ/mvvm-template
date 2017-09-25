@@ -16,7 +16,7 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class ProductsViewModel(private val repository: ProductsDataSource) : AbstractViewModel() {
+class ProductsViewModel(private val repository: ProductsDataSource, val itemBinding: ItemBinding<ProductItemViewModel>) : AbstractViewModel() {
 
     val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
@@ -40,7 +40,6 @@ class ProductsViewModel(private val repository: ProductsDataSource) : AbstractVi
 
     //For recyclerview data
     val productItemVmList = ObservableArrayList<ProductItemViewModel>()
-    var itemBinding: ItemBinding<ProductItemViewModel>? = null
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         productListSource = productListSource ?: ProductList().apply {
