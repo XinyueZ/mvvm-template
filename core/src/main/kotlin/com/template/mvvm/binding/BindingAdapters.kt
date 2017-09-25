@@ -12,7 +12,7 @@ import android.widget.ImageView
 import com.template.mvvm.GlideApp
 
 @BindingAdapter("remoteImageUri")
-fun a(view: View, uri: Uri?) {
+fun remoteImageUri(view: View, uri: Uri?) {
     uri?.let {
         if (view is ImageView)
             GlideApp.with(view).load(uri).into(view)
@@ -20,19 +20,19 @@ fun a(view: View, uri: Uri?) {
 }
 
 @BindingAdapter("onIndicatorClick")
-fun b(toolbar: Toolbar, l: OnIndicatorClickListener?) {
+fun onIndicatorClick(toolbar: Toolbar, l: OnIndicatorClickListener?) {
     l?.let {
         toolbar.setNavigationOnClickListener { l.onIndicatorClick() }
     }
 }
 
 @BindingAdapter("goBack")
-fun c(view: View, goBack: Boolean) {
+fun goBack(view: View, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("command")
-fun d(view: NavigationView, l: OnCommandListener?) {
+fun command(view: NavigationView, l: OnCommandListener?) {
     l?.let {
         view.setNavigationItemSelectedListener {
             it.isChecked = true
@@ -44,7 +44,7 @@ fun d(view: NavigationView, l: OnCommandListener?) {
 }
 
 @BindingAdapter("command")
-fun e(view: BottomNavigationView, l: OnCommandListener?) {
+fun command(view: BottomNavigationView, l: OnCommandListener?) {
     l?.let {
         view.setOnNavigationItemSelectedListener {
             l.onCommand(it.itemId)
@@ -55,7 +55,7 @@ fun e(view: BottomNavigationView, l: OnCommandListener?) {
 }
 
 @BindingAdapter("dataLoaded")
-fun dataLoaded(view: View, loaded: Boolean) {
+fun dataLoadFinished(view: View, loaded: Boolean) {
     view.visibility = if (loaded) {
         View.GONE
     } else {
