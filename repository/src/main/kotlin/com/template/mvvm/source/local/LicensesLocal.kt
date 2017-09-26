@@ -29,7 +29,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         loadLicenses(source)
         sub.onComplete()
         return@create
-    }
+    }//.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
     private fun loadLicenses(list: LibraryList) {
         val licensesData = gson.fromJson(InputStreamReader(app.assets

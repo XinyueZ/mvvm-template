@@ -2,11 +2,11 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
+import android.util.Log
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
@@ -46,14 +46,9 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                 it?.let {
                     libraryItemVmList.addAll(it)
                     pageStill.value = true
+                    dataLoaded.set(true)
                 }
             }
-
-            observe(lifecycleOwner, Observer {
-                value?.let {
-                    addToAutoDispose(repository.saveListOfLibrary(it).subscribe({}, { canNotLoadLicenses(it, lifecycleOwner) }))
-                }
-            })
         }
         loadAllLicenses(lifecycleOwner)
         return true
@@ -62,15 +57,11 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner) {
         libraryListSource?.let {
             addToAutoDispose(
-                    repository.getAllLibraries(it).doFinally {
-                        onLoadLicensesCompletely()
-                    }.subscribe({}, { canNotLoadLicenses(it, lifecycleOwner) })
+                    repository.getAllLibraries(it).subscribe({
+                        Log.d("LicensesRepository", "subscribe")
+                    }, { canNotLoadLicenses(it, lifecycleOwner) })
             )
         }
-    }
-
-    private fun onLoadLicensesCompletely() {
-        dataLoaded.set(true)
     }
 
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
@@ -78,7 +69,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner)
             pageStill.value = false
-            dataLoaded.set(false)
+            dataLoaded.set(true)
         }
     }
 

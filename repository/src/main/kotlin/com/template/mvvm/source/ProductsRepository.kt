@@ -1,6 +1,5 @@
 package com.template.mvvm.source
 
-import android.util.Log
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
@@ -15,7 +14,6 @@ class ProductsRepository(private val remote: ProductsDataSource,
     private val compositeDisposable = CompositeDisposable()
     override fun getAllProducts(source: ProductList) = remote.getAllProducts(source)
             .doOnComplete {
-                Log.e("ProductsRepository", "doOnComplete")
                 source.value?.let {
                     compositeDisposable.add(local.saveListOfProduct(it).subscribe())
                 }
@@ -24,7 +22,6 @@ class ProductsRepository(private val remote: ProductsDataSource,
                 compositeDisposable.clear()
             }
             .onErrorResumeNext {
-                Log.e("ProductsRepository", "onErrorResumeNext")
                 when (it) {
                     is MissingNetworkConnectionException -> local.getAllProducts(source)
                     else -> Completable.complete()
