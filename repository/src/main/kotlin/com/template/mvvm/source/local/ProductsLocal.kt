@@ -6,29 +6,24 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.source.local.dao.DB
 import com.template.mvvm.source.local.entities.products.ProductEntity
 import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class ProductsLocal : ProductsDataSource {
 
-    override fun getAllProducts(source: ProductList) = Completable.create { sub ->
-        loadProducts(source)
-        sub.onComplete()
-        return@create
-    }
-
-    private fun loadProducts(list: ProductList) {
-        list.value = arrayListOf(
-                Product("BIOM", "BIOM FJUEL - Trainers - aquatic"),
-                Product("FOGGY", "FOGGY - Trainers - brown/beige"),
-                Product("Sports", "Sports socks - blue"),
-                Product("PALERMO", "PALERMO - Trainers - oliv/rost"),
-                Product("JFWLAFAYETTE", "JFWLAFAYETTE  - Trainers - ivy green"),
-                Product("STRIKER", "STRIKER - Trainers - dress blues"),
-                Product("JFWLAFAYETTE", "JFWLAFAYETTE - Trainers - anthracite"),
-                Product("BILBAO II SUN", "BILBAO II SUN - Trainers - blue/lime"),
-                Product("BILBAO II SUN", "BILBAO II SUN - Trainers - black/white"),
-                Product("PICK", "PICK POCKET TX - Trainers - black"))
-    }
+    override fun getAllProducts(source: ProductList) = DB.INSTANCE.productDao().getProductList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .flatMapCompletable({
+                Completable.create { sub ->
+                    with(ArrayList<Product>()) {
+                        it.forEach {
+                            this.add(it.toProduct())
+                        }
+                        source.value = this
+                        sub.onComplete()
+                        return@create
+                    }
+                }
+            })
 
     override fun saveListOfProduct(listOfProduct: List<Product>) = Completable.create { sub ->
         listOfProduct.forEach {

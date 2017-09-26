@@ -15,7 +15,7 @@ class ProductsRemote : ProductsDataSource {
     override fun getAllProducts(source: ProductList): Completable {
         val ret: Single<ProductList> = Single.zip(Single.just(source), ProductsApi.service?.getArticles()?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread()), BiFunction({ p1, p2 ->
             p1.apply {
-                value = (arrayListOf<Product>()).apply {
+                with(arrayListOf<Product>()) {
                     p2.products.forEach {
                         add(Product(
                                 it.name,
@@ -23,6 +23,7 @@ class ProductsRemote : ProductsDataSource {
                                 it.media.images.first().largeHdUrl,
                                 it.brand.logo ?: Uri.EMPTY))
                     }
+                    value = this
                 }
             }
         }))

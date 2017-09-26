@@ -33,6 +33,9 @@ interface LicensesLibrariesDao {
 interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(productEntity: ProductEntity)
+
+    @Query("select * from products")
+    fun getProductList(): Flowable<List<ProductEntity>>
 }
 
 

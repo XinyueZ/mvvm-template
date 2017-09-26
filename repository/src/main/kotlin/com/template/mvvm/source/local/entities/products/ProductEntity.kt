@@ -21,4 +21,6 @@ class ProductEntity(
     companion object {
         fun from(product: Product) = ProductEntity(product.title, product.description, product.thumbnail, product.brandLogo)
     }
+
+    fun toProduct() = Product.from(this)
 }

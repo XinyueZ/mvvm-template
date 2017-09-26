@@ -2,12 +2,12 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
+import android.util.Log
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.ProductsDataSource
@@ -47,14 +47,9 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
                 it?.let {
                     productItemVmList.addAll(it)
                     pageStill.value = true
+                    dataLoaded.set(true)
                 }
             }
-
-            observe(lifecycleOwner, Observer {
-                value?.let {
-                    addToAutoDispose(repository.saveListOfProduct(it).subscribe({}, { canNotLoadProducts(it, lifecycleOwner) }))
-                }
-            })
         }
         loadAllProducts(lifecycleOwner)
         return true
@@ -63,15 +58,11 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
     private fun loadAllProducts(lifecycleOwner: LifecycleOwner) {
         productListSource?.let {
             addToAutoDispose(
-                    repository.getAllProducts(it).doFinally {
-                        onLoadProductsCompletely()
-                    }.subscribe({}, { canNotLoadProducts(it, lifecycleOwner) })
+                    repository.getAllProducts(it)
+                            .subscribe({ Log.i("ProductsRepository", "subscribe") },
+                                    { canNotLoadProducts(it, lifecycleOwner) })
             )
         }
-    }
-
-    private fun onLoadProductsCompletely() {
-        dataLoaded.set(true)
     }
 
     private fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
@@ -79,7 +70,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner)
             pageStill.value = false
-            dataLoaded.set(false)
+            dataLoaded.set(true)
         }
     }
 
