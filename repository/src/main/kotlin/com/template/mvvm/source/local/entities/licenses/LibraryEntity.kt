@@ -22,4 +22,6 @@ class LibraryEntity(
     companion object {
         fun from(library: Library) = LibraryEntity(library.name, library.owner, library.copyright, LicenseEntity.from(library.license))
     }
+
+    fun toLibrary() = Library.from(this)
 }

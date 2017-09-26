@@ -6,7 +6,6 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.util.Log
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
@@ -58,7 +57,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         libraryListSource?.let {
             addToAutoDispose(
                     repository.getAllLibraries(it).subscribe({
-                        Log.d("LicensesRepository", "subscribe")
+                        LL.d("subscribe")
                     }, { canNotLoadLicenses(it, lifecycleOwner) })
             )
         }

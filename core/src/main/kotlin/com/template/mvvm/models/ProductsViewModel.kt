@@ -7,7 +7,6 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
-import android.util.Log
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.ProductsDataSource
@@ -59,7 +58,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
         productListSource?.let {
             addToAutoDispose(
                     repository.getAllProducts(it)
-                            .subscribe({ Log.i("ProductsRepository", "subscribe") },
+                            .subscribe({ LL.i("subscribe") },
                                     { canNotLoadProducts(it, lifecycleOwner) })
             )
         }

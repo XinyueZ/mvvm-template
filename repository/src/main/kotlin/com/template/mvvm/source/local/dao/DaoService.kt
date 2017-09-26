@@ -14,19 +14,21 @@ interface LicensesLibrariesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLicense(licenseEntity: LicenseEntity)
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLibrary(libraryEntity: LibraryEntity)
 
-
-    @Query("SELECT * FROM licenses")
+    @Query("select * from licenses")
     fun getLicenseList(): Flowable<List<LicenseEntity>>
 
-
-    @Query("SELECT * FROM libraries")
+    @Query("select * from libraries")
     fun getLibraryList(): Flowable<List<LibraryEntity>>
 
+    @Query("select count(*) as total from libraries")
+    fun getLibraryListCount(): Flowable<List<Count>>
 
+    class Count {
+        var total: Int = 0
+    }
 }
 
 @Dao
