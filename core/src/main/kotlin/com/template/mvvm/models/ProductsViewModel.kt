@@ -58,9 +58,15 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
     private fun loadAllProducts(lifecycleOwner: LifecycleOwner) {
         productListSource?.let {
             addToAutoDispose(
-                    repository.getAllProducts(it)
-                            .subscribe({ LL.i("productListSource subscribe") },
-                                    { canNotLoadProducts(it, lifecycleOwner) })
+                    repository.getAllProducts()
+                            .subscribe(
+                                    {
+                                        productListSource?.value = it
+                                        LL.i("productListSource subscribe")
+                                    },
+                                    {
+                                        canNotLoadProducts(it, lifecycleOwner)
+                                    })
             )
         }
     }

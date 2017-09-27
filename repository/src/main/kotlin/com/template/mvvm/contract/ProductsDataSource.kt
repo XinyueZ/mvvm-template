@@ -1,9 +1,9 @@
 package com.template.mvvm.contract
 
-import com.template.mvvm.domain.products.ProductList
-import io.reactivex.Completable
+import com.template.mvvm.domain.products.Product
+import io.reactivex.Flowable
 
 interface ProductsDataSource : DataSource {
-    fun getAllProducts(source: ProductList): Completable
-    fun saveProducts(source: ProductList): Completable = Completable.complete()
+    fun getAllProducts(): Flowable<List<Product>>
+    fun saveProducts(source: List<Product>): List<Product> = source
 }
