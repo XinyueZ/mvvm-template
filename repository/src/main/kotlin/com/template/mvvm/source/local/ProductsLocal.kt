@@ -22,7 +22,7 @@ class ProductsLocal : ProductsDataSource {
             })
 
     override fun saveProducts(source: List<Product>) = source.apply {
-        source.forEach {
+        forEach {
             DB.INSTANCE.productDao().insertProduct(
                     ProductEntity.from(it)
             )

@@ -64,9 +64,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
                                         productListSource?.value = it
                                         LL.i("productListSource subscribe")
                                     },
-                                    {
-                                        canNotLoadProducts(it, lifecycleOwner)
-                                    })
+                                    { canNotLoadProducts(it, lifecycleOwner) })
             )
         }
     }

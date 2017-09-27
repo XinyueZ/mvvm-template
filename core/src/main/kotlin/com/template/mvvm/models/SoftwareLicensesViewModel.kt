@@ -57,9 +57,12 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner) {
         libraryListSource?.let {
             addToAutoDispose(
-                    repository.getAllLibraries(it).subscribe({
-                        LL.d("libraryListSource subscribe")
-                    }, { canNotLoadLicenses(it, lifecycleOwner) })
+                    repository.getAllLibraries().subscribe(
+                            {
+                                LL.i("libraryListSource subscribe")
+                                libraryListSource?.value = it
+                            },
+                            { canNotLoadLicenses(it, lifecycleOwner) })
             )
         }
     }

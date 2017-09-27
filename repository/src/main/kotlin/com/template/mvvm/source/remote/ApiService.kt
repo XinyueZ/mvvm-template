@@ -17,7 +17,7 @@ interface ProductsApi {
 
 interface LicensesApi {
     @GET("dxf7rgkcrsezbsw/licenses-list.json")
-    fun getLibraries(): Single<LicensesData>
+    fun getLibraries(): Flowable<LicensesData>
 
     companion object {
         lateinit var service: LicensesApi
