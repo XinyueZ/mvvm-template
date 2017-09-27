@@ -44,6 +44,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
         productListSource = productListSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
+                    productItemVmList.clear()
                     productItemVmList.addAll(it)
                     pageStill.value = true
                     dataLoaded.set(true)
@@ -58,7 +59,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
         productListSource?.let {
             addToAutoDispose(
                     repository.getAllProducts(it)
-                            .subscribe({ LL.i("subscribe") },
+                            .subscribe({ LL.i("productListSource subscribe") },
                                     { canNotLoadProducts(it, lifecycleOwner) })
             )
         }

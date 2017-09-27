@@ -43,6 +43,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         libraryListSource = libraryListSource ?: LibraryList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
+                    libraryItemVmList.clear()
                     libraryItemVmList.addAll(it)
                     pageStill.value = true
                     dataLoaded.set(true)
@@ -57,7 +58,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         libraryListSource?.let {
             addToAutoDispose(
                     repository.getAllLibraries(it).subscribe({
-                        LL.d("subscribe")
+                        LL.d("libraryListSource subscribe")
                     }, { canNotLoadLicenses(it, lifecycleOwner) })
             )
         }
