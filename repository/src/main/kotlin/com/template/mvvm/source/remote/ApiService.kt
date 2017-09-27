@@ -10,16 +10,15 @@ interface ProductsApi {
     fun getArticles(): Single<ProductsData>
 
     companion object {
-         var service: ProductsApi? = null
+        lateinit var service: ProductsApi
     }
 }
-
 
 interface LicensesApi {
     @GET("dxf7rgkcrsezbsw/licenses-list.json")
     fun getLibraries(): Single<LicensesData>
 
     companion object {
-        var service: LicensesApi? = null
+        lateinit var service: LicensesApi
     }
 }

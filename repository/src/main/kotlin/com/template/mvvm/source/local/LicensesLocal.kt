@@ -28,34 +28,31 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
     private val gson = Gson()
 
     override fun getAllLibraries(source: LibraryList) = DB.INSTANCE.licensesLibrariesDao().getLibraryListCount()
-            .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).flatMapCompletable {
-        when (it[0].total == 0) {
-            true -> Completable.create { sub ->
-                LL.d("licenses loaded from files")
-                loadLicensesFromAsset(source)
-                sub.onComplete()
-                return@create
-            }
-            false -> {
-                LL.d("licenses loaded from db")
-                DB.INSTANCE.licensesLibrariesDao().getLibraryList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                        .flatMapCompletable({
-                            Completable.create { sub ->
-                                with(ArrayList<Library>()) {
-                                    it.forEach {
-                                        this.add(it.toLibrary())
-                                    }
-                                    source.value = this
-                                    sub.onComplete()
-                                    return@create
-                                }
-                            }
-                        })
-            }
-        }
-    }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMapCompletable({
+                when (it[0].total == 0) {
+                    true -> loadLicensesFromAsset(source)
+                    false -> loadLicensesFromDB(source)
+                }
+            })
 
-    private fun loadLicensesFromAsset(list: LibraryList) {
+    private fun loadLicensesFromDB(source: LibraryList) = DB.INSTANCE.licensesLibrariesDao().getLibraryList()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMapCompletable({
+                Completable.fromAction({
+                    with(ArrayList<Library>()) {
+                        it.forEach {
+                            this.add(it.toLibrary())
+                        }
+                        source.value = this
+                        LL.d("licenses loaded from db")
+                    }
+                })
+            })
+
+    private fun loadLicensesFromAsset(list: LibraryList) = Completable.fromAction({
         val licensesData = gson.fromJson(InputStreamReader(app.assets
                 .open(LICENCES_LIST_JSON)), LicensesData::class.java)
         list.value = arrayListOf<Library>().apply {
@@ -65,10 +62,11 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                 })
             })
         }
-    }
+        LL.d("licenses loaded from asset")
+    })
 
-    override fun saveListOfLibrary(listOfLibrary: List<Library>) = Completable.create { sub ->
-        listOfLibrary.forEach {
+    override fun saveLibraries(source: LibraryList) = Completable.fromAction({
+        source.value?.forEach {
             DB.INSTANCE.apply {
                 licensesLibrariesDao().insertLibrary(
                         LibraryEntity.from(it)
@@ -78,9 +76,8 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                 )
             }
         }
-        sub.onComplete()
-        return@create
-    }.subscribeOn(Schedulers.io())
+        LL.w("licenses write to db")
+    }).subscribeOn(Schedulers.io())
 
     override fun clear() {
         //TODO Some resource information should be freed here.

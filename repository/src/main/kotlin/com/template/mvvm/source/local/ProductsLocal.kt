@@ -12,30 +12,30 @@ import io.reactivex.schedulers.Schedulers
 
 class ProductsLocal : ProductsDataSource {
 
-    override fun getAllProducts(source: ProductList) = DB.INSTANCE.productDao().getProductList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-            .flatMapCompletable({
-                LL.d("products loaded from db")
-                Completable.create { sub ->
+    override fun getAllProducts(source: ProductList) = DB.INSTANCE.productDao()
+            .getProductList()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMapCompletable ({
+                Completable.fromAction({
                     with(ArrayList<Product>()) {
                         it.forEach {
                             this.add(it.toProduct())
                         }
                         source.value = this
-                        sub.onComplete()
-                        return@create
                     }
-                }
+                    LL.d("products loaded from db")
+                })
             })
 
-    override fun saveListOfProduct(listOfProduct: List<Product>) = Completable.create { sub ->
-        listOfProduct.forEach {
+    override fun saveProducts(source: ProductList) = Completable.fromAction({
+        source.value?.forEach {
             DB.INSTANCE.productDao().insertProduct(
                     ProductEntity.from(it)
             )
         }
-        sub.onComplete()
-        return@create
-    }.subscribeOn(Schedulers.io())
+        LL.w("products write to db")
+    }).subscribeOn(Schedulers.io())
 
     override fun clear() {
         //TODO Some resource information should be freed here.
