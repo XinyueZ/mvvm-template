@@ -17,11 +17,7 @@ class LicenseDetailFragment : AppBaseDialogFragment<LicenseDetailViewModel>() {
 
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentLicenseDetailBinding.bind(view)
-                .apply {
-                    vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity)
-                    }
-                }
+                .apply { vm = obtainViewModel() }
         return binding
     }
 

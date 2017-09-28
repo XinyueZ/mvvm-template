@@ -17,13 +17,9 @@ class AboutFragment : AppBaseFragment<AboutViewModel>() {
 
     private lateinit var binding: FragmentAboutBinding
 
-
-
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentAboutBinding.bind(view)
-                .apply {
-                    vm = obtainViewModel()
-                }
+                .apply { vm = obtainViewModel() }
         return binding
     }
 

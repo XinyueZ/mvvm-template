@@ -8,10 +8,10 @@
             type="com.template.mvvm.models.LicenseDetailViewModel"/>
     </data>
 
-    <LinearLayout
+    <TextView
+        android:padding="@dimen/general_padding"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    </LinearLayout>
+        android:text="@{vm.detail}"
+        android:orientation="vertical" />
 </layout>

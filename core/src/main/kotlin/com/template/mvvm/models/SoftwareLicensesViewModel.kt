@@ -1,5 +1,6 @@
 package com.template.mvvm.models
 
+import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -25,6 +26,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
 
+    val licenseDetailViewModel = MutableLiveData<LicenseDetailViewModel>()
 
     // True when the data have been loaded.
     val pageStill = MutableLiveData<Boolean>()
@@ -56,14 +58,24 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
                     it.forEach {
                         addToAutoDispose(it.viewModelTapped.subscribe {
-                            LL.d(it.license.name)
-
-                            val licenseDetailViewModel = when (lifecycleOwner) {
-                                is Fragment -> lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                                is FragmentActivity -> lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                                else -> LicenseDetailViewModel()
+                            it?.let {
+                                // Tell UI to open a UI for license detail.
+                                licenseDetailViewModel.value = when (lifecycleOwner) {
+                                    is Fragment -> {
+                                        val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                                        addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it)
+                                                .subscribe({ vm.detail.set(it) }, {}))
+                                        vm
+                                    }
+                                    is FragmentActivity -> {
+                                        val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                                        addToAutoDispose(repository.getLicense(lifecycleOwner.application, it)
+                                                .subscribe({ vm.detail.set(it) }, {}))
+                                        vm
+                                    }
+                                    else -> LicenseDetailViewModel()
+                                }
                             }
-                            licenseDetailViewModel.license = it.license
                         })
                     }
                 }

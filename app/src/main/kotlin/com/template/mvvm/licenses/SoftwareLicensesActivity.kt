@@ -41,6 +41,9 @@ class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
                     false -> showSystemUi()
                 }
             })
+            licenseDetailViewModel.observe(this@SoftwareLicensesActivity, Observer {
+                LicenseDetailFragment.newInstance(this@SoftwareLicensesActivity).show(supportFragmentManager, null)
+            })
         }
     }
 }
