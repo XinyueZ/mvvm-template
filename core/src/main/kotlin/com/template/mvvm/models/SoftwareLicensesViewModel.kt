@@ -56,33 +56,37 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                     pageStill.value = true
                     dataLoaded.set(true)
 
-                    it.forEach {
-                        addToAutoDispose(it.viewModelTapped.subscribe({
-                            it?.let {
-                                // Tell UI to open a UI for license detail.
-                                licenseDetailViewModel.value = when (lifecycleOwner) {
-                                    is Fragment -> {
-                                        val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                                        addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it)
-                                                .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
-                                        vm
-                                    }
-                                    is FragmentActivity -> {
-                                        val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                                        addToAutoDispose(repository.getLicense(lifecycleOwner.application, it)
-                                                .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
-                                        vm
-                                    }
-                                    else -> LicenseDetailViewModel()
-                                }
-                            }
-                        }, { LL.d(it.message ?: "") }))
-                    }
+                    bindTapHandlers(it, lifecycleOwner)
                 }
             }
         }
         loadAllLicenses(lifecycleOwner)
         return true
+    }
+
+    private fun bindTapHandlers(it: List<SoftwareLicenseItemViewModel>, lifecycleOwner: LifecycleOwner) {
+        it.forEach {
+            addToAutoDispose(it.viewModelTapped.subscribe({
+                it?.let {
+                    // Tell UI to open a UI for license detail.
+                    licenseDetailViewModel.value = when (lifecycleOwner) {
+                        is Fragment -> {
+                            val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                            addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it)
+                                    .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
+                            vm
+                        }
+                        is FragmentActivity -> {
+                            val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                            addToAutoDispose(repository.getLicense(lifecycleOwner.application, it)
+                                    .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
+                            vm
+                        }
+                        else -> LicenseDetailViewModel()
+                    }
+                }
+            }, { LL.d(it.message ?: "") }))
+        }
     }
 
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner) {
