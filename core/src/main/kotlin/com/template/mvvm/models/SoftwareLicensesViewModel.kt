@@ -57,26 +57,26 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                     dataLoaded.set(true)
 
                     it.forEach {
-                        addToAutoDispose(it.viewModelTapped.subscribe {
+                        addToAutoDispose(it.viewModelTapped.subscribe({
                             it?.let {
                                 // Tell UI to open a UI for license detail.
                                 licenseDetailViewModel.value = when (lifecycleOwner) {
                                     is Fragment -> {
                                         val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
                                         addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it)
-                                                .subscribe({ vm.detail.set(it) }, {}))
+                                                .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
                                         vm
                                     }
                                     is FragmentActivity -> {
                                         val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
                                         addToAutoDispose(repository.getLicense(lifecycleOwner.application, it)
-                                                .subscribe({ vm.detail.set(it) }, {}))
+                                                .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
                                         vm
                                     }
                                     else -> LicenseDetailViewModel()
                                 }
                             }
-                        })
+                        }, { LL.d(it.message ?: "") }))
                     }
                 }
             }
@@ -93,13 +93,15 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                                 LL.i("libraryListSource subscribe")
                                 libraryListSource?.value = it
                             },
-                            { canNotLoadLicenses(it, lifecycleOwner) })
+                            {
+                                canNotLoadLicenses(it, lifecycleOwner)
+                                LL.d(it.message ?: "")
+                            })
             )
         }
     }
 
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
-        LL.e(it.toString())
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner)
             pageStill.value = false
@@ -109,6 +111,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
     override fun onCleared() {
         super.onCleared()
+        repository.clear()
         libraryListSource = null
     }
 }

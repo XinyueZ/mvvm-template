@@ -11,7 +11,6 @@ import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.utils.read
 import io.reactivex.Flowable
-import io.reactivex.Single
 import java.io.InputStreamReader
 
 class LicensesLocal(private val app: Application) : LicensesDataSource {
@@ -75,11 +74,13 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         LL.w("licenses write to db")
     }
 
-    override fun getLicense(app: Application, library: Library): Single<String> {
-        with(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name)) {
-            return app.assets.read(this)
-        }
-    }
+    override fun getLicense(app: Application, library: Library) = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
+            .flatMap {
+                io.reactivex.Single.just(
+                                it
+                                .replace(YEAR, library.copyright ?: "")
+                                .replace(COPYRIGHT_HOLDERS, library.owner ?: ""))
+            }
 
     override fun clear() {
         //TODO Some resource information should be freed here.

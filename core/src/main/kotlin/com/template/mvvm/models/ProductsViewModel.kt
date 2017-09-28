@@ -64,13 +64,15 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
                                         productListSource?.value = it
                                         LL.i("productListSource subscribe")
                                     },
-                                    { canNotLoadProducts(it, lifecycleOwner) })
+                                    {
+                                        canNotLoadProducts(it, lifecycleOwner)
+                                        LL.d(it.message ?: "")
+                                    })
             )
         }
     }
 
     private fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
-        LL.e(it.toString())
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner)
             pageStill.value = false
@@ -80,6 +82,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
 
     override fun onCleared() {
         super.onCleared()
+        repository.clear()
         productListSource = null
     }
 }
