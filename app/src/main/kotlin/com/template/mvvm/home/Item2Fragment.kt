@@ -2,15 +2,12 @@ package com.template.mvvm.home
 
 import android.content.Context
 import android.databinding.ViewDataBinding
-import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentItem2Binding
 import com.template.mvvm.ext.obtainViewModel
-import com.template.mvvm.ext.setupSnackbar
-import com.template.mvvm.ext.setupToast
 import com.template.mvvm.models.AppNavigationViewModel
 import com.template.mvvm.models.HomeViewModel
 
@@ -21,14 +18,6 @@ class Item2Fragment : AppBaseFragment<HomeViewModel>() {
     }
 
     private lateinit var binding: FragmentItem2Binding
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.vm?.let {
-            view.setupSnackbar(this, it.snackbarMessage)
-            view.context.setupToast(this, it.snackbarMessage)
-        }
-    }
 
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentItem2Binding.bind(view)
