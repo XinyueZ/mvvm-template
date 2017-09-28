@@ -9,6 +9,8 @@ import com.template.mvvm.domain.products.Product
 @Entity(tableName = "products")
 class ProductEntity(
         @PrimaryKey
+        @ColumnInfo(name = "product_id")
+        val pid: String,
         @ColumnInfo(name = "title")
         val title: String,
         @ColumnInfo(name = "description")
@@ -19,7 +21,7 @@ class ProductEntity(
         val brandLogo: Uri
 ) {
     companion object {
-        fun from(product: Product) = ProductEntity(product.title, product.description, product.thumbnail, product.brandLogo)
+        fun from(product: Product) = ProductEntity(product.pid, product.title, product.description, product.thumbnail, product.brandLogo)
     }
 
     fun toProduct() = Product.from(this)

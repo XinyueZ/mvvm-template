@@ -14,6 +14,7 @@ class ProductsRemote : ProductsDataSource {
                 val v: List<Product> = (mutableListOf<Product>()).apply {
                     it.products.forEach {
                         add(Product(
+                                it.pid,
                                 it.name,
                                 String.format("%s//%s//%s", it.brand.name, it.genders.joinToString(), it.ageGroups.joinToString()),
                                 it.media.images.first().largeHdUrl,
