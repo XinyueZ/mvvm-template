@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
@@ -20,8 +21,10 @@ class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
         }
     }
 
-    override fun getLayout() = R.layout.activity_software_licenses
-    override fun createViewModel() = SoftwareLicensesViewModel::class.java
+    override @LayoutRes
+    fun getLayout() = R.layout.activity_software_licenses
+
+    override fun requireViewModel() = SoftwareLicensesViewModel::class.java
     override fun createViewModelView() = SoftwareLicensesFragment.newInstance(application)
 
     lateinit var binding: ActivitySoftwareLicensesBinding
@@ -31,7 +34,7 @@ class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (obtainViewModel() as SoftwareLicensesViewModel).apply {
+        obtainViewModel().apply {
             pageStill.observe(this@SoftwareLicensesActivity, Observer {
                 when (it) {
                     true -> hideSystemUi(1500)

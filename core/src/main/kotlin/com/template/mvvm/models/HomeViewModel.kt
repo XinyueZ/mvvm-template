@@ -15,7 +15,7 @@ import com.template.mvvm.ext.obtainViewModel
 class HomeViewModel : AbstractViewModel() {
     val title = ObservableInt(R.string.home_title)
     val description = ObservableField<String>()
-    lateinit var drawerSubViewModel: AppNavigationViewModel
+    private lateinit var drawerSubViewModel: AppNavigationViewModel
     val snackbarMessage = MutableLiveData<String>()
 
     fun showClickFeedback(str: CharSequence) {
@@ -30,12 +30,8 @@ class HomeViewModel : AbstractViewModel() {
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         when (lifecycleOwner) {
-            is Fragment -> {
-                drawerSubViewModel = obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
-            }
-            is FragmentActivity -> {
-                drawerSubViewModel = obtainViewModel(lifecycleOwner, AppNavigationViewModel::class.java)
-            }
+            is Fragment -> drawerSubViewModel = lifecycleOwner.obtainViewModel(AppNavigationViewModel::class.java)
+            is FragmentActivity -> drawerSubViewModel = lifecycleOwner.obtainViewModel(AppNavigationViewModel::class.java)
         }
         return true
     }

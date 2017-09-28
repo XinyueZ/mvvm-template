@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
     <data class="LicenseItemBinding">
@@ -9,11 +10,13 @@
             type="com.template.mvvm.models.SoftwareLicenseItemViewModel"/>
     </data>
 
+
     <android.support.v7.widget.CardView
         style="@style/RecyclerViewCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:transitionGroup="false">
+        app:command="@{vm::onCommand}"
+        app:vm="@{vm}">
 
         <LinearLayout
             android:layout_width="match_parent"

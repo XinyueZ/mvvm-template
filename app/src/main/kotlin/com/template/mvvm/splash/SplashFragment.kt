@@ -19,10 +19,11 @@ class SplashFragment : AppBaseFragment<SplashViewModel>() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSplashBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(this@SplashFragment) }
+                    vm = obtainViewModel().apply { registerLifecycleOwner(activity) }
                 }
         return binding
     }
 
     override fun getLayout() = R.layout.fragment_splash
+    override fun requireViewModel() = SplashViewModel::class.java
 }

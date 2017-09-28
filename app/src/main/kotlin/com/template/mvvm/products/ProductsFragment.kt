@@ -1,6 +1,5 @@
 package com.template.mvvm.products
 
-import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
@@ -22,7 +21,7 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity as LifecycleOwner)
+                        registerLifecycleOwner(activity)
                         view.setupErrorSnackbar(this@ProductsFragment, this.onError)
                     }
                 }
@@ -30,4 +29,5 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
     }
 
     override fun getLayout() = R.layout.fragment_products
+    override fun requireViewModel() = ProductsViewModel::class.java
 }

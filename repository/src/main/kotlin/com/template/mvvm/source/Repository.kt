@@ -1,5 +1,6 @@
 package com.template.mvvm.source
 
+import android.app.Application
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.licenses.Library
@@ -10,6 +11,8 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
     override fun getAllLibraries() = licensesRepository.getAllLibraries()
 
     override fun saveLibraries(source: List<Library>) = licensesRepository.saveLibraries(source)
+
+    override fun getLicense(app: Application, library: Library) = licensesRepository.getLicense(app, library)
 
     // Products, brands, logo....
     override fun getAllProducts() = productsRepository.getAllProducts()

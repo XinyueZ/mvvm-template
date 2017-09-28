@@ -1,6 +1,7 @@
 package com.template.mvvm.binding
 
 import android.app.Activity
+import android.arch.lifecycle.ViewModel
 import android.databinding.BindingAdapter
 import android.net.Uri
 import android.support.design.widget.BottomNavigationView
@@ -51,6 +52,13 @@ fun commandm(view: BottomNavigationView, l: OnCommandListener?) {
 
             true
         }
+    }
+}
+
+@BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
+fun commandm(view: View, l: OnItemCommandListener, vm: ViewModel) {
+    view.setOnClickListener {
+        l.onCommand(vm)
     }
 }
 

@@ -31,6 +31,10 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(SoftwareLicensesViewModel::class.java) ->
                         SoftwareLicensesViewModel(Injection.getInstance(application).provideRepository(application),
                                 Injection.getInstance(application).itemOf(SoftwareLicenseItemViewModel::class.java) as ItemBinding<SoftwareLicenseItemViewModel>)
+                    isAssignableFrom(LicenseDetailViewModel::class.java) -> LicenseDetailViewModel()
+                    isAssignableFrom(SoftwareLicenseItemViewModel::class.java) -> SoftwareLicenseItemViewModel()
+                    isAssignableFrom(ProductItemViewModel::class.java) -> ProductItemViewModel()
+                    isAssignableFrom(LicenseDetailViewModel::class.java) -> LicenseDetailViewModel()
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

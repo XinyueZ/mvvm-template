@@ -1,6 +1,5 @@
 package com.template.mvvm.licenses
 
-import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
@@ -22,7 +21,7 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
         binding = FragmentSoftwareLicensesBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity as LifecycleOwner)
+                        registerLifecycleOwner(activity)
                         view.setupErrorSnackbar(this@SoftwareLicensesFragment, this.onError)
                     }
                 }
@@ -30,4 +29,5 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
     }
 
     override fun getLayout() = R.layout.fragment_software_licenses
+    override fun requireViewModel() = SoftwareLicensesViewModel::class.java
 }

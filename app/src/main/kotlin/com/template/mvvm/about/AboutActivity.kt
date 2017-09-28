@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
@@ -20,8 +21,8 @@ class AboutActivity : AppBaseActivity<AboutViewModel>() {
         }
     }
 
-    override fun getLayout() = R.layout.activity_about
-    override fun createViewModel() = AboutViewModel::class.java
+    override @LayoutRes fun getLayout() = R.layout.activity_about
+    override fun requireViewModel() = AboutViewModel::class.java
     override fun createViewModelView() = AboutFragment.newInstance(application)
     lateinit var binding: ActivityAboutBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {

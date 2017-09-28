@@ -6,6 +6,7 @@ import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.net.Uri
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
@@ -13,11 +14,11 @@ import com.template.mvvm.about.AboutActivity
 import com.template.mvvm.customtabs.CustomTabConfig
 import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
-import com.template.mvvm.ext.replaceFragmentInActivity
-import com.template.mvvm.ext.setup
+import com.template.mvvm.ext.*
 import com.template.mvvm.licenses.SoftwareLicensesActivity
-import com.template.mvvm.products.ProductsActivity
+import com.template.mvvm.models.AppNavigationViewModel
 import com.template.mvvm.models.HomeViewModel
+import com.template.mvvm.products.ProductsActivity
 
 class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
@@ -29,8 +30,10 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
         }
     }
 
-    override fun getLayout() = R.layout.activity_home
-    override fun createViewModel() = HomeViewModel::class.java
+    override @LayoutRes
+    fun getLayout() = R.layout.activity_home
+
+    override fun requireViewModel() = HomeViewModel::class.java
     override fun createViewModelView() = Item1Fragment.newInstance(application)
     lateinit var binding: ActivityHomeBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {
@@ -44,9 +47,14 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
     }
 
     private fun setUpHomeNavi() {
-        with((obtainViewModel() as HomeViewModel)) {
+        obtainViewModel().apply {
+            binding.contentFrame.apply {
+                setupSnackbar(this@HomeActivity, snackbarMessage)
+                context.setupToast(this@HomeActivity, snackbarMessage)
+            }
+
             registerLifecycleOwner(this@HomeActivity)
-            with((obtainViewModel() as HomeViewModel).drawerSubViewModel) {
+            this@HomeActivity.obtainViewModel(AppNavigationViewModel::class.java).apply {
                 binding.drawer.setup(this@HomeActivity, drawerToggle)
                 openProduct.observe(this@HomeActivity, Observer {
                     ProductsActivity.showInstance(this@HomeActivity)

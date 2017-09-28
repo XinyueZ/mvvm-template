@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
@@ -20,8 +21,10 @@ class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
         }
     }
 
-    override fun getLayout() = R.layout.activity_products
-    override fun createViewModel() = ProductsViewModel::class.java
+    override @LayoutRes
+    fun getLayout() = R.layout.activity_products
+
+    override fun requireViewModel() = ProductsViewModel::class.java
     override fun createViewModelView() = ProductsFragment.newInstance(application)
 
     lateinit var binding: ActivityProductsBinding
@@ -31,7 +34,7 @@ class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (obtainViewModel() as ProductsViewModel).apply {
+        obtainViewModel().apply {
             pageStill.observe(this@ProductsActivity, Observer {
                 when (it) {
                     true -> hideSystemUi(1500)

@@ -28,4 +28,5 @@ class AboutFragment : AppBaseFragment<AboutViewModel>() {
     }
 
     override fun getLayout() = R.layout.fragment_about
+    override fun requireViewModel() = AboutViewModel::class.java
 }
