@@ -14,7 +14,7 @@ import com.template.mvvm.GlideApp
 import com.template.mvvm.R
 
 @BindingAdapter("remoteImageUri")
-fun a(view: View, uri: Uri?) {
+fun remoteImageUriBinding(view: View, uri: Uri?) {
     uri?.let {
         if (view is ImageView)
             GlideApp.with(view).load(uri).into(view)
@@ -22,12 +22,12 @@ fun a(view: View, uri: Uri?) {
 }
 
 @BindingAdapter("goBack")
-fun b(view: View, goBack: Boolean) {
+fun goBackBinding(view: View, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun c(view: View, loaded: Boolean) {
+fun dataLoadedBinding(view: View, loaded: Boolean) {
     view.visibility = if (loaded) {
         View.GONE
     } else {
@@ -36,7 +36,7 @@ fun c(view: View, loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun d(view: NavigationView, l: OnCommandListener) {
+fun commandBinding(view: NavigationView, l: OnCommandListener) {
     view.setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
@@ -46,12 +46,12 @@ fun d(view: NavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun e(toolbar: Toolbar, l: OnCommandListener) {
-    toolbar.setNavigationOnClickListener { l.onCommand(R.id.action_hamburg) }
+fun commandBinding(toolbar: Toolbar, l: OnCommandListener) {
+    toolbar.setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun f(view: BottomNavigationView, l: OnCommandListener) {
+fun commandBinding(view: BottomNavigationView, l: OnCommandListener) {
     view.setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
 
@@ -60,7 +60,7 @@ fun f(view: BottomNavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun g(view: View, l: OnItemCommandListener, vm: ViewModel) {
+fun commandBinding(view: View, l: OnItemCommandListener, vm: ViewModel) {
     view.setOnClickListener {
         l.onCommand(vm)
     }

@@ -32,7 +32,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
 
     fun onCommand(id: Int) {
         when (id) {
-            R.id.action_hamburg -> goBack.set(true)
+            R.id.action_app_bar_indicator -> goBack.set(true)
         }
     }
 

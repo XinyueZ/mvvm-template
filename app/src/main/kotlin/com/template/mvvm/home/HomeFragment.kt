@@ -45,10 +45,10 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
                             replaceFragmentToFragment(AllBrandsFragment.newInstance(activity), R.id.childContentFrame)
                         })
                         openItem2.observe(activity, Observer {
-                            replaceFragmentToFragment(Item2Fragment.newInstance(activity), R.id.childContentFrame)
+                            replaceFragmentToFragment(MenFragment.newInstance(activity), R.id.childContentFrame)
                         })
                         openItem3.observe(activity, Observer {
-                            replaceFragmentToFragment(Item3Fragment.newInstance(activity), R.id.childContentFrame)
+                            replaceFragmentToFragment(WomenFragment.newInstance(activity), R.id.childContentFrame)
                         })
                         registerLifecycleOwner(activity)
                     }

@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.AllBrandsViewModel"/>
+            type="com.template.mvvm.models.MenViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

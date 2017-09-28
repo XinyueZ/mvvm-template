@@ -19,7 +19,7 @@ class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
 
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentAllBrandsBinding.bind(view)
-                .apply { vm = obtainViewModel().apply { description.set(getString(R.string.navi_menu_item_1)) } }
+                .apply { vm = obtainViewModel().apply { description.set(getString(R.string.action_all_brands)) } }
         return binding
     }
 

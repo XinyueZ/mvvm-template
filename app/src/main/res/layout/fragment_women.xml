@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.AllBrandsViewModel"/>
+            type="com.template.mvvm.models.WomenViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

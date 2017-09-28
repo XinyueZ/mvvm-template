@@ -21,7 +21,7 @@ class HomeViewModel : AbstractViewModel() {
 
     fun onCommand(id: Int) {
         when (id) {
-            R.id.action_hamburg -> drawerToggle.value = true
+            R.id.action_app_bar_indicator -> drawerToggle.value = true
             R.id.action_products -> {
                 drawerToggle.value = false
                 openProduct.value = true
@@ -39,9 +39,9 @@ class HomeViewModel : AbstractViewModel() {
                 drawerToggle.value = false
                 openAbout.value = true
             }
-            R.id.action_1 -> openItem1.value = true
-            R.id.action_2 -> openItem2.value = true
-            R.id.action_3 -> openItem3.value = true
+            R.id.action_all_brands -> openItem1.value = true
+            R.id.action_men -> openItem2.value = true
+            R.id.action_women -> openItem3.value = true
         }
     }
 

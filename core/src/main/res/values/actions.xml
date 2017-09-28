@@ -2,10 +2,10 @@
 <resources>
     <item name="action_products" type="id"/>
     <item name="action_about" type="id"/>
-    <item name="action_1" type="id"/>
-    <item name="action_2" type="id"/>
-    <item name="action_3" type="id"/>
-    <item name="action_hamburg" type="id"/>
+    <item name="action_all_brands" type="id"/>
+    <item name="action_men" type="id"/>
+    <item name="action_women" type="id"/>
+    <item name="action_app_bar_indicator" type="id"/>
     <item name="action_internet" type="id"/>
     <item name="action_software_licenses" type="id"/>
 </resources>

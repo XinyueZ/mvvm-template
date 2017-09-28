@@ -23,6 +23,8 @@ class ViewModelFactory private constructor(
                 when {
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
                     isAssignableFrom(AllBrandsViewModel::class.java) -> AllBrandsViewModel()
+                    isAssignableFrom(MenViewModel::class.java) -> MenViewModel()
+                    isAssignableFrom(WomenViewModel::class.java) -> WomenViewModel()
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
                     isAssignableFrom(ProductsViewModel::class.java) ->
                         ProductsViewModel(Injection.getInstance(application).provideRepository(application),

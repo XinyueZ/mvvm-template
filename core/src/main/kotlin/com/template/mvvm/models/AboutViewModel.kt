@@ -25,7 +25,7 @@ class AboutViewModel : AbstractViewModel() {
 
     fun onCommand(id: Int) {
         when (id) {
-            R.id.action_hamburg -> goBack.set(true)
+            R.id.action_app_bar_indicator -> goBack.set(true)
         }
     }
 }

@@ -2,9 +2,9 @@
     <string name="app_name">MVVM</string>
     <string name="click">Click</string>
 
-    <string name="navi_menu_item_1">item 1</string>
-    <string name="navi_menu_item_2">item 2</string>
-    <string name="navi_menu_item_3">item 3</string>
+    <string name="action_all_brands">All brands</string>
+    <string name="action_men">Men</string>
+    <string name="action_women">Women</string>
     <string name="navi_group_other">Other</string>
 
     <string name="home_title">@string/app_name</string>
