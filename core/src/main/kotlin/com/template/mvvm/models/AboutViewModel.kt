@@ -23,7 +23,9 @@ class AboutViewModel : AbstractViewModel() {
     //Return this view to home
     val goBack = ObservableBoolean(false)
 
-    fun toggleBack() {
-        goBack.set(true)
+    fun onCommand(id: Int) {
+        when (id) {
+            R.id.action_hamburg -> goBack.set(true)
+        }
     }
 }

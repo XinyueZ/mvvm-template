@@ -1,39 +1,48 @@
 package com.template.mvvm.models
 
-import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
-import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.text.TextUtils
 import com.template.mvvm.Injection
 import com.template.mvvm.R
 import com.template.mvvm.ViewModelFactory
-import com.template.mvvm.ext.obtainViewModel
 
 class HomeViewModel : AbstractViewModel() {
     val title = ObservableInt(R.string.home_title)
-    val description = ObservableField<String>()
-    private lateinit var drawerSubViewModel: AppNavigationViewModel
-    val snackbarMessage = MutableLiveData<String>()
 
-    fun showClickFeedback(str: CharSequence) {
-        when (!TextUtils.isEmpty(str)) {
-            true -> snackbarMessage.value = str.toString()
+    val openProduct = MutableLiveData<Boolean>()
+    val openInternet = MutableLiveData<Boolean>()
+    val openLicenses = MutableLiveData<Boolean>()
+    val openAbout = MutableLiveData<Boolean>()
+    val openItem1 = MutableLiveData<Boolean>()
+    val openItem2 = MutableLiveData<Boolean>()
+    val openItem3 = MutableLiveData<Boolean>()
+
+    val drawerToggle = MutableLiveData<Boolean>()
+
+    fun onCommand(id: Int) {
+        when (id) {
+            R.id.action_hamburg -> drawerToggle.value = true
+            R.id.action_products -> {
+                drawerToggle.value = false
+                openProduct.value = true
+            }
+            R.id.action_internet -> {
+                drawerToggle.value = false
+                openInternet.value = true
+            }
+            R.id.action_software_licenses -> {
+
+                drawerToggle.value = false
+                openLicenses.value = true
+            }
+            R.id.action_about -> {
+                drawerToggle.value = false
+                openAbout.value = true
+            }
+            R.id.action_1 -> openItem1.value = true
+            R.id.action_2 -> openItem2.value = true
+            R.id.action_3 -> openItem3.value = true
         }
-    }
-
-    fun onIndicator() {
-        drawerSubViewModel.drawerToggle.value = true
-    }
-
-    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
-        when (lifecycleOwner) {
-            is Fragment -> drawerSubViewModel = lifecycleOwner.obtainViewModel(AppNavigationViewModel::class.java)
-            is FragmentActivity -> drawerSubViewModel = lifecycleOwner.obtainViewModel(AppNavigationViewModel::class.java)
-        }
-        return true
     }
 
     override fun onCleared() {

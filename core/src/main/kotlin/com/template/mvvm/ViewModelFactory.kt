@@ -22,8 +22,8 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
+                    isAssignableFrom(AllBrandsViewModel::class.java) -> AllBrandsViewModel()
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
-                    isAssignableFrom(AppNavigationViewModel::class.java) -> AppNavigationViewModel()
                     isAssignableFrom(ProductsViewModel::class.java) ->
                         ProductsViewModel(Injection.getInstance(application).provideRepository(application),
                                 Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>)

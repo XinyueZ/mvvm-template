@@ -1,7 +1,6 @@
 package com.template.mvvm.home
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.net.Uri
@@ -10,15 +9,14 @@ import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
-import com.template.mvvm.about.AboutActivity
-import com.template.mvvm.customtabs.CustomTabConfig
 import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
-import com.template.mvvm.ext.*
-import com.template.mvvm.licenses.SoftwareLicensesActivity
-import com.template.mvvm.models.AppNavigationViewModel
+import com.template.mvvm.ext.obtainViewModel
+import com.template.mvvm.ext.setup
+import com.template.mvvm.ext.setupSnackbar
+import com.template.mvvm.ext.setupToast
+import com.template.mvvm.models.AllBrandsViewModel
 import com.template.mvvm.models.HomeViewModel
-import com.template.mvvm.products.ProductsActivity
 
 class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
@@ -34,7 +32,7 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
     fun getLayout() = R.layout.activity_home
 
     override fun requireViewModel() = HomeViewModel::class.java
-    override fun createViewModelView() = Item1Fragment.newInstance(application)
+    override fun createViewModelView() = HomeFragment.newInstance(application)
     lateinit var binding: ActivityHomeBinding
     override fun setViewDataBinding(binding: ViewDataBinding) {
         this.binding = binding as ActivityHomeBinding
@@ -43,41 +41,12 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideSystemUi(0)
-        setUpHomeNavi()
-    }
+        binding.vm = obtainViewModel().apply { binding.drawer.setup(this@HomeActivity, drawerToggle) }
 
-    private fun setUpHomeNavi() {
-        obtainViewModel().apply {
-            binding.contentFrame.apply {
-                setupSnackbar(this@HomeActivity, snackbarMessage)
-                context.setupToast(this@HomeActivity, snackbarMessage)
-            }
-
-            registerLifecycleOwner(this@HomeActivity)
-            this@HomeActivity.obtainViewModel(AppNavigationViewModel::class.java).apply {
-                binding.drawer.setup(this@HomeActivity, drawerToggle)
-                openProduct.observe(this@HomeActivity, Observer {
-                    ProductsActivity.showInstance(this@HomeActivity)
-                })
-                openInternet.observe(this@HomeActivity, Observer {
-                    CustomTabUtils.openWeb(this@HomeActivity, Uri.parse(getString(R.string.internet_url)), CustomTabConfig.builder)
-                })
-                openLicenses.observe(this@HomeActivity, Observer {
-                    SoftwareLicensesActivity.showInstance(this@HomeActivity)
-                })
-                openAbout.observe(this@HomeActivity, Observer {
-                    AboutActivity.showInstance(this@HomeActivity)
-                })
-                openItem1.observe(this@HomeActivity, Observer {
-                    replaceFragmentInActivity(Item1Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
-                })
-                openItem2.observe(this@HomeActivity, Observer {
-                    replaceFragmentInActivity(Item2Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
-                })
-                openItem3.observe(this@HomeActivity, Observer {
-                    replaceFragmentInActivity(Item3Fragment.newInstance(this@HomeActivity), R.id.contentFrame)
-                })
-            }
+        // Demo: ViewModel of arch-component can be always shared in scope of activity or fragment.
+        obtainViewModel(AllBrandsViewModel::class.java).apply {
+            binding.contentFrame.setupSnackbar(this@HomeActivity, snackbarMessage)
+            binding.contentFrame.context.setupToast(this@HomeActivity, snackbarMessage)
         }
     }
 
@@ -91,3 +60,4 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
         CustomTabUtils.clean(this)
     }
 }
+

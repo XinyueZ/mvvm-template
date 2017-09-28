@@ -5,7 +5,7 @@
     <item name="action_1" type="id"/>
     <item name="action_2" type="id"/>
     <item name="action_3" type="id"/>
-    <item name="action_drawer" type="id"/>
+    <item name="action_hamburg" type="id"/>
     <item name="action_internet" type="id"/>
     <item name="action_software_licenses" type="id"/>
 </resources>

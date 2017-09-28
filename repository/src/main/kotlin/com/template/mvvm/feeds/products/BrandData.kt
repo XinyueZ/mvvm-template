@@ -8,5 +8,6 @@ class BrandData
 (
         @SerializedName("key") val key: String,
         @SerializedName("name") val name: String,
-        @SerializedName("logoUrl") val logo: Uri?
+        @SerializedName("logoLargeUrl") val logo: Uri?,
+        @SerializedName("shopUrl") val shop: Uri?
 )

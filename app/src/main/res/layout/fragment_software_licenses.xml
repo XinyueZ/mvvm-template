@@ -34,7 +34,7 @@
                 android:theme="@style/Toolbar"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:onIndicatorClick="@{ vm::toggleBack }"
+                app:command="@{ vm::onCommand }"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="@{vm.title}"/>
 
