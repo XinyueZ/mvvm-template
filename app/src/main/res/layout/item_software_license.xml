@@ -14,8 +14,6 @@
     <android.support.v7.widget.CardView
         style="@style/RecyclerViewCardView"
         android:layout_width="match_parent"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_height="wrap_content"
         app:command="@{vm::onCommand}"
         app:vm="@{vm}">

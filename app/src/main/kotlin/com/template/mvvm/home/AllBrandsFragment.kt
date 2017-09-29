@@ -7,6 +7,9 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentAllBrandsBinding
+import com.template.mvvm.ext.getDimensionPixel
+import com.template.mvvm.ext.getScreenSize
+import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.AllBrandsViewModel
 
 class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
@@ -19,7 +22,14 @@ class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
 
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentAllBrandsBinding.bind(view)
-                .apply { vm = obtainViewModel().apply { description.set(getString(R.string.action_all_brands)) } }
+                .apply {
+                    vm = obtainViewModel().apply {
+                        itemWidth = (getScreenSize().width - getDimensionPixel(R.dimen.general_padding) * 2) / 2
+                        itemHeight = itemWidth
+                        registerLifecycleOwner(activity)
+                        view.setupErrorSnackbar(activity, this.onError)
+                    }
+                }
         return binding
     }
 

@@ -15,7 +15,6 @@ import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setup
 import com.template.mvvm.ext.setupSnackbar
 import com.template.mvvm.ext.setupToast
-import com.template.mvvm.models.AllBrandsViewModel
 import com.template.mvvm.models.HomeViewModel
 import com.template.mvvm.models.MenViewModel
 import com.template.mvvm.models.WomenViewModel
@@ -46,10 +45,6 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
         binding.vm = obtainViewModel().apply { binding.drawer.setup(this@HomeActivity, drawerToggle) }
 
         // Demo: ViewModel of arch-component can be always shared in scope of activity or fragment.
-        obtainViewModel(AllBrandsViewModel::class.java).apply {
-            binding.contentFrame.setupSnackbar(this@HomeActivity, snackbarMessage)
-            binding.contentFrame.context.setupToast(this@HomeActivity, snackbarMessage)
-        }
         obtainViewModel(MenViewModel::class.java).apply {
             binding.contentFrame.setupSnackbar(this@HomeActivity, snackbarMessage)
             binding.contentFrame.context.setupToast(this@HomeActivity, snackbarMessage)

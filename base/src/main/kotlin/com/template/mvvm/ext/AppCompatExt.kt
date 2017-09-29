@@ -15,7 +15,10 @@
  */
 package com.template.mvvm.ext
 
+import android.app.Activity
+import android.support.annotation.DimenRes
 import android.support.annotation.IdRes
+import android.support.annotation.Size
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
@@ -23,6 +26,13 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+
+fun Fragment.getDimensionPixel(@DimenRes res: Int) = resources.getDimensionPixelSize(res)
+fun Activity.getDimensionPixel(@DimenRes res: Int) = resources.getDimensionPixelSize(res)
+fun Fragment.getDimension(@DimenRes res: Int) = resources.getDimension(res)
+fun Activity.getDimension(@DimenRes res: Int) = resources.getDimension(res)
+@Size fun Fragment.getScreenSize() = com.template.mvvm.utils.getScreenSize(context, 0)
+@Size fun Activity.getScreenSize() = com.template.mvvm.utils.getScreenSize(this, 0)
 
 fun FragmentActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
     supportFragmentManager.transact {

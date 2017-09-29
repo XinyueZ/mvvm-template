@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -31,9 +32,12 @@
                     android:background="?attr/colorPrimary"
                     android:minHeight="?attr/actionBarSize"
                     android:theme="@style/Toolbar"
-                    app:elevation="10dp"
-                    app:navigationIcon="@drawable/ic_menu"
                     app:command="@{ vm::onCommand }"
+                    app:elevation="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/ic_menu"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:title="@{safeUnbox(vm.title)}"/>
 
@@ -41,34 +45,47 @@
                 <FrameLayout
                     android:id="@id/contentFrame"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/bottom_navi_height"
+                    android:layout_marginTop="?attr/actionBarSize"
+                    app:layout_constraintBottom_toTopOf="@+id/bottomNavi"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
 
-            </LinearLayout>
-            <!--
-             Bottom navigation provides quick navigation between top-level views of an app. It is primarily designed for use on mobile.
-             Larger displays, like desktop, may achieve a similar effect by using side navigation.
-             For instance, the compact “rail” treatment displays navigational icons by default.
+                <!--
+          Bottom navigation provides quick navigation between top-level views of an app. It is primarily designed for use on mobile.
+          Larger displays, like desktop, may achieve a similar effect by using side navigation.
+          For instance, the compact “rail” treatment displays navigational icons by default.
 
 
-             If your top-level navigation has more than six destinations,
-             provide access to destinations not covered in bottom navigation
-             through alternative locations, such as a navigation drawer.
+          If your top-level navigation has more than six destinations,
+          provide access to destinations not covered in bottom navigation
+          through alternative locations, such as a navigation drawer.
 
 
-             When the view is in focus, display that view’s icon and text label
-             When there are only three actions, display both icons and text labels at all times
-             If there are four or five actions, display inactive views as icons only
+          When the view is in focus, display that view’s icon and text label
+          When there are only three actions, display both icons and text labels at all times
+          If there are four or five actions, display inactive views as icons only
 
-             !!!!!On Android, the Back button does not navigate between bottom navigation bar views.
-             -->
-            <android.support.design.widget.BottomNavigationView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_navi_height"
-                android:layout_gravity="start|bottom"
-                android:theme="@style/BottomNavigationViewTheme"
-                app:command="@{vm::onCommand}"
-                app:menu="@menu/menu_navi_bottom"/>
+          !!!!!On Android, the Back button does not navigate between bottom navigation bar views.
+          -->
+                <android.support.design.widget.BottomNavigationView
+                    android:id="@+id/bottomNavi"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottom_navi_height"
+                    android:layout_gravity="start|bottom"
+                    android:theme="@style/BottomNavigationViewTheme"
+                    app:command="@{vm::onCommand}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:menu="@menu/menu_navi_bottom"/>
+
+            </android.support.constraint.ConstraintLayout>
+
         </android.support.design.widget.CoordinatorLayout>
 
         <android.support.design.widget.NavigationView

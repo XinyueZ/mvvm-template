@@ -25,6 +25,10 @@ class ProductsRemote : ProductsDataSource {
                 Flowable.just(v)
             }
 
+    override fun getAllBrands(localOnly: Boolean): Flowable<List<Brand>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun clear() {
         //TODO Some resource information should be freed here.
     }

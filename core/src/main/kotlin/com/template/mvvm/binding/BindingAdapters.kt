@@ -14,14 +14,21 @@ import android.widget.ImageView
 import com.template.mvvm.GlideApp
 import com.template.mvvm.R
 
+@BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
+fun setViewSizeDummy(view: View, width: Int, height: Int) {
+    view.layoutParams.width = width
+    view.layoutParams.height = height
+}
+
+
 @BindingAdapter("stopLoading")
-fun stopLoading(view: SwipeRefreshLayout, stopLoading: Boolean) {
+fun stopLoadingDummy(view: SwipeRefreshLayout, stopLoading: Boolean) {
     view.isRefreshing = !stopLoading
 }
 
 
 @BindingAdapter("reload")
-fun swipeToReload(view: SwipeRefreshLayout, l: OnReloadListener) {
+fun swipeToReloadDummy(view: SwipeRefreshLayout, l: OnReloadListener) {
     view.setOnRefreshListener {
         l.onReload()
     }
