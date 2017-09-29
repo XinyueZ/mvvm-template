@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:contentDescription="@null"
-            android:scaleType="center"
+            android:scaleType="centerInside"
             app:remoteImageUri="@{vm.logo}"/>
     </android.support.v7.widget.CardView>
 </layout>
