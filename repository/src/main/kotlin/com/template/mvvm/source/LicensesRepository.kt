@@ -15,7 +15,9 @@ class LicensesRepository(app: Application,
                          private val cache: LicensesDataSource
 ) : LicensesDataSource {
     override fun getAllLibraries(localOnly: Boolean) = Flowable.create<List<Library>>({ emitter ->
-        emitter.onNext(local.getAllLibraries().blockingFirst())
+        emitter.onNext(local.getAllLibraries().blockingFirst().takeIf { it.isNotEmpty() }
+                ?: local.saveLibraries(remote.getAllLibraries().blockingFirst())
+        )
         if (localOnly) return@create
         emitter.onNext(local.saveLibraries(remote.getAllLibraries().blockingFirst()))
     }, BackpressureStrategy.BUFFER)

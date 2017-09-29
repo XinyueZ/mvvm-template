@@ -13,7 +13,9 @@ class ProductsRepository(private val remote: ProductsDataSource,
                          private val cache: ProductsDataSource
 ) : ProductsDataSource {
     override fun getAllProducts(localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
-        emitter.onNext(local.getAllProducts().blockingFirst())
+        emitter.onNext(local.getAllProducts().blockingFirst().takeIf { it.isNotEmpty() }
+                ?: local.saveProducts(remote.getAllProducts().blockingFirst())
+        )
         if (localOnly) return@create
         emitter.onNext(local.saveProducts(remote.getAllProducts().blockingFirst()))
     }, BackpressureStrategy.BUFFER)
