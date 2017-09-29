@@ -1,6 +1,7 @@
 package com.template.mvvm.domain.products
 
 import android.net.Uri
+import com.template.mvvm.feeds.products.ProductData
 import com.template.mvvm.source.local.entities.products.ProductEntity
 
 data class Product(
@@ -11,5 +12,12 @@ data class Product(
         val brand: Brand = Brand.EMPTY) {
     companion object {
         fun from(productEntity: ProductEntity) = Product(productEntity.pid, productEntity.title, productEntity.description, productEntity.thumbnail, Brand.from(productEntity.brand))
+        fun from(productData: ProductData) = Product(
+                productData.pid,
+                productData.name,
+                String.format("%s//%s//%s", productData.brand.name, productData.genders.joinToString(), productData.ageGroups.joinToString()),
+                productData.media.images.first().largeHdUrl,
+                Brand.from(productData.brand)
+        )
     }
 }

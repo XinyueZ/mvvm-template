@@ -24,9 +24,12 @@ class ProductsRepository(private val remote: ProductsDataSource,
             .observeOn(AndroidSchedulers.mainThread())
 
     override fun getAllBrands(localOnly: Boolean) = Flowable.create<List<Brand>>({ emitter ->
-        emitter.onNext(local.getAllBrands().blockingFirst())
+        val remoteCallAndWrite = { local.saveBrands(remote.getAllBrands().blockingFirst()) }
+        emitter.onNext(local.getAllBrands().blockingFirst().takeIf { it.isNotEmpty() }
+                ?: remoteCallAndWrite()
+        )
         if (localOnly) return@create
-//        emitter.onNext(local.saveBrands(remote.getAllBrands().blockingFirst()))
+        emitter.onNext(remoteCallAndWrite())
     }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
