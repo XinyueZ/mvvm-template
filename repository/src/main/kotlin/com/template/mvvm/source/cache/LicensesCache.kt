@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 
 class LicensesCache : LicensesDataSource {
 
-    override fun getAllLibraries(): Flowable<List<Library>> {
+    override fun getAllLibraries(localOnly: Boolean): Flowable<List<Library>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

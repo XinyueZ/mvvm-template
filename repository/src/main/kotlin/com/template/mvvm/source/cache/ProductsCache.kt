@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 
 class ProductsCache : ProductsDataSource {
 
-    override fun getAllProducts(): Flowable<List<Product>> {
+    override fun getAllProducts(localOnly: Boolean): Flowable<List<Product>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

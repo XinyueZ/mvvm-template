@@ -7,14 +7,28 @@ import android.net.Uri
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
 import com.template.mvvm.GlideApp
 import com.template.mvvm.R
 
+@BindingAdapter("stopLoading")
+fun stopLoading(view: SwipeRefreshLayout, stopLoading: Boolean) {
+    view.isRefreshing = !stopLoading
+}
+
+
+@BindingAdapter("reload")
+fun swipeToReload(view: SwipeRefreshLayout, l: OnReloadListener) {
+    view.setOnRefreshListener {
+        l.onReload()
+    }
+}
+
 @BindingAdapter("remoteImageUri")
-fun remoteImageUriBinding(view: View, uri: Uri?) {
+fun remoteImageUriDummy(view: View, uri: Uri?) {
     uri?.let {
         if (view is ImageView)
             GlideApp.with(view).load(uri).into(view)
@@ -22,12 +36,12 @@ fun remoteImageUriBinding(view: View, uri: Uri?) {
 }
 
 @BindingAdapter("goBack")
-fun goBackBinding(view: View, goBack: Boolean) {
+fun goBackDummy(view: View, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun dataLoadedBinding(view: View, loaded: Boolean) {
+fun dataLoadedDummy(view: View, loaded: Boolean) {
     view.visibility = if (loaded) {
         View.GONE
     } else {
@@ -36,7 +50,7 @@ fun dataLoadedBinding(view: View, loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun commandBinding(view: NavigationView, l: OnCommandListener) {
+fun commandDummy(view: NavigationView, l: OnCommandListener) {
     view.setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
@@ -46,12 +60,12 @@ fun commandBinding(view: NavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun commandBinding(toolbar: Toolbar, l: OnCommandListener) {
+fun commandDummy(toolbar: Toolbar, l: OnCommandListener) {
     toolbar.setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun commandBinding(view: BottomNavigationView, l: OnCommandListener) {
+fun commandDummy(view: BottomNavigationView, l: OnCommandListener) {
     view.setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
 
@@ -60,7 +74,7 @@ fun commandBinding(view: BottomNavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun commandBinding(view: View, l: OnItemCommandListener, vm: ViewModel) {
+fun commandDummy(view: View, l: OnItemCommandListener, vm: ViewModel) {
     view.setOnClickListener {
         l.onCommand(vm)
     }

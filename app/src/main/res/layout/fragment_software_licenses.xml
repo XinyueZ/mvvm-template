@@ -5,7 +5,8 @@
 
     <data>
 
-        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers"/>
+
         <variable
             name="vm"
             type="com.template.mvvm.models.SoftwareLicensesViewModel"/>
@@ -32,23 +33,29 @@
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="@style/Toolbar"
+                app:command="@{ vm::onCommand }"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:command="@{ vm::onCommand }"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="@{vm.title}"/>
 
         </android.support.design.widget.AppBarLayout>
 
-
-        <android.support.v7.widget.RecyclerView
+        <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:items="@{vm.libraryItemVmList}"
-            app:layoutManager="@{LayoutManagers.linear()}"
-            app:itemBinding="@{vm.itemBinding}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
+            app:stopLoading="@{vm.dataLoaded}"
+            app:reload="@{vm::onReload}">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:itemBinding="@{vm.itemBinding}"
+                app:items="@{vm.libraryItemVmList}"
+                app:layoutManager="@{LayoutManagers.linear()}"
+                />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <include
             layout="@layout/layout_collection_progress_bar"

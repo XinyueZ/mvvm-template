@@ -9,7 +9,7 @@ import io.reactivex.Flowable
 
 class ProductsLocal : ProductsDataSource {
 
-    override fun getAllProducts() = DB.INSTANCE.productDao()
+    override fun getAllProducts(localOnly: Boolean) = DB.INSTANCE.productDao()
             .getProductList()
             .flatMap({
                 val v: List<Product> = (mutableListOf<Product>()).apply {

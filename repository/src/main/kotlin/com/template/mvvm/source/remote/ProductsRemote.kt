@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 
 class ProductsRemote : ProductsDataSource {
 
-    override fun getAllProducts() = ProductsApi.service
+    override fun getAllProducts(localOnly: Boolean) = ProductsApi.service
             .getArticles()
             .flatMap {
                 val v: List<Product> = (mutableListOf<Product>()).apply {

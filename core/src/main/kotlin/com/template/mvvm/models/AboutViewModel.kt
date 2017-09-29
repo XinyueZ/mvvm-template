@@ -23,9 +23,13 @@ class AboutViewModel : AbstractViewModel() {
     //Return this view to home
     val goBack = ObservableBoolean(false)
 
+    //-----------------------------------
+    //BindingAdapter handler
+    //-----------------------------------
     fun onCommand(id: Int) {
         when (id) {
             R.id.action_app_bar_indicator -> goBack.set(true)
         }
     }
+    //-----------------------------------
 }

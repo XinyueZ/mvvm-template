@@ -25,7 +25,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
 
     private val gson = Gson()
 
-    override fun getAllLibraries() = DB.INSTANCE.licensesLibrariesDao()
+    override fun getAllLibraries(localOnly: Boolean) = DB.INSTANCE.licensesLibrariesDao()
             .getLibraryListCount()
             .flatMap({
                 when (it[0].total == 0) {
@@ -74,7 +74,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         LL.w("licenses write to db")
     }
 
-    override fun getLicense(app: Application, library: Library) = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
+    override fun getLicense(app: Application, library: Library, localOnly: Boolean) = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
             .flatMap {
                 io.reactivex.Single.just(
                                 it

@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 
 interface LicensesDataSource : DataSource {
-    fun getAllLibraries(): Flowable<List<Library>>
+    fun getAllLibraries(localOnly: Boolean = false): Flowable<List<Library>>
     fun saveLibraries(source: List<Library>): List<Library> = source
-    fun getLicense(app: Application, library: Library): Single<String> = Single.just("empty license content")
+    fun getLicense(app: Application, library: Library, localOnly: Boolean = false): Single<String> = Single.just("empty license content")
 }

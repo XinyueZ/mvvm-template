@@ -2,6 +2,7 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -9,6 +10,7 @@ import android.databinding.ObservableInt
 import android.net.Uri
 import com.template.mvvm.LL
 import com.template.mvvm.R
+import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
@@ -21,6 +23,8 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
 
+    private val reload = SingleLiveData<Boolean>()
+
     // True when the data have been loaded.
     val pageStill = MutableLiveData<Boolean>()
 
@@ -30,11 +34,19 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
     //Return this view to home
     val goBack = ObservableBoolean(false)
 
+    //-----------------------------------
+    //BindingAdapter handler
+    //-----------------------------------
     fun onCommand(id: Int) {
         when (id) {
             R.id.action_app_bar_indicator -> goBack.set(true)
         }
     }
+
+    fun onReload() {
+        reload.value = true
+    }
+    //-----------------------------------
 
     //Data of this view-model
     private var productListSource: ProductList? = null
@@ -50,17 +62,21 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
                     productItemVmList.addAll(it)
                     pageStill.value = true
                     dataLoaded.set(true)
+                    dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                 }
             }
         }
+        reload.observe(lifecycleOwner, Observer {
+            loadAllProducts(lifecycleOwner, false)
+        })
         loadAllProducts(lifecycleOwner)
         return true
     }
 
-    private fun loadAllProducts(lifecycleOwner: LifecycleOwner) {
+    private fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         productListSource?.let {
             addToAutoDispose(
-                    repository.getAllProducts()
+                    repository.getAllProducts(localOnly)
                             .subscribe(
                                     {
                                         productListSource?.value = it

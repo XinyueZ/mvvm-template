@@ -3,6 +3,7 @@ package com.template.mvvm.models
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
@@ -26,6 +27,8 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
 
+    private val reload = MutableLiveData<Boolean>()
+
     val licenseDetailViewModel = MutableLiveData<LicenseDetailViewModel>()
 
     // True when the data have been loaded.
@@ -37,11 +40,19 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     //Return this view to home
     val goBack = ObservableBoolean(false)
 
+    //-----------------------------------
+    //BindingAdapter handler
+    //-----------------------------------
     fun onCommand(id: Int) {
         when (id) {
             R.id.action_app_bar_indicator -> goBack.set(true)
         }
     }
+
+    fun onReload() {
+        reload.value = true
+    }
+    //-----------------------------------
 
     //Data of this view-model
     private var libraryListSource: LibraryList? = null
@@ -57,11 +68,15 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                     libraryItemVmList.addAll(it)
                     pageStill.value = true
                     dataLoaded.set(true)
+                    dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
 
                     bindTapHandlers(it, lifecycleOwner)
                 }
             }
         }
+        reload.observe(lifecycleOwner, Observer {
+            loadAllLicenses(lifecycleOwner, false)
+        })
         loadAllLicenses(lifecycleOwner)
         return true
     }
@@ -74,13 +89,13 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                     licenseDetailViewModel.value = when (lifecycleOwner) {
                         is Fragment -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it)
+                            addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it, false)
                                     .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
                             vm
                         }
                         is FragmentActivity -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            addToAutoDispose(repository.getLicense(lifecycleOwner.application, it)
+                            addToAutoDispose(repository.getLicense(lifecycleOwner.application, it, false)
                                     .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
                             vm
                         }
@@ -91,10 +106,10 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         }
     }
 
-    private fun loadAllLicenses(lifecycleOwner: LifecycleOwner) {
+    private fun loadAllLicenses(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         libraryListSource?.let {
             addToAutoDispose(
-                    repository.getAllLibraries().subscribe(
+                    repository.getAllLibraries(localOnly).subscribe(
                             {
                                 LL.i("libraryListSource subscribe")
                                 libraryListSource?.value = it

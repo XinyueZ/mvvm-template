@@ -7,7 +7,7 @@ import io.reactivex.Flowable
 
 class LicensesRemote : LicensesDataSource {
 
-    override fun getAllLibraries() = LicensesApi.service
+    override fun getAllLibraries(localOnly: Boolean) = LicensesApi.service
             .getLibraries()
             .flatMap {
                 val v: List<Library> = (mutableListOf<Library>()).apply {

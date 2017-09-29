@@ -19,6 +19,9 @@ class HomeViewModel : AbstractViewModel() {
 
     val drawerToggle = MutableLiveData<Boolean>()
 
+    //-----------------------------------
+    //BindingAdapter handler
+    //-----------------------------------
     fun onCommand(id: Int) {
         when (id) {
             R.id.action_app_bar_indicator -> drawerToggle.value = true
@@ -44,6 +47,7 @@ class HomeViewModel : AbstractViewModel() {
             R.id.action_women -> openItem3.value = true
         }
     }
+    //-----------------------------------
 
     override fun onCleared() {
         super.onCleared()

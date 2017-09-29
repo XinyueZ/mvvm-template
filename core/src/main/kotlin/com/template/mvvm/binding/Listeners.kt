@@ -12,3 +12,7 @@ interface OnItemCommandListener {
     fun onCommand(vm: ViewModel)
 }
 
+interface OnReloadListener {
+    fun onReload()
+}
+
