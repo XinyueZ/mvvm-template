@@ -1,6 +1,7 @@
 package com.template.mvvm.source.local.entities.products
 
 import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.net.Uri
@@ -17,11 +18,11 @@ class ProductEntity(
         val description: String,
         @ColumnInfo(name = "thumbnail")
         val thumbnail: Uri,
-        @ColumnInfo(name = "brandLogo")
-        val brandLogo: Uri
+        @Embedded(prefix = "brand_")
+        val brand: BrandEntity
 ) {
     companion object {
-        fun from(product: Product) = ProductEntity(product.pid, product.title, product.description, product.thumbnail, product.brandLogo)
+        fun from(product: Product) = ProductEntity(product.pid, product.title, product.description, product.thumbnail, BrandEntity.from(product.brand))
     }
 
     fun toProduct() = Product.from(this)

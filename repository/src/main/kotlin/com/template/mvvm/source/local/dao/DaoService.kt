@@ -6,6 +6,7 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
+import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 import io.reactivex.Flowable
 
@@ -36,8 +37,14 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(productEntity: ProductEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBrand(brandEntity: BrandEntity)
+
     @Query("select * from products")
     fun getProductList(): Flowable<List<ProductEntity>>
+
+    @Query("select * from brands")
+    fun getBrandList(): Flowable<List<BrandEntity>>
 }
 
 

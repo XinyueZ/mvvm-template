@@ -7,9 +7,10 @@ import android.arch.persistence.room.TypeConverters
 import android.net.Uri
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
+import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 
-@Database(entities = arrayOf(LicenseEntity::class, LibraryEntity::class, ProductEntity::class), version = 1)
+@Database(entities = arrayOf(LicenseEntity::class, LibraryEntity::class, ProductEntity::class, BrandEntity::class ), version = 1)
 @TypeConverters(FieldConverter::class)
 abstract class DB : RoomDatabase() {
 

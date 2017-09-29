@@ -61,8 +61,8 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
     }
 
     override fun saveLibraries(source: List<Library>) = source.apply {
-        forEach {
-            DB.INSTANCE.apply {
+        DB.INSTANCE.apply {
+            forEach {
                 licensesLibrariesDao().insertLibrary(
                         LibraryEntity.from(it)
                 )
@@ -77,7 +77,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
     override fun getLicense(app: Application, library: Library, localOnly: Boolean) = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
             .flatMap {
                 io.reactivex.Single.just(
-                                it
+                        it
                                 .replace(YEAR, library.copyright ?: "")
                                 .replace(COPYRIGHT_HOLDERS, library.owner ?: ""))
             }
