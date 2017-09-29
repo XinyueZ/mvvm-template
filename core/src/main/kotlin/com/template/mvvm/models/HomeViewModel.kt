@@ -2,9 +2,7 @@ package com.template.mvvm.models
 
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableInt
-import com.template.mvvm.Injection
 import com.template.mvvm.R
-import com.template.mvvm.ViewModelFactory
 
 class HomeViewModel : AbstractViewModel() {
     val title = ObservableInt(R.string.home_title)
@@ -48,10 +46,4 @@ class HomeViewModel : AbstractViewModel() {
         }
     }
     //-----------------------------------
-
-    override fun onCleared() {
-        super.onCleared()
-        ViewModelFactory.destroyInstance()
-        Injection.destroyInstance()
-    }
 }

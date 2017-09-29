@@ -103,7 +103,7 @@ class Injection private constructor(application: Application) {
     private fun provideLocalLicensesRepository(application: Application) = LicensesLocal(application)
     private fun provideCacheLicensesRepository() = LicensesCache()
 
-    private val itemClassMap =  HashMap<String, ItemBinding<*>>()
+    private val itemClassMap =  WeakHashMap<String, ItemBinding<*>>()
     fun addItemBindingOf(modelClass: Class<*>, itemBinding: ItemBinding<*>) {
         itemClassMap.put(modelClass.name, itemBinding)
     }
