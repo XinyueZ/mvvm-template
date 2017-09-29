@@ -19,7 +19,6 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class ProductsViewModel(private val repository: ProductsDataSource, val itemBinding: ItemBinding<ProductItemViewModel>) : AbstractViewModel() {
 
-    val loadingText = ObservableInt(R.string.loading_products)
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
 

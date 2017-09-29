@@ -23,7 +23,6 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val itemBinding: ItemBinding<SoftwareLicenseItemViewModel>) : AbstractViewModel() {
 
-    val loadingText = ObservableInt(R.string.loading_software_licenses)
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
 
