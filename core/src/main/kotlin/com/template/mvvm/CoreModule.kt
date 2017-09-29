@@ -16,14 +16,12 @@ abstract class CoreModule : MultiDexApplication(), LifecycleObserver {
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         super.onCreate()
         RepositoryModule(this)
-        onCoreCreate()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     protected open fun onCoreCreate() {
         LL.d("process on_create")
 
-        // Begin injection here.
         with(Injection.getInstance(this)) {
             ProductsApi.service = provideProductsApiService()
             LicensesApi.service = provideLicensesApiService()
@@ -34,7 +32,6 @@ abstract class CoreModule : MultiDexApplication(), LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     protected open fun onCoreStart() {
         LL.d("process on_start")
-
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
