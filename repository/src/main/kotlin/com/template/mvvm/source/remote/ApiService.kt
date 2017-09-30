@@ -7,10 +7,10 @@ import io.reactivex.Flowable
 import retrofit2.http.GET
 
 interface ProductsApi {
-    @GET("articles")
+    @GET("articles?pageSize=100")
     fun getArticles(): Flowable<ProductsData>
 
-    @GET("brands")
+    @GET("brands?pageSize=100")
     fun getBrands(): Flowable<BrandsData>
 
     companion object {

@@ -24,7 +24,7 @@ class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
         binding = FragmentAllBrandsBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        itemWidth = (getScreenSize().width - getDimensionPixel(R.dimen.general_padding) * 2) / 2
+                        itemWidth = getScreenSize().width/ 2 - getDimensionPixel(R.dimen.general_padding) * 2
                         itemHeight = itemWidth
                         registerLifecycleOwner(activity)
                         view.setupErrorSnackbar(activity, this.onError)
