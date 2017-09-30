@@ -34,7 +34,7 @@ class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        obtainViewModel().apply {
+        binding.vm = obtainViewModel().apply {
             pageStill.observe(this@ProductsActivity, Observer {
                 when (it) {
                     true -> hideSystemUi(1500)

@@ -20,7 +20,19 @@ class ProductsRemote : ProductsDataSource {
                 Flowable.just(v)
             }
 
-    override fun getAllBrands(localOnly: Boolean)= ProductsApi.service
+    override fun filterProduct(keyword: String, localOnly: Boolean) = ProductsApi.service
+            .filterArticles(keyword)
+            .flatMap {
+                val v: List<Product> = (mutableListOf<Product>()).apply {
+                    it.products.forEach {
+                        add(Product.from(it))
+                    }
+                    LL.d("filtered $keyword products and loaded from net")
+                }
+                Flowable.just(v)
+            }
+
+    override fun getAllBrands(localOnly: Boolean) = ProductsApi.service
             .getBrands()
             .flatMap {
                 val v: List<Brand> = (mutableListOf<Brand>()).apply {

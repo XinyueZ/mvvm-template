@@ -17,6 +17,8 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
     // Products, brands, logo....
     override fun getAllProducts(localOnly: Boolean) = productsRepository.getAllProducts(localOnly)
 
+    override fun filterProduct(keyword: String, localOnly: Boolean) = productsRepository.filterProduct(keyword, localOnly)
+
     override fun getAllBrands(localOnly: Boolean) = productsRepository.getAllBrands(localOnly)
 
     override fun saveProducts(source: List<Product>) = productsRepository.saveProducts(source)

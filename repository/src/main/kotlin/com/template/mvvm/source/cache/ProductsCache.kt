@@ -11,6 +11,10 @@ class ProductsCache : ProductsDataSource {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun filterProduct(keyword: String, localOnly: Boolean): Flowable<List<Product>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getAllBrands(localOnly: Boolean): Flowable<List<Brand>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

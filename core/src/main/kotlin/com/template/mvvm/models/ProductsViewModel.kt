@@ -17,7 +17,7 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class ProductsViewModel(private val repository: ProductsDataSource, val itemBinding: ItemBinding<ProductItemViewModel>) : AbstractViewModel() {
+open class ProductsViewModel(protected val repository: ProductsDataSource, val itemBinding: ItemBinding<ProductItemViewModel>) : AbstractViewModel() {
 
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
@@ -48,7 +48,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
     //-----------------------------------
 
     //Data of this view-model
-    private var productListSource: ProductList? = null
+    protected var productListSource: ProductList? = null
 
     //For recyclerview data
     val productItemVmList = ObservableArrayList<ProductItemViewModel>()
@@ -72,7 +72,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
         return true
     }
 
-    private fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
+    protected open fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         productListSource?.let {
             addToAutoDispose(
                     repository.getAllProducts(localOnly)
@@ -89,7 +89,7 @@ class ProductsViewModel(private val repository: ProductsDataSource, val itemBind
         }
     }
 
-    private fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
+    protected fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner)
             pageStill.value = false

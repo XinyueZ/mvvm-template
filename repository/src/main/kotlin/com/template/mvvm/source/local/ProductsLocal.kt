@@ -23,7 +23,19 @@ class ProductsLocal : ProductsDataSource {
                 Flowable.just(v)
             })
 
-    override fun getAllBrands(localOnly: Boolean)= DB.INSTANCE.productDao()
+    override fun filterProduct(keyword: String, localOnly: Boolean) = DB.INSTANCE.productDao()
+            .filterProductList(keyword)
+            .flatMap({
+                val v: List<Product> = (mutableListOf<Product>()).apply {
+                    it.forEach {
+                        this.add(it.toProduct())
+                    }
+                    LL.d("filtered $keyword products and loaded from db")
+                }
+                Flowable.just(v)
+            })
+
+    override fun getAllBrands(localOnly: Boolean) = DB.INSTANCE.productDao()
             .getBrandList()
             .flatMap({
                 val v: List<Brand> = (mutableListOf<Brand>()).apply {

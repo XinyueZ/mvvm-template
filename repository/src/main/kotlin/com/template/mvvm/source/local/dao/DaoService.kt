@@ -43,6 +43,9 @@ interface ProductDao {
     @Query("select * from products")
     fun getProductList(): Flowable<List<ProductEntity>>
 
+    @Query("select * from products where categoryKeys   LIKE '%' || :keyword || '%'")
+    fun filterProductList(keyword: String?): Flowable<List<ProductEntity>>
+
     @Query("select * from brands")
     fun getBrandList(): Flowable<List<BrandEntity>>
 }

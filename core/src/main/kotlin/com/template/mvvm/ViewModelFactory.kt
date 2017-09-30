@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProvider
 import com.template.mvvm.models.*
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-
 class ViewModelFactory private constructor(
         private val application: Application
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -16,18 +15,31 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
-                    isAssignableFrom(AllBrandsViewModel::class.java) -> AllBrandsViewModel(Injection.getInstance(application).provideRepository(application),
-                            Injection.getInstance(application).itemOf(BrandItemViewModel::class.java) as ItemBinding<BrandItemViewModel>)
-                    isAssignableFrom(MenViewModel::class.java) -> MenViewModel()
-                    isAssignableFrom(WomenViewModel::class.java) -> WomenViewModel()
+                    isAssignableFrom(AllBrandsViewModel::class.java) ->
+                        AllBrandsViewModel(
+                                Injection.getInstance(application).provideRepository(application),
+                                Injection.getInstance(application).itemOf(BrandItemViewModel::class.java) as ItemBinding<BrandItemViewModel>
+                        )
+                    isAssignableFrom(MenViewModel::class.java) -> MenViewModel(
+                            Injection.getInstance(application).provideRepository(application),
+                            Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>
+                    )
+                    isAssignableFrom(WomenViewModel::class.java) -> WomenViewModel(
+                            Injection.getInstance(application).provideRepository(application),
+                            Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>
+                    )
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
                     isAssignableFrom(ProductsViewModel::class.java) ->
-                        ProductsViewModel(Injection.getInstance(application).provideRepository(application),
-                                Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>)
+                        ProductsViewModel(
+                                Injection.getInstance(application).provideRepository(application),
+                                Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>
+                        )
                     isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel()
                     isAssignableFrom(SoftwareLicensesViewModel::class.java) ->
-                        SoftwareLicensesViewModel(Injection.getInstance(application).provideRepository(application),
-                                Injection.getInstance(application).itemOf(SoftwareLicenseItemViewModel::class.java) as ItemBinding<SoftwareLicenseItemViewModel>)
+                        SoftwareLicensesViewModel(
+                                Injection.getInstance(application).provideRepository(application),
+                                Injection.getInstance(application).itemOf(SoftwareLicenseItemViewModel::class.java) as ItemBinding<SoftwareLicenseItemViewModel>
+                        )
                     isAssignableFrom(LicenseDetailViewModel::class.java) -> LicenseDetailViewModel()
                     isAssignableFrom(SoftwareLicenseItemViewModel::class.java) -> SoftwareLicenseItemViewModel()
                     isAssignableFrom(ProductItemViewModel::class.java) -> ProductItemViewModel()

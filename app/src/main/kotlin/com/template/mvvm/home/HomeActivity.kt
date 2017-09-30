@@ -11,13 +11,8 @@ import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
-import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setup
-import com.template.mvvm.ext.setupSnackbar
-import com.template.mvvm.ext.setupToast
 import com.template.mvvm.models.HomeViewModel
-import com.template.mvvm.models.MenViewModel
-import com.template.mvvm.models.WomenViewModel
 
 class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
@@ -43,16 +38,6 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
         super.onCreate(savedInstanceState)
         hideSystemUi(0)
         binding.vm = obtainViewModel().apply { binding.drawer.setup(this@HomeActivity, drawerToggle) }
-
-        // Demo: ViewModel of arch-component can be always shared in scope of activity or fragment.
-        obtainViewModel(MenViewModel::class.java).apply {
-            binding.contentFrame.setupSnackbar(this@HomeActivity, snackbarMessage)
-            binding.contentFrame.context.setupToast(this@HomeActivity, snackbarMessage)
-        }
-        obtainViewModel(WomenViewModel::class.java).apply {
-            binding.contentFrame.setupSnackbar(this@HomeActivity, snackbarMessage)
-            binding.contentFrame.context.setupToast(this@HomeActivity, snackbarMessage)
-        }
     }
 
     override fun onStart() {
