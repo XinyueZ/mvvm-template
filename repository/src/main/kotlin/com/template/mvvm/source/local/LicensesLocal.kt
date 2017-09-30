@@ -9,7 +9,7 @@ import com.template.mvvm.feeds.licenses.LicensesData
 import com.template.mvvm.source.local.dao.DB
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
-import com.template.mvvm.source.utils.read
+import com.template.mvvm.source.ext.read
 import io.reactivex.Flowable
 import java.io.InputStreamReader
 

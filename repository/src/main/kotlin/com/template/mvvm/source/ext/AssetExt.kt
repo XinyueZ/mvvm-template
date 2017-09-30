@@ -1,4 +1,4 @@
-package com.template.mvvm.source.utils
+package com.template.mvvm.source.ext
 
 import android.content.res.AssetManager
 import io.reactivex.Single
