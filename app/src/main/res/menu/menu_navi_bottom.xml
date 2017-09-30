@@ -3,16 +3,16 @@
 
     <item
         android:id="@id/action_all_brands"
-        android:icon="@drawable/ic_placeholder"
+        android:icon="@drawable/ic_all_brands"
         android:title="@string/action_all_brands"/>
 
     <item
         android:id="@id/action_men"
-        android:icon="@drawable/ic_placeholder"
+        android:icon="@drawable/ic_men"
         android:title="@string/action_men"/>
 
     <item
         android:id="@id/action_women"
-        android:icon="@drawable/ic_placeholder"
+        android:icon="@drawable/ic_women"
         android:title="@string/action_women"/>
 </menu>
