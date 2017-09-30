@@ -31,5 +31,13 @@ class FieldConverter {
         @TypeConverter
         @JvmStatic
         fun toUri(uriStr: String) = Uri.parse(uriStr)
+
+        @TypeConverter
+        @JvmStatic
+        fun fromStringList(list: List<String>) = list.joinToString("|")
+
+        @TypeConverter
+        @JvmStatic
+        fun toStringList(uriStr: String) = uriStr.split("|").toList()
     }
 }

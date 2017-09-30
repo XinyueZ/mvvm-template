@@ -19,10 +19,25 @@ class ProductEntity(
         @ColumnInfo(name = "thumbnail")
         val thumbnail: Uri,
         @Embedded(prefix = "brand_")
-        val brand: BrandEntity
+        val brand: BrandEntity,
+        @ColumnInfo(name = "genders")
+        val genders: List<String>,
+        @ColumnInfo(name = "ageGroups")
+        val ageGroups: List<String>,
+        @ColumnInfo(name = "categoryKeys")
+        val categoryKeys: List<String>
 ) {
     companion object {
-        fun from(product: Product) = ProductEntity(product.pid, product.title, product.description, product.thumbnail, BrandEntity.from(product.brand))
+        fun from(product: Product) = ProductEntity(
+                product.pid,
+                product.title,
+                product.description,
+                product.thumbnail,
+                BrandEntity.from(product.brand),
+                product.genders,
+                product.ageGroups,
+                product.categoryKeys
+        )
     }
 
     fun toProduct() = Product.from(this)
