@@ -37,7 +37,13 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideSystemUi(0)
-        binding.vm = obtainViewModel().apply { binding.drawer.setup(this@HomeActivity, drawerToggle) }
+        binding.apply {
+            contentFrame.apply {
+                vm = obtainViewModel().apply {
+                    drawer.setup(this@HomeActivity, drawerToggle)
+                }
+            }
+        }
     }
 
     override fun onStart() {

@@ -50,6 +50,9 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
                         openItem3.observe(activity, Observer {
                             replaceFragmentToFragment(WomenFragment.newInstance(activity), R.id.childContentFrame)
                         })
+                        openItem4.observe(activity, Observer {
+                            replaceFragmentToFragment(AllGendersFragment.newInstance(activity), R.id.childContentFrame)
+                        })
                         registerLifecycleOwner(activity)
                     }
                 }

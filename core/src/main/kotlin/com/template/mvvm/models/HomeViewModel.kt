@@ -14,6 +14,7 @@ class HomeViewModel : AbstractViewModel() {
     val openItem1 = MutableLiveData<Boolean>()
     val openItem2 = MutableLiveData<Boolean>()
     val openItem3 = MutableLiveData<Boolean>()
+    val openItem4 = MutableLiveData<Boolean>()
 
     val drawerToggle = MutableLiveData<Boolean>()
 
@@ -43,6 +44,7 @@ class HomeViewModel : AbstractViewModel() {
             R.id.action_all_brands -> openItem1.value = true
             R.id.action_men -> openItem2.value = true
             R.id.action_women -> openItem3.value = true
+            R.id.action_all_genders -> openItem4.value = true
         }
     }
     //-----------------------------------

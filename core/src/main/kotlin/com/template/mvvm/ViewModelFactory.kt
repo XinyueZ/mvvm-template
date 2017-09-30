@@ -28,6 +28,10 @@ class ViewModelFactory private constructor(
                             Injection.getInstance(application).provideRepository(application),
                             Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>
                     )
+                    isAssignableFrom(AllGendersViewModel::class.java) -> AllGendersViewModel(
+                            Injection.getInstance(application).provideRepository(application),
+                            Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>
+                    )
                     isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
                     isAssignableFrom(ProductsViewModel::class.java) ->
                         ProductsViewModel(

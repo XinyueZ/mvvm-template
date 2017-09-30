@@ -9,7 +9,6 @@ import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentAllBrandsBinding
 import com.template.mvvm.ext.getDimensionPixel
 import com.template.mvvm.ext.getScreenSize
-import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.AllBrandsViewModel
 
 class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
@@ -27,7 +26,6 @@ class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
                         itemWidth = getScreenSize().width/ 2 - getDimensionPixel(R.dimen.general_padding) * 2
                         itemHeight = itemWidth
                         registerLifecycleOwner(activity)
-                        view.setupErrorSnackbar(activity, this.onError)
                     }
                 }
         return binding

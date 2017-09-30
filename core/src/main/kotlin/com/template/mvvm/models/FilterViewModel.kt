@@ -11,7 +11,7 @@ abstract class FilterViewModel(repository: ProductsDataSource, itemBinding: Item
     override fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean) {
         productListSource?.let {
             addToAutoDispose(
-                    repository.getAllProducts(localOnly)
+                    repository.filterProduct(filterKeyword(), localOnly)
                             .subscribe(
                                     {
                                         productListSource?.value = it
@@ -32,4 +32,8 @@ class MenViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<Prod
 
 class WomenViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : FilterViewModel(repository, itemBinding) {
     override fun filterKeyword() = "women"
+}
+
+class AllGendersViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : FilterViewModel(repository, itemBinding) {
+    override fun filterKeyword() = "all"
 }

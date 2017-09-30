@@ -5,6 +5,7 @@
     <item name="action_all_brands" type="id"/>
     <item name="action_men" type="id"/>
     <item name="action_women" type="id"/>
+    <item name="action_all_genders" type="id"/>
     <item name="action_app_bar_indicator" type="id"/>
     <item name="action_internet" type="id"/>
     <item name="action_software_licenses" type="id"/>

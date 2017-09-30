@@ -2,17 +2,16 @@ package com.template.mvvm.home
 
 import android.content.Context
 import android.databinding.ViewDataBinding
-import android.support.v4.app.Fragment
 import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
-import com.template.mvvm.models.WomenViewModel
+import com.template.mvvm.models.AllGendersViewModel
 
-class WomenFragment : AppBaseFragment<WomenViewModel>() {
+class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
 
     companion object {
-        fun newInstance(cxt: Context) = Fragment.instantiate(cxt, WomenFragment::class.java.name) as WomenFragment
+        fun newInstance(cxt: Context) = instantiate(cxt, AllGendersFragment::class.java.name) as AllGendersFragment
     }
 
     private lateinit var binding: FragmentProductsBinding
@@ -28,5 +27,5 @@ class WomenFragment : AppBaseFragment<WomenViewModel>() {
     }
 
     override fun getLayout() = R.layout.fragment_products
-    override fun requireViewModel() = WomenViewModel::class.java
+    override fun requireViewModel() = AllGendersViewModel::class.java
 }

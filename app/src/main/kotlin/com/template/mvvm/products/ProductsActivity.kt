@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivityProductsBinding
+import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.ProductsViewModel
 
 class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
@@ -34,13 +35,18 @@ class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = obtainViewModel().apply {
-            pageStill.observe(this@ProductsActivity, Observer {
-                when (it) {
-                    true -> hideSystemUi(1500)
-                    false -> showSystemUi()
+        binding.apply {
+            contentFrame.apply {
+                vm = obtainViewModel().apply {
+                    pageStill.observe(this@ProductsActivity, Observer {
+                        when (it) {
+                            true -> hideSystemUi(1500)
+                            false -> showSystemUi()
+                        }
+                    })
+                    setupErrorSnackbar(this@ProductsActivity, this.onError)
                 }
-            })
+            }
         }
     }
 }

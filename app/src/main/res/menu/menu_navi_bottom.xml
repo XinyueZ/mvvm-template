@@ -15,4 +15,9 @@
         android:id="@id/action_women"
         android:icon="@drawable/ic_women"
         android:title="@string/action_women"/>
+    <item
+        android:id="@id/action_all_genders"
+        android:icon="@drawable/ic_all_genders"
+        android:title="@string/action_all_genders"/>
+
 </menu>

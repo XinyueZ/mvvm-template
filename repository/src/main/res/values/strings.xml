@@ -5,6 +5,7 @@
     <string name="action_all_brands">All brands</string>
     <string name="action_men">Men</string>
     <string name="action_women">Women</string>
+    <string name="action_all_genders">Human</string>
     <string name="navi_group_other">Other</string>
 
     <string name="home_title">@string/app_name</string>

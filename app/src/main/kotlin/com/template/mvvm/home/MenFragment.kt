@@ -7,14 +7,12 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
-import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.MenViewModel
-import com.template.mvvm.products.ProductsFragment
 
 class MenFragment : AppBaseFragment<MenViewModel>() {
 
     companion object {
-        fun newInstance(cxt: Context) = Fragment.instantiate(cxt, ProductsFragment::class.java.name) as ProductsFragment
+        fun newInstance(cxt: Context) = Fragment.instantiate(cxt, MenFragment::class.java.name) as MenFragment
     }
 
     private lateinit var binding: FragmentProductsBinding
@@ -24,7 +22,6 @@ class MenFragment : AppBaseFragment<MenViewModel>() {
                 .apply {
                     vm = obtainViewModel().apply {
                         registerLifecycleOwner(activity)
-                        view.setupErrorSnackbar(this@MenFragment, this.onError)
                     }
                 }
         return binding
