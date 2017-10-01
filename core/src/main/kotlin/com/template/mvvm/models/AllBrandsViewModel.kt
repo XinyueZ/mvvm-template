@@ -23,6 +23,8 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
     val dataLoaded = ObservableBoolean(false)
     // Final loaded of data signal for all available progress-indicators, call notifyChange() on it when needed.
     private val reload = SingleLiveData<Boolean>()
+    val dataHaveNotReloaded = ObservableBoolean(true)
+
     // Error
     var onError = ErrorViewModel()
 
@@ -47,6 +49,7 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
                     )
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
+                    dataHaveNotReloaded.set(true)
                 }
             }
         }
@@ -78,6 +81,7 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllBrands(lifecycleOwner)
             dataLoaded.set(true)
+            dataHaveNotReloaded.set(true)
         }
     }
 
@@ -92,6 +96,7 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
     //-----------------------------------
     fun onReload() {
         reload.value = true
+        dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
 

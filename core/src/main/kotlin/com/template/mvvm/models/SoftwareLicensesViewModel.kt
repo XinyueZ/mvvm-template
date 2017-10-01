@@ -27,6 +27,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     val dataLoaded = ObservableBoolean(false)
 
     private val reload = MutableLiveData<Boolean>()
+    val dataHaveNotReloaded = ObservableBoolean(true)
 
     val licenseDetailViewModel = MutableLiveData<LicenseDetailViewModel>()
 
@@ -38,20 +39,6 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
     //Return this view to home
     val goBack = ObservableBoolean(false)
-
-    //-----------------------------------
-    //BindingAdapter handler
-    //-----------------------------------
-    fun onCommand(id: Int) {
-        when (id) {
-            R.id.action_app_bar_indicator -> goBack.set(true)
-        }
-    }
-
-    fun onReload() {
-        reload.value = true
-    }
-    //-----------------------------------
 
     //Data of this view-model
     private var libraryListSource: LibraryList? = null
@@ -68,6 +55,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                     pageStill.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
+                    dataHaveNotReloaded.set(true)
 
                     bindTapHandlers(it, lifecycleOwner)
                 }
@@ -126,6 +114,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
             loadAllLicenses(lifecycleOwner)
             pageStill.value = false
             dataLoaded.set(true)
+            dataHaveNotReloaded.set(true)
         }
     }
 
@@ -134,6 +123,21 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         repository.clear()
         libraryListSource = null
     }
+
+    //-----------------------------------
+    //BindingAdapter handler
+    //-----------------------------------
+    fun onCommand(id: Int) {
+        when (id) {
+            R.id.action_app_bar_indicator -> goBack.set(true)
+        }
+    }
+
+    fun onReload() {
+        reload.value = true
+        dataHaveNotReloaded.set(false)
+    }
+    //-----------------------------------
 }
 
 class SoftwareLicenseItemViewModel : AbstractViewModel() {

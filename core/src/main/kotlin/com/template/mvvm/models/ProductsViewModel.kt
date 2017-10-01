@@ -23,6 +23,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
     val dataLoaded = ObservableBoolean(false)
 
     private val reload = SingleLiveData<Boolean>()
+    val dataHaveNotReloaded = ObservableBoolean(true)
 
     // True when the data have been loaded.
     val pageStill = MutableLiveData<Boolean>()
@@ -32,20 +33,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
 
     //Return this view to home
     val goBack = ObservableBoolean(false)
-
-    //-----------------------------------
-    //BindingAdapter handler
-    //-----------------------------------
-    fun onCommand(id: Int) {
-        when (id) {
-            R.id.action_app_bar_indicator -> goBack.set(true)
-        }
-    }
-
-    fun onReload() {
-        reload.value = true
-    }
-    //-----------------------------------
 
     //Data of this view-model
     protected var productListSource: ProductList? = null
@@ -62,6 +49,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
                     pageStill.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
+                    dataHaveNotReloaded.set(true)
                 }
             }
         }
@@ -94,6 +82,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
             loadAllProducts(lifecycleOwner)
             pageStill.value = false
             dataLoaded.set(true)
+            dataHaveNotReloaded.set(true)
         }
     }
 
@@ -102,6 +91,21 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
         repository.clear()
         productListSource = null
     }
+
+    //-----------------------------------
+    //BindingAdapter handler
+    //-----------------------------------
+    fun onCommand(id: Int) {
+        when (id) {
+            R.id.action_app_bar_indicator -> goBack.set(true)
+        }
+    }
+
+    fun onReload() {
+        reload.value = true
+        dataHaveNotReloaded.set(false)
+    }
+    //-----------------------------------
 }
 
 class ProductItemViewModel : AbstractViewModel() {
