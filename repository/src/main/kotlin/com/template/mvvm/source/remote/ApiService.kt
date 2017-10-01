@@ -12,7 +12,7 @@ interface ProductsApi {
     fun getArticles(): Flowable<ProductsData>
 
     @GET("articles?pageSize=100")
-    fun filterArticles(@Query("category") keyword: String): Flowable<ProductsData>
+    fun filterArticles(@Query("gender") keyword: String): Flowable<ProductsData>
 
     @GET("brands?pageSize=100")
     fun getBrands(): Flowable<BrandsData>

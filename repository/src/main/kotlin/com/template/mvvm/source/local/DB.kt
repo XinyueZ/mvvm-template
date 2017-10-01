@@ -1,4 +1,4 @@
-package com.template.mvvm.source.local.dao
+package com.template.mvvm.source.local
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase

@@ -1,4 +1,4 @@
-package com.template.mvvm.source.local.dao
+package com.template.mvvm.source.local
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
@@ -43,7 +43,7 @@ interface ProductDao {
     @Query("select * from products")
     fun getProductList(): Flowable<List<ProductEntity>>
 
-    @Query("select * from products where genders = :keyword")
+    @Query("select * from products where genders=:keyword")
     fun filterProductList(keyword: String?): Flowable<List<ProductEntity>>
 
     @Query("select * from brands")

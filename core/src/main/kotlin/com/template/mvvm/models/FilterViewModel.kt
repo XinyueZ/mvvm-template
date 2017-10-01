@@ -27,13 +27,11 @@ abstract class FilterViewModel(repository: ProductsDataSource, itemBinding: Item
 }
 
 class MenViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : FilterViewModel(repository, itemBinding) {
-    override fun filterKeyword() = "men"
+    override fun filterKeyword() = "MALE"
 }
 
 class WomenViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : FilterViewModel(repository, itemBinding) {
-    override fun filterKeyword() = "women"
+    override fun filterKeyword() = "FEMALE"
 }
 
-class AllGendersViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : FilterViewModel(repository, itemBinding) {
-    override fun filterKeyword() = "all"
-}
+class AllGendersViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>): ProductsViewModel(repository, itemBinding)

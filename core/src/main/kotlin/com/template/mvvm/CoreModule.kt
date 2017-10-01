@@ -7,7 +7,7 @@ import android.arch.lifecycle.ProcessLifecycleOwner
 import android.support.multidex.MultiDexApplication
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
-import com.template.mvvm.source.local.dao.DB
+import com.template.mvvm.source.local.DB
 import com.template.mvvm.source.remote.LicensesApi
 import com.template.mvvm.source.remote.ProductsApi
 

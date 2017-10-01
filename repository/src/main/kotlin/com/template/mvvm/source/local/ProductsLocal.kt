@@ -4,7 +4,6 @@ import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
-import com.template.mvvm.source.local.dao.DB
 import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 import io.reactivex.Flowable

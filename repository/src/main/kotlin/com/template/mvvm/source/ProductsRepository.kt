@@ -12,11 +12,6 @@ class ProductsRepository(private val remote: ProductsDataSource,
                          private val local: ProductsDataSource,
                          private val cache: ProductsDataSource
 ) : ProductsDataSource {
-    private val map = mapOf(
-            "men" to "MALE",
-            "women" to "FEMALE",
-            "all" to "MALE|FEMALE"
-    )
 
     override fun getAllProducts(localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = { local.saveProducts(remote.getAllProducts().blockingFirst()) }
@@ -31,7 +26,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun filterProduct(keyword: String, localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = { local.saveProducts(remote.filterProduct(keyword).blockingFirst()) }
-        emitter.onNext(local.filterProduct(map[keyword.toLowerCase()]!!).blockingFirst().takeIf { it.isNotEmpty() }
+        emitter.onNext(local.filterProduct(keyword).blockingFirst().takeIf { it.isNotEmpty() }
                 ?: remoteCallAndWrite()
         )
         if (localOnly) return@create

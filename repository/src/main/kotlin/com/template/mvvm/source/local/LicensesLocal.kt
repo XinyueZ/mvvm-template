@@ -6,7 +6,6 @@ import com.template.mvvm.LL
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.feeds.licenses.LicensesData
-import com.template.mvvm.source.local.dao.DB
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.ext.read

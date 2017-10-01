@@ -20,7 +20,7 @@ import com.template.mvvm.source.cache.LicensesCache
 import com.template.mvvm.source.cache.ProductsCache
 import com.template.mvvm.source.local.LicensesLocal
 import com.template.mvvm.source.local.ProductsLocal
-import com.template.mvvm.source.local.dao.DB
+import com.template.mvvm.source.local.DB
 import com.template.mvvm.source.remote.LicensesApi
 import com.template.mvvm.source.remote.LicensesRemote
 import com.template.mvvm.source.remote.ProductsApi
