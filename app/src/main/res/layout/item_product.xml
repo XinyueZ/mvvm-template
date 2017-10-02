@@ -5,6 +5,7 @@
 
     <data class="ProductItemBinding">
 
+        <import type="com.template.mvvm.R"/>
         <variable
             name="vm"
             type="com.template.mvvm.models.ProductItemViewModel"/>
@@ -30,6 +31,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_thumbnail_size"
                     android:contentDescription="@null"
+                    app:errorDrawableRes="@{R.drawable.ic_image}"
+                    app:placeholderRes="@{R.drawable.ic_image}"
                     app:remoteImageUri="@{vm.thumbnail}" />
 
 
@@ -39,6 +42,8 @@
                     android:layout_height="@dimen/item_brand_logo_size"
                     android:layout_gravity="top|end|right"
                     android:contentDescription="@null"
+                    app:errorDrawableRes="@{R.drawable.ic_image}"
+                    app:placeholderRes="@{R.drawable.ic_image}"
                     app:remoteImageUri="@{vm.brandLogo}" />
             </FrameLayout>
 
