@@ -15,10 +15,12 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun getAllProducts(localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = { local.saveProducts(remote.getAllProducts().blockingFirst()) }
-        emitter.onNext(local.getAllProducts().blockingFirst().takeIf { it.isNotEmpty() }
-                ?: remoteCallAndWrite()
-        )
-        if (localOnly) return@create
+        if (localOnly) {
+            emitter.onNext(local.getAllProducts().blockingFirst().takeIf { it.isNotEmpty() }
+                    ?: remoteCallAndWrite()
+            )
+            return@create
+        }
         emitter.onNext(remoteCallAndWrite())
     }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.computation())
@@ -26,10 +28,12 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun filterProduct(keyword: String, localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = { local.saveProducts(remote.filterProduct(keyword).blockingFirst()) }
-        emitter.onNext(local.filterProduct(keyword).blockingFirst().takeIf { it.isNotEmpty() }
-                ?: remoteCallAndWrite()
-        )
-        if (localOnly) return@create
+        if (localOnly) {
+            emitter.onNext(local.filterProduct(keyword).blockingFirst().takeIf { it.isNotEmpty() }
+                    ?: remoteCallAndWrite()
+            )
+            return@create
+        }
         emitter.onNext(remoteCallAndWrite())
     }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.computation())
@@ -37,10 +41,12 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun getAllBrands(localOnly: Boolean) = Flowable.create<List<Brand>>({ emitter ->
         val remoteCallAndWrite = { local.saveBrands(remote.getAllBrands().blockingFirst()) }
-        emitter.onNext(local.getAllBrands().blockingFirst().takeIf { it.isNotEmpty() }
-                ?: remoteCallAndWrite()
-        )
-        if (localOnly) return@create
+        if (localOnly) {
+            emitter.onNext(local.getAllBrands().blockingFirst().takeIf { it.isNotEmpty() }
+                    ?: remoteCallAndWrite()
+            )
+            return@create
+        }
         emitter.onNext(remoteCallAndWrite())
     }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.computation())

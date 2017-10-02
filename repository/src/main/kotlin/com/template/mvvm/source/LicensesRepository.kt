@@ -16,10 +16,12 @@ class LicensesRepository(app: Application,
 ) : LicensesDataSource {
     override fun getAllLibraries(localOnly: Boolean) = Flowable.create<List<Library>>({ emitter ->
         val remoteCallAndWrite = { local.saveLibraries(remote.getAllLibraries().blockingFirst()) }
-        emitter.onNext(local.getAllLibraries().blockingFirst().takeIf { it.isNotEmpty() }
-                ?: remoteCallAndWrite()
-        )
-        if (localOnly) return@create
+        if (localOnly) {
+            emitter.onNext(local.getAllLibraries().blockingFirst().takeIf { it.isNotEmpty() }
+                    ?: remoteCallAndWrite()
+            )
+            return@create
+        }
         emitter.onNext(remoteCallAndWrite())
     }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.computation())
