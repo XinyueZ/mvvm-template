@@ -116,9 +116,11 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner)
             pageStill.value = false
+
+            //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
             libraryListSource?.value?.let {
                 dataLoaded.set(it.isNotEmpty())
-            }
+            } ?: dataLoaded.set(false)
         }
     }
 
