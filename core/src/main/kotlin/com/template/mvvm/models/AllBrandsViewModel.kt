@@ -82,7 +82,9 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_brands, R.string.error_retry) {
             loadAllBrands(lifecycleOwner)
-            dataLoaded.set(true)
+            brandListSource?.value?.let {
+                dataLoaded.set(it.isNotEmpty())
+            }
         }
     }
 

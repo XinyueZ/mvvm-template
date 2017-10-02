@@ -116,7 +116,9 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner)
             pageStill.value = false
-            dataLoaded.set(true)
+            libraryListSource?.value?.let {
+                dataLoaded.set(it.isNotEmpty())
+            }
         }
     }
 

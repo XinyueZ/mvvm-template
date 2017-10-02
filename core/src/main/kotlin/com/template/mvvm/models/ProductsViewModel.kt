@@ -84,7 +84,9 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner)
             pageStill.value = false
-            dataLoaded.set(true)
+            productListSource?.value?.let {
+                dataLoaded.set(it.isNotEmpty())
+            }
         }
     }
 
