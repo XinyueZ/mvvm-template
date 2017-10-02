@@ -18,7 +18,7 @@
     <string name="about_title">About</string>
     <string name="action_about">About</string>
     <string name="about_version_title">Version</string>
-    <string name="about_version_content"> Version: v0.4</string>
+    <string name="about_version_content"> Version: %1$s</string>
     <string name="about_description_title">Description</string>
     <string name="about_description_content">This is a template project for MVVM, Android Architecture Components and Data-Binding. Use this template for improvement of project launch.</string>
 

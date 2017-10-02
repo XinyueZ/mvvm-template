@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.template.mvvm.BuildConfig"/>
+
         <variable
             name="vm"
             type="com.template.mvvm.models.AboutViewModel"/>
@@ -61,7 +63,7 @@
                     android:id="@+id/versionContent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{vm.versionContent}"
+                    android:text="@{context.getString(vm.versionContent, BuildConfig.VERSION_NAME)}"
                     android:textAppearance="@style/MaterialTextView.LightTheme.Body.Regular"
                     tools:text=" v0.2"/>
             </LinearLayout>
