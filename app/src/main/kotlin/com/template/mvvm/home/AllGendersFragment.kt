@@ -6,6 +6,7 @@ import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
+import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.AllGendersViewModel
 
 class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
@@ -20,7 +21,10 @@ class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity)
+                        activity.apply {
+                            registerLifecycleOwner(this)
+                            view.setupErrorSnackbar(this, onError)
+                        }
                     }
                 }
         return binding

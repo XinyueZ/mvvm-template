@@ -9,6 +9,7 @@ import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentAllBrandsBinding
 import com.template.mvvm.ext.getDimensionPixel
 import com.template.mvvm.ext.getScreenSize
+import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.AllBrandsViewModel
 
 class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
@@ -23,9 +24,12 @@ class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
         binding = FragmentAllBrandsBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        itemWidth = getScreenSize().width/ 2 - getDimensionPixel(R.dimen.general_padding) * 2
+                        itemWidth = getScreenSize().width / 2 - getDimensionPixel(R.dimen.general_padding) * 2
                         itemHeight = itemWidth
-                        registerLifecycleOwner(activity)
+                        activity.apply {
+                            registerLifecycleOwner(this)
+                            view.setupErrorSnackbar(this, onError)
+                        }
                     }
                 }
         return binding
