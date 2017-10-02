@@ -1,9 +1,12 @@
 package com.template.mvvm.binding
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.arch.lifecycle.ViewModel
 import android.databinding.BindingAdapter
 import android.net.Uri
+import android.support.design.internal.BottomNavigationItemView
+import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
@@ -12,6 +15,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
 import com.template.mvvm.GlideApp
+import com.template.mvvm.LL
 import com.template.mvvm.R
 
 @BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
@@ -73,6 +77,7 @@ fun h(toolbar: Toolbar, l: OnCommandListener) {
 
 @BindingAdapter("command")
 fun i(view: BottomNavigationView, l: OnCommandListener) {
+    view.disableShiftMode()
     view.setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
 
@@ -84,6 +89,28 @@ fun i(view: BottomNavigationView, l: OnCommandListener) {
 fun j(view: View, l: OnItemCommandListener, vm: ViewModel) {
     view.setOnClickListener {
         l.onCommand(vm)
+    }
+}
+
+// Some view-ext
+
+@SuppressLint("RestrictedApi")
+fun BottomNavigationView.disableShiftMode() {
+    val menuView = this.getChildAt(0) as BottomNavigationMenuView
+    try {
+        val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
+        shiftingMode.isAccessible = true
+        shiftingMode.setBoolean(menuView, false)
+        shiftingMode.isAccessible = false
+        for (i in 0 until menuView.childCount) {
+            val item = menuView.getChildAt(i) as BottomNavigationItemView
+            item.setShiftingMode(false)
+            item.setChecked(item.itemData.isChecked)
+        }
+    } catch (e: NoSuchFieldException) {
+        LL.e("Unable to get shift mode field", e)
+    } catch (e: IllegalAccessException) {
+        LL.e("Unable to change value of shift mode", e)
     }
 }
 
