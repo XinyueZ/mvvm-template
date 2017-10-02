@@ -7,14 +7,15 @@ import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+const val PAGE_SIZE = 100
 interface ProductsApi {
-    @GET("articles?pageSize=100")
+    @GET("articles?pageSize=$PAGE_SIZE")
     fun getArticles(): Flowable<ProductsData>
 
-    @GET("articles?pageSize=100")
+    @GET("articles?pageSize=$PAGE_SIZE")
     fun filterArticles(@Query("gender") keyword: String): Flowable<ProductsData>
 
-    @GET("brands?pageSize=100")
+    @GET("brands?pageSize=$PAGE_SIZE")
     fun getBrands(): Flowable<BrandsData>
 
     companion object {
