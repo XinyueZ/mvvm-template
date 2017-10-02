@@ -1,6 +1,9 @@
 <resources>
 
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="elevation">15dp</item>
+        <item name="android:elevation">15dp</item>
+    </style>
 
     <style name="CollectionProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:layout_width">match_parent</item>
