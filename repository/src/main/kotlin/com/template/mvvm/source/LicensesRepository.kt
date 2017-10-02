@@ -22,17 +22,17 @@ class LicensesRepository(app: Application,
     }
     override fun getAllLibraries(localOnly: Boolean) = Flowable.create<List<Library>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllLibraries().subscribe(
+            addToAutoDispose(remote.getAllLibraries().toList().subscribe(
                     {
-                        local.saveLibraries(it)
+                        if(it.first().isNotEmpty()) local.saveLibraries(it.first())
                     },
                     {}
             ))
         }
         if (localOnly) {
-            addToAutoDispose(local.getAllLibraries().subscribe(
+            addToAutoDispose(local.getAllLibraries().toList().subscribe(
                     {
-                        if(it.isNotEmpty()) emitter.onNext(it)
+                        if(it.first().isNotEmpty()) emitter.onNext(it.first())
                         else  remoteCallAndWrite()
                     },
                     {}

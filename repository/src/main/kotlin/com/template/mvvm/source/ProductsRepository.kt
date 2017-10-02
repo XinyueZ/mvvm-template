@@ -21,17 +21,17 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun getAllProducts(localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllProducts().subscribe(
+            addToAutoDispose(remote.getAllProducts().toList().subscribe(
                     {
-                        local.saveProducts(it)
+                        if(it.first().isNotEmpty()) local.saveProducts(it.first())
                     },
                     {}
             ))
         }
         if (localOnly) {
-            addToAutoDispose(local.getAllProducts().subscribe(
+            addToAutoDispose(local.getAllProducts().toList().subscribe(
                     {
-                        if(it.isNotEmpty()) emitter.onNext(it)
+                        if(it.first().isNotEmpty()) emitter.onNext(it.first())
                         else remoteCallAndWrite()
                     },
                     {}
@@ -45,17 +45,17 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun filterProduct(keyword: String, localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.filterProduct(keyword).subscribe(
+            addToAutoDispose(remote.filterProduct(keyword).toList().subscribe(
                     {
-                        local.saveProducts(it)
+                        if(it.first().isNotEmpty()) local.saveProducts(it.first())
                     },
                     {}
             ))
         }
         if (localOnly) {
-            addToAutoDispose(local.filterProduct(keyword).subscribe(
+            addToAutoDispose(local.filterProduct(keyword).toList().subscribe(
                     {
-                        if(it.isNotEmpty()) emitter.onNext(it)
+                        if(it.first().isNotEmpty())  emitter.onNext(it.first())
                         else remoteCallAndWrite()
                     },
                     {}
@@ -69,17 +69,17 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun getAllBrands(localOnly: Boolean) = Flowable.create<List<Brand>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllBrands().subscribe(
+            addToAutoDispose(remote.getAllBrands().toList().subscribe(
                     {
-                        local.saveBrands(it)
+                        if(it.first().isNotEmpty()) local.saveBrands(it.first())
                     },
                     {}
             ))
         }
         if (localOnly) {
-            addToAutoDispose(local.getAllBrands().subscribe(
+            addToAutoDispose(local.getAllBrands().toList().subscribe(
                     {
-                        if(it.isNotEmpty()) emitter.onNext(it)
+                        if(it.first().isNotEmpty())  emitter.onNext(it.first())
                         else remoteCallAndWrite()
                     },
                     {}
