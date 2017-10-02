@@ -28,36 +28,34 @@ import com.template.mvvm.LL
 import com.template.mvvm.R
 
 @BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
-fun a(view: View, width: Int, height: Int) {
+fun viewSize(view: View, width: Int, height: Int) {
     view.layoutParams.width = width
     view.layoutParams.height = height
 }
 
 @BindingAdapter("stopLoading")
-fun b(view: SwipeRefreshLayout, stopLoading: Boolean) {
+fun stopLoading(view: SwipeRefreshLayout, stopLoading: Boolean) {
     view.isRefreshing = !stopLoading
 }
 
 @BindingAdapter("reload")
-fun c(view: SwipeRefreshLayout, l: OnReloadListener) {
+fun reload(view: SwipeRefreshLayout, l: OnReloadListener) {
     view.setOnRefreshListener {
         l.onReload()
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun d(view: View, uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun remoteImageUri(view: View, uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     uri?.let {
         if (view is ImageView) {
-            d(view, arrayOf(uri),
-                    placeholderRes,
-                    errorDrawableRes)
+            remoteImageUris(view, arrayOf(uri), placeholderRes, errorDrawableRes)
         }
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUris", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun d(view: ImageView, imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun remoteImageUris(view: ImageView, imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
             when (errorDrawableRes > 0) {
@@ -118,12 +116,12 @@ private fun loadImage(view: ImageView, uri: Uri, placeholder: Drawable?, errorDr
 }
 
 @BindingAdapter("goBack")
-fun e(view: View, goBack: Boolean) {
+fun goBack(view: View, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun f(view: View, loaded: Boolean) {
+fun dataLoaded(view: View, loaded: Boolean) {
     view.visibility = if (loaded) {
         View.GONE
     } else {
@@ -132,7 +130,7 @@ fun f(view: View, loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun g(view: NavigationView, l: OnCommandListener) {
+fun command(view: NavigationView, l: OnCommandListener) {
     view.setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
@@ -142,12 +140,12 @@ fun g(view: NavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun h(toolbar: Toolbar, l: OnCommandListener) {
+fun command(toolbar: Toolbar, l: OnCommandListener) {
     toolbar.setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun i(view: BottomNavigationView, l: OnCommandListener) {
+fun command(view: BottomNavigationView, l: OnCommandListener) {
     view.disableShiftMode()
     view.setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
@@ -157,7 +155,7 @@ fun i(view: BottomNavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun j(view: View, l: OnItemCommandListener, vm: ViewModel) {
+fun command(view: View, l: OnItemCommandListener, vm: ViewModel) {
     view.setOnClickListener {
         l.onCommand(vm)
     }
