@@ -27,7 +27,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
-- [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4/repository): in [dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
+- [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4)
 
 #### Great update for modularization. App based on ```app```, ```core```, ```base```, ```repository``` and ```dependencies.gradle``` would define all libraries used in the application.
 
