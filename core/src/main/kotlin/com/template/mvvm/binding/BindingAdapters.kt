@@ -15,27 +15,27 @@ import com.template.mvvm.GlideApp
 import com.template.mvvm.R
 
 @BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
-fun setViewSize(view: View, width: Int, height: Int) {
+fun a(view: View, width: Int, height: Int) {
     view.layoutParams.width = width
     view.layoutParams.height = height
 }
 
 
 @BindingAdapter("stopLoading")
-fun stopLoading(view: SwipeRefreshLayout, stopLoading: Boolean) {
+fun b(view: SwipeRefreshLayout, stopLoading: Boolean) {
     view.isRefreshing = !stopLoading
 }
 
 
 @BindingAdapter("reload")
-fun swipeToReload(view: SwipeRefreshLayout, l: OnReloadListener) {
+fun c(view: SwipeRefreshLayout, l: OnReloadListener) {
     view.setOnRefreshListener {
         l.onReload()
     }
 }
 
 @BindingAdapter("remoteImageUri")
-fun remoteImageUri(view: View, uri: Uri?) {
+fun d(view: View, uri: Uri?) {
     uri?.let {
         if (view is ImageView)
             GlideApp.with(view).load(uri).into(view)
@@ -43,12 +43,12 @@ fun remoteImageUri(view: View, uri: Uri?) {
 }
 
 @BindingAdapter("goBack")
-fun goBack(view: View, goBack: Boolean) {
+fun e(view: View, goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun dataLoaded(view: View, loaded: Boolean) {
+fun f(view: View, loaded: Boolean) {
     view.visibility = if (loaded) {
         View.GONE
     } else {
@@ -57,7 +57,7 @@ fun dataLoaded(view: View, loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun command(view: NavigationView, l: OnCommandListener) {
+fun g(view: NavigationView, l: OnCommandListener) {
     view.setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
@@ -67,12 +67,12 @@ fun command(view: NavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun command(toolbar: Toolbar, l: OnCommandListener) {
+fun h(toolbar: Toolbar, l: OnCommandListener) {
     toolbar.setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun command(view: BottomNavigationView, l: OnCommandListener) {
+fun i(view: BottomNavigationView, l: OnCommandListener) {
     view.setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
 
@@ -81,7 +81,7 @@ fun command(view: BottomNavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun command(view: View, l: OnItemCommandListener, vm: ViewModel) {
+fun j(view: View, l: OnItemCommandListener, vm: ViewModel) {
     view.setOnClickListener {
         l.onCommand(vm)
     }

@@ -78,11 +78,11 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
     }
 
     protected fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
+        dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner)
             pageStill.value = false
             dataLoaded.set(true)
-            dataHaveNotReloaded.set(true)
         }
     }
 
