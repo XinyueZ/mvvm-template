@@ -110,6 +110,8 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     }
 
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
+        pageStill.value = true
+        dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner)

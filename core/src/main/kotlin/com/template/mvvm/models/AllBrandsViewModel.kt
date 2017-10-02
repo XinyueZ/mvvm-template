@@ -78,6 +78,7 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
     }
 
     private fun canNotLoadBrands(it: Throwable, lifecycleOwner: LifecycleOwner) {
+        dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_brands, R.string.error_retry) {
             loadAllBrands(lifecycleOwner)
