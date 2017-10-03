@@ -82,7 +82,11 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_brands, R.string.error_retry) {
             loadAllBrands(lifecycleOwner)
-            dataLoaded.set(true)
+
+            //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
+            brandListSource?.value?.let {
+                dataLoaded.set(it.isNotEmpty())
+            } ?: dataLoaded.set(false)
         }
     }
 
