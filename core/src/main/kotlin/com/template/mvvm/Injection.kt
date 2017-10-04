@@ -18,9 +18,9 @@ import com.template.mvvm.source.ProductsRepository
 import com.template.mvvm.source.Repository
 import com.template.mvvm.source.cache.LicensesCache
 import com.template.mvvm.source.cache.ProductsCache
+import com.template.mvvm.source.local.DB
 import com.template.mvvm.source.local.LicensesLocal
 import com.template.mvvm.source.local.ProductsLocal
-import com.template.mvvm.source.local.DB
 import com.template.mvvm.source.remote.LicensesApi
 import com.template.mvvm.source.remote.LicensesRemote
 import com.template.mvvm.source.remote.ProductsApi
@@ -50,6 +50,7 @@ class Injection private constructor(application: Application) {
         fun destroyInstance() {
             INSTANCE?.let {
                 with(it) {
+                    itemClassMap.clear()
                     DB_INSTANCE = null
                     DS_INSTANCE?.clear()
                     DS_INSTANCE = null
