@@ -53,7 +53,4 @@ class ProductsRepository(private val remote: ProductsDataSource,
             .observeOn(AndroidSchedulers.mainThread())
 
     override fun saveProducts(source: List<Product>) = local.saveProducts(source)
-    override fun clear() {
-        //TODO Some resource information should be freed here.
-    }
 }

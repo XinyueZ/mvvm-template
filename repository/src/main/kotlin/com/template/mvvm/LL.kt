@@ -76,7 +76,7 @@ class LL {
         val logger = LL()
 
         private fun mkMessage(msg: String): String {
-            return DEBUG_TAG + msg + DEBUG_TAG
+            return "[${Thread.currentThread().name}: $DEBUG_TAG $msg $DEBUG_TAG]"
         }
 
         private fun mkTag(): String {

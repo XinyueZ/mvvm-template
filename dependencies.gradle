@@ -77,6 +77,7 @@ ext {
             kotlinStdLib                        : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
             databindingCompiler                 : [group: "com.android.databinding", name: "compiler", version: gradle],
             kotlinCoroutines                    : [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: kotlinCoroutines],
+            kotlinCoroutinesAndroid             : [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-android", version: kotlinCoroutines],
 
             //RX
             rxJava                              : [group: "io.reactivex.rxjava2", name: "rxjava", version: rx],
@@ -182,6 +183,8 @@ ext {
             [configuration: "implementation", dependency: libs.kotlinStdLib],
             [configuration: "kapt", dependency: libs.databindingCompiler],
             [configuration: "implementation", dependency: libs.kotlinCoroutines],
+            [configuration: "implementation", dependency: libs.kotlinCoroutinesAndroid],
+
 
             //RX
             [configuration: "implementation", dependency: libs.rxJava],

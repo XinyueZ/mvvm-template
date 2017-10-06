@@ -3,13 +3,16 @@ package com.template.mvvm.source.remote
 import com.template.mvvm.LL
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
-import io.reactivex.Flowable
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.produce
 
 class LicensesRemote : LicensesDataSource {
-
-    override fun getAllLibraries(localOnly: Boolean) = LicensesApi.service
-            .getLibraries()
-            .flatMap {
+    override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = produce<List<Library>>(job) {
+        LicensesApi.service
+                .getLibraries().execute().takeIf {
+            it.isSuccessful
+        }?.let {
+            it.body()?.let {
                 val v: List<Library> = (mutableListOf<Library>()).apply {
                     it.licenses.forEach({ licenseData ->
                         licenseData.libraries.forEach({ libraryData ->
@@ -18,10 +21,8 @@ class LicensesRemote : LicensesDataSource {
                     })
                 }
                 LL.d("licenses loaded from net")
-                Flowable.just(v)
+                send(v)
             }
-
-    override fun clear() {
-        //TODO Some resource information should be freed here.
+        }
     }
 }

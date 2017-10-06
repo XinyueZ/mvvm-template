@@ -9,9 +9,9 @@ import com.template.mvvm.feeds.licenses.LicensesData
 import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
-import io.reactivex.Flowable
-import kotlinx.coroutines.experimental.channels.Channel
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.ProducerJob
+import kotlinx.coroutines.experimental.channels.produce
 import java.io.InputStreamReader
 
 class LicensesLocal(private val app: Application) : LicensesDataSource {
@@ -26,28 +26,34 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
 
     private val gson = Gson()
 
-    override fun getAllLibraries(localOnly: Boolean) = DB.INSTANCE.licensesLibrariesDao()
-            .getLibraryListCount()
-            .flatMap({
-                when (it[0].total == 0) {
-                    true -> loadLicensesFromAsset()
-                    false -> loadLicensesFromDB()
-                }
-            })
+    override suspend fun getAllLibraries(job: Job, localOnly: Boolean): ProducerJob<List<Library>> {
+        DB.INSTANCE.licensesLibrariesDao()
+                .getLibraryListCount().takeIf { it.isNotEmpty() }?.let {
+            return when (it[0].total == 0) {
+                true -> loadLicensesFromAsset(job)
+                else -> loadLicensesFromDB(job)
+            }
+        } ?: kotlin.run {
+            return produce(job) {
+                send(emptyList())
+            }
+        }
+    }
 
-    private fun loadLicensesFromDB() = DB.INSTANCE.licensesLibrariesDao()
-            .getLibraryList()
-            .flatMap({
-                val v: List<Library> = (mutableListOf<Library>()).apply {
-                    it.forEach {
-                        this.add(it.toLibrary())
-                    }
+    private suspend fun loadLicensesFromDB(job: Job) = produce<List<Library>>(job) {
+        val res = with(DB.INSTANCE.licensesLibrariesDao()
+                .getLibraryList()) {
+            mutableListOf<Library>().apply {
+                this@with.forEach {
+                    this.add(it.toLibrary())
                 }
-                LL.d("licenses loaded from db")
-                Flowable.just(v)
-            })
+            }
+        }
+        LL.d("licenses loaded from db")
+        send(res)
+    }
 
-    private fun loadLicensesFromAsset(): Flowable<List<Library>> {
+    private suspend fun loadLicensesFromAsset(job: Job) = produce(job) {
         val licensesData = gson.fromJson(InputStreamReader(app.assets
                 .open(LICENCES_LIST_JSON)), LicensesData::class.java)
         val v: List<Library> = mutableListOf<Library>().apply {
@@ -58,12 +64,12 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
             })
         }
         LL.d("licenses loaded from asset")
-        return Flowable.just(v)
+        send(v)
     }
 
-    override fun saveLibraries(source: List<Library>) = source.apply {
+    override suspend fun saveLibraries(job: Job, source: List<Library>) = produce<List<Library>>(job) {
         DB.INSTANCE.apply {
-            forEach {
+            source.forEach {
                 licensesLibrariesDao().insertLibrary(
                         LibraryEntity.from(it)
                 )
@@ -75,20 +81,11 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         LL.w("licenses write to db")
     }
 
-    override fun getLicense(app: Application, library: Library, localOnly: Boolean): Channel<String> {
-        val channel = super.getLicense(app, library, localOnly)
-        launch {
-            val source = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
-            channel.send(
-                    source.replace(YEAR, library.copyright ?: "")
-                            .replace(COPYRIGHT_HOLDERS, library.owner ?: "")
-            )
-            channel.close()
-        }
-        return channel
-    }
-
-    override fun clear() {
-        //TODO Some resource information should be freed here.
+    override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = produce(job) {
+        val source = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
+        send(source.replace(YEAR, library.copyright ?: "")
+                .replace(COPYRIGHT_HOLDERS, library.owner ?: "")
+        )
+        LL.w("read licenses detail from asset")
     }
 }

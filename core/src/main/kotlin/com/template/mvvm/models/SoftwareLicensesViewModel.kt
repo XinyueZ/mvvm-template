@@ -19,6 +19,9 @@ import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setUpTransform
 import io.reactivex.subjects.PublishSubject
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.channels.consumeEach
+import kotlinx.coroutines.experimental.launch
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val itemBinding: ItemBinding<SoftwareLicenseItemViewModel>) : AbstractViewModel() {
@@ -76,16 +79,21 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                     licenseDetailViewModel.value = when (lifecycleOwner) {
                         is Fragment -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            startJob(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it, false)) {
-                                vm.detail.set(it)
+                            launch(vmJob + UI) {
+                                repository.getLicense(lifecycleOwner.context.applicationContext as Application, vmJob, it, false).consumeEach {
+                                    LL.d("Show license detail")
+                                    vm.detail.set(it)
+                                }
                             }
-
                             vm
                         }
                         is FragmentActivity -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            startJob(repository.getLicense(lifecycleOwner.application, it, false)) {
-                                vm.detail.set(it)
+                            launch(vmJob + UI) {
+                                repository.getLicense(lifecycleOwner.application, vmJob, it, false).consumeEach {
+                                    LL.d("Show license detail")
+                                    vm.detail.set(it)
+                                }
                             }
                             vm
                         }
@@ -98,19 +106,19 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         libraryListSource?.let {
-            addToAutoDispose(
-                    repository.getAllLibraries(localOnly).subscribe(
-                            {
-                                LL.i("libraryListSource subscribe")
-                                libraryListSource?.value = it
-                            },
-                            {
-                                canNotLoadLicenses(it, lifecycleOwner)
-                                LL.d(it.message ?: "")
-                            })
-            )
+            launch(vmJob + UI) {
+                repository.getAllLibraries(vmJob, localOnly).consumeEach {
+                    LL.i("libraryListSource subscribe")
+                    libraryListSource?.value = it
+                }
+            }
         }
     }
+
+/*        {
+            canNotLoadLicenses(it, lifecycleOwner)
+            LL.d(it.message ?: "")
+        }*/
 
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
         pageStill.value = true

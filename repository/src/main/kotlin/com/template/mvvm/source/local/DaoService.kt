@@ -22,10 +22,10 @@ interface LicensesLibrariesDao {
     fun getLicenseList(): Flowable<List<LicenseEntity>>
 
     @Query("select * from libraries")
-    fun getLibraryList(): Flowable<List<LibraryEntity>>
+    fun getLibraryList(): List<LibraryEntity>
 
     @Query("select count(*) as total from libraries")
-    fun getLibraryListCount(): Flowable<List<Count>>
+    fun getLibraryListCount(): List<Count>
 
     class Count {
         var total: Int = 0

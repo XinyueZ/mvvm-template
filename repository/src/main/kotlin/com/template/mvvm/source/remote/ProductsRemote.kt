@@ -43,8 +43,4 @@ class ProductsRemote : ProductsDataSource {
                 }
                 Flowable.just(v)
             }
-
-    override fun clear() {
-        //TODO Some resource information should be freed here.
-    }
 }
