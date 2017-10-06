@@ -39,6 +39,7 @@ ext {
 
     //Kotlin
     def kotlin = ext.kotlin_version
+    def kotlinCoroutines = "0.19"
 
     //Gradle
     def gradle = ext.gradleVersion
@@ -75,6 +76,7 @@ ext {
             //KOTLIN
             kotlinStdLib                        : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
             databindingCompiler                 : [group: "com.android.databinding", name: "compiler", version: gradle],
+            kotlinCoroutines                    : [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: kotlinCoroutines],
 
             //RX
             rxJava                              : [group: "io.reactivex.rxjava2", name: "rxjava", version: rx],
@@ -179,6 +181,7 @@ ext {
             //KOTLIN
             [configuration: "implementation", dependency: libs.kotlinStdLib],
             [configuration: "kapt", dependency: libs.databindingCompiler],
+            [configuration: "implementation", dependency: libs.kotlinCoroutines],
 
             //RX
             [configuration: "implementation", dependency: libs.rxJava],
