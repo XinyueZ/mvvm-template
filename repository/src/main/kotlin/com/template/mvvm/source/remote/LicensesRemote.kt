@@ -7,7 +7,7 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.produce
 
 class LicensesRemote : LicensesDataSource {
-    override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = produce<List<Library>>(job) {
+    override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = produce(job) {
         LicensesApi.service
                 .getLibraries().execute().takeIf {
             it.isSuccessful

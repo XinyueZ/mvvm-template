@@ -19,6 +19,7 @@ import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setUpTransform
 import io.reactivex.subjects.PublishSubject
+import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
@@ -106,7 +107,10 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         libraryListSource?.let {
-            launch(vmJob + UI) {
+            launch(vmJob + UI + CoroutineExceptionHandler({ _, e ->
+                canNotLoadLicenses(e, lifecycleOwner)
+                LL.d(e.message ?: "")
+            })) {
                 repository.getAllLibraries(vmJob, localOnly).consumeEach {
                     LL.i("libraryListSource subscribe")
                     libraryListSource?.value = it
@@ -115,17 +119,12 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
         }
     }
 
-/*        {
-            canNotLoadLicenses(it, lifecycleOwner)
-            LL.d(it.message ?: "")
-        }*/
-
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
         pageStill.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
-            loadAllLicenses(lifecycleOwner)
+            loadAllLicenses(lifecycleOwner, false)
             pageStill.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
