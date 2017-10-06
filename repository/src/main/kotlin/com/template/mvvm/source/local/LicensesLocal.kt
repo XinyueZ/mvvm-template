@@ -6,10 +6,12 @@ import com.template.mvvm.LL
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.feeds.licenses.LicensesData
+import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
-import com.template.mvvm.source.ext.read
 import io.reactivex.Flowable
+import kotlinx.coroutines.experimental.channels.Channel
+import kotlinx.coroutines.experimental.launch
 import java.io.InputStreamReader
 
 class LicensesLocal(private val app: Application) : LicensesDataSource {
@@ -73,13 +75,18 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         LL.w("licenses write to db")
     }
 
-    override fun getLicense(app: Application, library: Library, localOnly: Boolean) = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
-            .flatMap {
-                io.reactivex.Single.just(
-                        it
-                                .replace(YEAR, library.copyright ?: "")
-                                .replace(COPYRIGHT_HOLDERS, library.owner ?: ""))
-            }
+    override fun getLicense(app: Application, library: Library, localOnly: Boolean): Channel<String> {
+        val channel = super.getLicense(app, library, localOnly)
+        launch {
+            val source = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
+            channel.send(
+                    source.replace(YEAR, library.copyright ?: "")
+                            .replace(COPYRIGHT_HOLDERS, library.owner ?: "")
+            )
+            channel.close()
+        }
+        return channel
+    }
 
     override fun clear() {
         //TODO Some resource information should be freed here.

@@ -76,14 +76,17 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
                     licenseDetailViewModel.value = when (lifecycleOwner) {
                         is Fragment -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it, false)
-                                    .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
+                            startJob(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it, false)) {
+                                vm.detail.set(it)
+                            }
+
                             vm
                         }
                         is FragmentActivity -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            addToAutoDispose(repository.getLicense(lifecycleOwner.application, it, false)
-                                    .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
+                            startJob(repository.getLicense(lifecycleOwner.application, it, false)) {
+                                vm.detail.set(it)
+                            }
                             vm
                         }
                         else -> LicenseDetailViewModel()

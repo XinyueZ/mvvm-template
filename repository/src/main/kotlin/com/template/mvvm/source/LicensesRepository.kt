@@ -5,9 +5,9 @@ import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.channels.Channel
 
 class LicensesRepository(app: Application,
                          private val remote: LicensesDataSource,
@@ -29,7 +29,7 @@ class LicensesRepository(app: Application,
 
     override fun saveLibraries(source: List<Library>) = local.saveLibraries(source)
 
-    override fun getLicense(app: Application, library: Library, localOnly: Boolean): Single<String> {
+    override fun getLicense(app: Application, library: Library, localOnly: Boolean): Channel<String> {
         return local.getLicense(app, library)
     }
 
