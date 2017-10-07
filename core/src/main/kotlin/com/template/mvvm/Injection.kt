@@ -30,7 +30,6 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 import java.util.*
@@ -104,7 +103,7 @@ class Injection private constructor(application: Application) {
     private fun provideLocalLicensesRepository(application: Application) = LicensesLocal(application)
     private fun provideCacheLicensesRepository() = LicensesCache()
 
-    private val itemClassMap =  WeakHashMap<String, ItemBinding<*>>()
+    private val itemClassMap = WeakHashMap<String, ItemBinding<*>>()
     fun addItemBindingOf(modelClass: Class<*>, itemBinding: ItemBinding<*>) {
         itemClassMap.put(modelClass.name, itemBinding)
     }
@@ -130,10 +129,10 @@ class Injection private constructor(application: Application) {
     }
 
     fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(gsonFactory)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
+            .build().create(ProductsApi::class.java)
 
     fun provideLicensesApiService() = Retrofit.Builder().client(client).baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(gsonFactory)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(LicensesApi::class.java)
+            .build().create(LicensesApi::class.java)
 }
 
 private object UriAdapter : JsonDeserializer<Uri> {

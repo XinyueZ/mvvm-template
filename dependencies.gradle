@@ -14,10 +14,7 @@ ext {
     def constraint = "1+"
     def multiDex = "1+"
 
-    //Rx, Retrofit
-    def rx = "2+"
-    def rxAndroid = "2+"
-    def rxAdapter = "2.3.0"
+    // Retrofit
     def retrofit = "2.3.0"
 
     //Material Design Guideline
@@ -79,14 +76,9 @@ ext {
             kotlinCoroutines                    : [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: kotlinCoroutines],
             kotlinCoroutinesAndroid             : [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-android", version: kotlinCoroutines],
 
-            //RX
-            rxJava                              : [group: "io.reactivex.rxjava2", name: "rxjava", version: rx],
-            rxAndroid                           : [group: "io.reactivex.rxjava2", name: "rxandroid", version: rxAndroid],
-
             //RETROFIT
             retrofit                            : [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit],
             converterGson                       : [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit],
-            adapterRxJava2                      : [group: "com.squareup.retrofit2", name: "adapter-rxjava2", version: rxAdapter],
 
             //MATERIAL DESIGN GUIDELINE
             materialDesignGuideline             : [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
@@ -185,15 +177,9 @@ ext {
             [configuration: "implementation", dependency: libs.kotlinCoroutines],
             [configuration: "implementation", dependency: libs.kotlinCoroutinesAndroid],
 
-
-            //RX
-            [configuration: "implementation", dependency: libs.rxJava],
-            [configuration: "implementation", dependency: libs.rxAndroid],
-
             //RETROFIT
             [configuration: "implementation", dependency: libs.retrofit],
             [configuration: "implementation", dependency: libs.converterGson],
-            [configuration: "implementation", dependency: libs.adapterRxJava2],
 
             //MATERIAL DESIGN GUIDELINE
             [configuration: "implementation", dependency: libs.materialDesignGuideline,
