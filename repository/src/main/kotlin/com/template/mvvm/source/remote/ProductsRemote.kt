@@ -4,7 +4,6 @@ import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
-import io.reactivex.Flowable
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.produce
 
@@ -20,7 +19,7 @@ class ProductsRemote : ProductsDataSource {
                         add(Product.from(it))
                     }
                     LL.d("products loaded from net")
-                    Flowable.just(this)
+                    send(this)
                 }
             }
         }

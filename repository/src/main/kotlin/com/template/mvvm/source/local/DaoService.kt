@@ -8,7 +8,6 @@ import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
-import io.reactivex.Flowable
 
 @Dao
 interface LicensesLibrariesDao {
@@ -17,9 +16,6 @@ interface LicensesLibrariesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLibrary(libraryEntity: LibraryEntity)
-
-    @Query("select * from licenses")
-    fun getLicenseList(): Flowable<List<LicenseEntity>>
 
     @Query("select * from libraries")
     fun getLibraryList(): List<LibraryEntity>

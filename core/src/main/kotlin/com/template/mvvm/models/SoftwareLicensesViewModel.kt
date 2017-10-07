@@ -18,9 +18,9 @@ import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setUpTransform
-import io.reactivex.subjects.PublishSubject
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 import me.tatarka.bindingcollectionadapter2.ItemBinding
@@ -74,34 +74,32 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
     private fun bindTapHandlers(it: List<SoftwareLicenseItemViewModel>, lifecycleOwner: LifecycleOwner) {
         it.forEach {
-            addToAutoDispose(it.viewModelTapped.subscribe({
-                it?.let {
+            launch(vmJob + UI) {
+                it.viewModelTapped.consumeEach {
                     // Tell UI to open a UI for license detail.
                     licenseDetailViewModel.value = when (lifecycleOwner) {
                         is Fragment -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            launch(vmJob + UI) {
-                                repository.getLicense(lifecycleOwner.context.applicationContext as Application, vmJob, it, false).consumeEach {
-                                    LL.d("Show license detail")
-                                    vm.detail.set(it)
-                                }
+
+                            repository.getLicense(lifecycleOwner.context.applicationContext as Application, vmJob, it, false).consumeEach {
+                                LL.d("Show license detail")
+                                vm.detail.set(it)
+
                             }
                             vm
                         }
                         is FragmentActivity -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            launch(vmJob + UI) {
-                                repository.getLicense(lifecycleOwner.application, vmJob, it, false).consumeEach {
-                                    LL.d("Show license detail")
-                                    vm.detail.set(it)
-                                }
+                            repository.getLicense(lifecycleOwner.application, vmJob, it, false).consumeEach {
+                                LL.d("Show license detail")
+                                vm.detail.set(it)
                             }
                             vm
                         }
                         else -> LicenseDetailViewModel()
                     }
                 }
-            }, { LL.d(it.message ?: "") }))
+            }
         }
     }
 
@@ -161,7 +159,7 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()
 
-    val viewModelTapped = PublishSubject.create<Library>()
+    val viewModelTapped = Channel<Library>()
 
     companion object {
         fun from(library: Library): SoftwareLicenseItemViewModel {
@@ -174,7 +172,9 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     }
 
     fun onCommand(vm: ViewModel) {
-        viewModelTapped.onNext(library)
+        launch(vmJob + UI) {
+            viewModelTapped.send(library)
+        }
     }
 }
 

@@ -14,7 +14,6 @@ import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.BrandList
 import com.template.mvvm.ext.setUpTransform
-import io.reactivex.subjects.PublishSubject
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
@@ -114,7 +113,6 @@ class BrandItemViewModel : AbstractViewModel() {
     lateinit var brand: Brand
     val logo = ObservableField<Uri>()
 
-    val viewModelTapped = PublishSubject.create<Brand>()
 
     var itemWidth: Int = 0
     var itemHeight: Int = 0
@@ -131,7 +129,7 @@ class BrandItemViewModel : AbstractViewModel() {
     fun isEmpty() = brand.logo == Uri.EMPTY
 
     fun onCommand(vm: ViewModel) {
-        viewModelTapped.onNext(brand)
+
     }
 }
 
