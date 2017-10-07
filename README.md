@@ -35,6 +35,10 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 1. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) instead  [Rx-Android](https://github.com/ReactiveX/RxAndroid) to support repository
 2. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) to implement [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
 
+See:
+
+![arch-coroutines](media/arch-coroutines.png)
+
 - [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4)
 
 #### Great update for modularization. App based on ```app```, ```core```, ```base```, ```repository``` and ```dependencies.gradle``` would define all libraries used in the application.

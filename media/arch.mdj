@@ -1410,11 +1410,11 @@
 											"containerExtending": false,
 											"left": 445,
 											"top": 398,
-											"width": 59,
+											"width": 119,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "RxJava",
+											"text": "Kotlin Coroutines",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1482,7 +1482,7 @@
 									"containerExtending": false,
 									"left": 440,
 									"top": 391,
-									"width": 69,
+									"width": 129,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -1510,7 +1510,7 @@
 							"containerExtending": false,
 							"left": 440,
 							"top": 376,
-							"width": 69,
+							"width": 129,
 							"height": 40,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
@@ -3188,7 +3188,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "RxJava",
+					"name": "Kotlin Coroutines",
 					"visibility": "public"
 				},
 				{
