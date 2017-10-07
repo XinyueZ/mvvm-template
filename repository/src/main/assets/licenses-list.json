@@ -19,20 +19,6 @@
       "description": "Apache License, Version 2.0",
       "libraries": [
         {
-          "name": "com.google.firebase:firebase-*",
-          "owner": "Firebase, Google"
-        },
-        {
-          "name": "io.reactivex:rxjava",
-          "owner": "Netflix, Inc.",
-          "copyright": "2013"
-        },
-        {
-          "name": "io.reactivex:rxandroid",
-          "owner": "The RxAndroid authors",
-          "copyright": "2015"
-        },
-        {
           "name": "com.google.code.gson:gson",
           "owner": "Google Inc.",
           "copyright": "2008"
@@ -55,10 +41,6 @@
           "name": "okhttp",
           "owner": "Square, Inc.",
           "copyright": "2016"
-        },
-        {
-          "name": "easypermissions",
-          "owner": "github.com/googlesamples/easypermissions"
         },
         {
           "name": "material-design-guideline",

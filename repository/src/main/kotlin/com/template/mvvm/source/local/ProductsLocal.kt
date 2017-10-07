@@ -43,6 +43,8 @@ class ProductsLocal : ProductsDataSource {
 
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Unit>(job) {
         DB.INSTANCE.apply {
+            productDao().deleteBrands()
+            productDao().deleteProducts()
             source.forEach {
                 productDao().insertProduct(
                         ProductEntity.from(it)

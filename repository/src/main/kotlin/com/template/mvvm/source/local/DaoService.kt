@@ -23,6 +23,9 @@ interface LicensesLibrariesDao {
     @Query("select count(*) as total from libraries")
     fun getLibraryListCount(): List<Count>
 
+    @Query("delete from libraries")
+    fun deleteLibraries()
+
     class Count {
         var total: Int = 0
     }
@@ -44,6 +47,12 @@ interface ProductDao {
 
     @Query("select * from brands")
     fun getBrandList(): List<BrandEntity>
+
+    @Query("delete from brands")
+    fun deleteBrands()
+
+    @Query("delete from products")
+    fun deleteProducts()
 }
 
 

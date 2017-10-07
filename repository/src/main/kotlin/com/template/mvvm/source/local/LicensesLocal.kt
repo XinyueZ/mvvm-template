@@ -69,6 +69,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
 
     override suspend fun saveLibraries(job: Job, source: List<Library>) = produce<Unit>(job) {
         DB.INSTANCE.apply {
+            licensesLibrariesDao().deleteLibraries()
             source.forEach {
                 licensesLibrariesDao().insertLibrary(
                         LibraryEntity.from(it)
