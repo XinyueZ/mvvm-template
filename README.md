@@ -15,7 +15,8 @@ Don't think that you can include it and build with your code directly. These cod
 
 - General [GOF](https://en.wikipedia.org/wiki/Design_Patterns) patterns
 - Repository pattern to provide data
-- [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
+- Background task(job) implementation before [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4)
+-- [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
 -- An implementation of actor model based on [Rx-Android](https://github.com/ReactiveX/RxAndroid)
 
 
@@ -27,7 +28,12 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
-- [v0.5] in [dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
+- [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/feature/dev)
+
+> Removed [Rx-Android](https://github.com/ReactiveX/RxAndroid)
+
+1. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) instead  [Rx-Android](https://github.com/ReactiveX/RxAndroid)
+2. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) to implement [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
 
 - [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4)
 
