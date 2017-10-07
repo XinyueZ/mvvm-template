@@ -3,54 +3,73 @@ package com.template.mvvm.source
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.produce
 
 class ProductsRepository(private val remote: ProductsDataSource,
                          private val local: ProductsDataSource,
                          private val cache: ProductsDataSource
 ) : ProductsDataSource {
 
-    override fun getAllProducts(localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
-        val remoteCallAndWrite = { local.saveProducts(remote.getAllProducts().blockingFirst()) }
+    override suspend fun getAllProducts(job: Job, localOnly: Boolean) = produce(job) {
         if (localOnly) {
-            emitter.onNext(local.getAllProducts().blockingFirst().takeIf { it.isNotEmpty() }
-                    ?: remoteCallAndWrite()
-            )
-            return@create
+            local.getAllProducts(job, localOnly).receiveOrNull()?.let {
+                it.takeIf { it.isNotEmpty() }?.let {
+                    send(it)
+                } ?: run {
+                    remote.getAllProducts(job, localOnly).receiveOrNull()?.let {
+                        send(it)
+                        local.saveProducts(job, it)
+                    }
+                }
+            }
+        } else {
+            remote.getAllProducts(job, localOnly).receiveOrNull()?.let {
+                send(it)
+                local.saveProducts(job, it)
+            }
         }
-        emitter.onNext(remoteCallAndWrite())
-    }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-    override fun filterProduct(keyword: String, localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
-        val remoteCallAndWrite = { local.saveProducts(remote.filterProduct(keyword).blockingFirst()) }
+    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce(job) {
         if (localOnly) {
-            emitter.onNext(local.filterProduct(keyword).blockingFirst().takeIf { it.isNotEmpty() }
-                    ?: remoteCallAndWrite()
-            )
-            return@create
+            local.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
+                it.takeIf { it.isNotEmpty() }?.let {
+                    send(it)
+                } ?: run {
+                    remote.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
+                        send(it)
+                        local.saveProducts(job, it)
+                    }
+                }
+            }
+        } else {
+            remote.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
+                send(it)
+                local.saveProducts(job, it)
+            }
         }
-        emitter.onNext(remoteCallAndWrite())
-    }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-    override fun getAllBrands(localOnly: Boolean) = Flowable.create<List<Brand>>({ emitter ->
-        val remoteCallAndWrite = { local.saveBrands(remote.getAllBrands().blockingFirst()) }
+    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce<List<Brand>>(job) {
         if (localOnly) {
-            emitter.onNext(local.getAllBrands().blockingFirst().takeIf { it.isNotEmpty() }
-                    ?: remoteCallAndWrite()
-            )
-            return@create
+            local.getAllBrands(job, localOnly).receiveOrNull()?.let {
+                it.takeIf { it.isNotEmpty() }?.let {
+                    send(it)
+                } ?: run {
+                    remote.getAllBrands(job, localOnly).receiveOrNull()?.let {
+                        send(it)
+                        local.saveBrands(job, it)
+                    }
+                }
+            }
+        } else {
+            remote.getAllBrands(job, localOnly).receiveOrNull()?.let {
+                send(it)
+                local.saveBrands(job, it)
+            }
         }
-        emitter.onNext(remoteCallAndWrite())
-    }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+    }
 
-    override fun saveProducts(source: List<Product>) = local.saveProducts(source)
+    override suspend fun saveProducts(job: Job, source: List<Product>) = local.saveProducts(job, source)
 }

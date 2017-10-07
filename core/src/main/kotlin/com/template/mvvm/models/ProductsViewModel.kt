@@ -15,6 +15,10 @@ import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
+import kotlinx.coroutines.experimental.CoroutineExceptionHandler
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.channels.consumeEach
+import kotlinx.coroutines.experimental.launch
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 open class ProductsViewModel(protected val repository: ProductsDataSource, val itemBinding: ItemBinding<ProductItemViewModel>) : AbstractViewModel() {
@@ -62,18 +66,15 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
 
     protected open fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         productListSource?.let {
-            addToAutoDispose(
-                    repository.getAllProducts(localOnly)
-                            .subscribe(
-                                    {
-                                        productListSource?.value = it
-                                        LL.i("productListSource subscribe")
-                                    },
-                                    {
-                                        canNotLoadProducts(it, lifecycleOwner)
-                                        LL.d(it.message ?: "")
-                                    })
-            )
+            launch(vmJob + UI + CoroutineExceptionHandler({ _, e ->
+                canNotLoadProducts(e, lifecycleOwner)
+                LL.d(e.message ?: "")
+            })) {
+                repository.getAllProducts(vmJob, localOnly).consumeEach {
+                    LL.i("productListSource subscribe")
+                    productListSource?.value = it
+                }
+            }
         }
     }
 

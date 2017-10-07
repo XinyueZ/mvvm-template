@@ -2,12 +2,13 @@ package com.template.mvvm.contract
 
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
-import io.reactivex.Flowable
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.produce
 
 interface ProductsDataSource : DataSource {
-    fun getAllProducts(localOnly: Boolean = false): Flowable<List<Product>>
-    fun filterProduct(keyword: String, localOnly: Boolean = true): Flowable<List<Product>>
-    fun getAllBrands(localOnly: Boolean = false): Flowable<List<Brand>>
-    fun saveProducts(source: List<Product>): List<Product> = source
-    fun saveBrands(source: List<Brand>): List<Brand> = source
+    suspend fun getAllProducts(job: Job, localOnly: Boolean = false) = produce<List<Product>>(job) {}
+    suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean = true) = produce<List<Product>>(job) {}
+    suspend fun getAllBrands(job: Job, localOnly: Boolean = false) = produce<List<Brand>>(job) {}
+    suspend fun saveProducts(job: Job, source: List<Product>) = produce<Unit>(job) {}
+    suspend fun saveBrands(job: Job, source: List<Brand>) = produce<Unit>(job) {}
 }

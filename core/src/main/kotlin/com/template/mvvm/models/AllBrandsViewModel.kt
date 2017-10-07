@@ -15,6 +15,10 @@ import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.BrandList
 import com.template.mvvm.ext.setUpTransform
 import io.reactivex.subjects.PublishSubject
+import kotlinx.coroutines.experimental.CoroutineExceptionHandler
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.channels.consumeEach
+import kotlinx.coroutines.experimental.launch
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBinding: ItemBinding<BrandItemViewModel>) : AbstractViewModel() {
@@ -62,18 +66,15 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
 
     private fun loadAllBrands(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         brandListSource?.let {
-            addToAutoDispose(
-                    repository.getAllBrands(localOnly)
-                            .subscribe(
-                                    {
-                                        brandListSource?.value = it
-                                        LL.i("brandListSource subscribe")
-                                    },
-                                    {
-                                        canNotLoadBrands(it, lifecycleOwner)
-                                        LL.d(it.message ?: "")
-                                    })
-            )
+            launch(vmJob + UI + CoroutineExceptionHandler({ _, e ->
+                canNotLoadBrands(e, lifecycleOwner)
+                LL.d(e.message ?: "")
+            })) {
+                repository.getAllBrands(vmJob, localOnly).consumeEach {
+                    LL.i("brandListSource subscribe")
+                    brandListSource?.value = it
+                }
+            }
         }
     }
 
@@ -81,7 +82,7 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_brands, R.string.error_retry) {
-            loadAllBrands(lifecycleOwner)
+            loadAllBrands(lifecycleOwner, false)
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
             brandListSource?.value?.let {

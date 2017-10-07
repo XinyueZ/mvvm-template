@@ -41,13 +41,13 @@ interface ProductDao {
     fun insertBrand(brandEntity: BrandEntity)
 
     @Query("select * from products")
-    fun getProductList(): Flowable<List<ProductEntity>>
+    fun getProductList(): List<ProductEntity>
 
     @Query("select * from products where genders=:keyword")
-    fun filterProductList(keyword: String?): Flowable<List<ProductEntity>>
+    fun filterProductList(keyword: String?): List<ProductEntity>
 
     @Query("select * from brands")
-    fun getBrandList(): Flowable<List<BrandEntity>>
+    fun getBrandList(): List<BrandEntity>
 }
 
 
