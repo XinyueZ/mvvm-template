@@ -28,7 +28,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
-- [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/feature/dev)
+- [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
 
 > Removed [Rx-Android](https://github.com/ReactiveX/RxAndroid), or RxJava
 
