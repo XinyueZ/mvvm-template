@@ -68,7 +68,6 @@ ext {
             lifeCycleCompiler                   : [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion],
             roomRuntime                         : [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion],
             roomCompiler                        : [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion],
-            roomRx                              : [group: "android.arch.persistence.room", name: "rxjava2", version: archLifecycleVersion],
 
             //KOTLIN
             kotlinStdLib                        : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
@@ -169,7 +168,6 @@ ext {
             [configuration: "kapt", dependency: libs.lifeCycleCompiler],
             [configuration: "implementation", dependency: libs.roomRuntime],
             [configuration: "kapt", dependency: libs.roomCompiler],
-            [configuration: "implementation", dependency: libs.roomRx],
 
             //KOTLIN
             [configuration: "implementation", dependency: libs.kotlinStdLib],
