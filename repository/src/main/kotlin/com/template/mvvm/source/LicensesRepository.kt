@@ -15,21 +15,7 @@ class LicensesRepository(app: Application,
 ) : LicensesDataSource {
 
     override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = produce(job) {
-        if (localOnly) {
-            local.getAllLibraries(job, localOnly).receiveOrNull()?.let {
-                it.takeIf { it.isNotEmpty() }?.let {
-                    send(it)
-                } ?: run {
-                    remote.getAllLibraries(job, localOnly).receiveOrNull()?.let {
-                        local.saveLibraries(job, it).consumeEach {
-                            local.getAllLibraries(job, localOnly).receiveOrNull()?.let {
-                                send(it)
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
+        val remoteSaveLoadLocal: (suspend () -> Unit) = {
             remote.getAllLibraries(job, localOnly).receiveOrNull()?.let {
                 local.saveLibraries(job, it).consumeEach {
                     local.getAllLibraries(job, localOnly).receiveOrNull()?.let {
@@ -37,6 +23,18 @@ class LicensesRepository(app: Application,
                     }
                 }
             }
+        }
+
+        if (localOnly) {
+            local.getAllLibraries(job, localOnly).receiveOrNull()?.let {
+                it.takeIf { it.isNotEmpty() }?.let {
+                    send(it)
+                } ?: run {
+                    remoteSaveLoadLocal()
+                }
+            }
+        } else {
+            remoteSaveLoadLocal()
         }
     }
 

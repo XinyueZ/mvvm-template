@@ -13,21 +13,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
 ) : ProductsDataSource {
 
     override suspend fun getAllProducts(job: Job, localOnly: Boolean) = produce(job) {
-        if (localOnly) {
-            local.getAllProducts(job, localOnly).receiveOrNull()?.let {
-                it.takeIf { it.isNotEmpty() }?.let {
-                    send(it)
-                } ?: run {
-                    remote.getAllProducts(job, localOnly).receiveOrNull()?.let {
-                        local.saveProducts(job, it).consumeEach {
-                            local.getAllProducts(job, localOnly).receiveOrNull()?.let {
-                                send(it)
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
+        val remoteSaveLoadLocal: (suspend () -> Unit) = {
             remote.getAllProducts(job, localOnly).receiveOrNull()?.let {
                 local.saveProducts(job, it).consumeEach {
                     local.getAllProducts(job, localOnly).receiveOrNull()?.let {
@@ -36,24 +22,21 @@ class ProductsRepository(private val remote: ProductsDataSource,
                 }
             }
         }
-    }
-
-    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce(job) {
         if (localOnly) {
-            local.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
+            local.getAllProducts(job, localOnly).receiveOrNull()?.let {
                 it.takeIf { it.isNotEmpty() }?.let {
                     send(it)
                 } ?: run {
-                    remote.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
-                        local.saveProducts(job, it).consumeEach {
-                            local.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
-                                send(it)
-                            }
-                        }
-                    }
+                    remoteSaveLoadLocal()
                 }
             }
         } else {
+            remoteSaveLoadLocal()
+        }
+    }
+
+    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce(job) {
+        val remoteSaveLoadLocal: (suspend () -> Unit) = {
             remote.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
                 local.saveProducts(job, it).consumeEach {
                     local.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
@@ -62,24 +45,21 @@ class ProductsRepository(private val remote: ProductsDataSource,
                 }
             }
         }
-    }
-
-    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce(job) {
         if (localOnly) {
-            local.getAllBrands(job, localOnly).receiveOrNull()?.let {
+            local.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
                 it.takeIf { it.isNotEmpty() }?.let {
                     send(it)
                 } ?: run {
-                    remote.getAllBrands(job, localOnly).receiveOrNull()?.let {
-                        local.saveBrands(job, it).consumeEach {
-                            local.getAllBrands(job, localOnly).receiveOrNull()?.let {
-                                send(it)
-                            }
-                        }
-                    }
+                    remoteSaveLoadLocal()
                 }
             }
         } else {
+            remoteSaveLoadLocal()
+        }
+    }
+
+    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce(job) {
+        val remoteSaveLoadLocal: (suspend () -> Unit) = {
             remote.getAllBrands(job, localOnly).receiveOrNull()?.let {
                 local.saveBrands(job, it).consumeEach {
                     local.getAllBrands(job, localOnly).receiveOrNull()?.let {
@@ -87,6 +67,17 @@ class ProductsRepository(private val remote: ProductsDataSource,
                     }
                 }
             }
+        }
+        if (localOnly) {
+            local.getAllBrands(job, localOnly).receiveOrNull()?.let {
+                it.takeIf { it.isNotEmpty() }?.let {
+                    send(it)
+                } ?: run {
+                    remoteSaveLoadLocal()
+                }
+            }
+        } else {
+            remoteSaveLoadLocal()
         }
     }
 
