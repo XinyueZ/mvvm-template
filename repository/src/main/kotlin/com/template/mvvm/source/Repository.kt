@@ -6,12 +6,13 @@ import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.products.Product
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.ProducerJob
 
 class Repository(private val licensesRepository: LicensesDataSource, private val productsRepository: ProductsDataSource) : LicensesDataSource, ProductsDataSource {
     // Application's libraries, licenses...
     override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = licensesRepository.getAllLibraries(job, localOnly)
 
-    override suspend fun saveLibraries(job: Job, source: List<Library>) = licensesRepository.saveLibraries(job, source)
+    override suspend fun saveLibraries(job: Job, source: List<Library>): ProducerJob<Byte> = licensesRepository.saveLibraries(job, source)
 
     override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = licensesRepository.getLicense(app, job, library, localOnly)
 
@@ -22,7 +23,7 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
 
     override suspend fun getAllBrands(job: Job, localOnly: Boolean) = productsRepository.getAllBrands(job, localOnly)
 
-    override suspend fun saveProducts(job: Job, source: List<Product>) = productsRepository.saveProducts(job, source)
+    override suspend fun saveProducts(job: Job, source: List<Product>): ProducerJob<Byte> = productsRepository.saveProducts(job, source)
 
     // Other...
     override fun clear(): Boolean {

@@ -4,6 +4,8 @@ import android.app.Application
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.ProducerJob
+import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.channels.produce
 
 class LicensesRepository(app: Application,
@@ -19,20 +21,26 @@ class LicensesRepository(app: Application,
                     send(it)
                 } ?: run {
                     remote.getAllLibraries(job, localOnly).receiveOrNull()?.let {
-                        send(it)
-                        local.saveLibraries(job, it)
+                        local.saveLibraries(job, it).consumeEach {
+                            local.getAllLibraries(job, localOnly).receiveOrNull()?.let {
+                                send(it)
+                            }
+                        }
                     }
                 }
             }
         } else {
             remote.getAllLibraries(job, localOnly).receiveOrNull()?.let {
-                send(it)
-                local.saveLibraries(job, it)
+                local.saveLibraries(job, it).consumeEach {
+                    local.getAllLibraries(job, localOnly).receiveOrNull()?.let {
+                        send(it)
+                    }
+                }
             }
         }
     }
 
-    override suspend fun saveLibraries(job: Job, source: List<Library>) = local.saveLibraries(job, source)
+    override suspend fun saveLibraries(job: Job, source: List<Library>): ProducerJob<Byte> = local.saveLibraries(job, source)
 
     override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = local.getLicense(app, job, library)
 }

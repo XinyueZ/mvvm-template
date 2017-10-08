@@ -1,9 +1,10 @@
 package com.template.mvvm.source
 
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.ProducerJob
+import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.channels.produce
 
 class ProductsRepository(private val remote: ProductsDataSource,
@@ -18,15 +19,21 @@ class ProductsRepository(private val remote: ProductsDataSource,
                     send(it)
                 } ?: run {
                     remote.getAllProducts(job, localOnly).receiveOrNull()?.let {
-                        send(it)
-                        local.saveProducts(job, it)
+                        local.saveProducts(job, it).consumeEach {
+                            local.getAllProducts(job, localOnly).receiveOrNull()?.let {
+                                send(it)
+                            }
+                        }
                     }
                 }
             }
         } else {
             remote.getAllProducts(job, localOnly).receiveOrNull()?.let {
-                send(it)
-                local.saveProducts(job, it)
+                local.saveProducts(job, it).consumeEach {
+                    local.getAllProducts(job, localOnly).receiveOrNull()?.let {
+                        send(it)
+                    }
+                }
             }
         }
     }
@@ -38,15 +45,21 @@ class ProductsRepository(private val remote: ProductsDataSource,
                     send(it)
                 } ?: run {
                     remote.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
-                        send(it)
-                        local.saveProducts(job, it)
+                        local.saveProducts(job, it).consumeEach {
+                            local.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
+                                send(it)
+                            }
+                        }
                     }
                 }
             }
         } else {
             remote.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
-                send(it)
-                local.saveProducts(job, it)
+                local.saveProducts(job, it).consumeEach {
+                    local.filterProduct(job, keyword, localOnly).receiveOrNull()?.let {
+                        send(it)
+                    }
+                }
             }
         }
     }
@@ -58,18 +71,24 @@ class ProductsRepository(private val remote: ProductsDataSource,
                     send(it)
                 } ?: run {
                     remote.getAllBrands(job, localOnly).receiveOrNull()?.let {
-                        send(it)
-                        local.saveBrands(job, it)
+                        local.saveBrands(job, it).consumeEach {
+                            local.getAllBrands(job, localOnly).receiveOrNull()?.let {
+                                send(it)
+                            }
+                        }
                     }
                 }
             }
         } else {
             remote.getAllBrands(job, localOnly).receiveOrNull()?.let {
-                send(it)
-                local.saveBrands(job, it)
+                local.saveBrands(job, it).consumeEach {
+                    local.getAllBrands(job, localOnly).receiveOrNull()?.let {
+                        send(it)
+                    }
+                }
             }
         }
     }
 
-    override suspend fun saveProducts(job: Job, source: List<Product>) = local.saveProducts(job, source)
+    override suspend fun saveProducts(job: Job, source: List<Product>): ProducerJob<Byte> = local.saveProducts(job, source)
 }

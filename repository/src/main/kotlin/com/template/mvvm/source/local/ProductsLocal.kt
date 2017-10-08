@@ -44,23 +44,25 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Unit>(job) {
+    override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
                 insertProduct(ProductEntity.from(it))
                 insertBrand(BrandEntity.from(it.brand))
             }
+            send(1)
+            LL.w("products write to db")
         }
-        LL.w("products write to db")
     }
 
-    override suspend fun saveBrands(job: Job, source: List<Brand>) = produce<Unit>(job) {
+    override suspend fun saveBrands(job: Job, source: List<Brand>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
             mutableListOf<Brand>().apply {
                 getBrandList().forEach { this.add(it.toBrand()) }
                 val diffResult = DiffUtil.calculateDiff(BrandsDiffCallback(this, source))
                 diffResult.dispatchUpdatesTo(BrandListUpdateCallback(this))
                 source.forEach { insertBrand(BrandEntity.from(it)) }
+                send(1)
                 LL.w("brands write to db")
             }
         }
