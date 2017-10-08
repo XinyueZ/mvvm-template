@@ -48,11 +48,11 @@ interface ProductDao {
     @Query("select * from brands")
     fun getBrandList(): List<BrandEntity>
 
-    @Query("delete from brands")
-    fun deleteBrands()
+    @Delete
+    fun deleteBrand(brandEntity: BrandEntity)
 
-    @Query("delete from products")
-    fun deleteProducts()
+    @Query("select * from products where brand_brand_key=:brandKey")
+    fun getBrandedProductList(brandKey: String?): List<ProductEntity>
 }
 
 

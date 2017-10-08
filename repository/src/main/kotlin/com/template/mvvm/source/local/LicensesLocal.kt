@@ -71,22 +71,14 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
     }
 
     override suspend fun saveLibraries(job: Job, source: List<Library>) = produce<Unit>(job) {
-        DB.INSTANCE.apply {
+        DB.INSTANCE.licensesLibrariesDao().apply {
             mutableListOf<Library>().apply {
-                licensesLibrariesDao().getLibraryList().forEach {
-                    this.add(it.toLibrary())
-                }
+                getLibraryList().forEach { this.add(it.toLibrary()) }
                 val diffResult = DiffUtil.calculateDiff(DifferentCallback(this, source))
                 diffResult.dispatchUpdatesTo(DifferentListUpdateCallback(this))
-
-
                 source.forEach {
-                    licensesLibrariesDao().insertLibrary(
-                            LibraryEntity.from(it)
-                    )
-                    licensesLibrariesDao().insertLicense(
-                            LicenseEntity.from(it.license)
-                    )
+                    insertLibrary(LibraryEntity.from(it))
+                    insertLicense(LicenseEntity.from(it.license))
                 }
                 LL.w("licenses write to db")
             }
@@ -118,7 +110,9 @@ class DifferentListUpdateCallback(private val oldList: List<Library>) : ListUpda
         LL.d("licenses onRemoved: $position, $count")
         val topToDel = position + count - 1
         for (i in position..topToDel) {
-            DB.INSTANCE.licensesLibrariesDao().deleteLibrary(LibraryEntity.from(oldList[i]))
+            val library = oldList[i]
+            LL.d("[library: ${library.name}] onRemoved at $position, total: $count")
+            DB.INSTANCE.licensesLibrariesDao().deleteLibrary(LibraryEntity.from(library))
         }
     }
 
