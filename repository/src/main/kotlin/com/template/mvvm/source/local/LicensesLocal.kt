@@ -1,6 +1,9 @@
 package com.template.mvvm.source.local
 
 import android.app.Application
+import android.support.v7.util.DiffUtil
+import android.support.v7.util.ListUpdateCallback
+import android.text.TextUtils
 import com.google.gson.Gson
 import com.template.mvvm.LL
 import com.template.mvvm.contract.LicensesDataSource
@@ -69,17 +72,25 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
 
     override suspend fun saveLibraries(job: Job, source: List<Library>) = produce<Unit>(job) {
         DB.INSTANCE.apply {
-            licensesLibrariesDao().deleteLibraries()
-            source.forEach {
-                licensesLibrariesDao().insertLibrary(
-                        LibraryEntity.from(it)
-                )
-                licensesLibrariesDao().insertLicense(
-                        LicenseEntity.from(it.license)
-                )
+            mutableListOf<Library>().apply {
+                licensesLibrariesDao().getLibraryList().forEach {
+                    this.add(it.toLibrary())
+                }
+                val diffResult = DiffUtil.calculateDiff(DifferentCallback(this, source))
+                diffResult.dispatchUpdatesTo(DifferentListUpdateCallback(this))
+
+
+                source.forEach {
+                    licensesLibrariesDao().insertLibrary(
+                            LibraryEntity.from(it)
+                    )
+                    licensesLibrariesDao().insertLicense(
+                            LicenseEntity.from(it.license)
+                    )
+                }
+                LL.w("licenses write to db")
             }
         }
-        LL.w("licenses write to db")
     }
 
     override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = produce(job) {
@@ -89,4 +100,38 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         )
         LL.w("read licenses detail from asset")
     }
+}
+
+class DifferentCallback(private val oldList: List<Library>, private val newList: List<Library>) : DiffUtil.Callback() {
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = TextUtils.equals(oldList[oldItemPosition].name, newList[newItemPosition].name)
+
+    override fun getOldListSize() = oldList.size
+
+    override fun getNewListSize() = newList.size
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) = TextUtils.equals(oldList[oldItemPosition].name, newList[newItemPosition].name)
+}
+
+class DifferentListUpdateCallback(private val oldList: List<Library>) : ListUpdateCallback {
+
+    override fun onRemoved(position: Int, count: Int) {
+        LL.d("licenses onRemoved: $position, $count")
+        val topToDel = position + count - 1
+        for (i in position..topToDel) {
+            DB.INSTANCE.licensesLibrariesDao().deleteLibrary(LibraryEntity.from(oldList[i]))
+        }
+    }
+
+    override fun onChanged(position: Int, count: Int, payload: Any?) {
+        LL.d("licenses onChanged: $position, $count")
+    }
+
+    override fun onMoved(fromPosition: Int, toPosition: Int) {
+        LL.d("licenses onMoved: $fromPosition, $toPosition")
+    }
+
+    override fun onInserted(position: Int, count: Int) {
+        LL.d("licenses onInserted: $position, $count")
+    }
+
 }

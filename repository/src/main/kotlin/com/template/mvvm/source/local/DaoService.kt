@@ -1,9 +1,6 @@
 package com.template.mvvm.source.local
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.local.entities.products.BrandEntity
@@ -25,6 +22,9 @@ interface LicensesLibrariesDao {
 
     @Query("delete from libraries")
     fun deleteLibraries()
+
+    @Delete
+    fun deleteLibrary(libraryEntity: LibraryEntity)
 
     class Count {
         var total: Int = 0
