@@ -51,7 +51,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
         }
     }
 
-    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce<List<Brand>>(job) {
+    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce(job) {
         if (localOnly) {
             local.getAllBrands(job, localOnly).receiveOrNull()?.let {
                 it.takeIf { it.isNotEmpty() }?.let {
