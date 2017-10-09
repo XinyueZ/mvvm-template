@@ -28,39 +28,39 @@ import com.template.mvvm.LL
 import com.template.mvvm.R
 
 @BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
-fun viewSizePlaceHolder(view: View, width: Int, height: Int) {
-    view.layoutParams.width = width
-    view.layoutParams.height = height
+fun View.viewSizePlaceHolder(width: Int, height: Int) {
+    layoutParams.width = width
+    layoutParams.height = height
 }
 
 @BindingAdapter("stopLoading")
-fun stopLoadingPlaceHolder(view: SwipeRefreshLayout, stopLoading: Boolean) {
-    view.isRefreshing = !stopLoading
+fun SwipeRefreshLayout.stopLoadingPlaceHolder(stopLoading: Boolean) {
+    isRefreshing = !stopLoading
 }
 
 @BindingAdapter("reload")
-fun reloadPlaceHolder(view: SwipeRefreshLayout, l: OnReloadListener) {
-    view.setOnRefreshListener {
+fun SwipeRefreshLayout.reloadPlaceHolder(l: OnReloadListener) {
+    setOnRefreshListener {
         l.onReload()
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun remoteImageUriPlaceHolder(view: View, uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun View.remoteImageUriPlaceHolder(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     uri?.let {
-        if (view is ImageView) {
-            remoteImageUrisPlaceHolder(view, arrayOf(uri), placeholderRes, errorDrawableRes)
+        if (this is ImageView) {
+            remoteImageUrisPlaceHolder(arrayOf(uri), placeholderRes, errorDrawableRes)
         }
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUris", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun remoteImageUrisPlaceHolder(view: ImageView, imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun ImageView.remoteImageUrisPlaceHolder(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
             when (errorDrawableRes > 0) {
-                true -> view.setImageResource(errorDrawableRes)
-                false -> view.setImageBitmap(null)
+                true -> setImageResource(errorDrawableRes)
+                false -> setImageBitmap(null)
             }
             return
         }
@@ -69,12 +69,12 @@ fun remoteImageUrisPlaceHolder(view: ImageView, imageUris: Array<Uri>?, @Drawabl
     imageUris?.let {
         val error: Drawable? = when (errorDrawableRes <= 0) {
             true -> null
-            else -> AppCompatResources.getDrawable(view.context, errorDrawableRes)
+            else -> AppCompatResources.getDrawable(context, errorDrawableRes)
         }
 
         val placeholder: Drawable? = when (placeholderRes <= 0) {
             true -> null
-            else -> AppCompatResources.getDrawable(view.context, placeholderRes)
+            else -> AppCompatResources.getDrawable(context, placeholderRes)
         }
 
         var pos = 0
@@ -89,7 +89,7 @@ fun remoteImageUrisPlaceHolder(view: ImageView, imageUris: Array<Uri>?, @Drawabl
                 when (pos < (imageUris.size - 1)) {
                     true -> {
                         pos++
-                        loadImagePlaceHolder(view, imageUris[pos], placeholder, error, this)
+                        loadImagePlaceHolder(imageUris[pos], placeholder, error, this)
                         return true
                     }
                 }
@@ -97,12 +97,12 @@ fun remoteImageUrisPlaceHolder(view: ImageView, imageUris: Array<Uri>?, @Drawabl
             }
         }
 
-        loadImagePlaceHolder(view, imageUris[pos], placeholder, error, listener)
+        loadImagePlaceHolder(imageUris[pos], placeholder, error, listener)
     }
 }
 
-private fun loadImagePlaceHolder(view: ImageView, uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
-    GlideApp.with(view)
+private fun ImageView.loadImagePlaceHolder(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
+    GlideApp.with(this)
             .asBitmap()
             .load(uri)
             .format(DecodeFormat.PREFER_RGB_565)
@@ -112,17 +112,17 @@ private fun loadImagePlaceHolder(view: ImageView, uri: Uri, placeholder: Drawabl
             .skipMemoryCache(false)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .listener(listener)
-            .into(view)
+            .into(this)
 }
 
 @BindingAdapter("goBack")
-fun goBackPlaceHolder(view: View, goBack: Boolean) {
-    if (goBack) ActivityCompat.finishAfterTransition(view.context as Activity)
+fun View.goBackPlaceHolder(goBack: Boolean) {
+    if (goBack) ActivityCompat.finishAfterTransition(context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun dataLoadedPlaceHolder(view: View, loaded: Boolean) {
-    view.visibility = if (loaded) {
+fun View.dataLoadedPlaceHolder(loaded: Boolean) {
+    visibility = if (loaded) {
         View.GONE
     } else {
         View.VISIBLE
@@ -130,8 +130,8 @@ fun dataLoadedPlaceHolder(view: View, loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun commandPlaceHolder(view: NavigationView, l: OnCommandListener) {
-    view.setNavigationItemSelectedListener {
+fun NavigationView.commandPlaceHolder(l: OnCommandListener) {
+    setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
 
@@ -140,14 +140,14 @@ fun commandPlaceHolder(view: NavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun commandPlaceHolder(toolbar: Toolbar, l: OnCommandListener) {
-    toolbar.setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
+fun Toolbar.commandPlaceHolder(l: OnCommandListener) {
+    setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun commandPlaceHolder(view: BottomNavigationView, l: OnCommandListener) {
-    view.disableShiftMode()
-    view.setOnNavigationItemSelectedListener {
+fun BottomNavigationView.commandPlaceHolder(l: OnCommandListener) {
+    disableShiftMode()
+    setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
 
         true
@@ -155,8 +155,8 @@ fun commandPlaceHolder(view: BottomNavigationView, l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun commandPlaceHolder(view: View, l: OnItemCommandListener, vm: ViewModel) {
-    view.setOnClickListener {
+fun View.commandPlaceHolder(l: OnItemCommandListener, vm: ViewModel) {
+    setOnClickListener {
         l.onCommand(vm)
     }
 }
