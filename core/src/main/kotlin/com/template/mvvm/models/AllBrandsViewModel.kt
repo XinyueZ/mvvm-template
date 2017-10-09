@@ -65,10 +65,10 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
 
     private fun loadAllBrands(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         brandListSource?.let {
-            launch(vmJob + UI + CoroutineExceptionHandler({ _, e ->
+            launch(UI + CoroutineExceptionHandler({ _, e ->
                 canNotLoadBrands(e, lifecycleOwner)
                 LL.d(e.message ?: "")
-            })) {
+            }) + vmJob) {
                 repository.getAllBrands(vmJob, localOnly).consumeEach {
                     LL.i("brandListSource subscribe")
                     brandListSource?.value = it
@@ -112,7 +112,6 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
 class BrandItemViewModel : AbstractViewModel() {
     lateinit var brand: Brand
     val logo = ObservableField<Uri>()
-
 
     var itemWidth: Int = 0
     var itemHeight: Int = 0

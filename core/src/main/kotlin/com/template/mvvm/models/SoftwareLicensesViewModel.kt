@@ -74,7 +74,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
     private fun bindTapHandlers(it: List<SoftwareLicenseItemViewModel>, lifecycleOwner: LifecycleOwner) {
         it.forEach {
-            launch(vmJob + UI) {
+            launch(UI + vmJob) {
                 it.viewModelTapped.consumeEach {
                     // Tell UI to open a UI for license detail.
                     licenseDetailViewModel.value = when (lifecycleOwner) {
@@ -105,10 +105,10 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
 
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         libraryListSource?.let {
-            launch(vmJob + UI + CoroutineExceptionHandler({ _, e ->
+            launch(UI + CoroutineExceptionHandler({ _, e ->
                 canNotLoadLicenses(e, lifecycleOwner)
                 LL.d(e.message ?: "")
-            })) {
+            }) + vmJob) {
                 repository.getAllLibraries(vmJob, localOnly).consumeEach {
                     LL.i("libraryListSource subscribe")
                     libraryListSource?.value = it
@@ -172,7 +172,7 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     }
 
     fun onCommand(vm: ViewModel) {
-        launch(vmJob + UI) {
+        launch(UI + vmJob) {
             viewModelTapped.send(library)
         }
     }

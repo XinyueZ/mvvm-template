@@ -66,10 +66,10 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
 
     protected open fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         productListSource?.let {
-            launch(vmJob + UI + CoroutineExceptionHandler({ _, e ->
+            launch(UI + CoroutineExceptionHandler({ _, e ->
                 canNotLoadProducts(e, lifecycleOwner)
                 LL.d(e.message ?: "")
-            })) {
+            }) + vmJob) {
                 repository.getAllProducts(vmJob, localOnly).consumeEach {
                     LL.i("productListSource subscribe")
                     productListSource?.value = it
