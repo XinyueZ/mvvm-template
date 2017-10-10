@@ -11,6 +11,7 @@ ext {
     // App dependencies
     def supportLibraryVersion = '26.1.0'
     def archLifecycleVersion = "1.0.0-alpha9-1"
+    def paging = "1.0.0-alpha1"
     def constraint = "1+"
     def multiDex = "1+"
 
@@ -68,6 +69,7 @@ ext {
             lifeCycleCompiler                   : [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion],
             roomRuntime                         : [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion],
             roomCompiler                        : [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion],
+            paging                        : [group: "android.arch.paging", name: "runtime", version: paging],
 
             //KOTLIN
             kotlinStdLib                        : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
@@ -168,6 +170,7 @@ ext {
             [configuration: "kapt", dependency: libs.lifeCycleCompiler],
             [configuration: "implementation", dependency: libs.roomRuntime],
             [configuration: "kapt", dependency: libs.roomCompiler],
+            [configuration: "implementation", dependency: libs.paging],
 
             //KOTLIN
             [configuration: "implementation", dependency: libs.kotlinStdLib],
