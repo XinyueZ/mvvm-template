@@ -49,3 +49,5 @@
 -keepclassmembernames class kotlinx.** {
     volatile <fields>;
 }
+
+-keep class * implements android.arch.lifecycle.GeneratedAdapter {<init>(...);}
