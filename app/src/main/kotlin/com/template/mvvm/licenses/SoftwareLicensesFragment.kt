@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
 import android.view.View
 import com.template.mvvm.AppBaseFragment
+import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentSoftwareLicensesBinding
 import com.template.mvvm.ext.setupErrorSnackbar
@@ -21,6 +22,7 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
         binding = FragmentSoftwareLicensesBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
+                        vmItem = BR.vm
                         registerLifecycleOwner(activity)
                         view.setupErrorSnackbar(this@SoftwareLicensesFragment, this.onError)
                     }

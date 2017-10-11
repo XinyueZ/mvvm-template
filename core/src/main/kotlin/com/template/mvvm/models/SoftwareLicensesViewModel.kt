@@ -1,16 +1,16 @@
 package com.template.mvvm.models
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableArrayList
+import android.arch.lifecycle.*
+import android.arch.paging.LivePagedListProvider
+import android.arch.paging.PagedList
+import android.arch.paging.TiledDataSource
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
@@ -23,9 +23,8 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
-import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val itemBinding: ItemBinding<SoftwareLicenseItemViewModel>) : AbstractViewModel() {
+class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : AbstractViewModel() {
 
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
@@ -48,14 +47,22 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
     private var libraryListSource: LibraryList? = null
 
     //For recyclerview data
-    val libraryItemVmList = ObservableArrayList<SoftwareLicenseItemViewModel>()
+    var libraryItemVmList: ObservableField<LiveData<PagedList<ViewModel>>> = ObservableField()
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         libraryListSource = libraryListSource ?: LibraryList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
-                    libraryItemVmList.clear()
-                    libraryItemVmList.addAll(it)
+                    libraryItemVmList.set(
+                            DataProvider(it).create(
+                                    0,
+                                    PagedList.Config.Builder()
+                                            .setPageSize(it.size)
+                                            .setInitialLoadSizeHint(it.size)
+                                            .setEnablePlaceholders(true)
+                                            .build())
+                    )
+
                     pageStill.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
@@ -176,6 +183,21 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
             viewModelTapped.send(library)
         }
     }
+
+    override fun equals(other: Any?) =
+            if (other == null) false
+            else TextUtils.equals(library.name, ((other as SoftwareLicenseItemViewModel).library.name))
+
+}
+
+class DataProvider(list: List<ViewModel>) : LivePagedListProvider<Int, ViewModel>() {
+    private val dataSource = KeyedVmQueryDataSource(list)
+    override fun createDataSource() = dataSource
+}
+
+class KeyedVmQueryDataSource(private var list: List<ViewModel>) : TiledDataSource<ViewModel>() {
+    override fun countItems() = list.size
+    override fun loadRange(startPosition: Int, count: Int) = list
 }
 
 

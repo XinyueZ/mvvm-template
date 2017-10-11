@@ -5,11 +5,15 @@
 
     <data>
 
-        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers"/>
+        <import type="com.template.mvvm.R"/>
 
         <variable
             name="vm"
             type="com.template.mvvm.models.SoftwareLicensesViewModel"/>
+
+        <variable
+            name="vmItem"
+            type="int"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -44,15 +48,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:stopLoading="@{vm.dataHaveNotReloaded}"
-            app:reload="@{vm::onReload}">
+            app:reload="@{vm::onReload}"
+            app:stopLoading="@{vm.dataHaveNotReloaded}">
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:itemBinding="@{vm.itemBinding}"
-                app:items="@{vm.libraryItemVmList}"
-                app:layoutManager="@{LayoutManagers.linear()}"
+                app:itemList="@{vm.libraryItemVmList}"
+                app:itemLayout="@{R.layout.item_software_license}"
+                app:vmItemLayout="@{vmItem}"
                 />
         </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -61,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:dataLoaded="@{vm.dataLoaded}" />
+            app:dataLoaded="@{vm.dataLoaded}"/>
 
 
     </android.support.design.widget.CoordinatorLayout>
