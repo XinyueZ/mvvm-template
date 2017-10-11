@@ -7,13 +7,15 @@
 
         <import type="com.template.mvvm.R"/>
 
-        <variable
-            name="vm"
-            type="com.template.mvvm.models.SoftwareLicensesViewModel"/>
 
         <variable
             name="vmItem"
             type="int"/>
+
+
+        <variable
+            name="vm"
+            type="com.template.mvvm.models.SoftwareLicensesViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -54,9 +56,10 @@
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:itemList="@{vm.libraryItemVmList}"
                 app:itemLayout="@{R.layout.item_software_license}"
+                app:itemList="@{vm.libraryItemVmList}"
                 app:vmItemLayout="@{vmItem}"
+                app:layout='@{"linear"}'
                 />
         </android.support.v4.widget.SwipeRefreshLayout>
 

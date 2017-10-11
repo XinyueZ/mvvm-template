@@ -20,9 +20,11 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentActivity
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.content.res.AppCompatResources
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.load.DecodeFormat
@@ -35,14 +37,20 @@ import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.recycler.MvvmListAdapter
 
-@BindingAdapter(value = *arrayOf("itemList", "itemLayout", "vmItemLayout"), requireAll = true)
-fun RecyclerView.setUpBindingEEEEE(
+@BindingAdapter(value = *arrayOf("itemList", "itemLayout", "vmItemLayout", "layout"), requireAll = true)
+fun RecyclerView.setUpBindingXXXXX(
         itemList: LiveData<PagedList<ViewModel>>?,
         @LayoutRes itemLayout: Int,
-        vmItemLayout: Int
+        vmItemLayout: Int,
+        layoutManager: String
 ) {
     if (adapter == null) {
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        this.layoutManager = if (TextUtils.equals(layoutManager, "linear"))
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        else {
+            val sp = (layoutManager.split("-"))[1].toInt()
+            GridLayoutManager(context, sp)
+        }
         val mvvmListAdapter = MvvmListAdapter(itemLayout, vmItemLayout)
         adapter = mvvmListAdapter
     }
@@ -51,34 +59,34 @@ fun RecyclerView.setUpBindingEEEEE(
 }
 
 @BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
-fun View.viewSizeEEEEE(width: Int, height: Int) {
+fun View.viewSizeXXXXX(width: Int, height: Int) {
     layoutParams.width = width
     layoutParams.height = height
 }
 
 @BindingAdapter("stopLoading")
-fun SwipeRefreshLayout.stopLoadingEEEEE(stopLoading: Boolean) {
+fun SwipeRefreshLayout.stopLoadingXXXXX(stopLoading: Boolean) {
     isRefreshing = !stopLoading
 }
 
 @BindingAdapter("reload")
-fun SwipeRefreshLayout.reloadEEEEE(l: OnReloadListener) {
+fun SwipeRefreshLayout.reloadXXXXX(l: OnReloadListener) {
     setOnRefreshListener {
         l.onReload()
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun View.remoteImageUriEEEEE(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun View.remoteImageUriXXXXX(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     uri?.let {
         if (this is ImageView) {
-            remoteImageUrisEEEEE(arrayOf(uri), placeholderRes, errorDrawableRes)
+            remoteImageUrisXXXXX(arrayOf(uri), placeholderRes, errorDrawableRes)
         }
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUris", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun ImageView.remoteImageUrisEEEEE(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun ImageView.remoteImageUrisXXXXX(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
             when (errorDrawableRes > 0) {
@@ -112,7 +120,7 @@ fun ImageView.remoteImageUrisEEEEE(imageUris: Array<Uri>?, @DrawableRes placehol
                 when (pos < (imageUris.size - 1)) {
                     true -> {
                         pos++
-                        loadImageEEEEE(imageUris[pos], placeholder, error, this)
+                        loadImageXXXXX(imageUris[pos], placeholder, error, this)
                         return true
                     }
                 }
@@ -120,11 +128,11 @@ fun ImageView.remoteImageUrisEEEEE(imageUris: Array<Uri>?, @DrawableRes placehol
             }
         }
 
-        loadImageEEEEE(imageUris[pos], placeholder, error, listener)
+        loadImageXXXXX(imageUris[pos], placeholder, error, listener)
     }
 }
 
-private fun ImageView.loadImageEEEEE(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
+private fun ImageView.loadImageXXXXX(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
     GlideApp.with(this)
             .asBitmap()
             .load(uri)
@@ -139,12 +147,12 @@ private fun ImageView.loadImageEEEEE(uri: Uri, placeholder: Drawable?, errorDraw
 }
 
 @BindingAdapter("goBack")
-fun View.goBackEEEEE(goBack: Boolean) {
+fun View.goBackXXXXX(goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun View.dataLoadedEEEEE(loaded: Boolean) {
+fun View.dataLoadedXXXXX(loaded: Boolean) {
     visibility = if (loaded) {
         View.GONE
     } else {
@@ -153,7 +161,7 @@ fun View.dataLoadedEEEEE(loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun NavigationView.commandEEEEE(l: OnCommandListener) {
+fun NavigationView.commandXXXXX(l: OnCommandListener) {
     setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
@@ -163,12 +171,12 @@ fun NavigationView.commandEEEEE(l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun Toolbar.commandEEEEE(l: OnCommandListener) {
+fun Toolbar.commandXXXXX(l: OnCommandListener) {
     setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun BottomNavigationView.commandEEEEE(l: OnCommandListener) {
+fun BottomNavigationView.commandXXXXX(l: OnCommandListener) {
     disableShiftMode()
     setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
@@ -178,7 +186,7 @@ fun BottomNavigationView.commandEEEEE(l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun View.commandEEEEE(l: OnItemCommandListener, vm: ViewModel) {
+fun View.commandXXXXX(l: OnItemCommandListener, vm: ViewModel) {
     setOnClickListener {
         l.onCommand(vm)
     }

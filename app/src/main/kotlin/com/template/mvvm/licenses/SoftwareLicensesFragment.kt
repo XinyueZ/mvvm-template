@@ -21,8 +21,8 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSoftwareLicensesBinding.bind(view)
                 .apply {
+                    vmItem = BR.vm
                     vm = obtainViewModel().apply {
-                        vmItem = BR.vm
                         registerLifecycleOwner(activity)
                         view.setupErrorSnackbar(this@SoftwareLicensesFragment, this.onError)
                     }

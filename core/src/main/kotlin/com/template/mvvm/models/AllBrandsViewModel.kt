@@ -1,9 +1,10 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableArrayList
+import android.arch.paging.PagedList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.net.Uri
@@ -14,13 +15,13 @@ import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.BrandList
 import com.template.mvvm.ext.setUpTransform
+import com.template.mvvm.recycler.MvvmListDataProvider
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
-import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBinding: ItemBinding<BrandItemViewModel>) : AbstractViewModel() {
+class AllBrandsViewModel(private val repository: ProductsDataSource) : AbstractViewModel() {
 
     // One progress-indicator for loading, only for one.
     val dataLoaded = ObservableBoolean(false)
@@ -35,20 +36,26 @@ class AllBrandsViewModel(private val repository: ProductsDataSource, val itemBin
     private var brandListSource: BrandList? = null
 
     //For recyclerview data
-    val brandItemVmList = ObservableArrayList<BrandItemViewModel>()
+    val brandItemVmList: ObservableField<LiveData<PagedList<ViewModel>>> = ObservableField()
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         brandListSource = brandListSource ?: BrandList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
-                    brandItemVmList.clear()
-                    brandItemVmList.addAll(it
-                            .filter { !it.isEmpty() }
-                            .map {
-                                it.itemWidth = itemWidth
-                                it.itemHeight = itemHeight
-                                it
-                            }
+                    brandItemVmList.set(
+                            MvvmListDataProvider(it
+                                    .filter { !it.isEmpty() }
+                                    .map {
+                                        it.itemWidth = itemWidth
+                                        it.itemHeight = itemHeight
+                                        it
+                                    }).create(
+                                    0,
+                                    PagedList.Config.Builder()
+                                            .setPageSize(it.size)
+                                            .setInitialLoadSizeHint(it.size)
+                                            .setEnablePlaceholders(true)
+                                            .build())
                     )
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"

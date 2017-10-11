@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
 import android.view.View
 import com.template.mvvm.AppBaseFragment
+import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentAllBrandsBinding
 import com.template.mvvm.ext.getDimensionPixel
@@ -23,6 +24,7 @@ class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentAllBrandsBinding.bind(view)
                 .apply {
+                    vmItem = BR.vm
                     vm = obtainViewModel().apply {
                         itemWidth = getScreenSize().width / 2 - getDimensionPixel(R.dimen.general_padding) * 2
                         itemHeight = itemWidth

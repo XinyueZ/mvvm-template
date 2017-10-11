@@ -5,7 +5,11 @@
 
     <data>
 
-        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers"/>
+        <import type="com.template.mvvm.R"/>
+
+        <variable
+            name="vmItem"
+            type="int"/>
 
         <variable
             name="vm"
@@ -14,7 +18,7 @@
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
 
         <android.support.v4.widget.SwipeRefreshLayout
@@ -23,12 +27,14 @@
             app:reload="@{vm::onReload}"
             app:stopLoading="@{vm.dataHaveNotReloaded}">
 
+
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:itemBinding="@{vm.itemBinding}"
-                app:items="@{vm.productItemVmList}"
-                app:layoutManager="@{LayoutManagers.linear()}"
+                app:itemLayout="@{R.layout.item_product}"
+                app:itemList="@{vm.productItemVmList}"
+                app:vmItemLayout="@{vmItem}"
+                app:layout='@{"linear"}'
                 />
         </android.support.v4.widget.SwipeRefreshLayout>
 

@@ -42,8 +42,6 @@ ext {
     //Gradle
     def gradle = ext.gradleVersion
 
-    //Recycler-view data-binding
-    def bindingCollectionAdapter = "2.2.0"
 
     libs = [
             //TEST
@@ -94,9 +92,6 @@ ext {
             stethoHelper                        : [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho],
             curlLoggerInterceptor               : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
 
-            //RECYCLER-VIEW DATA-BINDING
-            bindingCollectionAdapter            : [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter", version: bindingCollectionAdapter],
-            bindingCollectionAdapterRecyclerView: [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter-recyclerview", version: bindingCollectionAdapter],
     ]
 
     plugins = [
@@ -198,10 +193,6 @@ ext {
             [configuration: "implementation", dependency: libs.stetho],
             [configuration: "implementation", dependency: libs.stethoHelper],
             [configuration: "debugImplementation", dependency: libs.curlLoggerInterceptor],
-
-            //RECYCLER-VIEW DATA-BINDING
-            [configuration: "implementation", dependency: libs.bindingCollectionAdapter],
-            [configuration: "implementation", dependency: libs.bindingCollectionAdapterRecyclerView],
     ]
 
     coreDependencies = baseDependencies

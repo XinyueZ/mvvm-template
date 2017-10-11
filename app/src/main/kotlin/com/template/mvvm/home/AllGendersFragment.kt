@@ -4,6 +4,7 @@ import android.content.Context
 import android.databinding.ViewDataBinding
 import android.view.View
 import com.template.mvvm.AppBaseFragment
+import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
 import com.template.mvvm.ext.setupErrorSnackbar
@@ -20,6 +21,7 @@ class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
+                    vmItem = BR.vm
                     vm = obtainViewModel().apply {
                         activity.apply {
                             registerLifecycleOwner(this)

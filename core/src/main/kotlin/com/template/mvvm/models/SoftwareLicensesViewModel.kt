@@ -2,9 +2,7 @@ package com.template.mvvm.models
 
 import android.app.Application
 import android.arch.lifecycle.*
-import android.arch.paging.LivePagedListProvider
 import android.arch.paging.PagedList
-import android.arch.paging.TiledDataSource
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
@@ -18,6 +16,7 @@ import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setUpTransform
+import com.template.mvvm.recycler.MvvmListDataProvider
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel
@@ -54,7 +53,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
             setUpTransform(lifecycleOwner) {
                 it?.let {
                     libraryItemVmList.set(
-                            DataProvider(it).create(
+                            MvvmListDataProvider(it).create(
                                     0,
                                     PagedList.Config.Builder()
                                             .setPageSize(it.size)
@@ -190,14 +189,6 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
 
 }
 
-class DataProvider(list: List<ViewModel>) : LivePagedListProvider<Int, ViewModel>() {
-    private val dataSource = KeyedVmQueryDataSource(list)
-    override fun createDataSource() = dataSource
-}
 
-class KeyedVmQueryDataSource(private var list: List<ViewModel>) : TiledDataSource<ViewModel>() {
-    override fun countItems() = list.size
-    override fun loadRange(startPosition: Int, count: Int) = list
-}
 
 

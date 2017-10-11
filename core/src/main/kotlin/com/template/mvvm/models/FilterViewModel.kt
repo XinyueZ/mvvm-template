@@ -7,9 +7,8 @@ import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
-import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-abstract class FilterViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : ProductsViewModel(repository, itemBinding) {
+abstract class FilterViewModel(repository: ProductsDataSource) : ProductsViewModel(repository) {
     abstract fun filterKeyword(): String
 
     override fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean) {
@@ -27,12 +26,12 @@ abstract class FilterViewModel(repository: ProductsDataSource, itemBinding: Item
     }
 }
 
-class MenViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : FilterViewModel(repository, itemBinding) {
+class MenViewModel(repository: ProductsDataSource) : FilterViewModel(repository) {
     override fun filterKeyword() = "MALE"
 }
 
-class WomenViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : FilterViewModel(repository, itemBinding) {
+class WomenViewModel(repository: ProductsDataSource) : FilterViewModel(repository) {
     override fun filterKeyword() = "FEMALE"
 }
 
-class AllGendersViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : ProductsViewModel(repository, itemBinding)
+class AllGendersViewModel(repository: ProductsDataSource) : ProductsViewModel(repository)

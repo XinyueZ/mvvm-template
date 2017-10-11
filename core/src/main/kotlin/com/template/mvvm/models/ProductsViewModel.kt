@@ -1,9 +1,7 @@
 package com.template.mvvm.models
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
-import android.databinding.ObservableArrayList
+import android.arch.lifecycle.*
+import android.arch.paging.PagedList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
@@ -15,13 +13,13 @@ import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
+import com.template.mvvm.recycler.MvvmListDataProvider
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
-import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-open class ProductsViewModel(protected val repository: ProductsDataSource, val itemBinding: ItemBinding<ProductItemViewModel>) : AbstractViewModel() {
+open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
 
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
@@ -42,14 +40,21 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
     protected var productListSource: ProductList? = null
 
     //For recyclerview data
-    val productItemVmList = ObservableArrayList<ProductItemViewModel>()
+    val productItemVmList: ObservableField<LiveData<PagedList<ViewModel>>> = ObservableField()
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         productListSource = productListSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
-                    productItemVmList.clear()
-                    productItemVmList.addAll(it)
+                    productItemVmList.set(
+                            MvvmListDataProvider(it).create(
+                                    0,
+                                    PagedList.Config.Builder()
+                                            .setPageSize(it.size)
+                                            .setInitialLoadSizeHint(it.size)
+                                            .setEnablePlaceholders(true)
+                                            .build())
+                    )
                     pageStill.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
