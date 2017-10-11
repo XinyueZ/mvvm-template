@@ -25,7 +25,7 @@ class MenFragment : AppBaseFragment<MenViewModel>() {
                     vmItem = BR.vm
                     vm = obtainViewModel().apply {
                         activity.apply {
-                            registerLifecycleOwner(this)
+                            registerLifecycleOwner(activity)
                             view.setupErrorSnackbar(this, onError)
                         }
                     }

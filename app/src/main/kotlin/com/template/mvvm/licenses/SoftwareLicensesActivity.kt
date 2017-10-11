@@ -34,7 +34,7 @@ class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        obtainViewModel().apply {
+        binding.vm = obtainViewModel().apply {
             pageStill.observe(this@SoftwareLicensesActivity, Observer {
                 when (it) {
                     true -> hideSystemUi(1500)

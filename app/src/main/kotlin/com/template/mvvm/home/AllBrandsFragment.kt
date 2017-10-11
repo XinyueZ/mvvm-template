@@ -29,7 +29,7 @@ class AllBrandsFragment : AppBaseFragment<AllBrandsViewModel>() {
                         itemWidth = getScreenSize().width / 2 - getDimensionPixel(R.dimen.general_padding) * 2
                         itemHeight = itemWidth
                         activity.apply {
-                            registerLifecycleOwner(this)
+                            registerLifecycleOwner(activity)
                             view.setupErrorSnackbar(this, onError)
                         }
                     }
