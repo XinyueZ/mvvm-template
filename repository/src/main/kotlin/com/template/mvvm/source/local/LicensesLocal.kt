@@ -76,8 +76,4 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                                 .replace(YEAR, library.copyright ?: "")
                                 .replace(COPYRIGHT_HOLDERS, library.owner ?: ""))
             }
-
-    override fun clear() {
-        //TODO Some resource information should be freed here.
-    }
 }

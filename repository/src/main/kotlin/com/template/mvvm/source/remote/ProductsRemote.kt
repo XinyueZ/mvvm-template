@@ -44,7 +44,4 @@ class ProductsRemote : ProductsDataSource {
                 Single.just(v)
             }
 
-    override fun clear() {
-        //TODO Some resource information should be freed here.
-    }
 }

@@ -25,8 +25,9 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
     override fun saveProducts(source: List<Product>) = productsRepository.saveProducts(source)
 
     // Other...
-    override fun clear() {
+    override fun clear(): Boolean {
         licensesRepository.clear()
         productsRepository.clear()
+        return true
     }
 }

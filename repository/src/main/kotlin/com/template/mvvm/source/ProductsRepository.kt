@@ -38,7 +38,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
         remoteCallAndWrite()
     }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
 
-    override fun filterProduct(keyword: String, localOnly: Boolean)= Single.create<List<Product>>({ emitter ->
+    override fun filterProduct(keyword: String, localOnly: Boolean) = Single.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = {
             addToAutoDispose(remote.filterProduct(keyword).subscribe(Consumer {
                 local.saveProducts(it)
@@ -78,7 +78,8 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun saveProducts(source: List<Product>) = local.saveProducts(source)
 
-    override fun clear() {
+    override fun clear(): Boolean {
         compositeDisposable.clear()
+        return true
     }
 }

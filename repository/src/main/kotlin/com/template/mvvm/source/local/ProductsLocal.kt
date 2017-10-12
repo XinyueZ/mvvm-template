@@ -70,8 +70,4 @@ class ProductsLocal : ProductsDataSource {
         }
         LL.w("brands write to db")
     }
-
-    override fun clear() {
-        //TODO Some resource information should be freed here.
-    }
 }
