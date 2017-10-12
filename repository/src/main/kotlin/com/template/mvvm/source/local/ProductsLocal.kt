@@ -6,7 +6,7 @@ import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
-import io.reactivex.Flowable
+import io.reactivex.Single
 
 class ProductsLocal : ProductsDataSource {
 
@@ -19,7 +19,7 @@ class ProductsLocal : ProductsDataSource {
                     }
                     LL.d("products loaded from db")
                 }
-                Flowable.just(v)
+                Single.just(v)
             })
 
     override fun filterProduct(keyword: String, localOnly: Boolean) = DB.INSTANCE.productDao()
@@ -31,7 +31,7 @@ class ProductsLocal : ProductsDataSource {
                     }
                     LL.d("filtered $keyword products and loaded from db")
                 }
-                Flowable.just(v)
+                Single.just(v)
             })
 
     override fun getAllBrands(localOnly: Boolean) = DB.INSTANCE.productDao()
@@ -43,7 +43,7 @@ class ProductsLocal : ProductsDataSource {
                     }
                     LL.d("brands loaded from db")
                 }
-                Flowable.just(v)
+                Single.just(v)
             })
 
     override fun saveProducts(source: List<Product>) = source.apply {

@@ -3,10 +3,11 @@ package com.template.mvvm.source
 import android.app.Application
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 class LicensesRepository(app: Application,
@@ -14,18 +15,29 @@ class LicensesRepository(app: Application,
                          private val local: LicensesDataSource,
                          private val cache: LicensesDataSource
 ) : LicensesDataSource {
-    override fun getAllLibraries(localOnly: Boolean) = Flowable.create<List<Library>>({ emitter ->
-        val remoteCallAndWrite = { local.saveLibraries(remote.getAllLibraries().blockingFirst()) }
+    private val compositeDisposable = CompositeDisposable()
+    private fun addToAutoDispose(vararg disposables: Disposable) {
+        compositeDisposable.addAll(*disposables)
+    }
+
+    override fun getAllLibraries(localOnly: Boolean) = Single.create<List<Library>>({ emitter ->
+        val remoteCallAndWrite = {
+            addToAutoDispose(remote.getAllLibraries().subscribe(Consumer {
+                local.saveLibraries(it)
+                addToAutoDispose(local.getAllLibraries().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
+            }))
+        }
         if (localOnly) {
-            emitter.onNext(local.getAllLibraries().blockingFirst().takeIf { it.isNotEmpty() }
-                    ?: remoteCallAndWrite()
-            )
+            addToAutoDispose(local.getAllLibraries().subscribe(Consumer
+            {
+                if (it.isNotEmpty()) emitter.onSuccess(it)
+                else remoteCallAndWrite()
+            }
+            ))
             return@create
         }
-        emitter.onNext(remoteCallAndWrite())
-    }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+        remoteCallAndWrite()
+    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
 
     override fun saveLibraries(source: List<Library>) = local.saveLibraries(source)
 
@@ -34,6 +46,6 @@ class LicensesRepository(app: Application,
     }
 
     override fun clear() {
-        //TODO Some resource information should be freed here.
+        compositeDisposable.clear()
     }
 }

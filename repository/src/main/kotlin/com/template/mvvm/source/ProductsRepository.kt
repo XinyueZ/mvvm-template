@@ -3,57 +3,82 @@ package com.template.mvvm.source
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 class ProductsRepository(private val remote: ProductsDataSource,
                          private val local: ProductsDataSource,
                          private val cache: ProductsDataSource
 ) : ProductsDataSource {
+    private val compositeDisposable = CompositeDisposable()
+    private fun addToAutoDispose(vararg disposables: Disposable) {
+        compositeDisposable.addAll(*disposables)
+    }
 
-    override fun getAllProducts(localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
-        val remoteCallAndWrite = { local.saveProducts(remote.getAllProducts().blockingFirst()) }
+    override fun getAllProducts(localOnly: Boolean) = Single.create<List<Product>>({ emitter ->
+        val remoteCallAndWrite = {
+            addToAutoDispose(remote.getAllProducts().subscribe(Consumer {
+                local.saveProducts(it)
+                addToAutoDispose(local.getAllProducts().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
+            }))
+        }
         if (localOnly) {
-            emitter.onNext(local.getAllProducts().blockingFirst().takeIf { it.isNotEmpty() }
-                    ?: remoteCallAndWrite()
-            )
+            addToAutoDispose(local.getAllProducts().subscribe(Consumer
+            {
+                if (it.isNotEmpty()) emitter.onSuccess(it)
+                else remoteCallAndWrite()
+            }
+            ))
             return@create
         }
-        emitter.onNext(remoteCallAndWrite())
-    }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+        remoteCallAndWrite()
+    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
 
-    override fun filterProduct(keyword: String, localOnly: Boolean) = Flowable.create<List<Product>>({ emitter ->
-        val remoteCallAndWrite = { local.saveProducts(remote.filterProduct(keyword).blockingFirst()) }
+    override fun filterProduct(keyword: String, localOnly: Boolean)= Single.create<List<Product>>({ emitter ->
+        val remoteCallAndWrite = {
+            addToAutoDispose(remote.filterProduct(keyword).subscribe(Consumer {
+                local.saveProducts(it)
+                addToAutoDispose(local.filterProduct(keyword).subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
+            }))
+        }
         if (localOnly) {
-            emitter.onNext(local.filterProduct(keyword).blockingFirst().takeIf { it.isNotEmpty() }
-                    ?: remoteCallAndWrite()
-            )
+            addToAutoDispose(local.filterProduct(keyword).subscribe(Consumer
+            {
+                if (it.isNotEmpty()) emitter.onSuccess(it)
+                else remoteCallAndWrite()
+            }
+            ))
             return@create
         }
-        emitter.onNext(remoteCallAndWrite())
-    }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+        remoteCallAndWrite()
+    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
 
-    override fun getAllBrands(localOnly: Boolean) = Flowable.create<List<Brand>>({ emitter ->
-        val remoteCallAndWrite = { local.saveBrands(remote.getAllBrands().blockingFirst()) }
+    override fun getAllBrands(localOnly: Boolean) = Single.create<List<Brand>>({ emitter ->
+        val remoteCallAndWrite = {
+            addToAutoDispose(remote.getAllBrands().subscribe(Consumer {
+                local.saveBrands(it)
+                addToAutoDispose(local.getAllBrands().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
+            }))
+        }
         if (localOnly) {
-            emitter.onNext(local.getAllBrands().blockingFirst().takeIf { it.isNotEmpty() }
-                    ?: remoteCallAndWrite()
-            )
+            addToAutoDispose(local.getAllBrands().subscribe(Consumer
+            {
+                if (it.isNotEmpty()) emitter.onSuccess(it)
+                else remoteCallAndWrite()
+            }
+            ))
             return@create
         }
-        emitter.onNext(remoteCallAndWrite())
-    }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+        remoteCallAndWrite()
+    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
 
     override fun saveProducts(source: List<Product>) = local.saveProducts(source)
+
     override fun clear() {
-        //TODO Some resource information should be freed here.
+        compositeDisposable.clear()
     }
 }

@@ -4,7 +4,7 @@ import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
-import io.reactivex.Flowable
+import io.reactivex.Single
 
 class ProductsRemote : ProductsDataSource {
 
@@ -17,7 +17,7 @@ class ProductsRemote : ProductsDataSource {
                     }
                     LL.d("products loaded from net")
                 }
-                Flowable.just(v)
+                Single.just(v)
             }
 
     override fun filterProduct(keyword: String, localOnly: Boolean) = ProductsApi.service
@@ -29,7 +29,7 @@ class ProductsRemote : ProductsDataSource {
                     }
                     LL.d("filtered $keyword products and loaded from net")
                 }
-                Flowable.just(v)
+                Single.just(v)
             }
 
     override fun getAllBrands(localOnly: Boolean) = ProductsApi.service
@@ -41,7 +41,7 @@ class ProductsRemote : ProductsDataSource {
                     }
                     LL.d("brands loaded from net")
                 }
-                Flowable.just(v)
+                Single.just(v)
             }
 
     override fun clear() {
