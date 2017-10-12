@@ -1,9 +1,6 @@
 package com.template.mvvm.source.local
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.local.entities.products.BrandEntity
@@ -24,8 +21,17 @@ interface LicensesLibrariesDao {
     @Query("select * from libraries")
     fun getLibraryList(): Single<List<LibraryEntity>>
 
+    @Query("select * from libraries")
+    fun getLibraryListDirectly(): List<LibraryEntity>
+
     @Query("select count(*) as total from libraries")
     fun getLibraryListCount(): Single<List<Count>>
+
+    @Query("delete from libraries")
+    fun deleteLibraries()
+
+    @Delete
+    fun deleteLibrary(libraryEntity: LibraryEntity)
 
     class Count {
         var total: Int = 0
@@ -48,6 +54,15 @@ interface ProductDao {
 
     @Query("select * from brands")
     fun getBrandList(): Single<List<BrandEntity>>
+
+    @Query("select * from brands")
+    fun getBrandListDirectly(): List<BrandEntity>
+
+    @Delete
+    fun deleteBrand(brandEntity: BrandEntity)
+
+    @Query("select * from products where brand_brand_key=:brandKey")
+    fun getBrandedProductList(brandKey: String?): List<ProductEntity>
 }
 
 
