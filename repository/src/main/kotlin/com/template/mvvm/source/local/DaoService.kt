@@ -9,6 +9,7 @@ import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface LicensesLibrariesDao {
@@ -19,13 +20,13 @@ interface LicensesLibrariesDao {
     fun insertLibrary(libraryEntity: LibraryEntity)
 
     @Query("select * from licenses")
-    fun getLicenseList(): Flowable<List<LicenseEntity>>
+    fun getLicenseList(): Single<List<LicenseEntity>>
 
     @Query("select * from libraries")
-    fun getLibraryList(): Flowable<List<LibraryEntity>>
+    fun getLibraryList(): Single<List<LibraryEntity>>
 
     @Query("select count(*) as total from libraries")
-    fun getLibraryListCount(): Flowable<List<Count>>
+    fun getLibraryListCount(): Single<List<Count>>
 
     class Count {
         var total: Int = 0

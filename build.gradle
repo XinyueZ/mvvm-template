@@ -21,8 +21,8 @@ ext {
 
 
 buildscript {
-    ext.kotlin_version = '1.1.50'
-    ext.gradleVersion = '3.0.0-beta6'
+    ext.kotlin_version = '1.1.51'
+    ext.gradleVersion = '3.0.0-beta7'
 
     repositories {
         google()

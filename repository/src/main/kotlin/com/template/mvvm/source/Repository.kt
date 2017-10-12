@@ -5,10 +5,11 @@ import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.products.Product
+import io.reactivex.Single
 
 class Repository(private val licensesRepository: LicensesDataSource, private val productsRepository: ProductsDataSource) : LicensesDataSource, ProductsDataSource {
     // Application's libraries, licenses...
-    override fun getAllLibraries(localOnly: Boolean) = licensesRepository.getAllLibraries(localOnly)
+    override fun getAllLibraries(localOnly: Boolean): Single<List<Library>> = licensesRepository.getAllLibraries(localOnly)
 
     override fun saveLibraries(source: List<Library>) = licensesRepository.saveLibraries(source)
 

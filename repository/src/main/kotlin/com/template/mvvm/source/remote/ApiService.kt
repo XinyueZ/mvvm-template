@@ -4,6 +4,7 @@ import com.template.mvvm.feeds.licenses.LicensesData
 import com.template.mvvm.feeds.products.BrandsData
 import com.template.mvvm.feeds.products.ProductsData
 import io.reactivex.Flowable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -25,7 +26,7 @@ interface ProductsApi {
 
 interface LicensesApi {
     @GET("dxf7rgkcrsezbsw/licenses-list.json")
-    fun getLibraries(): Flowable<LicensesData>
+    fun getLibraries(): Single<LicensesData>
 
     companion object {
         lateinit var service: LicensesApi

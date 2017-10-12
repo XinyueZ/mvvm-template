@@ -3,13 +3,13 @@ package com.template.mvvm.source.remote
 import com.template.mvvm.LL
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
-import io.reactivex.Flowable
+import io.reactivex.Single
 
 class LicensesRemote : LicensesDataSource {
 
     override fun getAllLibraries(localOnly: Boolean) = LicensesApi.service
             .getLibraries()
-            .flatMap {
+            .flatMap({
                 val v: List<Library> = (mutableListOf<Library>()).apply {
                     it.licenses.forEach({ licenseData ->
                         licenseData.libraries.forEach({ libraryData ->
@@ -18,8 +18,8 @@ class LicensesRemote : LicensesDataSource {
                     })
                 }
                 LL.d("licenses loaded from net")
-                Flowable.just(v)
-            }
+                Single.just(v)
+            })
 
     override fun clear() {
         //TODO Some resource information should be freed here.

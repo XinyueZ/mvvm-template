@@ -6,10 +6,10 @@ import com.template.mvvm.LL
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.feeds.licenses.LicensesData
+import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
-import com.template.mvvm.source.ext.read
-import io.reactivex.Flowable
+import io.reactivex.Single
 import java.io.InputStreamReader
 
 class LicensesLocal(private val app: Application) : LicensesDataSource {
@@ -24,12 +24,12 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
 
     private val gson = Gson()
 
-    override fun getAllLibraries(localOnly: Boolean) = DB.INSTANCE.licensesLibrariesDao()
+    override fun getAllLibraries(localOnly: Boolean): Single<List<Library>> = DB.INSTANCE.licensesLibrariesDao()
             .getLibraryListCount()
             .flatMap({
                 when (it[0].total == 0) {
                     true -> loadLicensesFromAsset()
-                    false -> loadLicensesFromDB()
+                    else -> loadLicensesFromDB()
                 }
             })
 
@@ -42,22 +42,18 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                     }
                 }
                 LL.d("licenses loaded from db")
-                Flowable.just(v)
+                Single.just(v)
             })
 
-    private fun loadLicensesFromAsset(): Flowable<List<Library>> {
-        val licensesData = gson.fromJson(InputStreamReader(app.assets
-                .open(LICENCES_LIST_JSON)), LicensesData::class.java)
-        val v: List<Library> = mutableListOf<Library>().apply {
-            licensesData.licenses.forEach({ licenseData ->
-                licenseData.libraries.forEach({ libraryData ->
-                    this@apply.add(Library.from(libraryData, licenseData))
-                })
+    private fun loadLicensesFromAsset() = Single.just(mutableListOf<Library>().apply {
+        gson.fromJson(InputStreamReader(app.assets
+                .open(LICENCES_LIST_JSON)), LicensesData::class.java).licenses.forEach({ licenseData ->
+            licenseData.libraries.forEach({ libraryData ->
+                this@apply.add(Library.from(libraryData, licenseData))
             })
-        }
+        })
         LL.d("licenses loaded from asset")
-        return Flowable.just(v)
-    }
+    })
 
     override fun saveLibraries(source: List<Library>) = source.apply {
         DB.INSTANCE.apply {
