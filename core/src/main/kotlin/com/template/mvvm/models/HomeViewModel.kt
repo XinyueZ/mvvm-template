@@ -1,5 +1,6 @@
 package com.template.mvvm.models
 
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableInt
 import com.template.mvvm.R
@@ -17,6 +18,9 @@ class HomeViewModel : AbstractViewModel() {
     val openItem4 = MutableLiveData<Boolean>()
 
     val drawerToggle = MutableLiveData<Boolean>()
+
+    // True toggle the system-ui(navi-bar, status-bar etc.)
+    val showSystemUi = MediatorLiveData<Boolean>()
 
     //-----------------------------------
     //BindingAdapter handler

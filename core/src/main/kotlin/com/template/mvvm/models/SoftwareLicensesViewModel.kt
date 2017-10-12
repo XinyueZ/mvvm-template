@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
+import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.arch.recycler.MvvmListDataProvider
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
@@ -33,8 +34,8 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
 
     val licenseDetailViewModel = MutableLiveData<LicenseDetailViewModel>()
 
-    // True when the data have been loaded.
-    val showSystemUi = MutableLiveData<Boolean>()
+    // True toggle the system-ui(navi-bar, status-bar etc.)
+    val showSystemUi: MutableLiveData<Boolean> = SingleLiveData()
 
     // Error
     var onError = ErrorViewModel()

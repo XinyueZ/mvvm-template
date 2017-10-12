@@ -1,13 +1,11 @@
 package com.template.mvvm.models
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.*
 import android.arch.paging.PagedList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.net.Uri
+import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
@@ -28,6 +26,9 @@ class AllBrandsViewModel(private val repository: ProductsDataSource) : AbstractV
     // Final loaded of data signal for all available progress-indicators, call notifyChange() on it when needed.
     private val reload = SingleLiveData<Boolean>()
     val dataHaveNotReloaded = ObservableBoolean(true)
+
+    // True toggle the system-ui(navi-bar, status-bar etc.)
+    val showSystemUi: MutableLiveData<Boolean> = SingleLiveData()
 
     // Error
     var onError = ErrorViewModel()
@@ -57,6 +58,8 @@ class AllBrandsViewModel(private val repository: ProductsDataSource) : AbstractV
                                             .setEnablePlaceholders(true)
                                             .build())
                     )
+
+                    showSystemUi.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                     dataHaveNotReloaded.set(true)
@@ -85,10 +88,12 @@ class AllBrandsViewModel(private val repository: ProductsDataSource) : AbstractV
     }
 
     private fun canNotLoadBrands(it: Throwable, lifecycleOwner: LifecycleOwner) {
+        showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_brands, R.string.error_retry) {
             loadAllBrands(lifecycleOwner, false)
+            showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
             brandListSource?.value?.let {
@@ -131,6 +136,10 @@ class BrandItemViewModel : AbstractViewModel() {
             }
         }
     }
+
+    override fun equals(other: Any?) =
+            if (other == null) false
+            else TextUtils.equals(brand.key, ((other as BrandItemViewModel).brand.key))
 
     fun isEmpty() = brand.logo == Uri.EMPTY
 

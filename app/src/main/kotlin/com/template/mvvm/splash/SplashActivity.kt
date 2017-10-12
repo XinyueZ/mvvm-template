@@ -23,12 +23,16 @@ class SplashActivity : AppBaseActivity<SplashViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hideSystemUi(0)
         obtainViewModel().apply {
             startHome.observe(this@SplashActivity, Observer {
                 HomeActivity.showInstance(this@SplashActivity)
                 this@SplashActivity.finish()
             })
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        hideSystemUi(0)
     }
 }

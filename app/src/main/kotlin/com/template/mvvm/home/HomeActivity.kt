@@ -1,6 +1,7 @@
 package com.template.mvvm.home
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.net.Uri
@@ -11,8 +12,9 @@ import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
+import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setup
-import com.template.mvvm.models.HomeViewModel
+import com.template.mvvm.models.*
 
 class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
@@ -36,10 +38,28 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hideSystemUi(0)
         binding.apply {
             contentFrame.apply {
                 vm = obtainViewModel().apply {
+                    with(showSystemUi) {
+                        observe(
+                                this@HomeActivity,
+                                Observer {
+                                    when (it) {
+                                        true -> hideSystemUi(1500)
+                                        false -> showSystemUi()
+                                    }
+                                }
+                        )
+                        addSource(obtainViewModel(MenViewModel::class.java).showSystemUi,
+                                { this.value = it })
+                        addSource(obtainViewModel(WomenViewModel::class.java).showSystemUi,
+                                { this.value = it })
+                        addSource(obtainViewModel(AllGendersViewModel::class.java).showSystemUi,
+                                { this.value = it })
+                        addSource(obtainViewModel(AllBrandsViewModel::class.java).showSystemUi,
+                                { this.value = it })
+                    }
                     drawer.setup(this@HomeActivity, drawerToggle)
                 }
             }
@@ -48,6 +68,7 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
     override fun onStart() {
         super.onStart()
+        hideSystemUi(0)
         CustomTabUtils.warmUp(this, Uri.parse(getString(R.string.internet_url)))
     }
 

@@ -6,6 +6,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
+import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
@@ -27,8 +28,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     private val reload = SingleLiveData<Boolean>()
     val dataHaveNotReloaded = ObservableBoolean(true)
 
-    // True when the data have been loaded.
-    val showSystemUi = MutableLiveData<Boolean>()
+    // True toggle the system-ui(navi-bar, status-bar etc.)
+    val showSystemUi: MutableLiveData<Boolean> = SingleLiveData()
 
     // Error
     var onError = ErrorViewModel()
@@ -55,6 +56,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                                             .setEnablePlaceholders(true)
                                             .build())
                     )
+
                     showSystemUi.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
@@ -123,7 +125,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 }
 
 class ProductItemViewModel : AbstractViewModel() {
-
+    lateinit var product: Product
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
@@ -132,6 +134,7 @@ class ProductItemViewModel : AbstractViewModel() {
     companion object {
         fun from(product: Product): ProductItemViewModel {
             return ProductItemViewModel().apply {
+                this.product = product
                 title.set(product.title)
                 description.set(product.description)
                 thumbnail.set(product.thumbnail)
@@ -140,4 +143,7 @@ class ProductItemViewModel : AbstractViewModel() {
         }
     }
 
+    override fun equals(other: Any?) =
+            if (other == null) false
+            else TextUtils.equals(product.pid, ((other as ProductItemViewModel).product.pid))
 }
