@@ -8,7 +8,6 @@ import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
-import io.reactivex.Flowable
 import io.reactivex.Single
 
 @Dao
@@ -42,13 +41,13 @@ interface ProductDao {
     fun insertBrand(brandEntity: BrandEntity)
 
     @Query("select * from products")
-    fun getProductList(): Flowable<List<ProductEntity>>
+    fun getProductList(): Single<List<ProductEntity>>
 
     @Query("select * from products where genders=:keyword")
-    fun filterProductList(keyword: String?): Flowable<List<ProductEntity>>
+    fun filterProductList(keyword: String?): Single<List<ProductEntity>>
 
     @Query("select * from brands")
-    fun getBrandList(): Flowable<List<BrandEntity>>
+    fun getBrandList(): Single<List<BrandEntity>>
 }
 
 

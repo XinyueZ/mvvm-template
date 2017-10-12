@@ -20,25 +20,24 @@ class LicensesRepository(app: Application,
         compositeDisposable.addAll(*disposables)
     }
 
-    override fun getAllLibraries(localOnly: Boolean): Single<List<Library>> =
-            Single.create<List<Library>>({ emitter ->
-                val remoteCallAndWrite = {
-                    addToAutoDispose(remote.getAllLibraries().subscribe(Consumer {
-                        local.saveLibraries(it)
-                        addToAutoDispose(local.getAllLibraries().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
-                    }))
-                }
-                if (localOnly) {
-                    addToAutoDispose(local.getAllLibraries().subscribe(Consumer
-                    {
-                        if (it.isNotEmpty()) emitter.onSuccess(it)
-                        else remoteCallAndWrite()
-                    }
-                    ))
-                    return@create
-                }
-                remoteCallAndWrite()
-            }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+    override fun getAllLibraries(localOnly: Boolean) = Single.create<List<Library>>({ emitter ->
+        val remoteCallAndWrite = {
+            addToAutoDispose(remote.getAllLibraries().subscribe(Consumer {
+                local.saveLibraries(it)
+                addToAutoDispose(local.getAllLibraries().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
+            }))
+        }
+        if (localOnly) {
+            addToAutoDispose(local.getAllLibraries().subscribe(Consumer
+            {
+                if (it.isNotEmpty()) emitter.onSuccess(it)
+                else remoteCallAndWrite()
+            }
+            ))
+            return@create
+        }
+        remoteCallAndWrite()
+    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
 
     override fun saveLibraries(source: List<Library>) = local.saveLibraries(source)
 
