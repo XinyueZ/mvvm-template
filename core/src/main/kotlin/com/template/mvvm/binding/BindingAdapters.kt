@@ -35,10 +35,10 @@ import com.bumptech.glide.request.target.Target
 import com.template.mvvm.GlideApp
 import com.template.mvvm.LL
 import com.template.mvvm.R
-import com.template.mvvm.recycler.MvvmListAdapter
+import com.template.mvvm.arch.recycler.MvvmListAdapter
 
 @BindingAdapter(value = *arrayOf("itemList", "itemLayout", "vmItemLayout", "layout"), requireAll = true)
-fun RecyclerView.setUpBindingYYYYY(
+fun RecyclerView.setUpBindingZXYBinding(
         itemList: LiveData<PagedList<ViewModel>>?,
         @LayoutRes itemLayout: Int,
         vmItemLayout: Int,
@@ -59,34 +59,34 @@ fun RecyclerView.setUpBindingYYYYY(
 }
 
 @BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
-fun View.viewSizeYYYYY(width: Int, height: Int) {
+fun View.viewSizeZXYBinding(width: Int, height: Int) {
     layoutParams.width = width
     layoutParams.height = height
 }
 
 @BindingAdapter("stopLoading")
-fun SwipeRefreshLayout.stopLoadingYYYYY(stopLoading: Boolean) {
+fun SwipeRefreshLayout.stopLoadingZXYBinding(stopLoading: Boolean) {
     isRefreshing = !stopLoading
 }
 
 @BindingAdapter("reload")
-fun SwipeRefreshLayout.reloadYYYYY(l: OnReloadListener) {
+fun SwipeRefreshLayout.reloadZXYBinding(l: OnReloadListener) {
     setOnRefreshListener {
         l.onReload()
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun View.remoteImageUriYYYYY(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun View.remoteImageUriZXYBinding(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     uri?.let {
         if (this is ImageView) {
-            remoteImageUrisYYYYY(arrayOf(uri), placeholderRes, errorDrawableRes)
+            remoteImageUrisZXYBinding(arrayOf(uri), placeholderRes, errorDrawableRes)
         }
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUris", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun ImageView.remoteImageUrisYYYYY(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun ImageView.remoteImageUrisZXYBinding(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
             when (errorDrawableRes > 0) {
@@ -120,7 +120,7 @@ fun ImageView.remoteImageUrisYYYYY(imageUris: Array<Uri>?, @DrawableRes placehol
                 when (pos < (imageUris.size - 1)) {
                     true -> {
                         pos++
-                        loadImageYYYYY(imageUris[pos], placeholder, error, this)
+                        loadImageZXYBinding(imageUris[pos], placeholder, error, this)
                         return true
                     }
                 }
@@ -128,11 +128,11 @@ fun ImageView.remoteImageUrisYYYYY(imageUris: Array<Uri>?, @DrawableRes placehol
             }
         }
 
-        loadImageYYYYY(imageUris[pos], placeholder, error, listener)
+        loadImageZXYBinding(imageUris[pos], placeholder, error, listener)
     }
 }
 
-private fun ImageView.loadImageYYYYY(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
+private fun ImageView.loadImageZXYBinding(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
     GlideApp.with(this)
             .asBitmap()
             .load(uri)
@@ -147,12 +147,12 @@ private fun ImageView.loadImageYYYYY(uri: Uri, placeholder: Drawable?, errorDraw
 }
 
 @BindingAdapter("goBack")
-fun View.goBackYYYYY(goBack: Boolean) {
+fun View.goBackZXYBinding(goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun View.dataLoadedYYYYY(loaded: Boolean) {
+fun View.dataLoadedZXYBinding(loaded: Boolean) {
     visibility = if (loaded) {
         View.GONE
     } else {
@@ -161,7 +161,7 @@ fun View.dataLoadedYYYYY(loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun NavigationView.commandYYYYY(l: OnCommandListener) {
+fun NavigationView.commandZXYBinding(l: OnCommandListener) {
     setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
@@ -171,12 +171,12 @@ fun NavigationView.commandYYYYY(l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun Toolbar.commandYYYYY(l: OnCommandListener) {
+fun Toolbar.commandZXYBinding(l: OnCommandListener) {
     setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun BottomNavigationView.commandYYYYY(l: OnCommandListener) {
+fun BottomNavigationView.commandZXYBinding(l: OnCommandListener) {
     disableShiftMode()
     setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
@@ -186,7 +186,7 @@ fun BottomNavigationView.commandYYYYY(l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun View.commandYYYYY(l: OnItemCommandListener, vm: ViewModel) {
+fun View.commandZXYBinding(l: OnItemCommandListener, vm: ViewModel) {
     setOnClickListener {
         l.onCommand(vm)
     }

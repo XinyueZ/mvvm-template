@@ -11,12 +11,12 @@ import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
+import com.template.mvvm.arch.recycler.MvvmListDataProvider
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setUpTransform
-import com.template.mvvm.recycler.MvvmListDataProvider
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel
@@ -34,7 +34,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
     val licenseDetailViewModel = MutableLiveData<LicenseDetailViewModel>()
 
     // True when the data have been loaded.
-    val pageStill = MutableLiveData<Boolean>()
+    val showSystemUi = MutableLiveData<Boolean>()
 
     // Error
     var onError = ErrorViewModel()
@@ -62,7 +62,7 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
                                             .build())
                     )
 
-                    pageStill.value = true
+                    showSystemUi.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                     dataHaveNotReloaded.set(true)
@@ -124,12 +124,12 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
     }
 
     private fun canNotLoadLicenses(it: Throwable, lifecycleOwner: LifecycleOwner) {
-        pageStill.value = true
+        showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllLicenses(lifecycleOwner, false)
-            pageStill.value = false
+            showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
             libraryListSource?.value?.let {

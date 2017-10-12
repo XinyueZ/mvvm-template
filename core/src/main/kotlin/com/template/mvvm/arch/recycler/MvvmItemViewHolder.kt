@@ -1,4 +1,4 @@
-package com.template.mvvm.recycler
+package com.template.mvvm.arch.recycler
 
 import android.arch.lifecycle.ViewModel
 import android.databinding.DataBindingUtil

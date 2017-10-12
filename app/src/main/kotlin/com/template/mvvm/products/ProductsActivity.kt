@@ -38,7 +38,7 @@ class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
         binding.apply {
             contentFrame.apply {
                 vm = obtainViewModel().apply {
-                    pageStill.observe(this@ProductsActivity, Observer {
+                    showSystemUi.observe(this@ProductsActivity, Observer {
                         when (it) {
                             true -> hideSystemUi(1500)
                             false -> showSystemUi()

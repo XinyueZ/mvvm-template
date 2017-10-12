@@ -11,11 +11,11 @@ import android.net.Uri
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
+import com.template.mvvm.arch.recycler.MvvmListDataProvider
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.BrandList
 import com.template.mvvm.ext.setUpTransform
-import com.template.mvvm.recycler.MvvmListDataProvider
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach

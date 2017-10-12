@@ -9,11 +9,11 @@ import android.net.Uri
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
+import com.template.mvvm.arch.recycler.MvvmListDataProvider
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
-import com.template.mvvm.recycler.MvvmListDataProvider
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
@@ -28,7 +28,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     val dataHaveNotReloaded = ObservableBoolean(true)
 
     // True when the data have been loaded.
-    val pageStill = MutableLiveData<Boolean>()
+    val showSystemUi = MutableLiveData<Boolean>()
 
     // Error
     var onError = ErrorViewModel()
@@ -55,7 +55,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                                             .setEnablePlaceholders(true)
                                             .build())
                     )
-                    pageStill.value = true
+                    showSystemUi.value = true
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                     dataHaveNotReloaded.set(true)
@@ -84,14 +84,14 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     }
 
     protected fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
-        pageStill.value = true
+        showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
 
 
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
             loadAllProducts(lifecycleOwner, false)
-            pageStill.value = false
+            showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
             productListSource?.value?.let {
