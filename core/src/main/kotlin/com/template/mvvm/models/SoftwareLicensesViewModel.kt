@@ -188,6 +188,10 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
             if (other == null) false
             else TextUtils.equals(library.name, ((other as SoftwareLicenseItemViewModel).library.name))
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelTapped.close()
+    }
 }
 
 
