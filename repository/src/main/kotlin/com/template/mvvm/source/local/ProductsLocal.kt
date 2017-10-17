@@ -7,6 +7,7 @@ import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
+import com.template.mvvm.domain.products.ProductDetail
 import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
@@ -38,6 +39,15 @@ class ProductsLocal : ProductsDataSource {
             }
             LL.d("filtered $keyword products and loaded from db")
             send(this)
+        }
+    }
+
+    override suspend fun getProductDetail(job: Job, product: Product, localOnly: Boolean) = produce<ProductDetail>(job) {
+        with(DB.INSTANCE.productDao()) {
+            ProductDetail.from(
+                    getProduct(product.pid).first(),
+                    getImages(product.pid)
+            ).apply { send(this) }
         }
     }
 

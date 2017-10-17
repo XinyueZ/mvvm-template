@@ -46,6 +46,9 @@ interface ProductDao {
     @Query("select * from products")
     fun getProductList(): List<ProductEntity>
 
+    @Query("select * from products where pid=:pid")
+    fun getProduct(pid: String): List<ProductEntity>
+
     @Query("select * from images where pid=:pid")
     fun getImages(pid: String): List<ImageEntity>
 

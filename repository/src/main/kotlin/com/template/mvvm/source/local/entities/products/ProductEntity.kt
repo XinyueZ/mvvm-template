@@ -9,7 +9,7 @@ import com.template.mvvm.domain.products.Product
 @Entity(tableName = "products")
 class ProductEntity(
         @PrimaryKey
-        @ColumnInfo(name = "product_id")
+        @ColumnInfo(name = "pid")
         val pid: String,
         @ColumnInfo(name = "title")
         val title: String,
