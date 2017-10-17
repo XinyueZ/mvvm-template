@@ -4,7 +4,6 @@ import android.app.Application
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.channels.ProducerJob
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.channels.produce
 
@@ -38,7 +37,7 @@ class LicensesRepository(app: Application,
         }
     }
 
-    override suspend fun saveLibraries(job: Job, source: List<Library>): ProducerJob<Byte> = local.saveLibraries(job, source)
+    override suspend fun saveLibraries(job: Job, source: List<Library>) = local.saveLibraries(job, source)
 
     override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = local.getLicense(app, job, library)
 }

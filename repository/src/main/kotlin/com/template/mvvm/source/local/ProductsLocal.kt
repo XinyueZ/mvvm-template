@@ -8,6 +8,7 @@ import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.source.local.entities.products.BrandEntity
+import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.produce
@@ -16,8 +17,11 @@ class ProductsLocal : ProductsDataSource {
 
     override suspend fun getAllProducts(job: Job, localOnly: Boolean) = produce<List<Product>>(job) {
         mutableListOf<Product>().apply {
-            DB.INSTANCE.productDao().getProductList().forEach {
-                this.add(it.toProduct())
+            with(DB.INSTANCE.productDao()) {
+                getProductList().forEach {
+                    val imageList = getImages(it.pid)
+                    this@apply.add(Product.from(it, imageList))
+                }
             }
             LL.d("products loaded from db")
             send(this)
@@ -26,8 +30,11 @@ class ProductsLocal : ProductsDataSource {
 
     override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce<List<Product>>(job) {
         mutableListOf<Product>().apply {
-            DB.INSTANCE.productDao().filterProductList(keyword).forEach {
-                this.add(it.toProduct())
+            with(DB.INSTANCE.productDao()) {
+                filterProductList(keyword).forEach {
+                    val imageList = getImages(it.pid)
+                    this@apply.add(Product.from(it, imageList))
+                }
             }
             LL.d("filtered $keyword products and loaded from db")
             send(this)
@@ -47,8 +54,9 @@ class ProductsLocal : ProductsDataSource {
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
-                insertProduct(ProductEntity.from(it))
                 insertBrand(BrandEntity.from(it.brand))
+                insertImage(ImageEntity.from(it.pictures.first()))
+                insertProduct(ProductEntity.from(it))
             }
             send(1)
             LL.w("products write to db")
@@ -65,6 +73,18 @@ class ProductsLocal : ProductsDataSource {
                 send(1)
                 LL.w("brands write to db")
             }
+        }
+    }
+
+    override suspend fun savePictures(job: Job, source: List<Product>) = produce<Byte>(job) {
+        DB.INSTANCE.productDao().apply {
+            source.forEach {
+                it.pictures.forEach {
+                    insertImage(ImageEntity.from(it))
+                }
+            }
+            send(1)
+            LL.w("pictures(images) write to db")
         }
     }
 }
