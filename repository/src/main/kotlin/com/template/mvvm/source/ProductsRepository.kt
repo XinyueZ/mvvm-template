@@ -1,7 +1,6 @@
 package com.template.mvvm.source
 
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.domain.products.Product
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.channels.produce
@@ -19,6 +18,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
                         send(it)
                     }
                 }
+                local.saveBrand(job, it).receiveOrNull()
                 local.savePictures(job, it).receiveOrNull()
             }
         }
@@ -43,6 +43,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
                         send(it)
                     }
                 }
+                local.saveBrand(job, it).receiveOrNull()
                 local.savePictures(job, it).receiveOrNull()
             }
         }
@@ -81,8 +82,4 @@ class ProductsRepository(private val remote: ProductsDataSource,
             remoteSaveLoadLocal()
         }
     }
-
-    override suspend fun saveProducts(job: Job, source: List<Product>) = local.saveProducts(job, source)
-
-    override suspend fun savePictures(job: Job, source: List<Product>) = local.savePictures(job, source)
 }

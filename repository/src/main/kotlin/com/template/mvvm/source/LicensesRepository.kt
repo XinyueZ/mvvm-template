@@ -37,7 +37,5 @@ class LicensesRepository(app: Application,
         }
     }
 
-    override suspend fun saveLibraries(job: Job, source: List<Library>) = local.saveLibraries(job, source)
-
     override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = local.getLicense(app, job, library)
 }

@@ -54,7 +54,6 @@ class ProductsLocal : ProductsDataSource {
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
-                insertBrand(BrandEntity.from(it.brand))
                 insertImage(ImageEntity.from(it.pictures.first()))
                 insertProduct(ProductEntity.from(it))
             }
@@ -76,6 +75,16 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
+    override suspend fun saveBrand(job: Job, source: List<Product>) = produce<Byte>(job) {
+        DB.INSTANCE.productDao().apply {
+            source.forEach {
+                insertBrand(BrandEntity.from(it.brand))
+            }
+            send(1)
+            LL.w("products write brand to db")
+        }
+    }
+
     override suspend fun savePictures(job: Job, source: List<Product>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
@@ -84,7 +93,7 @@ class ProductsLocal : ProductsDataSource {
                 }
             }
             send(1)
-            LL.w("pictures(images) write to db")
+            LL.w("products write pictures(images) to db")
         }
     }
 }
