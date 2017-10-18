@@ -91,7 +91,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         dataHaveNotReloaded.set(true)
 
 
-        onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
+        onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
             loadAllProducts(lifecycleOwner, false)
             showSystemUi.value = false
 
