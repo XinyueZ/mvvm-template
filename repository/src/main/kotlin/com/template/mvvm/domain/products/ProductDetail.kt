@@ -14,12 +14,8 @@ data class ProductDetail(
                 productEntity.pid,
                 productEntity.title,
                 productEntity.description,
-                imageEntities.flatMap {
-                    mutableListOf<Image>().apply {
-                        imageEntities.forEach {
-                            this += Image.from(it)
-                        }
-                    }
+                imageEntities.map {
+                    Image.from(it)
                 }
         )
     }

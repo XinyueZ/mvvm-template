@@ -18,12 +18,8 @@ data class Product(
                 productEntity.pid,
                 productEntity.title,
                 productEntity.description,
-                imageEntities.flatMap {
-                    mutableListOf<Image>().apply {
-                        imageEntities.forEach {
-                            this += Image.from(it)
-                        }
-                    }
+                imageEntities.map {
+                    Image.from(it)
                 },
                 Brand.from(productEntity.brand),
                 productEntity.genders,
@@ -35,12 +31,8 @@ data class Product(
                 productData.pid,
                 productData.name,
                 String.format("%s//%s//%s", productData.brand.name, productData.genders.joinToString(), productData.ageGroups.joinToString()),
-                productData.media.images.flatMap {
-                    mutableListOf<Image>().apply {
-                        productData.media.images.forEach {
-                            this += Image.from(productData, it)
-                        }
-                    }
+                productData.media.images.map {
+                    Image.from(productData, it)
                 },
                 Brand.from(productData.brand),
                 productData.genders,
