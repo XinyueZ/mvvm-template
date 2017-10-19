@@ -34,7 +34,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
     val goBack = ObservableBoolean(false)
 
     //Data of this view-model
-    private var productListSource: MutableLiveData<ProductDetail>? = null
+    private var productDetailSource: MutableLiveData<ProductDetail>? = null
 
     var productIdToDetail: String? = null
 
@@ -47,7 +47,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
     //------------------------------------------------------------------------
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         assertProduct()
-        productListSource = productListSource ?: (MutableLiveData<ProductDetail>()).apply {
+        productDetailSource = productDetailSource ?: (MutableLiveData<ProductDetail>()).apply {
             observe(lifecycleOwner, Observer {
                 it?.let {
                     //-----------------------------------------
@@ -73,15 +73,15 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
     }
 
     protected open fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
-        productListSource?.let {
+        productDetailSource?.let {
             launch(UI + CoroutineExceptionHandler({ _, e ->
                 canNotLoadProductDetail(e, lifecycleOwner)
                 LL.d(e.message ?: "")
             }) + vmJob) {
                 productIdToDetail?.let {
                     repository.getProductDetail(vmJob, productIdToDetail!!, localOnly).consumeEach {
-                        LL.i("productListSource subscribe")
-                        productListSource?.value = it
+                        LL.i("productDetailSource subscribe")
+                        productDetailSource?.value = it
                     }
                 } ?: kotlin.run {
                     assertProduct()
@@ -101,7 +101,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
             showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
-            productListSource?.value?.let {
+            productDetailSource?.value?.let {
                 dataLoaded.set(true)
             } ?: dataLoaded.set(false)
         }
@@ -116,7 +116,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
         super.onCleared()
         repository.clear()
         productIdToDetail = null
-        productListSource = null
+        productDetailSource = null
     }
 
     //-----------------------------------

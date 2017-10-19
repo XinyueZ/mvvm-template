@@ -18,9 +18,8 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:keepScreenOn="true">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -80,7 +79,7 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -93,19 +92,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/general_padding"
-                    android:text="@{vm.productId}"/>
+                    android:text="ProductId:"
+                    android:textAppearance="@style/MaterialTextView.LightTheme.Title"
+                    android:textColor="@color/colorBlack"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/general_padding"
-                    android:text="@{vm.productTitle}"/>
+                    android:text="@{vm.productId}"
+                    android:textAppearance="@style/MaterialTextView.LightTheme.Caption"
+                    android:textColor="@color/colorBlack"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/general_padding"
-                    android:text="@{vm.productDescription}"/>
+                    android:text="Title:"
+                    android:textAppearance="@style/MaterialTextView.LightTheme.Title"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/general_padding"
+                    android:text="@{vm.productTitle}"
+                    android:textAppearance="@style/MaterialTextView.LightTheme.Caption"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/general_padding"
+                    android:text="Description:"
+                    android:textAppearance="@style/MaterialTextView.LightTheme.Title"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/general_padding"
+                    android:text="@{vm.productDescription}"
+                    android:textAppearance="@style/MaterialTextView.LightTheme.Caption"
+                    android:textColor="@color/colorBlack"/>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
