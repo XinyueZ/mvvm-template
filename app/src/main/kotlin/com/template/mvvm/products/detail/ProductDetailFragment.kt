@@ -2,6 +2,7 @@ package com.template.mvvm.products.detail
 
 import android.content.Context
 import android.databinding.ViewDataBinding
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
@@ -23,6 +24,11 @@ class ProductDetailFragment : AppBaseFragment<ProductDetailViewModel>() {
                         productIdToDetail = activity.intent.extras[ProductDetailActivity.ARG_SEL_ID] as String?
                         registerLifecycleOwner(activity)
                         view.setupErrorSnackbar(this@ProductDetailFragment, this.onError)
+                    }
+
+                    (activity as AppCompatActivity).apply {
+                        setSupportActionBar(toolbar)
+                        supportActionBar?.setDisplayHomeAsUpEnabled(true)
                     }
                 }
         return binding

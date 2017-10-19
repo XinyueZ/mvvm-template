@@ -25,15 +25,10 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="@style/Toolbar"
+                style="@style/Toolbar"
                 app:command="@{ vm::onCommand }"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="@{vm.title}"/>
 
         </android.support.design.widget.AppBarLayout>

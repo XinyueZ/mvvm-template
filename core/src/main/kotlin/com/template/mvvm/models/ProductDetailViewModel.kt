@@ -3,9 +3,8 @@ package com.template.mvvm.models
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
-import android.databinding.ObservableInt
+import android.databinding.*
+import android.net.Uri
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
@@ -44,6 +43,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
     val productId = ObservableField<String>()
     val productTitle = ObservableField<String>()
     val productDescription = ObservableField<String>()
+    val productImageUris: ObservableList<Uri> = ObservableArrayList()
     //------------------------------------------------------------------------
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         assertProduct()
@@ -56,6 +56,10 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
                     productId.set(it.pid)
                     productTitle.set(it.title)
                     productDescription.set(it.description)
+                    productImageUris.clear()
+                    productImageUris += it.pictures.map {
+                        it.largeHdUrl
+                    }
                     //-----------------------------------------
 
                     showSystemUi.value = true
