@@ -1,5 +1,6 @@
 package com.template.mvvm.products
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
@@ -10,6 +11,7 @@ import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
 import com.template.mvvm.ext.setupErrorSnackbar
 import com.template.mvvm.models.ProductsViewModel
+import com.template.mvvm.products.detail.ProductDetailActivity
 
 class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
     companion object {
@@ -25,6 +27,13 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
                     vm = obtainViewModel().apply {
                         registerLifecycleOwner(activity)
                         view.setupErrorSnackbar(this@ProductsFragment, this.onError)
+
+
+                        openProductDetail.observe(activity, Observer {
+                            it?.let {
+                                ProductDetailActivity.showInstance(activity, it)
+                            }
+                        })
                     }
                 }
         return binding

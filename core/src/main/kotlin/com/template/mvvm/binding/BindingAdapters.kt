@@ -38,7 +38,7 @@ import com.template.mvvm.R
 import com.template.mvvm.arch.recycler.MvvmListAdapter
 
 @BindingAdapter(value = *arrayOf("itemList", "itemLayout", "vmItemLayout", "layout"), requireAll = true)
-fun RecyclerView.setUpBindingChris(
+fun RecyclerView.setUpBindingXinyue(
         itemList: LiveData<PagedList<ViewModel>>?,
         @LayoutRes itemLayout: Int,
         vmItemLayout: Int,
@@ -59,34 +59,34 @@ fun RecyclerView.setUpBindingChris(
 }
 
 @BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
-fun View.viewSizeChris(width: Int, height: Int) {
+fun View.viewSizeXinyue(width: Int, height: Int) {
     layoutParams.width = width
     layoutParams.height = height
 }
 
 @BindingAdapter("stopLoading")
-fun SwipeRefreshLayout.stopLoadingChris(stopLoading: Boolean) {
+fun SwipeRefreshLayout.stopLoadingXinyue(stopLoading: Boolean) {
     isRefreshing = !stopLoading
 }
 
 @BindingAdapter("reload")
-fun SwipeRefreshLayout.reloadChris(l: OnReloadListener) {
+fun SwipeRefreshLayout.reloadXinyue(l: OnReloadListener) {
     setOnRefreshListener {
         l.onReload()
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun View.remoteImageUriChris(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun View.remoteImageUriXinyue(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     uri?.let {
         if (this is ImageView) {
-            remoteImageUrisChris(arrayOf(uri), placeholderRes, errorDrawableRes)
+            remoteImageUrisXinyue(arrayOf(uri), placeholderRes, errorDrawableRes)
         }
     }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUris", "placeholderRes", "errorDrawableRes"), requireAll = false)
-fun ImageView.remoteImageUrisChris(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
+fun ImageView.remoteImageUrisXinyue(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
             when (errorDrawableRes > 0) {
@@ -120,7 +120,7 @@ fun ImageView.remoteImageUrisChris(imageUris: Array<Uri>?, @DrawableRes placehol
                 when (pos < (imageUris.size - 1)) {
                     true -> {
                         pos++
-                        loadImageChris(imageUris[pos], placeholder, error, this)
+                        loadImageXinyue(imageUris[pos], placeholder, error, this)
                         return true
                     }
                 }
@@ -128,11 +128,11 @@ fun ImageView.remoteImageUrisChris(imageUris: Array<Uri>?, @DrawableRes placehol
             }
         }
 
-        loadImageChris(imageUris[pos], placeholder, error, listener)
+        loadImageXinyue(imageUris[pos], placeholder, error, listener)
     }
 }
 
-private fun ImageView.loadImageChris(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
+private fun ImageView.loadImageXinyue(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
     GlideApp.with(this)
             .asBitmap()
             .load(uri)
@@ -147,12 +147,12 @@ private fun ImageView.loadImageChris(uri: Uri, placeholder: Drawable?, errorDraw
 }
 
 @BindingAdapter("goBack")
-fun View.goBackChris(goBack: Boolean) {
+fun View.goBackXinyue(goBack: Boolean) {
     if (goBack) ActivityCompat.finishAfterTransition(context as Activity)
 }
 
 @BindingAdapter("dataLoaded")
-fun View.dataLoadedChris(loaded: Boolean) {
+fun View.dataLoadedXinyue(loaded: Boolean) {
     visibility = if (loaded) {
         View.GONE
     } else {
@@ -161,7 +161,7 @@ fun View.dataLoadedChris(loaded: Boolean) {
 }
 
 @BindingAdapter("command")
-fun NavigationView.commandChris(l: OnCommandListener) {
+fun NavigationView.commandXinyue(l: OnCommandListener) {
     setNavigationItemSelectedListener {
         it.isChecked = true
         l.onCommand(it.itemId)
@@ -171,12 +171,12 @@ fun NavigationView.commandChris(l: OnCommandListener) {
 }
 
 @BindingAdapter("command")
-fun Toolbar.commandChris(l: OnCommandListener) {
+fun Toolbar.commandXinyue(l: OnCommandListener) {
     setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
 }
 
 @BindingAdapter("command")
-fun BottomNavigationView.commandChris(l: OnCommandListener) {
+fun BottomNavigationView.commandXinyue(l: OnCommandListener) {
     disableShiftMode()
     setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
@@ -186,7 +186,7 @@ fun BottomNavigationView.commandChris(l: OnCommandListener) {
 }
 
 @BindingAdapter(value = *arrayOf("command", "vm"), requireAll = true)
-fun View.commandChris(l: OnItemCommandListener, vm: ViewModel) {
+fun View.commandXinyue(l: OnItemCommandListener, vm: ViewModel) {
     setOnClickListener {
         l.onCommand(vm)
     }

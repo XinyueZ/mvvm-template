@@ -35,6 +35,11 @@
     <style name="SoftwareLicensesTheme" parent="SoftwareLicensesThemeBase"/>
 
 
+    <style name="ProductDetailThemeBase" parent="AppTheme"/>
+
+    <style name="ProductDetailTheme" parent="ProductDetailThemeBase"/>
+
+
     <style name="DrawerNavigationViewTheme" parent="@style/Theme.AppCompat.Light">
         <item name="itemTextColor">@color/naviItemTextColor</item>
         <item name="itemIconTint">@color/naviMenuItemIconTint</item>

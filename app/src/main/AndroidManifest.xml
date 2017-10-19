@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.template.mvvm.ExAppGlideModule"
-            android:value="ExAppGlideModule" />
+            android:value="ExAppGlideModule"/>
 
         <activity
             android:name=".splash.SplashActivity"
@@ -32,6 +33,11 @@
         <activity
             android:name=".products.ProductsActivity"
             android:theme="@style/ProductsTheme"/>
+
+
+        <activity
+            android:name=".products.detail.ProductDetailActivity"
+            android:theme="@style/ProductDetailTheme"/>
 
         <activity
             android:name=".about.AboutActivity"

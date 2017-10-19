@@ -42,11 +42,11 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun getProductDetail(job: Job, product: Product, localOnly: Boolean) = produce<ProductDetail>(job) {
+    override suspend fun getProductDetail(job: Job, pid: String, localOnly: Boolean) = produce(job) {
         with(DB.INSTANCE.productDao()) {
             ProductDetail.from(
-                    getProduct(product.pid).first(),
-                    getImages(product.pid)
+                    getProduct(pid).first(),
+                    getImages(pid)
             ).apply { send(this) }
         }
     }

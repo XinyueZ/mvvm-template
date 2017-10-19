@@ -17,6 +17,7 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
@@ -43,6 +44,9 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     //For recyclerview data
     val productItemVmList: ObservableField<LiveData<PagedList<ViewModel>>> = ObservableField()
 
+    //Detail to open
+    val openProductDetail: MutableLiveData<String> = SingleLiveData()
+
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         productListSource = productListSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
@@ -61,6 +65,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                     dataLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                     dataHaveNotReloaded.set(true)
+
+                    bindTapHandlers(it)
                 }
             }
         }
@@ -80,6 +86,17 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 repository.getAllProducts(vmJob, localOnly).consumeEach {
                     LL.i("productListSource subscribe")
                     productListSource?.value = it
+                }
+            }
+        }
+    }
+
+    private fun bindTapHandlers(it: List<ProductItemViewModel>) {
+        it.forEach {
+            launch(UI + vmJob) {
+                it.viewModelTapped.consumeEach {
+                    // Tell UI to open a UI for license detail.
+                    openProductDetail.value = it.product.pid
                 }
             }
         }
@@ -130,6 +147,7 @@ class ProductItemViewModel : AbstractViewModel() {
     val description: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
     val brandLogo: ObservableField<Uri> = ObservableField()
+    val viewModelTapped = Channel<ProductItemViewModel>()
 
     companion object {
         fun from(product: Product): ProductItemViewModel {
@@ -143,6 +161,15 @@ class ProductItemViewModel : AbstractViewModel() {
         }
     }
 
+    fun onCommand(vm: ViewModel) {
+        launch(UI + vmJob) {
+            viewModelTapped.send(this@ProductItemViewModel)
+        }
+    }
+
+    /***
+     * For MvvmListAdapter.diffCallback
+     */
     override fun equals(other: Any?) =
             if (other == null) false
             else TextUtils.equals(product.pid, ((other as ProductItemViewModel).product.pid))

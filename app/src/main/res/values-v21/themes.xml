@@ -40,4 +40,6 @@
     <style name="AboutTheme" parent="AboutThemeBase"/>
 
     <style name="SoftwareLicensesTheme" parent="SoftwareLicensesThemeBase"/>
+
+    <style name="ProductDetailTheme" parent="ProductDetailThemeBase"/>
 </resources>

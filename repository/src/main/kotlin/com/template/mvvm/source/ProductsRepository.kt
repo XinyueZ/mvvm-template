@@ -1,7 +1,6 @@
 package com.template.mvvm.source
 
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.domain.products.Product
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.channels.produce
@@ -61,7 +60,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
         }
     }
 
-    override suspend fun getProductDetail(job: Job, product: Product, localOnly: Boolean) = local.getProductDetail(job, product, localOnly)
+    override suspend fun getProductDetail(job: Job, pid: String, localOnly: Boolean) = local.getProductDetail(job, pid, localOnly)
 
     override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce(job) {
         val remoteSaveLoadLocal: (suspend () -> Unit) = {

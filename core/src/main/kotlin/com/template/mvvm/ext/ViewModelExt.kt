@@ -18,6 +18,13 @@ fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
         ViewModelProviders.of(activity, ViewModelFactory.getInstance(activity.application)).get(viewModelClass)
 
+fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = with(when (this) {
+    is Fragment -> activity
+    else -> this as FragmentActivity
+}) {
+    ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
+}
+
 fun View.showErrorSnackbar(errorVm: Error, timeLength: Int = Snackbar.LENGTH_INDEFINITE) {
     Snackbar.make(this, errorVm.wording, timeLength).setAction(errorVm.retryWording, { errorVm.retry() }).show()
 }
