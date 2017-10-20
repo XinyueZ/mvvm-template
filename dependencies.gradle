@@ -42,58 +42,6 @@ ext {
     //Gradle
     def gradle = ext.gradleVersion
 
-
-    libs = [
-            //TEST
-            junit                               : [group: "junit", name: "junit", version: junit],
-            espresso                            : [group: "com.android.support.test.espresso", name: "espresso-core", version: espresso],
-
-            //SUPPORT
-            appcompatV7                         : [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion],
-            cardviewV7                          : [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion],
-            design                              : [group: "com.android.support", name: "design", version: supportLibraryVersion],
-            customtabs                          : [group: "com.android.support", name: "customtabs", version: supportLibraryVersion],
-            recyclerviewV7                      : [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion],
-            supportV4                           : [group: "com.android.support", name: "support-v4", version: supportLibraryVersion],
-            constraintLayout                    : [group: "com.android.support.constraint", name: "constraint-layout", version: constraint],
-            multidex                            : [group: "com.android.support", name: "multidex", version: multiDex],
-
-            //JSON
-            gson                                : [group: "com.google.code.gson", name: "gson", version: gson],
-
-            //ARCH
-            lifeCycleRuntime                    : [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion],
-            lifeCycleExtensions                 : [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion],
-            lifeCycleCompiler                   : [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion],
-            commonJava8                         : [group: "android.arch.lifecycle", name: "common-java8", version: archLifecycleVersion],
-            roomRuntime                         : [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion],
-            roomCompiler                        : [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion],
-            paging                              : [group: "android.arch.paging", name: "runtime", version: paging],
-
-            //KOTLIN
-            kotlinStdLib                        : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
-            databindingCompiler                 : [group: "com.android.databinding", name: "compiler", version: gradle],
-            kotlinCoroutines                    : [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: kotlinCoroutines],
-            kotlinCoroutinesAndroid             : [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-android", version: kotlinCoroutines],
-
-            //RETROFIT
-            retrofit                            : [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit],
-            converterGson                       : [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit],
-
-            //MATERIAL DESIGN GUIDELINE
-            materialDesignGuideline             : [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
-
-            //IMAGE-LOADER
-            glide                               : [group: "com.github.bumptech.glide", name: "glide", version: imageLoader],
-            glideCompiler                       : [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader],
-
-            //DEBUG TOOL
-            stetho                              : [group: "com.facebook.stetho", name: "stetho", version: stetho],
-            stethoHelper                        : [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho],
-            curlLoggerInterceptor               : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
-
-    ]
-
     plugins = [
             androidApp: "com.android.application",
             androidLib: "com.android.library",
@@ -138,61 +86,60 @@ ext {
             plugins.kapt,
     ]
 
-
     baseDependencies = [
             //TEST LIB
-            [configuration: "testImplementation", dependency: libs.junit],
-            [configuration: "androidTestImplementation", dependency: libs.espresso,
+            [configuration: "testImplementation", dependency: [group: "junit", name: "junit", version: junit]],
+            [configuration: "androidTestImplementation", dependency: [group: "com.android.support.test.espresso", name: "espresso-core", version: espresso],
              options      : {
                  exclude group: 'com.android.support', module: 'support-annotations'
              }],
 
             //SUPPORT
-            [configuration: "implementation", dependency: libs.appcompatV7],
-            [configuration: "implementation", dependency: libs.cardviewV7],
-            [configuration: "implementation", dependency: libs.design],
-            [configuration: "implementation", dependency: libs.customtabs],
-            [configuration: "implementation", dependency: libs.recyclerviewV7],
-            [configuration: "implementation", dependency: libs.supportV4],
-            [configuration: "implementation", dependency: libs.constraintLayout],
-            [configuration: "implementation", dependency: libs.multidex],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "design", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "customtabs", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-v4", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "com.android.support.constraint", name: "constraint-layout", version: constraint],],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "multidex", version: multiDex]],
 
             //JSON
-            [configuration: "implementation", dependency: libs.gson],
+            [configuration: "implementation", dependency: [group: "com.google.code.gson", name: "gson", version: gson]],
 
             //ARCH
-            [configuration: "implementation", dependency: libs.lifeCycleRuntime],
-            [configuration: "implementation", dependency: libs.lifeCycleExtensions],
-            [configuration: "kapt", dependency: libs.lifeCycleCompiler],
-            [configuration: "implementation", dependency: libs.commonJava8],
-            [configuration: "implementation", dependency: libs.roomRuntime],
-            [configuration: "kapt", dependency: libs.roomCompiler],
-            [configuration: "implementation", dependency: libs.paging],
+            [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion]],
+            [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion]],
+            [configuration: "kapt", dependency: [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion]],
+            [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "common-java8", version: archLifecycleVersion]],
+            [configuration: "implementation", dependency: [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion]],
+            [configuration: "kapt", dependency: [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion]],
+            [configuration: "implementation", dependency: [group: "android.arch.paging", name: "runtime", version: paging]],
 
             //KOTLIN
-            [configuration: "implementation", dependency: libs.kotlinStdLib],
-            [configuration: "kapt", dependency: libs.databindingCompiler],
-            [configuration: "implementation", dependency: libs.kotlinCoroutines],
-            [configuration: "implementation", dependency: libs.kotlinCoroutinesAndroid],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin]],
+            [configuration: "kapt", dependency: [group: "com.android.databinding", name: "compiler", version: gradle]],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: kotlinCoroutines]],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-android", version: kotlinCoroutines]],
 
             //RETROFIT
-            [configuration: "implementation", dependency: libs.retrofit],
-            [configuration: "implementation", dependency: libs.converterGson],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit]],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit]],
 
             //MATERIAL DESIGN GUIDELINE
-            [configuration: "implementation", dependency: libs.materialDesignGuideline,
+            [configuration: "implementation", dependency: [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
              options      : {
                  exclude group: 'com.android.support', module: 'support-annotations'
              }],
 
             //IMAGE-LOADER
-            [configuration: "implementation", dependency: libs.glide],
-            [configuration: "kapt", dependency: libs.glideCompiler],
+            [configuration: "implementation", dependency: [group: "com.github.bumptech.glide", name: "glide", version: imageLoader]],
+            [configuration: "kapt", dependency: [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader]],
 
             //DEBUG TOOL
-            [configuration: "implementation", dependency: libs.stetho],
-            [configuration: "implementation", dependency: libs.stethoHelper],
-            [configuration: "debugImplementation", dependency: libs.curlLoggerInterceptor],
+            [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: stetho]],
+            [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho]],
+            [configuration: "debugImplementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
     ]
 
     coreDependencies = baseDependencies
