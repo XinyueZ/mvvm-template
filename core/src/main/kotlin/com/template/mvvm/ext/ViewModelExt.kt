@@ -11,6 +11,10 @@ import android.view.View
 import com.template.mvvm.ViewModelFactory
 import com.template.mvvm.models.Error
 import com.template.mvvm.models.ErrorViewModel
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.channels.Channel
+import kotlinx.coroutines.experimental.channels.actor
+import kotlinx.coroutines.experimental.channels.consumeEach
 
 fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
         ViewModelProviders.of(this, ViewModelFactory.getInstance(this.application)).get(viewModelClass)
@@ -34,6 +38,16 @@ fun View.setupErrorSnackbar(lifecycleOwner: LifecycleOwner,
     liveData.observe(lifecycleOwner, Observer {
         it?.let { showErrorSnackbar(it, timeLength) }
     })
+}
+
+fun View.onClick(block: suspend () -> Unit) {
+    val eventActor = actor<Unit>(UI, capacity = Channel.CONFLATED) {
+        // Handling only most recently received update.
+        consumeEach { block() }
+    }
+    setOnClickListener {
+        eventActor.offer(Unit)
+    }
 }
 
 

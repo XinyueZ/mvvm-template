@@ -17,7 +17,6 @@ import com.template.mvvm.domain.products.ProductList
 import com.template.mvvm.ext.setUpTransform
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
@@ -93,11 +92,9 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private fun bindTapHandlers(it: List<ProductItemViewModel>) {
         it.forEach {
-            launch(UI + vmJob) {
-                it.viewModelTapped.consumeEach {
-                    // Tell UI to open a UI for license detail.
-                    openProductDetail.value = it.product.pid
-                }
+            it.clickHandler += {
+                // Tell UI to open a UI for license detail.
+                openProductDetail.value = it.pid
             }
         }
     }
@@ -147,7 +144,7 @@ class ProductItemViewModel : AbstractViewModel() {
     val description: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
     val brandLogo: ObservableField<Uri> = ObservableField()
-    val viewModelTapped = Channel<ProductItemViewModel>()
+    val clickHandler = arrayListOf<((Product) -> Unit)>()
 
     companion object {
         fun from(product: Product): ProductItemViewModel {
@@ -162,9 +159,7 @@ class ProductItemViewModel : AbstractViewModel() {
     }
 
     fun onCommand(vm: ViewModel) {
-        launch(UI + vmJob) {
-            viewModelTapped.send(this@ProductItemViewModel)
-        }
+        clickHandler.first()(product)
     }
 
     /***
@@ -173,4 +168,9 @@ class ProductItemViewModel : AbstractViewModel() {
     override fun equals(other: Any?) =
             if (other == null) false
             else TextUtils.equals(product.pid, ((other as ProductItemViewModel).product.pid))
+
+    override fun onCleared() {
+        super.onCleared()
+        clickHandler.clear()
+    }
 }

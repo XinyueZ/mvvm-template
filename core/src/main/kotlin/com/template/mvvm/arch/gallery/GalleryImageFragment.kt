@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.template.mvvm.binding.remoteImageUriXinyue
+import com.template.mvvm.binding.remoteImageUriChris
 
 class GalleryImageFragment : Fragment() {
 
@@ -28,7 +28,7 @@ class GalleryImageFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        imageView.remoteImageUriXinyue(
+        imageView.remoteImageUriChris(
                 arguments[EXTRAS_IMAGE_URI] as Uri,
                 android.R.drawable.ic_menu_gallery,
                 android.R.drawable.ic_menu_gallery)

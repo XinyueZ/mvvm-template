@@ -20,7 +20,6 @@ import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setUpTransform
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
@@ -81,13 +80,12 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
 
     private fun bindTapHandlers(it: List<SoftwareLicenseItemViewModel>, lifecycleOwner: LifecycleOwner) {
         it.forEach {
-            launch(UI + vmJob) {
-                it.viewModelTapped.consumeEach {
+            it.clickHandler += {
+                launch(UI + vmJob) {
                     // Tell UI to open a UI for license detail.
                     licenseDetailViewModel.value = when (lifecycleOwner) {
                         is Fragment -> {
                             val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-
                             repository.getLicense(lifecycleOwner.context.applicationContext as Application, vmJob, it, false).consumeEach {
                                 LL.d("Show license detail")
                                 vm.detail.set(it)
@@ -166,7 +164,7 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     val title: ObservableField<String> = ObservableField()
     val description: ObservableField<String> = ObservableField()
 
-    val viewModelTapped = Channel<Library>()
+    val clickHandler = arrayListOf<((Library) -> Unit)>()
 
     companion object {
         fun from(library: Library): SoftwareLicenseItemViewModel {
@@ -179,9 +177,7 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     }
 
     fun onCommand(vm: ViewModel) {
-        launch(UI + vmJob) {
-            viewModelTapped.send(library)
-        }
+        clickHandler.first()(library)
     }
 
     override fun equals(other: Any?) =
@@ -190,8 +186,9 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        viewModelTapped.close()
+        clickHandler.clear()
     }
+
 }
 
 
