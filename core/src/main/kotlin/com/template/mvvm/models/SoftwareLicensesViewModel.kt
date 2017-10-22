@@ -6,8 +6,6 @@ import android.arch.paging.PagedList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
@@ -23,7 +21,7 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
-class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : AbstractViewModel() {
+class SoftwareLicensesViewModel(private val application: Application, private val repository: LicensesDataSource) : AbstractViewModel() {
 
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
@@ -83,25 +81,11 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource) : Ab
             it.clickHandler += {
                 launch(UI + vmJob) {
                     // Tell UI to open a UI for license detail.
-                    licenseDetailViewModel.value = when (lifecycleOwner) {
-                        is Fragment -> {
-                            val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            repository.getLicense(lifecycleOwner.context.applicationContext as Application, vmJob, it, false).consumeEach {
-                                LL.d("Show license detail")
-                                vm.detail.set(it)
-
-                            }
-                            vm
+                    licenseDetailViewModel.value = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java).apply {
+                        repository.getLicense(application, vmJob, it, false).consumeEach {
+                            LL.d("Show license detail")
+                            detail.set(it)
                         }
-                        is FragmentActivity -> {
-                            val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            repository.getLicense(lifecycleOwner.application, vmJob, it, false).consumeEach {
-                                LL.d("Show license detail")
-                                vm.detail.set(it)
-                            }
-                            vm
-                        }
-                        else -> LicenseDetailViewModel()
                     }
                 }
             }

@@ -28,6 +28,7 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel()
                     isAssignableFrom(SoftwareLicensesViewModel::class.java) ->
                         SoftwareLicensesViewModel(
+                                application,
                                 Injection.getInstance(application).provideRepository(application))
                     isAssignableFrom(LicenseDetailViewModel::class.java) -> LicenseDetailViewModel()
                     isAssignableFrom(SoftwareLicenseItemViewModel::class.java) -> SoftwareLicenseItemViewModel()
