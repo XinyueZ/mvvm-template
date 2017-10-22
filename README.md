@@ -34,7 +34,13 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 1. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) instead  [Rx-Android](https://github.com/ReactiveX/RxAndroid) to support repository
 2. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) to implement [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
-
+3. Added detail page of product
+4. Compare two different ways for item-opening on list
+    - Click through [channel](https://github.com/XinyueZ/mvvm-template/blob/bd437884779a3d4a388262b261bfaeb5c70434c1/core/src/main/kotlin/com/template/mvvm/models/SoftwareLicensesViewModel.kt#L183-L183)  <- It won't be used in future, because channel runs without resource free, another [example](https://github.com/XinyueZ/mvvm-template/blob/dev/core/src/main/kotlin/com/template/mvvm/models/ProductsViewModel.kt#L166)
+    - Click through actor. The actor encapsulates channel which can be managed by parent like UI. [issue](https://github.com/Kotlin/kotlinx.coroutines/issues/140)
+        - Make [view-extension to extend view's onclick-listener](https://github.com/XinyueZ/mvvm-template/blob/70cd0d7453d8a7da735f859b97fc3875747c6421/core/src/main/kotlin/com/template/mvvm/ext/ViewModelExt.kt#L43-L43) to call coroutine-actor.
+        - In [view-binding-adapter](https://github.com/XinyueZ/mvvm-template/blob/70cd0d7453d8a7da735f859b97fc3875747c6421/core/src/main/kotlin/com/template/mvvm/binding/BindingAdapters.kt#L199-L199) using new extension.
+        - [Use a collection as placeholder for click-event handler in item-view-model](https://github.com/XinyueZ/mvvm-template/blob/70cd0d7453d8a7da735f859b97fc3875747c6421/core/src/main/kotlin/com/template/mvvm/models/ProductsViewModel.kt#L147), clear this collection when view-model's ```onCleared()``` is called.
 See:
 
 ![arch-coroutines](media/arch-coroutines.png)
