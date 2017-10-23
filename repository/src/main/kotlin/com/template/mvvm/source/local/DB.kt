@@ -11,7 +11,7 @@ import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 
-@Database(entities = arrayOf(LicenseEntity::class, LibraryEntity::class, ProductEntity::class, BrandEntity::class, ImageEntity::class), version = 1)
+@Database(entities = arrayOf(LicenseEntity::class, LibraryEntity::class, ProductEntity::class, BrandEntity::class, ImageEntity::class), version = 2)
 @TypeConverters(FieldConverter::class)
 abstract class DB : RoomDatabase() {
 

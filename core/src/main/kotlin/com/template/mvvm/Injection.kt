@@ -65,7 +65,7 @@ class Injection private constructor(application: Application) {
         DB_INSTANCE ?: buildDatabase(application).also { DB_INSTANCE = it }
     }
 
-    private fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, DB::class.java, "mvvm.db").build()
+    private fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, DB::class.java, "mvvm.db").fallbackToDestructiveMigration().build()
 
     // Provides whole repository
 
