@@ -43,17 +43,10 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         }
     }
 
-    private suspend fun loadLicensesFromDB(job: Job) = produce<List<Library>>(job) {
-        val res = with(DB.INSTANCE.licensesLibrariesDao()
-                .getLibraryList()) {
-            mutableListOf<Library>().apply {
-                this@with.forEach {
-                    this.add(it.toLibrary())
-                }
-            }
-        }
+    private suspend fun loadLicensesFromDB(job: Job) = produce(job) {
         LL.d("licenses loaded from db")
-        send(res)
+        send(DB.INSTANCE.licensesLibrariesDao()
+                .getLibraryList().map { it.toLibrary() })
     }
 
     private suspend fun loadLicensesFromAsset(job: Job) = produce(job) {
