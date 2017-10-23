@@ -16,29 +16,21 @@ import kotlinx.coroutines.experimental.channels.produce
 
 class ProductsLocal : ProductsDataSource {
 
-    override suspend fun getAllProducts(job: Job, localOnly: Boolean) = produce<List<Product>>(job) {
-        mutableListOf<Product>().apply {
-            with(DB.INSTANCE.productDao()) {
-                getProductList().forEach {
-                    val imageList = getImages(it.pid)
-                    this@apply.add(Product.from(it, imageList))
-                }
-            }
+    override suspend fun getAllProducts(job: Job, localOnly: Boolean) = produce(job) {
+        DB.INSTANCE.productDao().apply {
             LL.d("products loaded from db")
-            send(this)
+            send(getProductList().map {
+                Product.from(it, getImages(it.pid))
+            })
         }
     }
 
-    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce<List<Product>>(job) {
-        mutableListOf<Product>().apply {
-            with(DB.INSTANCE.productDao()) {
-                filterProductList(keyword).forEach {
-                    val imageList = getImages(it.pid)
-                    this@apply.add(Product.from(it, imageList))
-                }
-            }
+    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce(job) {
+        DB.INSTANCE.productDao().apply {
             LL.d("filtered $keyword products and loaded from db")
-            send(this)
+            send(filterProductList(keyword).map {
+                Product.from(it, getImages(it.pid))
+            })
         }
     }
 
@@ -51,14 +43,11 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce<List<Brand>>(job) {
-        mutableListOf<Brand>().apply {
-            DB.INSTANCE.productDao().getBrandList().forEach {
-                this.add(it.toBrand())
-            }
-            LL.d("brands loaded from db")
-            send(this)
-        }
+    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce(job) {
+        LL.d("brands loaded from db")
+        send(DB.INSTANCE.productDao().getBrandList().map {
+            it.toBrand()
+        })
     }
 
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Byte>(job) {
