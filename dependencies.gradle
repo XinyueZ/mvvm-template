@@ -101,7 +101,7 @@ ext {
             [configuration: "implementation", dependency: [group: "com.android.support", name: "customtabs", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "support-v4", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support.constraint", name: "constraint-layout", version: constraint],],
+            [configuration: "implementation", dependency: [group: "com.android.support.constraint", name: "constraint-layout", version: constraint]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "multidex", version: multiDex]],
 
             //JSON
