@@ -9,11 +9,12 @@ import com.template.mvvm.source.local.entities.products.ProductEntity
 
 @Dao
 interface LicensesLibrariesDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLicense(licenseEntity: LicenseEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLibrary(libraryEntity: LibraryEntity)
+    fun insertLicenses(licenseEntity: List<LicenseEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertLibraries(libraryEntity: List<LibraryEntity>)
 
     @Query("select * from libraries")
     fun getLibraryList(): List<LibraryEntity>
@@ -34,14 +35,15 @@ interface LicensesLibrariesDao {
 
 @Dao
 interface ProductDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(productEntity: ProductEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBrand(brandEntity: BrandEntity)
+    fun insertProducts(productEntity: List<ProductEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertImage(imageEntity: ImageEntity)
+    fun insertBrands(brandEntity: List<BrandEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertImages(imageEntity: List<ImageEntity>)
 
     @Query("select * from products")
     fun getProductList(): List<ProductEntity>

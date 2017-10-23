@@ -76,10 +76,13 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                 getLibraryList().forEach { this.add(it.toLibrary()) }
                 val diffResult = DiffUtil.calculateDiff(DifferentCallback(this, source))
                 diffResult.dispatchUpdatesTo(DifferentListUpdateCallback(this))
-                source.forEach {
-                    insertLibrary(LibraryEntity.from(it))
-                    insertLicense(LicenseEntity.from(it.license))
-                }
+
+                insertLibraries(source.map {
+                    LibraryEntity.from(it)
+                })
+                insertLicenses(source.map {
+                    LicenseEntity.from(it.license)
+                })
                 send(1)
                 LL.w("licenses write to db")
             }

@@ -63,10 +63,16 @@ class ProductsLocal : ProductsDataSource {
 
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
-            source.forEach {
-                insertImage(ImageEntity.from(it.pictures.first()))
-                insertProduct(ProductEntity.from(it))
-            }
+            insertImages(
+                    source.map {
+                        ImageEntity.from(it.pictures.first())
+                    }
+            )
+            insertProducts(
+                    source.map {
+                        ProductEntity.from(it)
+                    }
+            )
             send(1)
             LL.w("products write to db")
         }
@@ -78,7 +84,11 @@ class ProductsLocal : ProductsDataSource {
                 getBrandList().forEach { this.add(it.toBrand()) }
                 val diffResult = DiffUtil.calculateDiff(BrandsDiffCallback(this, source))
                 diffResult.dispatchUpdatesTo(BrandListUpdateCallback(this))
-                source.forEach { insertBrand(BrandEntity.from(it)) }
+                insertBrands(
+                        source.map {
+                            BrandEntity.from(it)
+                        }
+                )
                 send(1)
                 LL.w("brands write to db")
             }
@@ -87,9 +97,11 @@ class ProductsLocal : ProductsDataSource {
 
     override suspend fun saveBrand(job: Job, source: List<Product>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
-            source.forEach {
-                insertBrand(BrandEntity.from(it.brand))
-            }
+            insertBrands(
+                    source.map {
+                        BrandEntity.from(it.brand)
+                    }
+            )
             send(1)
             LL.w("products write brand to db")
         }
@@ -98,9 +110,11 @@ class ProductsLocal : ProductsDataSource {
     override suspend fun savePictures(job: Job, source: List<Product>) = produce<Byte>(job) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
-                it.pictures.forEach {
-                    insertImage(ImageEntity.from(it))
-                }
+                insertImages(
+                        it.pictures.map {
+                            ImageEntity.from(it)
+                        }
+                )
             }
             send(1)
             LL.w("products write pictures(images) to db")
