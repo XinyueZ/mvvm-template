@@ -14,10 +14,10 @@
         style="@style/RecyclerViewCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:commandItem="@{vm::onCommand}"
+        app:width="@{vm.itemWidth}"
         app:height="@{vm.itemHeight}"
-        app:vm="@{vm}"
-        app:width="@{vm.itemWidth}">
+        app:command="@{vm::onCommand}"
+        app:vm="@{vm}">
 
         <ImageView
             android:layout_width="match_parent"

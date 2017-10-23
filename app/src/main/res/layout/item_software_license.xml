@@ -15,7 +15,7 @@
         style="@style/RecyclerViewCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:commandItem="@{vm::onCommand}"
+        app:command="@{vm::onCommand}"
         app:vm="@{vm}">
 
         <LinearLayout

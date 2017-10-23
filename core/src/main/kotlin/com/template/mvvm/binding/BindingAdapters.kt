@@ -22,10 +22,7 @@ import android.support.v4.view.ViewPager
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.*
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -62,10 +59,18 @@ fun RecyclerView.setUpBinding(
 
 }
 
-@BindingAdapter(value = *arrayOf("width", "height"), requireAll = true)
-fun View.viewSize(width: Int, height: Int) {
-    layoutParams.width = width
-    layoutParams.height = height
+@BindingAdapter(value = *arrayOf("width", "height", "command", "vm"), requireAll = false)
+fun CardView.setupExtension(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
+    width?.let { layoutParams.width = it }
+    height?.let { layoutParams.height = it }
+    l?.let {
+        onClick {
+            vm?.let {
+                l.onCommand(vm)
+            }
+        }
+    }
+
 }
 
 @BindingAdapter("stopLoading")
@@ -84,7 +89,6 @@ fun SwipeRefreshLayout.reload(l: OnReloadListener) {
 fun ViewPager.setImageList(uris: List<Uri>) {
     adapter = GalleryViewPagerAdapter((context as AppCompatActivity).supportFragmentManager, uris)
 }
-
 
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
 fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
@@ -192,13 +196,6 @@ fun BottomNavigationView.command(l: OnCommandListener) {
         l.onCommand(it.itemId)
 
         true
-    }
-}
-
-@BindingAdapter(value = *arrayOf("commandItem", "vm"), requireAll = true)
-fun View.command(l: OnItemCommandListener, vm: ViewModel) {
-    onClick {
-        l.onCommand(vm)
     }
 }
 
