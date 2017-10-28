@@ -47,6 +47,7 @@ class Injection private constructor(application: Application) {
         fun destroyInstance() {
             INSTANCE?.let {
                 with(it) {
+                    DB_INSTANCE?.close()
                     DB_INSTANCE = null
                     DS_INSTANCE?.clear()
                     DS_INSTANCE = null
