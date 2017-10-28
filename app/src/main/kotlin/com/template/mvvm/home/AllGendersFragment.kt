@@ -25,15 +25,17 @@ class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
                 .apply {
                     vmItem = BR.vm
                     vm = obtainViewModel().apply {
-                        activity.apply {
-                            registerLifecycleOwner(activity)
-                            view.setupErrorSnackbar(this, onError)
+                        activity?.let {
+                            with(it) {
+                                registerLifecycleOwner(it)
+                                view.setupErrorSnackbar(it, onError)
 
-                            openProductDetail.observe(activity, Observer {
-                                it?.let {
-                                    ProductDetailActivity.showInstance(activity, it)
-                                }
-                            })
+                                openProductDetail.observe(it, Observer {
+                                    it?.let {
+                                        ProductDetailActivity.showInstance(this@with, it)
+                                    }
+                                })
+                            }
                         }
                     }
                 }

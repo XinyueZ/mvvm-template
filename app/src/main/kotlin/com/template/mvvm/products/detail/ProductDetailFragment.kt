@@ -21,8 +21,10 @@ class ProductDetailFragment : AppBaseFragment<ProductDetailViewModel>() {
         binding = FragmentProductDetailBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        productIdToDetail = activity.intent.extras[ProductDetailActivity.ARG_SEL_ID] as String?
-                        registerLifecycleOwner(activity)
+                        activity?.let {
+                            productIdToDetail = it.intent.extras[ProductDetailActivity.ARG_SEL_ID] as String?
+                            registerLifecycleOwner(it)
+                        }
                         view.setupErrorSnackbar(this@ProductDetailFragment, this.onError)
                     }
 

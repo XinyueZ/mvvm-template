@@ -16,11 +16,13 @@ abstract class LifeDialogFragment<out T : ViewModel> : AppCompatDialogFragment()
     protected abstract fun requireViewModel(): Class<out T>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(activity).apply {
-            activity.layoutInflater.inflate(getLayout(), null).apply {
-                setView(this)
-                bindingView(this)
-            }
-        }.create()
+        return activity?.let {
+            AlertDialog.Builder(it).apply {
+                it.layoutInflater.inflate(getLayout(), null).apply {
+                    setView(this)
+                    bindingView(this)
+                }
+            }.create()
+        } ?: kotlin.run { super.onCreateDialog(savedInstanceState) }
     }
 }

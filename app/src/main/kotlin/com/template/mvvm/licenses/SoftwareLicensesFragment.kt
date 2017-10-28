@@ -23,7 +23,9 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
                 .apply {
                     vmItem = BR.vm
                     vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity)
+                        activity?.let {
+                            registerLifecycleOwner(it)
+                        }
                         view.setupErrorSnackbar(this@SoftwareLicensesFragment, this.onError)
                     }
                 }

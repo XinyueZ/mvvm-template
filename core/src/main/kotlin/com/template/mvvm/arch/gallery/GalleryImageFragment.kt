@@ -26,11 +26,13 @@ class GalleryImageFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) = imageView
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        imageView.remoteImageUri(
-                arguments[EXTRAS_IMAGE_URI] as Uri,
-                android.R.drawable.ic_menu_gallery,
-                android.R.drawable.ic_menu_gallery)
+        arguments?.let {
+            imageView.remoteImageUri(
+                    it[EXTRAS_IMAGE_URI] as Uri,
+                    android.R.drawable.ic_menu_gallery,
+                    android.R.drawable.ic_menu_gallery)
+        }
     }
 }

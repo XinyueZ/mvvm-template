@@ -25,15 +25,17 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
                 .apply {
                     vmItem = BR.vm
                     vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity)
-                        view.setupErrorSnackbar(this@ProductsFragment, this.onError)
-
-
-                        openProductDetail.observe(activity, Observer {
-                            it?.let {
-                                ProductDetailActivity.showInstance(activity, it)
+                        activity?.let {
+                            with(it) {
+                                registerLifecycleOwner(it)
+                                view.setupErrorSnackbar(this@ProductsFragment, this@apply.onError)
+                                openProductDetail.observe(it, Observer {
+                                    it?.let {
+                                        ProductDetailActivity.showInstance(this@with, it)
+                                    }
+                                })
                             }
-                        })
+                        }
                     }
                 }
         return binding

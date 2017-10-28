@@ -20,13 +20,16 @@ fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
         ViewModelProviders.of(this, ViewModelFactory.getInstance(this.application)).get(viewModelClass)
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
-        ViewModelProviders.of(activity, ViewModelFactory.getInstance(activity.application)).get(viewModelClass)
+        activity?.let { ViewModelProviders.of(it, ViewModelFactory.getInstance(it.application)).get(viewModelClass) }
+                ?: kotlin.run { ViewModelProviders.of(this).get(viewModelClass) }
 
 fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = with(when (this) {
     is Fragment -> activity
     else -> this as FragmentActivity
 }) {
-    ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
+    this?.let {
+        ViewModelProviders.of(it, ViewModelFactory.getInstance(it.application)).get(viewModelClass)
+    } ?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
 }
 
 fun View.showErrorSnackbar(errorVm: Error, timeLength: Int = Snackbar.LENGTH_INDEFINITE) {

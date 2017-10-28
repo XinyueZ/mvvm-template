@@ -60,7 +60,7 @@ fun RecyclerView.setUpBinding(
 }
 
 @BindingAdapter(value = *arrayOf("width", "height", "command", "vm"), requireAll = false)
-fun CardView.setUpExtension(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
+fun CardView.setUpExt(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
     width?.let { layoutParams.width = it }
     height?.let { layoutParams.height = it }
     l?.let {
@@ -93,9 +93,7 @@ fun ViewPager.setImageList(uris: List<Uri>) {
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
 fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     uri?.let {
-        if (this is ImageView) {
-            remoteImageUris(arrayOf(uri), placeholderRes, errorDrawableRes)
-        }
+        (this as? ImageView)?.remoteImageUris(arrayOf(uri), placeholderRes, errorDrawableRes)
     }
 }
 
