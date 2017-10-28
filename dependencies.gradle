@@ -9,7 +9,7 @@ allprojects {
 
 ext {
     // App dependencies
-    def supportLibraryVersion = '26.1.0'
+    def supportLibraryVersion = '27.0.0'
     def archLifecycleVersion = "1.0.0-rc1"
     def paging = "1.0.0-alpha3"
     def constraint = "1+"
