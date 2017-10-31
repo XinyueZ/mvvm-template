@@ -7,7 +7,6 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 class ProductsRepository(private val remote: ProductsDataSource,
@@ -27,11 +26,11 @@ class ProductsRepository(private val remote: ProductsDataSource,
             }, { emitter.onError(it) }))
         }
         if (localOnly) {
-            addToAutoDispose(local.getAllProducts().subscribe(Consumer
+            addToAutoDispose(local.getAllProducts().subscribe(
             {
                 if (it.isNotEmpty()) emitter.onSuccess(it)
                 else remoteCallAndWrite()
-            }
+            }, { emitter.onError(it) }
             ))
             return@create
         }
@@ -46,11 +45,11 @@ class ProductsRepository(private val remote: ProductsDataSource,
             }, { emitter.onError(it) }))
         }
         if (localOnly) {
-            addToAutoDispose(local.filterProduct(keyword).subscribe(Consumer
+            addToAutoDispose(local.filterProduct(keyword).subscribe(
             {
                 if (it.isNotEmpty()) emitter.onSuccess(it)
                 else remoteCallAndWrite()
-            }
+            }, { emitter.onError(it) }
             ))
             return@create
         }
@@ -65,11 +64,11 @@ class ProductsRepository(private val remote: ProductsDataSource,
             }, { emitter.onError(it) }))
         }
         if (localOnly) {
-            addToAutoDispose(local.getAllBrands().subscribe(Consumer
+            addToAutoDispose(local.getAllBrands().subscribe(
             {
                 if (it.isNotEmpty()) emitter.onSuccess(it)
                 else remoteCallAndWrite()
-            }
+            }, { emitter.onError(it) }
             ))
             return@create
         }

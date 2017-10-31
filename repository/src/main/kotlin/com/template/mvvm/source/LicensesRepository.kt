@@ -7,7 +7,6 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 class LicensesRepository(app: Application,
@@ -28,11 +27,11 @@ class LicensesRepository(app: Application,
             }, { emitter.onError(it) }))
         }
         if (localOnly) {
-            addToAutoDispose(local.getAllLibraries().subscribe(Consumer
+            addToAutoDispose(local.getAllLibraries().subscribe(
             {
                 if (it.isNotEmpty()) emitter.onSuccess(it)
                 else remoteCallAndWrite()
-            }
+            }, { emitter.onError(it) }
             ))
             return@create
         }
