@@ -21,10 +21,10 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun getAllProducts(localOnly: Boolean) = Single.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllProducts().subscribe(Consumer {
+            addToAutoDispose(remote.getAllProducts().subscribe({
                 local.saveProducts(it)
-                addToAutoDispose(local.getAllProducts().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
-            }))
+                addToAutoDispose(local.getAllProducts().subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
+            }, { emitter.onError(it) }))
         }
         if (localOnly) {
             addToAutoDispose(local.getAllProducts().subscribe(Consumer
@@ -40,10 +40,10 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun filterProduct(keyword: String, localOnly: Boolean) = Single.create<List<Product>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.filterProduct(keyword).subscribe(Consumer {
+            addToAutoDispose(remote.filterProduct(keyword).subscribe({
                 local.saveProducts(it)
-                addToAutoDispose(local.filterProduct(keyword).subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
-            }))
+                addToAutoDispose(local.filterProduct(keyword).subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
+            }, { emitter.onError(it) }))
         }
         if (localOnly) {
             addToAutoDispose(local.filterProduct(keyword).subscribe(Consumer
@@ -59,10 +59,10 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun getAllBrands(localOnly: Boolean) = Single.create<List<Brand>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllBrands().subscribe(Consumer {
+            addToAutoDispose(remote.getAllBrands().subscribe({
                 local.saveBrands(it)
-                addToAutoDispose(local.getAllBrands().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
-            }))
+                addToAutoDispose(local.getAllBrands().subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
+            }, { emitter.onError(it) }))
         }
         if (localOnly) {
             addToAutoDispose(local.getAllBrands().subscribe(Consumer

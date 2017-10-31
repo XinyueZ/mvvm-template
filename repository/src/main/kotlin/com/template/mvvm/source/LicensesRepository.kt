@@ -22,10 +22,10 @@ class LicensesRepository(app: Application,
 
     override fun getAllLibraries(localOnly: Boolean) = Single.create<List<Library>>({ emitter ->
         val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllLibraries().subscribe(Consumer {
+            addToAutoDispose(remote.getAllLibraries().subscribe({
                 local.saveLibraries(it)
-                addToAutoDispose(local.getAllLibraries().subscribe(Consumer { if (it.isNotEmpty()) emitter.onSuccess(it) }))
-            }))
+                addToAutoDispose(local.getAllLibraries().subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
+            }, { emitter.onError(it) }))
         }
         if (localOnly) {
             addToAutoDispose(local.getAllLibraries().subscribe(Consumer
