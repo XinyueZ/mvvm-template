@@ -1,9 +1,9 @@
 ext {
     // Sdk and tools
     minSdkVersion = 16
-    targetSdkVersion = 26
-    compileSdkVersion = 26
-    buildToolsVersion = '26.0.2'
+    targetSdkVersion = 27
+    compileSdkVersion = 27
+    buildToolsVersion = '27.0.0'
 
     appId = "com.template.mvvm"
     versionCode = 4
@@ -22,7 +22,7 @@ ext {
 
 buildscript {
     ext.kotlin_version = '1.1.51'
-    ext.gradleVersion = '3.0.0-beta7'
+    ext.gradleVersion = '3.1.0-alpha01'
 
     repositories {
         google()
