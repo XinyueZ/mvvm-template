@@ -9,8 +9,8 @@ allprojects {
 
 ext {
     // App dependencies
-    def supportLibraryVersion = '27.0.0'
-    def archLifecycleVersion = "1.0.0-rc1"
+    def supportLibraryVersion = ext.support_comp
+    def archLifecycleVersion = ext.arch_comp
     def paging = "1.0.0-alpha3"
     def constraint = "1+"
     def multiDex = "1+"
@@ -37,10 +37,10 @@ ext {
 
     //Kotlin
     def kotlin = ext.kotlin_version
-    def kotlinCoroutines = "0.19.2"
+    def kotlinCoroutines = "0.19.3"
 
     //Gradle
-    def gradle = ext.gradleVersion
+    def gradle = ext.gradle_version
 
     plugins = [
             androidApp: "com.android.application",
