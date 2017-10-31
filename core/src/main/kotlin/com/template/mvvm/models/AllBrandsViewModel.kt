@@ -4,6 +4,7 @@ import android.arch.lifecycle.*
 import android.arch.paging.PagedList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import android.databinding.ObservableInt
 import android.net.Uri
 import android.text.TextUtils
 import com.template.mvvm.LL
@@ -47,8 +48,8 @@ class AllBrandsViewModel(private val repository: ProductsDataSource) : AbstractV
                             MvvmListDataProvider(it
                                     .filter { !it.isEmpty() }
                                     .map {
-                                        it.itemWidth = itemWidth
-                                        it.itemHeight = itemHeight
+                                        it.itemWidth.set(itemWidth)
+                                        it.itemHeight.set(itemHeight)
                                         it
                                     }).create(
                                     0,
@@ -125,8 +126,8 @@ class BrandItemViewModel : AbstractViewModel() {
     lateinit var brand: Brand
     val logo = ObservableField<Uri>()
 
-    var itemWidth: Int = 0
-    var itemHeight: Int = 0
+    var itemWidth = ObservableInt(0)
+    var itemHeight = ObservableInt(0)
 
     companion object {
         fun from(brand: Brand): BrandItemViewModel {
