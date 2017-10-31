@@ -9,8 +9,8 @@ allprojects {
 
 ext {
     // App dependencies
-    def supportLibraryVersion = '26.1.0'
-    def archLifecycleVersion = "1.0.0-alpha9-1"
+    def supportLibraryVersion = ext.support_comp
+    def archLifecycleVersion = ext.arch_comp
     def constraint = "1+"
     def multiDex = "1+"
 
@@ -41,7 +41,7 @@ ext {
     def kotlin = ext.kotlin_version
 
     //Gradle
-    def gradle = ext.gradleVersion
+    def gradle = ext.gradle_version
 
     //Recycler-view data-binding
     def bindingCollectionAdapter = "2.2.0"
