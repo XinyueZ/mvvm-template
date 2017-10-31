@@ -37,6 +37,8 @@ import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.recycler.MvvmListAdapter
 import com.template.mvvm.ext.onClick
+import com.template.mvvm.ext.onNavigationItemSelected
+import com.template.mvvm.ext.onNavigationOnClick
 
 @BindingAdapter(value = *arrayOf("itemList", "itemLayout", "vmItemLayout", "layout"), requireAll = true)
 fun RecyclerView.setUpBinding(
@@ -60,7 +62,7 @@ fun RecyclerView.setUpBinding(
 }
 
 @BindingAdapter(value = *arrayOf("width", "height", "command", "vm"), requireAll = false)
-fun CardView.setUpExt(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
+fun CardView.setUp(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
     width?.let { layoutParams.width = it }
     height?.let { layoutParams.height = it }
     l?.let {
@@ -73,28 +75,26 @@ fun CardView.setUpExt(width: Int?, height: Int?, l: OnItemCommandListener?, vm: 
 
 }
 
-@BindingAdapter("stopLoading")
-fun SwipeRefreshLayout.stopLoading(stopLoading: Boolean) {
-    isRefreshing = !stopLoading
+@BindingAdapter("stopLoading", requireAll = false)
+fun SwipeRefreshLayout.stopLoading(stopLoading: Boolean?) {
+    stopLoading?.let { isRefreshing = !it }
 }
 
-@BindingAdapter("reload")
-fun SwipeRefreshLayout.reload(l: OnReloadListener) {
+@BindingAdapter("reload", requireAll = false)
+fun SwipeRefreshLayout.reload(l: OnReloadListener?) {
     setOnRefreshListener {
-        l.onReload()
+        l?.onReload()
     }
 }
 
-@android.databinding.BindingAdapter("imageUris")
-fun ViewPager.setImageList(uris: List<Uri>) {
-    adapter = GalleryViewPagerAdapter((context as AppCompatActivity).supportFragmentManager, uris)
+@BindingAdapter("imageUris", requireAll = false)
+fun ViewPager.setImageList(uris: List<Uri>?) {
+    uris?.let { adapter = GalleryViewPagerAdapter((context as AppCompatActivity).supportFragmentManager, it) }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
 fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
-    uri?.let {
-        (this as? ImageView)?.remoteImageUris(arrayOf(uri), placeholderRes, errorDrawableRes)
-    }
+    uri?.let { (this as? ImageView)?.remoteImageUris(arrayOf(it), placeholderRes, errorDrawableRes) }
 }
 
 @BindingAdapter(value = *arrayOf("remoteImageUris", "placeholderRes", "errorDrawableRes"), requireAll = false)
@@ -158,43 +158,34 @@ private fun ImageView.loadImage(uri: Uri, placeholder: Drawable?, errorDrawable:
             .into(this)
 }
 
-@BindingAdapter("goBack")
-fun View.goBack(goBack: Boolean) {
-    if (goBack) ActivityCompat.finishAfterTransition(context as Activity)
+@BindingAdapter("goBack", requireAll = false)
+fun View.goBack(goBack: Boolean?) {
+    goBack?.let { if (it) ActivityCompat.finishAfterTransition(context as Activity) }
 }
 
-@BindingAdapter("dataLoaded")
-fun View.dataLoaded(loaded: Boolean) {
-    visibility = if (loaded) {
+@BindingAdapter("dataLoaded", requireAll = false)
+fun View.dataLoaded(loaded: Boolean?) {
+    visibility = if (loaded != null && loaded) {
         View.GONE
     } else {
         View.VISIBLE
     }
 }
 
-@BindingAdapter("command")
-fun NavigationView.command(l: OnCommandListener) {
-    setNavigationItemSelectedListener {
-        it.isChecked = true
-        l.onCommand(it.itemId)
-
-        true
-    }
+@BindingAdapter("command", requireAll = false)
+fun NavigationView.command(l: OnCommandListener?) {
+    onNavigationItemSelected { l?.onCommand(it) }
 }
 
-@BindingAdapter("command")
-fun Toolbar.command(l: OnCommandListener) {
-    setNavigationOnClickListener { l.onCommand(R.id.action_app_bar_indicator) }
+@BindingAdapter("command", requireAll = false)
+fun Toolbar.command(l: OnCommandListener?) {
+    onNavigationOnClick { l?.onCommand(R.id.action_app_bar_indicator) }
 }
 
-@BindingAdapter("command")
-fun BottomNavigationView.command(l: OnCommandListener) {
+@BindingAdapter("command", requireAll = false)
+fun BottomNavigationView.command(l: OnCommandListener?) {
     disableShiftMode()
-    setOnNavigationItemSelectedListener {
-        l.onCommand(it.itemId)
-
-        true
-    }
+    onNavigationItemSelected { l?.onCommand(it) }
 }
 
 //
