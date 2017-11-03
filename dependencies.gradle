@@ -31,9 +31,6 @@ ext {
     def curl = "0.1"
     def stetho = "1.5.0"
 
-    //Test
-    def espresso = "3.0.1"
-    def junit = "4.12"
 
     //Kotlin
     def kotlin = ext.kotlin_version
@@ -42,6 +39,15 @@ ext {
     //Gradle
     def gradle = ext.gradle_version
 
+    //Tests
+    def robolectric = "3.5.1"
+    def shadowsMultidex = "3.4.2"
+    def mockitoVersion = "1.10.19"
+    def hamcrest = "1.3"
+    def testRunner = "1.0.1"
+    def espresso = "3.0.1"
+    def junit = "4.12"
+    def roomTest = archLifecycleVersion
     plugins = [
             androidApp: "com.android.application",
             androidLib: "com.android.library",
@@ -87,12 +93,6 @@ ext {
     ]
 
     baseDependencies = [
-            //TEST LIB
-            [configuration: "testImplementation", dependency: [group: "junit", name: "junit", version: junit]],
-            [configuration: "androidTestImplementation", dependency: [group: "com.android.support.test.espresso", name: "espresso-core", version: espresso],
-             options      : {
-                 exclude group: 'com.android.support', module: 'support-annotations'
-             }],
 
             //SUPPORT
             [configuration: "implementation", dependency: [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion]],
@@ -140,6 +140,25 @@ ext {
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: stetho]],
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho]],
             [configuration: "debugImplementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
+
+            //TESTS
+            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],
+            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: shadowsMultidex]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
+            [configuration: "testImplementation", dependency: [group: 'junit', name: 'junit', version: junit]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'runner', version: testRunner]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'rules', version: testRunner]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: espresso]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-contrib', version: espresso]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-intents', version: espresso]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-accessibility', version: espresso]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-web', version: espresso]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-idling-resource', version: espresso]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso.idling', name: 'idling-concurrent', version: espresso]],
+            [configuration: "androidTestImplementation", dependency: [group: "android.arch.persistence.room", name: "testing", version: roomTest]],
+
     ]
 
     coreDependencies = baseDependencies
