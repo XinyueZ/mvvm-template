@@ -47,6 +47,7 @@ ext {
     def testRunner = "1.0.1"
     def espresso = "3.0.1"
     def junit = "4.12"
+    def dexmaker = "1.2"
     def roomTest = archLifecycleVersion
     plugins = [
             androidApp: "com.android.application",
@@ -158,6 +159,11 @@ ext {
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-idling-resource', version: espresso]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso.idling', name: 'idling-concurrent', version: espresso]],
             [configuration: "androidTestImplementation", dependency: [group: "android.arch.persistence.room", name: "testing", version: roomTest]],
+            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
+            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
+            [configuration: "androidTestImplementation", dependency: [group: 'junit', name: 'junit', version: junit]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker', version: dexmaker]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker-mockito', version: dexmaker]],
 
     ]
 
