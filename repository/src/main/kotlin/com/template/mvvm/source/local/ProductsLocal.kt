@@ -50,7 +50,7 @@ class ProductsLocal : ProductsDataSource {
         })
     }
 
-    override suspend fun saveProducts(job: Job, source: List<Product>) = produce<Byte>(job) {
+    override suspend fun saveProducts(job: Job, source: List<Product>) = produce(job) {
         DB.INSTANCE.productDao().apply {
             insertImages(
                     source.map {
@@ -62,12 +62,12 @@ class ProductsLocal : ProductsDataSource {
                         ProductEntity.from(it)
                     }
             )
-            send(1)
+            send(Unit)
             LL.w("products write to db")
         }
     }
 
-    override suspend fun saveBrands(job: Job, source: List<Brand>) = produce<Byte>(job) {
+    override suspend fun saveBrands(job: Job, source: List<Brand>) = produce(job) {
         DB.INSTANCE.productDao().apply {
             mutableListOf<Brand>().apply {
                 getBrandList().forEach { this.add(it.toBrand()) }
@@ -78,25 +78,25 @@ class ProductsLocal : ProductsDataSource {
                             BrandEntity.from(it)
                         }
                 )
-                send(1)
+                send(Unit)
                 LL.w("brands write to db")
             }
         }
     }
 
-    override suspend fun saveBrand(job: Job, source: List<Product>) = produce<Byte>(job) {
+    override suspend fun saveBrand(job: Job, source: List<Product>) = produce(job) {
         DB.INSTANCE.productDao().apply {
             insertBrands(
                     source.map {
                         BrandEntity.from(it.brand)
                     }
             )
-            send(1)
+            send(Unit)
             LL.w("products write brand to db")
         }
     }
 
-    override suspend fun savePictures(job: Job, source: List<Product>) = produce<Byte>(job) {
+    override suspend fun savePictures(job: Job, source: List<Product>) = produce(job) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
                 insertImages(
@@ -105,7 +105,7 @@ class ProductsLocal : ProductsDataSource {
                         }
                 )
             }
-            send(1)
+            send(Unit)
             LL.w("products write pictures(images) to db")
         }
     }

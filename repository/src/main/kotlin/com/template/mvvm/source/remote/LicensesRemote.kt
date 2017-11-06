@@ -8,7 +8,7 @@ import kotlinx.coroutines.experimental.channels.produce
 
 class LicensesRemote : LicensesDataSource {
     override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = produce(job) {
-        LicensesApi.service .getLibraries().execute().takeIf {
+        LicensesApi.service.getLibraries().execute().takeIf {
             it.isSuccessful
         }?.let {
             it.body()?.let {
@@ -21,7 +21,7 @@ class LicensesRemote : LicensesDataSource {
                 }
                 LL.d("licenses loaded from net")
                 send(v)
-            }
-        }
+            } ?: kotlin.run { send(null) }
+        } ?: kotlin.run { send(null) }
     }
 }

@@ -18,8 +18,8 @@ class ProductsRemote : ProductsDataSource {
                 send(it.products.map {
                     Product.from(it)
                 })
-            }
-        }
+            } ?: kotlin.run { send(null) }
+        } ?: kotlin.run { send(null) }
     }
 
     override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce(job) {
@@ -31,13 +31,12 @@ class ProductsRemote : ProductsDataSource {
                 send(it.products.map {
                     Product.from(it)
                 })
-            }
-        }
+            } ?: kotlin.run { send(null) }
+        } ?: kotlin.run { send(null) }
     }
 
     override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce(job) {
-        ProductsApi.service
-                .getBrands().execute().takeIf {
+        ProductsApi.service.getBrands().execute().takeIf {
             it.isSuccessful
         }?.let {
             it.body()?.let {
@@ -45,7 +44,7 @@ class ProductsRemote : ProductsDataSource {
                 send(it.brands.map {
                     Brand.from(it)
                 })
-            }
-        }
+            } ?: kotlin.run { send(null) }
+        } ?: kotlin.run { send(null) }
     }
 }

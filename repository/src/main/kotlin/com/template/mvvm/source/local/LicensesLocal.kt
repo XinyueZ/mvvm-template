@@ -63,7 +63,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         send(v)
     }
 
-    override suspend fun saveLibraries(job: Job, source: List<Library>) = produce<Byte>(job) {
+    override suspend fun saveLibraries(job: Job, source: List<Library>) = produce(job) {
         DB.INSTANCE.licensesLibrariesDao().apply {
             mutableListOf<Library>().apply {
                 getLibraryList().forEach { this.add(it.toLibrary()) }
@@ -76,7 +76,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
                 insertLicenses(source.map {
                     LicenseEntity.from(it.license)
                 })
-                send(1)
+                send(Unit)
                 LL.w("licenses write to db")
             }
         }
