@@ -15,7 +15,7 @@ suspend fun <T> select(
         predicateAcceptLocalOnly: suspend (T) -> Boolean,// Predication for local-only, if true, the local-only works to load data from DB, otherwise try remote and save DB and fetch from DB
         emptyT: suspend () -> T,// Last chance when local provides nothing
         localOnly: Boolean,
-        restRemoteDataHandlers: (suspend (T) -> Unit)? = null // Rest tasks after getting remote data
+        restRemoteDataHandlers: (suspend (T) -> Unit) = {} // Rest tasks after getting remote data
 ) = produce(job) {
     val remoteSaveLoadLocal: (suspend () -> Unit) = {
         remote(job)?.let { remoteData ->
@@ -26,7 +26,7 @@ suspend fun <T> select(
                     send(emptyT())
                 }
             }
-            restRemoteDataHandlers?.let { it(remoteData) }
+            restRemoteDataHandlers(remoteData)
         } ?: kotlin.run {
             local(job)?.let {
                 send(it)
