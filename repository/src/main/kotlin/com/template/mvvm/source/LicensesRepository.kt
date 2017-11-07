@@ -44,8 +44,7 @@ class LicensesRepository(app: Application,
         return local.getLicense(app, library)
     }
 
-    override fun clear(): Boolean {
+    override fun clear() {
         compositeDisposable.clear()
-        return true
     }
 }

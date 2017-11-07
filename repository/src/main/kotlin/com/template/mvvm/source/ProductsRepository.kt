@@ -77,8 +77,7 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override fun saveProducts(source: List<Product>) = local.saveProducts(source)
 
-    override fun clear(): Boolean {
+    override fun clear() {
         compositeDisposable.clear()
-        return true
     }
 }
