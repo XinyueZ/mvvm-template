@@ -14,9 +14,9 @@ class LicensesRepository(app: Application,
 
     override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = select(
             job, // Disposable control
-            { cxt -> remote.getAllLibraries(cxt, localOnly).receiveOrNull() }, // Fetch remote-data
-            { cxt, e -> local.saveLibraries(cxt, e).receive() },  // Save data in DB after fetch remote-data
-            { cxt -> local.getAllLibraries(cxt, localOnly).receiveOrNull() }, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
+            { remote.getAllLibraries(job, localOnly).receiveOrNull() }, // Fetch remote-data
+            { local.saveLibraries(job, it).receive() },  // Save data in DB after fetch remote-data
+            { local.getAllLibraries(job, localOnly).receiveOrNull() }, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
             { it.isNotEmpty() },// Predication for local-only, if true, the local-only works to load data from DB, otherwise try remote and save DB and fetch from DB
             { emptyList() }, // Last chance when local provides nothing
             localOnly
