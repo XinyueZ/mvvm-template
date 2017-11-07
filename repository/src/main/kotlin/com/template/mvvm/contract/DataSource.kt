@@ -7,7 +7,7 @@ interface DataSource {
     fun clear() = Unit
 }
 
-suspend fun <T> select(
+suspend fun <T, E : DataSource> E.select(
         job: Job, // Disposable control
         remote: suspend () -> T?, // Fetch remote-data
         saveAfterRemote: suspend (T) -> Unit?,  // Save data in DB after fetch remote-data
