@@ -53,6 +53,23 @@ android {
         htmlReport false
         abortOnError false
     }
+
+    testOptions { // <-- You need this
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+
+        unitTests.all {
+            // All the usual Gradle options.
+            testLogging {
+                events "passed", "skipped", "failed"
+                outputs.upToDateWhen {false}
+                showStandardStreams = true
+            }
+        }
+
+    }
 }
 
 dependencies {
