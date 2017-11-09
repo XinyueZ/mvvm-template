@@ -53,7 +53,7 @@ ext {
     def junit = "4.12"
     def dexmaker = "1.2"
     def roomTest = archLifecycleVersion
-    def multidexInstrumentation = "1.0.1"
+    def multidexInstrumentation = "1.0.2"
 
     libs = [
             //TEST
