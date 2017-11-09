@@ -2,12 +2,11 @@ package com.template.mvvm.source
 
 import android.app.Application
 import com.template.mvvm.contract.LicensesDataSource
+import com.template.mvvm.contract.select
 import com.template.mvvm.domain.licenses.Library
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class LicensesRepository(app: Application,
                          private val remote: LicensesDataSource,
@@ -19,24 +18,15 @@ class LicensesRepository(app: Application,
         compositeDisposable.addAll(*disposables)
     }
 
-    override fun getAllLibraries(localOnly: Boolean) = Single.create<List<Library>>({ emitter ->
-        val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllLibraries().subscribe({
-                local.saveLibraries(it)
-                addToAutoDispose(local.getAllLibraries().subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
-            }, { emitter.onError(it) }))
-        }
-        if (localOnly) {
-            addToAutoDispose(local.getAllLibraries().subscribe(
-            {
-                if (it.isNotEmpty()) emitter.onSuccess(it)
-                else remoteCallAndWrite()
-            }, { emitter.onError(it) }
-            ))
-            return@create
-        }
-        remoteCallAndWrite()
-    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+    override fun getAllLibraries(localOnly: Boolean) = select(
+            { addToAutoDispose(it) }, // Disposable control
+            { remote.getAllLibraries() }, // Fetch remote-data
+            { local.saveLibraries(it) },  // Save data in DB after fetch remote-data
+            { local.getAllLibraries() }, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
+            { it.isNotEmpty() },// Predication for local-only, if true, the local-only works to load data from DB, otherwise try remote and save DB and fetch from DB
+            { emptyList() },// Last chance when local provides nothing
+            localOnly
+    )
 
     override fun saveLibraries(source: List<Library>) = local.saveLibraries(source)
 

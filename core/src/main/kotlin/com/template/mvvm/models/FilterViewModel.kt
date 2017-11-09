@@ -1,6 +1,7 @@
 package com.template.mvvm.models
 
 import android.arch.lifecycle.LifecycleOwner
+import com.template.mvvm.ComputationToMainScheduleSingle
 import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
 import me.tatarka.bindingcollectionadapter2.ItemBinding
@@ -12,6 +13,7 @@ abstract class FilterViewModel(repository: ProductsDataSource, itemBinding: Item
         productListSource?.let {
             addToAutoDispose(
                     repository.filterProduct(filterKeyword(), localOnly)
+                            .compose(ComputationToMainScheduleSingle())
                             .subscribe(
                                     {
                                         productListSource?.value = it
@@ -34,4 +36,4 @@ class WomenViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<Pr
     override fun filterKeyword() = "FEMALE"
 }
 
-class AllGendersViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>): ProductsViewModel(repository, itemBinding)
+class AllGendersViewModel(repository: ProductsDataSource, itemBinding: ItemBinding<ProductItemViewModel>) : ProductsViewModel(repository, itemBinding)

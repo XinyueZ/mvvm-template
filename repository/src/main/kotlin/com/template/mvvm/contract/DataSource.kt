@@ -30,15 +30,14 @@ fun <T, E : DataSource> E.select(
         )
     }
     val remoteCallThenWrite = {
-        autoDispose(remote().subscribe({ remoteData ->
-            saveAfterRemote(remoteData)
-            fetchFromLocal({
-                emitter.onSuccess(it)
-                restRemoteDataHandlers(it)
-            }, { emitter.onSuccess(remoteData) }, { emitter.onError(it) })
-        }, {
-            fetchFromLocal({ emitter.onSuccess(it) }, { emitter.onSuccess(emptyT()) }, { emitter.onError(it) })
-        }))
+        autoDispose(remote()
+                .doAfterSuccess({ restRemoteDataHandlers(it) })
+                .subscribe({ remoteData ->
+                    saveAfterRemote(remoteData)
+                    fetchFromLocal({ emitter.onSuccess(it) }, { emitter.onSuccess(remoteData) }, { emitter.onError(it) })
+                }, {
+                    fetchFromLocal({ emitter.onSuccess(it) }, { emitter.onSuccess(emptyT()) }, { emitter.onError(it) })
+                }))
     }
 
     when (localOnly) {

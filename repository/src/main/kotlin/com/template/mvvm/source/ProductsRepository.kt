@@ -1,13 +1,10 @@
 package com.template.mvvm.source
 
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.domain.products.Brand
+import com.template.mvvm.contract.select
 import com.template.mvvm.domain.products.Product
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class ProductsRepository(private val remote: ProductsDataSource,
                          private val local: ProductsDataSource,
@@ -18,62 +15,35 @@ class ProductsRepository(private val remote: ProductsDataSource,
         compositeDisposable.addAll(*disposables)
     }
 
-    override fun getAllProducts(localOnly: Boolean) = Single.create<List<Product>>({ emitter ->
-        val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllProducts().subscribe({
-                local.saveProducts(it)
-                addToAutoDispose(local.getAllProducts().subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
-            }, { emitter.onError(it) }))
-        }
-        if (localOnly) {
-            addToAutoDispose(local.getAllProducts().subscribe(
-            {
-                if (it.isNotEmpty()) emitter.onSuccess(it)
-                else remoteCallAndWrite()
-            }, { emitter.onError(it) }
-            ))
-            return@create
-        }
-        remoteCallAndWrite()
-    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+    override fun getAllProducts(localOnly: Boolean) = select(
+            { addToAutoDispose(it) }, // Disposable control
+            { remote.getAllProducts() }, // Fetch remote-data
+            { local.saveProducts(it) },  // Save data in DB after fetch remote-data
+            { local.getAllProducts() }, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
+            { it.isNotEmpty() },// Predication for local-only, if true, the local-only works to load data from DB, otherwise try remote and save DB and fetch from DB
+            { emptyList() },// Last chance when local provides nothing
+            localOnly
+    )
 
-    override fun filterProduct(keyword: String, localOnly: Boolean) = Single.create<List<Product>>({ emitter ->
-        val remoteCallAndWrite = {
-            addToAutoDispose(remote.filterProduct(keyword).subscribe({
-                local.saveProducts(it)
-                addToAutoDispose(local.filterProduct(keyword).subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
-            }, { emitter.onError(it) }))
-        }
-        if (localOnly) {
-            addToAutoDispose(local.filterProduct(keyword).subscribe(
-            {
-                if (it.isNotEmpty()) emitter.onSuccess(it)
-                else remoteCallAndWrite()
-            }, { emitter.onError(it) }
-            ))
-            return@create
-        }
-        remoteCallAndWrite()
-    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+    override fun filterProduct(keyword: String, localOnly: Boolean) = select(
+            { addToAutoDispose(it) }, // Disposable control
+            { remote.filterProduct(keyword) }, // Fetch remote-data
+            { local.saveProducts(it) },  // Save data in DB after fetch remote-data
+            { local.filterProduct(keyword) }, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
+            { it.isNotEmpty() },// Predication for local-only, if true, the local-only works to load data from DB, otherwise try remote and save DB and fetch from DB
+            { emptyList() },// Last chance when local provides nothing
+            localOnly
+    )
 
-    override fun getAllBrands(localOnly: Boolean) = Single.create<List<Brand>>({ emitter ->
-        val remoteCallAndWrite = {
-            addToAutoDispose(remote.getAllBrands().subscribe({
-                local.saveBrands(it)
-                addToAutoDispose(local.getAllBrands().subscribe({ if (it.isNotEmpty()) emitter.onSuccess(it) }, { emitter.onError(it) }))
-            }, { emitter.onError(it) }))
-        }
-        if (localOnly) {
-            addToAutoDispose(local.getAllBrands().subscribe(
-            {
-                if (it.isNotEmpty()) emitter.onSuccess(it)
-                else remoteCallAndWrite()
-            }, { emitter.onError(it) }
-            ))
-            return@create
-        }
-        remoteCallAndWrite()
-    }).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+    override fun getAllBrands(localOnly: Boolean) = select(
+            { addToAutoDispose(it) }, // Disposable control
+            { remote.getAllBrands() }, // Fetch remote-data
+            { local.saveBrands(it) },  // Save data in DB after fetch remote-data
+            { local.getAllBrands() }, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
+            { it.isNotEmpty() },// Predication for local-only, if true, the local-only works to load data from DB, otherwise try remote and save DB and fetch from DB
+            { emptyList() },// Last chance when local provides nothing
+            localOnly
+    )
 
     override fun saveProducts(source: List<Product>) = local.saveProducts(source)
 

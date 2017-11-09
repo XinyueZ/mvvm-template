@@ -9,6 +9,7 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
+import com.template.mvvm.ComputationToMainScheduleSingle
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
@@ -87,15 +88,17 @@ class SoftwareLicensesViewModel(private val application: Application, private va
     private fun loadAllLicenses(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
         libraryListSource?.let {
             addToAutoDispose(
-                    repository.getAllLibraries(localOnly).subscribe(
-                            {
-                                LL.i("libraryListSource subscribe")
-                                libraryListSource?.value = it
-                            },
-                            {
-                                canNotLoadLicenses(it, lifecycleOwner)
-                                LL.d(it.message ?: "")
-                            })
+                    repository.getAllLibraries(localOnly)
+                            .compose(ComputationToMainScheduleSingle())
+                            .subscribe(
+                                    {
+                                        LL.i("libraryListSource subscribe")
+                                        libraryListSource?.value = it
+                                    },
+                                    {
+                                        canNotLoadLicenses(it, lifecycleOwner)
+                                        LL.d(it.message ?: "")
+                                    })
             )
         }
     }

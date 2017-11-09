@@ -8,6 +8,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
+import com.template.mvvm.ComputationToMainScheduleSingle
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
@@ -64,6 +65,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
         productListSource?.let {
             addToAutoDispose(
                     repository.getAllProducts(localOnly)
+                            .compose(ComputationToMainScheduleSingle())
                             .subscribe(
                                     {
                                         productListSource?.value = it
