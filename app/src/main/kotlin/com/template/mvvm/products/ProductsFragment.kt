@@ -21,8 +21,12 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity)
-                        view.setupErrorSnackbar(this@ProductsFragment, this.onError)
+                        activity?.let {
+                            with(it) {
+                                registerLifecycleOwner(it)
+                                view.setupErrorSnackbar(this@ProductsFragment, this@apply.onError)
+                            }
+                        }
                     }
                 }
         return binding

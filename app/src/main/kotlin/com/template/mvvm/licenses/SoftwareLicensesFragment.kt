@@ -21,7 +21,9 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
         binding = FragmentSoftwareLicensesBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        registerLifecycleOwner(activity)
+                        activity?.let {
+                            registerLifecycleOwner(it)
+                        }
                         view.setupErrorSnackbar(this@SoftwareLicensesFragment, this.onError)
                     }
                 }

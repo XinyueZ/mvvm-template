@@ -21,9 +21,11 @@ class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        activity.apply {
-                            registerLifecycleOwner(this)
-                            view.setupErrorSnackbar(this, onError)
+                        activity?.let {
+                            with(it) {
+                                registerLifecycleOwner(this)
+                                view.setupErrorSnackbar(this, onError)
+                            }
                         }
                     }
                 }

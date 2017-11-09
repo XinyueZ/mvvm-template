@@ -22,9 +22,11 @@ class MenFragment : AppBaseFragment<MenViewModel>() {
         binding = FragmentProductsBinding.bind(view)
                 .apply {
                     vm = obtainViewModel().apply {
-                        activity.apply {
-                            registerLifecycleOwner(this)
-                            view.setupErrorSnackbar(this, onError)
+                        activity?.let {
+                            with(it) {
+                                registerLifecycleOwner(it)
+                                view.setupErrorSnackbar(it, onError)
+                            }
                         }
                     }
                 }

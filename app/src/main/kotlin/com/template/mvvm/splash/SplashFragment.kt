@@ -19,7 +19,11 @@ class SplashFragment : AppBaseFragment<SplashViewModel>() {
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentSplashBinding.bind(view)
                 .apply {
-                    vm = obtainViewModel().apply { registerLifecycleOwner(activity) }
+                    vm = obtainViewModel().apply {
+                        activity?.let {
+                            registerLifecycleOwner(it)
+                        }
+                    }
                 }
         return binding
     }

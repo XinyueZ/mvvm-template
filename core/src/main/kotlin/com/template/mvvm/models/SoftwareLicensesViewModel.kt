@@ -9,8 +9,6 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.contract.LicensesDataSource
@@ -21,7 +19,7 @@ import com.template.mvvm.ext.setUpTransform
 import io.reactivex.subjects.PublishSubject
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val itemBinding: ItemBinding<SoftwareLicenseItemViewModel>) : AbstractViewModel() {
+class SoftwareLicensesViewModel(private val application: Application, private val repository: LicensesDataSource, val itemBinding: ItemBinding<SoftwareLicenseItemViewModel>) : AbstractViewModel() {
 
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
@@ -73,21 +71,14 @@ class SoftwareLicensesViewModel(private val repository: LicensesDataSource, val 
             addToAutoDispose(it.viewModelTapped.subscribe({
                 it?.let {
                     // Tell UI to open a UI for license detail.
-                    licenseDetailViewModel.value = when (lifecycleOwner) {
-                        is Fragment -> {
-                            val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            addToAutoDispose(repository.getLicense(lifecycleOwner.context.applicationContext as Application, it, false)
-                                    .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
-                            vm
-                        }
-                        is FragmentActivity -> {
-                            val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                            addToAutoDispose(repository.getLicense(lifecycleOwner.application, it, false)
-                                    .subscribe({ vm.detail.set(it) }, { LL.d(it.message ?: "") }))
-                            vm
-                        }
-                        else -> LicenseDetailViewModel()
-                    }
+                    val vm = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                    licenseDetailViewModel.value = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                    addToAutoDispose(repository.getLicense(application, it, false)
+                            .subscribe(
+                                    { vm.detail.set(it) },
+                                    { LL.d(it.message ?: "") }
+                            )
+                    )
                 }
             }, { LL.d(it.message ?: "") }))
         }
