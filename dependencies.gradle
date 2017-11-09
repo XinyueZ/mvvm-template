@@ -15,9 +15,9 @@ ext {
     def multiDex = "1+"
 
     //Rx, Retrofit
-    def rx = "2+"
-    def rxAndroid = "2+"
-    def rxAdapter = "2.3.0"
+    def rxAndroidAdapter = "2.3.0"
+    def rxAndroid = "2.0.1"
+    def rxJava = "2.1.3"
     def retrofit = "2.3.0"
 
     //Material Design Guideline
@@ -54,62 +54,6 @@ ext {
     def dexmaker = "1.2"
     def roomTest = archLifecycleVersion
     def multidexInstrumentation = "1.0.2"
-
-    libs = [
-            //TEST
-            junit                               : [group: "junit", name: "junit", version: junit],
-            espresso                            : [group: "com.android.support.test.espresso", name: "espresso-core", version: espresso],
-
-            //SUPPORT
-            appcompatV7                         : [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion],
-            cardviewV7                          : [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion],
-            design                              : [group: "com.android.support", name: "design", version: supportLibraryVersion],
-            customtabs                          : [group: "com.android.support", name: "customtabs", version: supportLibraryVersion],
-            recyclerviewV7                      : [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion],
-            supportV4                           : [group: "com.android.support", name: "support-v4", version: supportLibraryVersion],
-            constraintLayout                    : [group: "com.android.support.constraint", name: "constraint-layout", version: constraint],
-            multidex                            : [group: "com.android.support", name: "multidex", version: multiDex],
-
-            //JSON
-            gson                                : [group: "com.google.code.gson", name: "gson", version: gson],
-
-            //ARCH
-            lifeCycleRuntime                    : [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion],
-            lifeCycleExtensions                 : [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion],
-            lifeCycleCompiler                   : [group: "android.arch.lifecycle", name: "compiler", version: archLifecycleVersion],
-            roomRuntime                         : [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion],
-            roomCompiler                        : [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion],
-            roomRx                              : [group: "android.arch.persistence.room", name: "rxjava2", version: archLifecycleVersion],
-
-            //KOTLIN
-            kotlinStdLib                        : [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin],
-            databindingCompiler                 : [group: "com.android.databinding", name: "compiler", version: gradle],
-
-            //RX
-            rxJava                              : [group: "io.reactivex.rxjava2", name: "rxjava", version: rx],
-            rxAndroid                           : [group: "io.reactivex.rxjava2", name: "rxandroid", version: rxAndroid],
-
-            //RETROFIT
-            retrofit                            : [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit],
-            converterGson                       : [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit],
-            adapterRxJava2                      : [group: "com.squareup.retrofit2", name: "adapter-rxjava2", version: rxAdapter],
-
-            //MATERIAL DESIGN GUIDELINE
-            materialDesignGuideline             : [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
-
-            //IMAGE-LOADER
-            glide                               : [group: "com.github.bumptech.glide", name: "glide", version: imageLoader],
-            glideCompiler                       : [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader],
-
-            //DEBUG TOOL
-            stetho                              : [group: "com.facebook.stetho", name: "stetho", version: stetho],
-            stethoHelper                        : [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho],
-            curlLoggerInterceptor               : [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl],
-
-            //RECYCLER-VIEW DATA-BINDING
-            bindingCollectionAdapter            : [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter", version: bindingCollectionAdapter],
-            bindingCollectionAdapterRecyclerView: [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter-recyclerview", version: bindingCollectionAdapter],
-    ]
 
     plugins = [
             androidApp: "com.android.application",
@@ -177,6 +121,7 @@ ext {
             [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "common-java8", version: archLifecycleVersion]],
             [configuration: "implementation", dependency: [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion]],
             [configuration: "kapt", dependency: [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion]],
+            [configuration: "implementation", dependency: [group: "android.arch.persistence.room", name: "rxjava2", version: archLifecycleVersion]],
 
             //KOTLIN
             [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jre7", version: kotlin]],
@@ -185,6 +130,7 @@ ext {
             //RETROFIT
             [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit]],
             [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit]],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "adapter-rxjava2", version: rxAndroidAdapter]],
 
             //MATERIAL DESIGN GUIDELINE
             [configuration: "implementation", dependency: [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
@@ -195,6 +141,14 @@ ext {
             //IMAGE-LOADER
             [configuration: "implementation", dependency: [group: "com.github.bumptech.glide", name: "glide", version: imageLoader]],
             [configuration: "kapt", dependency: [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader]],
+
+            //RX
+            [configuration: "implementation", dependency: [group: "io.reactivex.rxjava2", name: "rxandroid", version: rxAndroid]],
+            [configuration: "implementation", dependency: [group: "io.reactivex.rxjava2", name: "rxjava", version: rxJava]],
+
+            //RECYCLER-VIEW DATA-BINDING
+            [configuration: "implementation", dependency: [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter", version: bindingCollectionAdapter]],
+            [configuration: "implementation", dependency: [group: "me.tatarka.bindingcollectionadapter2", name: "bindingcollectionadapter-recyclerview", version: bindingCollectionAdapter]],
 
             //DEBUG TOOL
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: stetho]],
