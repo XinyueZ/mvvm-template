@@ -36,7 +36,6 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hideSystemUi(0)
         binding.apply {
             contentFrame.apply {
                 vm = obtainViewModel().apply {
@@ -48,6 +47,7 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
     override fun onStart() {
         super.onStart()
+        hideSystemUi(0)
         CustomTabUtils.warmUp(this, Uri.parse(getString(R.string.internet_url)))
     }
 
