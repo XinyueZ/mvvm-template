@@ -53,6 +53,7 @@ ext {
     def junit = "4.12"
     def dexmaker = "1.2"
     def roomTest = archLifecycleVersion
+    def multidexInstrumentation = "1.0.1"
 
     libs = [
             //TEST
@@ -232,6 +233,8 @@ ext {
             [configuration: "androidTestImplementation", dependency: [group: 'junit', name: 'junit', version: junit]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker', version: dexmaker]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker-mockito', version: dexmaker]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support', name: 'multidex-instrumentation', version: multidexInstrumentation]],
+
     ]
 
     coreDependencies = baseDependencies
