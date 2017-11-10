@@ -59,7 +59,7 @@ class ProductsLocal : ProductsDataSource {
                 getBrandListDirectly().forEach { this.add(it.toBrand()) }
                 val diffResult = DiffUtil.calculateDiff(BrandsDiffCallback(this, source))
                 diffResult.dispatchUpdatesTo(BrandListUpdateCallback(this))
-                forEach { insertBrand(BrandEntity.from(it)) }
+                source.forEach { insertBrand(BrandEntity.from(it)) }
                 LL.w("brands write to db")
             }
         }
