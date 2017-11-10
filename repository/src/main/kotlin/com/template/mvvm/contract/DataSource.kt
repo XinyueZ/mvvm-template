@@ -17,30 +17,32 @@ suspend fun <T, E : DataSource> E.select(
         localOnly: Boolean,
         restRemoteDataHandlers: (suspend (T) -> Unit) = {} // Rest tasks after getting remote data
 ) = produce(job) {
-    val remoteSaveLoadLocal: (suspend () -> Unit) = {
-        remote()?.let { remoteData ->
-            saveAfterRemote(remoteData)?.let {
-                local()?.let {
-                    send(it)
-                } ?: kotlin.run {
-                    send(emptyT())
-                }
-            }
-            restRemoteDataHandlers(remoteData)
-        } ?: kotlin.run {
-            local()?.let {
-                send(it)
-            } ?: kotlin.run {
-                send(emptyT())
+    val fetchFromLocal: suspend (suspend (T) -> Unit, suspend () -> Unit) -> Unit = { success, fallbackIfEmpty ->
+        local()?.let {
+            when (predicateAcceptLocalOnly(it)) {
+                true -> success(it)
+                else -> fallbackIfEmpty()
             }
         }
     }
-    localOnly.takeIf { localOnly }
-            ?.let {
-                local()?.let {
-                    it.takeIf { predicateAcceptLocalOnly(it) }
-                            ?.let { send(it) }
-                            ?: kotlin.run { remoteSaveLoadLocal() }
-                } ?: kotlin.run { remoteSaveLoadLocal() }
-            } ?: kotlin.run { remoteSaveLoadLocal() }
+    val remoteCallThenWrite: (suspend () -> Unit) = {
+        remote()?.let { remoteData ->
+            saveAfterRemote(remoteData)
+            fetchFromLocal({ send(it) }, { send(remoteData) })
+            restRemoteDataHandlers(remoteData)
+        } ?: kotlin.run {
+            fetchFromLocal({ send(it) }, { send(emptyT()) })
+        }
+    }
+
+    when (localOnly) {
+        true ->
+            fetchFromLocal({
+                send(it)
+            }, {
+                remoteCallThenWrite()
+            })
+
+        else -> remoteCallThenWrite()
+    }
 }
