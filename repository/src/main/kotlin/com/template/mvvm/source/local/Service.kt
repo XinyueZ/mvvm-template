@@ -22,9 +22,6 @@ interface LicensesLibrariesDao {
     @Query("select count(*) as total from libraries")
     fun getLibraryListCount(): List<Count>
 
-    @Query("delete from libraries")
-    fun deleteLibraries()
-
     @Delete
     fun deleteLibrary(libraryEntity: LibraryEntity)
 
