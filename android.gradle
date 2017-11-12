@@ -1,0 +1,86 @@
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner rootProject.testInstrumentationRunner
+
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled rootProject.minifyEnabled
+            useProguard !rootProject.useProguard
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
+        release {
+            minifyEnabled rootProject.minifyEnabled
+            useProguard rootProject.useProguard
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    sourceSets {
+        main.java.srcDirs += rootProject.mainSrcDirs
+        test.java.srcDirs += rootProject.testSrcDirs
+        androidTest.java.srcDirs += rootProject.androidTestSrcDirs
+
+        prod.java.srcDirs += rootProject.prodSrcDirs
+        testProd.java.srcDirs += rootProject.prodTestSrcDirs
+        androidTestProd.java.srcDirs += rootProject.prodAndroidTestSrcDirs
+
+        mock.java.srcDirs += rootProject.mockSrcDirs
+        testMock.java.srcDirs += rootProject.mockTestSrcDirs
+        androidTestMock.java.srcDirs += rootProject.mockAndroidTestSrcDirs
+    }
+
+    lintOptions {
+        htmlReport false
+        abortOnError false
+    }
+
+    testOptions { // <-- You need this
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+
+        unitTests.all {
+            // All the usual Gradle options.
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
+        }
+
+    }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        prod {
+            dimension "app"
+        }
+        mock {
+            dimension "app"
+        }
+    }
+}
