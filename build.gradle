@@ -15,6 +15,14 @@ ext {
     testSrcDirs = "src/test/kotlin"
     androidTestSrcDirs = "src/androidTest/kotlin"
 
+    prodSrcDirs = "src/prod/kotlin"
+    prodTestSrcDirs = "src/testProd/kotlin"
+    prodAndroidTestSrcDirs = "src/androidTestProd/kotlin"
+
+    mockSrcDirs = "src/mock/kotlin"
+    mockTestSrcDirs = "src/testMock/kotlin"
+    mockAndroidTestSrcDirs = "src/androidTestMock/kotlin"
+
     minifyEnabled = true
     useProguard = true
 }
