@@ -10,10 +10,10 @@ import io.reactivex.Single
 @Dao
 interface LicensesLibrariesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLicense(licenseEntity: LicenseEntity)
+    fun insertLicenses(licenseEntity: List<LicenseEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLibrary(libraryEntity: LibraryEntity)
+    fun insertLibraries(libraryEntity: List<LibraryEntity>)
 
     @Query("select * from licenses")
     fun getLicenseList(): Single<List<LicenseEntity>>
@@ -41,10 +41,10 @@ interface LicensesLibrariesDao {
 @Dao
 interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(productEntity: ProductEntity)
+    fun insertProducts(productEntity: List<ProductEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBrand(brandEntity: BrandEntity)
+    fun insertBrands(brandEntity: List<BrandEntity>)
 
     @Query("select * from products")
     fun getProductList(): Single<List<ProductEntity>>

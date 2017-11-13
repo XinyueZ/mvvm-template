@@ -45,10 +45,8 @@ class ProductsLocal : ProductsDataSource {
 
     override fun saveProducts(source: List<Product>) = source.apply {
         DB.INSTANCE.productDao().apply {
-            forEach {
-                insertProduct(ProductEntity.from(it))
-                insertBrand(BrandEntity.from(it.brand))
-            }
+            insertProducts(source.map { ProductEntity.from(it) })
+            insertBrands(source.map { BrandEntity.from(it.brand) })
         }
         LL.w("products write to db")
     }
@@ -59,7 +57,7 @@ class ProductsLocal : ProductsDataSource {
                 getBrandListDirectly().forEach { this.add(it.toBrand()) }
                 val diffResult = DiffUtil.calculateDiff(BrandsDiffCallback(this, source))
                 diffResult.dispatchUpdatesTo(BrandListUpdateCallback(this))
-                source.forEach { insertBrand(BrandEntity.from(it)) }
+                insertBrands(source.map { BrandEntity.from(it) })
                 LL.w("brands write to db")
             }
         }
