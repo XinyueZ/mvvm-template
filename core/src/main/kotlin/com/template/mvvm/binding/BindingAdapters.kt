@@ -62,7 +62,7 @@ fun RecyclerView.setUpBinding(
 }
 
 @BindingAdapter(value = *arrayOf("width", "height", "command", "vm"), requireAll = false)
-fun CardView.setUpExt(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
+fun CardView.setUpEx(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
     width?.let { layoutParams.width = it }
     height?.let { layoutParams.height = it }
     l?.let {
