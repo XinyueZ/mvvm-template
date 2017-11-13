@@ -23,7 +23,7 @@ suspend fun <T, E : DataSource> E.select(
                 true -> success(it)
                 else -> fallbackIfEmpty()
             }
-        }
+        } ?: kotlin.run { fallbackIfEmpty() }
     }
     val remoteCallThenWrite: (suspend () -> Unit) = {
         remote()?.let { remoteData ->
