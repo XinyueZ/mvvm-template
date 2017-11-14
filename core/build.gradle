@@ -12,3 +12,8 @@ dependencies {
         add(it.configuration, it.dependency, it.options)
     }
 }
+
+
+kapt {
+    generateStubs = true
+}
