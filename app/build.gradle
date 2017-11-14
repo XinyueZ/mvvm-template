@@ -20,6 +20,4 @@ dependencies {
 }
 
 
-kapt {
-    generateStubs = true
-}
+ 
