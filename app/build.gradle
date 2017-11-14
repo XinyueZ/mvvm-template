@@ -19,6 +19,9 @@ dependencies {
     }
 }
 
+kapt {
+    generateStubs = true
+}
 
 kotlin {
     experimental {

@@ -2,9 +2,7 @@ rootProject.corePlugins.each {
     apply plugin: it
 }
 
-android{
-    publishNonDefault true
-}
+
 
 apply from: '../android.gradle'
 
@@ -15,4 +13,8 @@ dependencies {
     rootProject.coreDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
+}
+
+kapt {
+    generateStubs = true
 }
