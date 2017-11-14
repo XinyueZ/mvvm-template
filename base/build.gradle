@@ -1,11 +1,7 @@
 rootProject.basePlugins.each {
     apply plugin: it
 }
-
-android{
-    publishNonDefault true
-}
-
+ 
 apply from: '../android.gradle'
 
 dependencies {
