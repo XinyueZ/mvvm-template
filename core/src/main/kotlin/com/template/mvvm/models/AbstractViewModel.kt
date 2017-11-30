@@ -11,6 +11,6 @@ abstract class AbstractViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         vmJob.cancel()
-        Log.d("${this.javaClass.name}", "${this.javaClass.name}::onCleared")
+        Log.d(this.javaClass.name, "${this.javaClass.name}::onCleared")
     }
 }

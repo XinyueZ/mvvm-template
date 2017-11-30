@@ -2,7 +2,6 @@
     <string name="app_name">MVVM</string>
     <string name="click">Click</string>
 
-    <string name="action_all_brands">All brands</string>
     <string name="action_men">Men</string>
     <string name="action_women">Women</string>
     <string name="action_all_genders">Human</string>

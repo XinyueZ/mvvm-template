@@ -44,9 +44,6 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
                                 openAbout.observe(it, Observer {
                                     AboutActivity.showInstance(this@with)
                                 })
-                                openItem1.observe(it, Observer {
-                                    replaceFragmentToFragment(AllBrandsFragment.newInstance(this@with), R.id.childContentFrame)
-                                })
                                 openItem2.observe(it, Observer {
                                     replaceFragmentToFragment(MenFragment.newInstance(this@with), R.id.childContentFrame)
                                 })
@@ -70,6 +67,6 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        replaceFragmentToFragment(AllBrandsFragment.newInstance(activity as FragmentActivity), R.id.childContentFrame)
+        replaceFragmentToFragment(MenFragment.newInstance(activity as FragmentActivity), R.id.childContentFrame)
     }
 }

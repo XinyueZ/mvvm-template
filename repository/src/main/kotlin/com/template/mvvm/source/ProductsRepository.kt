@@ -41,13 +41,4 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override suspend fun getProductDetail(job: Job, pid: String, localOnly: Boolean) = local.getProductDetail(job, pid, localOnly)
 
-    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = select(
-            job, // Disposable control
-            { remote.getAllBrands(job, localOnly).receiveOrNull() }, // Fetch remote-data
-            { local.saveBrands(job, it).receive() }, // Save data in DB after fetch remote-data
-            { local.getAllBrands(job, localOnly).receiveOrNull() }, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
-            { it.isNotEmpty() }, // Predication for local-only, if true, the local-only works to load data from DB, otherwise try remote and save DB and fetch from DB
-            { emptyList() }, // Last chance when local provides nothing
-            localOnly
-    )
 }

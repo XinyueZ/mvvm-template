@@ -14,8 +14,6 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
-                    isAssignableFrom(AllBrandsViewModel::class.java) ->
-                        AllBrandsViewModel(Injection.getInstance(application).provideRepository(application))
                     isAssignableFrom(MenViewModel::class.java) -> MenViewModel(
                             Injection.getInstance(application).provideRepository(application))
                     isAssignableFrom(WomenViewModel::class.java) -> WomenViewModel(
@@ -34,7 +32,6 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(SoftwareLicenseItemViewModel::class.java) -> SoftwareLicenseItemViewModel()
                     isAssignableFrom(ProductItemViewModel::class.java) -> ProductItemViewModel()
                     isAssignableFrom(LicenseDetailViewModel::class.java) -> LicenseDetailViewModel()
-                    isAssignableFrom(BrandItemViewModel::class.java) -> BrandItemViewModel()
                     isAssignableFrom(ProductDetailViewModel::class.java) -> ProductDetailViewModel(
                             Injection.getInstance(application).provideRepository(application)
                     )

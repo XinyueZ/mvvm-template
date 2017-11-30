@@ -153,7 +153,6 @@ class ProductItemViewModel : AbstractViewModel() {
                 title.set(product.title)
                 description.set(product.description)
                 thumbnail.set(product.pictures.first().largeHdUrl)
-                brandLogo.set(product.brand.logo)
             }
         }
     }

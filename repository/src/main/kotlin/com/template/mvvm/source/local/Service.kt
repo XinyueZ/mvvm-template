@@ -3,7 +3,6 @@ package com.template.mvvm.source.local
 import android.arch.persistence.room.*
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
-import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 
@@ -37,9 +36,6 @@ interface ProductDao {
     fun insertProducts(productEntity: List<ProductEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBrands(brandEntity: List<BrandEntity>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertImages(imageEntity: List<ImageEntity>)
 
     @Query("select * from products")
@@ -53,15 +49,6 @@ interface ProductDao {
 
     @Query("select * from products where genders=:keyword")
     fun filterProductList(keyword: String?): List<ProductEntity>
-
-    @Query("select * from brands")
-    fun getBrandList(): List<BrandEntity>
-
-    @Delete
-    fun deleteBrand(brandEntity: BrandEntity)
-
-    @Query("select * from products where brand_brand_key=:brandKey")
-    fun getBrandedProductList(brandKey: String?): List<ProductEntity>
 }
 
 

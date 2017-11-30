@@ -14,7 +14,10 @@ import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setup
-import com.template.mvvm.models.*
+import com.template.mvvm.models.AllGendersViewModel
+import com.template.mvvm.models.HomeViewModel
+import com.template.mvvm.models.MenViewModel
+import com.template.mvvm.models.WomenViewModel
 
 class HomeActivity : AppBaseActivity<HomeViewModel>() {
 
@@ -56,8 +59,6 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
                         addSource(obtainViewModel(WomenViewModel::class.java).showSystemUi,
                                 { this.value = it })
                         addSource(obtainViewModel(AllGendersViewModel::class.java).showSystemUi,
-                                { this.value = it })
-                        addSource(obtainViewModel(AllBrandsViewModel::class.java).showSystemUi,
                                 { this.value = it })
                     }
                     drawer.setup(this@HomeActivity, drawerToggle)

@@ -9,7 +9,6 @@ data class Product(
         val title: String = "title",
         val description: String = "description",
         val pictures: List<Image> = emptyList(),
-        val brand: Brand = Brand.EMPTY,
         val genders: List<String> = emptyList(),
         val ageGroups: List<String> = emptyList(),
         val categoryKeys: List<String> = emptyList()) {
@@ -21,7 +20,6 @@ data class Product(
                 imageEntities.map {
                     Image.from(it)
                 },
-                Brand.from(productEntity.brand),
                 productEntity.genders,
                 productEntity.ageGroups,
                 productEntity.categoryKeys
@@ -30,11 +28,10 @@ data class Product(
         fun from(productData: ProductData) = Product(
                 productData.pid,
                 productData.name,
-                String.format("%s//%s//%s", productData.brand.name, productData.genders.joinToString(), productData.ageGroups.joinToString()),
+                String.format("%s//%s//%s", productData.genders.joinToString(), productData.ageGroups.joinToString()),
                 productData.media.images.map {
                     Image.from(productData, it)
                 },
-                Brand.from(productData.brand),
                 productData.genders,
                 productData.ageGroups,
                 productData.categoryKeys

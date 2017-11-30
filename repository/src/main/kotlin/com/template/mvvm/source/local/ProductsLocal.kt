@@ -1,14 +1,9 @@
 package com.template.mvvm.source.local
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.util.ListUpdateCallback
-import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.domain.products.Brand
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductDetail
-import com.template.mvvm.source.local.entities.products.BrandEntity
 import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 import kotlinx.coroutines.experimental.Job
@@ -43,13 +38,6 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = produce(job) {
-        LL.d("brands loaded from db")
-        send(DB.INSTANCE.productDao().getBrandList().map {
-            it.toBrand()
-        })
-    }
-
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce(job) {
         DB.INSTANCE.productDao().apply {
             insertImages(
@@ -67,35 +55,6 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun saveBrands(job: Job, source: List<Brand>) = produce(job) {
-        DB.INSTANCE.productDao().apply {
-            mutableListOf<Brand>().apply {
-                getBrandList().forEach { this.add(it.toBrand()) }
-                val diffResult = DiffUtil.calculateDiff(BrandsDiffCallback(this, source))
-                diffResult.dispatchUpdatesTo(BrandListUpdateCallback(this))
-                insertBrands(
-                        source.map {
-                            BrandEntity.from(it)
-                        }
-                )
-                send(Unit)
-                LL.w("brands write to db")
-            }
-        }
-    }
-
-    override suspend fun saveBrand(job: Job, source: List<Product>) = produce(job) {
-        DB.INSTANCE.productDao().apply {
-            insertBrands(
-                    source.map {
-                        BrandEntity.from(it.brand)
-                    }
-            )
-            send(Unit)
-            LL.w("products write brand to db")
-        }
-    }
-
     override suspend fun savePictures(job: Job, source: List<Product>) = produce(job) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
@@ -108,44 +67,5 @@ class ProductsLocal : ProductsDataSource {
             send(Unit)
             LL.w("products write pictures(images) to db")
         }
-    }
-}
-
-class BrandsDiffCallback(private val oldList: List<Brand>, private val newList: List<Brand>) : DiffUtil.Callback() {
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) = TextUtils.equals(oldList[oldItemPosition].key, newList[newItemPosition].key)
-
-    override fun getOldListSize() = oldList.size
-
-    override fun getNewListSize() = newList.size
-
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) = TextUtils.equals(oldList[oldItemPosition].key, newList[newItemPosition].key)
-}
-
-class BrandListUpdateCallback(private val oldList: List<Brand>) : ListUpdateCallback {
-    override fun onRemoved(position: Int, count: Int) {
-        val topToDel = position + count - 1
-        for (i in position..topToDel) {
-            DB.INSTANCE.productDao().apply {
-                val brand = oldList[i]
-                getBrandedProductList(brand.key).takeIf { it.isEmpty() }?.let {
-                    LL.d("[brand: ${brand.key}] onRemoved at $position, total: $count")
-                    deleteBrand(BrandEntity.from(brand))
-                } ?: kotlin.run {
-                    LL.d("[brand: ${brand.key}] has products and won't be deleted.")
-                }
-            }
-        }
-    }
-
-    override fun onInserted(position: Int, count: Int) {
-        LL.d("brands onInserted: $position, $count")
-    }
-
-    override fun onChanged(position: Int, count: Int, payload: Any?) {
-        LL.d("brands onChanged: $position, $count")
-    }
-
-    override fun onMoved(fromPosition: Int, toPosition: Int) {
-        LL.d("brands onMoved: $fromPosition, $toPosition")
     }
 }

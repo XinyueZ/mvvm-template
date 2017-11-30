@@ -19,7 +19,6 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
 
     override suspend fun getProductDetail(job: Job, pid: String, localOnly: Boolean) = productsRepository.getProductDetail(job, pid, localOnly)
 
-    override suspend fun getAllBrands(job: Job, localOnly: Boolean) = productsRepository.getAllBrands(job, localOnly)
 
     // Other...
     override fun clear() {
