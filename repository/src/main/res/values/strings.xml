@@ -31,8 +31,7 @@
 
 
     <string name="error_retry">Retry</string>
-
-    <string name="error_load_all_brands">Cannot load brands, something goes wrong. Try again by clicking [retry].</string>
+ 
     <string name="error_load_all_products">Cannot load products, something goes wrong. Try again by clicking [retry].</string>
     <string name="error_load_all_licenses">Cannot load licenses, something goes wrong. Try again by clicking [retry].</string>
 </resources>
