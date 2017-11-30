@@ -142,7 +142,6 @@ class ProductItemViewModel : AbstractViewModel() {
     lateinit var product: Product
     val title: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
-    val brandLogo: ObservableField<Uri> = ObservableField()
     val clickHandler = arrayListOf<((Product) -> Unit)>()
 
     companion object {
