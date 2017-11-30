@@ -141,7 +141,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 class ProductItemViewModel : AbstractViewModel() {
     lateinit var product: Product
     val title: ObservableField<String> = ObservableField()
-    val description: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
     val brandLogo: ObservableField<Uri> = ObservableField()
     val clickHandler = arrayListOf<((Product) -> Unit)>()
@@ -151,8 +150,7 @@ class ProductItemViewModel : AbstractViewModel() {
             return ProductItemViewModel().apply {
                 this.product = product
                 title.set(product.title)
-                description.set(product.description)
-                thumbnail.set(product.pictures.first().largeHdUrl)
+                thumbnail.set(product.pictures["Original"]?.uri)
             }
         }
     }

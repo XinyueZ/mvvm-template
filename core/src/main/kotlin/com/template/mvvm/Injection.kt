@@ -119,7 +119,7 @@ class Injection private constructor(application: Application) {
         )
     }
 
-    fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(gsonFactory)
+    fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("http://api.shopstyle.com/api/v2/").addConverterFactory(gsonFactory)
             .build().create(ProductsApi::class.java)
 
     fun provideLicensesApiService() = Retrofit.Builder().client(client).baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(gsonFactory)

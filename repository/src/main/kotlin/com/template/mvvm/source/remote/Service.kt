@@ -6,14 +6,14 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val PAGE_SIZE = 100
+const val PAGE_SIZE = 50
 
 interface ProductsApi {
-    @GET("articles?pageSize=$PAGE_SIZE")
+    @GET("products?pid=uid4100-40207790-50&limit=$PAGE_SIZE")
     fun getArticles(): Call<ProductsData>
 
-    @GET("articles?pageSize=$PAGE_SIZE")
-    fun filterArticles(@Query("gender") keyword: String): Call<ProductsData>
+    @GET("products?pid=uid4100-40207790-50&limit=$PAGE_SIZE")
+    fun filterArticles(@Query("cat") keyword: String): Call<ProductsData>
 
     companion object {
         lateinit var service: ProductsApi

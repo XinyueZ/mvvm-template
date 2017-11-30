@@ -40,11 +40,7 @@ class ProductsLocal : ProductsDataSource {
 
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce(job) {
         DB.INSTANCE.productDao().apply {
-            insertImages(
-                    source.map {
-                        ImageEntity.from(it.pictures.first())
-                    }
-            )
+            savePictures(job, source)
             insertProducts(
                     source.map {
                         ProductEntity.from(it)
@@ -60,7 +56,7 @@ class ProductsLocal : ProductsDataSource {
             source.forEach {
                 insertImages(
                         it.pictures.map {
-                            ImageEntity.from(it)
+                            ImageEntity.from(it.value)
                         }
                 )
             }

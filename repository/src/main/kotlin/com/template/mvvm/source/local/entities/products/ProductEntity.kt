@@ -15,20 +15,14 @@ class ProductEntity(
         @ColumnInfo(name = "description")
         val description: String,
         @ColumnInfo(name = "genders")
-        val genders: List<String>,
-        @ColumnInfo(name = "ageGroups")
-        val ageGroups: List<String>,
-        @ColumnInfo(name = "categoryKeys")
-        val categoryKeys: List<String>
+        val genders: List<String>
 ) {
     companion object {
         fun from(product: Product) = ProductEntity(
                 product.pid,
                 product.title,
                 product.description,
-                product.genders,
-                product.ageGroups,
-                product.categoryKeys
+                product.genders
         )
     }
 

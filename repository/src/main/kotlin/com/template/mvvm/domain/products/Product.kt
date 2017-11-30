@@ -8,33 +8,39 @@ data class Product(
         val pid: String,
         val title: String = "title",
         val description: String = "description",
-        val pictures: List<Image> = emptyList(),
-        val genders: List<String> = emptyList(),
-        val ageGroups: List<String> = emptyList(),
-        val categoryKeys: List<String> = emptyList()) {
+        val pictures: Map<String, Image> = emptyMap(),
+        val genders: List<String> = emptyList()) {
     companion object {
         fun from(productEntity: ProductEntity, imageEntities: List<ImageEntity>) = Product(
                 productEntity.pid,
                 productEntity.title,
                 productEntity.description,
-                imageEntities.map {
-                    Image.from(it)
+                mutableMapOf<String, Image>().apply {
+                    imageEntities.forEach {
+                        put(it.size, Image.from(it))
+                    }
+
                 },
-                productEntity.genders,
-                productEntity.ageGroups,
-                productEntity.categoryKeys
+                productEntity.genders
         )
 
-        fun from(productData: ProductData) = Product(
+        fun from(productData: ProductData, genders: List<String>) = Product(
                 productData.pid,
                 productData.name,
-                String.format("%s//%s//%s", productData.genders.joinToString(), productData.ageGroups.joinToString()),
-                productData.media.images.map {
-                    Image.from(productData, it)
+                productData.description,
+                mutableMapOf<String, Image>().apply {
+                    productData.image.sizes.run {
+                        put(this.small.sizeName, Image.from(productData, this.small))
+                        put(this.xLarge.sizeName, Image.from(productData, this.xLarge))
+                        put(this.medium.sizeName, Image.from(productData, this.medium))
+                        put(this.large.sizeName, Image.from(productData, this.large))
+                        put(this.best.sizeName, Image.from(productData, this.best))
+                        put(this.original.sizeName, Image.from(productData, this.original))
+                        put(this.iPhone.sizeName, Image.from(productData, this.iPhone))
+                        put(this.iPhoneSmall.sizeName, Image.from(productData, this.iPhoneSmall))
+                    }
                 },
-                productData.genders,
-                productData.ageGroups,
-                productData.categoryKeys
+                genders
         )
     }
 }

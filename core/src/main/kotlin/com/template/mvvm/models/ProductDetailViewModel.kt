@@ -58,7 +58,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
                     productDescription.set(it.description)
                     productImageUris.clear()
                     productImageUris += it.pictures.map {
-                        it.largeHdUrl
+                        it.uri
                     }
                     //-----------------------------------------
 

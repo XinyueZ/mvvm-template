@@ -12,10 +12,10 @@ class ProductsRemote : ProductsDataSource {
         ProductsApi.service.getArticles().execute().takeIf {
             it.isSuccessful
         }?.let {
-            it.body()?.let {
+            it.body()?.run {
                 LL.d("products loaded from net")
-                send(it.products.map {
-                    Product.from(it)
+                send(products.map {
+                    Product.from(it, listOf(metaData.category.localizedId))
                 })
             } ?: kotlin.run { send(null) }
         } ?: kotlin.run { send(null) }
@@ -25,13 +25,12 @@ class ProductsRemote : ProductsDataSource {
         ProductsApi.service.filterArticles(keyword).execute().takeIf {
             it.isSuccessful
         }?.let {
-            it.body()?.let {
+            it.body()?.run {
                 LL.d("filtered $keyword products and loaded from net")
-                send(it.products.map {
-                    Product.from(it)
+                send(products.map {
+                    Product.from(it, listOf(metaData.category.localizedId))
                 })
             } ?: kotlin.run { send(null) }
         } ?: kotlin.run { send(null) }
     }
-
 }

@@ -1,12 +1,30 @@
 package com.template.mvvm.feeds.products
 
-import android.net.Uri
 import com.google.gson.annotations.SerializedName
 
 data
 class ImageData
 (
-        @SerializedName("orderNumber") val orderNumber: Int,
-        @SerializedName("thumbnailHdUrl") val thumbnailHdUrl: Uri,
-        @SerializedName("largeHdUrl") val largeHdUrl: Uri
+        @SerializedName("sizes") val sizes: Sizes
+)
+
+data class Sizes(
+        @SerializedName("Small") val small: SizeType,
+        @SerializedName("XLarge") val xLarge: SizeType,
+        @SerializedName("Medium") val medium: SizeType,
+        @SerializedName("Large") val large: SizeType,
+        @SerializedName("Best") val best: SizeType,
+        @SerializedName("Original") val original: SizeType,
+        @SerializedName("IPhone") val iPhone: SizeType,
+        @SerializedName("IPhoneSmall") val iPhoneSmall: SizeType
+
+)
+
+data class SizeType(
+        @SerializedName("sizeName") val sizeName: String,
+        @SerializedName("url") val url: String,
+        @SerializedName("width") val width: Int,
+        @SerializedName("height") val height: Int,
+        @SerializedName("actualWidth") val actualWidth: Int,
+        @SerializedName("actualHeight") val actualHeight: Int
 )

@@ -27,11 +27,11 @@ abstract class FilterViewModel(repository: ProductsDataSource) : ProductsViewMod
 }
 
 class MenViewModel(repository: ProductsDataSource) : FilterViewModel(repository) {
-    override fun filterKeyword() = "MALE"
+    override fun filterKeyword() = "men"
 }
 
 class WomenViewModel(repository: ProductsDataSource) : FilterViewModel(repository) {
-    override fun filterKeyword() = "FEMALE"
+    override fun filterKeyword() = "women"
 }
 
 class AllGendersViewModel(repository: ProductsDataSource) : ProductsViewModel(repository)
