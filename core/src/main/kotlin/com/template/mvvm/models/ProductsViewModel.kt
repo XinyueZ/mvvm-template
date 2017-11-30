@@ -121,17 +121,13 @@ open class ProductsViewModel(protected val repository: ProductsDataSource, val i
 class ProductItemViewModel : AbstractViewModel() {
 
     val title: ObservableField<String> = ObservableField()
-    val description: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
-    val brandLogo: ObservableField<Uri> = ObservableField()
 
     companion object {
         fun from(product: Product): ProductItemViewModel {
             return ProductItemViewModel().apply {
                 title.set(product.title)
-                description.set(product.description)
-                thumbnail.set(product.thumbnail)
-                brandLogo.set(product.brand.logo)
+                thumbnail.set(product.pictures["Original"]?.uri)
             }
         }
     }

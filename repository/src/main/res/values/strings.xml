@@ -2,7 +2,6 @@
     <string name="app_name">MVVM</string>
     <string name="click">Click</string>
 
-    <string name="action_all_brands">All brands</string>
     <string name="action_men">Men</string>
     <string name="action_women">Women</string>
     <string name="action_all_genders">Human</string>
@@ -33,7 +32,6 @@
 
     <string name="error_retry">Retry</string>
 
-    <string name="error_load_all_brands">Cannot load brands, something goes wrong. Try again by clicking [retry].</string>
     <string name="error_load_all_products">Cannot load products, something goes wrong. Try again by clicking [retry].</string>
     <string name="error_load_all_licenses">Cannot load licenses, something goes wrong. Try again by clicking [retry].</string>
 </resources>

@@ -2,7 +2,6 @@
 <resources>
     <item name="action_products" type="id"/>
     <item name="action_about" type="id"/>
-    <item name="action_all_brands" type="id"/>
     <item name="action_men" type="id"/>
     <item name="action_women" type="id"/>
     <item name="action_all_genders" type="id"/>

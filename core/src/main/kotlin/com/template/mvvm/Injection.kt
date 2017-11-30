@@ -18,9 +18,9 @@ import com.template.mvvm.source.ProductsRepository
 import com.template.mvvm.source.Repository
 import com.template.mvvm.source.cache.LicensesCache
 import com.template.mvvm.source.cache.ProductsCache
+import com.template.mvvm.source.local.DB
 import com.template.mvvm.source.local.LicensesLocal
 import com.template.mvvm.source.local.ProductsLocal
-import com.template.mvvm.source.local.DB
 import com.template.mvvm.source.remote.LicensesApi
 import com.template.mvvm.source.remote.LicensesRemote
 import com.template.mvvm.source.remote.ProductsApi
@@ -128,7 +128,7 @@ class Injection private constructor(application: Application) {
         )
     }
 
-    fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("https://api.zalando.com/").addConverterFactory(gsonFactory)
+    fun provideProductsApiService() = Retrofit.Builder().client(client).baseUrl("http://api.shopstyle.com/api/v2/").addConverterFactory(gsonFactory)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build().create(ProductsApi::class.java)
 
     fun provideLicensesApiService() = Retrofit.Builder().client(client).baseUrl("https://dl.dropboxusercontent.com/s/").addConverterFactory(gsonFactory)

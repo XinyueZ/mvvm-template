@@ -36,15 +36,7 @@
                     app:remoteImageUri="@{vm.thumbnail}" />
 
 
-                <ImageView
-                    android:id="@+id/brandLogoIv"
-                    android:layout_width="@dimen/item_brand_logo_size"
-                    android:layout_height="@dimen/item_brand_logo_size"
-                    android:layout_gravity="top|end|right"
-                    android:contentDescription="@null"
-                    app:errorDrawableRes="@{R.drawable.ic_image}"
-                    app:placeholderRes="@{R.drawable.ic_image}"
-                    app:remoteImageUri="@{vm.brandLogo}" />
+
             </FrameLayout>
 
             <TextView
@@ -62,19 +54,6 @@
                 tools:text="title"/>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginStart="5dp"
-                android:gravity="center_vertical|start|end"
-                android:inputType="textNoSuggestions"
-                android:text="@{vm.description}"
-                android:textAppearance="@style/MaterialTextView.LightTheme.Caption"
-                android:textColor="@color/colorBlack"
-                tools:text="description"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>

@@ -20,8 +20,6 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
 
     override fun filterProduct(keyword: String, localOnly: Boolean) = productsRepository.filterProduct(keyword, localOnly)
 
-    override fun getAllBrands(localOnly: Boolean) = productsRepository.getAllBrands(localOnly)
-
     override fun saveProducts(source: List<Product>) = productsRepository.saveProducts(source)
 
     // Other...

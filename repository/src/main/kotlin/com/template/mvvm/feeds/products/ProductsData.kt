@@ -5,5 +5,6 @@ import com.google.gson.annotations.SerializedName
 data
 class ProductsData
 (
-        @SerializedName("content") val products: List<ProductData>
+        @SerializedName("metadata") val metaData: MetaData,
+        @SerializedName("products") val products: List<ProductData>
 )

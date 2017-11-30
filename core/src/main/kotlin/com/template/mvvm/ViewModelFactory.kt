@@ -15,11 +15,6 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
                     isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel()
-                    isAssignableFrom(AllBrandsViewModel::class.java) ->
-                        AllBrandsViewModel(
-                                Injection.getInstance(application).provideRepository(application),
-                                Injection.getInstance(application).itemOf(BrandItemViewModel::class.java) as ItemBinding<BrandItemViewModel>
-                        )
                     isAssignableFrom(MenViewModel::class.java) -> MenViewModel(
                             Injection.getInstance(application).provideRepository(application),
                             Injection.getInstance(application).itemOf(ProductItemViewModel::class.java) as ItemBinding<ProductItemViewModel>
@@ -49,7 +44,6 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(SoftwareLicenseItemViewModel::class.java) -> SoftwareLicenseItemViewModel()
                     isAssignableFrom(ProductItemViewModel::class.java) -> ProductItemViewModel()
                     isAssignableFrom(LicenseDetailViewModel::class.java) -> LicenseDetailViewModel()
-                    isAssignableFrom(BrandItemViewModel::class.java) -> BrandItemViewModel()
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
