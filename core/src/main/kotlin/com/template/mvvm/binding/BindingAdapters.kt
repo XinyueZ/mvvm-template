@@ -40,7 +40,7 @@ import com.template.mvvm.ext.onClick
 import com.template.mvvm.ext.onNavigationItemSelected
 import com.template.mvvm.ext.onNavigationOnClick
 
-@BindingAdapter(value = *arrayOf("itemList", "itemLayout", "vmItemLayout", "layout"), requireAll = true)
+@BindingAdapter(value = ["itemList", "itemLayout", "vmItemLayout", "layout"], requireAll = true)
 fun RecyclerView.setUpBinding(
         itemList: LiveData<PagedList<ViewModel>>?,
         @LayoutRes itemLayout: Int,
@@ -61,7 +61,7 @@ fun RecyclerView.setUpBinding(
 
 }
 
-@BindingAdapter(value = *arrayOf("width", "height", "command", "vm"), requireAll = false)
+@BindingAdapter(value = ["width", "height", "command", "vm"], requireAll = false)
 fun CardView.setUpExtt(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
     width?.let { layoutParams.width = it }
     height?.let { layoutParams.height = it }
@@ -92,12 +92,12 @@ fun ViewPager.setImageList(uris: List<Uri>?) {
     uris?.let { adapter = GalleryViewPagerAdapter((context as AppCompatActivity).supportFragmentManager, it) }
 }
 
-@BindingAdapter(value = *arrayOf("remoteImageUri", "placeholderRes", "errorDrawableRes"), requireAll = false)
+@BindingAdapter(value = ["remoteImageUri", "placeholderRes", "errorDrawableRes"], requireAll = false)
 fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     uri?.let { (this as? ImageView)?.remoteImageUris(arrayOf(it), placeholderRes, errorDrawableRes) }
 }
 
-@BindingAdapter(value = *arrayOf("remoteImageUris", "placeholderRes", "errorDrawableRes"), requireAll = false)
+@BindingAdapter(value = ["remoteImageUris", "placeholderRes", "errorDrawableRes"], requireAll = false)
 fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
