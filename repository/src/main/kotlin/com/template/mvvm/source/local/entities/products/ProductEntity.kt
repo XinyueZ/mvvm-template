@@ -15,14 +15,17 @@ class ProductEntity(
         @ColumnInfo(name = "description")
         val description: String,
         @ColumnInfo(name = "genders")
-        val genders: List<String>
+        val genders: List<String>,
+        @ColumnInfo(name = "create_time")
+        val createTime: Long
 ) {
     companion object {
         fun from(product: Product) = ProductEntity(
                 product.pid,
                 product.title,
                 product.description,
-                product.genders
+                product.genders,
+                System.currentTimeMillis()
         )
     }
 

@@ -42,7 +42,7 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertImages(imageEntity: List<ImageEntity>)
 
-    @Query("select * from products limit 10 offset :offset")
+    @Query("select * from products order by create_time asc limit 10 offset :offset")
     fun getProductList(offset: Int): List<ProductEntity>
 
     @Query("select * from products where pid=:pid")
@@ -51,7 +51,7 @@ interface ProductDao {
     @Query("select * from images where pid=:pid")
     fun getImages(pid: Long): List<ImageEntity>
 
-    @Query("select * from products where genders=:keyword limit 10 offset :offset")
+    @Query("select * from products where genders=:keyword order by create_time asc limit 10 offset :offset")
     fun filterProductList(offset: Int, keyword: String?): List<ProductEntity>
 }
 
