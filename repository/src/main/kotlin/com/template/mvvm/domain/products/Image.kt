@@ -6,7 +6,7 @@ import com.template.mvvm.feeds.products.SizeType
 import com.template.mvvm.source.local.entities.products.ImageEntity
 
 data class Image(
-        val pid: String,
+        val pid: Long,
         val size: String,
         val uri: Uri
 ) {

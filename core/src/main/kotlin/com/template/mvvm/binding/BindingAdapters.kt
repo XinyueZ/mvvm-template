@@ -5,7 +5,6 @@ import android.app.Activity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
-import android.arch.paging.PagedList
 import android.databinding.BindingAdapter
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -22,7 +21,11 @@ import android.support.v4.view.ViewPager
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.*
+import android.support.v7.widget.CardView
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -40,12 +43,14 @@ import com.template.mvvm.ext.onClick
 import com.template.mvvm.ext.onNavigationItemSelected
 import com.template.mvvm.ext.onNavigationOnClick
 
-@BindingAdapter(value = ["itemList", "itemLayout", "vmItemLayout", "layout"], requireAll = true)
+@BindingAdapter(value = ["itemList", "itemLayout", "vmItemLayout", "layout", "onListItemBound", "add"], requireAll = false)
 fun RecyclerView.setUpBinding(
-        itemList: LiveData<PagedList<ViewModel>>?,
+        itemList: LiveData<List<ViewModel>>?,
         @LayoutRes itemLayout: Int,
         vmItemLayout: Int,
-        layoutManager: String
+        layoutManager: String,
+        onListItemBound: OnListItemBoundListener?,
+        add: Boolean
 ) {
     if (adapter == null) {
         this.layoutManager = if (TextUtils.equals(layoutManager, "linear"))
@@ -54,11 +59,16 @@ fun RecyclerView.setUpBinding(
             val sp = (layoutManager.split("-"))[1].toInt()
             GridLayoutManager(context, sp)
         }
-        val mvvmListAdapter = MvvmListAdapter(itemLayout, vmItemLayout)
+        val mvvmListAdapter = MvvmListAdapter(itemLayout, vmItemLayout, onListItemBound)
         adapter = mvvmListAdapter
-    }
-    itemList?.observe(context as FragmentActivity, Observer((adapter as MvvmListAdapter)::setList))
 
+        itemList?.observe(context as FragmentActivity, Observer { updatedList ->
+            updatedList?.run {
+                if (add) mvvmListAdapter.add(this)
+                else mvvmListAdapter.update(this)
+            }
+        })
+    }
 }
 
 @BindingAdapter(value = ["width", "height", "command", "vm"], requireAll = false)

@@ -6,7 +6,7 @@ import com.template.mvvm.domain.products.Image
 
 @Entity(tableName = "images", primaryKeys = ["pid", "uri"])
 class ImageEntity(
-        val pid: String,
+        val pid: Long,
         val size: String,
         val uri: Uri
 ) {

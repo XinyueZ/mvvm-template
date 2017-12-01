@@ -4,7 +4,7 @@ import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
 
 data class ProductDetail(
-        val pid: String,
+        val pid: Long,
         val title: String = "title",
         val description: String = "description",
         val pictures: List<Image> = emptyList()

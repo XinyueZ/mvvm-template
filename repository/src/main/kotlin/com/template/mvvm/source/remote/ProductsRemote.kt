@@ -8,12 +8,12 @@ import kotlinx.coroutines.experimental.channels.produce
 
 class ProductsRemote : ProductsDataSource {
 
-    override suspend fun getAllProducts(job: Job, localOnly: Boolean) = produce(job) {
-        ProductsApi.service.getArticles().execute().takeIf {
+    override suspend fun getAllProducts(job: Job, offset: Int, localOnly: Boolean) = produce(job) {
+        ProductsApi.service.getArticles(offset).execute().takeIf {
             it.isSuccessful
         }?.let {
             it.body()?.run {
-                LL.d("products loaded from net")
+                LL.d("From $offset the products loaded from net")
                 send(products.map {
                     Product.from(it, listOf(metaData.category.localizedId))
                 })
@@ -21,12 +21,12 @@ class ProductsRemote : ProductsDataSource {
         } ?: kotlin.run { send(null) }
     }
 
-    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce(job) {
-        ProductsApi.service.filterArticles(keyword).execute().takeIf {
+    override suspend fun filterProducts(job: Job, offset: Int, localOnly: Boolean, keyword: String) = produce(job) {
+        ProductsApi.service.filterArticles(offset, keyword).execute().takeIf {
             it.isSuccessful
         }?.let {
             it.body()?.run {
-                LL.d("filtered $keyword products and loaded from net")
+                LL.d("From $offset to be filtered $keyword products and loaded from net")
                 send(products.map {
                     Product.from(it, listOf(metaData.category.localizedId))
                 })

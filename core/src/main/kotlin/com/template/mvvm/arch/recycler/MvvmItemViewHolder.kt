@@ -18,6 +18,7 @@ class MvvmItemViewHolder(
     fun bindViewModel(vm: ViewModel?) {
         vm?.let {
             binding.setVariable(vmItemLayout, vm)
+            binding.executePendingBindings()
         }
     }
 }

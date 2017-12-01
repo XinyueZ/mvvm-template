@@ -35,6 +35,8 @@
                 app:itemList="@{vm.productItemVmList}"
                 app:vmItemLayout="@{vmItem}"
                 app:layout='@{"linear"}'
+                app:onListItemBound="@{vm::onListItemBound}"
+                app:add="@{true}"
                 />
         </android.support.v4.widget.SwipeRefreshLayout>
 

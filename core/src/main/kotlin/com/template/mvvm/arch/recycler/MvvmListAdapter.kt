@@ -1,25 +1,38 @@
 package com.template.mvvm.arch.recycler
 
 import android.arch.lifecycle.ViewModel
-import android.arch.paging.PagedListAdapter
 import android.support.annotation.LayoutRes
-import android.support.v7.recyclerview.extensions.DiffCallback
+import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.template.mvvm.LL
+import com.template.mvvm.binding.OnListItemBoundListener
 
 class MvvmListAdapter(
         private @LayoutRes val itemLayout: Int,
-        private val vmItemLayout: Int
-) : PagedListAdapter<ViewModel, MvvmItemViewHolder>(diffCallback) {
+        private val vmItemLayout: Int,
+        private val onListItemBound: OnListItemBoundListener?
+) : RecyclerView.Adapter<MvvmItemViewHolder>() {
+
+    private val list = arrayListOf<ViewModel>()
+
+    override fun getItemCount() = list.size
+
+    fun add(list: List<ViewModel>) {
+        this.list.addAll(list)
+        notifyItemRangeInserted(this.list.size, list.size)
+    }
+
+    fun update(list: List<ViewModel>) {
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: MvvmItemViewHolder, position: Int) {
-        holder.bindViewModel(getItem(position))
+        holder.bindViewModel(list[position])
+        onListItemBound?.onBound(position)
+        LL.d("onBindViewHolder: $position")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MvvmItemViewHolder(parent, itemLayout, vmItemLayout)
-
-    companion object {
-        private val diffCallback = object : DiffCallback<ViewModel>() {
-            override fun areItemsTheSame(oldItem: ViewModel, newItem: ViewModel) = oldItem == newItem
-            override fun areContentsTheSame(oldItem: ViewModel, newItem: ViewModel) = oldItem == newItem
-        }
-    }
 }

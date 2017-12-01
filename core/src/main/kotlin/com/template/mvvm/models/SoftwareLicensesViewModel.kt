@@ -1,8 +1,12 @@
 package com.template.mvvm.models
 
 import android.app.Application
-import android.arch.lifecycle.*
-import android.arch.paging.PagedList
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
@@ -10,7 +14,6 @@ import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
-import com.template.mvvm.arch.recycler.MvvmListDataProvider
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
@@ -44,21 +47,15 @@ class SoftwareLicensesViewModel(private val application: Application, private va
     private var libraryListSource: LibraryList? = null
 
     //For recyclerview data
-    var libraryItemVmList: ObservableField<LiveData<PagedList<ViewModel>>> = ObservableField()
+    private val backProductItemVmList = MediatorLiveData<List<ViewModel>>()
+    var libraryItemVmList: ObservableField<LiveData<List<ViewModel>>> = ObservableField(backProductItemVmList)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         libraryListSource = libraryListSource ?: LibraryList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
-                    libraryItemVmList.set(
-                            MvvmListDataProvider(it).create(
-                                    0,
-                                    PagedList.Config.Builder()
-                                            .setPageSize(it.size)
-                                            .setInitialLoadSizeHint(it.size)
-                                            .setEnablePlaceholders(true)
-                                            .build())
-                    )
+                    LL.d("Updating new data...")
+                    backProductItemVmList.value = it
 
                     showSystemUi.value = true
                     dataLoaded.set(true)

@@ -1,16 +1,17 @@
 package com.template.mvvm.models
 
-import android.arch.lifecycle.*
-import android.arch.paging.PagedList
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
-import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
-import com.template.mvvm.arch.recycler.MvvmListDataProvider
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
@@ -38,27 +39,26 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     val goBack = ObservableBoolean(false)
 
     //Data of this view-model
-    protected var productListSource: ProductList? = null
+    private var productListSource: ProductList? = null
 
     //For recyclerview data
-    val productItemVmList: ObservableField<LiveData<PagedList<ViewModel>>> = ObservableField()
+    private val backProductItemVmList = SingleLiveData<List<ViewModel>>()
+    val productItemVmList: ObservableField<LiveData<List<ViewModel>>> = ObservableField(backProductItemVmList)
 
     //Detail to open
-    val openProductDetail: MutableLiveData<String> = SingleLiveData()
+    val openProductDetail: MutableLiveData<Long> = SingleLiveData()
+
+    lateinit var lifecycleOwner: LifecycleOwner
+
+    private var offset: Int = 0
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        this.lifecycleOwner = lifecycleOwner
         productListSource = productListSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
-                    productItemVmList.set(
-                            MvvmListDataProvider(it).create(
-                                    0,
-                                    PagedList.Config.Builder()
-                                            .setPageSize(it.size)
-                                            .setInitialLoadSizeHint(it.size)
-                                            .setEnablePlaceholders(true)
-                                            .build())
-                    )
+                    LL.d("Updating new data...")
+                    backProductItemVmList.value = it
 
                     showSystemUi.value = true
                     dataLoaded.set(true)
@@ -70,25 +70,38 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             }
         }
         reload.observe(lifecycleOwner, Observer {
-            loadAllProducts(lifecycleOwner, false)
+            loadAllProducts()
         })
-        loadAllProducts(lifecycleOwner)
+        loadAllProducts()
         return true
     }
 
-    protected open fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
-        productListSource?.let {
-            launch(UI + CoroutineExceptionHandler({ _, e ->
-                canNotLoadProducts(e, lifecycleOwner)
-                LL.d(e.message ?: "")
-            }) + vmJob) {
-                repository.getAllProducts(vmJob, localOnly).consumeEach {
-                    LL.i("productListSource subscribe")
-                    productListSource?.value = it
+    protected open fun loadAllProducts() {
+        onListItemBound(0)
+    }
+
+    fun onListItemBound(position: Int) {
+        launch(UI + CoroutineExceptionHandler({ _, e ->
+            canNotLoadProducts(e)
+            LL.d(e.message ?: "")
+        }) + vmJob) {
+            productListSource?.let { source ->
+                LL.d("offset = $offset, position = $position")
+                if (position >= offset - 1) {
+                    LL.i("Load next from $position")
+                    queryProducts(offset).consumeEach { ds ->
+                        LL.i("productListSource next subscribe")
+                        ds?.takeIf { it.isNotEmpty() }?.let {
+                            source.value = it
+                            offset += it.size
+                        }
+                    }
                 }
             }
         }
     }
+
+    protected open suspend fun queryProducts(start: Int) = repository.getAllProducts(vmJob, start, true)
 
     private fun bindTapHandlers(it: List<ProductItemViewModel>) {
         it.forEach {
@@ -99,14 +112,14 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    protected fun canNotLoadProducts(it: Throwable, lifecycleOwner: LifecycleOwner) {
+    private fun canNotLoadProducts(it: Throwable) {
         showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
 
 
         onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
-            loadAllProducts(lifecycleOwner, false)
+            loadAllProducts()
             showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
@@ -134,6 +147,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     fun onReload() {
         reload.value = true
         dataHaveNotReloaded.set(false)
+        offset = 0
     }
     //-----------------------------------
 }
@@ -163,7 +177,7 @@ class ProductItemViewModel : AbstractViewModel() {
      */
     override fun equals(other: Any?) =
             if (other == null) false
-            else TextUtils.equals(product.pid, ((other as ProductItemViewModel).product.pid))
+            else product.pid == ((other as ProductItemViewModel).product.pid)
 
     override fun onCleared() {
         super.onCleared()

@@ -13,12 +13,11 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
     override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = licensesRepository.getLicense(app, job, library, localOnly)
 
     // Products, brands, logo....
-    override suspend fun getAllProducts(job: Job, localOnly: Boolean) = productsRepository.getAllProducts(job, localOnly)
+    override suspend fun getAllProducts(job: Job, offset: Int, localOnly: Boolean) = productsRepository.getAllProducts(job, offset, localOnly)
 
-    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = productsRepository.filterProduct(job, keyword, localOnly)
+    override suspend fun filterProducts(job: Job, offset: Int, localOnly: Boolean, keyword: String) = productsRepository.filterProducts(job, offset, localOnly, keyword)
 
-    override suspend fun getProductDetail(job: Job, pid: String, localOnly: Boolean) = productsRepository.getProductDetail(job, pid, localOnly)
-
+    override suspend fun getProductDetail(job: Job, pid: Long, localOnly: Boolean) = productsRepository.getProductDetail(job, pid, localOnly)
 
     // Other...
     override fun clear() {

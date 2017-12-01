@@ -11,25 +11,25 @@ import kotlinx.coroutines.experimental.channels.produce
 
 class ProductsLocal : ProductsDataSource {
 
-    override suspend fun getAllProducts(job: Job, localOnly: Boolean) = produce(job) {
+    override suspend fun getAllProducts(job: Job, offset: Int, localOnly: Boolean) = produce(job) {
         DB.INSTANCE.productDao().apply {
-            LL.d("products loaded from db")
-            send(getProductList().map {
+            LL.d("From $offset the products loaded from db")
+            send(getProductList(offset).map {
                 Product.from(it, getImages(it.pid))
             })
         }
     }
 
-    override suspend fun filterProduct(job: Job, keyword: String, localOnly: Boolean) = produce(job) {
+    override suspend fun filterProducts(job: Job, offset: Int, localOnly: Boolean, keyword: String) = produce(job) {
         DB.INSTANCE.productDao().apply {
-            LL.d("filtered $keyword products and loaded from db")
-            send(filterProductList(keyword).map {
+            LL.d("From $offset to be filtered $keyword products and loaded from db")
+            send(filterProductList(offset, keyword).map {
                 Product.from(it, getImages(it.pid))
             })
         }
     }
 
-    override suspend fun getProductDetail(job: Job, pid: String, localOnly: Boolean) = produce(job) {
+    override suspend fun getProductDetail(job: Job, pid: Long, localOnly: Boolean) = produce(job) {
         with(DB.INSTANCE.productDao()) {
             ProductDetail.from(
                     getProduct(pid).first(),

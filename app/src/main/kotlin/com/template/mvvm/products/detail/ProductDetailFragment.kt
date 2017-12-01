@@ -22,7 +22,7 @@ class ProductDetailFragment : AppBaseFragment<ProductDetailViewModel>() {
                 .apply {
                     vm = obtainViewModel().apply {
                         activity?.let {
-                            productIdToDetail = it.intent.extras[ProductDetailActivity.ARG_SEL_ID] as String?
+                            productIdToDetail = it.intent.extras[ProductDetailActivity.ARG_SEL_ID] as Long?
                             registerLifecycleOwner(it)
                         }
                         view.setupErrorSnackbar(this@ProductDetailFragment, this.onError)

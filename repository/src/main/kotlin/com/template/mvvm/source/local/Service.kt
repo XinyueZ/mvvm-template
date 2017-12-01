@@ -1,6 +1,10 @@
 package com.template.mvvm.source.local
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.Query
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.source.local.entities.products.ImageEntity
@@ -38,17 +42,17 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertImages(imageEntity: List<ImageEntity>)
 
-    @Query("select * from products")
-    fun getProductList(): List<ProductEntity>
+    @Query("select * from products limit 10 offset :offset")
+    fun getProductList(offset: Int): List<ProductEntity>
 
     @Query("select * from products where pid=:pid")
-    fun getProduct(pid: String): List<ProductEntity>
+    fun getProduct(pid: Long): List<ProductEntity>
 
     @Query("select * from images where pid=:pid")
-    fun getImages(pid: String): List<ImageEntity>
+    fun getImages(pid: Long): List<ImageEntity>
 
-    @Query("select * from products where genders=:keyword")
-    fun filterProductList(keyword: String?): List<ProductEntity>
+    @Query("select * from products where genders=:keyword limit 10 offset :offset")
+    fun filterProductList(offset: Int, keyword: String?): List<ProductEntity>
 }
 
 

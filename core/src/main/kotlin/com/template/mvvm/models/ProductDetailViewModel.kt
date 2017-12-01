@@ -3,7 +3,11 @@ package com.template.mvvm.models
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.databinding.*
+import android.databinding.ObservableArrayList
+import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
+import android.databinding.ObservableInt
+import android.databinding.ObservableList
 import android.net.Uri
 import com.template.mvvm.LL
 import com.template.mvvm.R
@@ -35,12 +39,12 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) : 
     //Data of this view-model
     private var productDetailSource: MutableLiveData<ProductDetail>? = null
 
-    var productIdToDetail: String? = null
+    var productIdToDetail: Long? = null
 
     //------------------------------------------------------------------------
     // Fields to update
     //------------------------------------------------------------------------
-    val productId = ObservableField<String>()
+    val productId = ObservableField<Long>()
     val productTitle = ObservableField<String>()
     val productDescription = ObservableField<String>()
     val productImageUris: ObservableList<Uri> = ObservableArrayList()

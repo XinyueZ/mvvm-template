@@ -47,7 +47,6 @@ class Injection private constructor(application: Application) {
         fun destroyInstance() {
             INSTANCE?.let {
                 with(it) {
-                    DB_INSTANCE?.close()
                     DB_INSTANCE = null
                     DS_INSTANCE?.clear()
                     DS_INSTANCE = null
@@ -127,7 +126,7 @@ class Injection private constructor(application: Application) {
 }
 
 private object UriAdapter : JsonDeserializer<Uri> {
-    @Throws(exceptionClasses = *arrayOf(Exception::class))
+    @Throws(exceptionClasses = [(Exception::class)])
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): Uri {
         if (json == null) {
             throw IllegalArgumentException("Deserialization failed: null")

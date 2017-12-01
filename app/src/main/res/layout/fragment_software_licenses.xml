@@ -38,6 +38,7 @@
                 app:itemList="@{vm.libraryItemVmList}"
                 app:vmItemLayout="@{vmItem}"
                 app:layout='@{"linear"}'
+                app:add="@{false}"
                 />
         </android.support.v4.widget.SwipeRefreshLayout>
 

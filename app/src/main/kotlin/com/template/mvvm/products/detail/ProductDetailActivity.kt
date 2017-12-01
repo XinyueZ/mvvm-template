@@ -16,7 +16,7 @@ import com.template.mvvm.models.ProductDetailViewModel
 class ProductDetailActivity : AppBaseActivity<ProductDetailViewModel>() {
     companion object {
         internal val ARG_SEL_ID = "detail-item-id"
-        fun showInstance(cxt: Activity, selectedId: String) {
+        fun showInstance(cxt: Activity, selectedId: Long) {
             val intent = Intent(cxt, ProductDetailActivity::class.java)
             intent.putExtra(ARG_SEL_ID, selectedId)
             intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
