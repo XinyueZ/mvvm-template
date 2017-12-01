@@ -6,8 +6,6 @@ interface OnCommandListener {
     fun onCommand(id: Int)
 }
 
-
-
 interface OnItemCommandListener {
     fun onCommand(vm: ViewModel)
 }
