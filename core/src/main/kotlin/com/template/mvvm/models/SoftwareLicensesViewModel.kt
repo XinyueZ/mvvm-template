@@ -51,6 +51,7 @@ class SoftwareLicensesViewModel(private val application: Application, private va
     var libraryItemVmList: ObservableField<LiveData<List<ViewModel>>> = ObservableField(backProductItemVmList)
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        reload.observe(lifecycleOwner, Observer { loadAllLicenses(lifecycleOwner, false) })
         libraryListSource = libraryListSource ?: LibraryList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
@@ -66,9 +67,6 @@ class SoftwareLicensesViewModel(private val application: Application, private va
                 }
             }
         }
-        reload.observe(lifecycleOwner, Observer {
-            loadAllLicenses(lifecycleOwner, false)
-        })
         loadAllLicenses(lifecycleOwner)
         return true
     }

@@ -55,6 +55,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         this.lifecycleOwner = lifecycleOwner
+        reload.observe(lifecycleOwner, Observer { loadAllProducts() })
         productListSource = productListSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
@@ -71,9 +72,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 }
             }
         }
-        reload.observe(lifecycleOwner, Observer {
-            loadAllProducts()
-        })
         loadAllProducts()
         return true
     }
@@ -91,7 +89,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 LL.d("offset = $offset, position = $position")
                 if (position >= offset - 1) {
                     LL.i("Load next from $position")
-                    if(offset > 0) {
+                    if (offset > 0) {
                         // For progress-loading for more items
                         moreLoaded.set(false)
                     }
