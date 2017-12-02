@@ -28,6 +28,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private val reload = SingleLiveData<Boolean>()
     val dataHaveNotReloaded = ObservableBoolean(true)
+    val moreLoaded = ObservableBoolean(true)
 
     // True toggle the system-ui(navi-bar, status-bar etc.)
     val showSystemUi: MutableLiveData<Boolean> = SingleLiveData()
@@ -62,6 +63,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
                     showSystemUi.value = true
                     dataLoaded.set(true)
+                    moreLoaded.set(true)
                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                     dataHaveNotReloaded.set(true)
 
@@ -89,6 +91,10 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 LL.d("offset = $offset, position = $position")
                 if (position >= offset - 1) {
                     LL.i("Load next from $position")
+                    if(offset > 0) {
+                        // For progress-loading for more items
+                        moreLoaded.set(false)
+                    }
                     queryProducts(offset).consumeEach { ds ->
                         LL.i("productListSource next subscribe")
                         ds?.takeIf { it.isNotEmpty() }?.let {
@@ -116,7 +122,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
-
+        moreLoaded.set(true)
 
         onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
             loadAllProducts()
@@ -133,6 +139,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         super.onCleared()
         repository.clear()
         productListSource = null
+        offset = 0
     }
 
     //-----------------------------------
@@ -147,7 +154,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     fun onReload() {
         reload.value = true
         dataHaveNotReloaded.set(false)
-        offset = 0
     }
     //-----------------------------------
 }
