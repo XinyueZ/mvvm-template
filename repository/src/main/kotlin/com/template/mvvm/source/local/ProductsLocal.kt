@@ -64,4 +64,21 @@ class ProductsLocal : ProductsDataSource {
             LL.w("products write pictures(images) to db")
         }
     }
+
+    override suspend fun deleteAll(job: Job) = produce(job){
+        DB.INSTANCE.productDao().apply {
+            deleteProducts()
+            deleteImages()
+            LL.w("deleted products and pictures(images) from db")
+            send(Unit)
+        }
+    }
+
+    override suspend fun deleteAll(job: Job, keyword: String) = produce(job){
+        DB.INSTANCE.productDao().apply {
+            deleteProducts(keyword)
+            LL.w("deleted products and pictures(images<still in development>) from db with $keyword")
+            send(Unit)
+        }
+    }
 }

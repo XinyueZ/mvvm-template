@@ -12,4 +12,6 @@ interface ProductsDataSource : DataSource {
     suspend fun saveProducts(job: Job, source: List<Product>) = produce<Unit>(job) {}
     suspend fun savePictures(job: Job, source: List<Product>) = produce<Unit>(job) {}
     suspend fun saveBrand(job: Job, source: List<Product>) = produce<Unit>(job) {}
+    suspend fun deleteAll(job: Job) = produce<Unit>(job) {}
+    suspend fun deleteAll(job: Job, keyword: String) = produce<Unit>(job) {}
 }

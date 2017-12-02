@@ -55,7 +55,9 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         this.lifecycleOwner = lifecycleOwner
-        reload.observe(lifecycleOwner, Observer { loadAllProducts() })
+        reload.observe(lifecycleOwner, Observer {
+            deleteProducts()
+        })
         productListSource = productListSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
@@ -76,7 +78,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         return true
     }
 
-    protected open fun loadAllProducts() {
+    private fun loadAllProducts() {
         onListItemBound(0)
     }
 
@@ -93,7 +95,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                         // For progress-loading for more items
                         moreLoaded.set(false)
                     }
-                    queryProducts(offset).consumeEach { ds ->
+                    query(offset).consumeEach { ds ->
                         LL.i("productListSource next subscribe")
                         ds?.takeIf { it.isNotEmpty() }?.let {
                             source.value = it
@@ -105,7 +107,19 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    protected open suspend fun queryProducts(start: Int) = repository.getAllProducts(vmJob, start, true)
+    private fun deleteProducts() = launch(UI + CoroutineExceptionHandler({ _, e ->
+        LL.d(e.message ?: "")
+    }) + vmJob) {
+        delete().consumeEach {
+            LL.i("deleted products...")
+            offset = 0
+            loadAllProducts()
+        }
+    }
+
+    protected open suspend fun query(start: Int) = repository.getAllProducts(vmJob, start, true)
+
+    protected open suspend fun delete() = repository.deleteAll(vmJob)
 
     private fun bindTapHandlers(it: List<ProductItemViewModel>) {
         it.forEach {

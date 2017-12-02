@@ -42,6 +42,15 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertImages(imageEntity: List<ImageEntity>)
 
+    @Query("delete from products")
+    fun deleteProducts()
+
+    @Query("delete from products where genders=:keyword")
+    fun deleteProducts(keyword: String?)
+
+    @Query("delete from images")
+    fun deleteImages()
+
     @Query("select * from products order by create_time asc limit 10 offset :offset")
     fun getProductList(offset: Int): List<ProductEntity>
 
