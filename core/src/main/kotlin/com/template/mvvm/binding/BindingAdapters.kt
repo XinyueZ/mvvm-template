@@ -59,15 +59,19 @@ fun RecyclerView.bindingList(
             val sp = (layoutManager.split("-"))[1].toInt()
             GridLayoutManager(context, sp)
         }
-        val mvvmListAdapter = MvvmListAdapter(itemLayout, vmItemLayout, onListItemBound)
-        adapter = mvvmListAdapter
-
-        itemList?.observe(context as FragmentActivity, Observer { updatedList ->
-            updatedList?.run {
-                if (add) mvvmListAdapter.add(this)
-                else mvvmListAdapter.update(this)
+        adapter = MvvmListAdapter(itemLayout, vmItemLayout, onListItemBound).apply {
+            (context as FragmentActivity).run {
+                itemList?.let { liveData ->
+                    liveData.removeObservers(this)
+                    liveData.observe(this, Observer { updatedList ->
+                        updatedList?.run {
+                            if (add) add(this)
+                            else update(this)
+                        }
+                    })
+                }
             }
-        })
+        }
     }
 }
 
