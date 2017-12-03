@@ -38,10 +38,11 @@
                     android:layout_above="@+id/load_more_pb"
                     app:add="@{true}"
                     app:itemLayout="@{R.layout.item_product}"
-                    app:itemList="@{vm.productItemVmList}"
+                    app:itemList="@{vm.collectionItemVmList}"
                     app:layout='@{"linear"}'
                     app:onListItemBound="@{vm::onListItemBound}"
                     app:vmItemLayout="@{vmItem}"
+                    app:delete = "@{vm.deleteList}"
                     />
 
                 <ProgressBar

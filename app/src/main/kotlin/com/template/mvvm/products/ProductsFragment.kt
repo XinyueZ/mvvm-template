@@ -29,7 +29,7 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
                             with(it) {
                                 registerLifecycleOwner(it)
                                 view.setupErrorSnackbar(this@ProductsFragment, this@apply.onError)
-                                openProductDetail.observe(it, Observer {
+                                openItemDetail.observe(it, Observer {
                                     it?.let {
                                         ProductDetailActivity.showInstance(this@with, it)
                                     }

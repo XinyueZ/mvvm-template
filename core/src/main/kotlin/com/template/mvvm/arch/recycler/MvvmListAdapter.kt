@@ -18,13 +18,19 @@ class MvvmListAdapter(
     override fun getItemCount() = list.size
 
     fun add(list: List<ViewModel>) {
+        val start = this.list.size
         this.list.addAll(list)
-        notifyItemRangeInserted(this.list.size, list.size)
+        notifyItemRangeInserted(start, list.size)
     }
 
     fun update(list: List<ViewModel>) {
         this.list.clear()
         this.list.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun delete() {
+        this.list.clear()
         notifyDataSetChanged()
     }
 

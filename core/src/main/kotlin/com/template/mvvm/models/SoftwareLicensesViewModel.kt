@@ -3,14 +3,12 @@ package com.template.mvvm.models
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.text.TextUtils
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
@@ -47,10 +45,13 @@ class SoftwareLicensesViewModel(private val application: Application, private va
     private var libraryListSource: LibraryList? = null
 
     //For recyclerview data
-    private val backProductItemVmList = MediatorLiveData<List<ViewModel>>()
+    private val backProductItemVmList = SingleLiveData<List<ViewModel>>()
     var libraryItemVmList: ObservableField<LiveData<List<ViewModel>>> = ObservableField(backProductItemVmList)
 
+    lateinit var lifecycleOwner: LifecycleOwner
+
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+        this.lifecycleOwner = lifecycleOwner
         reload.observe(lifecycleOwner, Observer { loadAllLicenses(lifecycleOwner, false) })
         libraryListSource = libraryListSource ?: LibraryList().apply {
             setUpTransform(lifecycleOwner) {
@@ -116,10 +117,15 @@ class SoftwareLicensesViewModel(private val application: Application, private va
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
+    fun reset() {
         repository.clear()
         libraryListSource = null
+        backProductItemVmList.removeObservers(lifecycleOwner)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        reset()
     }
 
     //-----------------------------------
@@ -158,10 +164,6 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     fun onCommand(vm: ViewModel) {
         clickHandler.first()(library)
     }
-
-    override fun equals(other: Any?) =
-            if (other == null) false
-            else TextUtils.equals(library.name, ((other as SoftwareLicenseItemViewModel).library.name))
 
     override fun onCleared() {
         super.onCleared()

@@ -44,7 +44,7 @@ import com.template.mvvm.ext.onNavigationItemSelected
 import com.template.mvvm.ext.onNavigationOnClick
 
 @BindingAdapter(value = ["itemList", "itemLayout", "vmItemLayout", "layout", "onListItemBound", "add"], requireAll = false)
-fun RecyclerView.setUpBinding(
+fun RecyclerView.bindingList(
         itemList: LiveData<List<ViewModel>>?,
         @LayoutRes itemLayout: Int,
         vmItemLayout: Int,
@@ -69,6 +69,12 @@ fun RecyclerView.setUpBinding(
             }
         })
     }
+}
+
+@BindingAdapter("delete")
+fun RecyclerView.bindingDelete(deleteList: Boolean) {
+    if (deleteList)
+        (adapter as? MvvmListAdapter)?.delete()
 }
 
 @BindingAdapter(value = ["width", "height", "command", "vm"], requireAll = false)

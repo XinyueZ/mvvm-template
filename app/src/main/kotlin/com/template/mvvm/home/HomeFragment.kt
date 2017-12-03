@@ -26,6 +26,9 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
 
     private lateinit var binding: FragmentHomeBinding
 
+    private var menFrg: MenFragment? = null
+    private var womenFrg: WomenFragment? = null
+    private var allFrg: AllGendersFragment? = null
     override fun bindingView(view: View): ViewDataBinding {
         binding = FragmentHomeBinding.bind(view)
                 .apply {
@@ -45,13 +48,19 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
                                     AboutActivity.showInstance(this@with)
                                 })
                                 openItem2.observe(it, Observer {
-                                    replaceFragmentToFragment(MenFragment.newInstance(this@with), R.id.childContentFrame)
+                                    if (menFrg == null)
+                                        menFrg = MenFragment.newInstance(this@with)
+                                    menFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
                                 })
                                 openItem3.observe(it, Observer {
-                                    replaceFragmentToFragment(WomenFragment.newInstance(this@with), R.id.childContentFrame)
+                                    if (womenFrg == null)
+                                        womenFrg = WomenFragment.newInstance(this@with)
+                                    womenFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
                                 })
                                 openItem4.observe(it, Observer {
-                                    replaceFragmentToFragment(AllGendersFragment.newInstance(this@with), R.id.childContentFrame)
+                                    if (allFrg == null)
+                                        allFrg = AllGendersFragment.newInstance(this@with)
+                                    allFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
                                 })
                             }
                             registerLifecycleOwner(it)

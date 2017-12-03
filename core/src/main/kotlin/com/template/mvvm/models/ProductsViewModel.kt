@@ -40,29 +40,35 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     val goBack = ObservableBoolean(false)
 
     //Data of this view-model
-    private var productListSource: ProductList? = null
+    private var collectionSource: ProductList? = null
 
     //For recyclerview data
-    private val backProductItemVmList = SingleLiveData<List<ViewModel>>()
-    val productItemVmList: ObservableField<LiveData<List<ViewModel>>> = ObservableField(backProductItemVmList)
+    private val backCollectionItemVmList = SingleLiveData<List<ViewModel>>()
+    val collectionItemVmList: ObservableField<LiveData<List<ViewModel>>> = ObservableField(backCollectionItemVmList)
+
+    //Delete list on UI
+    val deleteList = ObservableBoolean(false)
+    //User might delete data with pull2refresh and then the UI should also do it after new data being loaded.
+    private var shouldDeleteList = false
 
     //Detail to open
-    val openProductDetail: MutableLiveData<Long> = SingleLiveData()
-
-    lateinit var lifecycleOwner: LifecycleOwner
+    val openItemDetail: MutableLiveData<Long> = SingleLiveData()
 
     private var offset: Int = 0
+
+
+    lateinit var lifecycleOwner: LifecycleOwner
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         this.lifecycleOwner = lifecycleOwner
         reload.observe(lifecycleOwner, Observer {
             deleteProducts()
         })
-        productListSource = productListSource ?: ProductList().apply {
+        collectionSource = collectionSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
                     LL.d("Updating new data...")
-                    backProductItemVmList.value = it
+                    backCollectionItemVmList.value = it
 
                     showSystemUi.value = true
                     dataLoaded.set(true)
@@ -87,7 +93,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             canNotLoadProducts(e)
             LL.d(e.message ?: "")
         }) + vmJob) {
-            productListSource?.let { source ->
+            collectionSource?.let { source ->
                 LL.d("offset = $offset, position = $position")
                 if (position >= offset - 1) {
                     LL.i("Load next from $position")
@@ -96,8 +102,15 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                         moreLoaded.set(false)
                     }
                     query(offset).consumeEach { ds ->
-                        LL.i("productListSource next subscribe")
+                        LL.i("collectionSource next subscribe")
                         ds?.takeIf { it.isNotEmpty() }?.let {
+
+                            if (shouldDeleteList) {
+                                deleteList.set(true)
+                                shouldDeleteList = false
+                                deleteList.set(false)
+                            }
+
                             source.value = it
                             offset += it.size
                         }
@@ -114,6 +127,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             LL.i("deleted products...")
             offset = 0
             loadAllProducts()
+            shouldDeleteList = true
         }
     }
 
@@ -125,7 +139,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         it.forEach {
             it.clickHandler += {
                 // Tell UI to open a UI for license detail.
-                openProductDetail.value = it.pid
+                openItemDetail.value = it.pid
             }
         }
     }
@@ -141,17 +155,23 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
-            productListSource?.value?.let {
+            collectionSource?.value?.let {
                 dataLoaded.set(it.isNotEmpty())
             } ?: dataLoaded.set(false)
         }
     }
 
+    fun reset() {
+        repository.clear()
+        collectionSource = null
+        backCollectionItemVmList.removeObservers(lifecycleOwner)
+        deleteList.set(false)
+        offset = 0
+    }
+
     override fun onCleared() {
         super.onCleared()
-        repository.clear()
-        productListSource = null
-        offset = 0
+        reset()
     }
 
     //-----------------------------------
@@ -189,13 +209,6 @@ class ProductItemViewModel : AbstractViewModel() {
     fun onCommand(vm: ViewModel) {
         clickHandler.first()(product)
     }
-
-    /***
-     * For MvvmListAdapter.diffCallback
-     */
-    override fun equals(other: Any?) =
-            if (other == null) false
-            else product.pid == ((other as ProductItemViewModel).product.pid)
 
     override fun onCleared() {
         super.onCleared()

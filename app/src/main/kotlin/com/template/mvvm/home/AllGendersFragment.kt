@@ -30,7 +30,7 @@ class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
                                 registerLifecycleOwner(it)
                                 view.setupErrorSnackbar(it, onError)
 
-                                openProductDetail.observe(it, Observer {
+                                openItemDetail.observe(it, Observer {
                                     it?.let {
                                         ProductDetailActivity.showInstance(this@with, it)
                                     }
@@ -44,4 +44,8 @@ class AllGendersFragment : AppBaseFragment<AllGendersViewModel>() {
 
     override fun getLayout() = R.layout.fragment_products
     override fun requireViewModel() = AllGendersViewModel::class.java
+    override fun onDetach() {
+        obtainViewModel().reset()
+        super.onDetach()
+    }
 }

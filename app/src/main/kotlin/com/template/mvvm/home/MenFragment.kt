@@ -31,7 +31,7 @@ class MenFragment : AppBaseFragment<MenViewModel>() {
                                 registerLifecycleOwner(it)
                                 view.setupErrorSnackbar(it, onError)
 
-                                openProductDetail.observe(it, Observer {
+                                openItemDetail.observe(it, Observer {
                                     it?.let {
                                         ProductDetailActivity.showInstance(this@with, it)
                                     }
@@ -45,4 +45,8 @@ class MenFragment : AppBaseFragment<MenViewModel>() {
 
     override fun getLayout() = R.layout.fragment_products
     override fun requireViewModel() = MenViewModel::class.java
+    override fun onDetach() {
+        obtainViewModel().reset()
+        super.onDetach()
+    }
 }
