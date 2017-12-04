@@ -41,6 +41,7 @@ ext {
 
     //Tests
     def robolectric = "3.5.1"
+    def robolectricSupportV4 = "3.4-rc2"
     def shadowsMultidex = "3.4.2"
     def mockitoVersion = "1.10.19"
     def powerMockVersion = "1.7.3"
@@ -147,6 +148,7 @@ ext {
 
             //TESTS
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],
+            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'shadows-support-v4', version: robolectricSupportV4]],
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: shadowsMultidex]],
             [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
             [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
