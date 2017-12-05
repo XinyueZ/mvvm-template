@@ -6,6 +6,13 @@
 
     <data>
 
+        <import type="android.support.v4.app.FragmentActivity"/>
+
+        <import type="android.support.v4.app.FragmentManager"/>
+
+        <import type="com.qiaoqiao.views.GalleryViewPagerAdapter"/>
+
+
         <variable
             name="fragment"
             type="android.support.v4.app.Fragment"/>
@@ -47,8 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="290dp"
                     android:fitsSystemWindows="true"
-                    app:imageUris="@{vm.productImageUris}"
-                    app:layout_collapseMode="parallax"/>
+                    app:layout_collapseMode="parallax"
+                    app:pagerAdapter="@{GalleryViewPagerAdapter.build(((FragmentActivity)context).supportFragmentManager, @{vm.productImageUris})}"/>
 
 
                 <android.support.v7.widget.Toolbar

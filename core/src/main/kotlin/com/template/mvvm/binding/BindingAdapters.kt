@@ -17,9 +17,9 @@ import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentActivity
+import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.CardView
 import android.support.v7.widget.GridLayoutManager
@@ -34,7 +34,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.qiaoqiao.views.GalleryViewPagerAdapter
 import com.template.mvvm.GlideApp
 import com.template.mvvm.LL
 import com.template.mvvm.R
@@ -107,9 +106,9 @@ fun SwipeRefreshLayout.reload(l: OnReloadListener?) {
     }
 }
 
-@BindingAdapter("imageUris", requireAll = false)
-fun ViewPager.setImageList(uris: List<Uri>?) {
-    uris?.let { adapter = GalleryViewPagerAdapter((context as AppCompatActivity).supportFragmentManager, it) }
+@BindingAdapter("pagerAdapter", requireAll = false)
+fun ViewPager.setImageList(adapter: PagerAdapter) {
+    this.adapter = adapter
 }
 
 @BindingAdapter(value = ["remoteImageUri", "placeholderRes", "errorDrawableRes"], requireAll = false)
