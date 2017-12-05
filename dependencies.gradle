@@ -132,6 +132,7 @@ ext {
             //RETROFIT
             [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit]],
             [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit]],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit-mock", version: retrofit]],
             [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "adapter-rxjava2", version: rxAndroidAdapter]],
 
             //MATERIAL DESIGN GUIDELINE
