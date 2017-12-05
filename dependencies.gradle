@@ -145,7 +145,7 @@ ext {
             //DEBUG TOOL
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: stetho]],
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho]],
-            [configuration: "debugImplementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
+            [configuration: "implementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
 
             //TESTS
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],

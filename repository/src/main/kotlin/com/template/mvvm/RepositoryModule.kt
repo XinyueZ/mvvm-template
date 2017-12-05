@@ -7,8 +7,11 @@ import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
 import com.grapesnberries.curllogger.CurlLoggerInterceptor
+import com.template.mvvm.source.local.DB
+import com.template.mvvm.source.local.DatabaseInjection.provideDatabase
 import com.template.mvvm.source.remote.LicensesApi
-import com.template.mvvm.source.remote.NetworkInjection
+import com.template.mvvm.source.remote.NetworkInjection.provideLicensesApiService
+import com.template.mvvm.source.remote.NetworkInjection.provideProductsApiService
 import com.template.mvvm.source.remote.ProductsApi
 import com.template.mvvm.source.remote.interceptors.NetworkConnectionInterceptor
 import okhttp3.OkHttpClient
@@ -38,9 +41,8 @@ class RepositoryModule(application: Application) {
 
     private fun onCreate(application: Application) {
         Stetho.initializeWithDefaults(application)
-        ProductsApi.service = NetworkInjection.provideProductsApiService(application, retrofitBuilder)
-        LicensesApi.service = NetworkInjection.provideLicensesApiService(application, retrofitBuilder)
+        DB.INSTANCE = provideDatabase(application)
+        ProductsApi.service = provideProductsApiService(application, retrofitBuilder)
+        LicensesApi.service = provideLicensesApiService(application, retrofitBuilder)
     }
-
-
 }

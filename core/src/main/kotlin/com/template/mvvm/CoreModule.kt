@@ -7,7 +7,6 @@ import android.arch.lifecycle.ProcessLifecycleOwner
 import android.support.multidex.MultiDexApplication
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
-import com.template.mvvm.source.local.DB
 
 abstract class CoreModule : MultiDexApplication(), LifecycleObserver {
     override final fun onCreate() {
@@ -19,10 +18,6 @@ abstract class CoreModule : MultiDexApplication(), LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     protected open fun onCoreCreate() {
         LL.d("process on_create")
-
-        with(Injection.getInstance(this)) {
-            DB.INSTANCE = provideDatabase(this@CoreModule)
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

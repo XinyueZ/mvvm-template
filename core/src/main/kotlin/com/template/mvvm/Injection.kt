@@ -2,15 +2,12 @@ package com.template.mvvm
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.arch.persistence.room.Room
-import android.content.Context
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.source.LicensesRepository
 import com.template.mvvm.source.ProductsRepository
 import com.template.mvvm.source.Repository
 import com.template.mvvm.source.cache.LicensesCache
 import com.template.mvvm.source.cache.ProductsCache
-import com.template.mvvm.source.local.DB
 import com.template.mvvm.source.local.LicensesLocal
 import com.template.mvvm.source.local.ProductsLocal
 import com.template.mvvm.source.remote.LicensesRemote
@@ -31,7 +28,6 @@ class Injection private constructor(application: Application) {
         fun destroyInstance() {
             INSTANCE?.let {
                 with(it) {
-                    DB_INSTANCE = null
                     DS_INSTANCE?.clear()
                     DS_INSTANCE = null
                 }
@@ -39,17 +35,6 @@ class Injection private constructor(application: Application) {
             }
         }
     }
-
-    // Provide database
-
-    @SuppressLint("StaticFieldLeak")
-    @Volatile private var DB_INSTANCE: DB? = null
-
-    fun provideDatabase(application: Application) = DB_INSTANCE ?: synchronized(this) {
-        DB_INSTANCE ?: buildDatabase(application).also { DB_INSTANCE = it }
-    }
-
-    private fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, DB::class.java, "mvvm.db").fallbackToDestructiveMigration().build()
 
     // Provides whole repository
 
