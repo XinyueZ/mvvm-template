@@ -129,6 +129,7 @@ ext {
             //RETROFIT
             [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit]],
             [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit]],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit-mock", version: retrofit]],
 
             //MATERIAL DESIGN GUIDELINE
             [configuration: "implementation", dependency: [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],

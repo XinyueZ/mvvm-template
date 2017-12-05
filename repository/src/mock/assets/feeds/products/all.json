@@ -1,0 +1,4646 @@
+{
+  "metadata": {
+    "offset": 0,
+    "limit": 10,
+    "total": 3349363,
+    "category": {
+      "id": "women",
+      "name": "Women's Fashion",
+      "shortName": "Women",
+      "fullName": "Women's Fashion",
+      "localizedIds": {
+        "de-DE": "damenmode",
+        "en-US": "women",
+        "en-CA": "women",
+        "en-AU": "women",
+        "fr-FR": "mode-femme",
+        "zh-CN": "women",
+        "en-GB": "women",
+        "ja-JP": "レディース-ファッション"
+      },
+      "localizedId": "women"
+    },
+    "showSizeFilter": false,
+    "showColorFilter": true,
+    "showHeelHeightFilter": false,
+    "showConditionFilter": true,
+    "engine": "LUCENE",
+    "elasticsearchEligible": true
+  },
+  "products": [
+    {
+      "id": 629968914,
+      "name": "Elisa Necklace and Nail Lacquer Set in Iridescent Drusy",
+      "brandedName": "Kendra Scott Elisa Necklace and Nail Lacquer Set in Iridescent Drusy",
+      "unbrandedName": "Elisa Necklace and Nail Lacquer Set in Iridescent Drusy",
+      "currency": "USD",
+      "price": 75.0,
+      "priceLabel": "$75",
+      "inStock": true,
+      "retailer": {
+        "id": "2004",
+        "name": "Kendra Scott",
+        "score": 49
+      },
+      "brand": {
+        "id": "320",
+        "name": "Kendra Scott"
+      },
+      "locale": "en_US",
+      "description": "Nail Lacquer:<br>• All Kendra Scott Nail Lacquer is final sale.<br>• Shipping/Returns: Certain items considered Hazardous Materials (HAZMAT) including aerosols and alcohol-based products (e.g. nail polish remover, nail polish, etc.) are required by the US Department of Transportation to be shipped by Ground-only transport, due to air transport restrictions and regulations. Regrettably, these items are only available for shipments within the continental United States.Pendant Necklace:<br>• 14K Gold Plated Over Brass<br>• Size: 0.63\"L x 0.38\"W stationary pendant, 15\" chain with 2\" extender<br>• Lobster claw closure<br>• Material: iridescent drusy<br>Please note: Due to the one-of-a-kind nature of the medium, exact color patterns may vary slightly from the image shown.",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=629968914&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/83/2d/832d94e8972f560b55477b27c71790a8_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/83/2d/832d94e8972f560b55477b27c71790a8_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/83/2d/832d94e8972f560b55477b27c71790a8_medium/kendra-scott-elisa-necklace-and-nail-lacquer-set-in-iridescent-drusy.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/83/2d/832d94e8972f560b55477b27c71790a8/kendra-scott-elisa-necklace-and-nail-lacquer-set-in-iridescent-drusy.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/83/2d/832d94e8972f560b55477b27c71790a8_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/83/2d/832d94e8972f560b55477b27c71790a8_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/83/2d/832d94e8972f560b55477b27c71790a8_best.jpg",
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/83/2d/832d94e8972f560b55477b27c71790a8.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "832d94e8972f560b55477b27c71790a8"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea_medium/kendra-scott-elisa-necklace-and-nail-lacquer-set-in-iridescent-drusy.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea/kendra-scott-elisa-necklace-and-nail-lacquer-set-in-iridescent-drusy.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea_best.jpg",
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/f7/3c/f73cdf4b938d39dcfd6d6aaf40fd8bea.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "f73cdf4b938d39dcfd6d6aaf40fd8bea"
+        }
+      ],
+      "discount": 0,
+      "colors": [],
+      "sizes": [],
+      "categories": [
+        {
+          "id": "necklaces",
+          "name": "Necklaces",
+          "shortName": "Necklaces",
+          "fullName": "Necklaces",
+          "localizedId": "necklaces"
+        }
+      ],
+      "extractDate": "2017-02-28",
+      "badges": [],
+      "seeMoreLabel": "Kendra Scott Necklaces",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686422001,
+      "name": "Illesteva Leonard Sunglasses",
+      "brandedName": "Illesteva Leonard Sunglasses",
+      "unbrandedName": "Leonard Sunglasses",
+      "currency": "USD",
+      "price": 177.0,
+      "priceLabel": "$177",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Tortoise/Grey"
+          },
+          "size": {
+            "name": "One Size"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "21211",
+        "name": "Illesteva"
+      },
+      "locale": "en_US",
+      "description": "Scaled-down Illesteva sunglasses in round tortoiseshell frames. Hardshell case and soft pouch included. <ul> <li>Round frame.</li> <li>Non-polarized lenses.</li> <li>Made in Italy.</li> <li>Measurements</li> <li>Width: 5.5in / 14cm</li> <li>Height: 2in / 5cm</li> <li>Lens Width: 48mm Style # ILLES30110</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686422001&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_medium/illesteva-leonard-sunglasses.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/a2/2b/a22bf510debf411521da4a0f57b8b3bb/illesteva-leonard-sunglasses.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/a2/2b/a22bf510debf411521da4a0f57b8b3bb.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "a22bf510debf411521da4a0f57b8b3bb"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b_medium/illesteva-leonard-sunglasses.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b/illesteva-leonard-sunglasses.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/6c/67/6c67baf0c4c998d2ff8ec30554e8d89b.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "6c67baf0c4c998d2ff8ec30554e8d89b"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/be/6dbe870e2d7b549f558485deab596a70_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/be/6dbe870e2d7b549f558485deab596a70_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/6d/be/6dbe870e2d7b549f558485deab596a70_medium/illesteva-leonard-sunglasses.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/6d/be/6dbe870e2d7b549f558485deab596a70/illesteva-leonard-sunglasses.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/6d/be/6dbe870e2d7b549f558485deab596a70_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/be/6dbe870e2d7b549f558485deab596a70_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/be/6dbe870e2d7b549f558485deab596a70_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/6d/be/6dbe870e2d7b549f558485deab596a70.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "6dbe870e2d7b549f558485deab596a70"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/74/d5/74d552803a93e3fcd81f617dd8ddae7d_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/74/d5/74d552803a93e3fcd81f617dd8ddae7d_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/74/d5/74d552803a93e3fcd81f617dd8ddae7d_medium/illesteva-leonard-sunglasses.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/74/d5/74d552803a93e3fcd81f617dd8ddae7d/illesteva-leonard-sunglasses.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/74/d5/74d552803a93e3fcd81f617dd8ddae7d_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/74/d5/74d552803a93e3fcd81f617dd8ddae7d_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/74/d5/74d552803a93e3fcd81f617dd8ddae7d_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/74/d5/74d552803a93e3fcd81f617dd8ddae7d.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "74d552803a93e3fcd81f617dd8ddae7d"
+        }
+      ],
+      "discount": 0,
+      "colors": [
+        {
+          "name": "Tortoise/Grey",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_medium/illesteva-leonard-sunglasses.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/a2/2b/a22bf510debf411521da4a0f57b8b3bb/illesteva-leonard-sunglasses.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/a2/2b/a22bf510debf411521da4a0f57b8b3bb_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/a2/2b/a22bf510debf411521da4a0f57b8b3bb.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "a22bf510debf411521da4a0f57b8b3bb"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/fa/55/fa5546e0f7a98f1da2a148fc819ff5e9.jpg",
+          "canonicalColors": [
+            {
+              "id": "1",
+              "name": "Brown"
+            },
+            {
+              "id": "14",
+              "name": "Gray"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "One Size"
+        }
+      ],
+      "categories": [
+        {
+          "id": "sunglasses",
+          "name": "Sunglasses",
+          "shortName": "Sunglasses",
+          "fullName": "Women's Sunglasses",
+          "localizedId": "sunglasses"
+        }
+      ],
+      "extractDate": "2017-01-14",
+      "lastModified": "2017-11-10",
+      "badges": [],
+      "seeMoreLabel": "Illesteva Sunglasses",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686421379,
+      "name": "BB Dakota Jack By BB Dakota Amory Sweater Dress",
+      "brandedName": "BB Dakota Jack By Amory Sweater Dress",
+      "unbrandedName": "Jack By Amory Sweater Dress",
+      "currency": "USD",
+      "price": 80.0,
+      "priceLabel": "$80",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "S"
+          }
+        },
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "XS"
+          }
+        },
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "L"
+          }
+        },
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "M"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "781",
+        "name": "BB Dakota"
+      },
+      "locale": "en_US",
+      "description": "This tactile Jack by BB Dakota sweater dress has a soft, slouchy turtleneck collar. Cable designs accent the front. Long sleeves. Unlined. <ul> <li>Fabric: Textured knit.</li> <li>100% acrylic.</li> <li>Hand wash or dry clean.</li> <li>Imported, China.</li> <li>Measurements</li> <li>Length: 33.5in / 85cm, from shoulder</li> <li>Measurements from size S Style # BBDAK42173</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686421379&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/01/11/0111a06e5d87842129e7af5773ebbe39_medium/bb-dakota-jack-by-amory-sweater-dress.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/01/11/0111a06e5d87842129e7af5773ebbe39/bb-dakota-jack-by-amory-sweater-dress.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/01/11/0111a06e5d87842129e7af5773ebbe39_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/01/11/0111a06e5d87842129e7af5773ebbe39.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "0111a06e5d87842129e7af5773ebbe39"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/01/04/01049246ff84d3401bc348d5e714f250_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/01/04/01049246ff84d3401bc348d5e714f250_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/01/04/01049246ff84d3401bc348d5e714f250_medium/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/01/04/01049246ff84d3401bc348d5e714f250/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/01/04/01049246ff84d3401bc348d5e714f250_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/01/04/01049246ff84d3401bc348d5e714f250_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/01/04/01049246ff84d3401bc348d5e714f250_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/01/04/01049246ff84d3401bc348d5e714f250.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "01049246ff84d3401bc348d5e714f250"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b_medium/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/95/a0/95a0c30e89a77fe469a70ccab4e2e05b.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "95a0c30e89a77fe469a70ccab4e2e05b"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9_medium/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/bd/d0/bdd0ab2aab77bbcb1c07eae75bf0f3b9.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "bdd0ab2aab77bbcb1c07eae75bf0f3b9"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/d0/5d/d05ded4851a1e856ec45b0388c13e654_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/d0/5d/d05ded4851a1e856ec45b0388c13e654_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/d0/5d/d05ded4851a1e856ec45b0388c13e654_medium/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/d0/5d/d05ded4851a1e856ec45b0388c13e654/bb-dakota-jack-by-amory-sweater-dress.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/d0/5d/d05ded4851a1e856ec45b0388c13e654_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/d0/5d/d05ded4851a1e856ec45b0388c13e654_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/d0/5d/d05ded4851a1e856ec45b0388c13e654_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/d0/5d/d05ded4851a1e856ec45b0388c13e654.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "d05ded4851a1e856ec45b0388c13e654"
+        }
+      ],
+      "discount": 0,
+      "colors": [
+        {
+          "name": "Ivory",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/01/11/0111a06e5d87842129e7af5773ebbe39_medium/bb-dakota-jack-by-amory-sweater-dress.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/01/11/0111a06e5d87842129e7af5773ebbe39/bb-dakota-jack-by-amory-sweater-dress.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/01/11/0111a06e5d87842129e7af5773ebbe39_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/01/11/0111a06e5d87842129e7af5773ebbe39_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/01/11/0111a06e5d87842129e7af5773ebbe39.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "0111a06e5d87842129e7af5773ebbe39"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/92/73/927324f90e53f076beb9b6e33bc92e22.jpg",
+          "canonicalColors": [
+            {
+              "id": "15",
+              "name": "White"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "XS",
+          "canonicalSize": {
+            "id": "81",
+            "name": "XS (2)"
+          }
+        },
+        {
+          "name": "S",
+          "canonicalSize": {
+            "id": "83",
+            "name": "S (4-6)"
+          }
+        },
+        {
+          "name": "M",
+          "canonicalSize": {
+            "id": "85",
+            "name": "M (8-10)"
+          }
+        },
+        {
+          "name": "L",
+          "canonicalSize": {
+            "id": "87",
+            "name": "L (12-14)"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "day-dresses",
+          "name": "Day Dresses",
+          "shortName": "Day",
+          "fullName": "Day Dresses",
+          "localizedId": "day-dresses"
+        }
+      ],
+      "extractDate": "2017-01-15",
+      "lastModified": "2017-11-11",
+      "badges": [],
+      "seeMoreLabel": "BB Dakota Day Dresses",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686424492,
+      "name": "BB Dakota Abriana Jacket",
+      "brandedName": "BB Dakota Abriana Jacket",
+      "unbrandedName": "Abriana Jacket",
+      "currency": "USD",
+      "price": 80.0,
+      "priceLabel": "$80",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "L"
+          }
+        },
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "XS"
+          }
+        },
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "S"
+          }
+        },
+        {
+          "color": {
+            "name": "Ivory"
+          },
+          "size": {
+            "name": "M"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "781",
+        "name": "BB Dakota"
+      },
+      "locale": "en_US",
+      "description": "Metallic threads add a subtle sparkle to this cozy knit BB Dakota sweater. Ribbed-knit trim traces the draped, open placket. Layered, asymmetrical back. Side pockets. Long sleeves. Unlined. <ul> <li>Fabric: Knit.</li> <li>80% cotton/18% polyester/2% metallic.</li> <li>Hand wash or dry clean.</li> <li>Imported, China.</li> <li>Measurements</li> <li>Length 1: 19.75in / 50cm, from shoulder to shortest point</li> <li>Length 2: 28.75in / 73cm, from shoulder to longest point</li> <li>Measurements from size S Style # BBDAK42221</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686424492&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_medium/bb-dakota-abriana-jacket.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe/bb-dakota-abriana-jacket.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "f670c2c224ba6f9b02e44b82660d1ebe"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/22/4c/224ca143237aaf1cfd8cd1a111d39a04_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/22/4c/224ca143237aaf1cfd8cd1a111d39a04_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/22/4c/224ca143237aaf1cfd8cd1a111d39a04_medium/bb-dakota-abriana-jacket.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/22/4c/224ca143237aaf1cfd8cd1a111d39a04/bb-dakota-abriana-jacket.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/22/4c/224ca143237aaf1cfd8cd1a111d39a04_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/22/4c/224ca143237aaf1cfd8cd1a111d39a04_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/22/4c/224ca143237aaf1cfd8cd1a111d39a04_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/22/4c/224ca143237aaf1cfd8cd1a111d39a04.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "224ca143237aaf1cfd8cd1a111d39a04"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/43/af/43af907af31f4247748783ca6523dc9c_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/43/af/43af907af31f4247748783ca6523dc9c_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/43/af/43af907af31f4247748783ca6523dc9c_medium/bb-dakota-abriana-jacket.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/43/af/43af907af31f4247748783ca6523dc9c/bb-dakota-abriana-jacket.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/43/af/43af907af31f4247748783ca6523dc9c_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/43/af/43af907af31f4247748783ca6523dc9c_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/43/af/43af907af31f4247748783ca6523dc9c_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/43/af/43af907af31f4247748783ca6523dc9c.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "43af907af31f4247748783ca6523dc9c"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/56/2b/562bb379bcac0226eaacb0777bf08927_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/56/2b/562bb379bcac0226eaacb0777bf08927_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/56/2b/562bb379bcac0226eaacb0777bf08927_medium/bb-dakota-abriana-jacket.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/56/2b/562bb379bcac0226eaacb0777bf08927/bb-dakota-abriana-jacket.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/56/2b/562bb379bcac0226eaacb0777bf08927_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/56/2b/562bb379bcac0226eaacb0777bf08927_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/56/2b/562bb379bcac0226eaacb0777bf08927_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/56/2b/562bb379bcac0226eaacb0777bf08927.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "562bb379bcac0226eaacb0777bf08927"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/6b/0d/6b0ddd966be956d833d72e572d7f74c7_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/6b/0d/6b0ddd966be956d833d72e572d7f74c7_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/6b/0d/6b0ddd966be956d833d72e572d7f74c7_medium/bb-dakota-abriana-jacket.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/6b/0d/6b0ddd966be956d833d72e572d7f74c7/bb-dakota-abriana-jacket.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/6b/0d/6b0ddd966be956d833d72e572d7f74c7_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/6b/0d/6b0ddd966be956d833d72e572d7f74c7_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/6b/0d/6b0ddd966be956d833d72e572d7f74c7_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/6b/0d/6b0ddd966be956d833d72e572d7f74c7.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "6b0ddd966be956d833d72e572d7f74c7"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c_medium/bb-dakota-abriana-jacket.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c/bb-dakota-abriana-jacket.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/f5/20/f520eb5bcb193e441fb52a6cf30a3b7c.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "f520eb5bcb193e441fb52a6cf30a3b7c"
+        }
+      ],
+      "discount": 0,
+      "colors": [
+        {
+          "name": "Ivory",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_medium/bb-dakota-abriana-jacket.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe/bb-dakota-abriana-jacket.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/f6/70/f670c2c224ba6f9b02e44b82660d1ebe.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "f670c2c224ba6f9b02e44b82660d1ebe"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/6d/48/6d48e808bbb72757a6a84fd5b9842e16.jpg",
+          "canonicalColors": [
+            {
+              "id": "15",
+              "name": "White"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "XS",
+          "canonicalSize": {
+            "id": "81",
+            "name": "XS (2)"
+          }
+        },
+        {
+          "name": "S",
+          "canonicalSize": {
+            "id": "83",
+            "name": "S (4-6)"
+          }
+        },
+        {
+          "name": "M",
+          "canonicalSize": {
+            "id": "85",
+            "name": "M (8-10)"
+          }
+        },
+        {
+          "name": "L",
+          "canonicalSize": {
+            "id": "87",
+            "name": "L (12-14)"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "jackets",
+          "name": "Jackets",
+          "shortName": "Jackets",
+          "fullName": "Women's Jackets",
+          "localizedId": "jackets"
+        }
+      ],
+      "extractDate": "2017-01-15",
+      "lastModified": "2017-11-11",
+      "badges": [],
+      "seeMoreLabel": "BB Dakota Jackets",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686428041,
+      "name": "Wildfox Carlyle Sweater",
+      "brandedName": "Wildfox Couture Carlyle Sweater",
+      "unbrandedName": "Carlyle Sweater",
+      "currency": "USD",
+      "price": 180.0,
+      "priceLabel": "$180",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Pale Indigo"
+          },
+          "size": {
+            "name": "XS"
+          }
+        },
+        {
+          "color": {
+            "name": "Pale Indigo"
+          },
+          "size": {
+            "name": "L"
+          }
+        },
+        {
+          "color": {
+            "name": "Pale Indigo"
+          },
+          "size": {
+            "name": "M"
+          }
+        },
+        {
+          "color": {
+            "name": "Pale Indigo"
+          },
+          "size": {
+            "name": "S"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "15503",
+        "name": "Wildfox Couture"
+      },
+      "locale": "en_US",
+      "description": "Exclusive to Shopbop. <ul> <li>This loose knit Wildfox sweater is trimmed with frilly, flounced ruffles. Loose threads at the hem and cuffs give the piece a well-worn effect. Long raglan sleeves.</li> <li>Fabric: Loose knit.</li> <li>100% cotton.</li> <li>Hand wash.</li> <li>Imported, China.</li> <li>Measurements</li> <li>Length: 18in / 46cm, from shoulder</li> <li>Measurements from size XS Style # WILDF42219</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686428041&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/16/59/1659250fefee20ef512adbe595a052e2_medium/wildfox-couture-carlyle-sweater.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/16/59/1659250fefee20ef512adbe595a052e2/wildfox-couture-carlyle-sweater.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/16/59/1659250fefee20ef512adbe595a052e2_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/16/59/1659250fefee20ef512adbe595a052e2.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "1659250fefee20ef512adbe595a052e2"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/04/99/04999e968fce23c116fd76aebdcf3658_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/04/99/04999e968fce23c116fd76aebdcf3658_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/04/99/04999e968fce23c116fd76aebdcf3658_medium/wildfox-couture-carlyle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/04/99/04999e968fce23c116fd76aebdcf3658/wildfox-couture-carlyle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/04/99/04999e968fce23c116fd76aebdcf3658_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/04/99/04999e968fce23c116fd76aebdcf3658_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/04/99/04999e968fce23c116fd76aebdcf3658_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/04/99/04999e968fce23c116fd76aebdcf3658.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "04999e968fce23c116fd76aebdcf3658"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/35/ce/35ce97bbaf4e0534cff463d223252f7c_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/35/ce/35ce97bbaf4e0534cff463d223252f7c_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/35/ce/35ce97bbaf4e0534cff463d223252f7c_medium/wildfox-couture-carlyle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/35/ce/35ce97bbaf4e0534cff463d223252f7c/wildfox-couture-carlyle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/35/ce/35ce97bbaf4e0534cff463d223252f7c_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/35/ce/35ce97bbaf4e0534cff463d223252f7c_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/35/ce/35ce97bbaf4e0534cff463d223252f7c_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/35/ce/35ce97bbaf4e0534cff463d223252f7c.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "35ce97bbaf4e0534cff463d223252f7c"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1_medium/wildfox-couture-carlyle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1/wildfox-couture-carlyle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/4a/6c/4a6cd2ac3f2ea9601d2d23fb4c5790e1.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "4a6cd2ac3f2ea9601d2d23fb4c5790e1"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83_medium/wildfox-couture-carlyle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83/wildfox-couture-carlyle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/75/db/75db741c40a4a5f7d6adb6e7f03f5d83.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "75db741c40a4a5f7d6adb6e7f03f5d83"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df_medium/wildfox-couture-carlyle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df/wildfox-couture-carlyle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/9c/ec/9cec1711d14cd4a202c76b0d23a2f8df.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "9cec1711d14cd4a202c76b0d23a2f8df"
+        }
+      ],
+      "discount": 0,
+      "colors": [
+        {
+          "name": "Pale Indigo",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/16/59/1659250fefee20ef512adbe595a052e2_medium/wildfox-couture-carlyle-sweater.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/16/59/1659250fefee20ef512adbe595a052e2/wildfox-couture-carlyle-sweater.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/16/59/1659250fefee20ef512adbe595a052e2_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/16/59/1659250fefee20ef512adbe595a052e2_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/16/59/1659250fefee20ef512adbe595a052e2.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "1659250fefee20ef512adbe595a052e2"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/92/4c/924c6f5a58fe2e4fc812385a0f2282f5.jpg",
+          "canonicalColors": [
+            {
+              "id": "10",
+              "name": "Blue"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "XS",
+          "canonicalSize": {
+            "id": "81",
+            "name": "XS (2)"
+          }
+        },
+        {
+          "name": "S",
+          "canonicalSize": {
+            "id": "83",
+            "name": "S (4-6)"
+          }
+        },
+        {
+          "name": "M",
+          "canonicalSize": {
+            "id": "85",
+            "name": "M (8-10)"
+          }
+        },
+        {
+          "name": "L",
+          "canonicalSize": {
+            "id": "87",
+            "name": "L (12-14)"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "sweaters",
+          "name": "Sweaters",
+          "shortName": "Sweaters",
+          "fullName": "Women's Sweaters",
+          "localizedId": "sweaters"
+        }
+      ],
+      "extractDate": "2017-01-15",
+      "lastModified": "2017-11-11",
+      "badges": [],
+      "seeMoreLabel": "Wildfox Couture Sweaters",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686435888,
+      "name": "endless rose Ruffle Sweater",
+      "brandedName": "Endless Rose Ruffle Sweater",
+      "unbrandedName": "Ruffle Sweater",
+      "currency": "USD",
+      "price": 90.0,
+      "priceLabel": "$90",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Black"
+          },
+          "size": {
+            "name": "S"
+          }
+        },
+        {
+          "color": {
+            "name": "Black"
+          },
+          "size": {
+            "name": "L"
+          }
+        },
+        {
+          "color": {
+            "name": "Black"
+          },
+          "size": {
+            "name": "XS"
+          }
+        },
+        {
+          "color": {
+            "name": "Black"
+          },
+          "size": {
+            "name": "M"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "32201",
+        "name": "Endless Rose"
+      },
+      "locale": "en_US",
+      "description": "This cozy endless rose sweater is detailed with flounced ruffles curving over the front. Dropped shoulder seams. Long sleeves with flounced cuffs. <ul> <li>Fabric: Knit.</li> <li>70% nylon/25% acrylic/5% mohair.</li> <li>Hand wash.</li> <li>Imported, China.</li> <li>Measurements</li> <li>Length: 22.5in / 57cm, from shoulder</li> <li>Measurements from size S Style # ENGLI30236</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686435888&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_medium/endless-rose-ruffle-sweater.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9/endless-rose-ruffle-sweater.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "e9c9534844e5e6f83fccc69eaece64a9"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/21/30/21304d0a21f5f2545c3ef29054f85abc_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/21/30/21304d0a21f5f2545c3ef29054f85abc_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/21/30/21304d0a21f5f2545c3ef29054f85abc_medium/endless-rose-ruffle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/21/30/21304d0a21f5f2545c3ef29054f85abc/endless-rose-ruffle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/21/30/21304d0a21f5f2545c3ef29054f85abc_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/21/30/21304d0a21f5f2545c3ef29054f85abc_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/21/30/21304d0a21f5f2545c3ef29054f85abc_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/21/30/21304d0a21f5f2545c3ef29054f85abc.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "21304d0a21f5f2545c3ef29054f85abc"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/e1/6de1a7f106d9e922e3029db4606f6f33_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/e1/6de1a7f106d9e922e3029db4606f6f33_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/6d/e1/6de1a7f106d9e922e3029db4606f6f33_medium/endless-rose-ruffle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/6d/e1/6de1a7f106d9e922e3029db4606f6f33/endless-rose-ruffle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/6d/e1/6de1a7f106d9e922e3029db4606f6f33_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/e1/6de1a7f106d9e922e3029db4606f6f33_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/6d/e1/6de1a7f106d9e922e3029db4606f6f33_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/6d/e1/6de1a7f106d9e922e3029db4606f6f33.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "6de1a7f106d9e922e3029db4606f6f33"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/b9/38/b938ba898de91327f3278fd2bc350486_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/b9/38/b938ba898de91327f3278fd2bc350486_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/b9/38/b938ba898de91327f3278fd2bc350486_medium/endless-rose-ruffle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/b9/38/b938ba898de91327f3278fd2bc350486/endless-rose-ruffle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/b9/38/b938ba898de91327f3278fd2bc350486_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/b9/38/b938ba898de91327f3278fd2bc350486_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/b9/38/b938ba898de91327f3278fd2bc350486_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/b9/38/b938ba898de91327f3278fd2bc350486.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "b938ba898de91327f3278fd2bc350486"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f_medium/endless-rose-ruffle-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f/endless-rose-ruffle-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/ff/de/ffde106bee1a8a0fa22bb0ab18f61b0f.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "ffde106bee1a8a0fa22bb0ab18f61b0f"
+        }
+      ],
+      "discount": 0,
+      "colors": [
+        {
+          "name": "Black",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_medium/endless-rose-ruffle-sweater.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9/endless-rose-ruffle-sweater.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/e9/c9/e9c9534844e5e6f83fccc69eaece64a9.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "e9c9534844e5e6f83fccc69eaece64a9"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/48/ea/48eaee2e1be81f0670645b6140c18931.jpg",
+          "canonicalColors": [
+            {
+              "id": "16",
+              "name": "Black"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "XS",
+          "canonicalSize": {
+            "id": "81",
+            "name": "XS (2)"
+          }
+        },
+        {
+          "name": "S",
+          "canonicalSize": {
+            "id": "83",
+            "name": "S (4-6)"
+          }
+        },
+        {
+          "name": "M",
+          "canonicalSize": {
+            "id": "85",
+            "name": "M (8-10)"
+          }
+        },
+        {
+          "name": "L",
+          "canonicalSize": {
+            "id": "87",
+            "name": "L (12-14)"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "sweaters",
+          "name": "Sweaters",
+          "shortName": "Sweaters",
+          "fullName": "Women's Sweaters",
+          "localizedId": "sweaters"
+        }
+      ],
+      "extractDate": "2017-01-15",
+      "lastModified": "2017-11-11",
+      "badges": [],
+      "seeMoreLabel": "Endless Rose Sweaters",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686410084,
+      "name": "J.O.A. Cable Cold Shoulder Sweater",
+      "brandedName": "J.o.a. Cable Cold Shoulder Sweater",
+      "unbrandedName": "Cable Cold Shoulder Sweater",
+      "currency": "USD",
+      "price": 72.0,
+      "priceLabel": "$72",
+      "salePrice": 50.4,
+      "salePriceLabel": "$50.40",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Charcoal"
+          },
+          "size": {
+            "name": "L"
+          }
+        },
+        {
+          "color": {
+            "name": "Charcoal"
+          },
+          "size": {
+            "name": "S"
+          }
+        },
+        {
+          "color": {
+            "name": "Charcoal"
+          },
+          "size": {
+            "name": "M"
+          }
+        },
+        {
+          "color": {
+            "name": "Charcoal"
+          },
+          "size": {
+            "name": "XS"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "31658",
+        "name": "J.o.a."
+      },
+      "locale": "en_US",
+      "description": "Exclusive to Shopbop. <ul> <li>This texture-rich J.O.A. sweater has a slouchy silhouette and ribbed edges. Long sleeves with cutout shoulders.</li> <li>Fabric: Loose-knit chambray.</li> <li>100% polyester.</li> <li>Dry clean.</li> <li>Imported, China.</li> <li>Measurements</li> <li>Length: 25.25in / 64cm, from shoulder</li> <li>Measurements from size L Style # JOOOA30469</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686410084&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/41/b0/41b06cd98a60e9197809148210c01302_medium/j-o-a-cable-cold-shoulder-sweater.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/41/b0/41b06cd98a60e9197809148210c01302/j-o-a-cable-cold-shoulder-sweater.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/41/b0/41b06cd98a60e9197809148210c01302_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/41/b0/41b06cd98a60e9197809148210c01302.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "41b06cd98a60e9197809148210c01302"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/03/cd/03cdb011db9b648da725d15f69ad1a5a_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/03/cd/03cdb011db9b648da725d15f69ad1a5a_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/03/cd/03cdb011db9b648da725d15f69ad1a5a_medium/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/03/cd/03cdb011db9b648da725d15f69ad1a5a/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/03/cd/03cdb011db9b648da725d15f69ad1a5a_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/03/cd/03cdb011db9b648da725d15f69ad1a5a_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/03/cd/03cdb011db9b648da725d15f69ad1a5a_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/03/cd/03cdb011db9b648da725d15f69ad1a5a.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "03cdb011db9b648da725d15f69ad1a5a"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8_medium/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/4a/b9/4ab939b4d6f749dc26481c61992cc1d8.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "4ab939b4d6f749dc26481c61992cc1d8"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d_medium/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/5b/52/5b525f5a69fdc3b2a2afbd3f7431c85d.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "5b525f5a69fdc3b2a2afbd3f7431c85d"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/f3/81/f3819818ed29663769d96e641e2601d2_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/f3/81/f3819818ed29663769d96e641e2601d2_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/f3/81/f3819818ed29663769d96e641e2601d2_medium/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/f3/81/f3819818ed29663769d96e641e2601d2/j-o-a-cable-cold-shoulder-sweater.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/f3/81/f3819818ed29663769d96e641e2601d2_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/f3/81/f3819818ed29663769d96e641e2601d2_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/f3/81/f3819818ed29663769d96e641e2601d2_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/f3/81/f3819818ed29663769d96e641e2601d2.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "f3819818ed29663769d96e641e2601d2"
+        }
+      ],
+      "discount": 30,
+      "colors": [
+        {
+          "name": "Charcoal",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/41/b0/41b06cd98a60e9197809148210c01302_medium/j-o-a-cable-cold-shoulder-sweater.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/41/b0/41b06cd98a60e9197809148210c01302/j-o-a-cable-cold-shoulder-sweater.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/41/b0/41b06cd98a60e9197809148210c01302_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/41/b0/41b06cd98a60e9197809148210c01302_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/41/b0/41b06cd98a60e9197809148210c01302.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "41b06cd98a60e9197809148210c01302"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/df/ae/dfaef057b456c0e50665f20837e7a4cd.jpg",
+          "canonicalColors": [
+            {
+              "id": "14",
+              "name": "Gray"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "XS",
+          "canonicalSize": {
+            "id": "81",
+            "name": "XS (2)"
+          }
+        },
+        {
+          "name": "S",
+          "canonicalSize": {
+            "id": "83",
+            "name": "S (4-6)"
+          }
+        },
+        {
+          "name": "M",
+          "canonicalSize": {
+            "id": "85",
+            "name": "M (8-10)"
+          }
+        },
+        {
+          "name": "L",
+          "canonicalSize": {
+            "id": "87",
+            "name": "L (12-14)"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "sweaters",
+          "name": "Sweaters",
+          "shortName": "Sweaters",
+          "fullName": "Women's Sweaters",
+          "localizedId": "sweaters"
+        }
+      ],
+      "extractDate": "2017-10-25",
+      "lastModified": "2017-11-29",
+      "badges": [],
+      "seeMoreLabel": "J.o.a. Sweaters",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686423696,
+      "name": "Rebecca Minkoff Leo Velvet Clutch",
+      "brandedName": "Rebecca Minkoff Leo Velvet Clutch",
+      "unbrandedName": "Leo Velvet Clutch",
+      "currency": "USD",
+      "price": 95.0,
+      "priceLabel": "$95",
+      "salePrice": 47.5,
+      "salePriceLabel": "$47.50",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Dark Cherry"
+          },
+          "size": {
+            "name": "One Size"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "1890",
+        "name": "Rebecca Minkoff"
+      },
+      "locale": "en_US",
+      "description": "Exposed zipper trim brings industrial edge to this plush velvet Rebecca Minkoff clutch. The magnetic front flap lifts to reveal a lined interior with 6 card slots. <ul> <li>Fabric: Velvet.</li> <li>Weight: 9oz / 0.26kg.</li> <li>Imported, China.</li> <li>Measurements</li> <li>Height: 7.5in / 19cm</li> <li>Length: 10.75in / 27cm Style # RMINK46662</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686423696&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/01/4d/014d836a9ba3fd0c124e1833dec311e3_medium/rebecca-minkoff-leo-velvet-clutch.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/01/4d/014d836a9ba3fd0c124e1833dec311e3/rebecca-minkoff-leo-velvet-clutch.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/01/4d/014d836a9ba3fd0c124e1833dec311e3_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/01/4d/014d836a9ba3fd0c124e1833dec311e3.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "014d836a9ba3fd0c124e1833dec311e3"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b_medium/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/1e/4a/1e4a4e9d1f35b02587b22d0c040a9e8b.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "1e4a4e9d1f35b02587b22d0c040a9e8b"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/93/0a/930a959e4a58c15fd8272765faac3242_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/93/0a/930a959e4a58c15fd8272765faac3242_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/93/0a/930a959e4a58c15fd8272765faac3242_medium/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/93/0a/930a959e4a58c15fd8272765faac3242/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/93/0a/930a959e4a58c15fd8272765faac3242_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/93/0a/930a959e4a58c15fd8272765faac3242_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/93/0a/930a959e4a58c15fd8272765faac3242_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/93/0a/930a959e4a58c15fd8272765faac3242.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "930a959e4a58c15fd8272765faac3242"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/cc/12/cc126570d8b6b7568b0e0719f146a16c_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/cc/12/cc126570d8b6b7568b0e0719f146a16c_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/cc/12/cc126570d8b6b7568b0e0719f146a16c_medium/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/cc/12/cc126570d8b6b7568b0e0719f146a16c/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/cc/12/cc126570d8b6b7568b0e0719f146a16c_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/cc/12/cc126570d8b6b7568b0e0719f146a16c_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/cc/12/cc126570d8b6b7568b0e0719f146a16c_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/cc/12/cc126570d8b6b7568b0e0719f146a16c.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "cc126570d8b6b7568b0e0719f146a16c"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/f1/31/f131f300216b7d0db849ca37853e7c07_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/f1/31/f131f300216b7d0db849ca37853e7c07_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/f1/31/f131f300216b7d0db849ca37853e7c07_medium/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/f1/31/f131f300216b7d0db849ca37853e7c07/rebecca-minkoff-leo-velvet-clutch.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/f1/31/f131f300216b7d0db849ca37853e7c07_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/f1/31/f131f300216b7d0db849ca37853e7c07_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/f1/31/f131f300216b7d0db849ca37853e7c07_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/f1/31/f131f300216b7d0db849ca37853e7c07.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "f131f300216b7d0db849ca37853e7c07"
+        }
+      ],
+      "discount": 50,
+      "colors": [
+        {
+          "name": "Dark Cherry",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/01/4d/014d836a9ba3fd0c124e1833dec311e3_medium/rebecca-minkoff-leo-velvet-clutch.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/01/4d/014d836a9ba3fd0c124e1833dec311e3/rebecca-minkoff-leo-velvet-clutch.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/01/4d/014d836a9ba3fd0c124e1833dec311e3_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/01/4d/014d836a9ba3fd0c124e1833dec311e3_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/01/4d/014d836a9ba3fd0c124e1833dec311e3.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "014d836a9ba3fd0c124e1833dec311e3"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/09/0e/090ebe03d7f6835607d227ba4e19cd38.jpg",
+          "canonicalColors": [
+            {
+              "id": "8",
+              "name": "Purple"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "One Size"
+        }
+      ],
+      "categories": [
+        {
+          "id": "clutches",
+          "name": "Clutches",
+          "shortName": "Clutches",
+          "fullName": "Clutches",
+          "localizedId": "clutches"
+        }
+      ],
+      "extractDate": "2017-10-18",
+      "lastModified": "2017-11-29",
+      "badges": [],
+      "seeMoreLabel": "Rebecca Minkoff Clutches",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686428372,
+      "name": "KARA Mirrored Panel Pail Bag",
+      "brandedName": "Kara Mirrored Panel Pail Bag",
+      "unbrandedName": "Mirrored Panel Pail Bag",
+      "currency": "USD",
+      "price": 425.0,
+      "priceLabel": "$425",
+      "salePrice": 255.0,
+      "salePriceLabel": "$255",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Silver"
+          },
+          "size": {
+            "name": "One Size"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "20883",
+        "name": "Kara"
+      },
+      "locale": "en_US",
+      "description": "An eye-catching KARA bucket bag in metallic patent leather. Horizontal zip pocket in front. Lined, 1-pocket interior. Slim handle. Dust bag included. <ul> <li>Leather: Cowhide.</li> <li>Weight: 10oz / 0.28kg.</li> <li>Imported, China.</li> <li>Measurements</li> <li>Height: 8.75in / 22cm</li> <li>Length: 6.75in / 17cm</li> <li>Depth: 4.25in / 11cm</li> <li>Strap drop: 19.75in / 50cm Style # KARAA30167</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686428372&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/46/41/464101a621fec415d5b581e4a882bd3c_medium/kara-mirrored-panel-pail-bag.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/46/41/464101a621fec415d5b581e4a882bd3c/kara-mirrored-panel-pail-bag.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/46/41/464101a621fec415d5b581e4a882bd3c_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/46/41/464101a621fec415d5b581e4a882bd3c.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "464101a621fec415d5b581e4a882bd3c"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/01/e2/01e21c03ec14928804548d2a685085ad_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/01/e2/01e21c03ec14928804548d2a685085ad_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/01/e2/01e21c03ec14928804548d2a685085ad_medium/kara-mirrored-panel-pail-bag.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/01/e2/01e21c03ec14928804548d2a685085ad/kara-mirrored-panel-pail-bag.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/01/e2/01e21c03ec14928804548d2a685085ad_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/01/e2/01e21c03ec14928804548d2a685085ad_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/01/e2/01e21c03ec14928804548d2a685085ad_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/01/e2/01e21c03ec14928804548d2a685085ad.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "01e21c03ec14928804548d2a685085ad"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/0a/f2/0af200b7e4f46af753b6aeed0dea497c_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/0a/f2/0af200b7e4f46af753b6aeed0dea497c_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/0a/f2/0af200b7e4f46af753b6aeed0dea497c_medium/kara-mirrored-panel-pail-bag.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/0a/f2/0af200b7e4f46af753b6aeed0dea497c/kara-mirrored-panel-pail-bag.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/0a/f2/0af200b7e4f46af753b6aeed0dea497c_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/0a/f2/0af200b7e4f46af753b6aeed0dea497c_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/0a/f2/0af200b7e4f46af753b6aeed0dea497c_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/0a/f2/0af200b7e4f46af753b6aeed0dea497c.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "0af200b7e4f46af753b6aeed0dea497c"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7_medium/kara-mirrored-panel-pail-bag.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7/kara-mirrored-panel-pail-bag.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/7b/2c/7b2c5510a2e76a62694c3facc84c86f7.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "7b2c5510a2e76a62694c3facc84c86f7"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899_medium/kara-mirrored-panel-pail-bag.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899/kara-mirrored-panel-pail-bag.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/ad/2f/ad2f3734eaa4d6a01177aab6250c2899.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "ad2f3734eaa4d6a01177aab6250c2899"
+        }
+      ],
+      "discount": 40,
+      "colors": [
+        {
+          "name": "Silver",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/46/41/464101a621fec415d5b581e4a882bd3c_medium/kara-mirrored-panel-pail-bag.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/46/41/464101a621fec415d5b581e4a882bd3c/kara-mirrored-panel-pail-bag.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/46/41/464101a621fec415d5b581e4a882bd3c_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/46/41/464101a621fec415d5b581e4a882bd3c_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/46/41/464101a621fec415d5b581e4a882bd3c.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "464101a621fec415d5b581e4a882bd3c"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/5c/f1/5cf1d4c5d2c067107887f34e4dc0b6bd.jpg",
+          "canonicalColors": [
+            {
+              "id": "19",
+              "name": "Silver"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "One Size"
+        }
+      ],
+      "categories": [
+        {
+          "id": "shoulder-bags",
+          "name": "Shoulder Bags",
+          "shortName": "Shoulder",
+          "fullName": "Shoulder Bags",
+          "localizedId": "shoulder-bags"
+        }
+      ],
+      "extractDate": "2017-09-16",
+      "lastModified": "2017-11-29",
+      "badges": [],
+      "seeMoreLabel": "Kara Shoulder Bags",
+      "preOwned": false,
+      "rental": false
+    },
+    {
+      "id": 686413160,
+      "name": "Sam Edelman Rochester Flats",
+      "brandedName": "Sam Edelman Rochester Flats",
+      "unbrandedName": "Rochester Flats",
+      "currency": "USD",
+      "price": 120.0,
+      "priceLabel": "$120",
+      "salePrice": 84.0,
+      "salePriceLabel": "$84",
+      "inStock": true,
+      "stock": [
+        {
+          "color": {
+            "name": "Black"
+          },
+          "size": {
+            "name": "8.5"
+          }
+        }
+      ],
+      "retailer": {
+        "id": "21",
+        "name": "shopbop.com",
+        "score": 24442
+      },
+      "brand": {
+        "id": "504",
+        "name": "Sam Edelman"
+      },
+      "locale": "en_US",
+      "description": "A knotted bow accents the pointed toe on these suede Sam Edelman flats. Lightly padded insole. Synthetic sole. <ul> <li>Leather: Kidskin.</li> <li>Imported, China.</li> </ul>",
+      "clickUrl": "https://api.shopstyle.com/action/apiVisitRetailer?id=686413160&pid=uid4100-40207790-50",
+      "image": {
+        "sizes": {
+          "Small": {
+            "sizeName": "Small",
+            "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_small.jpg",
+            "width": 32,
+            "height": 40,
+            "actualWidth": 32,
+            "actualHeight": 40
+          },
+          "XLarge": {
+            "sizeName": "XLarge",
+            "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_xlarge.jpg",
+            "width": 328,
+            "height": 410,
+            "actualWidth": 328,
+            "actualHeight": 410
+          },
+          "Medium": {
+            "sizeName": "Medium",
+            "url": "https://img.shopstyle-cdn.com/sim/79/a9/79a9fbf1bee48707a1da62666317ae5f_medium/sam-edelman-rochester-flats.jpg",
+            "width": 112,
+            "height": 140,
+            "actualWidth": 112,
+            "actualHeight": 140
+          },
+          "Large": {
+            "sizeName": "Large",
+            "url": "https://img.shopstyle-cdn.com/sim/79/a9/79a9fbf1bee48707a1da62666317ae5f/sam-edelman-rochester-flats.jpg",
+            "width": 164,
+            "height": 205,
+            "actualWidth": 164,
+            "actualHeight": 205
+          },
+          "IPhoneSmall": {
+            "sizeName": "IPhoneSmall",
+            "url": "https://img.shopstyle-cdn.com/mim/79/a9/79a9fbf1bee48707a1da62666317ae5f_small.jpg",
+            "width": 100,
+            "height": 125,
+            "actualWidth": 100,
+            "actualHeight": 125
+          },
+          "Best": {
+            "sizeName": "Best",
+            "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_best.jpg",
+            "width": 720,
+            "height": 900,
+            "actualWidth": 720,
+            "actualHeight": 900
+          },
+          "Original": {
+            "sizeName": "Original",
+            "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_best.jpg"
+          },
+          "IPhone": {
+            "sizeName": "IPhone",
+            "url": "https://img.shopstyle-cdn.com/mim/79/a9/79a9fbf1bee48707a1da62666317ae5f.jpg",
+            "width": 288,
+            "height": 360,
+            "actualWidth": 288,
+            "actualHeight": 360
+          }
+        },
+        "id": "79a9fbf1bee48707a1da62666317ae5f"
+      },
+      "alternateImages": [
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/70/7e/707e97ae14f432b4e792b9de6f5711a3_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/70/7e/707e97ae14f432b4e792b9de6f5711a3_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/70/7e/707e97ae14f432b4e792b9de6f5711a3_medium/sam-edelman-rochester-flats.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/70/7e/707e97ae14f432b4e792b9de6f5711a3/sam-edelman-rochester-flats.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/70/7e/707e97ae14f432b4e792b9de6f5711a3_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/70/7e/707e97ae14f432b4e792b9de6f5711a3_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/70/7e/707e97ae14f432b4e792b9de6f5711a3_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/70/7e/707e97ae14f432b4e792b9de6f5711a3.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "707e97ae14f432b4e792b9de6f5711a3"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/b2/a5/b2a57a118ea2d39e40a2142cda903318_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/b2/a5/b2a57a118ea2d39e40a2142cda903318_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/b2/a5/b2a57a118ea2d39e40a2142cda903318_medium/sam-edelman-rochester-flats.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/b2/a5/b2a57a118ea2d39e40a2142cda903318/sam-edelman-rochester-flats.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/b2/a5/b2a57a118ea2d39e40a2142cda903318_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/b2/a5/b2a57a118ea2d39e40a2142cda903318_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/b2/a5/b2a57a118ea2d39e40a2142cda903318_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/b2/a5/b2a57a118ea2d39e40a2142cda903318.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "b2a57a118ea2d39e40a2142cda903318"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb_medium/sam-edelman-rochester-flats.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb/sam-edelman-rochester-flats.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/d1/0c/d10cd88b1a58f3433a104ce29a563fdb.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "d10cd88b1a58f3433a104ce29a563fdb"
+        },
+        {
+          "sizes": {
+            "Small": {
+              "sizeName": "Small",
+              "url": "https://img.shopstyle-cdn.com/pim/ea/e4/eae4335435bc46c8719cfe4841afdbe1_small.jpg",
+              "width": 32,
+              "height": 40,
+              "actualWidth": 32,
+              "actualHeight": 40
+            },
+            "XLarge": {
+              "sizeName": "XLarge",
+              "url": "https://img.shopstyle-cdn.com/pim/ea/e4/eae4335435bc46c8719cfe4841afdbe1_xlarge.jpg",
+              "width": 328,
+              "height": 410,
+              "actualWidth": 328,
+              "actualHeight": 410
+            },
+            "Medium": {
+              "sizeName": "Medium",
+              "url": "https://img.shopstyle-cdn.com/sim/ea/e4/eae4335435bc46c8719cfe4841afdbe1_medium/sam-edelman-rochester-flats.jpg",
+              "width": 112,
+              "height": 140,
+              "actualWidth": 112,
+              "actualHeight": 140
+            },
+            "Large": {
+              "sizeName": "Large",
+              "url": "https://img.shopstyle-cdn.com/sim/ea/e4/eae4335435bc46c8719cfe4841afdbe1/sam-edelman-rochester-flats.jpg",
+              "width": 164,
+              "height": 205,
+              "actualWidth": 164,
+              "actualHeight": 205
+            },
+            "IPhoneSmall": {
+              "sizeName": "IPhoneSmall",
+              "url": "https://img.shopstyle-cdn.com/mim/ea/e4/eae4335435bc46c8719cfe4841afdbe1_small.jpg",
+              "width": 100,
+              "height": 125,
+              "actualWidth": 100,
+              "actualHeight": 125
+            },
+            "Best": {
+              "sizeName": "Best",
+              "url": "https://img.shopstyle-cdn.com/pim/ea/e4/eae4335435bc46c8719cfe4841afdbe1_best.jpg",
+              "width": 720,
+              "height": 900,
+              "actualWidth": 720,
+              "actualHeight": 900
+            },
+            "Original": {
+              "sizeName": "Original",
+              "url": "https://img.shopstyle-cdn.com/pim/ea/e4/eae4335435bc46c8719cfe4841afdbe1_best.jpg"
+            },
+            "IPhone": {
+              "sizeName": "IPhone",
+              "url": "https://img.shopstyle-cdn.com/mim/ea/e4/eae4335435bc46c8719cfe4841afdbe1.jpg",
+              "width": 288,
+              "height": 360,
+              "actualWidth": 288,
+              "actualHeight": 360
+            }
+          },
+          "id": "eae4335435bc46c8719cfe4841afdbe1"
+        }
+      ],
+      "discount": 30,
+      "colors": [
+        {
+          "name": "Black",
+          "image": {
+            "sizes": {
+              "Small": {
+                "sizeName": "Small",
+                "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_small.jpg",
+                "width": 32,
+                "height": 40,
+                "actualWidth": 32,
+                "actualHeight": 40
+              },
+              "XLarge": {
+                "sizeName": "XLarge",
+                "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_xlarge.jpg",
+                "width": 328,
+                "height": 410,
+                "actualWidth": 328,
+                "actualHeight": 410
+              },
+              "Medium": {
+                "sizeName": "Medium",
+                "url": "https://img.shopstyle-cdn.com/sim/79/a9/79a9fbf1bee48707a1da62666317ae5f_medium/sam-edelman-rochester-flats.jpg",
+                "width": 112,
+                "height": 140,
+                "actualWidth": 112,
+                "actualHeight": 140
+              },
+              "Large": {
+                "sizeName": "Large",
+                "url": "https://img.shopstyle-cdn.com/sim/79/a9/79a9fbf1bee48707a1da62666317ae5f/sam-edelman-rochester-flats.jpg",
+                "width": 164,
+                "height": 205,
+                "actualWidth": 164,
+                "actualHeight": 205
+              },
+              "IPhoneSmall": {
+                "sizeName": "IPhoneSmall",
+                "url": "https://img.shopstyle-cdn.com/mim/79/a9/79a9fbf1bee48707a1da62666317ae5f_small.jpg",
+                "width": 100,
+                "height": 125,
+                "actualWidth": 100,
+                "actualHeight": 125
+              },
+              "Best": {
+                "sizeName": "Best",
+                "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_best.jpg",
+                "width": 720,
+                "height": 900,
+                "actualWidth": 720,
+                "actualHeight": 900
+              },
+              "Original": {
+                "sizeName": "Original",
+                "url": "https://img.shopstyle-cdn.com/pim/79/a9/79a9fbf1bee48707a1da62666317ae5f_best.jpg"
+              },
+              "IPhone": {
+                "sizeName": "IPhone",
+                "url": "https://img.shopstyle-cdn.com/mim/79/a9/79a9fbf1bee48707a1da62666317ae5f.jpg",
+                "width": 288,
+                "height": 360,
+                "actualWidth": 288,
+                "actualHeight": 360
+              }
+            },
+            "id": "79a9fbf1bee48707a1da62666317ae5f"
+          },
+          "swatchUrl": "https://img.shopstyle-cdn.com/pim/3a/fc/3afcffeefab6dbdaec7c987d7ace7f09.jpg",
+          "canonicalColors": [
+            {
+              "id": "16",
+              "name": "Black"
+            }
+          ]
+        }
+      ],
+      "sizes": [
+        {
+          "name": "8.5",
+          "canonicalSize": {
+            "id": "24",
+            "name": "8.5"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "flats",
+          "name": "Flats",
+          "shortName": "Flats",
+          "fullName": "Women's flats",
+          "localizedId": "flats"
+        }
+      ],
+      "extractDate": "2017-10-30",
+      "lastModified": "2017-11-30",
+      "badges": [],
+      "seeMoreLabel": "Sam Edelman Flats",
+      "preOwned": false,
+      "rental": false
+    }
+  ]
+}
