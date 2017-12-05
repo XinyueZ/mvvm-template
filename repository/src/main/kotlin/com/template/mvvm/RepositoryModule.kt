@@ -3,6 +3,7 @@ package com.template.mvvm
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
+import android.text.TextUtils
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
@@ -23,8 +24,7 @@ class RepositoryModule(application: Application) {
         Retrofit.Builder()
                 .client(
                         OkHttpClient.Builder()
-                                .addNetworkInterceptor(StethoInterceptor())
-                                .addInterceptor(CurlLoggerInterceptor("#!#!"))
+                                .addDebugInterceptors()
                                 .addInterceptor(NetworkConnectionInterceptor(application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)).build()
                 )
                 .addConverterFactory(
@@ -35,12 +35,22 @@ class RepositoryModule(application: Application) {
                 )
     }
 
+    private fun OkHttpClient.Builder.addDebugInterceptors(): OkHttpClient.Builder {
+        if (BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
+            addNetworkInterceptor(StethoInterceptor())
+            addInterceptor(CurlLoggerInterceptor("#!#!"))
+        }
+        return this
+    }
+
     init {
         onCreate(application)
     }
 
     private fun onCreate(application: Application) {
-        Stetho.initializeWithDefaults(application)
+        if (BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
+            Stetho.initializeWithDefaults(application)
+        }
         DB.INSTANCE = provideDatabase(application)
         ProductsApi.service = provideProductsApiService(application, retrofitBuilder)
         LicensesApi.service = provideLicensesApiService(application, retrofitBuilder)
