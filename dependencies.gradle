@@ -150,10 +150,6 @@ ext {
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: shadowsMultidex]],
             [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
             [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.powermock', name: 'powermock-module-junit4', version: powerMockVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.powermock', name: 'powermock-module-junit4-rule', version: powerMockVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.powermock', name: 'powermock-api-mockito', version: powerMockVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.powermock', name: 'powermock-classloading-xstream', version: powerMockVersion]],
             [configuration: "testImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
             [configuration: "testImplementation", dependency: [group: "junit", name: "junit", version: junit],
              options      : {
@@ -171,10 +167,6 @@ ext {
             [configuration: "androidTestImplementation", dependency: [group: "android.arch.persistence.room", name: "testing", version: roomTest]],
             [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
             [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.powermock', name: 'powermock-module-junit4', version: powerMockVersion]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.powermock', name: 'powermock-module-junit4-rule', version: powerMockVersion]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.powermock', name: 'powermock-api-mockito', version: powerMockVersion]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.powermock', name: 'powermock-classloading-xstream', version: powerMockVersion]],
             [configuration: "androidTestImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
             [configuration: "androidTestImplementation", dependency: [group: "junit", name: "junit", version: junit],
              options      : {
