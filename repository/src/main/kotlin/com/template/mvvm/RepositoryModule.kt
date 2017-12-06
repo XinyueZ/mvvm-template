@@ -1,6 +1,5 @@
 package com.template.mvvm
 
-import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.text.TextUtils
@@ -19,13 +18,17 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RepositoryModule(application: Application) {
+class RepositoryModule(context: Context) {
+    private var activeDebugTool = false
+
+    public fun shouldUseDebugTool() = BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")
+
     private val retrofitBuilder: Retrofit.Builder by lazy {
         Retrofit.Builder()
                 .client(
                         OkHttpClient.Builder()
                                 .addDebugInterceptors()
-                                .addInterceptor(NetworkConnectionInterceptor(application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)).build()
+                                .addInterceptor(NetworkConnectionInterceptor(context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)).build()
                 )
                 .addConverterFactory(
                         GsonConverterFactory.create(
@@ -36,23 +39,26 @@ class RepositoryModule(application: Application) {
     }
 
     private fun OkHttpClient.Builder.addDebugInterceptors(): OkHttpClient.Builder {
-        if (BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
+        if (shouldUseDebugTool()) {
             addNetworkInterceptor(StethoInterceptor())
             addInterceptor(CurlLoggerInterceptor("#!#!"))
+            activeDebugTool = true
         }
         return this
     }
 
     init {
-        onCreate(application)
+        onCreate(context)
     }
 
-    private fun onCreate(application: Application) {
-        if (BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
-            Stetho.initializeWithDefaults(application)
+    private fun onCreate(context: Context) {
+        if (shouldUseDebugTool()) {
+            Stetho.initializeWithDefaults(context)
+            activeDebugTool = true
         }
-        DB.INSTANCE = provideDatabase(application)
-        ProductsApi.service = provideProductsApiService(application, retrofitBuilder)
-        LicensesApi.service = provideLicensesApiService(application, retrofitBuilder)
+        DB.INSTANCE = provideDatabase(context)
+        ProductsApi.service = provideProductsApiService(context, retrofitBuilder)
+        LicensesApi.service = provideLicensesApiService(context, retrofitBuilder)
     }
+
 }
