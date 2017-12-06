@@ -13,7 +13,7 @@ import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
 import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.channels.ProducerJob
+import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.produce
 import java.io.InputStreamReader
 
@@ -29,7 +29,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
 
     private val gson = Gson()
 
-    override suspend fun getAllLibraries(job: Job, localOnly: Boolean): ProducerJob<List<Library>> {
+    override suspend fun getAllLibraries(job: Job, localOnly: Boolean): ReceiveChannel<List<Library>> {
         DB.INSTANCE.licensesLibrariesDao()
                 .getLibraryListCount().takeIf { it.isNotEmpty() }?.let {
             return when (it[0].total == 0) {
