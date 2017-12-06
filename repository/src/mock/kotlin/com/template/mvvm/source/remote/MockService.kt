@@ -12,9 +12,15 @@ internal class MockProductsApi(context: Context, private val delegate: BehaviorD
     private val ALL_PRODUCTS by lazy { context.assets.read("feeds/products/all.json") }
     private val MEN_PRODUCTS by lazy { context.assets.read("feeds/products/men.json") }
     private val WOMEN_PRODUCTS by lazy { context.assets.read("feeds/products/women.json") }
+    private val EMPTY by lazy { context.assets.read("feeds/empty.json") }
 
     override fun getArticles(offset: Int): Call<ProductsData> {
-        return delegate.returningResponse(Gson().fromJson(ALL_PRODUCTS, ProductsData::class.java))
+        val feeds = if (offset > 0) EMPTY else ALL_PRODUCTS
+        println("##############################################################")
+        println("getArticles:")
+        println("$feeds")
+        println("##############################################################")
+        return delegate.returningResponse(Gson().fromJson(feeds, ProductsData::class.java))
                 .getArticles(offset)
     }
 
@@ -24,8 +30,12 @@ internal class MockProductsApi(context: Context, private val delegate: BehaviorD
             "women" -> WOMEN_PRODUCTS
             else -> ALL_PRODUCTS
         }
+        println("##############################################################")
+        println("filterArticles:")
+        println("$feeds")
+        println("##############################################################")
         return delegate.returningResponse(Gson().fromJson(feeds, ProductsData::class.java))
-                .getArticles(offset)
+                .filterArticles(offset, keyword)
     }
 }
 
@@ -33,6 +43,11 @@ internal class MockLicensesApi(context: Context, private val delegate: BehaviorD
     private val ALL_LICENSES by lazy { context.assets.read("feeds/licenses/licenses-list.json") }
 
     override fun getLibraries(): Call<LicensesData> {
+        val feeds = ALL_LICENSES
+        println("##############################################################")
+        println("getLibraries:")
+        println("$feeds")
+        println("##############################################################")
         return delegate.returningResponse(Gson().fromJson(ALL_LICENSES, LicensesData::class.java))
                 .getLibraries()
     }

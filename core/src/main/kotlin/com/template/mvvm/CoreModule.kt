@@ -40,7 +40,7 @@ abstract class CoreModule : MultiDexApplication(), LifecycleObserver {
         LL.d("process on_stop")
 
         ViewModelFactory.destroyInstance()
-        Injection.destroyInstance()
+        RepositoryInjection.destroyInstance()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

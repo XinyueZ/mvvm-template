@@ -13,15 +13,15 @@ import com.template.mvvm.source.local.ProductsLocal
 import com.template.mvvm.source.remote.LicensesRemote
 import com.template.mvvm.source.remote.ProductsRemote
 
-class Injection private constructor(application: Application) {
+class RepositoryInjection private constructor() {
     companion object {
 
         @SuppressLint("StaticFieldLeak")
-        @Volatile private var INSTANCE: Injection? = null
+        @Volatile private var INSTANCE: RepositoryInjection? = null
 
-        fun getInstance(application: Application) =
-                INSTANCE ?: synchronized(Injection::class.java) {
-                    INSTANCE ?: Injection(application)
+        fun getInstance() =
+                INSTANCE ?: synchronized(RepositoryInjection::class.java) {
+                    INSTANCE ?: RepositoryInjection()
                             .also { INSTANCE = it }
                 }
 
