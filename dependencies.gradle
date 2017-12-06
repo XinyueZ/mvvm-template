@@ -124,6 +124,7 @@ ext {
             //KOTLIN
             [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-stdlib", version: kotlin]],
             [configuration: "kapt", dependency: [group: "com.android.databinding", name: "compiler", version: gradle]],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: kotlin]],
             [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: kotlinCoroutines]],
             [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-android", version: kotlinCoroutines]],
 
