@@ -8,8 +8,8 @@ apply from: '../android.gradle'
 
 dependencies {
     //STANDALONE
-    compileOnly project(':core')
-    testCompileOnly project(':core')
+    implementation project(':core')
+    testImplementation project(':core')
     rootProject.baseDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
