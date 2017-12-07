@@ -20,4 +20,5 @@ cache:
     - $HOME/.gradle/wrapper/
 script: 
   - git checkout dev
-  - chmod 777 ./gradlew
+  - chmod 777 gradlew
+  - ./gradlew
