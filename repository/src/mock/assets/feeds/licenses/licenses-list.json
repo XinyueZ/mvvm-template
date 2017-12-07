@@ -31,31 +31,6 @@
           "name": "com.squareup.retrofit2",
           "owner": "Square, Inc.",
           "copyright": "2013"
-        },
-        {
-          "name": "com.squareup.retrofit:converter-gson",
-          "owner": "Square, Inc.",
-          "copyright": "2013"
-        },
-        {
-          "name": "okhttp",
-          "owner": "Square, Inc.",
-          "copyright": "2016"
-        },
-        {
-          "name": "material-design-guideline",
-          "owner": "TheKhaeng",
-          "copyright": "2017"
-        },
-        {
-          "name": "Curl-Logger-interceptor",
-          "owner": "Grapes 'n' Berries",
-          "copyright": "2016"
-        },
-        {
-          "name": "binding-collection-adapter",
-          "owner": "Evan Tatarka",
-          "copyright": "2015"
         }
       ]
     }

@@ -1,44 +1,40 @@
 package com.template.mvvm.source
 
 import com.template.mvvm.RepositoryInjection
+import com.template.mvvm.RepositoryModule
 import com.template.mvvm.RepositoryTestRule
 import com.template.mvvm.context
-import com.template.mvvm.contract.LicensesDataSource
-import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.getValueOf
-import org.hamcrest.CoreMatchers
-import org.hamcrest.MatcherAssert.assertThat
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.launch
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class TestRepository {
+class TestRepositoryMock {
     @Rule
     fun test() = RepositoryTestRule()
 
-    @Test
-    fun testSingleton() {
-        val ins_1 = RepositoryInjection.getInstance()
-        val ins_2 = RepositoryInjection.getInstance()
-        assertThat(ins_1, CoreMatchers.`equalTo`(ins_2))
+    private val testJob = Job()
+
+    @Before
+    fun setUp() {
+        RepositoryModule(context())
     }
 
     @Test
-    fun testRepositoryReady() {
+    fun testGetAllLibraries() {
         RepositoryInjection.getInstance().provideRepository(context()).run {
-            val productsSource: ProductsDataSource? = getValueOf("productsRepository")
-            val licenseSource: LicensesDataSource? = getValueOf("licensesRepository")
-
-            assertThat(productsSource, CoreMatchers.`is`(CoreMatchers.notNullValue()))
-            assertThat(licenseSource, CoreMatchers.`is`(CoreMatchers.notNullValue()))
-        }
-    }
-
-    @Test
-    fun testGetLicenses() {
-        RepositoryInjection.getInstance().provideRepository(context()).run {
+            launch(testJob) {
+                getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
+                    MatcherAssert.assertThat(listOfLibs.isNotEmpty(), `is`(true))
+                    MatcherAssert.assertThat(listOfLibs.size == 5, `is`(true))
+                }
+            }
         }
     }
 }
