@@ -26,6 +26,7 @@ class TestRepositoryModuleMock {
     fun testMockShouldWithoutDebugTool() {
         RepositoryModule(context()).run {
             val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
+            println("Is mock(${BuildConfig.FLAVOR}), then wouldn't use debug-tool.")
             assertThat(activeDebugTool, `is`(false))
         }
     }
