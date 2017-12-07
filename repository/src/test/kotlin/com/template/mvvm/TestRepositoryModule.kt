@@ -6,6 +6,7 @@ import com.template.mvvm.source.remote.ProductsApi
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,20 +17,17 @@ class TestRepositoryModule {
     @Rule
     fun test() = RepositoryTestRule()
 
+    @After
+    fun tearDown() {
+        DB.INSTANCE.close()
+    }
+
     @Test
     fun testInitOfModule() {
         RepositoryModule(context()).run {
             assertThat(DB.INSTANCE, `is`(notNullValue()))
             assertThat(ProductsApi.service, `is`(notNullValue()))
             assertThat(LicensesApi.service, `is`(notNullValue()))
-        }
-    }
-
-    @Test
-    fun testMockShouldWithoutDebugTool() {
-        RepositoryModule(context()).run {
-            val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
-            assertThat(activeDebugTool, `is`(false))
         }
     }
 }
