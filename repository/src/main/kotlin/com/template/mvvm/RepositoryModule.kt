@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RepositoryModule(context: Context) {
     private var activeDebugTool = false
 
-    fun shouldUseDebugTool() = BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")
+    private fun shouldUseDebugTool() = BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")
 
     private val retrofitBuilder: Retrofit.Builder by lazy {
         Retrofit.Builder()

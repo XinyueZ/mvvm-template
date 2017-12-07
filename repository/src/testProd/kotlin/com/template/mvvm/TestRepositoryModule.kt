@@ -1,10 +1,6 @@
 package com.template.mvvm
 import android.text.TextUtils
-import com.template.mvvm.source.local.DB
-import com.template.mvvm.source.remote.LicensesApi
-import com.template.mvvm.source.remote.ProductsApi
 import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -22,7 +18,6 @@ class TestRepositoryModule {
             val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
             if (BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
                 assertThat(activeDebugTool, `is`(true))
-                assertThat(shouldUseDebugTool(), `is`(true))
             }
         }
     }
@@ -33,7 +28,6 @@ class TestRepositoryModule {
             val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
             if (!BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
                 assertThat(activeDebugTool, `is`(false))
-                assertThat(shouldUseDebugTool(), `is`(false))
             }
         }
     }

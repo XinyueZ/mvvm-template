@@ -30,7 +30,6 @@ class TestRepositoryModule {
         RepositoryModule(context()).run {
             val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
             assertThat(activeDebugTool, `is`(false))
-            assertThat(shouldUseDebugTool(), `is`(false))
         }
     }
 }
