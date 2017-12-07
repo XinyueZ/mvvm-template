@@ -1,5 +1,7 @@
 # MVVM Template
 
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=master)](https://travis-ci.org/XinyueZ/mvvm-template)
+
 This repository provides templates which would be based on MVVM for Android application development.
 
 The code-base will be from very begin to complicate use-cases. The purpose of the template is to ease starting Android application development with MVVM. Because of MVVM the templates use Android [databinding](https://developer.android.com/topic/libraries/data-binding/index.html) which can help us to write declarative layouts and minimize the glue code necessary to bind your application logic and layouts. 
