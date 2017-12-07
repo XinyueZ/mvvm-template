@@ -6,14 +6,13 @@ android:
     - platform-tools
     - build-tools-27.0.2
     - android-27
-    - extra-android-support
     - extra-android-m2repository
     - extra-google-m2repository
-    - extra
+    - extra-google-android-support
 jdk:
     - oraclejdk8
 script:
-    -  ./gradlew :repository:testMockDebugUnitTest :repository:testProdDebugUnitTest :repository:testProdReleaseUnitTest
+    - ./gradlew :repository:testMockDebugUnitTest :repository:testProdDebugUnitTest :repository:testProdReleaseUnitTest
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
@@ -27,4 +26,4 @@ licenses:
     - 'google-gdk-license-.+'
 branches:
     only:
-    - dev
+      - dev
