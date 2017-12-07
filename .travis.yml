@@ -5,13 +5,20 @@ android:
     - platform-tools
     - build-tools-27.0.1
     - android-27
+    - extra-android-support
     - extra-android-m2repository
     - extra-google-m2repository
 jdk:
   - oraclejdk8
 script:
-  - ./gradlew build test
-
+  - ./gradlew test
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 branches:
   only:
   - dev
