@@ -11,19 +11,20 @@ android:
     - extra-google-m2repository
     - extra
 jdk:
-  - oraclejdk8
+    - oraclejdk8
 script:
-  -  ./gradlew :repository:testMockDebugUnitTest :repository:testProdDebugUnitTest :repository:testProdReleaseUnitTest
+    -  ./gradlew :repository:testMockDebugUnitTest :repository:testProdDebugUnitTest :repository:testProdReleaseUnitTest
 before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
   directories:
-  - $HOME/.m2
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
+    - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 licenses:
-  - 'android-sdk-license-.+'
-  - 'google-gdk-license-.+'
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 branches:
     only:
     - dev
