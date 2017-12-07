@@ -1,6 +1,5 @@
 # MVVM Template
 
-[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
 
 This repository provides templates which would be based on MVVM for Android application development.
 
@@ -31,6 +30,8 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 # History
 
 - [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
+
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
 
 > Removed [Rx-Android](https://github.com/ReactiveX/RxAndroid), or RxJava
 
