@@ -18,3 +18,7 @@ cache:
     - $HOME/.m2
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+branches:
+  only:
+  - dev
+  - feature/v0.4
