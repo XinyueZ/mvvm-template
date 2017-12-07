@@ -10,14 +10,8 @@ android:
 jdk:
   - oraclejdk8
 script:
-  - ./gradlew  test
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-cache:
-  directories:
-    - $HOME/.m2
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - ./gradlew build test
+
 branches:
   only:
   - dev
