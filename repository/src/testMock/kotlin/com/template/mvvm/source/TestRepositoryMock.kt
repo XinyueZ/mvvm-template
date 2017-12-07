@@ -9,7 +9,6 @@ import com.template.mvvm.feeds.products.ProductsData
 import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.DB
 import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -41,12 +40,10 @@ class TestRepositoryMock {
     fun testGetAllLibraries() {
         runBlocking(testJob) {
             RepositoryInjection.getInstance().provideRepository(context()).run {
-                launch(testJob) {
-                    getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
-                        assertThat(listOfLibs.isNotEmpty(), `is`(true))
-                        assertThat(listOfLibs.size, `is`(5))
-                    }
-                }.also { it.join() }
+                getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
+                    assertThat(listOfLibs.isNotEmpty(), `is`(true))
+                    assertThat(listOfLibs.size, `is`(5))
+                }
             }
         }
     }
@@ -55,28 +52,26 @@ class TestRepositoryMock {
     fun testGetAllProducts() {
         runBlocking(testJob) {
             RepositoryInjection.getInstance().provideRepository(context()).run {
-                launch(testJob) {
-                    getAllProducts(testJob, 0).receiveOrNull()?.let { result ->
-                        assertThat(result.isNotEmpty(), `is`(true))
-                        assertThat(result.size, `is`(10))
+                getAllProducts(testJob, 0).receiveOrNull()?.let { result ->
+                    assertThat(result.isNotEmpty(), `is`(true))
+                    assertThat(result.size, `is`(10))
 
-                        context().assets.read("feeds/products/all.json").run {
-                            Gson().fromJson(this, ProductsData::class.java)
-                        }.also { fromDataSource ->
-                            var failed = false
-                            result.forEach { rs ->
-                                val found = fromDataSource.products.find { ds ->
-                                    rs.pid == ds.pid
-                                }
-                                if (found == null) {
-                                    failed = true
-                                    return@forEach
-                                }
+                    context().assets.read("feeds/products/all.json").run {
+                        Gson().fromJson(this, ProductsData::class.java)
+                    }.also { fromDataSource ->
+                        var failed = false
+                        result.forEach { rs ->
+                            val found = fromDataSource.products.find { ds ->
+                                rs.pid == ds.pid
                             }
-                            assertThat(failed, `is`(false))
+                            if (found == null) {
+                                failed = true
+                                return@forEach
+                            }
                         }
+                        assertThat(failed, `is`(false))
                     }
-                }.also { it.join() }
+                }
             }
         }
     }
