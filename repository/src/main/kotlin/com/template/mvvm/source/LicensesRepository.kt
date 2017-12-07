@@ -1,12 +1,12 @@
 package com.template.mvvm.source
 
-import android.app.Application
+import android.content.Context
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.contract.select
 import com.template.mvvm.domain.licenses.Library
 import kotlinx.coroutines.experimental.Job
 
-class LicensesRepository(app: Application,
+class LicensesRepository(context: Context,
                          private val remote: LicensesDataSource,
                          private val local: LicensesDataSource,
                          private val cache: LicensesDataSource
@@ -22,5 +22,5 @@ class LicensesRepository(app: Application,
             localOnly
     )
 
-    override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = local.getLicense(app, job, library)
+    override suspend fun getLicense(context: Context, job: Job, library: Library, localOnly: Boolean) = local.getLicense(context, job, library)
 }

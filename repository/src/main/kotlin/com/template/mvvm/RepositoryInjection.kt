@@ -1,7 +1,7 @@
 package com.template.mvvm
 
 import android.annotation.SuppressLint
-import android.app.Application
+import android.content.Context
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.source.LicensesRepository
 import com.template.mvvm.source.ProductsRepository
@@ -41,8 +41,8 @@ class RepositoryInjection private constructor() {
     @SuppressLint("StaticFieldLeak")
     @Volatile private var DS_INSTANCE: Repository? = null
 
-    fun provideRepository(application: Application) = DS_INSTANCE ?: synchronized(this) {
-        DS_INSTANCE ?: Repository(provideLicensesRepository(application), provideProductsRepository())
+    fun provideRepository(context: Context) = DS_INSTANCE ?: synchronized(this) {
+        DS_INSTANCE ?: Repository(provideLicensesRepository(context), provideProductsRepository())
                 .also { DS_INSTANCE = it }
     }
 
@@ -58,14 +58,14 @@ class RepositoryInjection private constructor() {
     private fun provideCacheProductsRepository() = ProductsCache()
 
     // Provides repository for licenses
-    private fun provideLicensesRepository(application: Application) = LicensesRepository(
-            application,
+    private fun provideLicensesRepository(context: Context) = LicensesRepository(
+            context,
             provideRemoteLicensesRepository(),
-            provideLocalLicensesRepository(application),
+            provideLocalLicensesRepository(context),
             provideCacheLicensesRepository()
     )
 
     private fun provideRemoteLicensesRepository(): LicensesDataSource = LicensesRemote()
-    private fun provideLocalLicensesRepository(application: Application) = LicensesLocal(application)
+    private fun provideLocalLicensesRepository(context: Context) = LicensesLocal(context)
     private fun provideCacheLicensesRepository() = LicensesCache()
 }

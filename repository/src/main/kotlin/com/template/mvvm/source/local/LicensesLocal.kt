@@ -1,6 +1,6 @@
 package com.template.mvvm.source.local
 
-import android.app.Application
+import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.util.ListUpdateCallback
 import android.text.TextUtils
@@ -17,7 +17,7 @@ import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.produce
 import java.io.InputStreamReader
 
-class LicensesLocal(private val app: Application) : LicensesDataSource {
+class LicensesLocal(private val context: Context) : LicensesDataSource {
 
     companion object {
         private val LICENCES_LIST_JSON = "licenses-list.json"
@@ -50,7 +50,7 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
     }
 
     private suspend fun loadLicensesFromAsset(job: Job) = produce(job) {
-        val licensesData = gson.fromJson(InputStreamReader(app.assets
+        val licensesData = gson.fromJson(InputStreamReader(this@LicensesLocal.context.assets
                 .open(LICENCES_LIST_JSON)), LicensesData::class.java)
         val v: List<Library> = mutableListOf<Library>().apply {
             licensesData.licenses.forEach({ licenseData ->
@@ -82,8 +82,8 @@ class LicensesLocal(private val app: Application) : LicensesDataSource {
         }
     }
 
-    override suspend fun getLicense(app: Application, job: Job, library: Library, localOnly: Boolean) = produce(job) {
-        val source = app.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
+    override suspend fun getLicense(context: Context, job: Job, library: Library, localOnly: Boolean) = produce(job) {
+        val source = context.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
         send(source.replace(YEAR, library.copyright ?: "")
                 .replace(COPYRIGHT_HOLDERS, library.owner ?: "")
         )
