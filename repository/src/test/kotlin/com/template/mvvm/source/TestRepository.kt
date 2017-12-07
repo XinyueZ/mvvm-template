@@ -15,6 +15,7 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.greaterThan
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -106,6 +107,20 @@ class TestRepository {
     }
 
     @Test
+    fun testImagesInsert() {
+        runBlocking(testJob) {
+            RepositoryInjection.getInstance().provideRepository(context()).run {
+                getAllProducts(testJob, 0).receiveOrNull()?.let { storedProducts ->
+                    if (storedProducts.isNotEmpty()) {
+                        val storedImages: Long = ((getImages(testJob).receiveOrNull()?.size) ?: 0).toLong()
+                        assertThat(storedImages, `greaterThan`(0L))
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
     fun testDeleteAllWithoutKeyword() {
         runBlocking(testJob) {
             with(RepositoryInjection.getInstance()) {
@@ -113,8 +128,8 @@ class TestRepository {
                     deleteAll(testJob)
 
                     with(provideLocalProductsRepository()) {
-                        val localData = getAllProducts(testJob, 0).receiveOrNull()?.size
-                        assertThat(localData, `equalTo`(0))
+                        val storedProducts = getAllProducts(testJob, 0).receiveOrNull()?.size
+                        assertThat(storedProducts, `equalTo`(0))
                     }
 
                     val storedImages = getImages(testJob).receiveOrNull()?.size
