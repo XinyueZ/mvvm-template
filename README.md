@@ -1,6 +1,6 @@
 # MVVM Template
 
-[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=master)](https://travis-ci.org/XinyueZ/mvvm-template)
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
 
 This repository provides templates which would be based on MVVM for Android application development.
 
