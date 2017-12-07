@@ -1,5 +1,6 @@
 package com.template.mvvm.contract
 
+import com.template.mvvm.domain.products.Image
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductDetail
 import kotlinx.coroutines.experimental.Job
@@ -14,4 +15,5 @@ interface ProductsDataSource : DataSource {
     suspend fun saveBrand(job: Job, source: List<Product>) = produce<Unit>(job) {}
     suspend fun deleteAll(job: Job) = produce<Unit>(job) {}
     suspend fun deleteAll(job: Job, keyword: String) = produce<Unit>(job) {}
+    suspend fun getImages(job: Job) = produce<List<Image>>(job) {}
 }

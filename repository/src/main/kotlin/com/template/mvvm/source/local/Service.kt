@@ -60,6 +60,9 @@ interface ProductDao {
     @Query("select * from images where pid=:pid")
     fun getImages(pid: Long): List<ImageEntity>
 
+    @Query("select * from images")
+    fun getImages(): List<ImageEntity>
+
     @Query("select * from products where genders=:keyword order by create_time asc limit 10 offset :offset")
     fun filterProductList(offset: Int, keyword: String?): List<ProductEntity>
 }

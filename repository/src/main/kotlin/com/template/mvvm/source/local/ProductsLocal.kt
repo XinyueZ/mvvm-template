@@ -2,6 +2,7 @@ package com.template.mvvm.source.local
 
 import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
+import com.template.mvvm.domain.products.Image
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductDetail
 import com.template.mvvm.source.local.entities.products.ImageEntity
@@ -38,6 +39,12 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
+    override suspend fun getImages(job: Job) = produce(job) {
+        DB.INSTANCE.productDao().run {
+            getImages().map { Image.from(it) }
+        }.also { send(it) }
+    }
+
     override suspend fun saveProducts(job: Job, source: List<Product>) = produce(job) {
         DB.INSTANCE.productDao().apply {
             savePictures(job, source)
@@ -65,7 +72,7 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun deleteAll(job: Job) = produce(job){
+    override suspend fun deleteAll(job: Job) = produce(job) {
         DB.INSTANCE.productDao().apply {
             deleteProducts()
             deleteImages()
@@ -74,7 +81,7 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun deleteAll(job: Job, keyword: String) = produce(job){
+    override suspend fun deleteAll(job: Job, keyword: String) = produce(job) {
         DB.INSTANCE.productDao().apply {
             deleteProducts(keyword)
             LL.w("deleted products and pictures(images<still in development>) from db with $keyword")

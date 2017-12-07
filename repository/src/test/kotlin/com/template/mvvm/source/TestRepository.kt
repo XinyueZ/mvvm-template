@@ -108,12 +108,18 @@ class TestRepository {
     @Test
     fun testDeleteAllWithoutKeyword() {
         runBlocking(testJob) {
-            RepositoryInjection.getInstance().provideRepository(context()).run {
-                deleteAll(testJob)
-                val localData = RepositoryInjection.getInstance().provideLocalProductsRepository()
-                        .getAllProducts(testJob, 0)
-                        .receiveOrNull()?.size
-                assertThat(localData, `equalTo`(0))
+            with(RepositoryInjection.getInstance()) {
+                with(provideRepository(context())) {
+                    deleteAll(testJob)
+
+                    with(provideLocalProductsRepository()) {
+                        val localData = getAllProducts(testJob, 0).receiveOrNull()?.size
+                        assertThat(localData, `equalTo`(0))
+                    }
+
+                    val storedImages = getImages(testJob).receiveOrNull()?.size
+                    assertThat(storedImages, `equalTo`(0))
+                }
             }
         }
     }

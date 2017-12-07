@@ -23,6 +23,8 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
 
     override suspend fun deleteAll(job: Job, keyword: String) = productsRepository.deleteAll(job, keyword)
 
+    override suspend fun getImages(job: Job) = productsRepository.getImages(job)
+
     // Other...
     override fun clear() {
         licensesRepository.clear()
