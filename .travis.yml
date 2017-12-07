@@ -9,6 +9,7 @@ android:
     - extra-android-support
     - extra-android-m2repository
     - extra-google-m2repository
+    - extra
 jdk:
   - oraclejdk8
 script:
@@ -17,9 +18,12 @@ before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
   directories:
-    - $HOME/.m2
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - $HOME/.m2
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+licenses:
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
 branches:
-  only:
-  - dev
+    only:
+    - dev
