@@ -10,10 +10,13 @@ import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.getValueOf
 import com.template.mvvm.source.ext.read
+import com.template.mvvm.source.local.DB
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -30,6 +33,11 @@ class TestRepository {
     @Before
     fun setUp() {
         RepositoryModule(context())
+    }
+
+    @After
+    fun tearDown() {
+        DB.INSTANCE.close()
     }
 
     @Test
@@ -53,31 +61,34 @@ class TestRepository {
 
     @Test
     fun testGetAllLibraries() {
-        RepositoryInjection.getInstance().provideRepository(context()).run {
-            launch(testJob) {
-                getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
-                    assertThat(listOfLibs.isNotEmpty(), `is`(true))
-                }
+        runBlocking(testJob) {
+            RepositoryInjection.getInstance().provideRepository(context()).run {
+                launch(testJob) {
+                    getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
+                        assertThat(listOfLibs.isNotEmpty(), `is`(true))
+                    }
+                }.also { it.join() }
             }
-
         }
     }
 
     @Test
     fun testGetLicenses() {
-        RepositoryInjection.getInstance().provideRepository(context()).run {
-            launch(testJob) {
-                getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
-                    listOfLibs.forEach { lib ->
-                        val expText = readLicenseText(lib)
-                        assertThat(expText, `is`(notNullValue()))
-                        assertThat(TextUtils.isEmpty(expText), `is`(false))
-                        getLicense(context(), testJob, lib).receiveOrNull()?.also { licenseText ->
-                            assertThat(TextUtils.isEmpty(licenseText), `is`(false))
-                            assertThat(licenseText, `equalTo`(expText))
+        runBlocking(testJob) {
+            RepositoryInjection.getInstance().provideRepository(context()).run {
+                launch(testJob) {
+                    getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
+                        listOfLibs.forEach { lib ->
+                            val expText = readLicenseText(lib)
+                            assertThat(expText, `is`(notNullValue()))
+                            assertThat(TextUtils.isEmpty(expText), `is`(false))
+                            getLicense(context(), testJob, lib).receiveOrNull()?.also { licenseText ->
+                                assertThat(TextUtils.isEmpty(licenseText), `is`(false))
+                                assertThat(licenseText, `equalTo`(expText))
+                            }
                         }
                     }
-                }
+                }.also { it.join() }
             }
         }
     }
@@ -87,4 +98,17 @@ class TestRepository {
                     .replace("<year>", lib.copyright ?: "")
                     .replace("<copyright holders>", lib.owner ?: "")
 
+    @Test
+    fun testGetAllProducts() {
+        runBlocking(testJob) {
+            RepositoryInjection.getInstance().provideRepository(context()).run {
+                launch(testJob) {
+                    getAllProducts(testJob, 0).receiveOrNull()?.let {
+                        assertThat(it.isNotEmpty(), `is`(true))
+                        assertThat(it.size, `is`(10))
+                    }
+                }.also { it.join() }
+            }
+        }
+    }
 }

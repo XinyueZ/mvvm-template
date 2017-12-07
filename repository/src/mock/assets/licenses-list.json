@@ -1,0 +1,38 @@
+{
+  "Licenses": [
+    {
+      "name": "AOSP",
+      "description": "The Android Open Source Project",
+      "libraries": [
+        {
+          "name": "Android Support-*",
+          "owner": "Google"
+        },
+        {
+          "name": "Android Play-Service-*",
+          "owner": "Google"
+        }
+      ]
+    },
+    {
+      "name": "Apache-LICENSE-2.0",
+      "description": "Apache License, Version 2.0",
+      "libraries": [
+        {
+          "name": "com.google.code.gson:gson",
+          "owner": "Google Inc.",
+          "copyright": "2008"
+        },
+        {
+          "name": "Glide",
+          "owner": "bumptech/glide"
+        },
+        {
+          "name": "com.squareup.retrofit2",
+          "owner": "Square, Inc.",
+          "copyright": "2013"
+        }
+      ]
+    }
+  ]
+}
