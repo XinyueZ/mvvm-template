@@ -1,5 +1,6 @@
 # MVVM Template
 
+
 This repository provides templates which would be based on MVVM for Android application development.
 
 The code-base will be from very begin to complicate use-cases. The purpose of the template is to ease starting Android application development with MVVM. Because of MVVM the templates use Android [databinding](https://developer.android.com/topic/libraries/data-binding/index.html) which can help us to write declarative layouts and minimize the glue code necessary to bind your application logic and layouts. 
@@ -29,6 +30,8 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 # History
 
 - [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
+
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
 
 > Removed [Rx-Android](https://github.com/ReactiveX/RxAndroid), or RxJava
 
