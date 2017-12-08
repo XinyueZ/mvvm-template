@@ -117,6 +117,33 @@ class TestRepositoryMock {
     }
 
     @Test
+    fun testGetProductDetailByProduct() {
+        runBlocking(testJob) {
+            with(RepositoryInjection.getInstance()) {
+                provideRepository(context()).run {
+                    getAllProducts(testJob, 0).receiveOrNull()
+                }.also { products ->
+                    var failed = false
+                    products?.forEach { oneProduct ->
+                        provideRepository(context()).run {
+                            getProductDetail(testJob, oneProduct.pid, true)
+                        }.also {
+                            val found = (it.receiveOrNull()?.run {
+                                pid == oneProduct.pid
+                            }) ?: false
+                            if (!found) {
+                                failed = true
+                                return@forEach
+                            }
+                        }
+                    }
+                    assertThat(failed, `is`(false))
+                }
+            }
+        }
+    }
+
+    @Test
     fun testImagesInsert() {
         runBlocking(testJob) {
             with(RepositoryInjection.getInstance()) {
