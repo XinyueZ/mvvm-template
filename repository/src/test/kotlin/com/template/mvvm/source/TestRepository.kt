@@ -28,11 +28,12 @@ class TestRepository {
     @Rule
     fun test() = RepositoryTestRule()
 
-    private val testJob = Job()
+    private lateinit var testJob: Job
 
     @Before
     fun setUp() {
         RepositoryModule(context())
+        testJob = Job()
     }
 
     @After
@@ -127,7 +128,8 @@ class TestRepository {
                 with(provideRepository(context())) {
                     deleteAll(testJob)
 
-                    with(provideLocalProductsRepository()) { // check local data storage
+                    with(provideLocalProductsRepository()) {
+                        // check local data storage
                         val storedProducts = getAllProducts(testJob, 0).receiveOrNull()?.size
                         assertThat(storedProducts, `equalTo`(0))
                     }

@@ -26,11 +26,12 @@ class TestRepositoryMock {
     @Rule
     fun test() = RepositoryTestRule()
 
-    private val testJob = Job()
+    private lateinit var testJob: Job
 
     @Before
     fun setUp() {
         RepositoryModule(context())
+        testJob = Job()
     }
 
     @After
