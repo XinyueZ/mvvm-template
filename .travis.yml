@@ -1,5 +1,4 @@
 language: android
-
 android:
   components:
     - tools
@@ -8,7 +7,6 @@ android:
     - android-27
     - extra-android-m2repository
     - extra-google-m2repository
-    - extra-google-android-support
 jdk:
     - oraclejdk8
 script:
@@ -20,11 +18,6 @@ cache:
     - $HOME/.m2
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-licenses:
-    - '.+'
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
 branches:
     only:
       - dev
