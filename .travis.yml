@@ -8,8 +8,7 @@ android:
     - add-on
     - extra
 licenses:
-    - 'android-sdk-license-2742d1c5'
-    - 'google-gdk-license-.+'
+    - 'android-sdk-license-.+'
 jdk:
     - oraclejdk8
 script:
