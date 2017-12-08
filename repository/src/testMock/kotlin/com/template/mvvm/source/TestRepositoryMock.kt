@@ -5,10 +5,12 @@ import com.template.mvvm.RepositoryInjection
 import com.template.mvvm.RepositoryModule
 import com.template.mvvm.RepositoryTestRule
 import com.template.mvvm.context
+import com.template.mvvm.domain.products.Product
 import com.template.mvvm.feeds.products.ProductsData
 import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.DB
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
@@ -39,7 +41,7 @@ class TestRepositoryMock {
     @Test
     fun testGetAllLibraries() {
         runBlocking(testJob) {
-            RepositoryInjection.getInstance().provideRepository(context()).run {
+            with(RepositoryInjection.getInstance().provideRepository(context())) {
                 getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
                     assertThat(listOfLibs.isNotEmpty(), `is`(true))
                     assertThat(listOfLibs.size, `is`(5))
@@ -51,27 +53,65 @@ class TestRepositoryMock {
     @Test
     fun testGetAllProducts() {
         runBlocking(testJob) {
-            RepositoryInjection.getInstance().provideRepository(context()).run {
-                getAllProducts(testJob, 0).receiveOrNull()?.let { result ->
-                    assertThat(result.isNotEmpty(), `is`(true))
-                    assertThat(result.size, `is`(10))
+            with(RepositoryInjection.getInstance().provideRepository(context())) {
+                testHelperGetProducts(
+                        getAllProducts(testJob, 0),
+                        "feeds/products/all.json"
+                )
+            }
+        }
+    }
 
-                    context().assets.read("feeds/products/all.json").run {
-                        Gson().fromJson(this, ProductsData::class.java)
-                    }.also { fromDataSource ->
-                        var failed = false
-                        result.forEach { rs ->
-                            val found = fromDataSource.products.find { ds ->
-                                rs.pid == ds.pid
-                            }
-                            if (found == null) {
-                                failed = true
-                                return@forEach
-                            }
-                        }
-                        assertThat(failed, `is`(false))
+    @Test
+    fun testGetMenProducts() {
+        runBlocking(testJob) {
+            with(RepositoryInjection.getInstance().provideRepository(context())) {
+                testHelperGetProducts(
+                        filterProducts(testJob, 0, true, "men"),
+                        "feeds/products/men.json"
+                )
+            }
+        }
+    }
+
+    @Test
+    fun testGetWomenProducts() {
+        runBlocking(testJob) {
+            with(RepositoryInjection.getInstance().provideRepository(context())) {
+                testHelperGetProducts(
+                        filterProducts(testJob, 0, true, "women"),
+                        "feeds/products/women.json"
+                )
+            }
+        }
+    }
+
+    /**
+     * Helper to make request and get response from mock-backend and read mock-feeds.
+     * Compare results of backend and mock-feeds.
+     *
+     * @param  receiveChannel The backend source.
+     * @param mockFeedsFileLocation The location of file that provides feeds.
+     */
+    private suspend fun testHelperGetProducts(receiveChannel: ReceiveChannel<List<Product>?>, mockFeedsFileLocation: String) {
+        receiveChannel.receiveOrNull()?.let { result ->
+            assertThat(result.isNotEmpty(), `is`(true))
+            assertThat(result.size, `is`(10))
+
+            context().assets.read(mockFeedsFileLocation).run {
+                Gson().fromJson(this, ProductsData::class.java)
+            }.also { fromDataSource ->
+                var failed = false
+                result.forEach { rs ->
+                    val found = fromDataSource.products.find { ds ->
+                        rs.pid == ds.pid
+                    }
+                    if (found == null) {
+                        failed = true
+                        return@forEach
                     }
                 }
+                assertThat(failed, `is`(false))
             }
         }
     }
