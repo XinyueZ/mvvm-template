@@ -1,11 +1,11 @@
 language: android
 android:
   components:
-    - platform-tools
     - tools
+    - platform-tools
     - build-tools-27.0.2
     - android-27
-    - extra-google-google_play_services
+    - extra-android-support
     - extra-google-m2repository
     - extra-android-m2repository
 jdk:
@@ -19,17 +19,3 @@ cache:
     - $HOME/.m2
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-branches:
-    only:
-      - dev
-install:
-  - echo y | android update sdk -u -a -t tools
-  - echo y | android update sdk -u -a -t platform-tools
-  - echo y | android update sdk -u -a -t build-tools-27.0.2
-  - echo y | android update sdk -u -a -t android-27
-  - echo y | android update sdk -u -a -t extra-google-m2repository
-  - echo y | android update sdk -u -a -t extra-android-m2repository
-licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
