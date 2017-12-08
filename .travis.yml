@@ -20,3 +20,5 @@ cache:
     - $HOME/.m2
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+before_install:
+      - yes | sdkmanager "platforms;android-27"
