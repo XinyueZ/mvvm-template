@@ -3,12 +3,12 @@ package com.template.mvvm.source.remote
 import com.template.mvvm.LL
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
-import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.produce
+import kotlin.coroutines.experimental.CoroutineContext
 
 class ProductsRemote : ProductsDataSource {
 
-    override suspend fun getAllProducts(job: Job, offset: Int, localOnly: Boolean) = produce(job) {
+    override suspend fun getAllProducts(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean) = produce(coroutineContext) {
         ProductsApi.service.getArticles(offset).execute().takeIf {
             it.isSuccessful
         }?.let {
@@ -21,7 +21,7 @@ class ProductsRemote : ProductsDataSource {
         } ?: kotlin.run { send(null) }
     }
 
-    override suspend fun filterProducts(job: Job, offset: Int, localOnly: Boolean, keyword: String) = produce(job) {
+    override suspend fun filterProducts(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean, keyword: String) = produce(coroutineContext) {
         ProductsApi.service.filterArticles(offset, keyword).execute().takeIf {
             it.isSuccessful
         }?.let {

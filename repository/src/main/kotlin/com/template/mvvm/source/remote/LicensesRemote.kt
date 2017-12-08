@@ -3,11 +3,11 @@ package com.template.mvvm.source.remote
 import com.template.mvvm.LL
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.domain.licenses.Library
-import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.produce
+import kotlin.coroutines.experimental.CoroutineContext
 
 class LicensesRemote : LicensesDataSource {
-    override suspend fun getAllLibraries(job: Job, localOnly: Boolean) = produce(job) {
+    override suspend fun getAllLibraries(coroutineContext: CoroutineContext, localOnly: Boolean) = produce(coroutineContext) {
         LicensesApi.service.getLibraries().execute().takeIf {
             it.isSuccessful
         }?.let {

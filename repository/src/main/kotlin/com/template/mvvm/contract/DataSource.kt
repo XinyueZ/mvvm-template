@@ -1,14 +1,14 @@
 package com.template.mvvm.contract
 
-import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.produce
+import kotlin.coroutines.experimental.CoroutineContext
 
 interface DataSource {
     fun clear() = Unit
 }
 
 suspend fun <T, E : DataSource> E.select(
-        job: Job, // Disposable control
+        coroutineContext: CoroutineContext, // Disposable control
         remote: suspend () -> T?, // Fetch remote-data
         saveAfterRemote: suspend (T) -> Unit?,  // Save data in DB after fetch remote-data
         local: suspend () -> T?, // Fetch data from DB after getting remote-data or some error while calling remotely i.e Null returned
@@ -16,7 +16,7 @@ suspend fun <T, E : DataSource> E.select(
         emptyT: suspend () -> T,// Last chance when local provides nothing
         localOnly: Boolean,
         restRemoteDataHandlers: (suspend (T) -> Unit) = {} // Rest tasks after getting remote data
-) = produce(job) {
+) = produce(coroutineContext) {
     val fetchFromLocal: suspend (suspend (T) -> Unit, suspend () -> Unit) -> Unit = { success, fallbackIfEmpty ->
         local()?.let {
             when (predicateAcceptLocalOnly(it)) {

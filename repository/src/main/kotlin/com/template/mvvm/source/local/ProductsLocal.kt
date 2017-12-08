@@ -8,12 +8,12 @@ import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductDetail
 import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
-import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.produce
+import kotlin.coroutines.experimental.CoroutineContext
 
 class ProductsLocal : ProductsDataSource {
 
-    override suspend fun getAllProducts(job: Job, offset: Int, localOnly: Boolean) = produce(job) {
+    override suspend fun getAllProducts(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
             LL.d("From $offset the products loaded from db")
             send(getProductList(offset).map {
@@ -22,7 +22,7 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun filterProducts(job: Job, offset: Int, localOnly: Boolean, keyword: String) = produce(job) {
+    override suspend fun filterProducts(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean, keyword: String) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
             LL.d("From $offset to be filtered $keyword products and loaded from db")
             send(filterProductList(offset, keyword).map {
@@ -31,7 +31,7 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun getProductDetail(job: Job, pid: Long, localOnly: Boolean) = produce(job) {
+    override suspend fun getProductDetail(coroutineContext: CoroutineContext, pid: Long, localOnly: Boolean) = produce(coroutineContext) {
         with(DB.INSTANCE.productDao()) {
             ProductDetail.from(
                     getProduct(pid).first(),
@@ -40,19 +40,19 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun getImages(job: Job, pid: Long) = produce(job) {
+    override suspend fun getImages(coroutineContext: CoroutineContext, pid: Long) = produce(coroutineContext) {
         DB.INSTANCE.productDao().run {
             takeIf { pid == INVALID_PID }?.let {
                 getImages().map { Image.from(it) }
             } ?: kotlin.run {
-                getImages(pid).map { Image.from(it) }
+                getImages().map { Image.from(it) }
             }
         }.also { send(it) }
     }
 
-    override suspend fun saveProducts(job: Job, source: List<Product>) = produce(job) {
+    override suspend fun saveProducts(coroutineContext: CoroutineContext, source: List<Product>) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
-            savePictures(job, source)
+            savePictures(coroutineContext, source)
             insertProducts(
                     source.map {
                         ProductEntity.from(it)
@@ -63,7 +63,7 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun savePictures(job: Job, source: List<Product>) = produce(job) {
+    override suspend fun savePictures(coroutineContext: CoroutineContext, source: List<Product>) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
             source.forEach {
                 insertImages(
@@ -77,7 +77,7 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun deleteAll(job: Job) = produce(job) {
+    override suspend fun deleteAll(coroutineContext: CoroutineContext) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
             deleteProducts()
             deleteImages()
@@ -86,7 +86,7 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun deleteAll(job: Job, keyword: String) = produce(job) {
+    override suspend fun deleteAll(coroutineContext: CoroutineContext, keyword: String) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
             deleteProducts(keyword)
             LL.w("deleted products and pictures(images<still in development>) from db with $keyword")

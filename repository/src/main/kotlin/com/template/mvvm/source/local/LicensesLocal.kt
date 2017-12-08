@@ -12,10 +12,10 @@ import com.template.mvvm.feeds.licenses.LicensesData
 import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.source.local.entities.licenses.LicenseEntity
-import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.produce
 import java.io.InputStreamReader
+import kotlin.coroutines.experimental.CoroutineContext
 
 class LicensesLocal(private val context: Context) : LicensesDataSource {
 
@@ -29,27 +29,27 @@ class LicensesLocal(private val context: Context) : LicensesDataSource {
 
     private val gson = Gson()
 
-    override suspend fun getAllLibraries(job: Job, localOnly: Boolean): ReceiveChannel<List<Library>> {
+    override suspend fun getAllLibraries(coroutineContext: CoroutineContext, localOnly: Boolean): ReceiveChannel<List<Library>> {
         DB.INSTANCE.licensesLibrariesDao()
                 .getLibraryListCount().takeIf { it.isNotEmpty() }?.let {
             return when (it[0].total == 0) {
-                true -> loadLicensesFromAsset(job)
-                else -> loadLicensesFromDB(job)
+                true -> loadLicensesFromAsset(coroutineContext)
+                else -> loadLicensesFromDB(coroutineContext)
             }
         } ?: kotlin.run {
-            return produce(job) {
+            return produce(coroutineContext) {
                 send(emptyList())
             }
         }
     }
 
-    private suspend fun loadLicensesFromDB(job: Job) = produce(job) {
+    private suspend fun loadLicensesFromDB(coroutineContext: CoroutineContext) = produce(coroutineContext) {
         LL.d("licenses loaded from db")
         send(DB.INSTANCE.licensesLibrariesDao()
                 .getLibraryList().map { it.toLibrary() })
     }
 
-    private suspend fun loadLicensesFromAsset(job: Job) = produce(job) {
+    private suspend fun loadLicensesFromAsset(coroutineContext: CoroutineContext) = produce(coroutineContext) {
         val licensesData = gson.fromJson(InputStreamReader(this@LicensesLocal.context.assets
                 .open(LICENCES_LIST_JSON)), LicensesData::class.java)
         val v: List<Library> = mutableListOf<Library>().apply {
@@ -63,7 +63,7 @@ class LicensesLocal(private val context: Context) : LicensesDataSource {
         send(v)
     }
 
-    override suspend fun saveLibraries(job: Job, source: List<Library>) = produce(job) {
+    override suspend fun saveLibraries(coroutineContext: CoroutineContext, source: List<Library>) = produce(coroutineContext) {
         DB.INSTANCE.licensesLibrariesDao().apply {
             mutableListOf<Library>().apply {
                 getLibraryList().forEach { this.add(it.toLibrary()) }
@@ -82,7 +82,7 @@ class LicensesLocal(private val context: Context) : LicensesDataSource {
         }
     }
 
-    override suspend fun getLicense(context: Context, job: Job, library: Library, localOnly: Boolean) = produce(job) {
+    override suspend fun getLicense(context: Context, coroutineContext: CoroutineContext, library: Library, localOnly: Boolean) = produce(coroutineContext) {
         val source = context.assets.read(String.format(LICENCE_BOX_LOCATION_FORMAT, LICENCES_BOX, library.license.name))
         send(source.replace(YEAR, library.copyright ?: "")
                 .replace(COPYRIGHT_HOLDERS, library.owner ?: "")
