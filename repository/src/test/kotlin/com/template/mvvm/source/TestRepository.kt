@@ -127,7 +127,7 @@ class TestRepository {
                 with(provideRepository(context())) {
                     deleteAll(testJob)
 
-                    with(provideLocalProductsRepository()) {
+                    with(provideLocalProductsRepository()) { // check local data storage
                         val storedProducts = getAllProducts(testJob, 0).receiveOrNull()?.size
                         assertThat(storedProducts, `equalTo`(0))
                     }

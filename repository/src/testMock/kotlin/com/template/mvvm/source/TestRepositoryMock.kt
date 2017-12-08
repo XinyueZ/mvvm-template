@@ -10,7 +10,7 @@ import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.DB
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.runBlocking
-import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
@@ -69,6 +69,41 @@ class TestRepositoryMock {
                                 return@forEach
                             }
                         }
+                        assertThat(failed, `is`(false))
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testImagesInsert() {
+        runBlocking(testJob) {
+            with(RepositoryInjection.getInstance()) {
+                provideRepository(context()).run {
+                    getAllProducts(testJob, 0).receiveOrNull()
+                }.also { products ->
+                    products?.forEach { oneProduct ->
+                        val imagesOfItem = provideRepository(context()).run {
+                            getImages(testJob, oneProduct.pid).receiveOrNull()
+                        }
+                        assertThat(imagesOfItem, `is`(notNullValue()))
+                        assertThat(imagesOfItem?.isNotEmpty(), `equalTo`(true))
+
+                        var failed = false
+
+                        oneProduct.pictures.forEach { _, image ->
+                            val found = imagesOfItem?.find { expImage ->
+                                expImage.pid == image.pid
+                                        && expImage.size == image.size
+                                        && expImage.uri.toString() == image.uri.toString()
+                            }
+                            if (found == null) {
+                                failed = true
+                                return@forEach
+                            }
+                        }
+
                         assertThat(failed, `is`(false))
                     }
                 }

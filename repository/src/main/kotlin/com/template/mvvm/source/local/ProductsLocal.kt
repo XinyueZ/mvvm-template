@@ -1,6 +1,7 @@
 package com.template.mvvm.source.local
 
 import com.template.mvvm.LL
+import com.template.mvvm.contract.INVALID_PID
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Image
 import com.template.mvvm.domain.products.Product
@@ -39,9 +40,13 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun getImages(job: Job) = produce(job) {
+    override suspend fun getImages(job: Job, pid: Long) = produce(job) {
         DB.INSTANCE.productDao().run {
-            getImages().map { Image.from(it) }
+            takeIf { pid == INVALID_PID }?.let {
+                getImages().map { Image.from(it) }
+            } ?: kotlin.run {
+                getImages(pid).map { Image.from(it) }
+            }
         }.also { send(it) }
     }
 

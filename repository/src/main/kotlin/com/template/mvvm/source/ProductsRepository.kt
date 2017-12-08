@@ -45,5 +45,5 @@ class ProductsRepository(private val remote: ProductsDataSource,
 
     override suspend fun deleteAll(job: Job, keyword: String) = local.deleteAll(job, keyword)
 
-    override suspend fun getImages(job: Job) = local.getImages(job)
+    override suspend fun getImages(job: Job, pid: Long) = local.getImages(job, pid)
 }
