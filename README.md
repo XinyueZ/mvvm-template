@@ -50,6 +50,9 @@ See:
 
 - [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4)
 
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=feature/v0.4)](https://travis-ci.org/XinyueZ/mvvm-template)
+
+
 #### Great update for modularization. App based on ```app```, ```core```, ```base```, ```repository``` and ```dependencies.gradle``` would define all libraries used in the application.
 
 |  Module | Description  |
