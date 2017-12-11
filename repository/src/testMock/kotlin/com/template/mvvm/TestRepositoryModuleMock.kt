@@ -1,16 +1,14 @@
 package com.template.mvvm
 
 import com.template.mvvm.source.local.DB
-import com.template.mvvm.source.remote.LicensesApi
-import com.template.mvvm.source.remote.ProductsApi
 import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.junit.After
+import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 class TestRepositoryModuleMock {
@@ -25,7 +23,7 @@ class TestRepositoryModuleMock {
     @Test
     fun testMockShouldWithoutDebugTool() {
         RepositoryModule(context()).run {
-            val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
+            val activeDebugTool: Boolean? = ReflectionHelpers.getField(this,"activeDebugTool")
             println("Is mock(${BuildConfig.FLAVOR}), then wouldn't use debug-tool.")
             assertThat(activeDebugTool, `is`(false))
         }

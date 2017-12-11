@@ -7,8 +7,6 @@ import org.robolectric.shadows.ShadowApplication
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.util.Scheduler
 import java.util.concurrent.TimeUnit
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 fun context(): Context = ShadowApplication.getInstance().applicationContext
 
@@ -34,14 +32,5 @@ fun advanceToNextPostedRunnable(handler: Handler) {
     advanceToNextPostedRunnable(Shadows.shadowOf(handler.looper).scheduler)
 }
 
-inline fun <reified T : Any, reified E : Any> E.getValueOf(propertyName: String): T? =
-        E::class.memberProperties
-                .find { it.name == propertyName }
-                .apply {
-                    when {
-                        this == null -> throw IllegalArgumentException("Property <$propertyName> not found for class <${T::class}>!")
-                        else -> isAccessible = true
-                    }
-                }
-                ?.invoke(this) as T?
+
 

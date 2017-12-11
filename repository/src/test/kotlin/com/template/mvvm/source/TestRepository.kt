@@ -8,7 +8,6 @@ import com.template.mvvm.context
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.licenses.Library
-import com.template.mvvm.getValueOf
 import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.DB
 import kotlinx.coroutines.experimental.Job
@@ -22,6 +21,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 class TestRepository {
@@ -52,8 +52,8 @@ class TestRepository {
     @Test
     fun testRepositoryReady() {
         RepositoryInjection.getInstance().provideRepository(context()).run {
-            val productsSource: ProductsDataSource? = getValueOf("productsRepository")
-            val licenseSource: LicensesDataSource? = getValueOf("licensesRepository")
+            val productsSource: ProductsDataSource? = ReflectionHelpers.getField(this, "productsRepository")
+            val licenseSource: LicensesDataSource? = ReflectionHelpers.getField(this, "licensesRepository")
 
             assertThat(productsSource, `is`(notNullValue()))
             assertThat(licenseSource, `is`(notNullValue()))
