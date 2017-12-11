@@ -14,8 +14,8 @@ dependencies {
     //STANDALONE
     implementation project(':core')
     implementation project(':base')
-    testImplementation project(':core')
-    testImplementation project(':base')
+    testApi project(':core')
+    testApi project(':base')
     rootProject.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
