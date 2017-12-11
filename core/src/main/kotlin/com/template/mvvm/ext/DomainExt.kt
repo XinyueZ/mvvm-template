@@ -6,8 +6,8 @@ import android.arch.lifecycle.Transformations
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.domain.products.ProductList
-import com.template.mvvm.models.ProductItemViewModel
-import com.template.mvvm.models.SoftwareLicenseItemViewModel
+import com.template.mvvm.models.product.ProductItemViewModel
+import com.template.mvvm.models.license.SoftwareLicenseItemViewModel
 
 fun ProductList.setUpTransform(lifecycleOwner: LifecycleOwner, body: (t: List<ProductItemViewModel>?) -> Unit) {
     Transformations.switchMap(this) {

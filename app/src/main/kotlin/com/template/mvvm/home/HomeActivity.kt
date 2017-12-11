@@ -14,10 +14,10 @@ import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setup
-import com.template.mvvm.models.AllGendersViewModel
-import com.template.mvvm.models.HomeViewModel
-import com.template.mvvm.models.MenViewModel
-import com.template.mvvm.models.WomenViewModel
+import com.template.mvvm.models.product.AllGendersViewModel
+import com.template.mvvm.models.home.HomeViewModel
+import com.template.mvvm.models.product.MenViewModel
+import com.template.mvvm.models.product.WomenViewModel
 
 class HomeActivity : AppBaseActivity<HomeViewModel>() {
 

@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.SplashViewModel"/>
+            type="com.template.mvvm.models.splash.SplashViewModel"/>
     </data>
 
 

@@ -1,7 +1,8 @@
-package com.template.mvvm.models
+package com.template.mvvm.models.error
 
 import android.arch.lifecycle.MutableLiveData
 import android.support.annotation.StringRes
+import com.template.mvvm.models.AbstractViewModel
 
 class ErrorViewModel : MutableLiveData<Error>() {
     val t: Throwable? = value?.t

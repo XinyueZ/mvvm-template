@@ -12,8 +12,8 @@ import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.template.mvvm.ViewModelFactory
-import com.template.mvvm.models.Error
-import com.template.mvvm.models.ErrorViewModel
+import com.template.mvvm.models.error.Error
+import com.template.mvvm.models.error.ErrorViewModel
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.actor

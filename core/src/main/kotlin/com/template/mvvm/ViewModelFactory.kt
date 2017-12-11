@@ -4,18 +4,18 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.template.mvvm.models.AboutViewModel
-import com.template.mvvm.models.AllGendersViewModel
-import com.template.mvvm.models.HomeViewModel
-import com.template.mvvm.models.LicenseDetailViewModel
-import com.template.mvvm.models.MenViewModel
-import com.template.mvvm.models.ProductDetailViewModel
-import com.template.mvvm.models.ProductItemViewModel
-import com.template.mvvm.models.ProductsViewModel
-import com.template.mvvm.models.SoftwareLicenseItemViewModel
-import com.template.mvvm.models.SoftwareLicensesViewModel
-import com.template.mvvm.models.SplashViewModel
-import com.template.mvvm.models.WomenViewModel
+import com.template.mvvm.models.home.HomeViewModel
+import com.template.mvvm.models.about.AboutViewModel
+import com.template.mvvm.models.license.LicenseDetailViewModel
+import com.template.mvvm.models.license.SoftwareLicenseItemViewModel
+import com.template.mvvm.models.license.SoftwareLicensesViewModel
+import com.template.mvvm.models.product.AllGendersViewModel
+import com.template.mvvm.models.product.MenViewModel
+import com.template.mvvm.models.product.ProductDetailViewModel
+import com.template.mvvm.models.product.ProductItemViewModel
+import com.template.mvvm.models.product.ProductsViewModel
+import com.template.mvvm.models.product.WomenViewModel
+import com.template.mvvm.models.splash.SplashViewModel
 
 class ViewModelFactory private constructor(
         private val application: Application

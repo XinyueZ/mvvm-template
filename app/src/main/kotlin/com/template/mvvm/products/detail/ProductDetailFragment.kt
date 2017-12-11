@@ -8,7 +8,7 @@ import com.template.mvvm.AppBaseFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductDetailBinding
 import com.template.mvvm.ext.setupErrorSnackbar
-import com.template.mvvm.models.ProductDetailViewModel
+import com.template.mvvm.models.product.ProductDetailViewModel
 
 class ProductDetailFragment : AppBaseFragment<ProductDetailViewModel>() {
     companion object {

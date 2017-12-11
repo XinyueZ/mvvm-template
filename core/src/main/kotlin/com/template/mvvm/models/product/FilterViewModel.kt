@@ -1,4 +1,4 @@
-package com.template.mvvm.models
+package com.template.mvvm.models.product
 
 import com.template.mvvm.contract.ProductsDataSource
 

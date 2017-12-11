@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.SoftwareLicenseItemViewModel"/>
+            type="com.template.mvvm.models.license.SoftwareLicenseItemViewModel"/>
     </data>
 
 

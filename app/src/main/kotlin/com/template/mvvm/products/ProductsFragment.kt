@@ -10,7 +10,7 @@ import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentProductsBinding
 import com.template.mvvm.ext.setupErrorSnackbar
-import com.template.mvvm.models.ProductsViewModel
+import com.template.mvvm.models.product.ProductsViewModel
 import com.template.mvvm.products.detail.ProductDetailActivity
 
 class ProductsFragment : AppBaseFragment<ProductsViewModel>() {

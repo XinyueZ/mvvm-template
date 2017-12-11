@@ -1,4 +1,4 @@
-package com.template.mvvm.models
+package com.template.mvvm.models.product
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
@@ -14,6 +14,9 @@ import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.ProductDetail
+import com.template.mvvm.models.AbstractViewModel
+import com.template.mvvm.models.error.Error
+import com.template.mvvm.models.error.ErrorViewModel
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach

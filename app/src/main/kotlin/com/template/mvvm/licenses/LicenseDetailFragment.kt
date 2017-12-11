@@ -6,7 +6,7 @@ import android.view.View
 import com.template.mvvm.AppBaseDialogFragment
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentLicenseDetailBinding
-import com.template.mvvm.models.LicenseDetailViewModel
+import com.template.mvvm.models.license.LicenseDetailViewModel
 
 class LicenseDetailFragment : AppBaseDialogFragment<LicenseDetailViewModel>() {
     companion object {

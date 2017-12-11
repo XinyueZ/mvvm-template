@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.AboutViewModel"/>
+            type="com.template.mvvm.models.about.AboutViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

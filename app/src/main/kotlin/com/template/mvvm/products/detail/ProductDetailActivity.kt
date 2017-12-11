@@ -11,7 +11,7 @@ import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivityProductDetailBinding
 import com.template.mvvm.ext.setupErrorSnackbar
-import com.template.mvvm.models.ProductDetailViewModel
+import com.template.mvvm.models.product.ProductDetailViewModel
 
 class ProductDetailActivity : AppBaseActivity<ProductDetailViewModel>() {
     companion object {

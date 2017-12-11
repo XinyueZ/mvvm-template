@@ -1,4 +1,4 @@
-package com.template.mvvm.models
+package com.template.mvvm.models.license
 
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
@@ -17,6 +17,9 @@ import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.licenses.LibraryList
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setUpTransform
+import com.template.mvvm.models.AbstractViewModel
+import com.template.mvvm.models.error.Error
+import com.template.mvvm.models.error.ErrorViewModel
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach

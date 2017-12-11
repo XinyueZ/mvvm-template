@@ -1,9 +1,10 @@
-package com.template.mvvm.models
+package com.template.mvvm.models.home
 
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableInt
 import com.template.mvvm.R
+import com.template.mvvm.models.AbstractViewModel
 
 class HomeViewModel : AbstractViewModel() {
     val title = ObservableInt(R.string.home_title)

@@ -9,7 +9,7 @@ import com.template.mvvm.BR
 import com.template.mvvm.R
 import com.template.mvvm.databinding.FragmentSoftwareLicensesBinding
 import com.template.mvvm.ext.setupErrorSnackbar
-import com.template.mvvm.models.SoftwareLicensesViewModel
+import com.template.mvvm.models.license.SoftwareLicensesViewModel
 
 class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
     companion object {

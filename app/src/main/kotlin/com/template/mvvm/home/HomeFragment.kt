@@ -15,7 +15,7 @@ import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.FragmentHomeBinding
 import com.template.mvvm.ext.replaceFragmentToFragment
 import com.template.mvvm.licenses.SoftwareLicensesActivity
-import com.template.mvvm.models.HomeViewModel
+import com.template.mvvm.models.home.HomeViewModel
 import com.template.mvvm.products.ProductsActivity
 
 class HomeFragment : AppBaseFragment<HomeViewModel>() {

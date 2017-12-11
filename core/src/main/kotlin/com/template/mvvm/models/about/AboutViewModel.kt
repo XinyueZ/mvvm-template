@@ -1,8 +1,9 @@
-package com.template.mvvm.models
+package com.template.mvvm.models.about
 
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
 import com.template.mvvm.R
+import com.template.mvvm.models.AbstractViewModel
 
 class AboutViewModel : AbstractViewModel() {
     val title = ObservableInt(R.string.about_title)

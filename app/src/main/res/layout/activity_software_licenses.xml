@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.SoftwareLicensesViewModel"/>
+            type="com.template.mvvm.models.license.SoftwareLicensesViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout

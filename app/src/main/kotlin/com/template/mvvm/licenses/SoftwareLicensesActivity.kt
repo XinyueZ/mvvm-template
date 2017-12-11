@@ -10,7 +10,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivitySoftwareLicensesBinding
-import com.template.mvvm.models.SoftwareLicensesViewModel
+import com.template.mvvm.models.license.SoftwareLicensesViewModel
 
 class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
     companion object {

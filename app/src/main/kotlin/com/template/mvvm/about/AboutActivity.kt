@@ -9,7 +9,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.AppBaseActivity
 import com.template.mvvm.R
 import com.template.mvvm.databinding.ActivityAboutBinding
-import com.template.mvvm.models.AboutViewModel
+import com.template.mvvm.models.about.AboutViewModel
 
 class AboutActivity : AppBaseActivity<AboutViewModel>() {
 
