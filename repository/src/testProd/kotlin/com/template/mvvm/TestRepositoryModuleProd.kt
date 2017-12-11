@@ -23,7 +23,7 @@ class TestRepositoryModuleProd {
     @Test
     fun testProdDebugShouldWithDebugTool() {
         RepositoryModule(context()).run {
-            val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
+            val activeDebugTool: Boolean? = ReflectionHelpers.getField(this, "activeDebugTool")
             if (BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
                 println("Is prod(${BuildConfig.FLAVOR}) & debug(${BuildConfig.DEBUG}), then use debug-tool.")
                 assertThat(activeDebugTool, `is`(true))
@@ -37,7 +37,7 @@ class TestRepositoryModuleProd {
     @Test
     fun testProdReleaseShouldWithoutDebugTool() {
         RepositoryModule(context()).run {
-            val activeDebugTool: Boolean? = getValueOf("activeDebugTool")
+            val activeDebugTool: Boolean? = ReflectionHelpers.getField(this, "activeDebugTool")
             if (!BuildConfig.DEBUG && TextUtils.equals(BuildConfig.FLAVOR, "prod")) {
                 println("Is prod(${BuildConfig.FLAVOR}) & debug(${BuildConfig.DEBUG}), then wouldn't use debug-tool.")
                 assertThat(activeDebugTool, `is`(false))
