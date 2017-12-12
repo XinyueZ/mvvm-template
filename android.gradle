@@ -49,6 +49,12 @@ android {
         mock.java.srcDirs += rootProject.mockSrcDirs
         testMock.java.srcDirs += rootProject.mockTestSrcDirs
         androidTestMock.java.srcDirs += rootProject.mockAndroidTestSrcDirs
+
+
+        prodDebug.java.srcDirs += rootProject.prodDebugGenerated
+        mockDebug.java.srcDirs += rootProject.mockDebugGenerated
+        prodRelease.java.srcDirs += rootProject.prodReleaseGenerated
+        mockRelease.java.srcDirs += rootProject.mockReleaseGenerated
     }
 
     lintOptions {
