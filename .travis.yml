@@ -12,7 +12,11 @@ licenses:
 jdk:
     - oraclejdk8
 script:
-    - ./gradlew clean test
+    - ./gradlew \
+    :repository:testMockDebugUnitTest :repository:testProdDebugUnitTest :repository:testProdReleaseUnitTest \
+    :core:testMockDebugUnitTest :core:testProdDebugUnitTest :core:testProdReleaseUnitTest \
+    :base:testMockDebugUnitTest :base:testProdDebugUnitTest :base:testProdReleaseUnitTest \
+    :app:testMockDebugUnitTest :app:testProdDebugUnitTest :app:testProdReleaseUnitTest
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
