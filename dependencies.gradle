@@ -96,7 +96,7 @@ ext {
             plugins.kapt,
     ]
 
-    baseDependencies = [
+    applicationDependencies = [
 
             //SUPPORT
             [configuration: "implementation", dependency: [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion]],
@@ -181,7 +181,8 @@ ext {
 
     ]
 
-    coreDependencies = baseDependencies
-    repositoryDependencies = baseDependencies
-    appDependencies = coreDependencies
+    appDependencies = applicationDependencies
+    baseDependencies = applicationDependencies
+    coreDependencies = applicationDependencies
+    repositoryDependencies = applicationDependencies
 }
