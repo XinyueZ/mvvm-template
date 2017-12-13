@@ -23,10 +23,6 @@ ext {
     mockTestSrcDirs = "src/testMock/kotlin"
     mockAndroidTestSrcDirs = "src/androidTestMock/kotlin"
 
-    prodDebugGenerated = "build/generated/source/kapt/prodDebug/"
-    mockDebugGenerated = "build/generated/source/kapt/mockDebug/"
-    prodReleaseGenerated = "build/generated/source/kapt/prodRelease/"
-    mockReleaseGenerated = "build/generated/source/kapt/mockRelease/"
 
     minifyEnabled = true
     useProguard = true
