@@ -1,4 +1,6 @@
 language: android
+env:
+  - TEST_SUITE=units
 os:
   - osx
 android:
