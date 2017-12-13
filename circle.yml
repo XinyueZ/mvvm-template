@@ -1,7 +1,7 @@
 machine:
   timezone: Asia/Tokyo
   java:
-    version: openjdk7
+    version: oraclejdk8
   environment:
     ANDROID_HOME: /usr/local/android-sdk-linux
     INFER_HOME: /home/ubuntu/.infer/infer-linux64-v0.1.0/infer/infer
