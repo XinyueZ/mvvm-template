@@ -39,7 +39,7 @@
                     app:add="@{true}"
                     app:itemLayout="@{R.layout.item_product}"
                     app:itemList="@{vm.collectionItemVmList}"
-                    app:layout='@{"linear"}'
+                    app:layout="@{`linear`}"
                     app:onListItemBound="@{vm::onListItemBound}"
                     app:vmItemLayout="@{vmItem}"
                     app:delete = "@{vm.deleteList}"
