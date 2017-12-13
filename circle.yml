@@ -4,20 +4,19 @@ machine:
     version: oraclejdk8
   environment:
     ANDROID_HOME: /usr/local/android-sdk-linux
-    INFER_HOME: /home/ubuntu/.infer/infer-linux64-v0.1.0/infer/infer
     PATH: $INFER_HOME/bin:$PATH
 dependencies:
   cache_directories:
     - ~/.gradle
     - ~/.android
-    - ~/.infer
-
   override:
     - echo y | android update sdk --no-ui --filter "android-27,build-tools-27.0.2"
     - echo y | android update sdk --no-ui --all --filter "platform-tools, tools"
     - echo y | android update sdk --no-ui --all --filter "android-27, build-tools-27.0.2"
     - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
     - echo y | android update sdk --no-ui --all --filter "extra-android-support"
+    - chmod +x gradlew
+    - yes | sdkmanager "platforms;android-27"
 test:
   override:
 
