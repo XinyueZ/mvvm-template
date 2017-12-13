@@ -23,15 +23,9 @@ test:
 
     # run infer
     - ./gradlew clean
-    - infer -i -- ./gradlew build
-    # wait for it to have booted
-    - circle-android wait-for-boot
     # run tests  against the emulator.
     - ./gradlew test
-    # run lint checker
-    - lint app --html app/build/outputs/result.html
 
     # copy results
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
-    - cp -r app/infer-out $CIRCLE_ARTIFACTS
     - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
