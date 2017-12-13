@@ -24,5 +24,4 @@ dependencies:
     - chmod +x gradlew
 test:
   override:
-    - ./gradlew clean
     - ./gradlew test
