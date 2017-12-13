@@ -4,7 +4,6 @@ env:
 android:
   components:
     - tools
-    - tools
     - platform-tools
     - build-tools-27.0.2
     - android-27
@@ -15,7 +14,7 @@ licenses:
 jdk:
     - oraclejdk8
 script:
-    - ./gradlew test
+    - ./gradlew test --info
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
