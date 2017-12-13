@@ -14,10 +14,6 @@ dependencies {
     //STANDALONE
     implementation project(':core')
     implementation project(':base')
-    compileOnly project(':core')
-    testCompileOnly project(':core')
-    compileOnly project(':base')
-    testCompileOnly project(':base')
     rootProject.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
