@@ -9,6 +9,9 @@ dependencies:
   cache_directories:
     - ~/.gradle
     - ~/.android
+  pre:
+    - if [ ! -e $ANDROID_HOME/tools/bin/sdkmanager ]; then echo y | android update sdk --no-ui --all --filter tools; fi
+    - $ANDROID_HOME/tools/bin/sdkmanager --update && yes |  $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-27"
   override:
     - echo y | android update sdk --no-ui --filter "android-27,build-tools-27.0.2"
     - echo y | android update sdk --no-ui --all --filter "platform-tools, tools"
@@ -16,7 +19,6 @@ dependencies:
     - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
     - echo y | android update sdk --no-ui --all --filter "extra-android-support"
     - chmod +x gradlew
-    - sdkmanager --update && yes | sdkmanager "platforms;android-27"
 test:
   override:
     - ./gradlew clean
