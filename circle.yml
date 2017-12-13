@@ -5,6 +5,7 @@ machine:
   environment:
     ANDROID_HOME: /usr/local/android-sdk-linux
     PATH: $INFER_HOME/bin:$PATH
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx11536m -XX:+HeapDumpOnOutOfMemoryError"'
 dependencies:
   cache_directories:
     - ~/.gradle
