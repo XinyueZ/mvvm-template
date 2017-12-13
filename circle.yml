@@ -16,17 +16,10 @@ dependencies:
     - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
     - echo y | android update sdk --no-ui --all --filter "extra-android-support"
     - chmod +x gradlew
-checkout:
-  post:
-    - cp -r licenses/. $ANDROID_HOME/licenses
+    - sdkmanager --update && yes | sdkmanager "platforms;android-27"
 test:
   override:
-
-    # run infer
     - ./gradlew clean
-    # run tests  against the emulator.
     - ./gradlew test
-
-    # copy results
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
