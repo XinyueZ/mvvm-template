@@ -31,7 +31,6 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 - [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
 
-[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
 
 > Removed [Rx-Android](https://github.com/ReactiveX/RxAndroid), or RxJava
 
@@ -50,7 +49,6 @@ See:
 
 - [v0.4](https://github.com/XinyueZ/mvvm-template/tree/feature/v0.4)
 
-[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=feature/v0.4)](https://travis-ci.org/XinyueZ/mvvm-template)
 
 
 #### Great update for modularization. App based on ```app```, ```core```, ```base```, ```repository``` and ```dependencies.gradle``` would define all libraries used in the application.
