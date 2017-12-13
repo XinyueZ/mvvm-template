@@ -1,5 +1,8 @@
 version: 2
 jobs:
+  branches:
+    only:
+      - dev
   build:
     docker:
       - image: circleci/android:api-27
@@ -7,6 +10,3 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew test
-  branches:
-    only:
-      - dev
