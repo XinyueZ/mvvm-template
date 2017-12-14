@@ -12,7 +12,6 @@ import android.net.Uri
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
-import com.template.mvvm.arch.recycler.OnListItemBoundListener
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
@@ -25,7 +24,7 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
-open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() , OnListItemBoundListener {
+open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
 
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
@@ -60,7 +59,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-
     lateinit var lifecycleOwner: LifecycleOwner
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
@@ -92,7 +90,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         onBound(0)
     }
 
-    override fun onBound(position: Int) {
+    fun onBound(position: Int) {
         launch(UI + CoroutineExceptionHandler({ _, e ->
             canNotLoadProducts(e)
             LL.d(e.message ?: "")
