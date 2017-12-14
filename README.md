@@ -33,9 +33,9 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 |  Module | Description  |
 |:-------------:|:-------------:|
-|  app | Almost the activities, fragments which extend from the ```LiveActivity``` and ```LiveFragment``` in ```base-module```, including resource: *layout*, *dimen*, *color*, *style*  |
+|  app | Almost the activities, fragments which extend from the ```LiveActivity``` and ```LiveFragment``` in ```base-module```, data-binding (adapters, recyclerview-binding) , including resource: *layout*, *dimen*, *color*, *style*  |
 | base  | Tne Components would be reused by ```core``` or ```app```. |
-|  core | All ```view-model```s and extensions of them, include business logical, domain object, and data-binding (adapters, recyclerview-binding), excluding resource: *layout*, *dimen*, *color*, *style* and *strings* |
+|  core | All ```view-model```s and extensions of them, include business logical, domain object, excluding resource: *layout*, *dimen*, *color*, *style* and *strings* |
 | repository|The repository is data-center of an application. The data-center provides data remote, local or cache, including resource: *strings* |
 
 See:
