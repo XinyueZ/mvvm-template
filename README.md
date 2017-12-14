@@ -51,13 +51,15 @@ See:
 
 
 
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=feature/v0.4)](https://travis-ci.org/XinyueZ/mvvm-template)
+
 #### Great update for modularization. App based on ```app```, ```core```, ```base```, ```repository``` and ```dependencies.gradle``` would define all libraries used in the application.
 
 |  Module | Description  |
 |:-------------:|:-------------:|
-|  app | Almost the activities, fragments which extend from the ```LiveActivity``` and ```LiveFragment``` in ```base-module```, including resource: *layout*, *dimen*, *color*, *style*  |
-| base  | Tne Components would be reused by ```core``` or ```app```. |
-|  core | All ```view-model```s and extensions of them, include business logical, domain object, and data-binding (adapters, recyclerview-binding), excluding resource: *layout*, *dimen*, *color*, *style* and *strings* |
+|  app | UI, including activities, fragments, data-binding |
+| base  | Fundation of application for base elements, base classes |
+|  core |  ```view-model```s using repository as data-source to represent data on UI. |
 | repository|The repository is data-center of an application. The data-center provides data remote, local or cache, including resource: *strings* |
 
 See:
