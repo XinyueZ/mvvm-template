@@ -19,8 +19,8 @@ abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
     protected abstract fun createViewModelView(): LifeFragment<T>
     protected abstract @LayoutRes fun getLayout(): Int
     protected abstract fun setViewDataBinding(binding: ViewDataBinding)
-    private fun obtainViewModelView() = (supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-            createViewModelView()) as LifeFragment<T>
+    private fun obtainViewModelView() = supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
+            createViewModelView()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
