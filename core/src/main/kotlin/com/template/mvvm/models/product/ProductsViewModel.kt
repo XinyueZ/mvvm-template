@@ -12,6 +12,7 @@ import android.net.Uri
 import com.template.mvvm.LL
 import com.template.mvvm.R
 import com.template.mvvm.arch.SingleLiveData
+import com.template.mvvm.arch.recycler.OnListItemBoundListener
 import com.template.mvvm.contract.ProductsDataSource
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductList
@@ -24,7 +25,7 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
-open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
+open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() , OnListItemBoundListener {
 
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
@@ -88,10 +89,10 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     }
 
     private fun loadAllProducts() {
-        onListItemBound(0)
+        onBound(0)
     }
 
-    fun onListItemBound(position: Int) {
+    override fun onBound(position: Int) {
         launch(UI + CoroutineExceptionHandler({ _, e ->
             canNotLoadProducts(e)
             LL.d(e.message ?: "")

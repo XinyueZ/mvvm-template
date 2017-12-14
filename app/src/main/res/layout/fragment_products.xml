@@ -6,6 +6,7 @@
     <data>
 
         <import type="com.template.mvvm.R"/>
+        <import type="com.template.mvvm.arch.recycler.OnListItemBoundListener"/>
 
         <variable
             name="vmItem"
@@ -40,7 +41,7 @@
                     app:itemLayout="@{R.layout.item_product}"
                     app:itemList="@{vm.collectionItemVmList}"
                     app:layout="@{`linear`}"
-                    app:onListItemBound="@{vm::onListItemBound}"
+                    app:onListItemBound="@{vm::onBound}"
                     app:vmItemLayout="@{vmItem}"
                     app:delete = "@{vm.deleteList}"
                     />

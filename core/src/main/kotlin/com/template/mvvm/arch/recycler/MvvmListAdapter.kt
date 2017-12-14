@@ -5,7 +5,6 @@ import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.template.mvvm.LL
-import com.template.mvvm.binding.OnListItemBoundListener
 
 class MvvmListAdapter(
         private @LayoutRes val itemLayout: Int,
@@ -41,4 +40,8 @@ class MvvmListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MvvmItemViewHolder(parent, itemLayout, vmItemLayout)
+}
+
+interface OnListItemBoundListener {
+    fun onBound(position: Int)
 }

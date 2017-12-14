@@ -14,7 +14,3 @@ interface OnReloadListener {
     fun onReload()
 }
 
-interface OnListItemBoundListener {
-    fun onBound(position: Int)
-}
-
