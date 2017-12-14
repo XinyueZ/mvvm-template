@@ -8,6 +8,6 @@ before_install:
   - pip install pytest-cov
 
 
-script: 
-  - py.test -v --cov=maths
+
+
  
