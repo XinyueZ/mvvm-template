@@ -33,7 +33,6 @@ ext {
     def curl = "0.1"
     def stetho = "1.5.0"
 
-
     //Kotlin
     def kotlin = ext.kotlin_version
 
@@ -101,7 +100,7 @@ ext {
             plugins.kapt,
     ]
 
-    baseDependencies = [
+    applicationDependencies = [
 
             //SUPPORT
             [configuration: "implementation", dependency: [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion]],
@@ -156,7 +155,7 @@ ext {
             //DEBUG TOOL
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: stetho]],
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho]],
-            [configuration: "debugImplementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
+            [configuration: "implementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
 
             //TESTS
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],
@@ -200,7 +199,8 @@ ext {
 
     ]
 
-    coreDependencies = baseDependencies
-    repositoryDependencies = baseDependencies
-    appDependencies = coreDependencies
+    appDependencies = applicationDependencies
+    baseDependencies = applicationDependencies
+    coreDependencies = applicationDependencies
+    repositoryDependencies = applicationDependencies
 }

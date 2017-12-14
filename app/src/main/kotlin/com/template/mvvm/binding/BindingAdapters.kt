@@ -146,7 +146,6 @@ fun commandPlaceHolding(toolbar: Toolbar, l: OnCommandListener) {
 
 @BindingAdapter("command")
 fun commandPlaceHolding(view: BottomNavigationView, l: OnCommandListener) {
-    view.disableShiftMode()
     view.setOnNavigationItemSelectedListener {
         l.onCommand(it.itemId)
 
@@ -158,29 +157,6 @@ fun commandPlaceHolding(view: BottomNavigationView, l: OnCommandListener) {
 fun commandPlaceHolding(view: View, l: OnItemCommandListener, vm: ViewModel) {
     view.setOnClickListener {
         l.onCommand(vm)
-    }
-}
-
-//
-// Some view-ext, helpers
-//
-@SuppressLint("RestrictedApi")
-fun BottomNavigationView.disableShiftMode() {
-    val menuView = this.getChildAt(0) as BottomNavigationMenuView
-    try {
-        val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
-        shiftingMode.isAccessible = true
-        shiftingMode.setBoolean(menuView, false)
-        shiftingMode.isAccessible = false
-        for (i in 0 until menuView.childCount) {
-            val item = menuView.getChildAt(i) as BottomNavigationItemView
-            item.setShiftingMode(false)
-            item.setChecked(item.itemData.isChecked)
-        }
-    } catch (e: NoSuchFieldException) {
-        LL.e("Unable to get shift mode field", e)
-    } catch (e: IllegalAccessException) {
-        LL.e("Unable to change value of shift mode", e)
     }
 }
 

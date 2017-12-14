@@ -23,6 +23,7 @@ ext {
     mockTestSrcDirs = "src/testMock/kotlin"
     mockAndroidTestSrcDirs = "src/androidTestMock/kotlin"
 
+
     minifyEnabled = true
     useProguard = true
 }
