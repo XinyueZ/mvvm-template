@@ -1,7 +1,13 @@
-language: java
+language: python
 
-jdk:
-  - oraclejdk8
-  - openjdk7
+python:
+  - "2.7"
+  - "3.4"
 
+before_install:
+  - pip install pytest-cov
+  - cd python
+
+script: 
+  - py.test -v --cov=maths
  
