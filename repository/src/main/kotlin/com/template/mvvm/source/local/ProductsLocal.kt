@@ -85,7 +85,6 @@ class ProductsLocal : ProductsDataSource {
             imagesToDelete.await()
             productsToDelete.await()
             LL.w("deleted products and pictures(images) from db")
-            println("deleted products and pictures(images) from db")
             send(Unit)
         }
     }
