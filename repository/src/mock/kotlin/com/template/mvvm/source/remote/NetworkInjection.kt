@@ -5,11 +5,17 @@ import retrofit2.Retrofit
 import retrofit2.mock.MockRetrofit
 import retrofit2.mock.NetworkBehavior
 
+internal fun NetworkBehavior.setNetworkErrorPercent(percent: Int) {
+    setErrorPercent(percent)
+    setFailurePercent(percent)
+    setVariancePercent(percent)
+}
+
 internal object NetworkInjection {
-    private val behavior = NetworkBehavior.create().apply {
-        setErrorPercent(0)
-        setFailurePercent(0)
-        setVariancePercent(0)
+    internal val behavior: NetworkBehavior  by lazy {
+        NetworkBehavior.create().apply {
+            setNetworkErrorPercent(0)
+        }
     }
 
     fun provideProductsApiService(context: Context, retrofitBuilder: Retrofit.Builder) =

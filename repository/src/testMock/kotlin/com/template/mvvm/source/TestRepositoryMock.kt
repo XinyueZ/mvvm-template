@@ -11,6 +11,8 @@ import com.template.mvvm.domain.products.Product
 import com.template.mvvm.feeds.products.ProductsData
 import com.template.mvvm.source.ext.read
 import com.template.mvvm.source.local.DB
+import com.template.mvvm.source.remote.NetworkInjection
+import com.template.mvvm.source.remote.setNetworkErrorPercent
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.runBlocking
@@ -310,6 +312,56 @@ class TestRepositoryMock {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testRepositoryContinues() {
+        runBlocking(testJob) {
+            with(RepositoryInjection.getInstance()) {
+                with(provideRepository(context())) {
+                    // Get some data "all"
+                    getAllProducts(testJob, 0).receive()
+                    // Get some data "men"
+                    val menOnline = filterProducts(testJob, 0, true, "men").receive()
+                    // Get some data "women"
+                    val womenOnline = filterProducts(testJob, 0, true, "women").receive()
+
+                    // Cut the network
+                    NetworkInjection.behavior.setNetworkErrorPercent(100)
+
+                    // Reveal   data "all"
+                    getAllProducts(testJob, 0).receive()
+                    // Reveal   data "women"
+                    val menOffline = filterProducts(testJob, 0, true, "men").receive()
+                    // Reveal   data "men"
+                    val womenOffline = filterProducts(testJob, 0, true, "women").receive()
+
+                    var menEq = true
+                    menOnline?.forEach { online ->
+                        val eq = menOffline?.find { offline ->
+                            online.pid == offline.pid
+                        }
+                        if (eq == null) {
+                            menEq = false
+                            return@forEach
+                        }
+                    }
+                    assertThat(menEq, `is`(true))
+
+                    var womenEq = true
+                    womenOnline?.forEach { online ->
+                        val eq = womenOffline?.find { offline ->
+                            online.pid == offline.pid
+                        }
+                        if (eq == null) {
+                            womenEq = false
+                            return@forEach
+                        }
+                    }
+                    assertThat(womenEq, `is`(true))
                 }
             }
         }
