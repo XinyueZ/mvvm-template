@@ -42,6 +42,7 @@ class TestRepositoryMock {
     @After
     fun tearDown() {
         DB.INSTANCE.close()
+        NetworkInjection.behavior.setNetworkErrorPercent(0) // Should have no impact on tests.
     }
 
     @Test
