@@ -322,18 +322,14 @@ class TestRepositoryMock {
         runBlocking(testJob) {
             with(RepositoryInjection.getInstance()) {
                 with(provideRepository(context())) {
-                    // Get some data "all"
-                    getAllProducts(testJob, 0).receive()
                     // Get some data "men"
                     val menOnline = filterProducts(testJob, 0, true, "men").receive()
                     // Get some data "women"
                     val womenOnline = filterProducts(testJob, 0, true, "women").receive()
 
                     // Cut the network
-                    NetworkInjection.behavior.setNetworkErrorPercent(100)
+                    NetworkInjection.behavior.setNetworkErrorPercent(100) // Should have no impact on tests.
 
-                    // Reveal   data "all"
-                    getAllProducts(testJob, 0).receive()
                     // Reveal   data "women"
                     val menOffline = filterProducts(testJob, 0, true, "men").receive()
                     // Reveal   data "men"
