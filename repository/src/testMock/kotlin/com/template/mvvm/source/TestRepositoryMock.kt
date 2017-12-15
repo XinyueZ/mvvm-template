@@ -1,10 +1,12 @@
 package com.template.mvvm.source
 
+import android.text.TextUtils
 import com.google.gson.Gson
 import com.template.mvvm.RepositoryInjection
 import com.template.mvvm.RepositoryModule
 import com.template.mvvm.RepositoryTestRule
 import com.template.mvvm.context
+import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.feeds.products.ProductsData
 import com.template.mvvm.source.ext.read
@@ -14,6 +16,7 @@ import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -50,6 +53,30 @@ class TestRepositoryMock {
             }
         }
     }
+
+    @Test
+    fun testGetLicenses() {
+        runBlocking(testJob) {
+            RepositoryInjection.getInstance().provideRepository(context()).run {
+                getAllLibraries(testJob).receiveOrNull()?.let { listOfLibs ->
+                    listOfLibs.forEach { lib ->
+                        val expText = readLicenseText(lib)
+                        assertThat(expText, `is`(notNullValue()))
+                        assertThat(TextUtils.isEmpty(expText), `is`(false))
+                        getLicense(context(), testJob, lib).receiveOrNull()?.also { licenseText ->
+                            assertThat(TextUtils.isEmpty(licenseText), `is`(false))
+                            assertThat(licenseText, `equalTo`(expText))
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun readLicenseText(lib: Library) =
+            context().assets.read(String.format("%s/%s.txt", "licenses-box", lib.license.name))
+                    .replace("<year>", lib.copyright ?: "")
+                    .replace("<copyright holders>", lib.owner ?: "")
 
     @Test
     fun testGetAllProducts() {
@@ -145,7 +172,7 @@ class TestRepositoryMock {
     }
 
     @Test
-    fun testImagesInsert() {
+    fun testImagesInsert_1() {
         runBlocking(testJob) {
             with(RepositoryInjection.getInstance()) {
                 provideRepository(context()).run {
@@ -173,6 +200,115 @@ class TestRepositoryMock {
                         }
 
                         assertThat(failed, `is`(false))
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testImagesInsert_2() {
+        runBlocking(testJob) {
+            RepositoryInjection.getInstance().provideRepository(context()).run {
+                getAllProducts(testJob, 0).receiveOrNull()?.let { storedProducts ->
+                    if (storedProducts.isNotEmpty()) {
+                        val storedImages = getImages(testJob).receiveOrNull()
+                        assertThat(storedImages?.size?.toLong() ?: 0L, Matchers.greaterThan(0L))
+
+                        storedProducts.forEach { prd ->
+                            prd.pictures.values.forEach { img1 ->
+                                val found = storedImages?.find { img2 ->
+                                    img1.uri.toString() == img2.uri.toString()
+                                }
+                                assertThat(found, `is`(notNullValue()))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testDeleteAllWithoutKeyword() {
+        runBlocking(testJob) {
+            with(RepositoryInjection.getInstance()) {
+                with(provideRepository(context())) {
+                    getAllProducts(testJob, 0).receiveOrNull()?.let {
+                        assertThat(it.isNotEmpty(), `is`(true))
+                        assertThat(it.size, `equalTo`(10))
+                    }
+
+                    deleteAll(testJob).receiveOrNull()
+
+                    with(provideLocalProductsRepository()) {
+                        // Must use local repo, otherwise the api will also be called.
+                        // check local data storage
+                        val storedProducts = getAllProducts(testJob, 0).receiveOrNull()?.size ?: 0
+                        assertThat(storedProducts, `equalTo`(0))
+                    }
+
+                    val storedImages = getImages(testJob).receiveOrNull()?.size ?: 0
+                    assertThat(storedImages, `equalTo`(0))
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testDeleteWithKeyword() {
+        runBlocking(testJob) {
+            with(RepositoryInjection.getInstance()) {
+                with(provideRepository(context())) {
+
+                    val alreadyDeleted = mutableListOf<Product>()
+                    filterProducts(testJob, 0, true, "men").receiveOrNull()?.let {
+                        assertThat(it.isNotEmpty(), `is`(true))
+                        assertThat(it.size, `equalTo`(10))
+
+                        alreadyDeleted.addAll(it)
+                    }
+
+                    filterProducts(testJob, 0, true, "women").receiveOrNull()?.let {
+                        assertThat(it.isNotEmpty(), `is`(true))
+                        assertThat(it.size, `equalTo`(10))
+                    }
+
+
+                    deleteAll(testJob, "men").receiveOrNull()
+                    with(provideLocalProductsRepository()) {
+                        // Must use local repo, otherwise the api will also be called.
+                        // check local data storage
+                        val storedProducts = filterProducts(testJob, 0, true, "men").receiveOrNull()?.size
+                        assertThat(storedProducts, `equalTo`(0))
+
+                        alreadyDeleted.forEach {
+                            val prdImgs = it.pictures.values
+                            val dbImgs = provideRepository(context()).getImages(testJob, it.pid).receive()
+                            prdImgs.forEach { img1 ->
+                                val found = dbImgs.find { img2 ->
+                                    img1.uri.toString() == img2.uri.toString()
+                                }
+                                assertThat(found, `is`(nullValue()))
+                            }
+                        }
+                    }
+
+                    with(provideLocalProductsRepository()) {
+                        // Must use local repo, otherwise the api will also be called.
+                        // check local data storage
+                        val storedProducts = filterProducts(testJob, 0, true, "women").receive()
+                        assertThat(storedProducts.size, `equalTo`(10))
+                        storedProducts.forEach {
+                            val prdImgs = it.pictures.values
+                            val dbImgs = provideRepository(context()).getImages(testJob, it.pid).receive()
+                            prdImgs.forEach { img1 ->
+                                val found = dbImgs.find { img2 ->
+                                    img1.uri.toString() == img2.uri.toString()
+                                }
+                                assertThat(found, `is`(notNullValue()))
+                            }
+                        }
                     }
                 }
             }

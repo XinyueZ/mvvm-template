@@ -28,8 +28,13 @@ suspend fun <T, E : DataSource> E.select(
     val remoteCallThenWrite: (suspend () -> Unit) = {
         remote()?.let { remoteData ->
             saveAfterRemote(remoteData)
-            fetchFromLocal({ send(it) }, { send(remoteData) })
-            restRemoteDataHandlers(remoteData)
+            fetchFromLocal({
+                restRemoteDataHandlers(remoteData)
+                send(it)
+            }, {
+                restRemoteDataHandlers(remoteData)
+                send(remoteData)
+            })
         } ?: kotlin.run {
             fetchFromLocal({ send(it) }, { send(emptyT()) })
         }

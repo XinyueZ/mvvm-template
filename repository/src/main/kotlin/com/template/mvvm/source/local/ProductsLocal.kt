@@ -8,6 +8,7 @@ import com.template.mvvm.domain.products.Product
 import com.template.mvvm.domain.products.ProductDetail
 import com.template.mvvm.source.local.entities.products.ImageEntity
 import com.template.mvvm.source.local.entities.products.ProductEntity
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.produce
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -45,7 +46,7 @@ class ProductsLocal : ProductsDataSource {
             takeIf { pid == INVALID_PID }?.let {
                 getImages().map { Image.from(it) }
             } ?: kotlin.run {
-                getImages().map { Image.from(it) }
+                getImages(pid).map { Image.from(it) }
             }
         }.also { send(it) }
     }
@@ -79,17 +80,26 @@ class ProductsLocal : ProductsDataSource {
 
     override suspend fun deleteAll(coroutineContext: CoroutineContext) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
-            deleteProducts()
-            deleteImages()
+            val imagesToDelete = async(coroutineContext) { deleteImages() }
+            val productsToDelete = async(coroutineContext) { deleteProducts() }
+            imagesToDelete.await()
+            productsToDelete.await()
             LL.w("deleted products and pictures(images) from db")
+            println("deleted products and pictures(images) from db")
             send(Unit)
         }
     }
 
     override suspend fun deleteAll(coroutineContext: CoroutineContext, keyword: String) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
+            val productsToDelete = async(coroutineContext) { getProductList(keyword) }
+            LL.w("deleted products from db with $keyword")
+            val deletedProducts = productsToDelete.await()
+            deletedProducts.forEach {
+                LL.w("deleted image of product from db with $keyword")
+                deleteImages(it.pid)
+            }
             deleteProducts(keyword)
-            LL.w("deleted products and pictures(images<still in development>) from db with $keyword")
             send(Unit)
         }
     }

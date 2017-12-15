@@ -51,6 +51,12 @@ interface ProductDao {
     @Query("delete from images")
     fun deleteImages()
 
+    @Query("delete from images where pid=:pid")
+    fun deleteImages(pid: Long)
+
+    @Query("select * from products where genders=:keyword")
+    fun getProductList(keyword: String?): List<ProductEntity>
+
     @Query("select * from products order by create_time asc limit 10 offset :offset")
     fun getProductList(offset: Int): List<ProductEntity>
 
