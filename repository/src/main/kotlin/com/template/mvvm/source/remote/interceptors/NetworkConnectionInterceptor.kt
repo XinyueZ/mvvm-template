@@ -13,13 +13,13 @@ class NetworkConnectionInterceptor(private val connectivityManager: Connectivity
     override fun intercept(chain: Interceptor.Chain?): Response? {
         val activeNetwork = connectivityManager.activeNetworkInfo
 
-        if (isConnected(activeNetwork)) {
+        if (isNotConnected(activeNetwork)) {
             throw MissingNetworkConnectionException()
         }
 
         return chain?.proceed(chain.request())
     }
 
-    private fun isConnected(activeNetwork: NetworkInfo?) =
+    private fun isNotConnected(activeNetwork: NetworkInfo?) =
             (activeNetwork == null) || !activeNetwork.isConnected || ((activeNetwork.type != ConnectivityManager.TYPE_WIFI) && (activeNetwork.type != ConnectivityManager.TYPE_MOBILE))
 }
