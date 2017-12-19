@@ -12,9 +12,15 @@ import com.template.mvvm.source.local.LicensesLocal
 import com.template.mvvm.source.local.ProductsLocal
 import com.template.mvvm.source.remote.LicensesRemote
 import com.template.mvvm.source.remote.ProductsRemote
+import retrofit2.mock.NetworkBehavior
 
 class RepositoryInjection private constructor() {
     companion object {
+        internal val networkBehavior: NetworkBehavior  by lazy {
+            NetworkBehavior.create().apply {
+                setNetworkErrorPercent(0)
+            }
+        }
 
         @SuppressLint("StaticFieldLeak")
         @Volatile private var INSTANCE: RepositoryInjection? = null
@@ -68,4 +74,10 @@ class RepositoryInjection private constructor() {
     private fun provideRemoteLicensesRepository(): LicensesDataSource = LicensesRemote()
     private fun provideLocalLicensesRepository(context: Context) = LicensesLocal(context)
     private fun provideCacheLicensesRepository() = LicensesCache()
+}
+
+internal fun NetworkBehavior.setNetworkErrorPercent(percent: Int) {
+    setErrorPercent(percent)
+    setFailurePercent(percent)
+    setVariancePercent(percent)
 }

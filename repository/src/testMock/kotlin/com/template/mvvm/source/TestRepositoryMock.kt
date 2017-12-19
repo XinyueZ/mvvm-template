@@ -9,17 +9,14 @@ import com.template.mvvm.context
 import com.template.mvvm.domain.licenses.Library
 import com.template.mvvm.domain.products.Product
 import com.template.mvvm.feeds.products.ProductsData
+import com.template.mvvm.setNetworkErrorPercent
 import com.template.mvvm.source.ext.read
-import com.template.mvvm.source.local.DB
-import com.template.mvvm.source.remote.NetworkInjection
-import com.template.mvvm.source.remote.setNetworkErrorPercent
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -37,12 +34,6 @@ class TestRepositoryMock {
     fun setUp() {
         RepositoryModule(context())
         testJob = Job()
-    }
-
-    @After
-    fun tearDown() {
-        DB.INSTANCE.close()
-        NetworkInjection.behavior.setNetworkErrorPercent(0) // Should have no impact on tests.
     }
 
     @Test
@@ -329,7 +320,7 @@ class TestRepositoryMock {
                     val womenOnline = filterProducts(testJob, 0, true, "women").receive()
 
                     // Cut the network
-                    NetworkInjection.behavior.setNetworkErrorPercent(100) // Should have no impact on tests.
+                    RepositoryInjection.networkBehavior.setNetworkErrorPercent(100) // Should have no impact on tests.
 
                     // Reveal   data "women"
                     val menOffline = filterProducts(testJob, 0, true, "men").receive()

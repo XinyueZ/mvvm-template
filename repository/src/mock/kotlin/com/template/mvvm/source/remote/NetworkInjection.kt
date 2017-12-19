@@ -1,22 +1,11 @@
 package com.template.mvvm.source.remote
 
 import android.content.Context
+import com.template.mvvm.RepositoryInjection
 import retrofit2.Retrofit
 import retrofit2.mock.MockRetrofit
-import retrofit2.mock.NetworkBehavior
-
-internal fun NetworkBehavior.setNetworkErrorPercent(percent: Int) {
-    setErrorPercent(percent)
-    setFailurePercent(percent)
-    setVariancePercent(percent)
-}
 
 internal object NetworkInjection {
-    internal val behavior: NetworkBehavior  by lazy {
-        NetworkBehavior.create().apply {
-            setNetworkErrorPercent(0)
-        }
-    }
 
     fun provideProductsApiService(context: Context, retrofitBuilder: Retrofit.Builder) =
             MockProductsApi(
@@ -25,7 +14,7 @@ internal object NetworkInjection {
                             retrofitBuilder
                                     .baseUrl("http://www.hello.com")
                                     .build())
-                            .networkBehavior(behavior)
+                            .networkBehavior(RepositoryInjection.networkBehavior)
                             .build()
                             .create(ProductsApi::class.java)
             )
@@ -37,7 +26,7 @@ internal object NetworkInjection {
                             retrofitBuilder
                                     .baseUrl("http://www.hello.com")
                                     .build())
-                            .networkBehavior(behavior)
+                            .networkBehavior(RepositoryInjection.networkBehavior)
                             .build()
                             .create(LicensesApi::class.java)
             )

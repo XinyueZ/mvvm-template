@@ -6,11 +6,9 @@ import com.template.mvvm.RepositoryTestRule
 import com.template.mvvm.context
 import com.template.mvvm.contract.LicensesDataSource
 import com.template.mvvm.contract.ProductsDataSource
-import com.template.mvvm.source.local.DB
 import kotlinx.coroutines.experimental.Job
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,11 +27,6 @@ class TestRepository {
     fun setUp() {
         RepositoryModule(context())
         testJob = Job()
-    }
-
-    @After
-    fun tearDown() {
-        DB.INSTANCE.close()
     }
 
     @Test
