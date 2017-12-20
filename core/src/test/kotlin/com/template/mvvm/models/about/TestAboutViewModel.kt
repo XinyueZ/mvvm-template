@@ -16,7 +16,7 @@ class TestAboutViewModel {
     }
 
     @Test
-    fun testModelInit() {
+    fun testAboutModelInit() {
         with(aboutMv.state) {
             assertThat(goBack.get(), `is`(false))
 
