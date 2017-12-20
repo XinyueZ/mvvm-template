@@ -1,6 +1,19 @@
 package com.template.mvvm
 
 import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
+import com.template.mvvm.models.about.AboutViewModel
+import com.template.mvvm.models.home.HomeViewModel
+import com.template.mvvm.models.license.LicenseDetailViewModel
+import com.template.mvvm.models.license.SoftwareLicenseItemViewModel
+import com.template.mvvm.models.license.SoftwareLicensesViewModel
+import com.template.mvvm.models.product.AllGendersViewModel
+import com.template.mvvm.models.product.MenViewModel
+import com.template.mvvm.models.product.ProductDetailViewModel
+import com.template.mvvm.models.product.ProductItemViewModel
+import com.template.mvvm.models.product.ProductsViewModel
+import com.template.mvvm.models.product.WomenViewModel
+import com.template.mvvm.models.splash.SplashViewModel
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -31,5 +44,31 @@ class TestViewModelFactory {
         assertThat(obj_3, `is`(notNullValue()))
         val obj_4 = ViewModelFactory.getInstance(context().applicationContext as Application)
         assertThat(obj_3 === obj_4, `is`(true))
+    }
+
+    @Test
+    fun testCreate() {
+        with(ViewModelFactory.getInstance(context().applicationContext as Application)) {
+            assertThat(create(SplashViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(MenViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(WomenViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(AllGendersViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(HomeViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(ProductsViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(AboutViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(SoftwareLicensesViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(LicenseDetailViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(SoftwareLicenseItemViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(ProductItemViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(LicenseDetailViewModel::class.java), `is`(notNullValue()))
+            assertThat(create(ProductDetailViewModel::class.java), `is`(notNullValue()))
+
+            try {
+                create(AndroidViewModel::class.java)
+                assertThat(true, `is`(false))
+            } catch (ex: IllegalArgumentException) {
+                assertThat(ex, `is`(notNullValue()))
+            }
+        }
     }
 }
