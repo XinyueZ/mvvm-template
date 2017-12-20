@@ -6,7 +6,6 @@ import android.os.Handler
 import com.template.mvvm.models.AbstractViewModel
 
 class SplashViewModel : AbstractViewModel() {
-    private val TAG = "SplashViewModel"
 
     val startHome = MutableLiveData<Boolean>()
 
