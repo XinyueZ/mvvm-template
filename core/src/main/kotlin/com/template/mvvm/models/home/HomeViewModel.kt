@@ -23,7 +23,6 @@ class HomeViewModel : AbstractViewModel() {
                     openInternet.value = true
                 }
                 R.id.action_software_licenses -> {
-
                     drawerToggle.value = false
                     openLicenses.value = true
                 }
