@@ -14,8 +14,8 @@ import com.template.mvvm.customtabs.CustomTabUtils
 import com.template.mvvm.databinding.ActivityHomeBinding
 import com.template.mvvm.ext.obtainViewModel
 import com.template.mvvm.ext.setup
-import com.template.mvvm.models.product.AllGendersViewModel
 import com.template.mvvm.models.home.HomeViewModel
+import com.template.mvvm.models.product.AllGendersViewModel
 import com.template.mvvm.models.product.MenViewModel
 import com.template.mvvm.models.product.WomenViewModel
 
@@ -44,7 +44,7 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
         binding.apply {
             contentFrame.apply {
                 vm = obtainViewModel().apply {
-                    with(showSystemUi) {
+                    with(controller.showSystemUi) {
                         observe(
                                 this@HomeActivity,
                                 Observer {
@@ -61,7 +61,7 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
                         addSource(obtainViewModel(AllGendersViewModel::class.java).showSystemUi,
                                 { this.value = it })
                     }
-                    drawer.setup(this@HomeActivity, drawerToggle)
+                    drawer.setup(this@HomeActivity, controller.drawerToggle)
                 }
             }
         }

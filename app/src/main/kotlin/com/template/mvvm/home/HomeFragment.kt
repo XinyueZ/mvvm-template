@@ -35,33 +35,35 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
                     vm = obtainViewModel().apply {
                         activity?.let {
                             with(it) {
-                                openProduct.observe(it, Observer {
-                                    ProductsActivity.showInstance(this@with)
-                                })
-                                openInternet.observe(it, Observer {
-                                    CustomTabUtils.openWeb(this@with, Uri.parse(getString(R.string.internet_url)), CustomTabConfig.builder)
-                                })
-                                openLicenses.observe(it, Observer {
-                                    SoftwareLicensesActivity.showInstance(this@with)
-                                })
-                                openAbout.observe(it, Observer {
-                                    AboutActivity.showInstance(this@with)
-                                })
-                                openItem2.observe(it, Observer {
-                                    if (menFrg == null)
-                                        menFrg = MenFragment.newInstance(this@with)
-                                    menFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
-                                })
-                                openItem3.observe(it, Observer {
-                                    if (womenFrg == null)
-                                        womenFrg = WomenFragment.newInstance(this@with)
-                                    womenFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
-                                })
-                                openItem4.observe(it, Observer {
-                                    if (allFrg == null)
-                                        allFrg = AllGendersFragment.newInstance(this@with)
-                                    allFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
-                                })
+                                controller.run {
+                                    openProduct.observe(it, Observer {
+                                        ProductsActivity.showInstance(this@with)
+                                    })
+                                    openInternet.observe(it, Observer {
+                                        CustomTabUtils.openWeb(this@with, Uri.parse(getString(R.string.internet_url)), CustomTabConfig.builder)
+                                    })
+                                    openLicenses.observe(it, Observer {
+                                        SoftwareLicensesActivity.showInstance(this@with)
+                                    })
+                                    openAbout.observe(it, Observer {
+                                        AboutActivity.showInstance(this@with)
+                                    })
+                                    openItem2.observe(it, Observer {
+                                        if (menFrg == null)
+                                            menFrg = MenFragment.newInstance(this@with)
+                                        menFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
+                                    })
+                                    openItem3.observe(it, Observer {
+                                        if (womenFrg == null)
+                                            womenFrg = WomenFragment.newInstance(this@with)
+                                        womenFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
+                                    })
+                                    openItem4.observe(it, Observer {
+                                        if (allFrg == null)
+                                            allFrg = AllGendersFragment.newInstance(this@with)
+                                        allFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
+                                    })
+                                }
                             }
                             registerLifecycleOwner(it)
                         }
