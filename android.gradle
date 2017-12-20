@@ -84,8 +84,8 @@ android {
                 outputs.upToDateWhen { false }
                 showStandardStreams = true
             }
-            reports.html.enabled = false
-            reports.junitXml.enabled = false
+            reports.html.enabled = true
+            reports.junitXml.enabled = true
             maxParallelForks = 5
             forkEvery = 200
         }
