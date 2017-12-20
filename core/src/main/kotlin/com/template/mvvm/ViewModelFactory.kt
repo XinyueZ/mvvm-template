@@ -1,11 +1,10 @@
 package com.template.mvvm
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.template.mvvm.models.home.HomeViewModel
 import com.template.mvvm.models.about.AboutViewModel
+import com.template.mvvm.models.home.HomeViewModel
 import com.template.mvvm.models.license.LicenseDetailViewModel
 import com.template.mvvm.models.license.SoftwareLicenseItemViewModel
 import com.template.mvvm.models.license.SoftwareLicensesViewModel
@@ -53,7 +52,6 @@ class ViewModelFactory private constructor(
 
     companion object {
 
-        @SuppressLint("StaticFieldLeak")
         @Volatile private var INSTANCE: ViewModelFactory? = null
 
         fun getInstance(application: Application) =
