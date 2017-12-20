@@ -11,7 +11,7 @@ ext {
     // App dependencies
     def supportLibraryVersion = ext.support_comp
     def archLifecycleVersion = ext.arch_comp
-    def paging = "1.0.0-alpha3"
+    def paging = "1.0.0-alpha4-1"
     def constraint = "1+"
     def multiDex = "1+"
 
