@@ -1,27 +1,21 @@
-language: android
-env:
-  - TEST_SUITE=units
-android:
-  components:
-    - tools
-    - platform-tools
-    - build-tools-27.0.2
-    - android-27
-    - add-on
-    - extra
-licenses:
-    - 'android-sdk-license-.+'
-jdk:
-    - oraclejdk8
-script:
-    - ./gradlew clean test 
-before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-cache:
-  directories:
-    - $HOME/.m2
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+language: python
+
+python:
+  - "2.7"
+  - "3.4"
+
 before_install:
-      - chmod +x ./gradlew
-      - yes | sdkmanager "platforms;android-27"
+  - pip install pytest-cov
+  
+  
+
+script:
+    # Print build info that binary is compiled with.
+    - echo $TRAVIS_COMMIT
+    - echo $TRAVIS_TAG
+    - echo $TRAVIS_BRANCH
+    - echo $TRAVIS_BUILD_NUMBER
+    - echo $TRAVIS_REPO_SLUG
+
+
+ 
