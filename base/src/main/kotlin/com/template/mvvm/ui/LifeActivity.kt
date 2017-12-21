@@ -25,8 +25,10 @@ abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
         super.onCreate(savedInstanceState)
-        setViewDataBinding(DataBindingUtil.setContentView(this, getLayout()))
-        replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
+        (DataBindingUtil.setContentView(this, getLayout()) as? ViewDataBinding) ?.run {
+            setViewDataBinding(this)
+            replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
+        }
     }
 
     protected fun hideSystemUi(length: Long = 0) {
