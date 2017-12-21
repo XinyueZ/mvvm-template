@@ -12,13 +12,15 @@ class MvvmItemViewHolder(
         parent: ViewGroup,
         @LayoutRes layout: Int,
         private val vmItemLayout: Int,
-        private val binding: ViewDataBinding = DataBindingUtil.bind<ViewDataBinding>(LayoutInflater.from(parent.context).inflate(layout, parent, false)))
-    : RecyclerView.ViewHolder(binding.root) {
+        private val binding: ViewDataBinding? = DataBindingUtil.bind(LayoutInflater.from(parent.context).inflate(layout, parent, false)))
+    : RecyclerView.ViewHolder(binding?.root) {
 
     fun bindViewModel(vm: ViewModel?) {
         vm?.let {
-            binding.setVariable(vmItemLayout, vm)
-            binding.executePendingBindings()
+            binding?.let {
+                it.setVariable(vmItemLayout, vm)
+                it.executePendingBindings()
+            }
         }
     }
 }
