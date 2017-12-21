@@ -12,37 +12,31 @@ class CoreModule(context: Context) : LifecycleObserver {
     init {
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         RepositoryModule(context)
-        println("CoreModule onCreate")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     open fun onCoreCreate() {
         LL.d("process on_create")
-        println("process on_create")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     open fun onCoreStart() {
         LL.d("process on_start")
-        println("process on_start")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     open fun onCoreResume() {
         LL.d("process on_resume")
-        println("process on_resume")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     open fun onCorePause() {
         LL.d("process on_pause")
-        println("process on_pause")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     open fun onCoreStop() {
         LL.d("process on_stop")
-        println("process on_stop")
 
         ViewModelFactory.destroyInstance()
         RepositoryInjection.destroyInstance()
@@ -51,7 +45,6 @@ class CoreModule(context: Context) : LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     open fun onCoreDestroy() {
         LL.d("process on_destroy")
-        println("process on_destroy")
     }
 }
 
