@@ -10,7 +10,7 @@
 
         <import type="android.support.v4.app.FragmentManager"/>
 
-        <import type="com.qiaoqiao.views.GalleryViewPagerAdapter"/>
+        <import type="com.template.mvvm.app.gallery.GalleryViewPagerAdapter"/>
 
 
         <variable
@@ -19,7 +19,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.product.ProductDetailViewModel"/>
+            type="com.template.mvvm.core.models.product.ProductDetailViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout

@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.template.mvvm.R"/>
+        <import type="com.template.mvvm.app.R"/>
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.product.ProductItemViewModel"/>
+            type="com.template.mvvm.core.models.product.ProductItemViewModel"/>
     </data>
 
     <android.support.v7.widget.CardView

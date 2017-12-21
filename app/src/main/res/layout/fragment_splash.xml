@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    >
 
     <data>
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.splash.SplashViewModel"/>
+            type="com.template.mvvm.core.models.splash.SplashViewModel"/>
     </data>
 
 

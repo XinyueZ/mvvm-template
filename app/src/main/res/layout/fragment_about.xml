@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.template.mvvm.BuildConfig"/>
+        <import type="com.template.mvvm.app.BuildConfig"/>
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.about.AboutViewModel"/>
+            type="com.template.mvvm.core.models.about.AboutViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

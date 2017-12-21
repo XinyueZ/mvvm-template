@@ -5,7 +5,7 @@ ext {
     compileSdkVersion = 27
     buildToolsVersion = '27.0.2'
 
-    appId = "com.template.mvvm"
+    appId = "com.template.mvvm.application"
     versionCode = 5
     versionName = "v0.5"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"

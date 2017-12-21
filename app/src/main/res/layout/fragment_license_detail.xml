@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.license.LicenseDetailViewModel"/>
+            type="com.template.mvvm.core.models.license.LicenseDetailViewModel"/>
     </data>
 
     <TextView

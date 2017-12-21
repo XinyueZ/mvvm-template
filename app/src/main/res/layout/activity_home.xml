@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.home.HomeViewModel"/>
+            type="com.template.mvvm.core.models.home.HomeViewModel"/>
     </data>
 
     <android.support.v4.widget.DrawerLayout

@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.template.mvvm.R"/>
+        <import type="com.template.mvvm.app.R"/>
 
         <variable
             name="vmItem"
@@ -13,7 +13,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.product.ProductsViewModel"/>
+            type="com.template.mvvm.core.models.product.ProductsViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -35,13 +35,12 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@+id/load_more_pb"
-                    app:add="@{true}"
-                    app:itemLayout="@{R.layout.item_product}"
                     app:itemList="@{vm.collectionItemVmList}"
+                    app:itemLayout="@{R.layout.item_product}"
+                    app:vmItemLayout="@{vmItem}"
                     app:layout="@{`linear`}"
                     app:onListItemBound="@{vm::onBound}"
-                    app:vmItemLayout="@{vmItem}"
+                    app:add="@{true}"
                     app:delete = "@{vm.deleteList}"
                     />
 

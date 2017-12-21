@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.models.product.ProductDetailViewModel"/>
+            type="com.template.mvvm.core.models.product.ProductDetailViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
