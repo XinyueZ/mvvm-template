@@ -1,4 +1,11 @@
 package com.template.mvvm
 
-class App : CoreModule()
+import android.support.multidex.MultiDexApplication
+
+class App : MultiDexApplication() {
+    override fun onCreate() {
+        super.onCreate()
+        CoreModule(this)
+    }
+}
 

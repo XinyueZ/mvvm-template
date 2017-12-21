@@ -4,48 +4,54 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ProcessLifecycleOwner
-import android.support.multidex.MultiDexApplication
+import android.content.Context
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 
-abstract class CoreModule : MultiDexApplication(), LifecycleObserver {
-    override final fun onCreate() {
+class CoreModule(context: Context) : LifecycleObserver {
+    init {
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
-        super.onCreate()
-        RepositoryModule(this)
+        RepositoryModule(context)
+        println("CoreModule onCreate")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    protected open fun onCoreCreate() {
+    open fun onCoreCreate() {
         LL.d("process on_create")
+        println("process on_create")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    protected open fun onCoreStart() {
+    open fun onCoreStart() {
         LL.d("process on_start")
+        println("process on_start")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    protected open fun onCoreResume() {
+    open fun onCoreResume() {
         LL.d("process on_resume")
+        println("process on_resume")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    protected open fun onCorePause() {
+    open fun onCorePause() {
         LL.d("process on_pause")
+        println("process on_pause")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    protected open fun onCoreStop() {
+    open fun onCoreStop() {
         LL.d("process on_stop")
+        println("process on_stop")
 
         ViewModelFactory.destroyInstance()
         RepositoryInjection.destroyInstance()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    protected open fun onCoreDestroy() {
+    open fun onCoreDestroy() {
         LL.d("process on_destroy")
+        println("process on_destroy")
     }
 }
 
