@@ -1,3 +1,5 @@
+# This branch will not be developed further. Checkout [dev](https://github.com/XinyueZ/mvvm-template/tree/dev) for new updates in the furture. It is only a demo now for mvvm + reactivX .
+
 # MVVM Template
 
 This repository provides templates which would be based on MVVM for Android application development.
