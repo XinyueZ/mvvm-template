@@ -8,7 +8,7 @@ import android.content.Context
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 
-class CoreModule(context: Context) : LifecycleObserver {
+open class CoreModule(context: Context) : LifecycleObserver {
     init {
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         RepositoryModule(context)
