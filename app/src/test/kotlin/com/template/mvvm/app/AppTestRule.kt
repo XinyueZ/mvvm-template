@@ -12,14 +12,18 @@ class AppTestRule : TestRule {
     companion object {
         class TestStatement(private val base: Statement) : Statement() {
             override fun evaluate() {
-                adjustApplication()
+                setup()
                 base.evaluate()
+                tearDown()
             }
 
-            private fun adjustApplication() {
+            private fun setup() {
                 ShadowApplication.getInstance().apply {
                     grantPermissions(Manifest.permission.ACCESS_NETWORK_STATE)
                 }
+            }
+
+            private fun tearDown() {
             }
         }
     }
