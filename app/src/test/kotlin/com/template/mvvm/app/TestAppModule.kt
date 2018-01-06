@@ -1,6 +1,6 @@
 package com.template.mvvm.app
 
-import org.hamcrest.MatcherAssert
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.notNullValue
 import org.junit.Before
@@ -22,6 +22,6 @@ class TestAppModule {
 
     @Test
     fun testAppExist() {
-        MatcherAssert.assertThat(app, `is`(notNullValue()))
+        assertThat(app, `is`(notNullValue()))
     }
 }
