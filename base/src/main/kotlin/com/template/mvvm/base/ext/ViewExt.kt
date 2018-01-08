@@ -18,8 +18,15 @@ package com.template.mvvm.base.ext
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
+import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.Toolbar
 import android.view.View
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.channels.Channel
+import kotlinx.coroutines.experimental.channels.actor
+import kotlinx.coroutines.experimental.channels.consumeEach
 
 fun View.showSnackbar(snackbarText: String, timeLength: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(this, snackbarText, timeLength).show()
@@ -31,3 +38,48 @@ fun View.setupSnackbar(lifecycleOwner: LifecycleOwner,
         it?.let { showSnackbar(it, timeLength) }
     })
 }
+
+
+fun View.onClick(block: suspend () -> Unit) {
+    val eventActor = actor<Unit>(UI, capacity = Channel.CONFLATED) {
+        // Handling only most recently received update.
+        consumeEach { block() }
+    }
+    setOnClickListener {
+        eventActor.offer(Unit)
+    }
+}
+
+fun NavigationView.onNavigationItemSelected(block: suspend (Int) -> Unit) {
+    val eventActor = actor<Int>(UI, capacity = Channel.CONFLATED) {
+        // Handling only most recently received update.
+        consumeEach { block(it) }
+    }
+    setNavigationItemSelectedListener {
+        it.isChecked = true
+        eventActor.offer(it.itemId)
+        true
+    }
+}
+
+fun BottomNavigationView.onNavigationItemSelected(block: suspend (Int) -> Unit) {
+    val eventActor = actor<Int>(UI, capacity = Channel.CONFLATED) {
+        // Handling only most recently received update.
+        consumeEach { block(it) }
+    }
+    setOnNavigationItemSelectedListener {
+        eventActor.offer(it.itemId)
+        true
+    }
+}
+
+fun Toolbar.onNavigationOnClick(block: suspend () -> Unit) {
+    val eventActor = actor<Unit>(UI, capacity = Channel.CONFLATED) {
+        // Handling only most recently received update.
+        consumeEach { block() }
+    }
+    setNavigationOnClickListener {
+        eventActor.offer(Unit)
+    }
+}
+
