@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.support.annotation.IdRes
-import android.view.MotionEvent
 import android.view.View
 import org.junit.Assert
 import org.robolectric.Shadows
@@ -51,10 +50,6 @@ fun advanceToNextPostedRunnable(scheduler: Scheduler = ShadowLooper.getShadowMai
 
 fun advanceToNextPostedRunnable(handler: Handler) {
     advanceToNextPostedRunnable(Shadows.shadowOf(handler.looper).scheduler)
-}
-
-fun View.performTouch() {
-    dispatchTouchEvent(MotionEvent.obtain(0L, 0L, MotionEvent.ACTION_UP, 12f, 34f, 0))
 }
 
 
