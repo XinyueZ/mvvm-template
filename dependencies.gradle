@@ -148,6 +148,9 @@ ext {
             [configuration: "implementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
 
             //TESTS
+            [configuration: "testImplementation", dependency: [group: 'android.arch.core', name: 'core-testing', version: archLifecycleVersion]],
+            [configuration: "testImplementation", dependency: [group: 'android.arch.persistence.room', name: 'testing', version: archLifecycleVersion]],
+
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'shadows-support-v4', version: robolectricSupportV4]],
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: shadowsMultidex]],
