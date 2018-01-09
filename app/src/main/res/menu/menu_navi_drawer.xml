@@ -17,7 +17,9 @@
 
     </group>
 
-    <item android:title="@string/navi_group_other">
+    <item
+        android:id="@+id/action_other"
+        android:title="@string/navi_group_other">
         <menu>
             <item
                 android:id="@id/action_software_licenses"
