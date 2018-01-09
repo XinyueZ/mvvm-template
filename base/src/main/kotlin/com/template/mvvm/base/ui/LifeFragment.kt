@@ -25,6 +25,6 @@ abstract class LifeFragment<out T : ViewModel> : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(getLayout(), container, false)
-        return bindingView(view).root
+        return bindingView(view).apply { executePendingBindings() }.root
     }
 }
