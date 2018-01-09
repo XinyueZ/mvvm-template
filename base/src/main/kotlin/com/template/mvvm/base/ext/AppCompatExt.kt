@@ -34,6 +34,9 @@ fun Activity.getDimension(@DimenRes res: Int) = resources.getDimension(res)
 @Size fun Fragment.getScreenSize() = com.template.mvvm.base.utils.getScreenSize(context, 0)
 @Size fun Activity.getScreenSize() = com.template.mvvm.base.utils.getScreenSize(this, 0)
 
+fun FragmentActivity.findChildFragment(@IdRes parent: Int, @IdRes child: Int): Fragment? =
+        supportFragmentManager.findFragmentById(parent).childFragmentManager.findFragmentById(child)
+
 fun FragmentActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
     supportFragmentManager.transact {
         replace(frameId, fragment)

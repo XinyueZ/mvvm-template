@@ -51,8 +51,3 @@ fun advanceToNextPostedRunnable(scheduler: Scheduler = ShadowLooper.getShadowMai
 fun advanceToNextPostedRunnable(handler: Handler) {
     advanceToNextPostedRunnable(Shadows.shadowOf(handler.looper).scheduler)
 }
-
-
-
-
-

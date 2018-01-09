@@ -9,11 +9,11 @@ import com.template.mvvm.app.AppTestRule
 import com.template.mvvm.app.R
 import com.template.mvvm.app.advanceToNextPostedRunnable
 import com.template.mvvm.app.applyView
-import com.template.mvvm.app.findChildFragment
 import com.template.mvvm.app.finish
+import com.template.mvvm.base.ext.findChildFragment
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers
 import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -66,15 +66,17 @@ class UiTestHome {
 
     @Test
     fun testSelectionOnDifferentTabs() {
-        activity.applyView<BottomNavigationView>(R.id.bottomNavi) {
-            selectedItemId = R.id.action_men
-            assertThat(activity.findChildFragment(R.id.contentFrame, R.id.childContentFrame)?.javaClass.toString(), `equalTo`(MenFragment::class.java.toString()))
+        activity.run {
+            applyView<BottomNavigationView>(R.id.bottomNavi) {
+                selectedItemId = R.id.action_men
+                assertThat(findChildFragment(R.id.contentFrame, R.id.childContentFrame)?.javaClass.toString(), Matchers.equalTo(MenFragment::class.java.toString()))
 
-            selectedItemId = R.id.action_women
-            assertThat(activity.findChildFragment(R.id.contentFrame, R.id.childContentFrame)?.javaClass.toString(), `equalTo`(WomenFragment::class.java.toString()))
+                selectedItemId = R.id.action_women
+                assertThat(findChildFragment(R.id.contentFrame, R.id.childContentFrame)?.javaClass.toString(), Matchers.equalTo(WomenFragment::class.java.toString()))
 
-            selectedItemId = R.id.action_all_genders
-            assertThat(activity.findChildFragment(R.id.contentFrame, R.id.childContentFrame)?.javaClass.toString(), `equalTo`(AllGendersFragment::class.java.toString()))
+                selectedItemId = R.id.action_all_genders
+                assertThat(findChildFragment(R.id.contentFrame, R.id.childContentFrame)?.javaClass.toString(), Matchers.equalTo(AllGendersFragment::class.java.toString()))
+            }
         }
     }
 }
