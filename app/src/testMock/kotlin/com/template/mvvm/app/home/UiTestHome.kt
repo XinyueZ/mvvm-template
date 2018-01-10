@@ -1,6 +1,7 @@
 package com.template.mvvm.app.home
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -17,8 +18,10 @@ import com.template.mvvm.app.applyView
 import com.template.mvvm.app.finish
 import com.template.mvvm.app.licenses.SoftwareLicensesActivity
 import com.template.mvvm.app.products.ProductsActivity
+import com.template.mvvm.base.ext.bytesEqualTo
 import com.template.mvvm.base.ext.findChildFragment
 import com.template.mvvm.base.ext.findSubItem
+import com.template.mvvm.base.ext.toBitmap
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -60,8 +63,13 @@ class UiTestHome {
                 val vs = arrayListOf<View>()
                 findViewsWithText(vs, navigationContentDescription, View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION)
 
-                assertThat((vs[0] as ImageButton).drawable, `equalTo`(AppCompatResources.getDrawable(context, R.drawable.ic_menu)))
                 assertThat(title.toString(), `equalTo`(getString(R.string.home_title)))
+
+                val bgColor = (background as ColorDrawable).color
+                assertThat(bgColor, `equalTo`(getColor(R.color.colorPrimary)))
+
+                assertThat(true, `is`((vs[0] as ImageButton).drawable.toBitmap().bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_menu)?.toBitmap())))
+                assertThat(false, `is`((vs[0] as ImageButton).drawable.toBitmap().bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_men)?.toBitmap())))
             }
         }
     }
