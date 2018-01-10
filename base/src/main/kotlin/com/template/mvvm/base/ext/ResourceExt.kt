@@ -2,12 +2,15 @@ package com.template.mvvm.base.ext
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import java.io.ByteArrayOutputStream
 
 fun Bitmap.bytesEqualTo(otherBitmap: Bitmap?) = otherBitmap?.let { other -> toBytes().contentEquals(other.toBytes()) } ?: kotlin.run { false }
 
 fun <T : Drawable> T.toBitmap(): Bitmap {
+    if (this is BitmapDrawable) return bitmap
+
     val drawable: Drawable = this
     val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
