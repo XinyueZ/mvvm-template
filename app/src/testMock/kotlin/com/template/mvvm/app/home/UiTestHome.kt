@@ -21,7 +21,7 @@ import com.template.mvvm.app.products.ProductsActivity
 import com.template.mvvm.base.ext.bytesEqualTo
 import com.template.mvvm.base.ext.findChildFragment
 import com.template.mvvm.base.ext.findSubItem
-import com.template.mvvm.base.ext.toBitmap
+import com.template.mvvm.base.ext.pixelsEqualTo
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -35,6 +35,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
+import kotlin.system.measureTimeMillis
 
 @RunWith(RobolectricTestRunner::class)
 class UiTestHome {
@@ -68,8 +69,19 @@ class UiTestHome {
                 val bgColor = (background as ColorDrawable).color
                 assertThat(bgColor, `equalTo`(getColor(R.color.colorPrimary)))
 
-                assertThat(true, `is`((vs[0] as ImageButton).drawable.toBitmap().bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_menu)?.toBitmap())))
-                assertThat(false, `is`((vs[0] as ImageButton).drawable.toBitmap().bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_men)?.toBitmap())))
+                measureTimeMillis {
+                    assertThat(true, `is`((vs[0] as ImageButton).drawable.bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_menu))))
+                    assertThat(false, `is`((vs[0] as ImageButton).drawable.bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_men))))
+                }.apply {
+                    println("bytesEqualTo: $this")
+                }
+
+                measureTimeMillis {
+                    assertThat(true, `is`((vs[0] as ImageButton).drawable.pixelsEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_menu))))
+                    assertThat(false, `is`((vs[0] as ImageButton).drawable.pixelsEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_men))))
+                }.apply {
+                    println("pixelsEqualTo: $this")
+                }
             }
         }
     }
