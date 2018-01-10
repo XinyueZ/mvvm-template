@@ -5,8 +5,10 @@ import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.Toolbar
 import android.view.View
+import android.widget.ImageButton
 import com.template.mvvm.app.AppTestRule
 import com.template.mvvm.app.R
 import com.template.mvvm.app.about.AboutActivity
@@ -48,6 +50,20 @@ class UiTestHome {
     @After
     fun tearDown() {
         activityCtrl.finish()
+    }
+
+    @Test
+    fun testAppBarLook() {
+        activity.run {
+            applyView<Toolbar>(R.id.toolbar) {
+                navigationContentDescription = "burg-button is good"
+                val vs = arrayListOf<View>()
+                findViewsWithText(vs, navigationContentDescription, View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION)
+
+                assertThat((vs[0] as ImageButton).drawable, `equalTo`(AppCompatResources.getDrawable(context, R.drawable.ic_menu)))
+                assertThat(title.toString(), `equalTo`(getString(R.string.home_title)))
+            }
+        }
     }
 
     @Test
