@@ -17,3 +17,5 @@ fun DrawerLayout.setup(lifecycleOwner: LifecycleOwner,
         }
     })
 }
+
+fun DrawerLayout.isDrawerTurnOn(drawerGravity: Int) = isDrawerOpen(drawerGravity) && isDrawerVisible(drawerGravity)
