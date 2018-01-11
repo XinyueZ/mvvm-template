@@ -7,21 +7,33 @@ import android.graphics.drawable.Drawable
 import java.io.ByteArrayOutputStream
 import java.util.*
 
-fun <T : Drawable> T.bytesEqualTo(t: T?) = toBitmap().bytesEqualTo(t?.toBitmap())
+fun <T : Drawable> T.bytesEqualTo(t: T?) = toBitmap().bytesEqualTo(t?.toBitmap(), true)
 
-fun <T : Drawable> T.pixelsEqualTo(t: T?) = toBitmap().pixelsEqualTo(t?.toBitmap())
+fun <T : Drawable> T.pixelsEqualTo(t: T?) = toBitmap().pixelsEqualTo(t?.toBitmap(), true)
 
-fun Bitmap.bytesEqualTo(otherBitmap: Bitmap?) = otherBitmap?.let { other ->
-    if (width == other.width && height == other.height)
-        toBytes().contentEquals(other.toBytes())
-    else false
+fun Bitmap.bytesEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) = otherBitmap?.let { other ->
+    if (width == other.width && height == other.height) {
+        val res = toBytes().contentEquals(other.toBytes())
+        if (shouldRecycle) {
+            doRecycle().also { otherBitmap.doRecycle() }
+        }
+        res
+    } else false
 } ?: kotlin.run { false }
 
-fun Bitmap.pixelsEqualTo(otherBitmap: Bitmap?) = otherBitmap?.let { other ->
-    if (width == other.width && height == other.height)
-        Arrays.equals(toPixels(), other.toPixels())
-    else false
+fun Bitmap.pixelsEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) = otherBitmap?.let { other ->
+    if (width == other.width && height == other.height) {
+        val res = Arrays.equals(toPixels(), other.toPixels())
+        if (shouldRecycle) {
+            doRecycle().also { otherBitmap.doRecycle() }
+        }
+        res
+    } else false
 } ?: kotlin.run { false }
+
+fun Bitmap.doRecycle() {
+    if (!isRecycled) recycle()
+}
 
 fun <T : Drawable> T.toBitmap(): Bitmap {
     if (this is BitmapDrawable) return bitmap
@@ -40,7 +52,3 @@ fun Bitmap.toBytes(): ByteArray = ByteArrayOutputStream().use { stream ->
 }
 
 fun Bitmap.toPixels() = IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }
-
-
-
-
