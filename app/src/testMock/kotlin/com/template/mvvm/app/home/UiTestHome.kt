@@ -19,6 +19,7 @@ import com.template.mvvm.app.uiTestAppearance
 import com.template.mvvm.base.ext.findChildFragment
 import com.template.mvvm.base.ext.findSubItem
 import com.template.mvvm.base.ext.getMenuItemView
+import com.template.mvvm.base.ext.isDrawerTurnOn
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -75,7 +76,7 @@ class UiTestHome {
         activity.applyView<DrawerLayout>(R.id.drawer) {
             advanceToNextPostedRunnable()
             computeScroll()
-            assertThat(isDrawerOpen(GravityCompat.START), `is`(true))
+            assertThat(isDrawerTurnOn(GravityCompat.START), `is`(true))
         }
     }
 
@@ -153,6 +154,27 @@ class UiTestHome {
 
                         getMenuItemView(R.id.action_about)?.performClick()
                         assertThat(nextStartedActivity.component.className, `is`(AboutActivity::class.java.name))
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testDrawerMenuItemClickAndDrawerClosed() {
+        activity.apply {
+            applyView<DrawerLayout>(R.id.drawer) {
+                applyView<NavigationView>(R.id.drawerNavi) {
+                    menu.run {
+                        shadowOf(this@apply).run {
+                            getMenuItemView(R.id.action_products)?.performClick()
+                            assertThat(isDrawerTurnOn(GravityCompat.START), `is`(false))
+                            getMenuItemView(R.id.action_internet)?.performClick()
+                            assertThat(isDrawerTurnOn(GravityCompat.START), `is`(false))
+                            getMenuItemView(R.id.action_software_licenses)?.performClick()
+                            assertThat(isDrawerTurnOn(GravityCompat.START), `is`(false))
+                            getMenuItemView(R.id.action_about)?.performClick()
+                        }
                     }
                 }
             }
