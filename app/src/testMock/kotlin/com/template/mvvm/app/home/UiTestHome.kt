@@ -18,6 +18,7 @@ import com.template.mvvm.app.products.ProductsActivity
 import com.template.mvvm.app.uiTestAppearance
 import com.template.mvvm.base.ext.findChildFragment
 import com.template.mvvm.base.ext.findSubItem
+import com.template.mvvm.base.ext.getMenuItemView
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -109,8 +110,7 @@ class UiTestHome {
     }
 
     @Test
-
-    fun testDrawerMenuItemSelection() {
+    fun testDrawerMenuItemSelect() {
         activity.apply {
             applyView<NavigationView>(R.id.drawerNavi) {
                 menu.run {
@@ -127,6 +127,31 @@ class UiTestHome {
                         assertThat(nextStartedActivity.component.className, `is`(SoftwareLicensesActivity::class.java.name))
 
                         performIdentifierAction(R.id.action_about, 0)
+                        assertThat(nextStartedActivity.component.className, `is`(AboutActivity::class.java.name))
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testDrawerMenuItemClick() {
+        activity.apply {
+            applyView<NavigationView>(R.id.drawerNavi) {
+                menu.run {
+                    shadowOf(this@apply).run {
+                        getMenuItemView(R.id.action_products)?.performClick()
+                        assertThat(nextStartedActivity.component.className, `is`(ProductsActivity::class.java.name))
+
+                        getMenuItemView(R.id.action_internet)?.performClick()
+                        val startedIntent = nextStartedActivity
+                        assertThat(startedIntent.action, `is`(Intent.ACTION_VIEW))
+                        assertThat(startedIntent.dataString, `is`(getString(R.string.internet_url)))
+
+                        getMenuItemView(R.id.action_software_licenses)?.performClick()
+                        assertThat(nextStartedActivity.component.className, `is`(SoftwareLicensesActivity::class.java.name))
+
+                        getMenuItemView(R.id.action_about)?.performClick()
                         assertThat(nextStartedActivity.component.className, `is`(AboutActivity::class.java.name))
                     }
                 }
