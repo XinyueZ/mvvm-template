@@ -1,15 +1,12 @@
 package com.template.mvvm.app.home
 
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.ImageButton
 import com.template.mvvm.app.AppTestRule
 import com.template.mvvm.app.R
 import com.template.mvvm.app.about.AboutActivity
@@ -18,10 +15,9 @@ import com.template.mvvm.app.applyView
 import com.template.mvvm.app.finish
 import com.template.mvvm.app.licenses.SoftwareLicensesActivity
 import com.template.mvvm.app.products.ProductsActivity
-import com.template.mvvm.base.ext.bytesEqualTo
+import com.template.mvvm.app.uiTestAppearance
 import com.template.mvvm.base.ext.findChildFragment
 import com.template.mvvm.base.ext.findSubItem
-import com.template.mvvm.base.ext.pixelsEqualTo
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -35,7 +31,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
-import kotlin.system.measureTimeMillis
 
 @RunWith(RobolectricTestRunner::class)
 class UiTestHome {
@@ -58,32 +53,7 @@ class UiTestHome {
 
     @Test
     fun testAppBarLook() {
-        activity.run {
-            applyView<Toolbar>(R.id.toolbar) {
-                navigationContentDescription = "burg-button is good"
-                val vs = arrayListOf<View>()
-                findViewsWithText(vs, navigationContentDescription, View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION)
-
-                assertThat(title.toString(), `equalTo`(getString(R.string.home_title)))
-
-                val bgColor = (background as ColorDrawable).color
-                assertThat(bgColor, `equalTo`(getColor(R.color.colorPrimary)))
-
-                measureTimeMillis {
-                    assertThat(true, `is`((vs[0] as ImageButton).drawable.bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_menu))))
-                    assertThat(false, `is`((vs[0] as ImageButton).drawable.bytesEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_men))))
-                }.apply {
-                    println("bytesEqualTo: $this")
-                }
-
-                measureTimeMillis {
-                    assertThat(true, `is`((vs[0] as ImageButton).drawable.pixelsEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_menu))))
-                    assertThat(false, `is`((vs[0] as ImageButton).drawable.pixelsEqualTo(AppCompatResources.getDrawable(context, R.drawable.ic_men))))
-                }.apply {
-                    println("pixelsEqualTo: $this")
-                }
-            }
-        }
+        activity.applyView<Toolbar>(R.id.toolbar).uiTestAppearance(R.string.home_title, R.color.colorPrimary, R.drawable.ic_menu)
     }
 
     @Test
