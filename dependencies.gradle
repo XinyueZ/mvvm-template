@@ -12,7 +12,7 @@ ext {
     def supportLibraryVersion = ext.support_comp
     def archLifecycleVersion = ext.arch_comp
     def paging = "1.0.0-alpha4-1"
-    def constraint = "1+"
+    def constraint = "1.1.0-beta4"
     def multiDex = "1+"
 
     // Retrofit
