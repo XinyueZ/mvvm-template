@@ -14,7 +14,7 @@ licenses:
 jdk:
     - oraclejdk8
 script:
-    - ./gradlew clean test  -x testMockReleaseUnitTest -x :base:generateProdDebugUnitTestConfig -x :base:generateProdReleaseUnitTestConfig   -x :core:generateProdDebugUnitTestConfig -x :core:generateProdReleaseUnitTestConfig  -x :repository:generateProdDebugUnitTestConfig -x :repository:generateProdReleaseUnitTestConfig
+    - ./gradlew clean test
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
