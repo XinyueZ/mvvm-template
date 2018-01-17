@@ -9,11 +9,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 
 class MvvmItemViewHolder(
-        parent: ViewGroup,
-        @LayoutRes layout: Int,
-        private val vmItemLayout: Int,
-        private val binding: ViewDataBinding? = DataBindingUtil.bind(LayoutInflater.from(parent.context).inflate(layout, parent, false)))
-    : RecyclerView.ViewHolder(binding?.root) {
+    parent: ViewGroup,
+    @LayoutRes layout: Int,
+    private val vmItemLayout: Int,
+    private val binding: ViewDataBinding? = DataBindingUtil.bind(
+        LayoutInflater.from(parent.context).inflate(
+            layout,
+            parent,
+            false
+        )
+    )
+) : RecyclerView.ViewHolder(binding?.root) {
 
     fun bindViewModel(vm: ViewModel?) {
         vm?.let {

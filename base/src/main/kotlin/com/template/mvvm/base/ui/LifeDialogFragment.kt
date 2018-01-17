@@ -11,7 +11,9 @@ import android.view.View
 
 abstract class LifeDialogFragment<out T : ViewModel> : AppCompatDialogFragment() {
     protected abstract fun obtainViewModel(): T
-    protected abstract @LayoutRes fun getLayout(): Int
+    protected abstract @LayoutRes
+    fun getLayout(): Int
+
     protected abstract fun bindingView(view: View): ViewDataBinding
     protected abstract fun requireViewModel(): Class<out T>
 

@@ -22,14 +22,17 @@ import android.os.Build
 import android.view.View
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-internal open class SystemUiHelperImplJB(activity: Activity, level: Int, flags: Int,
-                                         onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?) : SystemUiHelperImplICS(activity, level, flags, onVisibilityChangeListener) {
+internal open class SystemUiHelperImplJB(
+    activity: Activity, level: Int, flags: Int,
+    onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?
+) : SystemUiHelperImplICS(activity, level, flags, onVisibilityChangeListener) {
 
     override fun createShowFlags(): Int {
         var flag = super.createShowFlags()
 
         if (mLevel >= SystemUiHelper.LEVEL_HIDE_STATUS_BAR) {
-            flag = flag or (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+            flag = flag or
+                    (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
 
             if (mLevel >= SystemUiHelper.LEVEL_LEAN_BACK) {
                 flag = flag or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -43,7 +46,8 @@ internal open class SystemUiHelperImplJB(activity: Activity, level: Int, flags: 
         var flag = super.createHideFlags()
 
         if (mLevel >= SystemUiHelper.LEVEL_HIDE_STATUS_BAR) {
-            flag = flag or (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_FULLSCREEN)
+            flag = flag or
+                    (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_FULLSCREEN)
 
             if (mLevel >= SystemUiHelper.LEVEL_LEAN_BACK) {
                 flag = flag or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

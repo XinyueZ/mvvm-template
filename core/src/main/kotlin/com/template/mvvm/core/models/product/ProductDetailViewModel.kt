@@ -22,7 +22,8 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
-open class ProductDetailViewModel(private val repository: ProductsDataSource) : AbstractViewModel() {
+open class ProductDetailViewModel(private val repository: ProductsDataSource) :
+    AbstractViewModel() {
 
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)

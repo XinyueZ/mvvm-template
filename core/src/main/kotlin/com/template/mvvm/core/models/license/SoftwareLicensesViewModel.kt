@@ -24,7 +24,10 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
-class SoftwareLicensesViewModel(private val application: Application, private val repository: LicensesDataSource) : AbstractViewModel() {
+class SoftwareLicensesViewModel(
+    private val application: Application,
+    private val repository: LicensesDataSource
+) : AbstractViewModel() {
 
     val title = ObservableInt(R.string.software_licenses_title)
     val dataLoaded = ObservableBoolean(false)
@@ -73,17 +76,23 @@ class SoftwareLicensesViewModel(private val application: Application, private va
         return true
     }
 
-    private fun bindTapHandlers(it: List<SoftwareLicenseItemViewModel>, lifecycleOwner: LifecycleOwner) {
+    private fun bindTapHandlers(
+        it: List<SoftwareLicenseItemViewModel>,
+        lifecycleOwner: LifecycleOwner
+    ) {
         it.forEach {
             it.clickHandler += {
                 launch(UI + vmJob) {
                     // Tell UI to open a UI for license detail.
-                    licenseDetailViewModel.value = lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java).apply {
-                        repository.getLicense(application, vmJob, it, false).consumeEach {
-                            LL.d("Show license detail")
-                            detail.set(it)
-                        }
-                    }
+                    licenseDetailViewModel.value =
+                            lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                                .apply {
+                                    repository.getLicense(application, vmJob, it, false)
+                                        .consumeEach {
+                                            LL.d("Show license detail")
+                                            detail.set(it)
+                                        }
+                                }
                 }
             }
         }

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package com.template.mvvm.base.customtabs
+
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -24,7 +25,8 @@ private const val STABLE_PACKAGE = "com.android.chrome"
 private const val BETA_PACKAGE = "com.chrome.beta"
 private const val DEV_PACKAGE = "com.chrome.dev"
 private const val LOCAL_PACKAGE = "com.google.android.apps.chrome"
-private const val ACTION_CUSTOM_TABS_CONNECTION = "android.support.customtabs.action.CustomTabsService"
+private const val ACTION_CUSTOM_TABS_CONNECTION =
+    "android.support.customtabs.action.CustomTabsService"
 
 /**
  * Helper class for Custom Tabs.
@@ -75,8 +77,9 @@ internal object CustomTabsHelper {
         } else if (packagesSupportingCustomTabs.size == 1) {
             usePackageName = packagesSupportingCustomTabs[0]
         } else if (!TextUtils.isEmpty(defaultViewHandlerPackageName)
-                && !hasSpecializedHandlerIntents(context, activityIntent)
-                && packagesSupportingCustomTabs.contains(defaultViewHandlerPackageName)) {
+            && !hasSpecializedHandlerIntents(context, activityIntent)
+            && packagesSupportingCustomTabs.contains(defaultViewHandlerPackageName)
+        ) {
             usePackageName = defaultViewHandlerPackageName
         } else if (packagesSupportingCustomTabs.contains(STABLE_PACKAGE)) {
             usePackageName = STABLE_PACKAGE
@@ -100,8 +103,9 @@ internal object CustomTabsHelper {
         try {
             val pm = context.packageManager
             val handlers = pm.queryIntentActivities(
-                    intent,
-                    PackageManager.GET_RESOLVED_FILTER)
+                intent,
+                PackageManager.GET_RESOLVED_FILTER
+            )
             if (handlers == null || handlers.size == 0) {
                 return false
             }
@@ -112,7 +116,11 @@ internal object CustomTabsHelper {
                 return true
             }
         } catch (e: RuntimeException) {
-            Log.e(CustomTabsHelper::class.qualifiedName, "Error while obtaining specialized handlers.", e)
+            Log.e(
+                CustomTabsHelper::class.qualifiedName,
+                "Error while obtaining specialized handlers.",
+                e
+            )
         }
 
         return false

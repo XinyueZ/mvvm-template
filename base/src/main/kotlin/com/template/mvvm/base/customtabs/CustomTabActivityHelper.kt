@@ -1,4 +1,5 @@
 package com.template.mvvm.base.customtabs
+
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
@@ -15,7 +16,12 @@ internal class CustomTabActivityHelper : ServiceConnectionCallback {
 
     companion object {
 
-        internal fun openCustomTab(activity: Activity, customTabsIntent: CustomTabsIntent, uri: Uri, fallback: CustomTabFallback?) {
+        internal fun openCustomTab(
+            activity: Activity,
+            customTabsIntent: CustomTabsIntent,
+            uri: Uri,
+            fallback: CustomTabFallback?
+        ) {
             val packageName = CustomTabsHelper.getPackageNameToUse(activity)
 
             if (packageName == null) {
@@ -62,7 +68,6 @@ internal class CustomTabActivityHelper : ServiceConnectionCallback {
         CustomTabsClient.bindCustomTabsService(context, packageName, connection)
         return this
     }
-
 
     /**
      * @see {@link CustomTabsSession.mayLaunchUrl

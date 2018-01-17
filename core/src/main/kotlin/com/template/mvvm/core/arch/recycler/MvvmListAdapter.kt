@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import com.template.mvvm.repository.LL
 
 class MvvmListAdapter(
-        private @LayoutRes val itemLayout: Int,
-        private val vmItemLayout: Int,
-        private val onListItemBound: OnListItemBoundListener?
+    private @LayoutRes val itemLayout: Int,
+    private val vmItemLayout: Int,
+    private val onListItemBound: OnListItemBoundListener?
 ) : RecyclerView.Adapter<MvvmItemViewHolder>() {
 
     private val list = arrayListOf<ViewModel>()
@@ -39,7 +39,8 @@ class MvvmListAdapter(
         LL.d("onBindViewHolder: $position")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MvvmItemViewHolder(parent, itemLayout, vmItemLayout)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        MvvmItemViewHolder(parent, itemLayout, vmItemLayout)
 }
 
 interface OnListItemBoundListener {

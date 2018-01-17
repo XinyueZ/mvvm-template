@@ -1,4 +1,5 @@
 package com.template.mvvm.base.customtabs
+
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -26,7 +27,12 @@ object CustomTabUtils {
         }
     }
 
-    fun openWeb(activity: Activity, url: Uri, builder: CustomTabsIntent.Builder, fallback: CustomTabFallback = DefaultFallback) {
+    fun openWeb(
+        activity: Activity,
+        url: Uri,
+        builder: CustomTabsIntent.Builder,
+        fallback: CustomTabFallback = DefaultFallback
+    ) {
         CustomTabActivityHelper.openCustomTab(activity, builder.build(), url, fallback)
     }
 }
@@ -43,7 +49,11 @@ internal object DefaultFallback : CustomTabFallback {
             intent.data = uri
             activity.startActivity(intent)
         } catch (ex: ActivityNotFoundException) {
-            Log.e(DefaultFallback::class.qualifiedName, "Unable to start activity intent for uri: $uri", ex)
+            Log.e(
+                DefaultFallback::class.qualifiedName,
+                "Unable to start activity intent for uri: $uri",
+                ex
+            )
         }
     }
 }

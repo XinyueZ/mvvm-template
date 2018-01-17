@@ -13,27 +13,35 @@ import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
 
 fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
-        ViewModelProviders.of(this, ViewModelFactory.getInstance(this.application)).get(viewModelClass)
+    ViewModelProviders.of(this, ViewModelFactory.getInstance(this.application)).get(viewModelClass)
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
-        activity?.let { ViewModelProviders.of(it, ViewModelFactory.getInstance(it.application)).get(viewModelClass) }
-                ?: kotlin.run { ViewModelProviders.of(this).get(viewModelClass) }
+    activity?.let {
+        ViewModelProviders.of(it, ViewModelFactory.getInstance(it.application)).get(viewModelClass)
+    }
+            ?: kotlin.run { ViewModelProviders.of(this).get(viewModelClass) }
 
-fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = with(when (this) {
-    is Fragment -> activity
-    else -> this as FragmentActivity
-}) {
+fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = with(
+    when (this) {
+        is Fragment -> activity
+        else -> this as FragmentActivity
+    }
+) {
     this?.let {
         ViewModelProviders.of(it, ViewModelFactory.getInstance(it.application)).get(viewModelClass)
-    } ?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
+    }
+            ?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
 }
 
 fun View.showErrorSnackbar(errorVm: Error, timeLength: Int = Snackbar.LENGTH_INDEFINITE) {
-    Snackbar.make(this, errorVm.wording, timeLength).setAction(errorVm.retryWording, { errorVm.retry() }).show()
+    Snackbar.make(this, errorVm.wording, timeLength)
+        .setAction(errorVm.retryWording, { errorVm.retry() }).show()
 }
 
-fun View.setupErrorSnackbar(lifecycleOwner: LifecycleOwner,
-                            liveData: ErrorViewModel, timeLength: Int = Snackbar.LENGTH_INDEFINITE) {
+fun View.setupErrorSnackbar(
+    lifecycleOwner: LifecycleOwner,
+    liveData: ErrorViewModel, timeLength: Int = Snackbar.LENGTH_INDEFINITE
+) {
     liveData.observe(lifecycleOwner, Observer {
         it?.let { showErrorSnackbar(it, timeLength) }
     })

@@ -32,13 +32,14 @@ fun View.showSnackbar(snackbarText: String, timeLength: Int = Snackbar.LENGTH_SH
     Snackbar.make(this, snackbarText, timeLength).show()
 }
 
-fun View.setupSnackbar(lifecycleOwner: LifecycleOwner,
-                       liveData: LiveData<String>, timeLength: Int = Snackbar.LENGTH_SHORT) {
+fun View.setupSnackbar(
+    lifecycleOwner: LifecycleOwner,
+    liveData: LiveData<String>, timeLength: Int = Snackbar.LENGTH_SHORT
+) {
     liveData.observe(lifecycleOwner, Observer {
         it?.let { showSnackbar(it, timeLength) }
     })
 }
-
 
 fun View.onClick(block: suspend () -> Unit) {
     val eventActor = actor<Unit>(UI, capacity = Channel.CONFLATED) {

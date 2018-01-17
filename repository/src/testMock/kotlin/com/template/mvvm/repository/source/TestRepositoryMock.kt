@@ -68,17 +68,17 @@ class TestRepositoryMock {
     }
 
     private fun readLicenseText(lib: Library) =
-            context().assets.read(String.format("%s/%s.txt", "licenses-box", lib.license.name))
-                    .replace("<year>", lib.copyright ?: "")
-                    .replace("<copyright holders>", lib.owner ?: "")
+        context().assets.read(String.format("%s/%s.txt", "licenses-box", lib.license.name))
+            .replace("<year>", lib.copyright ?: "")
+            .replace("<copyright holders>", lib.owner ?: "")
 
     @Test
     fun testGetAllProducts() {
         runBlocking(testJob) {
             with(RepositoryInjection.getInstance().provideRepository(context())) {
                 testHelperGetProducts(
-                        getAllProducts(testJob, 0),
-                        "feeds/products/all.json"
+                    getAllProducts(testJob, 0),
+                    "feeds/products/all.json"
                 )
             }
         }
@@ -89,8 +89,8 @@ class TestRepositoryMock {
         runBlocking(testJob) {
             with(RepositoryInjection.getInstance().provideRepository(context())) {
                 testHelperGetProducts(
-                        filterProducts(testJob, 0, true, "men"),
-                        "feeds/products/men.json"
+                    filterProducts(testJob, 0, true, "men"),
+                    "feeds/products/men.json"
                 )
             }
         }
@@ -101,8 +101,8 @@ class TestRepositoryMock {
         runBlocking(testJob) {
             with(RepositoryInjection.getInstance().provideRepository(context())) {
                 testHelperGetProducts(
-                        filterProducts(testJob, 0, true, "women"),
-                        "feeds/products/women.json"
+                    filterProducts(testJob, 0, true, "women"),
+                    "feeds/products/women.json"
                 )
             }
         }
@@ -115,7 +115,10 @@ class TestRepositoryMock {
      * @param  receiveChannel The backend source.
      * @param mockFeedsFileLocation The location of file that provides feeds.
      */
-    private suspend fun testHelperGetProducts(receiveChannel: ReceiveChannel<List<Product>?>, mockFeedsFileLocation: String) {
+    private suspend fun testHelperGetProducts(
+        receiveChannel: ReceiveChannel<List<Product>?>,
+        mockFeedsFileLocation: String
+    ) {
         receiveChannel.receiveOrNull()?.let { result ->
             assertThat(result.isNotEmpty(), `is`(true))
             assertThat(result.size, `is`(10))
@@ -123,18 +126,18 @@ class TestRepositoryMock {
             context().assets.read(mockFeedsFileLocation).run {
                 Gson().fromJson(this, ProductsData::class.java)
             }.also { fromDataSource ->
-                var failed = false
-                result.forEach { rs ->
-                    val found = fromDataSource.products.find { ds ->
-                        rs.pid == ds.pid
+                    var failed = false
+                    result.forEach { rs ->
+                        val found = fromDataSource.products.find { ds ->
+                            rs.pid == ds.pid
+                        }
+                        if (found == null) {
+                            failed = true
+                            return@forEach
+                        }
                     }
-                    if (found == null) {
-                        failed = true
-                        return@forEach
-                    }
+                    assertThat(failed, `is`(false))
                 }
-                assertThat(failed, `is`(false))
-            }
         }
     }
 
@@ -145,22 +148,22 @@ class TestRepositoryMock {
                 provideRepository(context()).run {
                     getAllProducts(testJob, 0).receiveOrNull()
                 }.also { products ->
-                    var failed = false
-                    products?.forEach { oneProduct ->
-                        provideRepository(context()).run {
-                            getProductDetail(testJob, oneProduct.pid, true)
-                        }.also {
-                            val found = (it.receiveOrNull()?.run {
-                                pid == oneProduct.pid
-                            }) ?: false
-                            if (!found) {
-                                failed = true
-                                return@forEach
-                            }
+                        var failed = false
+                        products?.forEach { oneProduct ->
+                            provideRepository(context()).run {
+                                getProductDetail(testJob, oneProduct.pid, true)
+                            }.also {
+                                    val found = (it.receiveOrNull()?.run {
+                                        pid == oneProduct.pid
+                                    }) ?: false
+                                    if (!found) {
+                                        failed = true
+                                        return@forEach
+                                    }
+                                }
                         }
+                        assertThat(failed, `is`(false))
                     }
-                    assertThat(failed, `is`(false))
-                }
             }
         }
     }
@@ -172,30 +175,30 @@ class TestRepositoryMock {
                 provideRepository(context()).run {
                     getAllProducts(testJob, 0).receiveOrNull()
                 }.also { products ->
-                    products?.forEach { oneProduct ->
-                        val imagesOfItem = provideRepository(context()).run {
-                            getImages(testJob, oneProduct.pid).receiveOrNull()
-                        }
-                        assertThat(imagesOfItem, `is`(notNullValue()))
-                        assertThat(imagesOfItem?.isNotEmpty(), `equalTo`(true))
-
-                        var failed = false
-
-                        oneProduct.pictures.forEach { _, image ->
-                            val found = imagesOfItem?.find { expImage ->
-                                expImage.pid == image.pid
-                                        && expImage.size == image.size
-                                        && expImage.uri.toString() == image.uri.toString()
+                        products?.forEach { oneProduct ->
+                            val imagesOfItem = provideRepository(context()).run {
+                                getImages(testJob, oneProduct.pid).receiveOrNull()
                             }
-                            if (found == null) {
-                                failed = true
-                                return@forEach
-                            }
-                        }
+                            assertThat(imagesOfItem, `is`(notNullValue()))
+                            assertThat(imagesOfItem?.isNotEmpty(), `equalTo`(true))
 
-                        assertThat(failed, `is`(false))
+                            var failed = false
+
+                            oneProduct.pictures.forEach { _, image ->
+                                val found = imagesOfItem?.find { expImage ->
+                                    expImage.pid == image.pid
+                                            && expImage.size == image.size
+                                            && expImage.uri.toString() == image.uri.toString()
+                                }
+                                if (found == null) {
+                                    failed = true
+                                    return@forEach
+                                }
+                            }
+
+                            assertThat(failed, `is`(false))
+                        }
                     }
-                }
             }
         }
     }
@@ -273,12 +276,14 @@ class TestRepositoryMock {
                     with(provideLocalProductsRepository()) {
                         // Must use local repo, otherwise the api will also be called.
                         // check local data storage
-                        val storedProducts = filterProducts(testJob, 0, true, "men").receiveOrNull()?.size
+                        val storedProducts =
+                            filterProducts(testJob, 0, true, "men").receiveOrNull()?.size
                         assertThat(storedProducts, `equalTo`(0))
 
                         alreadyDeleted.forEach {
                             val prdImgs = it.pictures.values
-                            val dbImgs = provideRepository(context()).getImages(testJob, it.pid).receive()
+                            val dbImgs =
+                                provideRepository(context()).getImages(testJob, it.pid).receive()
                             prdImgs.forEach { img1 ->
                                 val found = dbImgs.find { img2 ->
                                     img1.uri.toString() == img2.uri.toString()
@@ -295,7 +300,8 @@ class TestRepositoryMock {
                         assertThat(storedProducts.size, `equalTo`(10))
                         storedProducts.forEach {
                             val prdImgs = it.pictures.values
-                            val dbImgs = provideRepository(context()).getImages(testJob, it.pid).receive()
+                            val dbImgs =
+                                provideRepository(context()).getImages(testJob, it.pid).receive()
                             prdImgs.forEach { img1 ->
                                 val found = dbImgs.find { img2 ->
                                     img1.uri.toString() == img2.uri.toString()

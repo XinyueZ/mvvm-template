@@ -7,7 +7,6 @@ import android.support.annotation.MainThread
 import android.util.Log
 import java.util.concurrent.atomic.AtomicBoolean
 
-
 open class SingleLiveData<T> : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)
@@ -16,7 +15,10 @@ open class SingleLiveData<T> : MutableLiveData<T>() {
     override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
 
         if (hasActiveObservers()) {
-            Log.w(javaClass.simpleName, "Multiple observers registered but only one will be notified of changes.")
+            Log.w(
+                javaClass.simpleName,
+                "Multiple observers registered but only one will be notified of changes."
+            )
         }
 
         // Observe the internal MutableLiveData

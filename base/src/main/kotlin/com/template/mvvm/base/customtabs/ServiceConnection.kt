@@ -22,8 +22,10 @@ import java.lang.ref.WeakReference
  * Implementation for the CustomTabsServiceConnection that avoids leaking the
  * ServiceConnectionCallback
  */
-internal class ServiceConnection(connectionCallback: ServiceConnectionCallback) : CustomTabsServiceConnection() {
-    private val callback: WeakReference<ServiceConnectionCallback> = WeakReference(connectionCallback)
+internal class ServiceConnection(connectionCallback: ServiceConnectionCallback) :
+    CustomTabsServiceConnection() {
+    private val callback: WeakReference<ServiceConnectionCallback> =
+        WeakReference(connectionCallback)
 
     override fun onCustomTabsServiceConnected(name: ComponentName, client: CustomTabsClient) {
         val connectionCallback = callback.get()

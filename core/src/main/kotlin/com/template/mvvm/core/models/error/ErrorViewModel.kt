@@ -13,4 +13,7 @@ class ErrorViewModel : MutableLiveData<Error>() {
     val retry: (() -> Unit)? = value?.retry
 }
 
-class Error(val t: Throwable, @StringRes val wording: Int, @StringRes val retryWording: Int, val retry: () -> Unit) : AbstractViewModel()
+class Error(
+    val t: Throwable, @StringRes val wording: Int, @StringRes val retryWording: Int,
+    val retry: () -> Unit
+) : AbstractViewModel()

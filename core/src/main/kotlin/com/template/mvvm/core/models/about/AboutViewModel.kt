@@ -6,7 +6,6 @@ import com.template.mvvm.core.models.AbstractViewModel
 class AboutViewModel : AbstractViewModel() {
     val state = AboutViewModelState()
 
-
     //-----------------------------------
     //BindingAdapter handler
     //-----------------------------------

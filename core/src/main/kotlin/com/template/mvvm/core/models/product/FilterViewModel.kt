@@ -4,7 +4,9 @@ import com.template.mvvm.repository.contract.ProductsDataSource
 
 abstract class FilterViewModel(repository: ProductsDataSource) : ProductsViewModel(repository) {
     abstract fun filterKeyword(): String
-    override suspend fun query(start: Int) = repository.filterProducts(vmJob, start, true, filterKeyword())
+    override suspend fun query(start: Int) =
+        repository.filterProducts(vmJob, start, true, filterKeyword())
+
     override suspend fun delete() = repository.deleteAll(vmJob, filterKeyword())
 }
 

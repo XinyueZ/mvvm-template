@@ -23,8 +23,11 @@ import android.view.View
 import android.view.WindowManager
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-internal open class SystemUiHelperImplHC(activity: Activity, level: Int, flags: Int,
-                                         onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?) : SystemUiHelper.SystemUiHelperImpl(activity, level, flags, onVisibilityChangeListener), View.OnSystemUiVisibilityChangeListener {
+internal open class SystemUiHelperImplHC(
+    activity: Activity, level: Int, flags: Int,
+    onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?
+) : SystemUiHelper.SystemUiHelperImpl(activity, level, flags, onVisibilityChangeListener),
+    View.OnSystemUiVisibilityChangeListener {
 
     val mDecorView: View
 

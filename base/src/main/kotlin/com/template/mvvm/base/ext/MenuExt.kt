@@ -13,10 +13,10 @@ fun NavigationView.getMenuItemView(@IdRes id: Int): NavigationMenuItemView? {
         with(getChildAt(i)) {
             if (this is NavigationMenuView) {
                 return (0 until childCount)
-                        .map { getChildAt(it) }
-                        .filter { it is NavigationMenuItemView }
-                        .map { it as NavigationMenuItemView }
-                        .firstOrNull { it.itemData.itemId == id }
+                    .map { getChildAt(it) }
+                    .filter { it is NavigationMenuItemView }
+                    .map { it as NavigationMenuItemView }
+                    .firstOrNull { it.itemData.itemId == id }
             }
         }
     }

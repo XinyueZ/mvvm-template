@@ -6,8 +6,10 @@ import android.arch.lifecycle.Observer
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 
-fun DrawerLayout.setup(lifecycleOwner: LifecycleOwner,
-                       openTrue: LiveData<Boolean>) {
+fun DrawerLayout.setup(
+    lifecycleOwner: LifecycleOwner,
+    openTrue: LiveData<Boolean>
+) {
     openTrue.observe(lifecycleOwner, Observer {
         it?.let {
             when (it) {
@@ -18,4 +20,5 @@ fun DrawerLayout.setup(lifecycleOwner: LifecycleOwner,
     })
 }
 
-fun DrawerLayout.isDrawerTurnOn(drawerGravity: Int) = isDrawerOpen(drawerGravity) && isDrawerVisible(drawerGravity)
+fun DrawerLayout.isDrawerTurnOn(drawerGravity: Int) =
+    isDrawerOpen(drawerGravity) && isDrawerVisible(drawerGravity)

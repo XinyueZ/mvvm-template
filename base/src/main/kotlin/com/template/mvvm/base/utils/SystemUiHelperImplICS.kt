@@ -22,8 +22,10 @@ import android.os.Build
 import android.view.View
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-internal open class SystemUiHelperImplICS(activity: Activity, level: Int, flags: Int,
-                                          onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?) : SystemUiHelperImplHC(activity, level, flags, onVisibilityChangeListener) {
+internal open class SystemUiHelperImplICS(
+    activity: Activity, level: Int, flags: Int,
+    onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?
+) : SystemUiHelperImplHC(activity, level, flags, onVisibilityChangeListener) {
 
     override fun createShowFlags(): Int {
         return View.SYSTEM_UI_FLAG_VISIBLE

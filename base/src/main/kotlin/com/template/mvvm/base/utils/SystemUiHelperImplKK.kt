@@ -22,8 +22,10 @@ import android.os.Build
 import android.view.View
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
-internal class SystemUiHelperImplKK(activity: Activity, level: Int, flags: Int,
-                                    onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?) : SystemUiHelperImplJB(activity, level, flags, onVisibilityChangeListener) {
+internal class SystemUiHelperImplKK(
+    activity: Activity, level: Int, flags: Int,
+    onVisibilityChangeListener: SystemUiHelper.OnVisibilityChangeListener?
+) : SystemUiHelperImplJB(activity, level, flags, onVisibilityChangeListener) {
 
     override fun createHideFlags(): Int {
         var flag = super.createHideFlags()

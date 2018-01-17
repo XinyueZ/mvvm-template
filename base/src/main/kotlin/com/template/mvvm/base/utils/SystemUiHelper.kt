@@ -40,8 +40,10 @@ class SystemUiHelper
  * [.FLAG_IMMERSIVE_STICKY]
  * @param listener A listener which is called when the system visibility is changed
  */
-@JvmOverloads constructor(activity: Activity, level: Int, flags: Int,
-                          listener: OnVisibilityChangeListener? = null) {
+@JvmOverloads constructor(
+    activity: Activity, level: Int, flags: Int,
+    listener: OnVisibilityChangeListener? = null
+) {
 
     private val mImpl: SystemUiHelperImpl
 
@@ -146,8 +148,10 @@ class SystemUiHelper
         fun onVisibilityChange(visible: Boolean)
     }
 
-    internal abstract class SystemUiHelperImpl(val mActivity: Activity, val mLevel: Int, val mFlags: Int,
-                                               val mOnVisibilityChangeListener: OnVisibilityChangeListener?) {
+    internal abstract class SystemUiHelperImpl(
+        val mActivity: Activity, val mLevel: Int, val mFlags: Int,
+        val mOnVisibilityChangeListener: OnVisibilityChangeListener?
+    ) {
 
         var mIsShowing = true
 
@@ -166,14 +170,17 @@ class SystemUiHelper
     /**
      * Base implementation. Used onLoaded API level 10 and below.
      */
-    internal class SystemUiHelperImplBase(activity: Activity, level: Int, flags: Int,
-                                          onVisibilityChangeListener: OnVisibilityChangeListener?) : SystemUiHelperImpl(activity, level, flags, onVisibilityChangeListener) {
+    internal class SystemUiHelperImplBase(
+        activity: Activity, level: Int, flags: Int,
+        onVisibilityChangeListener: OnVisibilityChangeListener?
+    ) : SystemUiHelperImpl(activity, level, flags, onVisibilityChangeListener) {
 
         init {
 
             if (mFlags and SystemUiHelper.FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES != 0) {
                 mActivity.window.addFlags(
-                        WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                )
             }
         }
 
