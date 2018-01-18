@@ -51,6 +51,7 @@ ext {
     def dexmaker = "1.2"
     def roomTest = archLifecycleVersion
     def multidexInstrumentation = "1.0.2"
+    def kotlinTest = "2+"
 
     plugins = [
             androidApp: "com.android.application",
@@ -161,6 +162,7 @@ ext {
              options      : {
                  exclude group: 'org.hamcrest', module: 'org.hamcrest'
              }],
+            [configuration: "testImplementation", dependency: [group: 'io.kotlintest', name: 'kotlintest', version: kotlinTest]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'runner', version: testRunner]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'rules', version: testRunner]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: espresso]],
