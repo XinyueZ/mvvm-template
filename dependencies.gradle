@@ -156,7 +156,6 @@ ext {
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'shadows-support-v4', version: robolectricSupportV4]],
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: shadowsMultidex]],
             [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
             [configuration: "testImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
             [configuration: "testImplementation", dependency: [group: "junit", name: "junit", version: junit],
              options      : {
@@ -174,7 +173,6 @@ ext {
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso.idling', name: 'idling-concurrent', version: espresso]],
             [configuration: "androidTestImplementation", dependency: [group: "android.arch.persistence.room", name: "testing", version: roomTest]],
             [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
             [configuration: "androidTestImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
             [configuration: "androidTestImplementation", dependency: [group: "junit", name: "junit", version: junit],
              options      : {
