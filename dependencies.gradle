@@ -11,7 +11,8 @@ ext {
     // App dependencies
     def supportLibraryVersion = ext.support_comp
     def archLifecycleVersion = ext.arch_comp
-    def paging = "1.0.0-alpha4-1"
+    def dbLib = ext.room
+    def paging = "1.0.0-alpha5"
     def constraint = "1.1.0-beta4"
     def multiDex = "1+"
 
@@ -50,7 +51,7 @@ ext {
     def espresso = "3.0.1"
     def junit = "4.12"
     def dexmaker = "1.2"
-    def roomTest = archLifecycleVersion
+    def roomTest = "1.0.0"
     def multidexInstrumentation = "1.0.2"
     def kotlinTest = "2+"
 
@@ -117,8 +118,8 @@ ext {
             [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion]],
             [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion]],
             [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "common-java8", version: archLifecycleVersion]],
-            [configuration: "implementation", dependency: [group: "android.arch.persistence.room", name: "runtime", version: archLifecycleVersion]],
-            [configuration: "kapt", dependency: [group: "android.arch.persistence.room", name: "compiler", version: archLifecycleVersion]],
+            [configuration: "implementation", dependency: [group: "android.arch.persistence.room", name: "runtime", version: dbLib]],
+            [configuration: "kapt", dependency: [group: "android.arch.persistence.room", name: "compiler", version: dbLib]],
             [configuration: "implementation", dependency: [group: "android.arch.paging", name: "runtime", version: paging]],
 
             //KOTLIN
@@ -150,7 +151,7 @@ ext {
 
             //TESTS
             [configuration: "testImplementation", dependency: [group: 'android.arch.core', name: 'core-testing', version: archLifecycleVersion]],
-            [configuration: "testImplementation", dependency: [group: 'android.arch.persistence.room', name: 'testing', version: archLifecycleVersion]],
+            [configuration: "testImplementation", dependency: [group: 'android.arch.persistence.room', name: 'testing', version: roomTest]],
 
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'shadows-support-v4', version: robolectricSupportV4]],
