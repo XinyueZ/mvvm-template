@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
-            android:name="com.template.mvvm.ExAppGlideModule"
+            android:name="com.template.mvvm.core.ExAppGlideModule"
             android:value="ExAppGlideModule"/>
 
         <activity
@@ -33,12 +33,12 @@
 
 
         <activity
-            android:name=".products.ProductsActivity"
+            android:name=".product.ProductsActivity"
             android:theme="@style/ProductsTheme"/>
 
 
         <activity
-            android:name=".products.detail.ProductDetailActivity"
+            android:name=".product.detail.ProductDetailActivity"
             android:theme="@style/ProductDetailTheme"/>
 
         <activity
