@@ -1,6 +1,7 @@
 package com.template.mvvm.core.models.product
 
 import android.arch.lifecycle.LifecycleOwner
+import io.kotlintest.properties.Gen
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.Before
@@ -44,5 +45,10 @@ class TestProductsViewModel {
             lifeThing,
             `equalTo`(vm.lifecycleOwner)
         )
+    }
+
+    @Test
+    fun testOnBound() {
+       mockWhen(vm.onBound(Gen.negativeIntegers().generate())).thenThrow(IndexOutOfBoundsException())
     }
 }

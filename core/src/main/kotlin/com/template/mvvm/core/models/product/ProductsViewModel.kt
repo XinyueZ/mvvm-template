@@ -8,6 +8,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.net.Uri
+import android.support.annotation.IntRange
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.SingleLiveData
 import com.template.mvvm.core.ext.setUpTransform
@@ -88,7 +89,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         onBound(0)
     }
 
-    fun onBound(position: Int) {
+    fun onBound(@IntRange(from = 0L) position: Int) {
+        if(position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         launch(UI + CoroutineExceptionHandler({ _, e ->
             canNotLoadProducts(e)
             LL.d(e.message ?: "")
