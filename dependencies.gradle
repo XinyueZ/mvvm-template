@@ -43,7 +43,7 @@ ext {
     def robolectric = "3.6.1"
     def robolectricSupportV4 = "3.4-rc2"
     def shadowsMultidex = "3.4.2"
-    def mockitoVersion = "2.0.2-beta"
+    def mockitoVersion = "2.13.0"
     def mockitoAndroidVersion = "2.13.0"
     def hamcrest = "1.3"
     def testRunner = "1.0.1"
@@ -159,7 +159,9 @@ ext {
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'shadows-support-v4', version: robolectricSupportV4]],
             [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: shadowsMultidex]],
-            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-inline', version: mockitoVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-android', version: mockitoAndroidVersion]],
             [configuration: "testImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
             [configuration: "testImplementation", dependency: [group: "junit", name: "junit", version: junit],
              options      : {
@@ -176,7 +178,8 @@ ext {
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-idling-resource', version: espresso]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso.idling', name: 'idling-concurrent', version: espresso]],
             [configuration: "androidTestImplementation", dependency: [group: "android.arch.persistence.room", name: "testing", version: roomTest]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-all', version: mockitoVersion]],
+            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
+            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-inline', version: mockitoVersion]],
             [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-android', version: mockitoAndroidVersion]],
             [configuration: "androidTestImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
             [configuration: "androidTestImplementation", dependency: [group: "junit", name: "junit", version: junit],
