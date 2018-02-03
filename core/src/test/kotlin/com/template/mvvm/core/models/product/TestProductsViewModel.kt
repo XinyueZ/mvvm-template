@@ -6,13 +6,16 @@ import org.hamcrest.Matchers.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
 import org.hamcrest.CoreMatchers.`is` as matchIs
 import org.mockito.Mockito.`when` as mockWhen
 
 class TestProductsViewModel {
+    @Mock
     private lateinit var vm: ProductsViewModel
 
     @Rule
@@ -20,7 +23,7 @@ class TestProductsViewModel {
 
     @Before
     fun setUp() {
-        vm = mock(ProductsViewModel::class.java)
+        MockitoAnnotations.initMocks(this)
     }
 
     @Test
