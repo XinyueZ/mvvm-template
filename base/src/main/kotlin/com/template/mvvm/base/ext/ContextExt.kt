@@ -19,3 +19,12 @@ fun Context.setupToast(
         it?.let { showToast(it, timeLength) }
     })
 }
+
+fun Context.isPreApi23() =
+    android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M
+
+fun Context.isPreApi24() =
+    android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N
+
+fun Context.isPreApi26() =
+    android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O
