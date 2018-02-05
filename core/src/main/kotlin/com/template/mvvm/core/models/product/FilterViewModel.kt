@@ -8,7 +8,7 @@ abstract class FilterViewModel(repository: ProductsDataSource) : ProductsViewMod
     override suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.filterProducts(vmJob, start, true, filterKeyword())
 
-    override suspend fun delete() = repository.deleteAll(vmJob, filterKeyword())
+    override suspend fun delete(coroutineContext: CoroutineContext) = repository.deleteAll(coroutineContext, filterKeyword())
 }
 
 class MenViewModel(repository: ProductsDataSource) : FilterViewModel(repository) {

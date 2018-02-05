@@ -71,7 +71,7 @@ class TestProductsViewModel {
 
         Job().run {
             val size = 10
-            val pages = 10
+            val pages = Gen.positiveIntegers().generate()
 
             for (i in 0 until pages) {
                 val offset = i * size
@@ -86,6 +86,11 @@ class TestProductsViewModel {
                 `equalTo`(pages * size)
             )
         }
+    }
+
+    @Test
+    fun getReloadAllProducts() {
+
     }
 
     private fun ProductsViewModel.getCurrentOffset() =

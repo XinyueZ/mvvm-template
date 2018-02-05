@@ -64,12 +64,11 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         this.lifecycleOwner = lifecycleOwner
         reload.observe(lifecycleOwner, Observer {
-            deleteProducts()
+            reloadAllProducts()
         })
         collectionSource = collectionSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
-                    LL.d("Updating new data...")
                     collectionItemVmList.value = it
 
                     showSystemUi.value = true
@@ -138,10 +137,14 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    private fun deleteProducts() = launch(UI + CoroutineExceptionHandler({ _, e ->
+    private fun reloadAllProducts() = launch(UI + CoroutineExceptionHandler({ _, e ->
         LL.d(e.message ?: "")
     }) + vmJob) {
-        delete().consumeEach {
+        reloadAllProducts(coroutineContext)
+    }
+
+    internal suspend fun reloadAllProducts(coroutineContext: CoroutineContext) {
+        delete(coroutineContext).consumeEach {
             LL.i("deleted products...")
             offset = 0
             loadAllProducts()
@@ -149,7 +152,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    protected open suspend fun delete() = repository.deleteAll(vmJob)
+    protected open suspend fun delete(coroutineContext: CoroutineContext) =
+        repository.deleteAll(coroutineContext)
 
     private fun bindTapHandlers(it: List<ProductItemViewModel>) {
         it.forEach {
