@@ -103,11 +103,10 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     internal suspend fun loadList(
         coroutineContext: CoroutineContext,
         position: Int,
-        updateUI: Boolean = true
+        notify: Boolean = true
     ) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
-                LL.i("Load next from $position")
                 if (offset > 0) {
                     // For progress-loading for more items
                     moreLoaded.set(false)
@@ -115,15 +114,16 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 query(coroutineContext, offset).consumeEach { ds ->
                     ds?.takeIf { it.isNotEmpty() }?.let { list ->
                         offset += list.size
-                        if (updateUI)
-                            refreshUIAfterNewData(source, list)
+                        if (notify) {
+                            onQueried(source, list)
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun refreshUIAfterNewData(
+    private fun onQueried(
         source: ProductList,
         list: List<Product>
     ) {
@@ -135,6 +135,9 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         source.value = list
     }
 
+    protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
+        repository.getAllProducts(coroutineContext, start, true)
+
     private fun deleteProducts() = launch(UI + CoroutineExceptionHandler({ _, e ->
         LL.d(e.message ?: "")
     }) + vmJob) {
@@ -145,9 +148,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             shouldDeleteList = true
         }
     }
-
-    protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
-        repository.getAllProducts(coroutineContext, start, true)
 
     protected open suspend fun delete() = repository.deleteAll(vmJob)
 
