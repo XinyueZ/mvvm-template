@@ -23,6 +23,7 @@ import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 import kotlin.coroutines.experimental.CoroutineContext
 
 open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
@@ -92,18 +93,18 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     fun onBound(@IntRange(from = 0L) position: Int) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
-        launch(UI + CoroutineExceptionHandler({ _, e ->
-            canNotLoadProducts(e)
-            LL.d(e.message ?: "")
-        }) + vmJob) {
-            onBound(coroutineContext, position)
+        runBlocking {
+            onBound(UI + CoroutineExceptionHandler({ _, e ->
+                canNotLoadProducts(e)
+                LL.d(e.message ?: "")
+            }) + vmJob, position)
         }
     }
 
     internal suspend fun onBound(
         coroutineContext: CoroutineContext,
         position: Int
-    ) {
+    ) = launch(coroutineContext) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
                 if (offset > 0) {
