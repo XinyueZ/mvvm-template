@@ -51,7 +51,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     //Delete list on UI
     val deleteList = ObservableBoolean(false)
-    //User might delete data with pull2refresh and then the UI should also do it after new data being loaded.
+    //User might delete data with pull2refresh and then the UI should also do it after new data being loaded,
+    //ie. clean recyclerview and it's adapter.
     private var shouldDeleteList = false
 
     //Detail to open
@@ -101,8 +102,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     internal suspend fun onBound(
         coroutineContext: CoroutineContext,
-        position: Int,
-        notify: Boolean = true
+        position: Int
     ) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
@@ -113,7 +113,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 query(coroutineContext, offset).consumeEach { ds ->
                     ds?.takeIf { it.isNotEmpty() }?.let { list ->
                         offset += list.size
-                        if (notify) {
+                        launch(UI + vmJob) {
                             onQueried(source, list)
                         }
                     }
@@ -145,7 +145,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     internal suspend fun reloadAllProducts(coroutineContext: CoroutineContext) {
         delete(coroutineContext).consumeEach {
-            LL.i("deleted products...")
             offset = 0
             loadAllProducts()
             shouldDeleteList = true

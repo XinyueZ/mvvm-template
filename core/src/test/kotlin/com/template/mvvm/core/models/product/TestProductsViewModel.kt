@@ -64,14 +64,14 @@ class TestProductsViewModel {
     }
 
     @Test
-    fun testLoadListGetCorrectOffset() = runBlocking {
+    fun testCorrectOffsetAfterOnBound() = runBlocking {
         val lifeThing = mock(LifecycleOwner::class.java)
         mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
         vm.registerLifecycleOwner(lifeThing)
 
         Job().run {
             val size = 10
-            val pages = Gen.positiveIntegers().generate()
+            val pages = Gen.choose(1, 200).generate()
 
             for (i in 0 until pages) {
                 val offset = i * size
@@ -79,7 +79,7 @@ class TestProductsViewModel {
                     produce(this) {
                         send(generateProductList(size).generate())
                     })
-                vm.onBound(this, offset, false)
+                vm.onBound(this, offset)
             }
             assertThat(
                 vm.getCurrentOffset(),
@@ -89,8 +89,21 @@ class TestProductsViewModel {
     }
 
     @Test
-    fun getReloadAllProducts() {
-
+    fun testGetReloadAllProducts() {
+//        val lifeThing = mock(LifecycleOwner::class.java)
+//        mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
+//        vm.registerLifecycleOwner(lifeThing)
+//
+//        Job().run {
+//            val size = 10
+//            val pages = Gen.choose(1, 200).generate()
+//
+//            vm.reloadAllProducts(this)
+//            assertThat(
+//                vm.getCurrentOffset(),
+//                `equalTo`(0)
+//            )
+//        }
     }
 
     private fun ProductsViewModel.getCurrentOffset() =
