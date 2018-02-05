@@ -96,11 +96,11 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             canNotLoadProducts(e)
             LL.d(e.message ?: "")
         }) + vmJob) {
-            loadList(coroutineContext, position)
+            onBound(coroutineContext, position)
         }
     }
 
-    internal suspend fun loadList(
+    internal suspend fun onBound(
         coroutineContext: CoroutineContext,
         position: Int,
         notify: Boolean = true

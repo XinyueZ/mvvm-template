@@ -79,7 +79,7 @@ class TestProductsViewModel {
                     produce(this) {
                         send(generateProductList(size).generate())
                     })
-                vm.loadList(this, offset, false)
+                vm.onBound(this, offset, false)
             }
             assertThat(
                 vm.getCurrentOffset(),
