@@ -138,19 +138,22 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    private fun reloadAllProducts() = launch(UI + CoroutineExceptionHandler({ _, e ->
-        LL.d(e.message ?: "")
-    }) + vmJob) {
-        reloadAllProducts(coroutineContext)
+    private fun reloadAllProducts() = runBlocking {
+        reloadAllProducts(
+            CoroutineExceptionHandler({ _, e ->
+                LL.d(e.message ?: "")
+            }) + vmJob
+        )
     }
 
-    internal suspend fun reloadAllProducts(coroutineContext: CoroutineContext) {
-        delete(coroutineContext).consumeEach {
-            offset = 0
-            loadAllProducts()
-            shouldDeleteList = true
+    internal suspend fun reloadAllProducts(coroutineContext: CoroutineContext) =
+        launch(coroutineContext) {
+            delete(coroutineContext).consumeEach {
+                offset = 0
+                loadAllProducts()
+                shouldDeleteList = true
+            }
         }
-    }
 
     protected open suspend fun delete(coroutineContext: CoroutineContext) =
         repository.deleteAll(coroutineContext)
