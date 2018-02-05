@@ -1,10 +1,11 @@
 package com.template.mvvm.core.models.product
 
 import com.template.mvvm.repository.contract.ProductsDataSource
+import kotlin.coroutines.experimental.CoroutineContext
 
 abstract class FilterViewModel(repository: ProductsDataSource) : ProductsViewModel(repository) {
     abstract fun filterKeyword(): String
-    override  suspend fun query(start: Int) =
+    override suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.filterProducts(vmJob, start, true, filterKeyword())
 
     override suspend fun delete() = repository.deleteAll(vmJob, filterKeyword())

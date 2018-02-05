@@ -23,6 +23,7 @@ import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
+import kotlin.coroutines.experimental.CoroutineContext
 
 open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
 
@@ -95,31 +96,43 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             canNotLoadProducts(e)
             LL.d(e.message ?: "")
         }) + vmJob) {
-            collectionSource?.let { source ->
-                LL.d("offset = $offset, position = $position")
-                if (position >= offset - 1) {
-                    LL.i("Load next from $position")
-                    if (offset > 0) {
-                        // For progress-loading for more items
-                        moreLoaded.set(false)
-                    }
-                    query(offset).consumeEach { ds ->
-                        LL.i("collectionSource next subscribe")
-                        ds?.takeIf { it.isNotEmpty() }?.let {
+            loadList(coroutineContext, position)
+        }
+    }
 
-                            if (shouldDeleteList) {
-                                deleteList.set(true)
-                                shouldDeleteList = false
-                                deleteList.set(false)
-                            }
-
-                            source.value = it
-                            offset += it.size
-                        }
+    internal suspend fun loadList(
+        coroutineContext: CoroutineContext,
+        position: Int,
+        updateUI: Boolean = true
+    ) {
+        collectionSource?.let { source ->
+            if (position >= offset - 1) {
+                LL.i("Load next from $position")
+                if (offset > 0) {
+                    // For progress-loading for more items
+                    moreLoaded.set(false)
+                }
+                query(coroutineContext, offset).consumeEach { ds ->
+                    ds?.takeIf { it.isNotEmpty() }?.let { list ->
+                        offset += list.size
+                        if (updateUI)
+                            refreshUIAfterNewData(source, list)
                     }
                 }
             }
         }
+    }
+
+    private fun refreshUIAfterNewData(
+        source: ProductList,
+        list: List<Product>
+    ) {
+        if (shouldDeleteList) {
+            deleteList.set(true)
+            shouldDeleteList = false
+            deleteList.set(false)
+        }
+        source.value = list
     }
 
     private fun deleteProducts() = launch(UI + CoroutineExceptionHandler({ _, e ->
@@ -133,7 +146,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    protected open suspend fun query(start: Int) = repository.getAllProducts(vmJob, start, true)
+    protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
+        repository.getAllProducts(coroutineContext, start, true)
 
     protected open suspend fun delete() = repository.deleteAll(vmJob)
 
