@@ -9,7 +9,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.util.ReflectionHelpers
+import org.robolectric.util.ReflectionHelpers.getStaticField
 
 @RunWith(RobolectricTestRunner::class)
 class TestCoreModule {
@@ -25,8 +25,8 @@ class TestCoreModule {
     @Test
     fun testOnCoreStop() {
         coreModule.onCoreStop()
-        assertThat(ReflectionHelpers.getStaticField<ViewModelFactory>(ViewModelFactory::class.java, "INSTANCE"), `is`(nullValue()))
-        assertThat(ReflectionHelpers.getStaticField<RepositoryInjection>(RepositoryInjection::class.java, "INSTANCE"), `is`(nullValue()))
+        assertThat(getStaticField<ViewModelFactory>(ViewModelFactory::class.java, "INSTANCE"), `is`(nullValue()))
+        assertThat(getStaticField<RepositoryInjection>(RepositoryInjection::class.java, "INSTANCE"), `is`(nullValue()))
 //        assertThat(ReflectionHelpers.getStaticField<Repository?>(RepositoryInjection::class.java, "DS_INSTANCE"), `is`(nullValue()))
     }
 }

@@ -14,7 +14,7 @@ import com.template.mvvm.app.advanceToNextPostedRunnable
 import com.template.mvvm.app.applyView
 import com.template.mvvm.app.finish
 import com.template.mvvm.app.licenses.SoftwareLicensesActivity
-import com.template.mvvm.app.products.ProductsActivity
+import com.template.mvvm.app.product.ProductsActivity
 import com.template.mvvm.app.uiTestAppearance
 import com.template.mvvm.base.ext.findChildFragment
 import com.template.mvvm.base.ext.findSubItem

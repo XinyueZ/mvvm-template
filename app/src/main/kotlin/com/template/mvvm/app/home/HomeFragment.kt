@@ -12,7 +12,7 @@ import com.template.mvvm.app.R
 import com.template.mvvm.app.about.AboutActivity
 import com.template.mvvm.app.databinding.FragmentHomeBinding
 import com.template.mvvm.app.licenses.SoftwareLicensesActivity
-import com.template.mvvm.app.products.ProductsActivity
+import com.template.mvvm.app.product.ProductsActivity
 import com.template.mvvm.base.customtabs.CustomTabConfig
 import com.template.mvvm.base.customtabs.CustomTabUtils
 import com.template.mvvm.base.ext.replaceFragmentToFragment

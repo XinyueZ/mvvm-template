@@ -9,8 +9,10 @@ import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.databinding.ObservableList
 import android.net.Uri
+import android.text.Spanned
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.SingleLiveData
+import com.template.mvvm.core.ext.toHtml
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
@@ -50,7 +52,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     //------------------------------------------------------------------------
     val productId = ObservableField<Long>()
     val productTitle = ObservableField<String>()
-    val productDescription = ObservableField<String>()
+    val productDescription = ObservableField<Spanned>()
     val productImageUris: ObservableList<Uri> = ObservableArrayList()
     //------------------------------------------------------------------------
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
@@ -63,7 +65,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
                     //-----------------------------------------
                     productId.set(it.pid)
                     productTitle.set(it.title)
-                    productDescription.set(it.description)
+                    productDescription.set(it.description.toHtml())
                     productImageUris.clear()
                     productImageUris += it.pictures.map {
                         it.uri

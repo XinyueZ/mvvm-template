@@ -1,11 +1,11 @@
 package com.template.mvvm.app.binding
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.databinding.BindingAdapter
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.support.annotation.DrawableRes
@@ -113,6 +113,7 @@ fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRe
     uri?.let { (this as? ImageView)?.remoteImageUris(arrayOf(it), placeholderRes, errorDrawableRes) }
 }
 
+@SuppressLint("ResourceType")
 @BindingAdapter(value = ["remoteImageUris", "placeholderRes", "errorDrawableRes"], requireAll = false)
 fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
@@ -137,13 +138,13 @@ fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRe
         }
 
         var pos = 0
-        val listener = object : RequestListener<Bitmap> {
-            override fun onResourceReady(resource: Bitmap?, model: Any?, target: Target<Bitmap>?, dataSource: com.bumptech.glide.load.DataSource?, isFirstResource: Boolean): Boolean {
+        val listener = object : RequestListener<Drawable> {
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: com.bumptech.glide.load.DataSource?, isFirstResource: Boolean): Boolean {
                 // let glide set the image by returning false
                 return false
             }
 
-            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                 // load next one if possible
                 when (pos < (imageUris.size - 1)) {
                     true -> {
@@ -160,9 +161,8 @@ fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRe
     }
 }
 
-private fun ImageView.loadImage(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Bitmap>) {
+private fun ImageView.loadImage(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Drawable>) {
     GlideApp.with(this)
-            .asBitmap()
             .load(uri)
             .format(DecodeFormat.PREFER_RGB_565)
             .placeholder(placeholder)

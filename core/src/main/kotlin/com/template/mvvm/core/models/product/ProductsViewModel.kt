@@ -90,7 +90,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     }
 
     fun onBound(@IntRange(from = 0L) position: Int) {
-        if(position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
+        if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         launch(UI + CoroutineExceptionHandler({ _, e ->
             canNotLoadProducts(e)
             LL.d(e.message ?: "")

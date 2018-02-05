@@ -9,7 +9,7 @@ import com.template.mvvm.app.AppBaseFragment
 import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductsBinding
-import com.template.mvvm.app.products.detail.ProductDetailActivity
+import com.template.mvvm.app.product.detail.ProductDetailActivity
 import com.template.mvvm.core.ext.setupErrorSnackbar
 import com.template.mvvm.core.models.product.WomenViewModel
 

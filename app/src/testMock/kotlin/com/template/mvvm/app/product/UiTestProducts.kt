@@ -1,4 +1,4 @@
-package com.template.mvvm.app.products
+package com.template.mvvm.app.product
 
 import android.support.v7.widget.Toolbar
 import com.template.mvvm.app.AppTestRule
@@ -37,5 +37,15 @@ class UiTestProducts {
     @Test
     fun testAppBarLook() {
         activity.applyView<Toolbar>(R.id.toolbar).uiTestAppearance(R.string.product_list_title, R.color.colorPrimary, R.drawable.ic_arrow_back)
+    }
+
+    @Test
+    fun testLoadFirstPage() {
+        // TODO test first produect page
+    }
+
+    @Test
+    fun testLoadNextPages() {
+        // TODO test first produect page
     }
 }

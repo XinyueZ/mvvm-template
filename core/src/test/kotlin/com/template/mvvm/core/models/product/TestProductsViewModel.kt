@@ -3,7 +3,11 @@ package com.template.mvvm.core.models.product
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.repository.contract.ProductsDataSource
+import com.template.mvvm.repository.domain.products.Product
 import io.kotlintest.properties.Gen
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.channels.produce
+import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.Before
@@ -56,5 +60,17 @@ class TestProductsViewModel {
     @Test(expected = IndexOutOfBoundsException::class)
     fun testOnBoundIndexOutOfBoundsException() {
         vm.onBound(Gen.negativeIntegers().generate())
+    }
+
+    @Test
+    fun testOnBoundGetCorrectIndex() {
+        // TODO Test correct index of product-page
+        runBlocking {
+            val job = Job()
+            mockWhen(dataSource.getAllProducts(job, 0, true)).thenReturn(
+                produce<List<Product>> {
+                    send(emptyList())
+                })
+        }
     }
 }

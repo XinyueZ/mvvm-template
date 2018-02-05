@@ -1,4 +1,4 @@
-package com.template.mvvm.app.products
+package com.template.mvvm.app.product
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
