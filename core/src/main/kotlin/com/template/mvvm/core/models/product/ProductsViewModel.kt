@@ -103,7 +103,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     internal suspend fun onBound(
         coroutineContext: CoroutineContext,
-        position: Int
+        @IntRange(from = 0L)  position: Int
     ) = launch(coroutineContext) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
