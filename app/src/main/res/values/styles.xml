@@ -22,8 +22,8 @@
     </style>
 
     <style name="CircleProgressBar" parent="Widget.AppCompat.ProgressBar">
-        <item name="android:layout_width">@dimen/general_padding</item>
-        <item name="android:layout_height">@dimen/general_padding</item>
+        <item name="android:layout_width">@dimen/circle_loading</item>
+        <item name="android:layout_height">@dimen/circle_loading</item>
         <item name="android:indeterminate">true</item>
     </style>
 

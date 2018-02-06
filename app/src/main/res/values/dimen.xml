@@ -8,4 +8,5 @@
     <dimen name="item_thumbnail_size">100dp</dimen>
     <dimen name="item_brand_logo_size">50dp</dimen>
     <dimen name="general_padding">10dp</dimen>
+    <dimen name="circle_loading">25dp</dimen>
 </resources>
