@@ -138,7 +138,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private suspend fun reloadAllProducts(coroutineContext: CoroutineContext) =
         newSingleThreadContext("delete-all-worker").use {
-            delete(it).consumeEach {
+            delete(it + vmJob).consumeEach {
                 launch(coroutineContext) {
                     offset = 0
                     loadAllProducts()
