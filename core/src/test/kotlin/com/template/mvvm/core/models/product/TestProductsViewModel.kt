@@ -11,6 +11,7 @@ import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
+import org.hamcrest.Matchers.greaterThan
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -66,7 +67,7 @@ class TestProductsViewModel {
 
     @Test
     fun testCorrectOffsetAfterOnBound() {
-        runBlocking  {
+        runBlocking {
             val lifeThing = mock(LifecycleOwner::class.java)
             mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
             vm.registerLifecycleOwner(lifeThing)
@@ -75,14 +76,22 @@ class TestProductsViewModel {
                 val size = 10
                 val pages = Gen.choose(1, 200).generate()
 
-                for (i in 0 until pages) {
-                    val offset = i * size
-                    mockWhen(dataSource.getAllProducts(coroutineContext, offset, true)).thenReturn(
-                        produce(coroutineContext) {
-                            send(generateProductList(size).generate())
-                        })
-                    vm.onBound(offset)
-                }
+                (0 until pages)
+                    .asSequence()
+                    .map { it * size }
+                    .forEach { offset ->
+                        mockWhen(
+                            dataSource.getAllProducts(
+                                coroutineContext,
+                                offset,
+                                true
+                            )
+                        ).thenReturn(
+                            produce(coroutineContext) {
+                                send(generateProductList(size).generate())
+                            })
+                        vm.onBound(offset)
+                    }
                 assertThat(
                     vm.getCurrentOffset(),
                     `equalTo`(pages * size)
@@ -93,20 +102,45 @@ class TestProductsViewModel {
 
     @Test
     fun testGetReloadAllProducts() {
-//        val lifeThing = mock(LifecycleOwner::class.java)
-//        mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
-//        vm.registerLifecycleOwner(lifeThing)
-//
-//        Job().run {
-//            val size = 10
-//            val pages = Gen.choose(1, 200).generate()
-//
-//            vm.reloadAllProducts(this)
-//            assertThat(
-//                vm.getCurrentOffset(),
-//                `equalTo`(0)
-//            )
-//        }
+        runBlocking {
+            val lifeThing = mock(LifecycleOwner::class.java)
+            mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
+            vm.registerLifecycleOwner(lifeThing)
+
+            launch(UI) {
+                val size = 10
+                val pages = Gen.choose(1, 200).generate()
+
+                (0 until pages)
+                    .asSequence()
+                    .map { it * size }
+                    .forEach { offset ->
+                        mockWhen(
+                            dataSource.getAllProducts(
+                                coroutineContext,
+                                offset,
+                                true
+                            )
+                        ).thenReturn(
+                            produce(coroutineContext) {
+                                send(generateProductList(size).generate())
+                            })
+                    }
+                mockWhen(dataSource.deleteAll(coroutineContext)).thenReturn(
+                    produce(coroutineContext) {
+                        send(Unit)
+                    })
+
+                assertThat(
+                    vm.getCurrentOffset(),
+                    `greaterThan`(0)
+                )
+                assertThat(
+                    vm.getCurrentOffset(),
+                    `equalTo`(size)
+                )
+            }
+        }
     }
 
     private fun ProductsViewModel.getCurrentOffset() =
