@@ -94,6 +94,10 @@ class TestProductsViewModel {
                     }
                 assertThat(
                     vm.getCurrentOffset(),
+                    `greaterThan`(0)
+                )
+                assertThat(
+                    vm.getCurrentOffset(),
                     `equalTo`(pages * size)
                 )
             }
