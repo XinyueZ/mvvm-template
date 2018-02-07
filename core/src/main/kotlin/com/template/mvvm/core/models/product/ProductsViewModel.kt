@@ -60,8 +60,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-    lateinit var lifecycleOwner: LifecycleOwner
-
     private val jobHandler by lazy {
         UI + CoroutineExceptionHandler({ _, e ->
             canNotLoadProducts(e)
@@ -70,7 +68,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     }
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
-        this.lifecycleOwner = lifecycleOwner
         collectionSource = collectionSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
@@ -99,7 +96,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    private suspend fun onBound(
+    private fun onBound(
         coroutineContext: CoroutineContext,
         @IntRange(from = 0L) position: Int
     ) = launch(coroutineContext) {
@@ -179,7 +176,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     fun reset() {
         repository.clear()
         collectionSource = null
-        collectionItemVmList.removeObservers(lifecycleOwner)
         deleteList.set(false)
         offset = 0
     }

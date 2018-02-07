@@ -40,33 +40,13 @@ class TestProductsViewModel {
         vm = ProductsViewModel(dataSource)
     }
 
-    @Test
-    fun testRegisterLifecycleOwner() {
-        val lifeThing = mock(LifecycleOwner::class.java)
-        mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
-
-        vm.registerLifecycleOwner(lifeThing)
-        assertThat(
-            lifeThing,
-            `equalTo`(vm.lifecycleOwner)
-        )
-
-        val lifeThingOther = mock(LifecycleOwner::class.java)
-        mockWhen(lifeThingOther.lifecycle).thenReturn(lifecycle)
-        vm.registerLifecycleOwner(lifeThingOther)
-        assertThat(
-            lifeThingOther,
-            `equalTo`(vm.lifecycleOwner)
-        )
-    }
-
     @Test(expected = IndexOutOfBoundsException::class)
     fun testOnBoundIndexOutOfBoundsException() {
         vm.onBound(Gen.negativeIntegers().generate())
     }
 
     @Test
-    fun testCorrectOffsetAfterOnBound() {
+    fun testOffsetAfterPagings() {
         runBlocking {
             val lifeThing = mock(LifecycleOwner::class.java)
             mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
@@ -105,7 +85,7 @@ class TestProductsViewModel {
     }
 
     @Test
-    fun testGetReloadAllProducts() {
+    fun testOffsetAfterReload() {
         runBlocking {
             val lifeThing = mock(LifecycleOwner::class.java)
             mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
