@@ -83,11 +83,11 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 }
             }
         }
-        loadAllProducts()
+        loadData()
         return true
     }
 
-    private fun loadAllProducts() = runBlocking { onBound(jobHandler, 0) }
+    private fun loadData() = runBlocking { onBound(jobHandler, 0) }
 
     fun onBound(@IntRange(from = 0L) position: Int) {
         runBlocking {
@@ -131,14 +131,14 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    private fun reloadAllProducts() = runBlocking { reloadAllProducts(jobHandler) }
+    private fun reloadData() = runBlocking { reloadData(jobHandler) }
 
-    private suspend fun reloadAllProducts(coroutineContext: CoroutineContext) =
+    private suspend fun reloadData(coroutineContext: CoroutineContext) =
         newSingleThreadContext("delete-all-worker").use {
             delete(it + vmJob).consumeEach {
                 launch(coroutineContext) {
                     offset = 0
-                    loadAllProducts()
+                    loadData()
                     shouldDeleteList = true
                 }
             }
@@ -163,7 +163,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         moreLoaded.set(true)
 
         onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
-            loadAllProducts()
+            loadData()
             showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
@@ -195,7 +195,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     }
 
     fun onReload() {
-        reloadAllProducts()
+        reloadData()
         dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
