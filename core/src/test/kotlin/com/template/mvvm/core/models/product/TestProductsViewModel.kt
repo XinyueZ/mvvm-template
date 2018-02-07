@@ -35,7 +35,7 @@ class TestProductsViewModel {
         dataSource = mock(ProductsDataSource::class.java)
 
         lifecycle = mock(Lifecycle::class.java)
-        mockWhen(lifecycle.currentState).thenReturn(Lifecycle.State.DESTROYED)
+        mockWhen(lifecycle.currentState).thenReturn(Lifecycle.State.INITIALIZED)
 
         vm = ProductsViewModel(dataSource)
     }
