@@ -2,7 +2,6 @@ package com.template.mvvm.core.models.product
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -23,6 +22,7 @@ import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.newSingleThreadContext
 import kotlinx.coroutines.experimental.runBlocking
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -31,7 +31,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
 
-    private val reload = SingleLiveData<Boolean>()
     val dataHaveNotReloaded = ObservableBoolean(true)
     val moreLoaded = ObservableBoolean(true)
 
@@ -65,17 +64,13 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private val jobHandler by lazy {
         UI + CoroutineExceptionHandler({ _, e ->
-            // TODO For delete, there's another handling which should be considered.
             canNotLoadProducts(e)
             LL.d(e.message ?: "")
-        }) +  vmJob
+        }) + vmJob
     }
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         this.lifecycleOwner = lifecycleOwner
-        reload.observe(lifecycleOwner, Observer {
-            reloadAllProducts()
-        })
         collectionSource = collectionSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
                 it?.let {
@@ -139,16 +134,16 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    private fun reloadAllProducts() = runBlocking {
-        reloadAllProducts(jobHandler)
-    }
+    private fun reloadAllProducts() = runBlocking { reloadAllProducts(jobHandler) }
 
-    internal suspend fun reloadAllProducts(coroutineContext: CoroutineContext) =
-        launch(coroutineContext) {
-            delete(coroutineContext).consumeEach {
-                offset = 0
-                loadAllProducts()
-                shouldDeleteList = true
+    private suspend fun reloadAllProducts(coroutineContext: CoroutineContext) =
+        newSingleThreadContext("delete-all-worker").use {
+            delete(it).consumeEach {
+                launch(coroutineContext) {
+                    offset = 0
+                    loadAllProducts()
+                    shouldDeleteList = true
+                }
             }
         }
 
@@ -204,7 +199,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     }
 
     fun onReload() {
-        reload.value = true
+        reloadAllProducts()
         dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
