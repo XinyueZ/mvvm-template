@@ -63,6 +63,14 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     lateinit var lifecycleOwner: LifecycleOwner
 
+    private val jobHandler by lazy {
+        UI + CoroutineExceptionHandler({ _, e ->
+            // TODO For delete, there's another handling which should be considered.
+            canNotLoadProducts(e)
+            LL.d(e.message ?: "")
+        }) +  vmJob
+    }
+
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         this.lifecycleOwner = lifecycleOwner
         reload.observe(lifecycleOwner, Observer {
@@ -87,23 +95,18 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         return true
     }
 
-    private fun loadAllProducts() {
-        onBound(0)
-    }
+    private fun loadAllProducts() = runBlocking { onBound(jobHandler, 0) }
 
     fun onBound(@IntRange(from = 0L) position: Int) {
         runBlocking {
             if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
-            onBound(UI + CoroutineExceptionHandler({ _, e ->
-                canNotLoadProducts(e)
-                LL.d(e.message ?: "")
-            }) + vmJob, position)
+            onBound(jobHandler, position)
         }
     }
 
-    internal suspend fun onBound(
+    private suspend fun onBound(
         coroutineContext: CoroutineContext,
-        @IntRange(from = 0L)  position: Int
+        @IntRange(from = 0L) position: Int
     ) = launch(coroutineContext) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
@@ -114,9 +117,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 query(coroutineContext, offset).consumeEach { ds ->
                     ds?.takeIf { it.isNotEmpty() }?.let { list ->
                         offset += list.size
-                        launch(UI + vmJob) {
-                            onQueried(source, list)
-                        }
+                        onQueried(source, list)
                     }
                 }
             }
@@ -139,11 +140,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         repository.getAllProducts(coroutineContext, start, true)
 
     private fun reloadAllProducts() = runBlocking {
-        reloadAllProducts(
-            CoroutineExceptionHandler({ _, e ->
-                LL.d(e.message ?: "")
-            }) + vmJob
-        )
+        reloadAllProducts(jobHandler)
     }
 
     internal suspend fun reloadAllProducts(coroutineContext: CoroutineContext) =

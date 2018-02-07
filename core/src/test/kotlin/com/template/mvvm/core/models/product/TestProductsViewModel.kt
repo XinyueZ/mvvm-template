@@ -5,8 +5,9 @@ import android.arch.lifecycle.LifecycleOwner
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
 import io.kotlintest.properties.Gen
-import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.produce
+import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
@@ -64,27 +65,29 @@ class TestProductsViewModel {
     }
 
     @Test
-    fun testCorrectOffsetAfterOnBound() = runBlocking {
-        val lifeThing = mock(LifecycleOwner::class.java)
-        mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
-        vm.registerLifecycleOwner(lifeThing)
+    fun testCorrectOffsetAfterOnBound() {
+        runBlocking  {
+            val lifeThing = mock(LifecycleOwner::class.java)
+            mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
+            vm.registerLifecycleOwner(lifeThing)
 
-        Job().run {
-            val size = 10
-            val pages = Gen.choose(1, 200).generate()
+            launch(UI) {
+                val size = 10
+                val pages = Gen.choose(1, 200).generate()
 
-            for (i in 0 until pages) {
-                val offset = i * size
-                mockWhen(dataSource.getAllProducts(this, offset, true)).thenReturn(
-                    produce(this) {
-                        send(generateProductList(size).generate())
-                    })
-                vm.onBound(this, offset).join()
+                for (i in 0 until pages) {
+                    val offset = i * size
+                    mockWhen(dataSource.getAllProducts(coroutineContext, offset, true)).thenReturn(
+                        produce(coroutineContext) {
+                            send(generateProductList(size).generate())
+                        })
+                    vm.onBound(offset)
+                }
+                assertThat(
+                    vm.getCurrentOffset(),
+                    `equalTo`(pages * size)
+                )
             }
-            assertThat(
-                vm.getCurrentOffset(),
-                `equalTo`(pages * size)
-            )
         }
     }
 
