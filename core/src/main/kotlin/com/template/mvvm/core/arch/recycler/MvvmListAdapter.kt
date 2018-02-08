@@ -17,11 +17,10 @@ class MvvmListAdapter(
     override fun getItemCount() = list.size
 
     fun add(list: List<ViewModel>) {
-        if (this.list.isEmpty() && list.isEmpty()){
+        if (this.list.isEmpty() && list.isEmpty()) {
             onListItemBound?.onBound(0)
             LL.d("MvvmListAdapter.add, force on-bound.")
-        }
-        else {
+        } else {
             val start = this.list.size
             this.list.addAll(list)
             notifyItemRangeInserted(start, list.size)
@@ -29,9 +28,14 @@ class MvvmListAdapter(
     }
 
     fun update(list: List<ViewModel>) {
-        this.list.clear()
-        this.list.addAll(list)
-        notifyDataSetChanged()
+        if (this.list.isEmpty() && list.isEmpty()) {
+            onListItemBound?.onBound(0)
+            LL.d("MvvmListAdapter.update, force on-bound.")
+        } else {
+            this.list.clear()
+            this.list.addAll(list)
+            notifyDataSetChanged()
+        }
     }
 
     fun delete() {

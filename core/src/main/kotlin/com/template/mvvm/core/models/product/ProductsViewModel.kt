@@ -136,8 +136,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     internal fun reloadData() = runBlocking { reloadData(jobHandler) }
 
     private suspend fun reloadData(coroutineContext: CoroutineContext) =
-        newSingleThreadContext("delete-all-worker").use {
-            delete(it + vmJob).consumeEach {
+        newSingleThreadContext("delete-all-worker").use { worker ->
+            delete(worker + vmJob).consumeEach {
                 launch(coroutineContext) {
                     offset = 0
                     loadData()
