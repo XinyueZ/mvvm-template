@@ -123,11 +123,11 @@ class SoftwareLicensesViewModel(
             }
         }
 
-    private fun loadData(coroutineContext: CoroutineContext) {
+    internal fun loadData(coroutineContext: CoroutineContext) {
         onBound(coroutineContext, true)
     }
 
-    private fun reloadData(coroutineContext: CoroutineContext) {
+    internal fun reloadData(coroutineContext: CoroutineContext) {
         onBound(coroutineContext, false)
     }
 

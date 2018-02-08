@@ -89,7 +89,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         return true
     }
 
-    private fun loadData() = runBlocking { onBound(jobHandler, 0) }
+    internal fun loadData() = runBlocking { onBound(jobHandler, 0) }
 
     fun onBound(@IntRange(from = 0L) position: Int) {
         runBlocking {

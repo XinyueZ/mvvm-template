@@ -45,8 +45,8 @@ class WomenFragment : AppBaseFragment<WomenViewModel>() {
 
     override fun getLayout() = R.layout.fragment_products
     override fun requireViewModel() = WomenViewModel::class.java
-    override fun onDetach() {
+    override fun onStop() {
         obtainViewModel().reset()
-        super.onDetach()
+        super.onStop()
     }
 }
