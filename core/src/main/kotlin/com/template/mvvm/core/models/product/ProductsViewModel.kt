@@ -83,7 +83,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 }
             }
         }
-        loadData()
+        collectionItemVmList.value = emptyList()
         return true
     }
 
