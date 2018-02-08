@@ -108,10 +108,12 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                     // For progress-loading for more items
                     moreLoaded.set(false)
                 }
-                query(coroutineContext, offset).consumeEach { ds ->
-                    ds?.takeIf { it.isNotEmpty() }?.let { list ->
-                        offset += list.size
-                        onQueried(source, list)
+                newSingleThreadContext("query-products-worker").use { worker ->
+                    query(worker + vmJob, offset).consumeEach { ds ->
+                        ds?.takeIf { it.isNotEmpty() }?.let { list ->
+                            offset += list.size
+                            onQueried(source, list)
+                        }
                     }
                 }
             }
