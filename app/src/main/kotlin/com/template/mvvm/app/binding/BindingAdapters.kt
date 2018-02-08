@@ -57,7 +57,7 @@ fun RecyclerView.bindingList(
         }
         adapter = MvvmListAdapter(itemLayout, vmItemLayout, onListItemBound).apply {
             (context as FragmentActivity).run {
-                itemList?.let { liveData ->
+                itemList.let { liveData ->
                     liveData.removeObservers(this)
                     liveData.observe(this, Observer { updatedList ->
                         updatedList?.run {
