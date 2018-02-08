@@ -83,7 +83,9 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 }
             }
         }
-        collectionItemVmList.value = emptyList()
+        launch(jobHandler) {
+            collectionItemVmList.value = emptyList()
+        }
         return true
     }
 
@@ -131,7 +133,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    private fun reloadData() = runBlocking { reloadData(jobHandler) }
+    internal fun reloadData() = runBlocking { reloadData(jobHandler) }
 
     private suspend fun reloadData(coroutineContext: CoroutineContext) =
         newSingleThreadContext("delete-all-worker").use {

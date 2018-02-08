@@ -115,6 +115,8 @@ class TestProductsViewModel {
                         send(Unit)
                     })
 
+                vm.reloadData()
+
                 assertThat(
                     vm.getCurrentOffset(),
                     `greaterThan`(0)
