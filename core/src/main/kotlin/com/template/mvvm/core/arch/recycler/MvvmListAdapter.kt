@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.template.mvvm.repository.LL
 
 class MvvmListAdapter(
-    private @LayoutRes val itemLayout: Int,
+    @LayoutRes private val itemLayout: Int,
     private val vmItemLayout: Int,
     private val onListItemBound: OnListItemBoundListener?
 ) : RecyclerView.Adapter<MvvmItemViewHolder>() {
@@ -17,9 +17,15 @@ class MvvmListAdapter(
     override fun getItemCount() = list.size
 
     fun add(list: List<ViewModel>) {
-        val start = this.list.size
-        this.list.addAll(list)
-        notifyItemRangeInserted(start, list.size)
+        if (this.list.isEmpty() && list.isEmpty()){
+            onListItemBound?.onBound(0)
+            LL.d("MvvmListAdapter.add, force on-bound.")
+        }
+        else {
+            val start = this.list.size
+            this.list.addAll(list)
+            notifyItemRangeInserted(start, list.size)
+        }
     }
 
     fun update(list: List<ViewModel>) {
@@ -36,7 +42,7 @@ class MvvmListAdapter(
     override fun onBindViewHolder(holder: MvvmItemViewHolder, position: Int) {
         holder.bindViewModel(list[position])
         onListItemBound?.onBound(position)
-        LL.d("onBindViewHolder: $position")
+        LL.d("MvvmListAdapter.onBindViewHolder: $position")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
