@@ -34,8 +34,8 @@ class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
 
     override fun getLayout() = R.layout.fragment_software_licenses
     override fun requireViewModel() = SoftwareLicensesViewModel::class.java
-    override fun onDetach() {
+    override fun onStop() {
         obtainViewModel().reset()
-        super.onDetach()
+        super.onStop()
     }
 }
