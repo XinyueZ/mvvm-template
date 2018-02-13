@@ -24,6 +24,7 @@ import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
 
 class SoftwareLicensesViewModel(
     private val application: Application,
@@ -86,17 +87,23 @@ class SoftwareLicensesViewModel(
     ) {
         it.forEach {
             it.clickHandler += {
-                launch(uiHandler) {
-                    // Tell UI to open a UI for license detail.
-                    licenseDetailViewModel.value =
-                            lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
-                                .apply {
-                                    repository.getLicense(application, vmJob, it, false)
-                                        .consumeEach {
-                                            detail.set(it)
-                                        }
+                //                launch(uiHandler) {
+                // Tell UI to open a UI for license detail.
+                licenseDetailViewModel.value =
+                        lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
+                            .apply {
+                                runBlocking {
+                                    repository.getLicense(
+                                        application,
+                                        CommonPool + vmJob,
+                                        it,
+                                        false
+                                    ).consumeEach {
+                                        detail.set(it)
+                                    }
                                 }
-                }
+                            }
+//                }
             }
         }
     }
