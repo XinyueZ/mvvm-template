@@ -18,12 +18,11 @@ import com.template.mvvm.repository.LL
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
 import com.template.mvvm.repository.domain.products.ProductList
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.newSingleThreadContext
-import kotlinx.coroutines.experimental.runBlocking
 import kotlin.coroutines.experimental.CoroutineContext
 
 open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
@@ -60,7 +59,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-    private val jobHandler by lazy {
+    private val uiHandler by lazy {
         UI + CoroutineExceptionHandler({ _, e ->
             canNotLoadProducts(e)
             LL.d(e.message ?: "")
@@ -83,37 +82,32 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 }
             }
         }
-        launch(jobHandler) {
-            collectionItemVmList.value = emptyList()
-        }
+
+        collectionItemVmList.removeObservers(lifecycleOwner)
+        collectionItemVmList.value = emptyList()
         return true
     }
 
-    internal fun loadData() = runBlocking { onBound(jobHandler, 0) }
+    private fun loadData() = onBound(0)
 
     fun onBound(@IntRange(from = 0L) position: Int) {
-        runBlocking {
-            if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
-            onBound(jobHandler, position)
-        }
+        if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
+        doOnBound(position)
     }
 
-    private fun onBound(
-        coroutineContext: CoroutineContext,
+    private fun doOnBound(
         @IntRange(from = 0L) position: Int
-    ) = launch(coroutineContext) {
+    ) = launch(uiHandler) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
                 if (offset > 0) {
                     // For progress-loading for more items
                     moreLoaded.set(false)
                 }
-                newSingleThreadContext("query-products-worker").use { worker ->
-                    query(worker + vmJob, offset).consumeEach { ds ->
-                        ds?.takeIf { it.isNotEmpty() }?.let { list ->
-                            offset += list.size
-                            onQueried(source, list)
-                        }
+                query(CommonPool + vmJob, offset).consumeEach { ds ->
+                    ds?.takeIf { it.isNotEmpty() }?.let { list ->
+                        offset += list.size
+                        onQueried(source, list)
                     }
                 }
             }
@@ -135,18 +129,17 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    internal fun reloadData() = runBlocking { reloadData(jobHandler) }
+    internal fun reloadData() {
+        doReloadData()
+    }
 
-    private suspend fun reloadData(coroutineContext: CoroutineContext) =
-        newSingleThreadContext("delete-all-worker").use { worker ->
-            delete(worker + vmJob).consumeEach {
-                launch(coroutineContext) {
-                    offset = 0
-                    loadData()
-                    shouldDeleteList = true
-                }
-            }
+    private fun doReloadData() = launch(uiHandler) {
+        delete(CommonPool + vmJob).consumeEach {
+            offset = 0
+            loadData()
+            shouldDeleteList = true
         }
+    }
 
     protected open suspend fun delete(coroutineContext: CoroutineContext) =
         repository.deleteAll(coroutineContext)
