@@ -104,7 +104,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                     // For progress-loading for more items
                     moreLoaded.set(false)
                 }
-                query(CommonPool + vmJob, offset).consumeEach { ds ->
+                query(offset).consumeEach { ds ->
                     ds?.takeIf { it.isNotEmpty() }?.let { list ->
                         offset += list.size
                         onQueried(source, list)
@@ -126,8 +126,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         source.value = list
     }
 
-    protected open suspend fun query(coroutineContext: CoroutineContext, start: Int) =
-        repository.getAllProducts(coroutineContext, start, true)
+    protected open suspend fun query(start: Int) =
+        repository.getAllProducts(CommonPool + vmJob, start, true)
 
     internal fun reloadData() {
         doReloadData()

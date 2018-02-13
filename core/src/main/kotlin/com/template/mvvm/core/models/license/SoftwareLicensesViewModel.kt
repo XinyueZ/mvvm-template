@@ -19,13 +19,11 @@ import com.template.mvvm.repository.LL
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.licenses.LibraryList
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.newSingleThreadContext
-import kotlinx.coroutines.experimental.runBlocking
-import kotlin.coroutines.experimental.CoroutineContext
 
 class SoftwareLicensesViewModel(
     private val application: Application,
@@ -54,7 +52,7 @@ class SoftwareLicensesViewModel(
     //For recyclerview data
     var libraryItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
 
-    private val jobHandler by lazy {
+    private val uiHandler by lazy {
         UI + CoroutineExceptionHandler({ _, e ->
             canNotLoadLicenses(e)
             LL.d(e.message ?: "")
@@ -76,9 +74,9 @@ class SoftwareLicensesViewModel(
                 }
             }
         }
-        launch(jobHandler) {
-            libraryItemVmList.value = emptyList()
-        }
+
+        libraryItemVmList.removeObservers(lifecycleOwner)
+        libraryItemVmList.value = emptyList()
         return true
     }
 
@@ -88,7 +86,7 @@ class SoftwareLicensesViewModel(
     ) {
         it.forEach {
             it.clickHandler += {
-                launch(jobHandler) {
+                launch(uiHandler) {
                     // Tell UI to open a UI for license detail.
                     licenseDetailViewModel.value =
                             lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
@@ -103,33 +101,29 @@ class SoftwareLicensesViewModel(
         }
     }
 
+    private fun loadData() {
+        doOnBound(true)
+    }
+
+    private fun reloadData() {
+        doOnBound(false)
+    }
+
     fun onBound(@IntRange(from = 0L) position: Int) {
-        runBlocking {
-            val shouldLoad = libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }
-            if (shouldLoad) {
-                loadData(jobHandler)
-            }
+        val shouldLoad = libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }
+        if (shouldLoad) {
+            loadData()
         }
     }
 
-    private fun onBound(coroutineContext: CoroutineContext, localOnly: Boolean) =
-        launch(coroutineContext) {
+    private fun doOnBound(localOnly: Boolean) =
+        launch(uiHandler) {
             libraryListSource?.let { source ->
-                newSingleThreadContext("query-licenses-worker").use { worker ->
-                    query(worker + vmJob, localOnly).consumeEach {
-                        onQueried(source, it)
-                    }
+                query(localOnly).consumeEach {
+                    onQueried(source, it)
                 }
             }
         }
-
-    internal fun loadData(coroutineContext: CoroutineContext) {
-        onBound(coroutineContext, true)
-    }
-
-    internal fun reloadData(coroutineContext: CoroutineContext) {
-        onBound(coroutineContext, false)
-    }
 
     private fun onQueried(
         source: LibraryList,
@@ -138,15 +132,15 @@ class SoftwareLicensesViewModel(
         source.value = it
     }
 
-    private suspend fun query(coroutineContext: CoroutineContext, localOnly: Boolean) =
-        repository.getAllLibraries(coroutineContext, localOnly)
+    private suspend fun query(localOnly: Boolean) =
+        repository.getAllLibraries(CommonPool + vmJob, localOnly)
 
     private fun canNotLoadLicenses(it: Throwable) {
         showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
-            reloadData(jobHandler)
+            reloadData()
             showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
@@ -176,7 +170,7 @@ class SoftwareLicensesViewModel(
     }
 
     fun onReload() {
-        reloadData(jobHandler)
+        reloadData()
         dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
