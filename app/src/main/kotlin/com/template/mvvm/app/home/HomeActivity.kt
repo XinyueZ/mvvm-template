@@ -12,6 +12,7 @@ import com.template.mvvm.app.AppBaseActivity
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.ActivityHomeBinding
 import com.template.mvvm.base.customtabs.CustomTabUtils
+import com.template.mvvm.base.ext.setUpActionBar
 import com.template.mvvm.base.ext.setup
 import com.template.mvvm.core.ext.obtainViewModel
 import com.template.mvvm.core.models.home.HomeViewModel
@@ -29,8 +30,8 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
         }
     }
 
-    override @LayoutRes
-    fun getLayout() = R.layout.activity_home
+    @LayoutRes
+    override fun getLayout() = R.layout.activity_home
 
     override fun requireViewModel() = HomeViewModel::class.java
     override fun createViewModelView() = HomeFragment.newInstance(application)
@@ -42,6 +43,7 @@ class HomeActivity : AppBaseActivity<HomeViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.apply {
+            setUpActionBar(toolbar)
             contentFrame.apply {
                 vm = obtainViewModel().apply {
                     with(controller.showSystemUi) {

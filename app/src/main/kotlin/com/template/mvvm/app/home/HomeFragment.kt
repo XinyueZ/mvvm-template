@@ -65,9 +65,8 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
                                     })
                                 }
                             }
-                            registerLifecycleOwner(it)
+                            registerLifecycle(it)
                         }
-
                     }
                 }
         return binding

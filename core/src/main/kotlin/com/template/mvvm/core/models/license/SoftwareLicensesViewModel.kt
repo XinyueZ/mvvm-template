@@ -1,8 +1,10 @@
 package com.template.mvvm.core.models.license
 
 import android.app.Application
+import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -50,24 +52,28 @@ class SoftwareLicensesViewModel(
     //For recyclerview data
     var libraryItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
 
-    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
-        libraryListSource = libraryListSource ?: LibraryList().apply {
-            setUpTransform(lifecycleOwner) {
-                it?.let {
-                    libraryItemVmList.value = it
-
-                    showSystemUi.value = true
-                    dataLoaded.set(true)
-                    dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
-                    dataHaveNotReloaded.set(true)
-
-                    bindTapHandlers(it, lifecycleOwner)
+    override fun registerLifecycle(lifecycleOwner: LifecycleOwner): Boolean {
+        lifecycleOwner.run {
+            lifecycle.addObserver(this@SoftwareLicensesViewModel)
+            libraryListSource = libraryListSource ?: LibraryList().apply {
+                setUpTransform(this@run) {
+                    it?.let {
+                        libraryItemVmList.value = it
+                        showSystemUi.value = true
+                        dataLoaded.set(true)
+                        dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
+                        dataHaveNotReloaded.set(true)
+                        bindTapHandlers(it, this@run)
+                    }
                 }
+            }
+
+            libraryItemVmList.apply {
+                removeObservers(this@run)
+                value = emptyList()
             }
         }
 
-        libraryItemVmList.removeObservers(lifecycleOwner)
-        libraryItemVmList.value = emptyList()
         return true
     }
 
@@ -146,14 +152,15 @@ class SoftwareLicensesViewModel(
         }
     }
 
-    fun reset() {
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    private fun onLifecycleStop() {
         repository.clear()
         libraryListSource = null
     }
 
     override fun onCleared() {
         super.onCleared()
-        reset()
+        onLifecycleStop()
     }
 
     //-----------------------------------

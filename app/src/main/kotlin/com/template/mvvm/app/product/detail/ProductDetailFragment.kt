@@ -2,11 +2,12 @@ package com.template.mvvm.app.product.detail
 
 import android.content.Context
 import android.databinding.ViewDataBinding
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.template.mvvm.app.AppBaseFragment
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductDetailBinding
+import com.template.mvvm.base.ext.putObserver
+import com.template.mvvm.base.ext.setUpActionBar
 import com.template.mvvm.core.ext.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductDetailViewModel
 
@@ -23,14 +24,13 @@ class ProductDetailFragment : AppBaseFragment<ProductDetailViewModel>() {
                     vm = obtainViewModel().apply {
                         activity?.let {
                             productIdToDetail = it.intent.extras[ProductDetailActivity.ARG_SEL_ID] as Long?
-                            registerLifecycleOwner(it)
+                            registerLifecycle(it)
                         }
                         view.setupErrorSnackbar(this@ProductDetailFragment, this.onError)
+                        lifecycle.putObserver(this)
                     }
-
-                    (activity as AppCompatActivity).apply {
-                        setSupportActionBar(toolbar)
-                        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                    activity.setUpActionBar(toolbar) {
+                        setDisplayHomeAsUpEnabled(true)
                     }
                 }
         return binding

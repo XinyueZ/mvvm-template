@@ -1,7 +1,9 @@
 package com.template.mvvm.core.models.product
 
+import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -56,26 +58,30 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
-        collectionSource = collectionSource ?: ProductList().apply {
-            setUpTransform(lifecycleOwner) {
-                it?.let {
-                    collectionItemVmList.value = it
+    override fun registerLifecycle(lifecycleOwner: LifecycleOwner): Boolean {
+        lifecycleOwner.run {
+            lifecycle.addObserver(this@ProductsViewModel)
+            collectionSource = collectionSource ?: ProductList().apply {
+                setUpTransform(this@run) {
+                    it?.let {
+                        collectionItemVmList.value = it
 
-                    showSystemUi.value = true
-                    dataLoaded.set(true)
-                    moreLoaded.set(true)
-                    dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
-                    dataHaveNotReloaded.set(true)
+                        showSystemUi.value = true
+                        dataLoaded.set(true)
+                        moreLoaded.set(true)
+                        dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
+                        dataHaveNotReloaded.set(true)
 
-                    bindTapHandlers(it)
+                        bindTapHandlers(it)
+                    }
                 }
             }
+            collectionItemVmList.apply {
+                removeObservers(this@run)
+                value = emptyList()
+            }
+            return true
         }
-
-        collectionItemVmList.removeObservers(lifecycleOwner)
-        collectionItemVmList.value = emptyList()
-        return true
     }
 
     private fun loadData() = onBound(0)
@@ -158,7 +164,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    fun reset() {
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    private fun onLifecycleStop() {
         repository.clear()
         collectionSource = null
         deleteList.set(false)
@@ -167,7 +174,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     override fun onCleared() {
         super.onCleared()
-        reset()
+        onLifecycleStop()
     }
 
     //-----------------------------------

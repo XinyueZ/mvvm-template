@@ -10,6 +10,7 @@ import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductsBinding
 import com.template.mvvm.app.product.detail.ProductDetailActivity
+import com.template.mvvm.base.ext.putObserver
 import com.template.mvvm.core.ext.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductsViewModel
 
@@ -25,9 +26,10 @@ class ProductsFragment : AppBaseFragment<ProductsViewModel>() {
                 .apply {
                     vmItem = BR.vm
                     vm = obtainViewModel().apply {
+                        lifecycle.putObserver(this)
                         activity?.let {
                             with(it) {
-                                registerLifecycleOwner(it)
+                                registerLifecycle(it)
                                 view.setupErrorSnackbar(this@ProductsFragment, this@apply.onError)
                                 openItemDetail.observe(it, Observer {
                                     it?.let {

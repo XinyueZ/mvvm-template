@@ -21,7 +21,7 @@ class SplashFragment : AppBaseFragment<SplashViewModel>() {
                 .apply {
                     vm = obtainViewModel().apply {
                         activity?.let {
-                            registerLifecycleOwner(it)
+                            registerLifecycle(it)
                         }
                     }
                 }

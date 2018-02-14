@@ -1,14 +1,19 @@
 <resources>
 
-    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:elevation">15dp</item>
-        <item name="elevation">15dp</item>
-        <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <style name="ToolbarBase" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="elevation">@dimen/material_elevation_toolbar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">?attr/colorPrimary</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
+    </style>
+
+    <style name="Toolbar" parent="@style/ToolbarBase">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+
+    <style name="Toolbar2" parent="@style/ToolbarBase">
     </style>
 
     <style name="CollectionProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">

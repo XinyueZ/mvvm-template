@@ -53,7 +53,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     val productImageUris: ObservableList<Uri> = ObservableArrayList()
     //------------------------------------------------------------------------
 
-    override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
+    override fun registerLifecycle(lifecycleOwner: LifecycleOwner): Boolean {
         assertProduct()
         productDetailSource = productDetailSource ?: (MutableLiveData<ProductDetail>()).apply {
             observe(lifecycleOwner, Observer {

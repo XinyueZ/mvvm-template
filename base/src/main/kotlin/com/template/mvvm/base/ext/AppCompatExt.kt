@@ -64,10 +64,16 @@ fun Fragment.replaceFragmentToFragment(fragment: Fragment, frameId: Int) {
     }
 }
 
-fun AppCompatActivity.setupActionBar(@IdRes toolbar: Toolbar, action: ActionBar.() -> Unit) {
-    setSupportActionBar(toolbar)
-    supportActionBar?.run {
-        action()
+fun Activity?.setUpActionBar(@IdRes toolbar: Toolbar, action: (ActionBar.() -> Unit)? = null) {
+    when (this is AppCompatActivity) {
+        true -> {
+            (this as AppCompatActivity).run {
+                setSupportActionBar(toolbar)
+                supportActionBar?.run {
+                    action?.let { it.invoke(this) }
+                }
+            }
+        }
     }
 }
 

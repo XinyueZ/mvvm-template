@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.app.AppBaseActivity
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.ActivityProductsBinding
+import com.template.mvvm.base.ext.setUpActionBar
 import com.template.mvvm.core.ext.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductsViewModel
 
@@ -36,6 +37,7 @@ class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.apply {
+            setUpActionBar(toolbar)
             contentFrame.apply {
                 vm = obtainViewModel().apply {
                     showSystemUi.observe(this@ProductsActivity, Observer {

@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat
 import com.template.mvvm.app.AppBaseActivity
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.ActivitySoftwareLicensesBinding
+import com.template.mvvm.base.ext.setUpActionBar
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 
 class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
@@ -21,8 +22,8 @@ class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
         }
     }
 
-    override @LayoutRes
-    fun getLayout() = R.layout.activity_software_licenses
+    @LayoutRes
+    override fun getLayout() = R.layout.activity_software_licenses
 
     override fun requireViewModel() = SoftwareLicensesViewModel::class.java
     override fun createViewModelView() = SoftwareLicensesFragment.newInstance(application)
@@ -34,16 +35,20 @@ class SoftwareLicensesActivity : AppBaseActivity<SoftwareLicensesViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = obtainViewModel().apply {
-            showSystemUi.observe(this@SoftwareLicensesActivity, Observer {
-                when (it) {
-                    true -> hideSystemUi(1500)
-                    false -> showSystemUi()
-                }
-            })
-            licenseDetailViewModel.observe(this@SoftwareLicensesActivity, Observer {
-                LicenseDetailFragment.newInstance(this@SoftwareLicensesActivity).show(supportFragmentManager, null)
-            })
+        binding.apply {
+            setUpActionBar(toolbar)
+            vm = obtainViewModel().apply {
+                showSystemUi.observe(this@SoftwareLicensesActivity, Observer {
+                    when (it) {
+                        true -> hideSystemUi(1500)
+                        false -> showSystemUi()
+                    }
+                })
+                licenseDetailViewModel.observe(this@SoftwareLicensesActivity, Observer {
+                    LicenseDetailFragment.newInstance(this@SoftwareLicensesActivity)
+                        .show(supportFragmentManager, null)
+                })
+            }
         }
     }
 }
