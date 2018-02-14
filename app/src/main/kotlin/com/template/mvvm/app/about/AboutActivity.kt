@@ -8,8 +8,8 @@ import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import com.template.mvvm.app.AppBaseActivity
 import com.template.mvvm.app.R
-import com.template.mvvm.core.models.about.AboutViewModel
 import com.template.mvvm.app.databinding.ActivityAboutBinding
+import com.template.mvvm.core.models.about.AboutViewModel
 
 class AboutActivity : AppBaseActivity<AboutViewModel>() {
 
@@ -21,7 +21,8 @@ class AboutActivity : AppBaseActivity<AboutViewModel>() {
         }
     }
 
-    override @LayoutRes fun getLayout() = R.layout.activity_about
+    @LayoutRes
+    override fun getLayout() = R.layout.activity_about
     override fun requireViewModel() = AboutViewModel::class.java
     override fun createViewModelView() = AboutFragment.newInstance(application)
     lateinit var binding: ActivityAboutBinding
@@ -32,7 +33,8 @@ class AboutActivity : AppBaseActivity<AboutViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideSystemUi(0)
+        binding.apply {
+            vm = obtainViewModel()
+        }
     }
-
-
 }

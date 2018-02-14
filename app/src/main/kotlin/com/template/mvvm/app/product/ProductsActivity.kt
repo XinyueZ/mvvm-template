@@ -23,8 +23,8 @@ class ProductsActivity : AppBaseActivity<ProductsViewModel>() {
         }
     }
 
-    override @LayoutRes
-    fun getLayout() = R.layout.activity_products
+    @LayoutRes
+    override fun getLayout() = R.layout.activity_products
 
     override fun requireViewModel() = ProductsViewModel::class.java
     override fun createViewModelView() = ProductsFragment.newInstance(application)
