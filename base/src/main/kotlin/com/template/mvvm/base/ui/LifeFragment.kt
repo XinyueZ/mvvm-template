@@ -11,8 +11,8 @@ import android.view.ViewGroup
 
 abstract class LifeFragment<out T : ViewModel> : Fragment() {
     protected abstract fun obtainViewModel(): T
-    protected abstract @LayoutRes
-    fun getLayout(): Int
+    @LayoutRes
+    protected abstract fun getLayout(): Int
 
     protected abstract fun bindingView(view: View): ViewDataBinding
     protected abstract fun requireViewModel(): Class<out T>

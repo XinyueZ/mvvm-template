@@ -17,8 +17,8 @@ abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
     protected abstract fun obtainViewModel(): T
     protected abstract fun requireViewModel(): Class<out T>
     protected abstract fun createViewModelView(): LifeFragment<T>
-    protected abstract @LayoutRes
-    fun getLayout(): Int
+    @LayoutRes
+    protected abstract fun getLayout(): Int
 
     protected abstract fun setViewDataBinding(binding: ViewDataBinding)
     private fun obtainViewModelView() =
