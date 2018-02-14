@@ -25,21 +25,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
+
+            <ImageView
+                android:id="@+id/thumnailIv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/item_thumbnail_size"
+                android:contentDescription="@null"
+                app:errorDrawableRes="@{R.drawable.ic_image}"
+                app:placeholderRes="@{R.drawable.ic_image}"
+                app:remoteImageUri="@{vm.thumbnail}"/>
 
-                <ImageView
-                    android:id="@+id/thumnailIv"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_thumbnail_size"
-                    android:contentDescription="@null"
-                    app:errorDrawableRes="@{R.drawable.ic_image}"
-                    app:placeholderRes="@{R.drawable.ic_image}"
-                    app:remoteImageUri="@{vm.thumbnail}"/>
-
-
-            </FrameLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -48,10 +43,11 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginStart="5dp"
-                android:gravity="center_vertical|start|end"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
                 android:inputType="textNoSuggestions|textMultiLine"
                 android:text="@{vm.title}"
-                android:textAppearance="@style/MaterialTextView.LightTheme.Title"
+                android:textAppearance="@style/MaterialTextView.LightTheme.Subheading"
                 android:textColor="@color/colorBlack"
                 tools:text="title"/>
 
