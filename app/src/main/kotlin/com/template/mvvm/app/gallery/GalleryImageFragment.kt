@@ -7,13 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ImageView.ScaleType.CENTER_CROP
 import com.template.mvvm.app.binding.remoteImageUri
 
 class GalleryImageFragment : Fragment() {
 
     companion object {
-        val EXTRAS_IMAGE_URI = "image-uri"
+        private const val EXTRAS_IMAGE_URI = "image-uri"
         fun newInstance(imageUri: Uri): GalleryImageFragment {
             val args = Bundle(1)
             args.putParcelable(EXTRAS_IMAGE_URI, imageUri)
@@ -33,15 +32,12 @@ class GalleryImageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.let {
-            imageView.apply {
-                remoteImageUri(
-                    it[EXTRAS_IMAGE_URI] as Uri,
-                    android.R.drawable.ic_menu_gallery,
-                    android.R.drawable.ic_menu_gallery
-                )
-                scaleType = CENTER_CROP
-            }
+        arguments?.let { args ->
+            imageView.remoteImageUri(
+                args[EXTRAS_IMAGE_URI] as Uri,
+                android.R.drawable.ic_menu_gallery,
+                android.R.drawable.ic_menu_gallery
+            )
         }
     }
 }
