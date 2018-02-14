@@ -14,13 +14,10 @@ import com.template.mvvm.core.ext.setUpTransform
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
-import com.template.mvvm.repository.LL
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
 import com.template.mvvm.repository.domain.products.ProductList
 import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.CoroutineExceptionHandler
-import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
@@ -59,13 +56,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-    private val uiHandler by lazy {
-        UI + CoroutineExceptionHandler({ _, e ->
-            canNotLoadProducts(e)
-            LL.d(e.message ?: "")
-        }) + vmJob
-    }
-
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         collectionSource = collectionSource ?: ProductList().apply {
             setUpTransform(lifecycleOwner) {
@@ -95,9 +85,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         doOnBound(position)
     }
 
-    private fun doOnBound(
-        @IntRange(from = 0L) position: Int
-    ) = launch(uiHandler) {
+    private fun doOnBound(@IntRange(from = 0L) position: Int) = launch(vmUiJob) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
                 if (offset > 0) {
@@ -133,7 +121,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         doReloadData()
     }
 
-    private fun doReloadData() = launch(uiHandler) {
+    private fun doReloadData() = launch(vmUiJob) {
         delete(CommonPool + vmJob).consumeEach {
             offset = 0
             loadData()
@@ -153,7 +141,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    private fun canNotLoadProducts(it: Throwable) {
+    override fun onUiJobError(it: Throwable) {
         showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)

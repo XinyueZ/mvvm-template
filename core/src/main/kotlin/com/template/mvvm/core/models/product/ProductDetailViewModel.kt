@@ -16,11 +16,9 @@ import com.template.mvvm.core.ext.toHtml
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
-import com.template.mvvm.repository.LL
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductDetail
-import kotlinx.coroutines.experimental.CoroutineExceptionHandler
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
@@ -30,7 +28,6 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     val title = ObservableInt(R.string.product_list_title)
     val dataLoaded = ObservableBoolean(false)
 
-    private val reload = SingleLiveData<Boolean>()
     val dataHaveNotReloaded = ObservableBoolean(true)
 
     // True toggle the system-ui(navi-bar, status-bar etc.)
@@ -55,6 +52,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     val productDescription = ObservableField<Spanned>()
     val productImageUris: ObservableList<Uri> = ObservableArrayList()
     //------------------------------------------------------------------------
+
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         assertProduct()
         productDetailSource = productDetailSource ?: (MutableLiveData<ProductDetail>()).apply {
@@ -79,39 +77,38 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
                 }
             })
         }
-        reload.observe(lifecycleOwner, Observer {
-            loadAllProducts(lifecycleOwner, false)
-        })
-        loadAllProducts(lifecycleOwner)
+
+        loadData()
         return true
     }
 
-    protected open fun loadAllProducts(lifecycleOwner: LifecycleOwner, localOnly: Boolean = true) {
+    private fun loadData(localOnly: Boolean = true) = launch(vmUiJob) {
         productDetailSource?.let {
-            launch(UI + CoroutineExceptionHandler({ _, e ->
-                canNotLoadProductDetail(e, lifecycleOwner)
-                LL.d(e.message ?: "")
-            }) + vmJob) {
-                productIdToDetail?.let {
-                    repository.getProductDetail(vmJob, productIdToDetail!!, localOnly).consumeEach {
-                        LL.i("productDetailSource subscribe")
-                        productDetailSource?.value = it
-                    }
-                } ?: kotlin.run {
-                    assertProduct()
+            productIdToDetail?.let {
+                query(localOnly).consumeEach {
+                    productDetailSource?.value = it
                 }
+            } ?: kotlin.run {
+                assertProduct()
             }
         }
     }
 
-    protected fun canNotLoadProductDetail(it: Throwable, lifecycleOwner: LifecycleOwner) {
+    private fun reloadData() {
+        loadData(false)
+    }
+
+    private suspend fun query(localOnly: Boolean = true) =
+        repository.getProductDetail(CommonPool + vmJob, productIdToDetail!!, localOnly)
+
+    override fun onUiJobError(it: Throwable) {
         showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
 
 
         onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
-            loadAllProducts(lifecycleOwner, false)
+            loadData(false)
             showSystemUi.value = false
 
             //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
@@ -143,7 +140,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     }
 
     fun onReload() {
-        reload.value = true
+        reloadData()
         dataHaveNotReloaded.set(false)
     }
     //-----------------------------------

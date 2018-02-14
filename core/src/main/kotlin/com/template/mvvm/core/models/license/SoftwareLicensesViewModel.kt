@@ -15,13 +15,10 @@ import com.template.mvvm.core.ext.setUpTransform
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
-import com.template.mvvm.repository.LL
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.licenses.LibraryList
 import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.CoroutineExceptionHandler
-import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
@@ -52,13 +49,6 @@ class SoftwareLicensesViewModel(
 
     //For recyclerview data
     var libraryItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
-
-    private val uiHandler by lazy {
-        UI + CoroutineExceptionHandler({ _, e ->
-            canNotLoadLicenses(e)
-            LL.d(e.message ?: "")
-        }) + vmJob
-    }
 
     override fun registerLifecycleOwner(lifecycleOwner: LifecycleOwner): Boolean {
         libraryListSource = libraryListSource ?: LibraryList().apply {
@@ -123,14 +113,13 @@ class SoftwareLicensesViewModel(
         }
     }
 
-    private fun doOnBound(localOnly: Boolean) =
-        launch(uiHandler) {
-            libraryListSource?.let { source ->
-                query(localOnly).consumeEach {
-                    onQueried(source, it)
-                }
+    private fun doOnBound(localOnly: Boolean) = launch(vmUiJob) {
+        libraryListSource?.let { source ->
+            query(localOnly).consumeEach {
+                onQueried(source, it)
             }
         }
+    }
 
     private fun onQueried(
         source: LibraryList,
@@ -142,7 +131,7 @@ class SoftwareLicensesViewModel(
     private suspend fun query(localOnly: Boolean) =
         repository.getAllLibraries(CommonPool + vmJob, localOnly)
 
-    private fun canNotLoadLicenses(it: Throwable) {
+    override fun onUiJobError(it: Throwable) {
         showSystemUi.value = true
         dataLoaded.set(true)
         dataHaveNotReloaded.set(true)
