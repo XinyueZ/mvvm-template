@@ -55,13 +55,13 @@ ext {
     def kotlinTest = "2+"
 
     plugins = [
-            androidApp    : "com.android.application",
-            androidInstantApp: "com.android.instantapp" ,
-            androidBaseApp: "com.android.feature",
-            androidLib    : "com.android.library",
-            kotlin        : "kotlin-android",
-            kotlinExt     : "kotlin-android-extensions",
-            kapt          : "kotlin-kapt"
+            androidInstalled : "com.android.application",
+            androidInstantApp: "com.android.instantapp",
+            androidBaseApp   : "com.android.feature",
+            androidLib       : "com.android.library",
+            kotlin           : "kotlin-android",
+            kotlinExt        : "kotlin-android-extensions",
+            kapt             : "kotlin-kapt"
     ]
 
 
@@ -93,8 +93,8 @@ ext {
             plugins.kapt,
     ]
 
-    appPlugins = [
-            plugins.androidApp,
+    installedPlugins = [
+            plugins.androidInstalled,
             plugins.kotlin,
             plugins.kotlinExt,
             plugins.kapt,

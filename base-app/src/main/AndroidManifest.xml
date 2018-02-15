@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true" >
         <meta-data
             android:name="com.template.mvvm.core.ExAppGlideModule"
             android:value="ExAppGlideModule"/>
@@ -25,11 +26,23 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:scheme="https"
+                    android:host="project-ww.appspot.com"
+                    />
+            </intent-filter>
         </activity>
 
         <activity
             android:name=".home.HomeActivity"
-            android:theme="@style/HomeTheme"/>
+            android:theme="@style/HomeTheme">
+        </activity>
 
 
         <activity

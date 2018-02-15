@@ -1,5 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.template.mvvm.app">
-
-
-</manifest>
+          package="com.template.mvvm.installed"/>

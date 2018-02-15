@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 internal object NetworkInjection {
     fun provideProductsApiService(cxt: Context, retrofitBuilder: Retrofit.Builder) =
             retrofitBuilder
-                    .baseUrl("http://api.shopstyle.com/api/v2/")
+                    .baseUrl("https://api.shopstyle.com/api/v2/")
                     .build()
                     .create(ProductsApi::class.java)
 

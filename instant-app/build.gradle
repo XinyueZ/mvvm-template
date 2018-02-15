@@ -5,7 +5,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersionInstant
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.versionCode
         versionName rootProject.versionName
