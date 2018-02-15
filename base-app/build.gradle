@@ -1,4 +1,4 @@
-rootProject.appPlugins.each {
+rootProject.baseAppPlugins.each {
     apply plugin: it
 }
 
