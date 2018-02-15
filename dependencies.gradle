@@ -56,6 +56,7 @@ ext {
 
     plugins = [
             androidApp    : "com.android.application",
+            androidInstantApp: "com.android.instantapp" ,
             androidBaseApp: "com.android.feature",
             androidLib    : "com.android.library",
             kotlin        : "kotlin-android",
@@ -102,6 +103,13 @@ ext {
 
     baseAppPlugins = [
             plugins.androidBaseApp,
+            plugins.kotlin,
+            plugins.kotlinExt,
+            plugins.kapt,
+    ]
+
+    instantAppPlugins = [
+            plugins.androidInstantApp,
             plugins.kotlin,
             plugins.kotlinExt,
             plugins.kapt,

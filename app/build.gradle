@@ -1,17 +1,18 @@
-rootProject.baseAppPlugins.each {
+rootProject.appPlugins.each {
     apply plugin: it
 }
 
 android {
-    baseFeature = true
+    defaultConfig {
+        applicationId rootProject.appId
+    }
 }
 
 apply from: '../android.gradle'
 
 dependencies {
     //STANDALONE
-    implementation project(':core')
-    implementation project(':base')
+    implementation project(':base-app')
     rootProject.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }

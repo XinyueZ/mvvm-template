@@ -1,0 +1,39 @@
+apply plugin: 'com.android.instantapp'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+
+    }
+
+    buildTypes {
+        debug {}
+
+        release {}
+    }
+
+
+    flavorDimensions "app"
+
+    productFlavors {
+        prod {
+            dimension "app"
+        }
+        mock {
+            dimension "app"
+        }
+    }
+}
+
+dependencies {
+    //STANDALONE
+    implementation project(':base-app')
+}
+
