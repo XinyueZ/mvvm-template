@@ -17,11 +17,13 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.notNullValue
 import org.hamcrest.Matchers.nullValue
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when` as mockWhen
 
+@Ignore
 class TestLicensesViewModel {
     @Mock
     private lateinit var application: Application

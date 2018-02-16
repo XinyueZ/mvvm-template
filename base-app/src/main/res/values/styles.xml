@@ -44,8 +44,7 @@
         <item name="android:layout_marginRight">@dimen/general_padding</item>
         <item name="cardBackgroundColor">@color/colorWhite</item>
         <item name="contentPadding">@dimen/general_padding</item>
-        <item name="cardElevation">10dp</item>
-        <item name="cardMaxElevation">10dp</item>
+        <item name="cardElevation">@dimen/material_elevation_card</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardCornerRadius">1dp</item>
     </style>
