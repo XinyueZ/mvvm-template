@@ -65,15 +65,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-gradle.startParameter.excludedTaskNames += [
-        "testMockReleaseUnitTest",
-        ":base:generateProdDebugUnitTestConfig",
-        ":base:generateProdReleaseUnitTestConfig",
-        ":core:generateProdDebugUnitTestConfig",
-        ":core:generateProdReleaseUnitTestConfig",
-        ":repository:generateProdDebugUnitTestConfig",
-        ":repository:generateProdReleaseUnitTestConfig"
-]
-
-
 apply from: 'dependencies.gradle'
