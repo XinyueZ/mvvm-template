@@ -11,7 +11,7 @@ import com.template.mvvm.repository.LL
 import com.template.mvvm.repository.RepositoryInjection
 import com.template.mvvm.repository.RepositoryModule
 
-open class CoreModule(context: Context) : LifecycleObserver {
+class CoreModule(context: Context) : LifecycleObserver {
     init {
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         RepositoryModule(context)
