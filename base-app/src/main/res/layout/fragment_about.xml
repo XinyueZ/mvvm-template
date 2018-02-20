@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="@{safeUnbox(vm.state.versionTitle)}"
+                    android:text="@{context.getString(vm.state.versionTitle)}"
                     android:textAppearance="@style/MaterialTextView.LightTheme.Headline"
                     tools:text="Version"/>
 
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="@{safeUnbox(vm.state.descriptionTitle)}"
+                    android:text="@{context.getString(vm.state.descriptionTitle)}"
                     android:textAppearance="@style/MaterialTextView.LightTheme.Headline"
                     tools:text="Description"/>
 
@@ -80,7 +80,7 @@
                     android:id="@+id/descriptionContent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{safeUnbox(vm.state.descriptionContent)}"
+                    android:text="@{context.getString(vm.state.descriptionContent)}"
                     android:textAppearance="@style/MaterialTextView.LightTheme.Body.Regular"
                     tools:text="Hi this is in development"/>
             </LinearLayout>

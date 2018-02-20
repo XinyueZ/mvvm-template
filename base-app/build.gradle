@@ -10,6 +10,7 @@ apply from: '../android.gradle'
 
 dependencies {
     //STANDALONE
+    application project(':installed')
     implementation project(':core')
     implementation project(':base')
     rootProject.appDependencies.each {

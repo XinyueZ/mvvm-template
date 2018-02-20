@@ -29,12 +29,18 @@ android {
         testInstrumentationRunner rootProject.testInstrumentationRunner
 
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
+    }
+
+    dexOptions {
+        preDexLibraries true
+        javaMaxHeapSize project.JAVA_MAX_HEAP_SIZE
     }
 
     buildTypes {
         debug {
-            minifyEnabled rootProject.minifyEnabled
-            useProguard !rootProject.useProguard
+            minifyEnabled false
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
@@ -101,5 +107,14 @@ android {
         mock {
             dimension "app"
         }
+    }
+}
+
+configurations.all { configuration ->
+    resolutionStrategy {
+        force "com.android.support:support-v4:$rootProject.ext.support_comp",
+                "com.android.support:appcompat-v7:$rootProject.ext.support_comp",
+                "com.android.support:support-core-utils:$rootProject.ext.support_comp",
+                "android.arch.lifecycle:runtime:$rootProject.ext.arch_comp"
     }
 }

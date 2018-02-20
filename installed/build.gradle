@@ -13,9 +13,6 @@ apply from: '../android.gradle'
 dependencies {
     //STANDALONE
     implementation project(':base-app')
-    rootProject.appDependencies.each {
-        add(it.configuration, it.dependency, it.options)
-    }
 }
 
 
