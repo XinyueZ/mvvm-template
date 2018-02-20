@@ -15,6 +15,7 @@ ext {
     def paging = "1.0.0-alpha5"
     def constraint = "1.1.0-beta4"
     def multiDex = "1+"
+    def instantapps = "1.1.0"
 
     // Retrofit
     def retrofit = "2.3.0"
@@ -126,6 +127,7 @@ ext {
             [configuration: "implementation", dependency: [group: "com.android.support", name: "support-v4", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support.constraint", name: "constraint-layout", version: constraint]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "multidex", version: multiDex]],
+            [configuration: "implementation", dependency: [group: "com.google.android.instantapps", name: "instantapps", version: instantapps]],
             [configuration: "kapt", dependency: [group: "com.android.databinding", name: "compiler", version: gradle]],
 
             //JSON
