@@ -11,11 +11,9 @@ import com.template.mvvm.base.R
 import com.template.mvvm.base.ext.android.app.replaceFragmentInActivity
 import com.template.mvvm.base.utils.SystemUiHelper
 
-abstract class LifeActivity<out T : ViewModel, in B : ViewDataBinding> : AppCompatActivity() {
+abstract class LiveActivity<out T : ViewModel, in B : ViewDataBinding> : AppCompatActivity() {
     private lateinit var uiHelper: SystemUiHelper
 
-    protected abstract fun obtainViewModel(): T
-    protected abstract fun requireViewModel(): Class<out T>
     protected abstract fun createViewModelView(): LifeFragment<T>
     @LayoutRes
     protected abstract fun getLayout(): Int

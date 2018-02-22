@@ -20,6 +20,7 @@ import com.template.mvvm.core.models.product.ProductsViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
 import com.template.mvvm.core.models.splash.SplashViewModel
 import com.template.mvvm.repository.RepositoryInjection
+import kotlin.reflect.KClass
 
 class ViewModelFactory private constructor(
     private val application: Application
@@ -106,5 +107,25 @@ fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = w
             it,
             ViewModelFactory.getInstance(it.application)
         ).get(viewModelClass)
-    }?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
+    }
+            ?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
+}
+
+fun <VM : ViewModel> FragmentActivity?.viewModel(vm: KClass<VM>, block: VM.() -> Unit) {
+    this?.run {
+        obtainViewModel(vm.java).apply {
+            block()
+        }
+    }
+}
+
+fun <VM : ViewModel, VMC : KClass<VM>> VMC.generateViewModel(
+    activity: FragmentActivity?,
+    block: VM.() -> Unit
+) {
+    activity?.run {
+        obtainViewModel(java).apply {
+            block()
+        }
+    }
 }
