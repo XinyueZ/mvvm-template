@@ -10,11 +10,11 @@ import android.support.v7.app.AppCompatDialogFragment
 import android.view.View
 
 abstract class LifeDialogFragment<out T : ViewModel> : AppCompatDialogFragment() {
-    protected abstract fun obtainViewModel(): T
-    protected abstract @LayoutRes
-    fun getLayout(): Int
+    @LayoutRes
+    protected abstract fun getLayout(): Int
 
-    protected abstract fun bindingView(view: View): ViewDataBinding
+    protected abstract fun obtainViewModel(): T
+    protected abstract fun onViewCreated(view: View): ViewDataBinding
     protected abstract fun requireViewModel(): Class<out T>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -22,7 +22,7 @@ abstract class LifeDialogFragment<out T : ViewModel> : AppCompatDialogFragment()
             AlertDialog.Builder(it).apply {
                 it.layoutInflater.inflate(getLayout(), null).apply {
                     setView(this)
-                    bindingView(this)
+                    onViewCreated(this)
                 }
             }.create()
         } ?: kotlin.run { super.onCreateDialog(savedInstanceState) }

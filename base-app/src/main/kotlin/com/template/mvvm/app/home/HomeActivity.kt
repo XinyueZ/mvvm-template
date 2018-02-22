@@ -1,8 +1,6 @@
 package com.template.mvvm.app.home
 
-import android.databinding.ViewDataBinding
 import android.net.Uri
-import android.os.Bundle
 import android.support.annotation.LayoutRes
 import com.template.mvvm.app.AppBaseActivity
 import com.template.mvvm.app.R
@@ -19,20 +17,14 @@ import com.template.mvvm.core.models.product.MenViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
 import com.template.mvvm.core.obtainViewModel
 
-class HomeActivity : AppBaseActivity<HomeViewModel>() {
+class HomeActivity : AppBaseActivity<HomeViewModel, ActivityHomeBinding>() {
 
     @LayoutRes
     override fun getLayout() = R.layout.activity_home
 
     override fun requireViewModel() = HomeViewModel::class.java
     override fun createViewModelView() = HomeFragment::class.newInstance(application)
-    lateinit var binding: ActivityHomeBinding
-    override fun setViewDataBinding(binding: ViewDataBinding) {
-        this.binding = binding as ActivityHomeBinding
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(binding: ActivityHomeBinding) {
         setUpActionBar(binding.toolbar)
         binding.vm = obtainViewModel().apply {
             with(controller.showSystemUi) {

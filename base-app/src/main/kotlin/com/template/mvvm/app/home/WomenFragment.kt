@@ -6,6 +6,7 @@ import com.template.mvvm.app.AppBaseFragment
 import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductsBinding
+import com.template.mvvm.app.product.detail.ARG_SEL_ID
 import com.template.mvvm.app.product.detail.ProductDetailActivity
 import com.template.mvvm.base.ext.android.app.showSingleTopActivity
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
@@ -15,7 +16,7 @@ import com.template.mvvm.core.models.registerLifecycleOwner
 
 class WomenFragment : AppBaseFragment<WomenViewModel>() {
 
-    override fun bindingView(view: View) = FragmentProductsBinding.bind(view).apply {
+    override fun onViewCreated(view: View) = FragmentProductsBinding.bind(view).apply {
         vmItem = BR.vm
         vm = obtainViewModel().apply {
             registerLifecycleOwner(this@WomenFragment)
@@ -23,7 +24,7 @@ class WomenFragment : AppBaseFragment<WomenViewModel>() {
             openItemDetail.setupObserve(activity) {
                 ProductDetailActivity::class.showSingleTopActivity(activity, Bundle().apply {
                     putLong(
-                        ProductDetailActivity.ARG_SEL_ID, this@setupObserve
+                        ARG_SEL_ID, this@setupObserve
                     )
                 })
             }

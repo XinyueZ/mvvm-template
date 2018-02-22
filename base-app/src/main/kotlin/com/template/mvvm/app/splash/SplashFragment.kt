@@ -9,8 +9,7 @@ import com.template.mvvm.core.models.splash.SplashViewModel
 
 class SplashFragment : AppBaseFragment<SplashViewModel>() {
 
-
-    override fun bindingView(view: View) = FragmentSplashBinding.bind(view).apply {
+    override fun onViewCreated(view: View) = FragmentSplashBinding.bind(view).apply {
         vm = obtainViewModel().apply {
             registerLifecycleOwner(this@SplashFragment)
         }

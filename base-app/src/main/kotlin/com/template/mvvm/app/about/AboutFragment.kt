@@ -8,7 +8,7 @@ import com.template.mvvm.core.models.about.AboutViewModel
 
 class AboutFragment : AppBaseFragment<AboutViewModel>() {
 
-    override fun bindingView(view: View) = FragmentAboutBinding.bind(view).apply {
+    override fun onViewCreated(view: View) = FragmentAboutBinding.bind(view).apply {
         vm = obtainViewModel()
     }
 

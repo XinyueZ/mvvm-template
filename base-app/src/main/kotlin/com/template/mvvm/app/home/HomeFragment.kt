@@ -23,7 +23,7 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
     private var womenFrg: WomenFragment? = null
     private var allFrg: AllGendersFragment? = null
 
-    override fun bindingView(view: View) = FragmentHomeBinding.bind(view).apply {
+    override fun onViewCreated(view: View) = FragmentHomeBinding.bind(view).apply {
         vm = obtainViewModel().apply {
             controller.run {
                 openProduct.setupObserve(activity) { ProductsActivity::class.showSingleTopActivity(activity) }

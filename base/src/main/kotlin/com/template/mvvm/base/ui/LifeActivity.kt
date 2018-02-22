@@ -11,7 +11,7 @@ import com.template.mvvm.base.R
 import com.template.mvvm.base.ext.android.app.replaceFragmentInActivity
 import com.template.mvvm.base.utils.SystemUiHelper
 
-abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
+abstract class LifeActivity<out T : ViewModel, in B : ViewDataBinding> : AppCompatActivity() {
     private lateinit var uiHelper: SystemUiHelper
 
     protected abstract fun obtainViewModel(): T
@@ -20,15 +20,16 @@ abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {
     @LayoutRes
     protected abstract fun getLayout(): Int
 
-    protected abstract fun setViewDataBinding(binding: ViewDataBinding)
+    protected abstract fun onCreate(binding: B)
+
     private fun obtainViewModelView() =
         supportFragmentManager.findFragmentById(R.id.contentFrame) ?: createViewModelView()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
         super.onCreate(savedInstanceState)
-        (DataBindingUtil.setContentView(this, getLayout()) as? ViewDataBinding)?.run {
-            setViewDataBinding(this)
+        (DataBindingUtil.setContentView(this, getLayout()) as? ViewDataBinding)?.let { binding ->
+            onCreate(binding as B)
             replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
         }
     }

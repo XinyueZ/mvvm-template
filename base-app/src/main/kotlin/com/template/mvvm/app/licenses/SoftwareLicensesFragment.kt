@@ -10,7 +10,7 @@ import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
 class SoftwareLicensesFragment : AppBaseFragment<SoftwareLicensesViewModel>() {
-    override fun bindingView(view: View) = FragmentSoftwareLicensesBinding.bind(view).apply {
+    override fun onViewCreated(view: View) = FragmentSoftwareLicensesBinding.bind(view).apply {
         vmItem = BR.vm
         vm = obtainViewModel().apply {
             registerLifecycleOwner(activity)
