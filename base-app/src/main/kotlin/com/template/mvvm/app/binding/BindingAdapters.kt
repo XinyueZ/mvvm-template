@@ -32,9 +32,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.template.mvvm.app.R
-import com.template.mvvm.base.ext.onClick
-import com.template.mvvm.base.ext.onNavigationItemSelected
-import com.template.mvvm.base.ext.onNavigationOnClick
+import com.template.mvvm.base.ext.android.view.onClick
+import com.template.mvvm.base.ext.android.widget.onNavigationItemSelected
+import com.template.mvvm.base.ext.android.widget.onNavigationOnClick
 import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.arch.recycler.MvvmListAdapter
 import com.template.mvvm.core.arch.recycler.OnListItemBoundListener

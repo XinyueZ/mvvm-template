@@ -1,4 +1,4 @@
-package com.template.mvvm.base.ext
+package com.template.mvvm.base.ext.android.graphics
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -6,10 +6,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import java.io.ByteArrayOutputStream
 import java.util.*
-
-fun <T : Drawable> T.bytesEqualTo(t: T?) = toBitmap().bytesEqualTo(t?.toBitmap(), true)
-
-fun <T : Drawable> T.pixelsEqualTo(t: T?) = toBitmap().pixelsEqualTo(t?.toBitmap(), true)
 
 fun Bitmap.bytesEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) =
     otherBitmap?.let { other ->

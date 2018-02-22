@@ -3,7 +3,9 @@ package com.template.mvvm.core.models.product
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.OnLifecycleEvent
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -12,7 +14,6 @@ import android.net.Uri
 import android.support.annotation.IntRange
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.SingleLiveData
-import com.template.mvvm.core.ext.setUpTransform
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
@@ -58,7 +59,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-    override fun registerLifecycle(lifecycleOwner: LifecycleOwner): Boolean {
+    override fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
         lifecycleOwner.run {
             lifecycle.addObserver(this@ProductsViewModel)
             collectionSource = collectionSource ?: ProductList().apply {
@@ -80,7 +81,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 removeObservers(this@run)
                 value = emptyList()
             }
-            return true
         }
     }
 
@@ -217,4 +217,21 @@ class ProductItemViewModel : AbstractViewModel() {
         super.onCleared()
         clickHandler.clear()
     }
+}
+
+fun ProductList.setUpTransform(
+    lifecycleOwner: LifecycleOwner,
+    body: (t: List<ProductItemViewModel>?) -> Unit
+) {
+    Transformations.switchMap(this) {
+        val itemVmList = arrayListOf<ProductItemViewModel>().apply {
+            it.mapTo(this) {
+                ProductItemViewModel.from(it)
+            }
+        }
+        SingleLiveData<List<ProductItemViewModel>>()
+            .apply {
+            value = itemVmList
+        }
+    }.observe(lifecycleOwner, Observer { body(it) })
 }

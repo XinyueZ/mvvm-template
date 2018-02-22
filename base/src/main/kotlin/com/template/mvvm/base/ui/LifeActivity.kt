@@ -8,7 +8,7 @@ import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import com.template.mvvm.base.R
-import com.template.mvvm.base.ext.replaceFragmentInActivity
+import com.template.mvvm.base.ext.android.app.replaceFragmentInActivity
 import com.template.mvvm.base.utils.SystemUiHelper
 
 abstract class LifeActivity<out T : ViewModel> : AppCompatActivity() {

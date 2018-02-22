@@ -9,10 +9,9 @@ class SplashViewModel : AbstractViewModel() {
 
     val startHome = MutableLiveData<Boolean>()
 
-    override fun registerLifecycle(lifecycleOwner: LifecycleOwner): Boolean {
+    override fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
         Handler().postDelayed({
             startHome.value = true
         }, 1500)
-        return true
     }
 }

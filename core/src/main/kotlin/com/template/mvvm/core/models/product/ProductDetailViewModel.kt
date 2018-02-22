@@ -9,10 +9,11 @@ import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.databinding.ObservableList
 import android.net.Uri
+import android.os.Build
+import android.text.Html
 import android.text.Spanned
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.SingleLiveData
-import com.template.mvvm.core.ext.toHtml
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
@@ -53,7 +54,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     val productImageUris: ObservableList<Uri> = ObservableArrayList()
     //------------------------------------------------------------------------
 
-    override fun registerLifecycle(lifecycleOwner: LifecycleOwner): Boolean {
+    override fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
         assertProduct()
         productDetailSource = productDetailSource ?: (MutableLiveData<ProductDetail>()).apply {
             observe(lifecycleOwner, Observer {
@@ -79,7 +80,6 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
         }
 
         loadData()
-        return true
     }
 
     private fun loadData(localOnly: Boolean = true) = launch(vmUiJob) {
@@ -144,4 +144,20 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
         dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
+}
+
+fun String.toHtml(trimmed: Boolean = true): Spanned? {
+    val result = when {
+        isEmpty() -> null
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> Html.fromHtml(
+            this,
+            0
+        )
+        else -> Html.fromHtml(this)
+    }
+
+    return when (trimmed) {
+        true -> result?.trim() as Spanned
+        false -> result
+    }
 }

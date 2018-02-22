@@ -1,4 +1,4 @@
-package com.template.mvvm.base.ext
+package com.template.mvvm.base.ext.android.widget
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData

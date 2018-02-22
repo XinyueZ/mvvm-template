@@ -4,7 +4,9 @@ import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.OnLifecycleEvent
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -12,11 +14,10 @@ import android.databinding.ObservableInt
 import android.support.annotation.IntRange
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.SingleLiveData
-import com.template.mvvm.core.ext.obtainViewModel
-import com.template.mvvm.core.ext.setUpTransform
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
+import com.template.mvvm.core.obtainViewModel
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.licenses.LibraryList
@@ -52,7 +53,7 @@ class SoftwareLicensesViewModel(
     //For recyclerview data
     var libraryItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
 
-    override fun registerLifecycle(lifecycleOwner: LifecycleOwner): Boolean {
+    override fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
         lifecycleOwner.run {
             lifecycle.addObserver(this@SoftwareLicensesViewModel)
             libraryListSource = libraryListSource ?: LibraryList().apply {
@@ -73,8 +74,6 @@ class SoftwareLicensesViewModel(
                 value = emptyList()
             }
         }
-
-        return true
     }
 
     private fun bindTapHandlers(
@@ -206,6 +205,19 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     }
 }
 
-
-
-
+fun LibraryList.setUpTransform(
+    lifecycleOwner: LifecycleOwner,
+    body: (t: List<SoftwareLicenseItemViewModel>?) -> Unit
+) {
+    Transformations.switchMap(this) {
+        val itemVmList = arrayListOf<SoftwareLicenseItemViewModel>().apply {
+            it.mapTo(this) {
+                SoftwareLicenseItemViewModel.from(it)
+            }
+        }
+        SingleLiveData<List<SoftwareLicenseItemViewModel>>()
+            .apply {
+            value = itemVmList
+        }
+    }.observe(lifecycleOwner, Observer { body(it) })
+}

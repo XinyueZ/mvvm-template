@@ -1,8 +1,12 @@
 package com.template.mvvm.core
 
 import android.app.Application
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import com.template.mvvm.core.models.about.AboutViewModel
 import com.template.mvvm.core.models.home.HomeViewModel
 import com.template.mvvm.core.models.license.LicenseDetailViewModel
@@ -74,4 +78,33 @@ class ViewModelFactory private constructor(
             INSTANCE = null
         }
     }
+}
+
+fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
+    ViewModelProviders.of(
+        this,
+        ViewModelFactory.getInstance(this.application)
+    ).get(viewModelClass)
+
+fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
+    activity?.let {
+        ViewModelProviders.of(
+            it,
+            ViewModelFactory.getInstance(it.application)
+        ).get(viewModelClass)
+    }
+            ?: kotlin.run { ViewModelProviders.of(this).get(viewModelClass) }
+
+fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = with(
+    when (this) {
+        is Fragment -> activity
+        else -> this as FragmentActivity
+    }
+) {
+    this?.let {
+        ViewModelProviders.of(
+            it,
+            ViewModelFactory.getInstance(it.application)
+        ).get(viewModelClass)
+    }?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
 }

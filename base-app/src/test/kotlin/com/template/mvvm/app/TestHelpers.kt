@@ -8,8 +8,6 @@ import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageButton
-import com.template.mvvm.base.ext.bytesEqualTo
-import com.template.mvvm.base.ext.pixelsEqualTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.equalTo

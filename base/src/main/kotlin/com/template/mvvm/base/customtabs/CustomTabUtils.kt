@@ -28,12 +28,14 @@ object CustomTabUtils {
     }
 
     fun openWeb(
-        activity: Activity,
+        activity: Activity?,
         url: Uri,
         builder: CustomTabsIntent.Builder,
         fallback: CustomTabFallback = DefaultFallback
     ) {
-        CustomTabActivityHelper.openCustomTab(activity, builder.build(), url, fallback)
+        activity?.run {
+            CustomTabActivityHelper.openCustomTab(this, builder.build(), url, fallback)
+        }
     }
 }
 

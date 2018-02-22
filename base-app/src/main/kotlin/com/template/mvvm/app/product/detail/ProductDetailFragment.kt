@@ -1,39 +1,28 @@
 package com.template.mvvm.app.product.detail
 
-import android.content.Context
-import android.databinding.ViewDataBinding
 import android.view.View
 import com.template.mvvm.app.AppBaseFragment
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductDetailBinding
-import com.template.mvvm.base.ext.putObserver
-import com.template.mvvm.base.ext.setUpActionBar
-import com.template.mvvm.core.ext.setupErrorSnackbar
+import com.template.mvvm.app.product.detail.ProductDetailActivity.Companion.ARG_SEL_ID
+import com.template.mvvm.base.ext.android.app.getExtras
+import com.template.mvvm.base.ext.android.app.setUpActionBar
+import com.template.mvvm.base.ext.android.app.setViewGoldenRatioHeight
+import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductDetailViewModel
+import com.template.mvvm.core.models.registerLifecycleOwner
 
 class ProductDetailFragment : AppBaseFragment<ProductDetailViewModel>() {
-    companion object {
-        fun newInstance(cxt: Context) = instantiate(cxt, ProductDetailFragment::class.java.name) as ProductDetailFragment
-    }
-
-    private lateinit var binding: FragmentProductDetailBinding
-
-    override fun bindingView(view: View): ViewDataBinding {
-        binding = FragmentProductDetailBinding.bind(view)
-                .apply {
-                    vm = obtainViewModel().apply {
-                        activity?.let {
-                            productIdToDetail = it.intent.extras[ProductDetailActivity.ARG_SEL_ID] as Long?
-                            registerLifecycle(it)
-                        }
-                        view.setupErrorSnackbar(this@ProductDetailFragment, this.onError)
-                        lifecycle.putObserver(this)
-                    }
-                    activity.setUpActionBar(toolbar) {
-                        setDisplayHomeAsUpEnabled(true)
-                    }
-                }
-        return binding
+    override fun bindingView(view: View) = FragmentProductDetailBinding.bind(view).apply {
+        vm = obtainViewModel().apply {
+            productIdToDetail = activity.getExtras(ARG_SEL_ID)
+            onError.setupErrorSnackbar(view, activity)
+            registerLifecycleOwner(this@ProductDetailFragment)
+            activity.setUpActionBar(toolbar) {
+                setDisplayHomeAsUpEnabled(true)
+            }
+            activity.setViewGoldenRatioHeight(appbar)
+        }
     }
 
     override fun getLayout() = R.layout.fragment_product_detail
