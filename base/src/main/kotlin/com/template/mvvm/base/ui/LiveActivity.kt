@@ -14,7 +14,7 @@ import com.template.mvvm.base.utils.SystemUiHelper
 abstract class LiveActivity<out T : ViewModel, in B : ViewDataBinding> : AppCompatActivity() {
     private lateinit var uiHelper: SystemUiHelper
 
-    protected abstract fun createViewModelView(): LifeFragment<T>
+    protected abstract fun createViewModelView(): LiveFragment<T>
     @LayoutRes
     protected abstract fun getLayout(): Int
 

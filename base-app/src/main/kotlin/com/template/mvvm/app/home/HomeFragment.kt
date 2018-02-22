@@ -3,7 +3,6 @@ package com.template.mvvm.app.home
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import com.template.mvvm.app.AppBaseFragment
 import com.template.mvvm.app.R
 import com.template.mvvm.app.about.AboutActivity
 import com.template.mvvm.app.databinding.FragmentHomeBinding
@@ -15,18 +14,25 @@ import com.template.mvvm.base.ext.android.app.newInstance
 import com.template.mvvm.base.ext.android.app.replaceFragmentToFragment
 import com.template.mvvm.base.ext.android.app.showSingleTopActivity
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
+import com.template.mvvm.base.ui.LiveFragment
+import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.home.HomeViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class HomeFragment : AppBaseFragment<HomeViewModel>() {
+class HomeFragment : LiveFragment<HomeViewModel>() {
     private var menFrg: MenFragment? = null
     private var womenFrg: WomenFragment? = null
     private var allFrg: AllGendersFragment? = null
 
     override fun onViewCreated(view: View) = FragmentHomeBinding.bind(view).apply {
-        vm = obtainViewModel().apply {
+        HomeViewModel::class.generateViewModel(this@HomeFragment) {
+            vm = this
             controller.run {
-                openProduct.setupObserve(activity) { ProductsActivity::class.showSingleTopActivity(activity) }
+                openProduct.setupObserve(activity) {
+                    ProductsActivity::class.showSingleTopActivity(
+                        activity
+                    )
+                }
                 openInternet.setupObserve(activity) {
                     CustomTabUtils.openWeb(
                         activity,
@@ -34,8 +40,16 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
                         CustomTabConfig.builder
                     )
                 }
-                openLicenses.setupObserve(activity) { SoftwareLicensesActivity::class.showSingleTopActivity(activity) }
-                openAbout.setupObserve(activity) { AboutActivity::class.showSingleTopActivity(activity) }
+                openLicenses.setupObserve(activity) {
+                    SoftwareLicensesActivity::class.showSingleTopActivity(
+                        activity
+                    )
+                }
+                openAbout.setupObserve(activity) {
+                    AboutActivity::class.showSingleTopActivity(
+                        activity
+                    )
+                }
                 openItem2.setupObserve(activity) {
                     if (menFrg == null)
                         menFrg = MenFragment::class.newInstance(context)
@@ -57,7 +71,6 @@ class HomeFragment : AppBaseFragment<HomeViewModel>() {
     }
 
     override fun getLayout() = R.layout.fragment_home
-    override fun requireViewModel() = HomeViewModel::class.java
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

@@ -9,14 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-abstract class LifeFragment<out T : ViewModel> : Fragment() {
+abstract class LiveFragment<out T : ViewModel> : Fragment() {
     @LayoutRes
     protected abstract fun getLayout(): Int
 
-    protected abstract fun obtainViewModel(): T
     protected abstract fun onViewCreated(view: View): ViewDataBinding
-    protected abstract fun requireViewModel(): Class<out T>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = false

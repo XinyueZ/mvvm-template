@@ -129,3 +129,22 @@ fun <VM : ViewModel, VMC : KClass<VM>> VMC.generateViewModel(
         }
     }
 }
+
+fun <VM : ViewModel> Fragment?.viewModel(vm: KClass<VM>, block: VM.() -> Unit) {
+    this?.run {
+        obtainViewModel(vm.java).apply {
+            block()
+        }
+    }
+}
+
+fun <VM : ViewModel, VMC : KClass<VM>> VMC.generateViewModel(
+    fragment: Fragment?,
+    block: VM.() -> Unit
+) {
+    fragment?.run {
+        obtainViewModel(java).apply {
+            block()
+        }
+    }
+}

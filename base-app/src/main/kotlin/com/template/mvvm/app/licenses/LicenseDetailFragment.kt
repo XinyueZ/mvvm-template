@@ -1,15 +1,19 @@
 package com.template.mvvm.app.licenses
 
 import android.view.View
-import com.template.mvvm.app.AppBaseDialogFragment
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentLicenseDetailBinding
+import com.template.mvvm.base.ui.LiveDialogFragment
+import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.license.LicenseDetailViewModel
 
-class LicenseDetailFragment : AppBaseDialogFragment<LicenseDetailViewModel>() {
+class LicenseDetailFragment : LiveDialogFragment<LicenseDetailViewModel>() {
     override fun onViewCreated(view: View) =
-        FragmentLicenseDetailBinding.bind(view).apply { vm = obtainViewModel() }
+        FragmentLicenseDetailBinding.bind(view).apply {
+            LicenseDetailViewModel::class.generateViewModel(this@LicenseDetailFragment) {
+                vm = this
+            }
+        }
 
     override fun getLayout() = R.layout.fragment_license_detail
-    override fun requireViewModel() = LicenseDetailViewModel::class.java
 }
