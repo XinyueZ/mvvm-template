@@ -43,7 +43,7 @@ fun Context.isPreApi24() =
 fun Context.isPreApi26() =
     android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O
 
-inline fun <E : Context, reified T : KClass<out E>> T.showNewTaskActivity(
+fun <E : Context, T : KClass<out E>> T.showNewTaskActivity(
     context: E?,
     args: Bundle? = null
 ) =

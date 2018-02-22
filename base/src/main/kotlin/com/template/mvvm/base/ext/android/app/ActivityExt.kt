@@ -24,12 +24,6 @@ fun Activity?.setViewGoldenRatioHeight(view: View) {
     }
 }
 
-inline fun <reified T : Any> Activity?.getExtras(key: String): T? = this?.let {
-    intent.extras[key] as T
-} ?: kotlin.run {
-    null
-}
-
 fun Activity?.setUpActionBar(@IdRes toolbar: Toolbar, action: (ActionBar.() -> Unit)? = null) {
     when (this is AppCompatActivity) {
         true -> {
@@ -61,7 +55,7 @@ fun FragmentActivity.findChildFragment(@IdRes parent: Int, @IdRes child: Int): F
 @Size
 fun Activity.getScreenSize() = com.template.mvvm.base.utils.getScreenSize(this, 0)
 
-inline fun <E : Activity, reified T : KClass<out E>> T.showSingleTopActivity(
+fun <E : Activity, T : KClass<out E>> T.showSingleTopActivity(
     context: E?,
     args: Bundle? = null
 ) =
@@ -73,3 +67,9 @@ inline fun <E : Activity, reified T : KClass<out E>> T.showSingleTopActivity(
             ActivityCompat.startActivity(this@run, this, EMPTY)
         }
     }
+
+fun <T : Any> Activity?.getExtras(key: String): T? = this?.let {
+    intent.extras[key] as? T
+} ?: kotlin.run {
+    null
+}

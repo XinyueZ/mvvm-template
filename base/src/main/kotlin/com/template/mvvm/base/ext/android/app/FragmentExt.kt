@@ -42,13 +42,13 @@ fun Fragment.replaceFragmentToFragment(fragment: Fragment, frameId: Int) {
     }
 }
 
-inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
+fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
     beginTransaction().apply {
         action()
     }.commit()
 }
 
-inline fun <E : Fragment, reified T : KClass<out E>> T.newInstance(
+fun <E : Fragment, T : KClass<out E>> T.newInstance(
     context: Context?,
     args: Bundle? = null
 ) =
