@@ -18,7 +18,7 @@ class ProductDetailActivity : LiveActivity<ActivityProductDetailBinding>() {
     @LayoutRes
     override fun getLayout() = R.layout.activity_product_detail
 
-    override fun createViewModelView() = ProductDetailFragment::class.newInstance(application)
+    override fun createLiveFragment() = ProductDetailFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityProductDetailBinding) {
         ProductDetailViewModel::class.generateViewModel(this) {
             binding.vm = this

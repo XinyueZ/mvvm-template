@@ -15,7 +15,7 @@ class SplashActivity : LiveActivity<ActivitySplashBinding>() {
     @LayoutRes
     override fun getLayout() = R.layout.activity_splash
 
-    override fun createViewModelView() = SplashFragment::class.newInstance(application)
+    override fun createLiveFragment() = SplashFragment::class.newInstance(application)
     override fun onCreate(binding: ActivitySplashBinding) {
         SplashViewModel::class.generateViewModel(this) {
             startHome.setupObserve(this@SplashActivity) {

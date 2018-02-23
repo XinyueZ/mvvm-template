@@ -13,21 +13,20 @@ import com.template.mvvm.base.utils.SystemUiHelper
 abstract class LiveActivity<in B : ViewDataBinding> : AppCompatActivity() {
     private lateinit var uiHelper: SystemUiHelper
 
-    protected abstract fun createViewModelView(): LiveFragment
     @LayoutRes
     protected abstract fun getLayout(): Int
 
+    protected abstract fun createLiveFragment(): LiveFragment
     protected abstract fun onCreate(binding: B)
-
-    private fun obtainViewModelView() =
-        supportFragmentManager.findFragmentById(R.id.contentFrame) ?: createViewModelView()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
         super.onCreate(savedInstanceState)
         (DataBindingUtil.setContentView(this, getLayout()) as? ViewDataBinding)?.let { binding ->
             onCreate(binding as B)
-            replaceFragmentInActivity(obtainViewModelView(), R.id.contentFrame)
+            replaceFragmentInActivity(
+                supportFragmentManager.findFragmentById(R.id.contentFrame) ?: createLiveFragment(),
+                R.id.contentFrame
+            )
         }
     }
 

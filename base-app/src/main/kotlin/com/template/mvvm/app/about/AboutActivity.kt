@@ -13,7 +13,7 @@ class AboutActivity : LiveActivity<ActivityAboutBinding>() {
     @LayoutRes
     override fun getLayout() = R.layout.activity_about
 
-    override fun createViewModelView() = AboutFragment::class.newInstance(application)
+    override fun createLiveFragment() = AboutFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityAboutBinding) {
         hideSystemUi(0)
         AboutViewModel::class.generateViewModel(this) {

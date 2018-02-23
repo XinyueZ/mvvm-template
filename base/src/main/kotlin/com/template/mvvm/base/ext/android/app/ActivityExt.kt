@@ -9,8 +9,6 @@ import android.os.Bundle.EMPTY
 import android.support.annotation.IdRes
 import android.support.annotation.Size
 import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -36,21 +34,6 @@ fun Activity?.setUpActionBar(@IdRes toolbar: Toolbar, action: (ActionBar.() -> U
         }
     }
 }
-
-fun FragmentActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
-    supportFragmentManager.transact {
-        replace(frameId, fragment)
-    }
-}
-
-fun FragmentActivity.addFragmentToActivity(fragment: Fragment, tag: String) {
-    supportFragmentManager.transact {
-        add(fragment, tag)
-    }
-}
-
-fun FragmentActivity.findChildFragment(@IdRes parent: Int, @IdRes child: Int): Fragment? =
-    supportFragmentManager.findFragmentById(parent).childFragmentManager.findFragmentById(child)
 
 @Size
 fun Activity.getScreenSize() = com.template.mvvm.base.utils.getScreenSize(this, 0)

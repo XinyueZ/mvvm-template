@@ -16,7 +16,7 @@ class SoftwareLicensesActivity : LiveActivity<ActivitySoftwareLicensesBinding>()
     @LayoutRes
     override fun getLayout() = R.layout.activity_software_licenses
 
-    override fun createViewModelView() = SoftwareLicensesFragment::class.newInstance(application)
+    override fun createLiveFragment() = SoftwareLicensesFragment::class.newInstance(application)
     override fun onCreate(binding: ActivitySoftwareLicensesBinding) {
         setUpActionBar(binding.toolbar)
         SoftwareLicensesViewModel::class.generateViewModel(this) {

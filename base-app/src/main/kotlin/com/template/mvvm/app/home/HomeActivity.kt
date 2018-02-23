@@ -23,7 +23,7 @@ class HomeActivity : LiveActivity<ActivityHomeBinding>() {
     @LayoutRes
     override fun getLayout() = R.layout.activity_home
 
-    override fun createViewModelView() = HomeFragment::class.newInstance(application)
+    override fun createLiveFragment() = HomeFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityHomeBinding) {
         setUpActionBar(binding.toolbar)
         HomeViewModel::class.generateViewModel(this) {
