@@ -47,8 +47,8 @@ ext {
     def mockitoVersion = "2.13.0"
     def mockitoAndroidVersion = "2.13.0"
     def hamcrest = "1.3"
-    def testRunner = "1.0.1"
-    def espresso = "3.0.1"
+    def testRunner = "1+"
+    def espresso = "3+"
     def junit = "4.12"
     def dexmaker = "1.2"
     def roomTest = "1.0.0"
@@ -119,6 +119,7 @@ ext {
     applicationDependencies = [
 
             //SUPPORT
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-annotations", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "design", version: supportLibraryVersion]],
