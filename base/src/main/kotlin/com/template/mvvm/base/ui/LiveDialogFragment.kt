@@ -1,7 +1,6 @@
 package com.template.mvvm.base.ui
 
 import android.app.Dialog
-import android.arch.lifecycle.ViewModel
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.LayoutRes
@@ -9,7 +8,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatDialogFragment
 import android.view.View
 
-abstract class LiveDialogFragment<out T : ViewModel> : AppCompatDialogFragment() {
+abstract class LiveDialogFragment : AppCompatDialogFragment() {
     @LayoutRes
     protected abstract fun getLayout(): Int
 

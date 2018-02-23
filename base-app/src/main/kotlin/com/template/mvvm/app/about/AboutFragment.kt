@@ -7,7 +7,7 @@ import com.template.mvvm.base.ui.LiveFragment
 import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.about.AboutViewModel
 
-class AboutFragment : LiveFragment<AboutViewModel>() {
+class AboutFragment : LiveFragment() {
 
     override fun onViewCreated(view: View) = FragmentAboutBinding.bind(view).apply {
         AboutViewModel::class.generateViewModel(this@AboutFragment) {

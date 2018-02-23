@@ -18,7 +18,7 @@ import com.template.mvvm.core.models.product.MenViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
 import com.template.mvvm.core.obtainViewModel
 
-class HomeActivity : LiveActivity<HomeViewModel, ActivityHomeBinding>() {
+class HomeActivity : LiveActivity<ActivityHomeBinding>() {
 
     @LayoutRes
     override fun getLayout() = R.layout.activity_home

@@ -12,7 +12,7 @@ import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductsViewModel
 
-class ProductsActivity : LiveActivity<ProductsViewModel, ActivityProductsBinding>() {
+class ProductsActivity : LiveActivity<ActivityProductsBinding>() {
 
     @LayoutRes
     override fun getLayout() = R.layout.activity_products

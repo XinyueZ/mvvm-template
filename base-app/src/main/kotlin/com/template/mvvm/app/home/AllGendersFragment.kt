@@ -15,7 +15,7 @@ import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class AllGendersFragment : LiveFragment<AllGendersViewModel>() {
+class AllGendersFragment : LiveFragment() {
 
     override fun onViewCreated(view: View) = FragmentProductsBinding.bind(view).apply {
         vmItem = BR.vm

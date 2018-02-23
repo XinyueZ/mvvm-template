@@ -19,7 +19,7 @@ import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.home.HomeViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class HomeFragment : LiveFragment<HomeViewModel>() {
+class HomeFragment : LiveFragment() {
     private var menFrg: MenFragment? = null
     private var womenFrg: WomenFragment? = null
     private var allFrg: AllGendersFragment? = null

@@ -1,6 +1,5 @@
 package com.template.mvvm.base.ui
 
-import android.arch.lifecycle.ViewModel
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -11,10 +10,10 @@ import com.template.mvvm.base.R
 import com.template.mvvm.base.ext.android.app.replaceFragmentInActivity
 import com.template.mvvm.base.utils.SystemUiHelper
 
-abstract class LiveActivity<out T : ViewModel, in B : ViewDataBinding> : AppCompatActivity() {
+abstract class LiveActivity<in B : ViewDataBinding> : AppCompatActivity() {
     private lateinit var uiHelper: SystemUiHelper
 
-    protected abstract fun createViewModelView(): LiveFragment<T>
+    protected abstract fun createViewModelView(): LiveFragment
     @LayoutRes
     protected abstract fun getLayout(): Int
 

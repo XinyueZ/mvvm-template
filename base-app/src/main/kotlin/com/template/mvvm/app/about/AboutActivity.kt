@@ -8,7 +8,7 @@ import com.template.mvvm.base.ui.LiveActivity
 import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.about.AboutViewModel
 
-class AboutActivity : LiveActivity<AboutViewModel, ActivityAboutBinding>() {
+class AboutActivity : LiveActivity<ActivityAboutBinding>() {
 
     @LayoutRes
     override fun getLayout() = R.layout.activity_about

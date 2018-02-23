@@ -11,7 +11,7 @@ import com.template.mvvm.base.ui.LiveActivity
 import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.splash.SplashViewModel
 
-class SplashActivity : LiveActivity<SplashViewModel, ActivitySplashBinding>() {
+class SplashActivity : LiveActivity<ActivitySplashBinding>() {
     @LayoutRes
     override fun getLayout() = R.layout.activity_splash
 

@@ -15,7 +15,7 @@ import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductsViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class ProductsFragment : LiveFragment<ProductsViewModel>() {
+class ProductsFragment : LiveFragment() {
 
     override fun onViewCreated(view: View) = FragmentProductsBinding.bind(view).apply {
         vmItem = BR.vm

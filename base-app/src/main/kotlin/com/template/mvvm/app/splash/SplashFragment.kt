@@ -8,7 +8,7 @@ import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.core.models.splash.SplashViewModel
 
-class SplashFragment : LiveFragment<SplashViewModel>() {
+class SplashFragment : LiveFragment() {
 
     override fun onViewCreated(view: View) = FragmentSplashBinding.bind(view).apply {
         SplashViewModel::class.generateViewModel(this@SplashFragment) {

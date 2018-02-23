@@ -13,8 +13,7 @@ import com.template.mvvm.core.models.product.ProductDetailViewModel
 
 internal const val ARG_SEL_ID = "detail-item-id"
 
-class ProductDetailActivity :
-    LiveActivity<ProductDetailViewModel, ActivityProductDetailBinding>() {
+class ProductDetailActivity : LiveActivity<ActivityProductDetailBinding>() {
 
     @LayoutRes
     override fun getLayout() = R.layout.activity_product_detail

@@ -12,7 +12,7 @@ import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductDetailViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class ProductDetailFragment : LiveFragment<ProductDetailViewModel>() {
+class ProductDetailFragment : LiveFragment() {
 
     override fun onViewCreated(view: View) = FragmentProductDetailBinding.bind(view).apply {
         ProductDetailViewModel::class.generateViewModel(this@ProductDetailFragment) {

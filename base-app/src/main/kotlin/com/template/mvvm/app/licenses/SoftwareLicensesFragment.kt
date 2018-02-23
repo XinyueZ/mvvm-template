@@ -10,7 +10,7 @@ import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class SoftwareLicensesFragment : LiveFragment<SoftwareLicensesViewModel>() {
+class SoftwareLicensesFragment : LiveFragment() {
     override fun onViewCreated(view: View) = FragmentSoftwareLicensesBinding.bind(view).apply {
         vmItem = BR.vm
         SoftwareLicensesViewModel::class.generateViewModel(this@SoftwareLicensesFragment) {

@@ -11,8 +11,7 @@ import com.template.mvvm.base.ui.LiveActivity
 import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 
-class SoftwareLicensesActivity :
-    LiveActivity<SoftwareLicensesViewModel, ActivitySoftwareLicensesBinding>() {
+class SoftwareLicensesActivity : LiveActivity<ActivitySoftwareLicensesBinding>() {
 
     @LayoutRes
     override fun getLayout() = R.layout.activity_software_licenses
@@ -26,7 +25,8 @@ class SoftwareLicensesActivity :
                 execute({ hideSystemUi(1500) }, { showSystemUi() })
             }
             licenseDetailViewModel.setupObserve(this@SoftwareLicensesActivity) {
-                LicenseDetailFragment::class.newInstance(this@SoftwareLicensesActivity).show(supportFragmentManager, null)
+                LicenseDetailFragment::class.newInstance(this@SoftwareLicensesActivity)
+                    .show(supportFragmentManager, null)
             }
         }
     }

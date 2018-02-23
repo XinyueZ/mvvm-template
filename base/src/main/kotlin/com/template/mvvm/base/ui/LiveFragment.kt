@@ -1,6 +1,5 @@
 package com.template.mvvm.base.ui
 
-import android.arch.lifecycle.ViewModel
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.LayoutRes
@@ -9,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-abstract class LiveFragment<out T : ViewModel> : Fragment() {
+abstract class LiveFragment: Fragment() {
     @LayoutRes
     protected abstract fun getLayout(): Int
 
