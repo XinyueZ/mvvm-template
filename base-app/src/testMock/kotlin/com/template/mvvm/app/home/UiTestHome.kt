@@ -16,10 +16,10 @@ import com.template.mvvm.app.finish
 import com.template.mvvm.app.licenses.SoftwareLicensesActivity
 import com.template.mvvm.app.product.ProductsActivity
 import com.template.mvvm.app.uiTestAppearance
-import com.template.mvvm.base.ext.findChildFragment
-import com.template.mvvm.base.ext.findSubItem
-import com.template.mvvm.base.ext.getMenuItemView
-import com.template.mvvm.base.ext.isDrawerTurnOn
+import com.template.mvvm.base.ext.android.app.findChildFragment
+import com.template.mvvm.base.ext.android.view.findSubItem
+import com.template.mvvm.base.ext.android.widget.getMenuItemView
+import com.template.mvvm.base.ext.android.widget.isDrawerTurnOn
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
