@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-abstract class LiveFragment: Fragment() {
+abstract class LiveFragment : Fragment() {
     @LayoutRes
     protected abstract fun getLayout(): Int
 
@@ -22,8 +22,11 @@ abstract class LiveFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(getLayout(), container, false)
-        return onViewCreated(view).apply { executePendingBindings() }.root
-    }
+    ) = onViewCreated(
+        inflater.inflate(
+            getLayout(),
+            container,
+            false
+        )
+    ).apply { executePendingBindings() }.root
 }

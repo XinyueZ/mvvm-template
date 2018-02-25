@@ -21,13 +21,11 @@ abstract class LiveActivity<in B : ViewDataBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         uiHelper = SystemUiHelper(this, SystemUiHelper.LEVEL_IMMERSIVE, 0)
         super.onCreate(savedInstanceState)
-        (DataBindingUtil.setContentView(this, getLayout()) as? ViewDataBinding)?.let { binding ->
-            onCreate(binding as B)
-            replaceFragmentInActivity(
-                supportFragmentManager.findFragmentById(R.id.contentFrame) ?: createLiveFragment(),
-                R.id.contentFrame
-            )
-        }
+        onCreate(DataBindingUtil.setContentView<ViewDataBinding>(this, getLayout()) as B)
+        replaceFragmentInActivity(
+            supportFragmentManager.findFragmentById(R.id.contentFrame) ?: createLiveFragment(),
+            R.id.contentFrame
+        )
     }
 
     protected fun hideSystemUi(length: Long = 0) {
