@@ -72,7 +72,6 @@ class SoftwareLicensesViewModel(
             }
 
             libraryItemVmList.apply {
-                removeObservers(this@run)
                 value = emptyList()
             }
         }
