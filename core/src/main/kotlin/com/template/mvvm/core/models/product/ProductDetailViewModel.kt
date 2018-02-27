@@ -1,8 +1,9 @@
 package com.template.mvvm.core.models.product
 
-import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.OnLifecycleEvent
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -55,7 +56,8 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     val productImageUris: ObservableList<Uri> = ObservableArrayList()
     //------------------------------------------------------------------------
 
-    override fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onLifecycleStart() {
         assertProduct()
         productDetailSource = productDetailSource ?: (MutableLiveData<ProductDetail>()).apply {
             observe(lifecycleOwner, Observer {

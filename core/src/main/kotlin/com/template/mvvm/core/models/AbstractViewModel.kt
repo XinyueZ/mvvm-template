@@ -10,7 +10,6 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 
 abstract class AbstractViewModel : ViewModel(), LifecycleObserver {
-    open fun registerLifecycle(lifecycleOwner: LifecycleOwner) = Unit
     protected val vmJob = Job()
     protected val vmUiJob by lazy {
         UI + CoroutineExceptionHandler({ _, e ->
@@ -18,6 +17,7 @@ abstract class AbstractViewModel : ViewModel(), LifecycleObserver {
             LL.d(e.message ?: "")
         }) + vmJob
     }
+    internal lateinit var lifecycleOwner: LifecycleOwner
 
     override fun onCleared() {
         super.onCleared()
@@ -28,11 +28,11 @@ abstract class AbstractViewModel : ViewModel(), LifecycleObserver {
     protected open fun onUiJobError(e: Throwable) = Unit
 }
 
-fun AbstractViewModel?.registerLifecycleOwner(lifecycleOwner: LifecycleOwner?) {
+fun AbstractViewModel?.registerLifecycleOwner(owner: LifecycleOwner?) {
     this?.let { vm ->
-        lifecycleOwner?.let { owner ->
-            owner.lifecycle.addObserver(vm)
-            vm.registerLifecycle(owner)
+        owner?.let {
+            lifecycleOwner = it
+            lifecycleOwner.lifecycle.addObserver(vm)
         }
     }
 }

@@ -59,7 +59,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-    override fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onLifecycleStart() {
         lifecycleOwner.run {
             lifecycle.addObserver(this@ProductsViewModel)
             collectionSource = collectionSource ?: ProductList().apply {
@@ -82,6 +83,14 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 value = emptyList()
             }
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    private fun onLifecycleStop() {
+        repository.clear()
+        collectionSource = null
+        deleteList.set(false)
+        offset = 0
     }
 
     private fun loadData() = onBound(0)
@@ -167,14 +176,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    private fun onLifecycleStop() {
-        repository.clear()
-        collectionSource = null
-        deleteList.set(false)
-        offset = 0
-    }
-
     override fun onCleared() {
         super.onCleared()
         onLifecycleStop()
@@ -234,7 +235,7 @@ fun ProductList.setUpTransform(
         }
         SingleLiveData<List<ProductItemViewModel>>()
             .apply {
-            value = itemVmList
-        }
+                value = itemVmList
+            }
     }.observe(lifecycleOwner, Observer { body(it) })
 }

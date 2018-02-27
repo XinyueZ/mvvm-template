@@ -54,7 +54,8 @@ class SoftwareLicensesViewModel(
     //For recyclerview data
     var libraryItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
 
-    override fun registerLifecycle(lifecycleOwner: LifecycleOwner) {
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onLifecycleStart() {
         lifecycleOwner.run {
             lifecycle.addObserver(this@SoftwareLicensesViewModel)
             libraryListSource = libraryListSource ?: LibraryList().apply {
@@ -75,6 +76,12 @@ class SoftwareLicensesViewModel(
                 value = emptyList()
             }
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    private fun onLifecycleStop() {
+        repository.clear()
+        libraryListSource = null
     }
 
     private fun bindTapHandlers(
@@ -147,12 +154,6 @@ class SoftwareLicensesViewModel(
                 dataLoaded.set(it.isNotEmpty())
             } ?: dataLoaded.set(false)
         }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    private fun onLifecycleStop() {
-        repository.clear()
-        libraryListSource = null
     }
 
     override fun onCleared() {
