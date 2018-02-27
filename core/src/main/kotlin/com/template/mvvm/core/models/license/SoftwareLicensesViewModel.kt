@@ -1,11 +1,9 @@
 package com.template.mvvm.core.models.license
 
 import android.app.Application
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
@@ -21,7 +19,6 @@ import com.template.mvvm.core.obtainViewModel
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.licenses.LibraryList
-import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
@@ -54,8 +51,7 @@ class SoftwareLicensesViewModel(
     //For recyclerview data
     var libraryItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    private fun onLifecycleStart() {
+    override fun onLifecycleCreate() {
         lifecycleOwner.run {
             lifecycle.addObserver(this@SoftwareLicensesViewModel)
             libraryListSource = libraryListSource ?: LibraryList().apply {
@@ -77,10 +73,8 @@ class SoftwareLicensesViewModel(
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    private fun onLifecycleStop() {
+    override fun onLifecycleStop() {
         repository.clear()
-        dataLoaded.set(false)
         libraryListSource = null
     }
 
@@ -96,7 +90,7 @@ class SoftwareLicensesViewModel(
                                 runBlocking {
                                     repository.getLicense(
                                         application,
-                                        CommonPool + vmJob,
+                                        bgContext,
                                         it,
                                         false
                                     ).consumeEach {
@@ -123,9 +117,9 @@ class SoftwareLicensesViewModel(
         }
     }
 
-    private fun doOnBound(localOnly: Boolean) = launch(vmUiJob) {
+    private fun doOnBound(localOnly: Boolean) = launch(uiContext) {
         libraryListSource?.let { source ->
-            query(CommonPool + vmJob, localOnly).consumeEach {
+            query(bgContext, localOnly).consumeEach {
                 onQueried(source, it)
             }
         }

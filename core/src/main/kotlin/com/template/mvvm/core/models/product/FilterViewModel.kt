@@ -9,7 +9,7 @@ abstract class FilterViewModel(repository: ProductsDataSource) : ProductsViewMod
         coroutineContext: CoroutineContext,
         start: Int
     ) =
-        repository.filterProducts(vmJob, start, true, filterKeyword())
+        repository.filterProducts(bgContext, start, true, filterKeyword())
 
     override suspend fun delete(coroutineContext: CoroutineContext) =
         repository.deleteAll(coroutineContext, filterKeyword())

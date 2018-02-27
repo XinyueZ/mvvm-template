@@ -1,10 +1,8 @@
 package com.template.mvvm.core.models.product
 
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
@@ -20,7 +18,6 @@ import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
 import com.template.mvvm.repository.domain.products.ProductList
-import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
@@ -59,8 +56,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private var offset: Int = 0
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    private fun onLifecycleStart() {
+    override fun onLifecycleStart() {
         lifecycleOwner.run {
             lifecycle.addObserver(this@ProductsViewModel)
             collectionSource = collectionSource ?: ProductList().apply {
@@ -84,12 +80,10 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    private fun onLifecycleStop() {
+    override fun onLifecycleStop() {
         repository.clear()
         collectionSource = null
         deleteList.set(false)
-        dataLoaded.set(false)
         offset = 0
         collectionItemVmList.removeObservers(lifecycleOwner)
     }
@@ -101,14 +95,14 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         doOnBound(position)
     }
 
-    private fun doOnBound(@IntRange(from = 0L) position: Int) = launch(vmUiJob) {
+    private fun doOnBound(@IntRange(from = 0L) position: Int) = launch(uiContext) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
                 if (offset > 0) {
                     // For progress-loading for more items
                     moreLoaded.set(false)
                 }
-                query(CommonPool + vmJob, offset).consumeEach { ds ->
+                query(bgContext, offset).consumeEach { ds ->
                     ds?.takeIf { it.isNotEmpty() }?.let { list ->
                         offset += list.size
                         onQueried(source, list)
@@ -136,12 +130,12 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     ) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    internal fun reloadData() {
+    private fun reloadData() {
         doReloadData()
     }
 
-    private fun doReloadData() = launch(vmUiJob) {
-        delete(CommonPool + vmJob).consumeEach {
+    private fun doReloadData() = launch(uiContext) {
+        delete(bgContext).consumeEach {
             offset = 0
             loadData()
             shouldDeleteList = true

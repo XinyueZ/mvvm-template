@@ -1,9 +1,7 @@
 package com.template.mvvm.core.models.product
 
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.OnLifecycleEvent
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
@@ -20,7 +18,6 @@ import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductDetail
-import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
@@ -56,8 +53,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     val productImageUris: ObservableList<Uri> = ObservableArrayList()
     //------------------------------------------------------------------------
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    private fun onLifecycleStart() {
+    override fun onLifecycleStart() {
         assertProduct()
         productDetailSource = productDetailSource ?: (MutableLiveData<ProductDetail>()).apply {
             observe(lifecycleOwner, Observer {
@@ -85,10 +81,10 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
         loadData()
     }
 
-    private fun loadData(localOnly: Boolean = true) = launch(vmUiJob) {
+    private fun loadData(localOnly: Boolean = true) = launch(uiContext) {
         productDetailSource?.let {
             productIdToDetail?.let {
-                query(CommonPool + vmJob, localOnly).consumeEach {
+                query(bgContext, localOnly).consumeEach {
                     productDetailSource?.value = it
                 }
             } ?: kotlin.run {
