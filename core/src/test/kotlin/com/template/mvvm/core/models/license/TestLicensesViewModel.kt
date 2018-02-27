@@ -50,7 +50,6 @@ class TestLicensesViewModel {
         runBlocking {
             val lifeThing = Mockito.mock(LifecycleOwner::class.java)
             mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
-            vm.registerLifecycle(lifeThing)
 
             launch(UI) {
                 val size = Gen.positiveIntegers().generate()

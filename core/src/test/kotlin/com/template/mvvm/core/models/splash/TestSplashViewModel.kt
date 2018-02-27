@@ -30,7 +30,6 @@ class TestSplashViewModel {
                     startHome.observeForever {
                         done = true
                     }
-                    splashMv.registerLifecycle(this)
                     measureTimeMillis {
                         ShadowLooper.idleMainLooper(2000, TimeUnit.MILLISECONDS)
                         !done
