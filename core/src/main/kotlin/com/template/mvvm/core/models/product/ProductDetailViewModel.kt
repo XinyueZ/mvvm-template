@@ -22,6 +22,7 @@ import com.template.mvvm.repository.domain.products.ProductDetail
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
+import kotlin.coroutines.experimental.CoroutineContext
 
 open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     AbstractViewModel() {
@@ -85,7 +86,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     private fun loadData(localOnly: Boolean = true) = launch(vmUiJob) {
         productDetailSource?.let {
             productIdToDetail?.let {
-                query(localOnly).consumeEach {
+                query(CommonPool + vmJob, localOnly).consumeEach {
                     productDetailSource?.value = it
                 }
             } ?: kotlin.run {
@@ -98,8 +99,8 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
         loadData(false)
     }
 
-    private suspend fun query(localOnly: Boolean = true) =
-        repository.getProductDetail(CommonPool + vmJob, productIdToDetail!!, localOnly)
+    private suspend fun query(coroutineContext: CoroutineContext, localOnly: Boolean = true) =
+        repository.getProductDetail(coroutineContext, productIdToDetail!!, localOnly)
 
     override fun onUiJobError(it: Throwable) {
         showSystemUi.value = true

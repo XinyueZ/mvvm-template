@@ -25,6 +25,7 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
+import kotlin.coroutines.experimental.CoroutineContext
 
 class SoftwareLicensesViewModel(
     private val application: Application,
@@ -82,8 +83,6 @@ class SoftwareLicensesViewModel(
     ) {
         it.forEach {
             it.clickHandler += {
-                //                launch(uiHandler) {
-                // Tell UI to open a UI for license detail.
                 licenseDetailViewModel.value =
                         lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
                             .apply {
@@ -98,7 +97,6 @@ class SoftwareLicensesViewModel(
                                     }
                                 }
                             }
-//                }
             }
         }
     }
@@ -120,7 +118,7 @@ class SoftwareLicensesViewModel(
 
     private fun doOnBound(localOnly: Boolean) = launch(vmUiJob) {
         libraryListSource?.let { source ->
-            query(localOnly).consumeEach {
+            query(CommonPool + vmJob, localOnly).consumeEach {
                 onQueried(source, it)
             }
         }
@@ -133,8 +131,8 @@ class SoftwareLicensesViewModel(
         source.value = it
     }
 
-    private suspend fun query(localOnly: Boolean) =
-        repository.getAllLibraries(CommonPool + vmJob, localOnly)
+    private suspend fun query(coroutineContext: CoroutineContext, localOnly: Boolean) =
+        repository.getAllLibraries(coroutineContext, localOnly)
 
     override fun onUiJobError(it: Throwable) {
         showSystemUi.value = true
@@ -217,7 +215,7 @@ fun LibraryList.setUpTransform(
         }
         SingleLiveData<List<SoftwareLicenseItemViewModel>>()
             .apply {
-            value = itemVmList
-        }
+                value = itemVmList
+            }
     }.observe(lifecycleOwner, Observer { body(it) })
 }
