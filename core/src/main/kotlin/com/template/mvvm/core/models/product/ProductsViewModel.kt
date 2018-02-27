@@ -92,6 +92,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         deleteList.set(false)
         dataLoaded.set(false)
         offset = 0
+        collectionItemVmList.removeObservers(lifecycleOwner)
     }
 
     private fun loadData() = onBound(0)
