@@ -97,7 +97,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
         collectionSource?.let { source ->
-            if (position >= offset - 1) {
+            if (position + 1 >= offset) {
                 if (offset > 0) {
                     // For progress-loading for more items
                     moreLoaded.set(false)
