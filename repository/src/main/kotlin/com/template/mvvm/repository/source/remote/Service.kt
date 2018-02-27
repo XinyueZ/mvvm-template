@@ -7,10 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ProductsApi {
-    @GET("products?pid=uid4100-40207790-50&limit=10&fts=man&fts=women")
+    @GET("products?pid=uid4100-40207790-50&limit=10&fts=coat+dress")
     fun getArticles(@Query("offset") offset: Int): Call<ProductsData>
 
-    @GET("products?pid=uid4100-40207790-50&fts=clothes&dress&limit=10")
+    @GET("products?pid=uid4100-40207790-50&limit=10&fts=coat+dress")
     fun filterArticles(@Query("offset") offset: Int, @Query("cat") keyword: String): Call<ProductsData>
 
     companion object {
