@@ -90,6 +90,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         repository.clear()
         collectionSource = null
         deleteList.set(false)
+        dataLoaded.set(false)
         offset = 0
     }
 

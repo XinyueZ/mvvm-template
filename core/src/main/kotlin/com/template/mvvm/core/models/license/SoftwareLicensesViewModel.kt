@@ -80,6 +80,7 @@ class SoftwareLicensesViewModel(
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     private fun onLifecycleStop() {
         repository.clear()
+        dataLoaded.set(false)
         libraryListSource = null
     }
 
