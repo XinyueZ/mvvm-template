@@ -1,9 +1,13 @@
 package com.template.mvvm.core.models.home
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LifecycleRegistry
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.IdRes
 import com.template.mvvm.core.R
+import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.equalTo
@@ -11,49 +15,51 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class TestHomeViewModel {
-    private lateinit var homeVm: HomeViewModel
+    private lateinit var vm: HomeViewModel
 
     @Before
     fun setup() {
-        homeVm = HomeViewModel()
+        vm = HomeViewModel()
     }
 
     @Test
     fun testHomeModelInit() {
         // Test state init
-        assertThat(homeVm.state.title.get(), `equalTo`(R.string.home_title))
+        assertThat(vm.state.title.get(), `equalTo`(R.string.home_title))
     }
 
     @Test
     fun testHomeCommands() {
-        with(homeVm.controller) {
-            testCommand(drawerToggle, R.id.action_app_bar_indicator)
-            testCommand(drawerToggle, R.id.action_products)
-            testCommand(openProduct, R.id.action_products)
-            testCommand(drawerToggle, R.id.action_internet)
-            testCommand(openInternet, R.id.action_internet)
-            testCommand(drawerToggle, R.id.action_software_licenses)
-            testCommand(openLicenses, R.id.action_software_licenses)
-            testCommand(drawerToggle, R.id.action_about)
-            testCommand(openAbout, R.id.action_about)
-            testCommand(openItem2, R.id.action_men)
-            testCommand(openItem3, R.id.action_women)
-            testCommand(openItem4, R.id.action_all_genders)
+        with(vm.controller) {
+            pendingForCommand(drawerToggle, R.id.action_app_bar_indicator)
+            pendingForCommand(drawerToggle, R.id.action_products)
+            pendingForCommand(openProduct, R.id.action_products)
+            pendingForCommand(drawerToggle, R.id.action_internet)
+            pendingForCommand(openInternet, R.id.action_internet)
+            pendingForCommand(drawerToggle, R.id.action_software_licenses)
+            pendingForCommand(openLicenses, R.id.action_software_licenses)
+            pendingForCommand(drawerToggle, R.id.action_about)
+            pendingForCommand(openAbout, R.id.action_about)
+            pendingForCommand(openItem2, R.id.action_men)
+            pendingForCommand(openItem3, R.id.action_women)
+            pendingForCommand(openItem4, R.id.action_all_genders)
         }
     }
 
-    private fun testCommand(liveData: LiveData<Boolean>, @IdRes actionId: Int) {
+    private
+    fun <T> pendingForCommand(liveData: LiveData<T>, @IdRes actionId: Int) {
         var done = false
-        val update = Observer<Boolean> {
+        val update = Observer<T> {
             done = true
         }
         liveData.observeForever(update)
 
-        homeVm.onCommand(actionId)
+        vm.onCommand(actionId)
 
         sleepWhile {
             !done
@@ -61,5 +67,15 @@ class TestHomeViewModel {
         assertThat(done, `is`(true))
 
         liveData.removeObserver(update)
+    }
+
+    @Test
+    fun testHomeAtLifecycleBegin() {
+        val lifeOwner = Mockito.mock(LifecycleOwner::class.java)
+        val lifecycle = LifecycleRegistry(lifeOwner)
+        Mockito.`when`(lifeOwner.lifecycle).thenReturn(lifecycle)
+        vm.registerLifecycleOwner(lifeOwner)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        pendingForCommand(vm.controller.defaultSelection, R.id.action_women)
     }
 }

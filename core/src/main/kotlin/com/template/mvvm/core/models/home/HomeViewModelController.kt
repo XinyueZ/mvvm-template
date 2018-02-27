@@ -2,6 +2,7 @@ package com.template.mvvm.core.models.home
 
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
+import com.template.mvvm.core.arch.SingleLiveData
 
 class HomeViewModelController {
     val openProduct = MutableLiveData<Boolean>()
@@ -11,6 +12,7 @@ class HomeViewModelController {
     val openItem2 = MutableLiveData<Boolean>()
     val openItem3 = MutableLiveData<Boolean>()
     val openItem4 = MutableLiveData<Boolean>()
+    val defaultSelection = SingleLiveData<Int>()
 
     val drawerToggle = MutableLiveData<Boolean>()
 
