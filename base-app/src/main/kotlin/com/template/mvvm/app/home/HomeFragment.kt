@@ -1,7 +1,6 @@
 package com.template.mvvm.app.home
 
 import android.net.Uri
-import android.os.Bundle
 import android.view.View
 import com.template.mvvm.app.R
 import com.template.mvvm.app.about.AboutActivity
@@ -71,11 +70,4 @@ class HomeFragment : LiveFragment() {
     }
 
     override fun getLayout() = R.layout.fragment_home
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        if (menFrg == null)
-            menFrg = MenFragment::class.newInstance(context)
-        menFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
-    }
 }
