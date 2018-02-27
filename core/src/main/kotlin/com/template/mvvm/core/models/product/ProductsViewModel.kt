@@ -79,7 +79,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
                 }
             }
             collectionItemVmList.apply {
-                removeObservers(this@run)
                 value = emptyList()
             }
         }
