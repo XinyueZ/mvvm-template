@@ -18,8 +18,8 @@ import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductDetail
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
 
 open class ProductDetailViewModel(private val repository: ProductsDataSource) :
@@ -81,7 +81,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
         loadData()
     }
 
-    private fun loadData(localOnly: Boolean = true) = launch(uiContext) {
+    private fun loadData(localOnly: Boolean = true) = async(uiContext) {
         productDetailSource?.let {
             productIdToDetail?.let {
                 query(bgContext, localOnly).consumeEach {

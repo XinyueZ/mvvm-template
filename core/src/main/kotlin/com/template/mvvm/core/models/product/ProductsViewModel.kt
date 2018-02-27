@@ -18,8 +18,8 @@ import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
 import com.template.mvvm.repository.domain.products.ProductList
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.launch
 import kotlin.coroutines.experimental.CoroutineContext
 
 open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
@@ -95,7 +95,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         doOnBound(position)
     }
 
-    private fun doOnBound(@IntRange(from = 0L) position: Int) = launch(uiContext) {
+    private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
         collectionSource?.let { source ->
             if (position >= offset - 1) {
                 if (offset > 0) {
@@ -134,7 +134,7 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         doReloadData()
     }
 
-    private fun doReloadData() = launch(uiContext) {
+    private fun doReloadData() = async(uiContext) {
         delete(bgContext).consumeEach {
             offset = 0
             loadData()

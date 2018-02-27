@@ -6,16 +6,15 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import com.template.mvvm.core.ViewModelInjection
 import com.template.mvvm.repository.LL
-import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
-import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.cancel
 
 abstract class AbstractViewModel : ViewModel(), LifecycleObserver {
-    protected val bgContext = CommonPool
+    protected val bgContext = ViewModelInjection.bgContext
     protected val uiContext by lazy {
-        UI + CoroutineExceptionHandler({ _, e ->
+        ViewModelInjection.uiContext + CoroutineExceptionHandler({ _, e ->
             onUiJobError(e)
             LL.d(e.message ?: "")
         })

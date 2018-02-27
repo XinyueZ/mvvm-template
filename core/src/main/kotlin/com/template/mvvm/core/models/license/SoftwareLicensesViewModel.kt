@@ -19,8 +19,8 @@ import com.template.mvvm.core.obtainViewModel
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.licenses.LibraryList
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -117,7 +117,7 @@ class SoftwareLicensesViewModel(
         }
     }
 
-    private fun doOnBound(localOnly: Boolean) = launch(uiContext) {
+    private fun doOnBound(localOnly: Boolean) = async(uiContext) {
         libraryListSource?.let { source ->
             query(bgContext, localOnly).consumeEach {
                 onQueried(source, it)
