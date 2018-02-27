@@ -53,7 +53,6 @@ class TestProductsViewModel {
     fun testOffsetAfterPagings() = runBlocking {
         val size = 10
         val pages = Gen.choose(0, 200).generate()
-        println("size: $size, pages: $pages")
         (0 until pages)
             .asSequence()
             .map { it * size }
@@ -73,7 +72,6 @@ class TestProductsViewModel {
         })
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
         sleepWhile {
-            println("current: ${vm.getCurrentOffset()}")
             vm.getCurrentOffset() != size * pages
         }
         assertThat(
