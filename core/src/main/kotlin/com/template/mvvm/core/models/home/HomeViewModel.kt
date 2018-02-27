@@ -7,6 +7,13 @@ class HomeViewModel : AbstractViewModel() {
     val state = HomeViewModelState()
     val controller = HomeViewModelController()
 
+    override fun onLifecycleCreate() {
+        super.onLifecycleCreate()
+        state.defaultSelection.value = R.id.action_women.also {
+            onCommand(it)
+        }
+    }
+
     //-----------------------------------
     //BindingAdapter handler
     //-----------------------------------
