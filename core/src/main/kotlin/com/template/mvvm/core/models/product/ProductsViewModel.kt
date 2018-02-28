@@ -63,7 +63,6 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
             collectionSource = null
             state.deleteList.set(false)
             offset = 0
-            collectionItemVmList.removeObservers(lifecycleOwner)
         }
     }
 
