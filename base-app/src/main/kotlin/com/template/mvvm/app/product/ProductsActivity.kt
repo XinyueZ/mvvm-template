@@ -22,7 +22,7 @@ class ProductsActivity : LiveActivity<ActivityProductsBinding>() {
         setUpActionBar(binding.toolbar)
         ProductsViewModel::class.generateViewModel(this) {
             binding.vm = this
-            showSystemUi.setupObserve(this@ProductsActivity) {
+            controller.showSystemUi.setupObserve(this@ProductsActivity) {
                 execute({ hideSystemUi(1500) }, { showSystemUi() })
             }
             onError.setupErrorSnackbar(binding.contentFrame, this@ProductsActivity)

@@ -67,61 +67,18 @@ class TestProductsViewModel {
             }
 
         vm.registerLifecycleOwner(lifeOwner)
-        vm.collectionItemVmList.observe(lifeOwner, Observer {
+        vm.controller.collectionItemVmList.observe(lifeOwner, Observer {
             vm.onBound(if (vm.getCurrentOffset() == 0) 0 else vm.getCurrentOffset() - 1)
         })
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        val predication = size * pages
         sleepWhile {
-            vm.getCurrentOffset() != size * pages
+            vm.getCurrentOffset() != predication
         }
         assertThat(
             vm.getCurrentOffset(),
-            `equalTo`(size * pages)
+            `equalTo`(predication)
         )
-    }
-
-    @Test
-    fun testOffsetAfterReload() {
-//        runBlocking {
-        //            val lifeThing = mock(LifecycleOwner::class.java)
-//            mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
-
-//            launch(UI) {
-//                val size = 10
-//                val pages = Gen.choose(1, 200).generate()
-//
-//                (0 until pages)
-//                    .asSequence()
-//                    .map { it * size }
-//                    .forEach { offset ->
-//                        mockWhen(
-//                            dataSource.getAllProducts(
-//                                coroutineContext,
-//                                offset,
-//                                true
-//                            )
-//                        ).thenReturn(
-//                            produce(coroutineContext) {
-//                                send(generateProductList(size).generate())
-//                            })
-//                    }
-//                mockWhen(dataSource.deleteAll(coroutineContext)).thenReturn(
-//                    produce(coroutineContext) {
-//                        send(Unit)
-//                    })
-//
-//                vm.reloadData()
-//
-//                assertThat(
-//                    vm.getCurrentOffset(),
-//                    `greaterThan`(0)
-//                )
-//                assertThat(
-//                    vm.getCurrentOffset(),
-//                    `equalTo`(size)
-//                )
-//            }
-//        }
     }
 
     private fun ProductsViewModel.getCurrentOffset() =

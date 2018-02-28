@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:reload="@{vm::onReload}"
-            app:stopLoading="@{vm.dataHaveNotReloaded}">
+            app:stopLoading="@{vm.state.dataHaveNotReloaded}">
 
 
             <FrameLayout
@@ -35,13 +35,13 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:itemList="@{vm.collectionItemVmList}"
+                    app:itemList="@{vm.controller.collectionItemVmList}"
                     app:itemLayout="@{R.layout.item_product}"
                     app:vmItemLayout="@{vmItem}"
                     app:layout="@{`linear`}"
                     app:onListItemBound="@{vm::onBound}"
                     app:add="@{true}"
-                    app:delete = "@{vm.deleteList}"
+                    app:delete = "@{vm.state.deleteList}"
                     />
 
                 <ProgressBar
@@ -49,7 +49,7 @@
                     style="@style/CircleProgressBar"
                     android:layout_gravity="bottom|center_horizontal"
                     android:background="@color/colorTransparent"
-                    app:dataLoaded="@{vm.moreLoaded}"
+                    app:dataLoaded="@{vm.state.moreLoaded}"
                     />
             </FrameLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:dataLoaded="@{vm.dataLoaded}"/>
+            app:dataLoaded="@{vm.state.dataLoaded}"/>
 
 
     </android.support.design.widget.CoordinatorLayout>

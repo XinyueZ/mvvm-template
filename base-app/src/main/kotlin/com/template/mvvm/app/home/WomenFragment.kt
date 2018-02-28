@@ -23,7 +23,7 @@ class WomenFragment : LiveFragment() {
             vm = this
             registerLifecycleOwner(this@WomenFragment)
             onError.setupErrorSnackbar(view, activity)
-            openItemDetail.setupObserve(activity) {
+            controller.openItemDetail.setupObserve(activity) {
                 ProductDetailActivity::class.showSingleTopActivity(activity, Bundle().apply {
                     putLong(
                         ARG_SEL_ID, this@setupObserve

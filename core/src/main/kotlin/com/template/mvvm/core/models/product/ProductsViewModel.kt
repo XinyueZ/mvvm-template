@@ -1,13 +1,10 @@
 package com.template.mvvm.core.models.product
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import android.databinding.ObservableInt
 import android.net.Uri
 import android.support.annotation.IntRange
 import com.template.mvvm.core.R
@@ -23,69 +20,51 @@ import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlin.coroutines.experimental.CoroutineContext
 
 open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
-
-    val title = ObservableInt(R.string.product_list_title)
-    val dataLoaded = ObservableBoolean(false)
-
-    val dataHaveNotReloaded = ObservableBoolean(true)
-    val moreLoaded = ObservableBoolean(true)
-
-    // True toggle the system-ui(navi-bar, status-bar etc.)
-    val showSystemUi: MutableLiveData<Boolean> = SingleLiveData()
+    val state = ProductsViewModelState()
+    val controller = ProductsViewModelController()
 
     // Error
     var onError = ErrorViewModel()
-
-    //Return this view to home
-    val goBack = ObservableBoolean(false)
-
-    //Data of this view-model
-    private var collectionSource: ProductList? = null
-
-    //For recyclerview data
-    val collectionItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
-
-    //Delete list on UI
-    val deleteList = ObservableBoolean(false)
     //User might delete data with pull2refresh and then the UI should also do it after new data being loaded,
     //ie. clean recyclerview and it's adapter.
     private var shouldDeleteList = false
-
-    //Detail to open
-    val openItemDetail: MutableLiveData<Long> = SingleLiveData()
-
     private var offset: Int = 0
 
     override fun onLifecycleStart() {
-        lifecycleOwner.run {
-            lifecycle.addObserver(this@ProductsViewModel)
-            collectionSource = collectionSource ?: ProductList().apply {
-                setUpTransform(this@run) {
-                    it?.let {
-                        collectionItemVmList.value = it
+        with(controller) {
+            lifecycleOwner.run {
+                lifecycle.addObserver(this@ProductsViewModel)
+                collectionSource = collectionSource ?: ProductList().apply {
+                    setUpTransform(this@run) {
+                        it?.let {
+                            collectionItemVmList.value = it
 
-                        showSystemUi.value = true
-                        dataLoaded.set(true)
-                        moreLoaded.set(true)
-                        dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
-                        dataHaveNotReloaded.set(true)
-
-                        bindTapHandlers(it)
+                            showSystemUi.value = true
+                            with(state) {
+                                dataLoaded.set(true)
+                                moreLoaded.set(true)
+                                dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
+                                dataHaveNotReloaded.set(true)
+                            }
+                            bindTapHandlers(it)
+                        }
                     }
                 }
-            }
-            collectionItemVmList.apply {
-                value = emptyList()
+                collectionItemVmList.apply {
+                    value = emptyList()
+                }
             }
         }
     }
 
     override fun onLifecycleStop() {
-        repository.clear()
-        collectionSource = null
-        deleteList.set(false)
-        offset = 0
-        collectionItemVmList.removeObservers(lifecycleOwner)
+        with(controller) {
+            repository.clear()
+            collectionSource = null
+            state.deleteList.set(false)
+            offset = 0
+            collectionItemVmList.removeObservers(lifecycleOwner)
+        }
     }
 
     private fun loadData() = onBound(0)
@@ -96,11 +75,11 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     }
 
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
-        collectionSource?.let { source ->
+        controller.collectionSource?.let { source ->
             if (position + 1 >= offset) {
                 if (offset > 0) {
                     // For progress-loading for more items
-                    moreLoaded.set(false)
+                    state.moreLoaded.set(false)
                 }
                 query(bgContext, offset).consumeEach { ds ->
                     ds?.takeIf { it.isNotEmpty() }?.let { list ->
@@ -116,10 +95,12 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         source: ProductList,
         list: List<Product>
     ) {
-        if (shouldDeleteList) {
-            deleteList.set(true)
-            shouldDeleteList = false
-            deleteList.set(false)
+        with(state) {
+            if (shouldDeleteList) {
+                deleteList.set(true)
+                shouldDeleteList = false
+                deleteList.set(false)
+            }
         }
         source.value = list
     }
@@ -149,25 +130,29 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         it.forEach {
             it.clickHandler += {
                 // Tell UI to open a UI for license detail.
-                openItemDetail.value = it.pid
+                controller.openItemDetail.value = it.pid
             }
         }
     }
 
     override fun onUiJobError(it: Throwable) {
-        showSystemUi.value = true
-        dataLoaded.set(true)
-        dataHaveNotReloaded.set(true)
-        moreLoaded.set(true)
+        with(controller) {
+            with(state) {
+                showSystemUi.value = true
+                dataLoaded.set(true)
+                dataHaveNotReloaded.set(true)
+                moreLoaded.set(true)
 
-        onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
-            loadData()
-            showSystemUi.value = false
+                onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
+                    loadData()
+                    showSystemUi.value = false
 
-            //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
-            collectionSource?.value?.let {
-                dataLoaded.set(it.isNotEmpty())
-            } ?: dataLoaded.set(false)
+                    //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
+                    collectionSource?.value?.let {
+                        dataLoaded.set(it.isNotEmpty())
+                    } ?: dataLoaded.set(false)
+                }
+            }
         }
     }
 
@@ -181,13 +166,13 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
     //-----------------------------------
     fun onCommand(id: Int) {
         when (id) {
-            R.id.action_app_bar_indicator -> goBack.set(true)
+            R.id.action_app_bar_indicator -> state.goBack.set(true)
         }
     }
 
     fun onReload() {
         reloadData()
-        dataHaveNotReloaded.set(false)
+        state.dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
 }

@@ -32,11 +32,11 @@ class HomeActivity : LiveActivity<ActivityHomeBinding>() {
                 setupObserve(this@HomeActivity) {
                     execute({ hideSystemUi(1500) }, { showSystemUi() })
                 }
-                addSource(obtainViewModel(MenViewModel::class.java).showSystemUi,
+                addSource(obtainViewModel(MenViewModel::class.java).controller.showSystemUi,
                     { this.value = it })
-                addSource(obtainViewModel(WomenViewModel::class.java).showSystemUi,
+                addSource(obtainViewModel(WomenViewModel::class.java).controller.showSystemUi,
                     { this.value = it })
-                addSource(obtainViewModel(AllGendersViewModel::class.java).showSystemUi,
+                addSource(obtainViewModel(AllGendersViewModel::class.java).controller.showSystemUi,
                     { this.value = it })
             }
             binding.drawer.setup(this@HomeActivity, controller.drawerToggle)
