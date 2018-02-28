@@ -7,6 +7,7 @@ import com.template.mvvm.base.ext.android.app.getExtras
 import com.template.mvvm.base.ext.android.app.setUpActionBar
 import com.template.mvvm.base.ext.android.app.setViewGoldenRatioHeight
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
+import com.template.mvvm.base.ext.android.widget.setPalette
 import com.template.mvvm.base.ui.LiveFragment
 import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.error.setupErrorSnackbar
@@ -27,20 +28,8 @@ class ProductDetailFragment : LiveFragment() {
                 }
             }
             controller.palette.setupObserve(this@ProductDetailFragment) {
-                when (swatches.isEmpty()) {
-                    false -> {
-                        with(swatches[0]) {
-                            val textColor = bodyTextColor
-                            val barColor = rgb
-                            kotlin.with(collapsingToolbar) {
-                                setExpandedTitleColor(textColor)
-                                setCollapsedTitleTextColor(textColor)
-                                setContentScrimColor(barColor)
-                                setStatusBarScrimColor(barColor)
-                            }
-                        }
-                    }
-                }
+                toolbar.setPalette(this)
+                collapsingToolbar.setPalette(this)
             }
         }
     }

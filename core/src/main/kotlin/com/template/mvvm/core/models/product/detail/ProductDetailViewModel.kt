@@ -4,13 +4,12 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.graphics.Bitmap
-import android.os.Build
 import android.support.v7.graphics.Palette
-import android.text.Html
-import android.text.Spanned
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.template.mvvm.base.ext.lang.ref.withReferent
+import com.template.mvvm.base.ext.lang.toHtml
 import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.R
 import com.template.mvvm.core.models.AbstractViewModel
@@ -20,7 +19,6 @@ import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductDetail
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
-import java.lang.ref.Reference
 import java.lang.ref.WeakReference
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -165,25 +163,3 @@ open class ProductDetailViewModel(context: Context, private val repository: Prod
     //-----------------------------------
 }
 
-private fun String.toHtml(trimmed: Boolean = true): Spanned? {
-    val result = when {
-        isEmpty() -> null
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> Html.fromHtml(
-            this,
-            0
-        )
-        else -> Html.fromHtml(this)
-    }
-
-    return when (trimmed) {
-        true -> result?.trim() as Spanned
-        false -> result
-    }
-}
-
-private fun <R, T> Reference<T>?.withReferent(run: (T.() -> R?)): R? {
-    this?.get()?.apply {
-        return run(this)
-    }
-    return null
-}

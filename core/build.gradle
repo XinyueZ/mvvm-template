@@ -9,6 +9,7 @@ apply from: '../android.gradle'
 
 dependencies {
     //STANDALONE
+    implementation project(':base')
     implementation project(':repository')
     rootProject.coreDependencies.each {
         add(it.configuration, it.dependency, it.options)
