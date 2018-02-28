@@ -47,7 +47,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 6. Defined flavors for ```prod``` and ```mock```.
 7. Because of flavors the Retrofit call on network has been distinguished into mock/prod-feeds.
 8. *Support Instant App* feature.
-9. Added ```base-app``` as ```baseFeatrue```. The feature is at moment represent of the whole app.
+9. Added ```base-app``` as ```baseFeatrue```. The feature is at moment represent of the whole app, the ```installed``` calls ```base-app``` to start regular app.
 10. Used ```controller``` for every ```ViewModel``` to hold all ```LiveData```s, used ```state``` for every ```ViewModel``` to hold all ```Observable```s .
 11. A little design changes.
 

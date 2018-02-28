@@ -13,6 +13,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,8 +21,9 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 
+@Ignore
 @RunWith(RobolectricTestRunner::class)
-class UiTestAbout {
+class DeprecatedUiTestAbout {
     private lateinit var activityCtrl: ActivityController<AboutActivity>
     private val activity: AboutActivity
         get() = activityCtrl.get()

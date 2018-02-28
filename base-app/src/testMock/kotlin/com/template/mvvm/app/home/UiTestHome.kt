@@ -26,6 +26,7 @@ import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,6 +35,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 
+@Ignore
 @RunWith(RobolectricTestRunner::class)
 class UiTestHome {
     private lateinit var activityCtrl: ActivityController<HomeActivity>

@@ -8,6 +8,7 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,9 +19,9 @@ import org.robolectric.android.controller.ActivityController
 import org.robolectric.shadows.ShadowLooper.idleMainLooper
 import java.util.concurrent.TimeUnit
 import kotlin.system.measureTimeMillis
-
+@Ignore
 @RunWith(RobolectricTestRunner::class)
-class UiTestSplash {
+class DeprecatedUiTestSplash {
     private lateinit var activityCtrl: ActivityController<SplashActivity>
     private val activity: SplashActivity
         get() = activityCtrl.get()
