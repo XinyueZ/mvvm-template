@@ -124,6 +124,7 @@ ext {
             [configuration: "implementation", dependency: [group: "com.android.support", name: "multidex", version: multiDex]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "design", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "customtabs", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "com.android.support", name: "palette-v7", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion]],
             [configuration: "implementation", dependency: [group: "com.android.support", name: "support-compat", version: supportLibraryVersion]],
