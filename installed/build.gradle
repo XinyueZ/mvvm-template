@@ -5,6 +5,7 @@ rootProject.installedPlugins.each {
 android {
     defaultConfig {
         applicationId rootProject.appId
+        testApplicationId rootProject.testAppId
     }
 }
 
