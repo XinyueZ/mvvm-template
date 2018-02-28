@@ -1,6 +1,7 @@
 package com.template.mvvm.core.models.product.detail
 
 import android.arch.lifecycle.MutableLiveData
+import android.support.v7.graphics.Palette
 import com.template.mvvm.core.arch.SingleLiveData
 import com.template.mvvm.repository.domain.products.ProductDetail
 
@@ -10,4 +11,6 @@ class ProductDetailViewModelController {
 
     //Data of this view-model
     var productDetailSource: MutableLiveData<ProductDetail>? = null
+
+    var palette = SingleLiveData<Palette>()
 }

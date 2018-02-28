@@ -2,9 +2,16 @@ package com.template.mvvm.core.models.product.detail
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
+import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
+import android.support.v7.graphics.Palette
 import android.text.Html
 import android.text.Spanned
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
+import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.R
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
@@ -13,16 +20,20 @@ import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductDetail
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
+import java.lang.ref.Reference
+import java.lang.ref.WeakReference
 import kotlin.coroutines.experimental.CoroutineContext
 
-open class ProductDetailViewModel(private val repository: ProductsDataSource) :
-    AbstractViewModel() {
+open class ProductDetailViewModel(context: Context, private val repository: ProductsDataSource) :
+    AbstractViewModel(), Palette.PaletteAsyncListener {
     val state = ProductDetailViewModelState()
     val controller = ProductDetailViewModelController()
 
     // Error
     var onError = ErrorViewModel()
     var productIdToDetail: Long? = null
+
+    private val cxtRef = WeakReference(context)
 
     override fun onLifecycleStart() {
         assertProduct()
@@ -48,6 +59,8 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
                                     dataLoaded.set(true)
                                     dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                                     dataHaveNotReloaded.set(true)
+
+                                    generatePalette()
                                 }
                             })
                         }
@@ -108,6 +121,34 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
         controller.productDetailSource = null
     }
 
+    private fun generatePalette() {
+        cxtRef.withReferent {
+            if (state.productImageUris.isNotEmpty()) {
+                val image = state.productImageUris.first()
+                GlideApp.with(this)
+                    .asBitmap()
+                    .load(image)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(false)
+                    .into(object : SimpleTarget<Bitmap>() {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            with(Palette.Builder(resource)) {
+                                maximumColorCount(1)
+                                generate(this@ProductDetailViewModel)
+                            }
+                        }
+                    })
+            }
+        }
+    }
+
+    override fun onGenerated(palette: Palette) {
+        controller.palette.value = palette
+    }
+
     //-----------------------------------
     //BindingAdapter handler
     //-----------------------------------
@@ -124,7 +165,7 @@ open class ProductDetailViewModel(private val repository: ProductsDataSource) :
     //-----------------------------------
 }
 
-fun String.toHtml(trimmed: Boolean = true): Spanned? {
+private fun String.toHtml(trimmed: Boolean = true): Spanned? {
     val result = when {
         isEmpty() -> null
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> Html.fromHtml(
@@ -138,4 +179,11 @@ fun String.toHtml(trimmed: Boolean = true): Spanned? {
         true -> result?.trim() as Spanned
         false -> result
     }
+}
+
+private fun <R, T> Reference<T>?.withReferent(run: (T.() -> R?)): R? {
+    this?.get()?.apply {
+        return run(this)
+    }
+    return null
 }
