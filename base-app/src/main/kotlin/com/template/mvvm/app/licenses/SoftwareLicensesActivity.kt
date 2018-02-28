@@ -21,10 +21,10 @@ class SoftwareLicensesActivity : LiveActivity<ActivitySoftwareLicensesBinding>()
         setUpActionBar(binding.toolbar)
         SoftwareLicensesViewModel::class.generateViewModel(this) {
             binding.vm = this
-            showSystemUi.setupObserve(this@SoftwareLicensesActivity) {
+            controller.showSystemUi.setupObserve(this@SoftwareLicensesActivity) {
                 execute({ hideSystemUi(1500) }, { showSystemUi() })
             }
-            licenseDetailViewModel.setupObserve(this@SoftwareLicensesActivity) {
+            controller.licenseDetailViewModel.setupObserve(this@SoftwareLicensesActivity) {
                 LicenseDetailFragment::class.newInstance(this@SoftwareLicensesActivity)
                     .show(supportFragmentManager, null)
             }

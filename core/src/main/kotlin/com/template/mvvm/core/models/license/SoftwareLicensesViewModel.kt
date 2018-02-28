@@ -2,13 +2,10 @@ package com.template.mvvm.core.models.license
 
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import android.databinding.ObservableInt
 import android.support.annotation.IntRange
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.SingleLiveData
@@ -28,54 +25,41 @@ class SoftwareLicensesViewModel(
     private val application: Application,
     private val repository: LicensesDataSource
 ) : AbstractViewModel() {
-
-    val title = ObservableInt(R.string.software_licenses_title)
-    val dataLoaded = ObservableBoolean(false)
-
-    val dataHaveNotReloaded = ObservableBoolean(true)
-
-    val licenseDetailViewModel = MutableLiveData<LicenseDetailViewModel>()
-
-    // True toggle the system-ui(navi-bar, status-bar etc.)
-    val showSystemUi: MutableLiveData<Boolean> = SingleLiveData()
+    val state = SoftwareLicensesViewModelState()
+    val controller = SoftwareLicensesViewModelController()
 
     // Error
     var onError = ErrorViewModel()
 
-    //Return this view to home
-    val goBack = ObservableBoolean(false)
-
-    //Data of this view-model
-    private var libraryListSource: LibraryList? = null
-
-    //For recyclerview data
-    var libraryItemVmList: MutableLiveData<List<ViewModel>> = SingleLiveData()
-
     override fun onLifecycleCreate() {
-        lifecycleOwner.run {
-            lifecycle.addObserver(this@SoftwareLicensesViewModel)
-            libraryListSource = libraryListSource ?: LibraryList().apply {
-                setUpTransform(this@run) {
-                    it?.let {
-                        libraryItemVmList.value = it
-                        showSystemUi.value = true
-                        dataLoaded.set(true)
-                        dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
-                        dataHaveNotReloaded.set(true)
-                        bindTapHandlers(it, this@run)
+        with(state) {
+            with(controller) {
+                lifecycleOwner.run {
+                    lifecycle.addObserver(this@SoftwareLicensesViewModel)
+                    libraryListSource = libraryListSource ?: LibraryList().apply {
+                        setUpTransform(this@run) {
+                            it?.let {
+                                libraryItemVmList.value = it
+                                showSystemUi.value = true
+                                dataLoaded.set(true)
+                                dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
+                                dataHaveNotReloaded.set(true)
+                                bindTapHandlers(it, this@run)
+                            }
+                        }
+                    }
+
+                    libraryItemVmList.apply {
+                        value = emptyList()
                     }
                 }
-            }
-
-            libraryItemVmList.apply {
-                value = emptyList()
             }
         }
     }
 
     override fun onLifecycleStop() {
         repository.clear()
-        libraryListSource = null
+        controller.libraryListSource = null
     }
 
     private fun bindTapHandlers(
@@ -84,7 +68,7 @@ class SoftwareLicensesViewModel(
     ) {
         it.forEach {
             it.clickHandler += {
-                licenseDetailViewModel.value =
+                controller.licenseDetailViewModel.value =
                         lifecycleOwner.obtainViewModel(LicenseDetailViewModel::class.java)
                             .apply {
                                 runBlocking {
@@ -111,13 +95,13 @@ class SoftwareLicensesViewModel(
     }
 
     fun onBound(@IntRange(from = 0L) position: Int) {
-        when (libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
+        when (controller.libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
             true -> loadData()
         }
     }
 
     private fun doOnBound(localOnly: Boolean) = async(uiContext) {
-        libraryListSource?.let { source ->
+        controller.libraryListSource?.let { source ->
             query(bgContext, localOnly).consumeEach {
                 onQueried(source, it)
             }
@@ -135,17 +119,21 @@ class SoftwareLicensesViewModel(
         repository.getAllLibraries(coroutineContext, localOnly)
 
     override fun onUiJobError(it: Throwable) {
-        showSystemUi.value = true
-        dataLoaded.set(true)
-        dataHaveNotReloaded.set(true)
-        onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
-            reloadData()
-            showSystemUi.value = false
+        with(state) {
+            with(controller) {
+                showSystemUi.value = true
+                dataLoaded.set(true)
+                dataHaveNotReloaded.set(true)
+                onError.value = Error(it, R.string.error_load_all_licenses, R.string.error_retry) {
+                    reloadData()
+                    showSystemUi.value = false
 
-            //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
-            libraryListSource?.value?.let {
-                dataLoaded.set(it.isNotEmpty())
-            } ?: dataLoaded.set(false)
+                    //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
+                    libraryListSource?.value?.let {
+                        dataLoaded.set(it.isNotEmpty())
+                    } ?: dataLoaded.set(false)
+                }
+            }
         }
     }
 
@@ -159,13 +147,13 @@ class SoftwareLicensesViewModel(
     //-----------------------------------
     fun onCommand(id: Int) {
         when (id) {
-            R.id.action_app_bar_indicator -> goBack.set(true)
+            R.id.action_app_bar_indicator -> state.goBack.set(true)
         }
     }
 
     fun onReload() {
         reloadData()
-        dataHaveNotReloaded.set(false)
+        state.dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
 }

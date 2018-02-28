@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/windowBackground"
-        app:goBack="@{vm.goBack}">
+        app:goBack="@{vm.state.goBack}">
 
 
         <android.support.design.widget.AppBarLayout
@@ -29,7 +29,7 @@
                 app:command="@{ vm::onCommand }"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:navigationIcon="@drawable/ic_arrow_back"
-                app:title="@{vm.title}"/>
+                app:title="@{vm.state.title}"/>
 
         </android.support.design.widget.AppBarLayout>
 
