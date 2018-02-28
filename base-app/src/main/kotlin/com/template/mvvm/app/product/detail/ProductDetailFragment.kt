@@ -9,7 +9,7 @@ import com.template.mvvm.base.ext.android.app.setViewGoldenRatioHeight
 import com.template.mvvm.base.ui.LiveFragment
 import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.error.setupErrorSnackbar
-import com.template.mvvm.core.models.product.ProductDetailViewModel
+import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
 class ProductDetailFragment : LiveFragment() {
@@ -20,10 +20,11 @@ class ProductDetailFragment : LiveFragment() {
             productIdToDetail = activity.getExtras(ARG_SEL_ID)
             onError.setupErrorSnackbar(view, activity)
             registerLifecycleOwner(this@ProductDetailFragment)
-            activity.setUpActionBar(toolbar) {
-                setDisplayHomeAsUpEnabled(true)
+            activity.setViewGoldenRatioHeight(appbar)?.also {
+                it.setUpActionBar(toolbar) {
+                    setDisplayHomeAsUpEnabled(true)
+                }
             }
-            activity.setViewGoldenRatioHeight(appbar)
         }
     }
 

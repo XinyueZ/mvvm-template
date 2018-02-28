@@ -9,7 +9,7 @@ import com.template.mvvm.core.models.license.SoftwareLicenseItemViewModel
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
-import com.template.mvvm.core.models.product.ProductDetailViewModel
+import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.product.ProductItemViewModel
 import com.template.mvvm.core.models.product.ProductsViewModel
 import com.template.mvvm.core.models.product.WomenViewModel

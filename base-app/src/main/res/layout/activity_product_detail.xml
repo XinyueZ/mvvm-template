@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.core.models.product.ProductDetailViewModel"/>
+            type="com.template.mvvm.core.models.product.detail.ProductDetailViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/windowBackground"
-        app:goBack="@{vm.goBack}"/>
+        app:goBack="@{vm.state.goBack}"/>
 
 
 </layout>

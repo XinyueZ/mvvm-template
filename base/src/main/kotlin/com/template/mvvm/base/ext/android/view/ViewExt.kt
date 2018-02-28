@@ -50,7 +50,8 @@ fun View.onClick(block: suspend () -> Unit) {
     }
 }
 
-fun View.setUpGoldenRatioHeight(activity: Activity) {
+fun View.setUpGoldenRatioHeight(activity: Activity): View? {
     layoutParams.height = (activity.getScreenSize().height.toFloat() * 0.618339887f).toInt()
+    return this
 }
 

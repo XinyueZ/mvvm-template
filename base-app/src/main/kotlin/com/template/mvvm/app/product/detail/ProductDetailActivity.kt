@@ -9,7 +9,7 @@ import com.template.mvvm.base.ext.lang.execute
 import com.template.mvvm.base.ui.LiveActivity
 import com.template.mvvm.core.generateViewModel
 import com.template.mvvm.core.models.error.setupErrorSnackbar
-import com.template.mvvm.core.models.product.ProductDetailViewModel
+import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 
 internal const val ARG_SEL_ID = "detail-item-id"
 
@@ -22,7 +22,7 @@ class ProductDetailActivity : LiveActivity<ActivityProductDetailBinding>() {
     override fun onCreate(binding: ActivityProductDetailBinding) {
         ProductDetailViewModel::class.generateViewModel(this) {
             binding.vm = this
-            showSystemUi.setupObserve(this@ProductDetailActivity) {
+            controller.showSystemUi.setupObserve(this@ProductDetailActivity) {
                 execute({ hideSystemUi(1500) }, { showSystemUi() })
             }
             onError.setupErrorSnackbar(binding.contentFrame, this@ProductDetailActivity)
