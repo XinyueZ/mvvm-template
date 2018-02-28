@@ -9,6 +9,7 @@ import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.support.annotation.DrawableRes
+import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
@@ -39,14 +40,17 @@ import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.arch.recycler.MvvmListAdapter
 import com.template.mvvm.core.arch.recycler.OnListItemBoundListener
 
-@BindingAdapter(value = ["itemList", "itemLayout", "vmItemLayout", "layout", "onListItemBound", "add"], requireAll = false)
+@BindingAdapter(
+    value = ["itemList", "itemLayout", "vmItemLayout", "layout", "onListItemBound", "add"],
+    requireAll = false
+)
 fun RecyclerView.bindingList(
-        itemList: LiveData<List<ViewModel>>,
-        @LayoutRes itemLayout: Int,
-        vmItemLayout: Int,
-        layout: String,
-        onListItemBound: OnListItemBoundListener?,
-        add: Boolean
+    itemList: LiveData<List<ViewModel>>,
+    @LayoutRes itemLayout: Int,
+    vmItemLayout: Int,
+    layout: String,
+    onListItemBound: OnListItemBoundListener?,
+    add: Boolean
 ) {
     if (adapter == null) {
         this.layoutManager = if (TextUtils.equals(layout, "linear"))
@@ -108,13 +112,25 @@ fun ViewPager.setImageList(adapter: PagerAdapter) {
     this.adapter = adapter
 }
 
-@BindingAdapter(value = ["remoteImageUri", "placeholderRes", "errorDrawableRes"], requireAll = false)
+@BindingAdapter(
+    value = ["remoteImageUri", "placeholderRes", "errorDrawableRes"],
+    requireAll = false
+)
 fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
-    uri?.let { (this as? ImageView)?.remoteImageUris(arrayOf(it), placeholderRes, errorDrawableRes) }
+    uri?.let {
+        (this as? ImageView)?.remoteImageUris(
+            arrayOf(it),
+            placeholderRes,
+            errorDrawableRes
+        )
+    }
 }
 
 @SuppressLint("ResourceType")
-@BindingAdapter(value = ["remoteImageUris", "placeholderRes", "errorDrawableRes"], requireAll = false)
+@BindingAdapter(
+    value = ["remoteImageUris", "placeholderRes", "errorDrawableRes"],
+    requireAll = false
+)
 fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
@@ -139,12 +155,23 @@ fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRe
 
         var pos = 0
         val listener = object : RequestListener<Drawable> {
-            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: com.bumptech.glide.load.DataSource?, isFirstResource: Boolean): Boolean {
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: com.bumptech.glide.load.DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
                 // let glide set the image by returning false
                 return false
             }
 
-            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
                 // load next one if possible
                 when (pos < (imageUris.size - 1)) {
                     true -> {
@@ -161,17 +188,22 @@ fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRe
     }
 }
 
-private fun ImageView.loadImage(uri: Uri, placeholder: Drawable?, errorDrawable: Drawable?, listener: RequestListener<Drawable>) {
+private fun ImageView.loadImage(
+    uri: Uri,
+    placeholder: Drawable?,
+    errorDrawable: Drawable?,
+    listener: RequestListener<Drawable>
+) {
     GlideApp.with(this)
-            .load(uri)
-            .format(DecodeFormat.PREFER_RGB_565)
-            .placeholder(placeholder)
-            .error(errorDrawable)
-            .dontAnimate()
-            .skipMemoryCache(false)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .listener(listener)
-            .into(this)
+        .load(uri)
+        .format(DecodeFormat.PREFER_RGB_565)
+        .placeholder(placeholder)
+        .error(errorDrawable)
+        .dontAnimate()
+        .skipMemoryCache(false)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .listener(listener)
+        .into(this)
 }
 
 @BindingAdapter("goBack", requireAll = false)
@@ -201,6 +233,11 @@ fun Toolbar.command(l: OnCommandListener?) {
 @BindingAdapter("command", requireAll = false)
 fun BottomNavigationView.command(l: OnCommandListener?) {
     onNavigationItemSelected { l?.onCommand(it) }
+}
+
+@BindingAdapter("selectItem", requireAll = false)
+fun BottomNavigationView.selectItem(@IdRes id: Int) {
+    selectedItemId = id
 }
 
 

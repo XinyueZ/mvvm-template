@@ -76,6 +76,9 @@ class TestHomeViewModel {
         Mockito.`when`(lifeOwner.lifecycle).thenReturn(lifecycle)
         vm.registerLifecycleOwner(lifeOwner)
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-        pendingForCommand(vm.controller.defaultSelection, R.id.action_women)
+        sleepWhile {
+            vm.state.selectItem.get() != R.id.action_women
+        }
+        assertThat(vm.state.selectItem.get(), `is`(R.id.action_women))
     }
 }

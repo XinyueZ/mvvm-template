@@ -40,9 +40,6 @@ class HomeActivity : LiveActivity<ActivityHomeBinding>() {
                     { this.value = it })
             }
             binding.drawer.setup(this@HomeActivity, controller.drawerToggle)
-            controller.defaultSelection.setupObserve(this@HomeActivity) {
-                binding.bottomNavi.selectedItemId = this
-            }
         }
     }
 

@@ -9,9 +9,7 @@ class HomeViewModel : AbstractViewModel() {
 
     override fun onLifecycleCreate() {
         super.onLifecycleCreate()
-        controller.defaultSelection.value = R.id.action_women.also {
-            onCommand(it)
-        }
+        state.selectItem.set(R.id.action_women)
     }
 
     //-----------------------------------
