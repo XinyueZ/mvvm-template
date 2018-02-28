@@ -111,9 +111,8 @@ class SoftwareLicensesViewModel(
     }
 
     fun onBound(@IntRange(from = 0L) position: Int) {
-        val shouldLoad = libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }
-        if (shouldLoad) {
-            loadData()
+        when (libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
+            true -> loadData()
         }
     }
 

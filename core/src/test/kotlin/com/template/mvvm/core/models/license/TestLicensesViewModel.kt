@@ -3,78 +3,73 @@ package com.template.mvvm.core.models.license
 import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LifecycleRegistry
+import android.arch.lifecycle.Observer
+import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.sleepWhile
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.licenses.License
-import io.kotlintest.matchers.shouldEqual
 import io.kotlintest.properties.Gen
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.produce
-import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.notNullValue
-import org.hamcrest.Matchers.nullValue
+import org.hamcrest.CoreMatchers
+import org.hamcrest.MatcherAssert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.robolectric.RobolectricTestRunner
 import org.mockito.Mockito.`when` as mockWhen
 
-@Ignore
+@RunWith(RobolectricTestRunner::class)
 class TestLicensesViewModel {
     @Mock
     private lateinit var application: Application
     @Mock
     private lateinit var dataSource: LicensesDataSource
     @Mock
-    private lateinit var lifecycle: Lifecycle
-
+    private lateinit var lifeOwner: LifecycleOwner
+    private lateinit var lifecycle: LifecycleRegistry
     private lateinit var vm: SoftwareLicensesViewModel
 
     @Before
     fun setUp() {
+        //MockitoAnnotations.initMocks(this)
         application = Mockito.mock(Application::class.java)
         dataSource = Mockito.mock(LicensesDataSource::class.java)
-
-        lifecycle = Mockito.mock(Lifecycle::class.java)
-        mockWhen(lifecycle.currentState).thenReturn(Lifecycle.State.INITIALIZED)
-
+        lifeOwner = Mockito.mock(LifecycleOwner::class.java)
+        lifecycle = LifecycleRegistry(lifeOwner)
+        mockWhen(lifeOwner.lifecycle).thenReturn(lifecycle)
         vm = SoftwareLicensesViewModel(application, dataSource)
     }
 
     @Test
-    fun testOnBound() {
-        runBlocking {
-            val lifeThing = Mockito.mock(LifecycleOwner::class.java)
-            mockWhen(lifeThing.lifecycle).thenReturn(lifecycle)
+    fun testOnBound() = runBlocking {
+        val size = Gen.choose(0, 200).generate()
+        mockWhen(
+            dataSource.getAllLibraries(
+                CommonPool
+            )
+        ).thenReturn(produce(CommonPool) { send(generateLicenseList(size).generate()) })
 
-            launch(UI) {
-                val size = Gen.positiveIntegers().generate()
-                val readyToGenerate = generateLicenseList(size).generate()
-                mockWhen(
-                    dataSource.getAllLibraries(
-                        coroutineContext,
-                        Gen.bool().generate()
-                    )
-                ).thenReturn(
-                    produce(coroutineContext) {
-                        send(readyToGenerate)
-                    })
-                vm.onBound(0)
-                assertThat(
-                    vm.libraryItemVmList.value,
-                    `is`(nullValue())
-                )
-                assertThat(
-                    vm.libraryItemVmList.value,
-                    `is`(notNullValue())
-                )
-                readyToGenerate.shouldEqual(vm.libraryItemVmList.value)
-            }.join()
+        vm.registerLifecycleOwner(lifeOwner)
+        vm.libraryItemVmList.observe(lifeOwner, Observer {
+            vm.onBound(0)
+        })
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+
+        sleepWhile {
+            println("temp: ${vm.libraryItemVmList.value?.size}")
+            vm.libraryItemVmList.value?.size != size
         }
+
+        MatcherAssert.assertThat(
+            vm.libraryItemVmList.value?.size,
+            CoreMatchers.equalTo(size)
+        )
     }
 
     private fun generateLicenseList(size: Int) = object : Gen<List<Library>> {
