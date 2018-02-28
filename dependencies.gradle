@@ -14,7 +14,7 @@ ext {
     def archRoom = ext.arch_room
     def paging = "1.0.0-alpha5"
     def constraint = "1.1.0-beta4"
-    def multiDex = "1+"
+    def multiDex = ext.multiDex
     def instantapps = "1.1.0"
 
     // Retrofit

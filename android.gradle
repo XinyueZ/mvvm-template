@@ -117,6 +117,7 @@ configurations.all { configuration ->
         force "com.android.support:support-v4:$rootProject.ext.support_comp",
                 "com.android.support:appcompat-v7:$rootProject.ext.support_comp",
                 "com.android.support:support-core-utils:$rootProject.ext.support_comp",
-                "android.arch.lifecycle:runtime:$rootProject.ext.arch_comp"
+                "android.arch.lifecycle:runtime:$rootProject.ext.arch_comp",
+                "com.android.support:multidex:$rootProject.ext.multiDex"
     }
 }

@@ -37,6 +37,7 @@ buildscript {
     ext.arch_comp = "1.1.0"
     ext.arch_room = "1.1.0-alpha1"
     ext.support_comp = "27.0.2"
+    ext.multiDex = "1.0.2"
 
     repositories {
         google()
