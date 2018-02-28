@@ -56,18 +56,17 @@ class TestLicensesViewModel {
         ).thenReturn(produce(CommonPool) { send(generateLicenseList(size).generate()) })
 
         vm.registerLifecycleOwner(lifeOwner)
-        vm.libraryItemVmList.observe(lifeOwner, Observer {
+        vm.controller.libraryItemVmList.observe(lifeOwner, Observer {
             vm.onBound(0)
         })
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
         sleepWhile {
-            println("temp: ${vm.libraryItemVmList.value?.size}")
-            vm.libraryItemVmList.value?.size != size
+            vm.controller.libraryItemVmList.value?.size != size
         }
 
         MatcherAssert.assertThat(
-            vm.libraryItemVmList.value?.size,
+            vm.controller.libraryItemVmList.value?.size,
             CoreMatchers.equalTo(size)
         )
     }
