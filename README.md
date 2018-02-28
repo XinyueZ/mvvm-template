@@ -1,4 +1,4 @@
-# MVVM Template
+# MVVM Template(Cheers)
 
 This repository provides templates which would be based on MVVM for Android application development.
 
@@ -43,6 +43,14 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
         - Make [view-extension to extend view's onclick-listener](https://github.com/XinyueZ/mvvm-template/blob/70cd0d7453d8a7da735f859b97fc3875747c6421/core/src/main/kotlin/com/template/mvvm/ext/ViewModelExt.kt#L43-L43) to call coroutine-actor.
         - In [view-binding-adapter](https://github.com/XinyueZ/mvvm-template/blob/70cd0d7453d8a7da735f859b97fc3875747c6421/core/src/main/kotlin/com/template/mvvm/binding/BindingAdapters.kt#L199-L199) using new extension.
         - [Use a collection as placeholder for click-event handler in item-view-model](https://github.com/XinyueZ/mvvm-template/blob/70cd0d7453d8a7da735f859b97fc3875747c6421/core/src/main/kotlin/com/template/mvvm/models/ProductsViewModel.kt#L147), clear this collection when view-model's ```onCleared()``` is called.
+5. Added tests for repository, core modules.
+6. Defined flavors for ```prod``` and ```mock```.
+7. Because of flavors the Retrofit call on network has been distinguished into mock/prod-feeds.
+8. *Support Instant App* feature.
+9. Added ```base-app``` as ```baseFeatrue```. The feature is at moment represent of the whole app.
+10. Used ```controller``` for every ```ViewModel``` to hold all ```LiveData```s, used ```state``` for every ```ViewModel``` to hold all ```Observable```s .
+11. A little design changes.
+
 See:
 
 ![arch-coroutines](media/arch-coroutines.png)
