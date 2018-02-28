@@ -35,7 +35,7 @@ ext {
 
     //Kotlin
     def kotlin = ext.kotlin_version
-    def kotlinCoroutines = "0.22.2"
+    def kotlinCoroutines = "0.22.3"
 
     //Gradle
     def gradle = ext.gradle_version
@@ -48,7 +48,7 @@ ext {
     def mockitoAndroidVersion = "2.13.0"
     def hamcrest = "1.3"
     def testRunner = "1+"
-    def espresso = "3+"
+    def espresso = "3.0.1"
     def junit = "4.12"
     def dexmaker = "1.2"
     def roomTest = "1.0.0"
@@ -192,48 +192,48 @@ ext {
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'runner', version: testRunner],
              options      : {
                  exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'rules', version: testRunner],
              options      : {
                  exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: espresso],
              options      : {
                  exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-contrib', version: espresso],
              options      : {
                  exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-intents', version: espresso],
              options      : {
                  exclude group: 'com.android.support'
-             }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-accessibility', version: espresso],
-             options      : {
-                 exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-web', version: espresso],
              options      : {
                  exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-idling-resource', version: espresso],
              options      : {
                  exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso.idling', name: 'idling-concurrent', version: espresso],
              options      : {
                  exclude group: 'com.android.support'
+                 exclude group: 'android.arch.lifecycle'
              }],
             [configuration: "androidTestImplementation", dependency: [group: "android.arch.persistence.room", name: "testing", version: roomTest]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-inline', version: mockitoVersion]],
-            [configuration: "androidTestImplementation", dependency: [group: 'org.mockito', name: 'mockito-android', version: mockitoAndroidVersion]],
             [configuration: "androidTestImplementation", dependency: [group: "junit", name: "junit", version: junit]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker', version: dexmaker]],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker-mockito', version: dexmaker]],
             [configuration: "androidTestImplementation", dependency: [group: 'com.android.support', name: 'multidex-instrumentation', version: multidexInstrumentation]],
-
+            [configuration: "androidTestImplementation", dependency: [group: "com.android.support", name: "support-annotations", version: supportLibraryVersion]],
     ]
 
     appDependencies = applicationDependencies

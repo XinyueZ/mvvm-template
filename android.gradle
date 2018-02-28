@@ -55,6 +55,7 @@ android {
 
     dataBinding {
         enabled = true
+        enabledForTests = true
     }
 
     sourceSets {
@@ -78,6 +79,7 @@ android {
     }
 
     testOptions { // <-- You need this
+        animationsDisabled = true
         unitTests {
             returnDefaultValues = true
             includeAndroidResources = true
