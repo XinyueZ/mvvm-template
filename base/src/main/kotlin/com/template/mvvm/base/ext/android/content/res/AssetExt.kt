@@ -1,4 +1,4 @@
-package com.template.mvvm.repository.source.ext
+package com.template.mvvm.base.ext.android.content.res
 
 import android.content.res.AssetManager
 import java.io.IOException
