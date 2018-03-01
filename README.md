@@ -28,9 +28,9 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
-- [Instant-app integrated in v0.5](https://github.com/XinyueZ/mvvm-template/tree/feature/instant-app)
+- [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
 
-[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=feature%2Finstant-app)](https://travis-ci.org/XinyueZ/mvvm-template)
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
 
 
 - [Instant-app integrated in v0.5](https://github.com/XinyueZ/mvvm-template/tree/feature/instant-app)
