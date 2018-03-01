@@ -11,7 +11,7 @@ import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.android.widget.setup
 import com.template.mvvm.base.ext.lang.execute
 import com.template.mvvm.base.ui.LiveActivity
-import com.template.mvvm.core.generateViewModel
+import com.template.mvvm.core.get
 import com.template.mvvm.core.models.home.HomeViewModel
 import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
@@ -26,7 +26,7 @@ class HomeActivity : LiveActivity<ActivityHomeBinding>() {
     override fun createLiveFragment() = HomeFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityHomeBinding) {
         setUpActionBar(binding.toolbar)
-        HomeViewModel::class.generateViewModel(this) {
+        HomeViewModel::class.get(this) {
             binding.vm = this
             with(controller.showSystemUi) {
                 setupObserve(this@HomeActivity) {

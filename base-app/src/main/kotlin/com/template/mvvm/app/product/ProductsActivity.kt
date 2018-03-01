@@ -8,7 +8,7 @@ import com.template.mvvm.base.ext.android.app.setUpActionBar
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.lang.execute
 import com.template.mvvm.base.ui.LiveActivity
-import com.template.mvvm.core.generateViewModel
+import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.ProductsViewModel
 
@@ -20,7 +20,7 @@ class ProductsActivity : LiveActivity<ActivityProductsBinding>() {
     override fun createLiveFragment() = ProductsFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityProductsBinding) {
         setUpActionBar(binding.toolbar)
-        ProductsViewModel::class.generateViewModel(this) {
+        ProductsViewModel::class.get(this) {
             binding.vm = this
             controller.showSystemUi.setupObserve(this@ProductsActivity) {
                 execute({ hideSystemUi(1500) }, { showSystemUi() })

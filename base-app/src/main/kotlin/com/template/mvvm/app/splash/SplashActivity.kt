@@ -8,7 +8,7 @@ import com.template.mvvm.base.ext.android.app.newInstance
 import com.template.mvvm.base.ext.android.app.showSingleTopActivity
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ui.LiveActivity
-import com.template.mvvm.core.generateViewModel
+import com.template.mvvm.core.get
 import com.template.mvvm.core.models.splash.SplashViewModel
 
 class SplashActivity : LiveActivity<ActivitySplashBinding>() {
@@ -17,7 +17,7 @@ class SplashActivity : LiveActivity<ActivitySplashBinding>() {
 
     override fun createLiveFragment() = SplashFragment::class.newInstance(application)
     override fun onCreate(binding: ActivitySplashBinding) {
-        SplashViewModel::class.generateViewModel(this) {
+        SplashViewModel::class.get(this) {
             startHome.setupObserve(this@SplashActivity) {
                 HomeActivity::class.showSingleTopActivity(this@SplashActivity)
                 this@SplashActivity.finish()
