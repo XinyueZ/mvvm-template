@@ -102,9 +102,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.state.productId.toString()}"
                             android:textAppearance="@style/MaterialTextView.LightTheme.Body"
-                            android:textColor="@color/colorBlack"/>
+                            android:textColor="@color/colorBlack"
+                            app:boundLong="@{vm.state.productId}"
+                            app:onViewBound="@{vm::onBound}"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 

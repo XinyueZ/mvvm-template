@@ -37,22 +37,24 @@ fun generateProductList(size: Int) = object :
     }
 }
 
-fun generateProductDetail(withPictures: Boolean = false) = object :
+fun generateProductDetail(pid: Long, withPictures: Boolean = true) = object :
     Gen<ProductDetail> {
-    override fun generate() = ProductDetail(
-        Gen.positiveIntegers().generate().toLong(),
-        Gen.string().generate(),
-        Gen.string().generate(),
-        emptyList()
-    )
+    override fun generate(): ProductDetail {
+        return ProductDetail(
+            pid,
+            Gen.string().generate(),
+            Gen.string().generate(),
+            if (!withPictures) emptyList() else generateProductImages(pid).generate()
+        )
+    }
 }
 
 fun generateProductImages(pid: Long) = object :
     Gen<List<Image>> {
     override fun generate() =
         mutableListOf(generateProductImage(pid).generate()).apply {
-            (1 until Gen.positiveIntegers().generate()).asSequence()
-                .forEach { add(generateProductImage(pid).generate()) }
+            (1 until Gen.choose(5, 10).generate()).asSequence()
+                .forEach { this += generateProductImage(pid).generate() }
         }
 }
 

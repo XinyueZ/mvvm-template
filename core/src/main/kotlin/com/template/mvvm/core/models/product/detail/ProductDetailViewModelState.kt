@@ -6,6 +6,7 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.databinding.ObservableList
+import android.databinding.ObservableLong
 import android.net.Uri
 import android.text.Spanned
 import com.template.mvvm.core.R
@@ -20,7 +21,7 @@ class ProductDetailViewModelState : BaseObservable() {
     //------------------------------------------------------------------------
     // Fields to update
     //------------------------------------------------------------------------
-    val productId = ObservableField<Long>()
+    val productId = ObservableLong()
     val productTitle = ObservableField<String>()
     val productDescription = ObservableField<Spanned>()
     val productImageUris: ObservableList<Uri> = ObservableArrayList()

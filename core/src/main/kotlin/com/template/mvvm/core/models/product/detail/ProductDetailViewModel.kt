@@ -22,7 +22,7 @@ import kotlinx.coroutines.experimental.channels.consumeEach
 import java.lang.ref.WeakReference
 import kotlin.coroutines.experimental.CoroutineContext
 
-open class ProductDetailViewModel(context: Context, private val repository: ProductsDataSource) :
+class ProductDetailViewModel(context: Context, private val repository: ProductsDataSource) :
     AbstractViewModel(), Palette.PaletteAsyncListener {
     val state = ProductDetailViewModelState()
     val controller = ProductDetailViewModelController()
@@ -44,7 +44,6 @@ open class ProductDetailViewModel(context: Context, private val repository: Prod
                                     //-----------------------------------------
                                     // Update UI with new data here
                                     //-----------------------------------------
-                                    productId.set(it.pid)
                                     productTitle.set(it.title)
                                     productDescription.set(it.description.toHtml())
                                     productImageUris.clear()
@@ -62,9 +61,13 @@ open class ProductDetailViewModel(context: Context, private val repository: Prod
                                 }
                             })
                         }
-                loadData()
             }
         }
+        productIdToDetail?.apply { state.productId.set(this) }
+    }
+
+    fun onBound() {
+        loadData()
     }
 
     private fun loadData(localOnly: Boolean = true) = async(uiContext) {
