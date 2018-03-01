@@ -32,6 +32,11 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 [![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
 
+
+- [Instant-app integrated in v0.5](https://github.com/XinyueZ/mvvm-template/tree/feature/instant-app)
+
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=feature%2Finstant-app)](https://travis-ci.org/XinyueZ/mvvm-template)
+
 > Removed [Rx-Android](https://github.com/ReactiveX/RxAndroid), or RxJava
 
 1. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) instead  [Rx-Android](https://github.com/ReactiveX/RxAndroid) to support repository
