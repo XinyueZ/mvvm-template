@@ -29,6 +29,11 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 
 # History
 
+- [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
+
+[![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=dev)](https://travis-ci.org/XinyueZ/mvvm-template)
+
+
 - [Instant-app integrated in v0.5](https://github.com/XinyueZ/mvvm-template/tree/feature/instant-app)
 
 [![Build Status](https://travis-ci.org/XinyueZ/mvvm-template.svg?branch=feature%2Finstant-app)](https://travis-ci.org/XinyueZ/mvvm-template)
@@ -36,7 +41,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 > Removed [Rx-Android](https://github.com/ReactiveX/RxAndroid), or RxJava
 
 1. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) instead  [Rx-Android](https://github.com/ReactiveX/RxAndroid) to support repository
-2. Use  [coroutines](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md) to implement [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
+2. Use  [coroutines](https://github.com/Kotlin/kotlinx.cvoroutines/blob/master/coroutines-guide.md) to implement [Actor](http://www.brianstorti.com/the-actor-model/?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=6127)
 3. Added detail page of product
 4. Compare two different ways for item-opening on list
     - Click through [channel](https://github.com/XinyueZ/mvvm-template/blob/bd437884779a3d4a388262b261bfaeb5c70434c1/core/src/main/kotlin/com/template/mvvm/models/SoftwareLicensesViewModel.kt#L183-L183)  <- It won't be used in future, because channel runs without resource free, another [example](https://github.com/XinyueZ/mvvm-template/blob/dev/core/src/main/kotlin/com/template/mvvm/models/ProductsViewModel.kt#L166)
