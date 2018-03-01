@@ -10,7 +10,7 @@ import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.products.Product
 import com.template.mvvm.repository.feeds.products.ProductsData
 import com.template.mvvm.repository.setNetworkErrorPercent
-import com.template.mvvm.repository.source.ext.read
+import com.template.mvvm.base.ext.android.content.res.read
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.runBlocking

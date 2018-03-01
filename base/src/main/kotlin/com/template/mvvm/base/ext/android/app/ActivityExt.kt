@@ -16,10 +16,11 @@ import android.view.View
 import com.template.mvvm.base.ext.android.view.setUpGoldenRatioHeight
 import kotlin.reflect.KClass
 
-fun Activity?.setViewGoldenRatioHeight(view: View) {
+fun Activity?.setViewGoldenRatioHeight(view: View): Activity? {
     this?.apply {
         view.setUpGoldenRatioHeight(this)
     }
+    return this
 }
 
 fun Activity?.setUpActionBar(@IdRes toolbar: Toolbar, action: (ActionBar.() -> Unit)? = null) {

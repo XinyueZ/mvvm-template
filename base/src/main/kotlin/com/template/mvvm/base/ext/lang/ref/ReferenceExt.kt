@@ -1,4 +1,4 @@
-package com.template.mvvm.base.ext.lang
+package com.template.mvvm.base.ext.lang.ref
 
 import java.lang.ref.Reference
 

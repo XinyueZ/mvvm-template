@@ -14,10 +14,10 @@ import com.template.mvvm.core.models.license.SoftwareLicenseItemViewModel
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
-import com.template.mvvm.core.models.product.ProductDetailViewModel
 import com.template.mvvm.core.models.product.ProductItemViewModel
 import com.template.mvvm.core.models.product.ProductsViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
+import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.splash.SplashViewModel
 import com.template.mvvm.repository.RepositoryInjection
 import kotlin.reflect.KClass
@@ -57,6 +57,7 @@ class ViewModelFactory private constructor(
                 isAssignableFrom(ProductItemViewModel::class.java) -> ProductItemViewModel()
                 isAssignableFrom(LicenseDetailViewModel::class.java) -> LicenseDetailViewModel()
                 isAssignableFrom(ProductDetailViewModel::class.java) -> ProductDetailViewModel(
+                    application,
                     RepositoryInjection.getInstance().provideRepository(application)
                 )
                 else ->
@@ -111,7 +112,7 @@ fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = w
             ?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
 }
 
-fun <VM : ViewModel> FragmentActivity?.viewModel(vm: KClass<VM>, block: VM.() -> Unit) {
+fun <VM : ViewModel> FragmentActivity?.obtainViewModel(vm: KClass<VM>, block: VM.() -> Unit) {
     this?.run {
         obtainViewModel(vm.java).apply {
             block()
@@ -119,7 +120,7 @@ fun <VM : ViewModel> FragmentActivity?.viewModel(vm: KClass<VM>, block: VM.() ->
     }
 }
 
-fun <VM : ViewModel, VMC : KClass<VM>> VMC.generateViewModel(
+fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
     activity: FragmentActivity?,
     block: VM.() -> Unit
 ) {
@@ -130,7 +131,7 @@ fun <VM : ViewModel, VMC : KClass<VM>> VMC.generateViewModel(
     }
 }
 
-fun <VM : ViewModel> Fragment?.viewModel(vm: KClass<VM>, block: VM.() -> Unit) {
+fun <VM : ViewModel> Fragment?.obtainViewModel(vm: KClass<VM>, block: VM.() -> Unit) {
     this?.run {
         obtainViewModel(vm.java).apply {
             block()
@@ -138,7 +139,7 @@ fun <VM : ViewModel> Fragment?.viewModel(vm: KClass<VM>, block: VM.() -> Unit) {
     }
 }
 
-fun <VM : ViewModel, VMC : KClass<VM>> VMC.generateViewModel(
+fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
     fragment: Fragment?,
     block: VM.() -> Unit
 ) {

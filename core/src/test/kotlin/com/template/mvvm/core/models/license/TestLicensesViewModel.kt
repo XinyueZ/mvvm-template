@@ -5,11 +5,10 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
 import android.arch.lifecycle.Observer
+import com.template.mvvm.core.generateLicenseList
 import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile
 import com.template.mvvm.repository.contract.LicensesDataSource
-import com.template.mvvm.repository.domain.licenses.Library
-import com.template.mvvm.repository.domain.licenses.License
 import io.kotlintest.properties.Gen
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.produce
@@ -71,18 +70,4 @@ class TestLicensesViewModel {
         )
     }
 
-    private fun generateLicenseList(size: Int) = object : Gen<List<Library>> {
-        override fun generate(): List<Library> = mutableListOf<Library>().apply {
-            for (i in 0 until size) {
-                add(
-                    Library(
-                        Gen.string().generate(),
-                        Gen.string().generate(),
-                        Gen.string().generate(),
-                        License(Gen.string().generate(), Gen.string().generate())
-                    )
-                )
-            }
-        }
-    }
 }

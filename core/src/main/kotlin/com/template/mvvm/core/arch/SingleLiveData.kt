@@ -30,7 +30,7 @@ open class SingleLiveData<T> : MutableLiveData<T>() {
     }
 
     @MainThread
-    override final fun setValue(t: T?) {
+    override fun setValue(t: T?) {
         pending.set(true)
         super.setValue(t)
     }

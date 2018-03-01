@@ -8,7 +8,7 @@ import com.template.mvvm.base.ext.android.app.setUpActionBar
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.lang.execute
 import com.template.mvvm.base.ui.LiveActivity
-import com.template.mvvm.core.generateViewModel
+import com.template.mvvm.core.get
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 
 class SoftwareLicensesActivity : LiveActivity<ActivitySoftwareLicensesBinding>() {
@@ -19,7 +19,7 @@ class SoftwareLicensesActivity : LiveActivity<ActivitySoftwareLicensesBinding>()
     override fun createLiveFragment() = SoftwareLicensesFragment::class.newInstance(application)
     override fun onCreate(binding: ActivitySoftwareLicensesBinding) {
         setUpActionBar(binding.toolbar)
-        SoftwareLicensesViewModel::class.generateViewModel(this) {
+        SoftwareLicensesViewModel::class.get(this) {
             binding.vm = this
             controller.showSystemUi.setupObserve(this@SoftwareLicensesActivity) {
                 execute({ hideSystemUi(1500) }, { showSystemUi() })

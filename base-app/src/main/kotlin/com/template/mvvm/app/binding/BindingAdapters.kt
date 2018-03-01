@@ -27,6 +27,7 @@ import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
@@ -37,8 +38,21 @@ import com.template.mvvm.base.ext.android.view.onClick
 import com.template.mvvm.base.ext.android.widget.onNavigationItemSelected
 import com.template.mvvm.base.ext.android.widget.onNavigationOnClick
 import com.template.mvvm.core.GlideApp
+import com.template.mvvm.core.arch.OnViewBoundListener
 import com.template.mvvm.core.arch.recycler.MvvmListAdapter
 import com.template.mvvm.core.arch.recycler.OnListItemBoundListener
+
+@BindingAdapter(
+    value = ["boundLong", "onViewBound"],
+    requireAll = false
+)
+fun TextView.bindingBoundLong(
+    boundValue: Long,
+    viewBound: OnViewBoundListener?
+) {
+    text = boundValue.toString()
+    viewBound?.onBound()
+}
 
 @BindingAdapter(
     value = ["itemList", "itemLayout", "vmItemLayout", "layout", "onListItemBound", "add"],

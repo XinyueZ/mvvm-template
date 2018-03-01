@@ -5,7 +5,7 @@ import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.ActivityAboutBinding
 import com.template.mvvm.base.ext.android.app.newInstance
 import com.template.mvvm.base.ui.LiveActivity
-import com.template.mvvm.core.generateViewModel
+import com.template.mvvm.core.get
 import com.template.mvvm.core.models.about.AboutViewModel
 
 class AboutActivity : LiveActivity<ActivityAboutBinding>() {
@@ -16,7 +16,7 @@ class AboutActivity : LiveActivity<ActivityAboutBinding>() {
     override fun createLiveFragment() = AboutFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityAboutBinding) {
         hideSystemUi(0)
-        AboutViewModel::class.generateViewModel(this) {
+        AboutViewModel::class.get(this) {
             binding.vm = this
         }
     }

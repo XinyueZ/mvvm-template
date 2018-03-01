@@ -19,7 +19,7 @@
 
         <variable
             name="vm"
-            type="com.template.mvvm.core.models.product.ProductDetailViewModel"/>
+            type="com.template.mvvm.core.models.product.detail.ProductDetailViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -56,7 +56,7 @@
                     android:background="@color/colorWhite"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax"
-                    app:pagerAdapter="@{GalleryViewPagerAdapter.build(((FragmentActivity)context).supportFragmentManager, @{vm.productImageUris})}"/>
+                    app:pagerAdapter="@{GalleryViewPagerAdapter.build(((FragmentActivity)context).supportFragmentManager, @{vm.state.productImageUris})}"/>
 
 
                 <android.support.v7.widget.Toolbar
@@ -102,9 +102,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.productId.toString()}"
                             android:textAppearance="@style/MaterialTextView.LightTheme.Body"
-                            android:textColor="@color/colorBlack"/>
+                            android:textColor="@color/colorBlack"
+                            app:boundLong="@{vm.state.productId}"
+                            app:onViewBound="@{vm::onBound}"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
@@ -129,7 +130,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.productTitle}"
+                            android:text="@{vm.state.productTitle}"
                             android:textAppearance="@style/MaterialTextView.LightTheme.Body"
                             android:textColor="@color/colorBlack"/>
                     </LinearLayout>
@@ -156,7 +157,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.productDescription}"
+                            android:text="@{vm.state.productDescription}"
                             android:textAppearance="@style/MaterialTextView.LightTheme.Body"
                             android:textColor="@color/colorBlack"/>
                     </LinearLayout>
@@ -170,6 +171,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:dataLoaded="@{vm.dataLoaded}"/>
+            app:dataLoaded="@{vm.state.dataLoaded}"/>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

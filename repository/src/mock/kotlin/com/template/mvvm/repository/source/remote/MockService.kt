@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.template.mvvm.repository.feeds.licenses.LicensesData
 import com.template.mvvm.repository.feeds.products.ProductsData
-import com.template.mvvm.repository.source.ext.read
+import com.template.mvvm.base.ext.android.content.res.read
 import retrofit2.Call
 import retrofit2.mock.BehaviorDelegate
 
