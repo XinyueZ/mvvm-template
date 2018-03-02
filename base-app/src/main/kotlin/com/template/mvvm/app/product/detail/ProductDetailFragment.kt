@@ -9,6 +9,7 @@ import com.template.mvvm.base.ext.android.app.setViewGoldenRatioHeight
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.android.widget.setPalette
 import com.template.mvvm.base.ui.LiveFragment
+import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.detail.ProductDetailViewModel

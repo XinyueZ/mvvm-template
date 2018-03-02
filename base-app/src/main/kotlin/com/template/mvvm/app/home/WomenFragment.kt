@@ -1,11 +1,9 @@
 package com.template.mvvm.app.home
 
-import android.os.Bundle
 import android.view.View
 import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductsBinding
-import com.template.mvvm.app.product.detail.ARG_SEL_ID
 import com.template.mvvm.app.product.detail.ProductDetailActivity
 import com.template.mvvm.base.ext.android.app.showSingleTopActivity
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
@@ -24,11 +22,7 @@ class WomenFragment : LiveFragment() {
             registerLifecycleOwner(this@WomenFragment)
             onError.setupErrorSnackbar(view, activity)
             controller.openItemDetail.setupObserve(activity) {
-                ProductDetailActivity::class.showSingleTopActivity(activity, Bundle().apply {
-                    putLong(
-                        ARG_SEL_ID, this@setupObserve
-                    )
-                })
+                ProductDetailActivity::class.showSingleTopActivity(activity, this)
             }
         }
     }

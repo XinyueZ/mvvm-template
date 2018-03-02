@@ -6,7 +6,9 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.net.Uri
+import android.os.Bundle
 import android.support.annotation.IntRange
+import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.SingleLiveData
 import com.template.mvvm.core.models.AbstractViewModel
@@ -129,7 +131,8 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
         it.forEach {
             it.clickHandler += {
                 // Tell UI to open a UI for license detail.
-                controller.openItemDetail.value = it.pid
+//                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(cxt, transitionView, transitionSharedItemName)
+                controller.openItemDetail.value = Bundle().apply { putLong(ARG_SEL_ID, it.pid) }
             }
         }
     }

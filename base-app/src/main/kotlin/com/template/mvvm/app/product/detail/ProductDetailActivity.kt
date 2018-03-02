@@ -11,8 +11,6 @@ import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 
-internal const val ARG_SEL_ID = "detail-item-id"
-
 class ProductDetailActivity : LiveActivity<ActivityProductDetailBinding>() {
 
     @LayoutRes
