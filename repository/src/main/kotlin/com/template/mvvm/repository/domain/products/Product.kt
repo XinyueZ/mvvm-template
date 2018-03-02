@@ -9,7 +9,7 @@ data class Product(
         val title: String = "title",
         val description: String = "description",
         val pictures: Map<String, Image> = emptyMap(),
-        val genders: List<String> = emptyList()) {
+        val filter: List<String> = emptyList()) {
     companion object {
         fun from(productEntity: ProductEntity, imageEntities: List<ImageEntity>) = Product(
                 productEntity.pid,
@@ -21,7 +21,7 @@ data class Product(
                     }
 
                 },
-                productEntity.genders
+                productEntity.filter
         )
 
         fun from(productData: ProductData, genders: List<String>) = Product(

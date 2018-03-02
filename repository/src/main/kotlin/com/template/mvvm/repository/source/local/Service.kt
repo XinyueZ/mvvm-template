@@ -45,7 +45,7 @@ interface ProductDao {
     @Query("delete from products")
     fun deleteProducts()
 
-    @Query("delete from products where genders=:keyword")
+    @Query("delete from products where filter=:keyword")
     fun deleteProducts(keyword: String?)
 
     @Query("delete from images")
@@ -54,7 +54,7 @@ interface ProductDao {
     @Query("delete from images where pid=:pid")
     fun deleteImages(pid: Long)
 
-    @Query("select * from products where genders=:keyword")
+    @Query("select * from products where filter=:keyword")
     fun getProductList(keyword: String?): List<ProductEntity>
 
     @Query("select * from products order by create_time asc limit 10 offset :offset")
@@ -69,7 +69,7 @@ interface ProductDao {
     @Query("select * from images")
     fun getImages(): List<ImageEntity>
 
-    @Query("select * from products where genders=:keyword order by create_time asc limit 10 offset :offset")
+    @Query("select * from products where filter=:keyword order by create_time asc limit 10 offset :offset")
     fun filterProductList(offset: Int, keyword: String?): List<ProductEntity>
 }
 
