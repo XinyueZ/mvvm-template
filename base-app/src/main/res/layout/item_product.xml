@@ -48,7 +48,7 @@
                 android:inputType="textNoSuggestions|textMultiLine"
                 android:text="@{vm.title}"
                 android:textAppearance="@style/MaterialTextView.LightTheme.Subheading"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/material_black"
                 tools:text="title"/>
 
 

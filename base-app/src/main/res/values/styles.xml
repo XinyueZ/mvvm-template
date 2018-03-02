@@ -42,7 +42,7 @@
         <item name="android:layout_marginEnd">@dimen/material_margin_content</item>
         <item name="android:layout_marginLeft">@dimen/material_margin_content</item>
         <item name="android:layout_marginRight">@dimen/material_margin_content</item>
-        <item name="cardBackgroundColor">@color/colorWhite</item>
+        <item name="cardBackgroundColor">@color/material_white</item>
         <item name="contentPadding">@dimen/material_margin_content</item>
         <item name="cardElevation">@dimen/material_elevation_card</item>
         <item name="cardUseCompatPadding">true</item>

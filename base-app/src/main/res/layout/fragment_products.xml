@@ -48,7 +48,7 @@
                     android:id="@+id/load_more_pb"
                     style="@style/CircleProgressBar"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:background="@color/colorTransparent"
+                    android:background="@android:color/transparent"
                     app:dataLoaded="@{vm.state.moreLoaded}"
                     />
             </FrameLayout>

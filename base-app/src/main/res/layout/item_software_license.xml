@@ -33,7 +33,7 @@
                 android:layout_marginStart="5dp"
                 android:text="@{vm.title}"
                 android:textAppearance="@style/MaterialTextView.LightTheme.Title"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/material_black"
                 tools:text="title"/>
 
 
@@ -46,7 +46,7 @@
                 android:layout_marginStart="5dp"
                 android:text="@{vm.description}"
                 android:textAppearance="@style/MaterialTextView.LightTheme.Caption"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/material_black"
                 tools:text="description"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
