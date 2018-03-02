@@ -24,6 +24,8 @@ import android.support.annotation.Size
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import com.template.mvvm.base.ui.ViewModelDialogFragment
+import com.template.mvvm.base.ui.ViewModelFragment
 import kotlin.reflect.KClass
 
 fun Fragment.getDimensionPixel(@DimenRes res: Int) = resources.getDimensionPixelSize(res)
@@ -50,7 +52,7 @@ fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
     }.commit()
 }
 
-fun <E : Fragment> KClass<out E>.newInstance(
+fun <FRG : Fragment> KClass<FRG>.newInstance(
     context: Context?,
     args: Bundle? = EMPTY
 ) =
@@ -58,18 +60,35 @@ fun <E : Fragment> KClass<out E>.newInstance(
         (Fragment.instantiate(
             context,
             java.name
-        ) as E).apply { arguments = args }
+        ) as FRG).apply { arguments = args }
     } ?: kotlin.run { throw NullPointerException("[Context] cannot be null.") }
 
-inline fun <reified VM : ViewModel> KClass<out Fragment>.newInstanceWith(
+inline fun <reified FRG : ViewModelFragment<VM>, reified VM : ViewModel> KClass<FRG>.newInstance(
     context: Context?,
     args: Bundle? = EMPTY
-): Fragment =
+): ViewModelFragment<VM> =
     context?.run {
-        Fragment.instantiate(
+        (Fragment.instantiate(
             context,
             java.name
-        ).apply {
+        ) as ViewModelFragment<VM>).apply {
+            arguments = args
+            if (arguments == EMPTY) {
+                arguments = Bundle()
+            }
+            arguments?.putSerializable("vm", VM::class.java)
+        }
+    } ?: kotlin.run { throw NullPointerException("[Context] cannot be null.") }
+
+inline fun <reified FRG : ViewModelDialogFragment<VM>, reified VM : ViewModel> KClass<FRG>.newInstance(
+    context: Context?,
+    args: Bundle? = EMPTY
+): ViewModelDialogFragment<VM> =
+    context?.run {
+        (Fragment.instantiate(
+            context,
+            java.name
+        ) as ViewModelDialogFragment<VM>).apply {
             arguments = args
             if (arguments == EMPTY) {
                 arguments = Bundle()

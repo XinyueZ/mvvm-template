@@ -8,16 +8,23 @@ import com.template.mvvm.app.product.detail.ProductDetailActivity
 import com.template.mvvm.base.ext.android.app.createActivityOptions
 import com.template.mvvm.base.ext.android.app.showSingleTopActivity
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
-import com.template.mvvm.base.ui.LiveFragment
+import com.template.mvvm.base.ui.ViewModelFragment
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
+import com.template.mvvm.core.models.product.AllGendersViewModel
+import com.template.mvvm.core.models.product.MenViewModel
 import com.template.mvvm.core.models.product.ProductsViewModel
+import com.template.mvvm.core.models.product.WomenViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class ProductsFragment : LiveFragment() {
+class MenFragment : ProductsFragment<MenViewModel>()
+class WomenFragment : ProductsFragment<WomenViewModel>()
+class AllGenderFragment : ProductsFragment<AllGendersViewModel>()
+
+abstract class ProductsFragment<VM : ProductsViewModel> : ViewModelFragment<VM>() {
     override fun onViewCreated(view: View) = FragmentProductsBinding.bind(view).apply {
         vmItem = BR.vm
-        (arguments?.get("vm") as Class<ProductsViewModel>).get(this@ProductsFragment) {
+        requestViewModel().get(this@ProductsFragment) {
             vm = this
             registerLifecycleOwner(this@ProductsFragment)
             onError.setupErrorSnackbar(view, activity)

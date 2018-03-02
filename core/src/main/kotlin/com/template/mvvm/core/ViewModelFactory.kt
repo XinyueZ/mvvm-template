@@ -104,13 +104,7 @@ fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = w
             ?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
 }
 
-fun <VM : ViewModel> FragmentActivity?.obtainViewModel(vm: KClass<VM>, block: VM.() -> Unit) {
-    this?.run {
-        obtainViewModel(vm.java).apply {
-            block()
-        }
-    }
-}
+
 
 fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
     activity: FragmentActivity?,
@@ -123,21 +117,14 @@ fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
     }
 }
 
-fun <VM : ViewModel> Fragment?.obtainViewModel(vm: KClass<VM>, block: VM.() -> Unit) {
-    this?.run {
-        obtainViewModel(vm.java).apply {
-            block()
-        }
-    }
-}
 
 fun <VM : ViewModel, VMC : KClass<VM>> VMC?.get(
-    fragment: Fragment?,
+    lifecycleOwner: LifecycleOwner?,
     block: VM.() -> Unit
 ) {
     this?.run {
-        fragment?.run {
-            obtainViewModel(java).apply {
+        lifecycleOwner?.run {
+            lifecycleOwner.obtainViewModel(java).apply {
                 block()
             }
         }
@@ -145,12 +132,12 @@ fun <VM : ViewModel, VMC : KClass<VM>> VMC?.get(
 }
 
 fun <VM : ViewModel, VMC : Class<VM>> VMC?.get(
-    fragment: Fragment?,
+    lifecycleOwner: LifecycleOwner?,
     block: VM.() -> Unit
 ) {
     this?.run {
-        fragment?.run {
-            obtainViewModel(this@get).apply {
+        lifecycleOwner?.run {
+            lifecycleOwner.obtainViewModel(this@get).apply {
                 block()
             }
         }

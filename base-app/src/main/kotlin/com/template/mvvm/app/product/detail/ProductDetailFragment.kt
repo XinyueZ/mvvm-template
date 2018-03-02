@@ -9,17 +9,17 @@ import com.template.mvvm.base.ext.android.app.setUpActionBar
 import com.template.mvvm.base.ext.android.app.setViewGoldenRatioHeight
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.android.widget.setPalette
-import com.template.mvvm.base.ui.LiveFragment
+import com.template.mvvm.base.ui.ViewModelFragment
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 
-class ProductDetailFragment : LiveFragment() {
+class ProductDetailFragment : ViewModelFragment<ProductDetailViewModel>() {
 
     override fun onViewCreated(view: View) = FragmentProductDetailBinding.bind(view).apply {
-        ProductDetailViewModel::class.get(this@ProductDetailFragment) {
+        requestViewModel().get(this@ProductDetailFragment) {
             vm = this
             productIdToDetail = activity.getExtras(ARG_SEL_ID)
             onError.setupErrorSnackbar(view, activity)

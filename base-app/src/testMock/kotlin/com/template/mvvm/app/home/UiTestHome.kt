@@ -35,6 +35,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 import com.template.mvvm.app.product.ProductsFragment
+import com.template.mvvm.app.product.MenFragment
+import com.template.mvvm.app.product.WomenFragment
+import com.template.mvvm.app.product.AllGenderFragment
 
 // TODO Re-do this tests after google fixed data-binding.
 @Ignore
@@ -98,7 +101,7 @@ class UiTestHome {
                     findChildFragment(
                         R.id.contentFrame,
                         R.id.childContentFrame
-                    )?.javaClass.toString(), equalTo(ProductsFragment::class.java.toString())
+                    )?.javaClass.toString(), equalTo(MenFragment::class.java.toString())
                 )
 
                 selectedItemId = R.id.action_women
@@ -106,7 +109,7 @@ class UiTestHome {
                     findChildFragment(
                         R.id.contentFrame,
                         R.id.childContentFrame
-                    )?.javaClass.toString(), equalTo(ProductsFragment::class.java.toString())
+                    )?.javaClass.toString(), equalTo(WomenFragment::class.java.toString())
                 )
 
                 selectedItemId = R.id.action_all_genders
@@ -114,7 +117,7 @@ class UiTestHome {
                     findChildFragment(
                         R.id.contentFrame,
                         R.id.childContentFrame
-                    )?.javaClass.toString(), equalTo(ProductsFragment::class.java.toString())
+                    )?.javaClass.toString(), equalTo(AllGenderFragment::class.java.toString())
                 )
             }
         }
