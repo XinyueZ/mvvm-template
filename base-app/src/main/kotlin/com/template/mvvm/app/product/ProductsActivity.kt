@@ -10,7 +10,7 @@ import com.template.mvvm.base.ext.lang.execute
 import com.template.mvvm.base.ui.LiveActivity
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
-import com.template.mvvm.core.models.product.ProductsViewModel
+import com.template.mvvm.core.models.product.AllGendersViewModel
 
 class ProductsActivity : LiveActivity<ActivityProductsBinding>() {
 
@@ -20,7 +20,7 @@ class ProductsActivity : LiveActivity<ActivityProductsBinding>() {
     override fun createLiveFragment() = ProductsFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityProductsBinding) {
         setUpActionBar(binding.toolbar)
-        ProductsViewModel::class.get(this) {
+        AllGendersViewModel::class.get(this) {
             binding.vm = this
             controller.showSystemUi.setupObserve(this@ProductsActivity) {
                 execute({ hideSystemUi(1500) }, { showSystemUi() })

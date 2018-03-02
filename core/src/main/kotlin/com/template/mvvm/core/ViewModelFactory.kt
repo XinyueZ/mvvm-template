@@ -15,7 +15,6 @@ import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
 import com.template.mvvm.core.models.product.ProductItemViewModel
-import com.template.mvvm.core.models.product.ProductsViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
 import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.splash.SplashViewModel
@@ -40,12 +39,6 @@ class ViewModelFactory private constructor(
                     RepositoryInjection.getInstance().provideRepository(application)
                 )
                 isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel()
-                isAssignableFrom(ProductsViewModel::class.java) ->
-                    ProductsViewModel(
-                        RepositoryInjection.getInstance().provideRepository(
-                            application
-                        )
-                    )
                 isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel()
                 isAssignableFrom(SoftwareLicensesViewModel::class.java) ->
                     SoftwareLicensesViewModel(
@@ -139,13 +132,28 @@ fun <VM : ViewModel> Fragment?.obtainViewModel(vm: KClass<VM>, block: VM.() -> U
     }
 }
 
-fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
+fun <VM : ViewModel, VMC : KClass<VM>> VMC?.get(
     fragment: Fragment?,
     block: VM.() -> Unit
 ) {
-    fragment?.run {
-        obtainViewModel(java).apply {
-            block()
+    this?.run {
+        fragment?.run {
+            obtainViewModel(java).apply {
+                block()
+            }
+        }
+    }
+}
+
+fun <VM : ViewModel, VMC : Class<VM>> VMC?.get(
+    fragment: Fragment?,
+    block: VM.() -> Unit
+) {
+    this?.run {
+        fragment?.run {
+            obtainViewModel(this@get).apply {
+                block()
+            }
         }
     }
 }

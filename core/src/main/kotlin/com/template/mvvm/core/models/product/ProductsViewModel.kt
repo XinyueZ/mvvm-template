@@ -21,7 +21,7 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlin.coroutines.experimental.CoroutineContext
 
-open class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
+abstract class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
     val state = ProductsViewModelState()
     val controller = ProductsViewModelController()
 

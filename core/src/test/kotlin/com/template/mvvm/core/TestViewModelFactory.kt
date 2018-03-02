@@ -9,10 +9,9 @@ import com.template.mvvm.core.models.license.SoftwareLicenseItemViewModel
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
 import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
-import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.product.ProductItemViewModel
-import com.template.mvvm.core.models.product.ProductsViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
+import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.splash.SplashViewModel
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -54,7 +53,6 @@ class TestViewModelFactory {
             assertThat(create(WomenViewModel::class.java), `is`(notNullValue()))
             assertThat(create(AllGendersViewModel::class.java), `is`(notNullValue()))
             assertThat(create(HomeViewModel::class.java), `is`(notNullValue()))
-            assertThat(create(ProductsViewModel::class.java), `is`(notNullValue()))
             assertThat(create(AboutViewModel::class.java), `is`(notNullValue()))
             assertThat(create(SoftwareLicensesViewModel::class.java), `is`(notNullValue()))
             assertThat(create(LicenseDetailViewModel::class.java), `is`(notNullValue()))

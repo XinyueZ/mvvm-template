@@ -15,8 +15,10 @@
  */
 package com.template.mvvm.base.ext.android.app
 
+import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.os.Bundle
+import android.os.Bundle.EMPTY
 import android.support.annotation.DimenRes
 import android.support.annotation.Size
 import android.support.v4.app.Fragment
@@ -50,11 +52,28 @@ fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
 
 fun <E : Fragment, T : KClass<out E>> T.newInstance(
     context: Context?,
-    args: Bundle? = null
+    args: Bundle? = EMPTY
 ) =
     context?.run {
         (Fragment.instantiate(
             context,
             java.name
         ) as E).apply { arguments = args }
+    } ?: kotlin.run { throw NullPointerException("[Context] cannot be null.") }
+
+inline fun <reified VM : ViewModel> KClass<out Fragment>.newInstanceWith(
+    context: Context?,
+    args: Bundle? = EMPTY
+): Fragment =
+    context?.run {
+        Fragment.instantiate(
+            context,
+            java.name
+        ).apply {
+            arguments = args
+            if (arguments == EMPTY) {
+                arguments = Bundle()
+            }
+            arguments?.putSerializable("vm", VM::class.java)
+        }
     } ?: kotlin.run { throw NullPointerException("[Context] cannot be null.") }

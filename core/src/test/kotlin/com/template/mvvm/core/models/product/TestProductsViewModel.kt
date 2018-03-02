@@ -41,7 +41,7 @@ class TestProductsViewModel {
         lifeOwner = mock(LifecycleOwner::class.java)
         lifecycle = LifecycleRegistry(lifeOwner)
         mockWhen(lifeOwner.lifecycle).thenReturn(lifecycle)
-        vm = ProductsViewModel(dataSource)
+        vm = AllGendersViewModel(dataSource)
     }
 
     @Test(expected = IndexOutOfBoundsException::class)
