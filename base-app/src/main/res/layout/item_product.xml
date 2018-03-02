@@ -16,7 +16,7 @@
         style="@style/RecyclerViewCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:command="@{vm::onCommand}"
+        app:command="@{(a, b) -> vm.onCommand(a, thumnailIv)}"
         app:vm="@{vm}">
 
 

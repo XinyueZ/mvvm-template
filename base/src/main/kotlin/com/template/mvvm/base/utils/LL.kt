@@ -1,4 +1,4 @@
-package com.template.mvvm.repository
+package com.template.mvvm.base.utils
 
 import android.util.Log
 
@@ -11,61 +11,86 @@ class LL {
 
     fun info(_msg: String) {
         if (mDebugable) {
-            Log.i(mkTag(), mkMessage(_msg))
+            Log.i(
+                mkTag(),
+                mkMessage(_msg)
+            )
         }
     }
 
     fun info(_msg: String, _t: Throwable) {
         if (mDebugable) {
-            Log.i(mkTag(), mkMessage(_msg), _t)
+            Log.i(
+                mkTag(),
+                mkMessage(_msg), _t)
         }
     }
 
     fun warn(_msg: String) {
         if (mDebugable) {
-            Log.w(mkTag(), mkMessage(_msg))
+            Log.w(
+                mkTag(),
+                mkMessage(_msg)
+            )
         }
     }
 
     fun warn(_msg: String, _t: Throwable) {
         if (mDebugable) {
-            Log.w(mkTag(), mkMessage(_msg), _t)
+            Log.w(
+                mkTag(),
+                mkMessage(_msg), _t)
         }
     }
 
     fun debug(_msg: String) {
         if (mDebugable) {
-            Log.d(mkTag(), mkMessage(_msg))
+            Log.d(
+                mkTag(),
+                mkMessage(_msg)
+            )
         }
     }
 
     fun debug(_msg: String, _t: Throwable) {
         if (mDebugable) {
-            Log.d(mkTag(), mkMessage(_msg), _t)
+            Log.d(
+                mkTag(),
+                mkMessage(_msg), _t)
         }
     }
 
     fun error(_msg: String) {
         if (mDebugable) {
-            Log.e(mkTag(), mkMessage(_msg))
+            Log.e(
+                mkTag(),
+                mkMessage(_msg)
+            )
         }
     }
 
     fun error(_msg: String, _t: Throwable) {
         if (mDebugable) {
-            Log.e(mkTag(), mkMessage(_msg), _t)
+            Log.e(
+                mkTag(),
+                mkMessage(_msg), _t)
         }
     }
 
     fun fatal(_msg: String) {
         if (mDebugable) {
-            Log.e(mkTag(), mkMessage(_msg))
+            Log.e(
+                mkTag(),
+                mkMessage(_msg)
+            )
         }
     }
 
     fun fatal(_msg: String, _t: Throwable) {
         if (mDebugable) {
-            Log.e(mkTag(), mkMessage(_msg), _t)
+            Log.e(
+                mkTag(),
+                mkMessage(_msg), _t)
         }
     }
 
@@ -76,7 +101,7 @@ class LL {
         val logger = LL()
 
         private fun mkMessage(msg: String): String {
-            return "[${Thread.currentThread().name}: $DEBUG_TAG $msg $DEBUG_TAG]"
+            return "[${Thread.currentThread().name}: ${DEBUG_TAG} $msg ${DEBUG_TAG}]"
         }
 
         private fun mkTag(): String {

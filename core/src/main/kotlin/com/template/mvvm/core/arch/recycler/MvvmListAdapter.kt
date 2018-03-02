@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.template.mvvm.repository.LL
+import com.template.mvvm.base.utils.LL
 
 class MvvmListAdapter(
     @LayoutRes private val itemLayout: Int,

@@ -1,6 +1,6 @@
 package com.template.mvvm.repository.source.remote
 
-import com.template.mvvm.repository.LL
+import com.template.mvvm.base.utils.LL
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import kotlinx.coroutines.experimental.channels.produce

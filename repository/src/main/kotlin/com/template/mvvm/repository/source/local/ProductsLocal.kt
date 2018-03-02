@@ -1,6 +1,6 @@
 package com.template.mvvm.repository.source.local
 
-import com.template.mvvm.repository.LL
+import com.template.mvvm.base.utils.LL
 import com.template.mvvm.repository.contract.INVALID_PID
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Image

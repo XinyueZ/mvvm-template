@@ -7,7 +7,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.template.mvvm.core.ViewModelInjection
-import com.template.mvvm.repository.LL
+import com.template.mvvm.base.utils.LL
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.cancel
 

@@ -6,7 +6,7 @@ import android.support.v7.util.ListUpdateCallback
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.template.mvvm.base.ext.android.content.res.read
-import com.template.mvvm.repository.LL
+import com.template.mvvm.base.utils.LL
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.feeds.licenses.LicensesData

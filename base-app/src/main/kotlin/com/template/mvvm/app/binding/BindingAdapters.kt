@@ -102,7 +102,7 @@ fun CardView.setUpExt(width: Int?, height: Int?, l: OnItemCommandListener?, vm: 
     l?.let {
         onClick {
             vm?.let {
-                l.onCommand(vm)
+                l.onCommand(vm, this)
             }
         }
     }

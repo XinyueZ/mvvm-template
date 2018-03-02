@@ -7,7 +7,7 @@ interface OnCommandListener {
 }
 
 interface OnItemCommandListener {
-    fun onCommand(vm: ViewModel)
+    fun onCommand(vm: ViewModel, shared: Any?)
 }
 
 interface OnReloadListener {

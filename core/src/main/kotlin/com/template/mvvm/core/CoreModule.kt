@@ -7,7 +7,7 @@ import android.arch.lifecycle.ProcessLifecycleOwner
 import android.content.Context
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
-import com.template.mvvm.repository.LL
+import com.template.mvvm.base.utils.LL
 import com.template.mvvm.repository.RepositoryInjection
 import com.template.mvvm.repository.RepositoryModule
 

@@ -7,8 +7,9 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.support.annotation.IntRange
+import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
+import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
-import com.template.mvvm.core.arch.SingleLiveData
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
@@ -175,8 +176,9 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
         }
     }
 
-    fun onCommand(vm: ViewModel) {
+    fun onCommand(vm: ViewModel, shared: Any?) {
         clickHandler.first()(library)
+        LL.d("$shared")
     }
 
     override fun onCleared() {

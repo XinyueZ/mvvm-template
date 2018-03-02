@@ -1,4 +1,4 @@
-package com.template.mvvm.core.arch
+package com.template.mvvm.base.ext.android.arch.lifecycle
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import android.support.annotation.MainThread
 import android.util.Log
 import java.util.concurrent.atomic.AtomicBoolean
 
-open class SingleLiveData<T> : MutableLiveData<T>() {
+class SingleLiveData<T> : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)
 
