@@ -16,6 +16,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 
+// TODO Re-do this tests after google fixed data-binding.
 @Ignore
 @RunWith(RobolectricTestRunner::class)
 class UiTestProducts {

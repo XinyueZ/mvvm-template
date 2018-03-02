@@ -19,6 +19,8 @@ import org.robolectric.android.controller.ActivityController
 import org.robolectric.shadows.ShadowLooper.idleMainLooper
 import java.util.concurrent.TimeUnit
 import kotlin.system.measureTimeMillis
+
+// TODO Re-do this tests after google fixed data-binding.
 @Ignore
 @RunWith(RobolectricTestRunner::class)
 class DeprecatedUiTestSplash {

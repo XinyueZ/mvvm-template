@@ -36,6 +36,7 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 import com.template.mvvm.app.product.ProductsFragment
 
+// TODO Re-do this tests after google fixed data-binding.
 @Ignore
 @RunWith(RobolectricTestRunner::class)
 class UiTestHome {

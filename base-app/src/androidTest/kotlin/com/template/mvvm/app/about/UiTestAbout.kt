@@ -18,6 +18,8 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+
+// TODO Re-do this tests after google fixed data-binding.
 @Ignore
 @RunWith(AndroidJUnit4::class)
 class UiTestAbout {
