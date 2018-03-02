@@ -18,6 +18,7 @@ import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ui.LiveFragment
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.home.HomeViewModel
+import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
@@ -65,7 +66,7 @@ class HomeFragment : LiveFragment() {
                 }
                 openItem4.setupObserve(activity) {
                     if (allFrg == null)
-                        allFrg = ProductsFragment::class.newInstanceWith<MenViewModel>(context)
+                        allFrg = ProductsFragment::class.newInstanceWith<AllGendersViewModel>(context)
                     allFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
                 }
             }

@@ -50,7 +50,7 @@ fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
     }.commit()
 }
 
-fun <E : Fragment, T : KClass<out E>> T.newInstance(
+fun <E : Fragment> KClass<out E>.newInstance(
     context: Context?,
     args: Bundle? = EMPTY
 ) =

@@ -87,8 +87,7 @@ fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
             it,
             ViewModelFactory.getInstance(it.application)
         ).get(viewModelClass)
-    }
-            ?: kotlin.run { ViewModelProviders.of(this).get(viewModelClass) }
+    } ?: kotlin.run { ViewModelProviders.of(this).get(viewModelClass) }
 
 fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = with(
     when (this) {
