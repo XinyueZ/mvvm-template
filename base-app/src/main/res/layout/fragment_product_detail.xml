@@ -42,8 +42,8 @@
                 app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleGravity="start|bottom|left"
-                app:expandedTitleMarginEnd="@dimen/general_padding"
-                app:expandedTitleMarginStart="@dimen/general_padding"
+                app:expandedTitleMarginEnd="@dimen/material_margin_content"
+                app:expandedTitleMarginStart="@dimen/material_margin_content"
                 app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 app:toolbarId="@+id/toolbar">
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/general_padding">
+                android:paddingTop="@dimen/material_margin_content">
 
                 <android.support.v7.widget.CardView
                     style="@style/RecyclerViewCardView"

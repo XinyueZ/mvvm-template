@@ -8,6 +8,7 @@ import com.template.mvvm.base.customtabs.CustomTabUtils
 import com.template.mvvm.base.ext.android.app.newInstance
 import com.template.mvvm.base.ext.android.app.setUpActionBar
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
+import com.template.mvvm.base.ext.android.widget.setHeaderHeightBetter
 import com.template.mvvm.base.ext.android.widget.setup
 import com.template.mvvm.base.ext.lang.execute
 import com.template.mvvm.base.ui.LiveActivity
@@ -39,6 +40,7 @@ class HomeActivity : LiveActivity<ActivityHomeBinding>() {
                 addSource(obtainViewModel(AllGendersViewModel::class.java).controller.showSystemUi,
                     { this.value = it })
             }
+            binding.drawerNavi.setHeaderHeightBetter(this@HomeActivity)
             binding.drawer.setup(this@HomeActivity, controller.drawerToggle)
         }
     }

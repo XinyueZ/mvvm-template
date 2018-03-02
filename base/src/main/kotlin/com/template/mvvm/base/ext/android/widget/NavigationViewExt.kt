@@ -1,10 +1,12 @@
 package com.template.mvvm.base.ext.android.widget
 
+import android.app.Activity
 import android.support.annotation.IdRes
 import android.support.design.internal.NavigationMenuItemView
 import android.support.design.internal.NavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
+import com.template.mvvm.base.ext.android.view.setUpGoldenRatioInvertedHeight
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel
 import kotlinx.coroutines.experimental.channels.actor
@@ -52,4 +54,8 @@ fun NavigationView.onNavigationItemSelected(block: suspend (Int) -> Unit) {
         eventActor.offer(it.itemId)
         true
     }
+}
+
+fun NavigationView.setHeaderHeightBetter(activity: Activity) {
+    getHeaderView(0).setUpGoldenRatioInvertedHeight(activity)
 }

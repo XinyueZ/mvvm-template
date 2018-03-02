@@ -23,6 +23,13 @@ fun Activity?.setViewGoldenRatioHeight(view: View): Activity? {
     return this
 }
 
+fun Activity?.setUpGoldenRatioInvertedHeight(view: View): Activity? {
+    this?.apply {
+        view.setUpGoldenRatioHeight(this)
+    }
+    return this
+}
+
 fun Activity?.setUpActionBar(@IdRes toolbar: Toolbar, action: (ActionBar.() -> Unit)? = null) {
     when (this is AppCompatActivity) {
         true -> {

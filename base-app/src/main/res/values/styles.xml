@@ -18,7 +18,7 @@
 
     <style name="CollectionProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/general_padding</item>
+        <item name="android:layout_height">@dimen/material_margin_content</item>
         <item name="android:layout_marginEnd">@dimen/collection_progress_bar_margin</item>
         <item name="android:layout_marginLeft">@dimen/collection_progress_bar_margin</item>
         <item name="android:layout_marginRight">@dimen/collection_progress_bar_margin</item>
@@ -38,12 +38,12 @@
         <item name="android:focusable">true</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
-        <item name="android:layout_marginStart">@dimen/general_padding</item>
-        <item name="android:layout_marginEnd">@dimen/general_padding</item>
-        <item name="android:layout_marginLeft">@dimen/general_padding</item>
-        <item name="android:layout_marginRight">@dimen/general_padding</item>
+        <item name="android:layout_marginStart">@dimen/material_margin_content</item>
+        <item name="android:layout_marginEnd">@dimen/material_margin_content</item>
+        <item name="android:layout_marginLeft">@dimen/material_margin_content</item>
+        <item name="android:layout_marginRight">@dimen/material_margin_content</item>
         <item name="cardBackgroundColor">@color/colorWhite</item>
-        <item name="contentPadding">@dimen/general_padding</item>
+        <item name="contentPadding">@dimen/material_margin_content</item>
         <item name="cardElevation">@dimen/material_elevation_card</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardCornerRadius">1dp</item>

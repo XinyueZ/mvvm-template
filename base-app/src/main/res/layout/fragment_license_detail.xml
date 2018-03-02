@@ -9,7 +9,7 @@
     </data>
 
     <TextView
-        android:padding="@dimen/general_padding"
+        android:padding="@dimen/material_margin_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@{vm.detail}"

@@ -24,7 +24,7 @@
     <color name="naviMenuBack">@color/colorWhite</color>
     <!--Drawer-->
     <color name="naviMenuItemIconTint">@color/material_grey800</color>
-    <color name="naviHeaderBackground">@color/colorWhite</color>
+    <color name="naviHeaderBackground">@color/colorPrimaryDark</color>
     <color name="naviDrawerBackground">@color/material_grey200</color>
 
     <!--Bottom navi-->

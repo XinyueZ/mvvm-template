@@ -29,8 +29,10 @@
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
                     app:command="@{ vm::onCommand }"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:navigationIcon="@drawable/ic_menu"
                     app:title="@{context.getString(vm.state.title)}"/>
@@ -39,13 +41,13 @@
                 <FrameLayout
                     android:id="@id/contentFrame"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/bottom_navi_height"
-                    android:layout_marginTop="?attr/actionBarSize"
+                    android:layout_height="0dp"
                     app:layout_constraintBottom_toTopOf="@+id/bottomNavi"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
 
@@ -69,13 +71,15 @@
                 <android.support.design.widget.BottomNavigationView
                     android:id="@+id/bottomNavi"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/bottom_navi_height"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start|bottom"
                     android:theme="@style/BottomNavigationViewTheme"
                     app:command="@{vm::onCommand}"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:menu="@menu/menu_navi_bottom"
                     app:selectItem="@{vm.state.selectItem}"/>
 

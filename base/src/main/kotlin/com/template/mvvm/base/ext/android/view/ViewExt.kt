@@ -55,3 +55,8 @@ fun View.setUpGoldenRatioHeight(activity: Activity): View? {
     return this
 }
 
+fun View.setUpGoldenRatioInvertedHeight(activity: Activity): View? {
+    layoutParams.height = (activity.getScreenSize().height.toFloat() * (1f - 0.618339887f)).toInt()
+    return this
+}
+
