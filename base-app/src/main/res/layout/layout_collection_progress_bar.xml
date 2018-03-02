@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/general_padding"
-            android:src="@mipmap/ic_launcher_round"
-            tools:src="@mipmap/ic_launcher_round"/>
+            android:src="@mipmap/ic_launcher_foreground"
+            tools:src="@mipmap/ic_launcher_foreground"/>
 
 
         <ProgressBar
