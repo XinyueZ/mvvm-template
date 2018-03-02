@@ -10,6 +10,7 @@ import android.support.annotation.IdRes
 import android.support.annotation.Size
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -69,4 +70,19 @@ fun <T : Any> Activity?.getExtras(key: String): T? = this?.let {
     intent.extras[key] as? T
 } ?: kotlin.run {
     null
+}
+
+fun Activity?.createActivityOptions(view: View?, sharedName: String): ActivityOptionsCompat? {
+    return if (this == null || view == null) null
+    else {
+        ViewCompat.setTransitionName(
+            view,
+            sharedName
+        )
+        ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            view,
+            sharedName
+        )
+    }
 }
