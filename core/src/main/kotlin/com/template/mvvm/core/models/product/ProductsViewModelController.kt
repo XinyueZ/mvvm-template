@@ -17,7 +17,7 @@ class ProductsViewModelController : BaseObservable() {
     val showSystemUi: MutableLiveData<Boolean> =
         SingleLiveData()
     //Detail to open
-    val openItemDetail: MutableLiveData<Bundle> =
+    val openItemDetail: MutableLiveData<Pair<Bundle, Any?>> =
         SingleLiveData()
 
 }

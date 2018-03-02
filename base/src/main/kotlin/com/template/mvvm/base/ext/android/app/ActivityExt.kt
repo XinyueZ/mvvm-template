@@ -9,6 +9,7 @@ import android.os.Bundle.EMPTY
 import android.support.annotation.IdRes
 import android.support.annotation.Size
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -48,14 +49,19 @@ fun Activity.getScreenSize() = com.template.mvvm.base.utils.getScreenSize(this, 
 
 fun <E : Activity, T : KClass<out E>> T.showSingleTopActivity(
     context: E?,
-    args: Bundle? = null
+    args: Bundle? = null,
+    options: ActivityOptionsCompat? = null
 ) =
     context?.run {
         with(Intent(this, this@showSingleTopActivity.java)) {
             if (args != null)
                 putExtras(args)
             flags = FLAG_ACTIVITY_SINGLE_TOP or FLAG_ACTIVITY_CLEAR_TOP
-            ActivityCompat.startActivity(this@run, this, EMPTY)
+            ActivityCompat.startActivity(
+                this@run,
+                this,
+                if (options != null) options.toBundle() else EMPTY
+            )
         }
     }
 

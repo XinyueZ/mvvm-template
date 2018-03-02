@@ -1,5 +1,6 @@
 package com.template.mvvm.app.product.detail
 
+import android.support.v4.view.ViewCompat
 import android.view.View
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductDetailBinding
@@ -32,6 +33,7 @@ class ProductDetailFragment : LiveFragment() {
                 toolbar.setPalette(this)
                 collapsingToolbar.setPalette(this)
             }
+            ViewCompat.setTransitionName(appbar, getString(R.string.shared_object_name))
         }
     }
 

@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.IntRange
 import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
-import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
 import com.template.mvvm.core.models.AbstractViewModel
@@ -130,10 +129,11 @@ open class ProductsViewModel(protected val repository: ProductsDataSource) : Abs
 
     private fun bindTapHandlers(it: List<ProductItemViewModel>) {
         it.forEach {
-            it.clickHandler += {
-                // Tell UI to open a UI for license detail.
-//                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(cxt, transitionView, transitionSharedItemName)
-                controller.openItemDetail.value = Bundle().apply { putLong(ARG_SEL_ID, it.pid) }
+            it.clickHandler += { product, shared ->
+                Pair(
+                    Bundle().apply { putLong(ARG_SEL_ID, product.pid) },
+                    shared
+                ).also { controller.openItemDetail.value = it }
             }
         }
     }
@@ -184,7 +184,7 @@ class ProductItemViewModel : AbstractViewModel() {
     lateinit var product: Product
     val title: ObservableField<String> = ObservableField()
     val thumbnail: ObservableField<Uri> = ObservableField()
-    val clickHandler = arrayListOf<((Product) -> Unit)>()
+    val clickHandler = arrayListOf<((Product, Any?) -> Unit)>()
 
     companion object {
         fun from(product: Product): ProductItemViewModel {
@@ -197,8 +197,7 @@ class ProductItemViewModel : AbstractViewModel() {
     }
 
     fun onCommand(vm: ViewModel, shared: Any?) {
-        clickHandler.first()(product)
-        LL.d("$shared")
+        clickHandler.first()(product, shared)
     }
 
     override fun onCleared() {

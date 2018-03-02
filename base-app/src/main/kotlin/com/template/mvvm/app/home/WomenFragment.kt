@@ -1,5 +1,7 @@
 package com.template.mvvm.app.home
 
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.view.View
 import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
@@ -22,7 +24,16 @@ class WomenFragment : LiveFragment() {
             registerLifecycleOwner(this@WomenFragment)
             onError.setupErrorSnackbar(view, activity)
             controller.openItemDetail.setupObserve(activity) {
-                ProductDetailActivity::class.showSingleTopActivity(activity, this)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    activity!!,
+                    this.second as View,
+                    getString(R.string.shared_object_name)
+                )
+                ViewCompat.setTransitionName(
+                    this.second as View,
+                    getString(R.string.shared_object_name)
+                )
+                ProductDetailActivity::class.showSingleTopActivity(activity, this.first, options)
             }
         }
     }
