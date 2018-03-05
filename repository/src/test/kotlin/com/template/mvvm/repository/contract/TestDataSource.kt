@@ -6,7 +6,6 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.runBlocking
 import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -34,13 +33,13 @@ class TestDataSource {
         localSource = Gen.list(Gen.positiveIntegers()).generate()
         emptyT = { emptyList() }
         predicateAcceptLocalOnly = { it.isNotEmpty() }
-        saveAfterRemote = { list -> println(list.toString()) }
+        saveAfterRemote = {}
         remote = { remoteSource }
         local = { localSource }
     }
 
     @Test
-    fun testSelectLocalOnly() = runBlocking {
+    fun shouldLocalOnlyReturnsLocalDataSource() = runBlocking {
         var shouldNotSave = true
         saveAfterRemote = {
             shouldNotSave = false
@@ -58,10 +57,6 @@ class TestDataSource {
             {}
         ).consumeEach {
             assertThat(
-                this,
-                `is`(notNullValue())
-            )
-            assertThat(
                 it == localSource,
                 `is`(true)
             )
@@ -78,7 +73,36 @@ class TestDataSource {
     }
 
     @Test
-    fun testSelectNotLocalOnly() = runBlocking {
+    fun shouldLocalOnlyNotSaveAnyData() = runBlocking {
+        var shouldNotSave = true
+        saveAfterRemote = {
+            shouldNotSave = false
+            Unit
+        }
+
+        datasource.select(
+            CommonPool,
+            remote,
+            saveAfterRemote,
+            local,
+            predicateAcceptLocalOnly,
+            emptyT,
+            true,
+            {}
+        ).consumeEach {
+            sleepWhile {
+                !shouldNotSave
+            }
+
+            assertThat(
+                shouldNotSave,
+                `is`(true)
+            )
+        }
+    }
+
+    @Test
+    fun shouldGetRemoteSourceAndSaveToLocalFinallyGetFromLocalSource() = runBlocking {
         var save = false
         saveAfterRemote = {
             save = true
@@ -97,15 +121,6 @@ class TestDataSource {
             false,
             { someRestDone = true }
         ).consumeEach {
-            assertThat(
-                this,
-                `is`(notNullValue())
-            )
-            assertThat(
-                it == localSource,
-                `is`(true)
-            )
-
             sleepWhile {
                 !save
             }
@@ -118,14 +133,42 @@ class TestDataSource {
                 someRestDone,
                 `is`(true)
             )
+
+            assertThat(
+                it == localSource,
+                `is`(true)
+            )
         }
     }
 
     @Test
-    fun testShouldNotSaveWhenRemoteNull() = runBlocking {
+    fun shouldDoRestRemoteDataHandlersAfterGettingRemoteSource() = runBlocking {
+        var someRestDone = false
+
+        datasource.select(
+            CommonPool,
+            remote,
+            saveAfterRemote,
+            local,
+            predicateAcceptLocalOnly,
+            emptyT,
+            false,
+            { someRestDone = true }
+        ).consumeEach {
+            sleepWhile {
+                !someRestDone
+            }
+            assertThat(
+                someRestDone,
+                `is`(true)
+            )
+        }
+    }
+
+    @Test
+    fun shouldNotSaveWhenRemoteNull() = runBlocking {
         remote = { null }
         local = { localSource }
-        var someRestDone = false
 
         var shouldNotSave = true
         saveAfterRemote = {
@@ -141,7 +184,7 @@ class TestDataSource {
             predicateAcceptLocalOnly,
             emptyT,
             false,
-            { someRestDone = true }
+            { }
         ).consumeEach {
             sleepWhile {
                 !shouldNotSave
@@ -150,6 +193,28 @@ class TestDataSource {
                 shouldNotSave,
                 `is`(true)
             )
+        }
+    }
+
+    @Test
+    fun shouldNotDoRestRemoteDataHandlersWhenRemoteNull() = runBlocking {
+        remote = { null }
+        local = { localSource }
+        var someRestDone = false
+
+        datasource.select(
+            CommonPool,
+            remote,
+            saveAfterRemote,
+            local,
+            predicateAcceptLocalOnly,
+            emptyT,
+            false,
+            { someRestDone = true }
+        ).consumeEach {
+            sleepWhile {
+                someRestDone
+            }
             assertThat(
                 someRestDone,
                 `is`(false)
