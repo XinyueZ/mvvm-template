@@ -35,12 +35,12 @@ class TestDataSource {
         emptyT = { emptyList() }
         predicateAcceptLocalOnly = { it.isNotEmpty() }
         saveAfterRemote = { list -> println(list.toString()) }
+        remote = { remoteSource }
+        local = { localSource }
     }
 
     @Test
     fun testSelectLocalOnly() = runBlocking {
-        remote = { remoteSource }
-        local = { localSource }
         var shouldNotSave = true
         saveAfterRemote = {
             shouldNotSave = false
@@ -79,14 +79,13 @@ class TestDataSource {
 
     @Test
     fun testSelectNotLocalOnly() = runBlocking {
-        remote = { remoteSource }
-        local = { localSource }
-
         var save = false
         saveAfterRemote = {
             save = true
             Unit
         }
+
+        var someRestDone = false
 
         datasource.select(
             CommonPool,
@@ -96,7 +95,7 @@ class TestDataSource {
             predicateAcceptLocalOnly,
             emptyT,
             false,
-            {}
+            { someRestDone = true }
         ).consumeEach {
             assertThat(
                 this,
@@ -114,6 +113,46 @@ class TestDataSource {
             assertThat(
                 save,
                 `is`(true)
+            )
+            assertThat(
+                someRestDone,
+                `is`(true)
+            )
+        }
+    }
+
+    @Test
+    fun testShouldNotSaveWhenRemoteNull() = runBlocking {
+        remote = { null }
+        local = { localSource }
+        var someRestDone = false
+
+        var shouldNotSave = true
+        saveAfterRemote = {
+            shouldNotSave = false
+            Unit
+        }
+
+        datasource.select(
+            CommonPool,
+            remote,
+            saveAfterRemote,
+            local,
+            predicateAcceptLocalOnly,
+            emptyT,
+            false,
+            { someRestDone = true }
+        ).consumeEach {
+            sleepWhile {
+                !shouldNotSave
+            }
+            assertThat(
+                shouldNotSave,
+                `is`(true)
+            )
+            assertThat(
+                someRestDone,
+                `is`(false)
             )
         }
     }
