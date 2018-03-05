@@ -221,4 +221,26 @@ class TestDataSource {
             )
         }
     }
+
+    @Test
+    fun shouldGetEmptyWhenRemoteAndLocalAllHaveProblem() = runBlocking {
+        remote = { null }
+        local = { null }
+
+        datasource.select(
+            CommonPool,
+            remote,
+            saveAfterRemote,
+            local,
+            predicateAcceptLocalOnly,
+            emptyT,
+            Gen.bool().generate(),
+            { }
+        ).consumeEach {
+            assertThat(
+                it.isEmpty(),
+                `is`(true)
+            )
+        }
+    }
 }
