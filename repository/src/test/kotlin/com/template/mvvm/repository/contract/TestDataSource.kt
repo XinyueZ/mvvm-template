@@ -1,5 +1,6 @@
 package com.template.mvvm.repository.contract
 
+import com.template.mvvm.repository.sleepWhile
 import io.kotlintest.properties.Gen
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.channels.consumeEach
@@ -33,13 +34,19 @@ class TestDataSource {
         localSource = Gen.list(Gen.positiveIntegers()).generate()
         emptyT = { emptyList() }
         predicateAcceptLocalOnly = { it.isNotEmpty() }
-        remote = { remoteSource }
-        local = { localSource }
         saveAfterRemote = { list -> println(list.toString()) }
     }
 
     @Test
     fun testSelectLocalOnly() = runBlocking {
+        remote = { remoteSource }
+        local = { localSource }
+        var shouldNotSave = true
+        saveAfterRemote = {
+            shouldNotSave = false
+            Unit
+        }
+
         datasource.select(
             CommonPool,
             remote,
@@ -56,6 +63,56 @@ class TestDataSource {
             )
             assertThat(
                 it == localSource,
+                `is`(true)
+            )
+
+            sleepWhile {
+                !shouldNotSave
+            }
+
+            assertThat(
+                shouldNotSave,
+                `is`(true)
+            )
+        }
+    }
+
+    @Test
+    fun testSelectNotLocalOnly() = runBlocking {
+        remote = { remoteSource }
+        local = { localSource }
+
+        var save = false
+        saveAfterRemote = {
+            save = true
+            Unit
+        }
+
+        datasource.select(
+            CommonPool,
+            remote,
+            saveAfterRemote,
+            local,
+            predicateAcceptLocalOnly,
+            emptyT,
+            false,
+            {}
+        ).consumeEach {
+            assertThat(
+                this,
+                `is`(notNullValue())
+            )
+            assertThat(
+                it == localSource,
+                `is`(true)
+            )
+
+            sleepWhile {
+                !save
+            }
+
+            assertThat(
+                save,
                 `is`(true)
             )
         }
