@@ -16,6 +16,7 @@ ext {
     def constraint = "1.1.0-beta4"
     def multiDex = ext.multiDex
     def instantapps = "1.1.0"
+    def ktx = "0.2"
 
     // Retrofit
     def retrofit = "2.3.0"
@@ -119,6 +120,9 @@ ext {
     applicationDependencies = [
             [configuration: "kapt", dependency: [group: "com.android.databinding", name: "compiler", version: gradle]],
             [configuration: "implementation", dependency: [group: "com.google.android.instantapps", name: "instantapps", version: instantapps]],
+
+            //Ktx
+            [configuration: "implementation", dependency: [group: "androidx.core", name: "core-ktx", version: ktx]],
 
             //SUPPORT
             [configuration: "implementation", dependency: [group: "com.android.support", name: "multidex", version: multiDex]],
