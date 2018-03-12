@@ -12,7 +12,7 @@ ext {
     def supportLibraryVersion = ext.support_comp
     def archLifecycleVersion = ext.arch_comp
     def archRoom = ext.arch_room
-    def paging = "1.0.0-alpha5"
+    def paging = "1.0.0-alpha6"
     def constraint = "1.1.0-beta4"
     def multiDex = ext.multiDex
     def instantapps = "1.1.0"
