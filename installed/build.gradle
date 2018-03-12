@@ -15,10 +15,3 @@ dependencies {
     //STANDALONE
     implementation project(':base-app')
 }
-
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}

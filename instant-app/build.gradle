@@ -32,8 +32,3 @@ android {
     }
 }
 
-dependencies {
-    //STANDALONE
-    implementation project(':base-app')
-}
-
