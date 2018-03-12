@@ -121,3 +121,15 @@ configurations.all { configuration ->
                 "com.android.support:multidex:$rootProject.ext.multiDex"
     }
 }
+
+
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+kapt {
+    useBuildCache = true
+}

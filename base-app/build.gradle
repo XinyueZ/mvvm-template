@@ -17,10 +17,3 @@ dependencies {
         add(it.configuration, it.dependency, it.options)
     }
 }
-
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
