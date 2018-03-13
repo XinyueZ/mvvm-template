@@ -87,13 +87,9 @@ class SoftwareLicensesViewModel(
         }
     }
 
-    private fun loadData() {
-        doOnBound(true)
-    }
+    private fun loadData() = doOnBound(true)
 
-    private fun reloadData() {
-        doOnBound(false)
-    }
+    private fun reloadData() = doOnBound(false)
 
     fun onBound(@IntRange(from = 0L) position: Int) {
         when (controller.libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {

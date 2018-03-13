@@ -82,9 +82,7 @@ class ProductDetailViewModel(context: Context, private val repository: ProductsD
         }
     }
 
-    private fun reloadData() {
-        loadData(false)
-    }
+    private fun reloadData() = loadData(false)
 
     private suspend fun query(coroutineContext: CoroutineContext, localOnly: Boolean = true) =
         repository.getProductDetail(coroutineContext, productIdToDetail!!, localOnly)
