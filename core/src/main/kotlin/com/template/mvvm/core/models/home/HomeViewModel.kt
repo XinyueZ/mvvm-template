@@ -38,6 +38,7 @@ class HomeViewModel : AbstractViewModel() {
                 R.id.action_men -> openItem2.value = true
                 R.id.action_women -> openItem3.value = true
                 R.id.action_all_genders -> openItem4.value = true
+                R.id.action_categories_products -> openItem5.value = true
             }
         }
     }

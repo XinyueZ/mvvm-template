@@ -5,6 +5,7 @@
     <string name="action_men">Men</string>
     <string name="action_women">Women</string>
     <string name="action_all_genders">Human</string>
+    <string name="action_categories_products">Categories</string>
     <string name="navi_group_other">Other</string>
 
     <string name="home_title">@string/app_name</string>
@@ -33,5 +34,6 @@
     <string name="error_retry">Retry</string>
  
     <string name="error_load_all_products">Cannot load products, something goes wrong. Try again by clicking [retry].</string>
+    <string name="error_load_all_products_categories">Cannot load products and categories, something goes wrong. Try again by clicking [retry].</string>
     <string name="error_load_all_licenses">Cannot load detail of product, something goes wrong. Try again by clicking [retry].</string>
 </resources>

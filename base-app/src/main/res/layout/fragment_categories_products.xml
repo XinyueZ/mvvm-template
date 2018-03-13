@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <import type="com.template.mvvm.app.R"/>
+
+        <variable
+            name="vmItem"
+            type="int"/>
+
+        <variable
+            name="vm"
+            type="com.template.mvvm.core.models.product.category.CategoriesProductsViewModel"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:reload="@{vm::onReload}"
+            app:stopLoading="@{vm.state.dataHaveNotReloaded}">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemList="@{vm.controller.productCategoryItemVmList}"
+                    app:itemLayout="@{R.layout.item_product_category}"
+                    app:vmItemLayout="@{vmItem}"
+                    app:layout="@{`linear`}"
+                    app:onListItemBound="@{vm::onBound}"
+                    app:add="@{true}"
+                    app:delete = "@{vm.state.deleteList}"
+                    />
+
+                <ProgressBar
+                    android:id="@+id/load_more_pb"
+                    style="@style/CircleProgressBar"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:background="@android:color/transparent"
+                    app:dataLoaded="@{vm.state.moreLoaded}"
+                    />
+            </FrameLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <include
+            layout="@layout/layout_collection_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:dataLoaded="@{vm.state.dataLoaded}"/>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

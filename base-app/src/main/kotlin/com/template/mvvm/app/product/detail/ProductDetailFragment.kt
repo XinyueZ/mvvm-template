@@ -19,7 +19,7 @@ import com.template.mvvm.core.models.registerLifecycleOwner
 class ProductDetailFragment : ViewModelFragment<ProductDetailViewModel>() {
 
     override fun onViewCreated(view: View) = FragmentProductDetailBinding.bind(view).apply {
-        requestViewModel().get(this@ProductDetailFragment) {
+        requestViewModel().get(activity) {
             vm = this
             productIdToDetail = activity.getExtras(ARG_SEL_ID)
             onError.setupErrorSnackbar(view, activity)

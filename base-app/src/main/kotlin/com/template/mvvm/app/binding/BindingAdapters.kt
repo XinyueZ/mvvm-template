@@ -3,7 +3,6 @@ package com.template.mvvm.app.binding
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
@@ -11,6 +10,8 @@ import android.net.Uri
 import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
+import android.support.design.internal.BottomNavigationItemView
+import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
@@ -34,9 +35,11 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.template.mvvm.app.R
+import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.android.view.onClick
 import com.template.mvvm.base.ext.android.widget.onNavigationItemSelected
 import com.template.mvvm.base.ext.android.widget.onNavigationOnClick
+import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.arch.OnViewBoundListener
 import com.template.mvvm.core.arch.recycler.MvvmListAdapter
@@ -75,15 +78,10 @@ fun RecyclerView.bindingList(
         }
         adapter = MvvmListAdapter(itemLayout, vmItemLayout, onListItemBound).apply {
             (context as FragmentActivity).run {
-                itemList.let { liveData ->
-                    liveData.removeObservers(this)
-                    liveData.observe(this, Observer { updatedList ->
-                        updatedList?.run {
-                            if (add) add(this)
-                            else update(this)
-                        }
-                    })
-                }
+                itemList.setupObserve(this, {
+                    if (add) add(this)
+                    else update(this)
+                })
             }
         }
     }
@@ -246,12 +244,36 @@ fun Toolbar.command(l: OnCommandListener?) {
 
 @BindingAdapter("command", requireAll = false)
 fun BottomNavigationView.command(l: OnCommandListener?) {
+    disableShiftMode()
     onNavigationItemSelected { l?.onCommand(it) }
 }
 
 @BindingAdapter("selectItem", requireAll = false)
 fun BottomNavigationView.selectItem(@IdRes id: Int) {
     selectedItemId = id
+}
+
+//
+// Some view-ext, helpers
+//
+@SuppressLint("RestrictedApi")
+fun BottomNavigationView.disableShiftMode() {
+    val menuView = this.getChildAt(0) as BottomNavigationMenuView
+    try {
+        val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
+        shiftingMode.isAccessible = true
+        shiftingMode.setBoolean(menuView, false)
+        shiftingMode.isAccessible = false
+        for (i in 0 until menuView.childCount) {
+            val item = menuView.getChildAt(i) as BottomNavigationItemView
+            item.setShiftingMode(false)
+            item.setChecked(item.itemData.isChecked)
+        }
+    } catch (e: NoSuchFieldException) {
+        LL.e("Unable to get shift mode field", e)
+    } catch (e: IllegalAccessException) {
+        LL.e("Unable to change value of shift mode", e)
+    }
 }
 
 

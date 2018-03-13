@@ -11,6 +11,7 @@ class HomeViewModelController {
     val openItem2 = MutableLiveData<Boolean>()
     val openItem3 = MutableLiveData<Boolean>()
     val openItem4 = MutableLiveData<Boolean>()
+    val openItem5 = MutableLiveData<Boolean>()
 
     val drawerToggle = MutableLiveData<Boolean>()
 

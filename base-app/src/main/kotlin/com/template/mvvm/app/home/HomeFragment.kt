@@ -11,6 +11,7 @@ import com.template.mvvm.app.product.AllGenderFragment
 import com.template.mvvm.app.product.MenFragment
 import com.template.mvvm.app.product.ProductsActivity
 import com.template.mvvm.app.product.WomenFragment
+import com.template.mvvm.app.product.category.CategoriesProductsFragment
 import com.template.mvvm.base.customtabs.CustomTabConfig
 import com.template.mvvm.base.customtabs.CustomTabUtils
 import com.template.mvvm.base.ext.android.app.newInstance
@@ -26,6 +27,7 @@ class HomeFragment : ViewModelFragment<HomeViewModel>() {
     private var menFrg: Fragment? = null
     private var womenFrg: Fragment? = null
     private var allFrg: Fragment? = null
+    private var catPrdFrag: Fragment? = null
 
     override fun onViewCreated(view: View) = FragmentHomeBinding.bind(view).apply {
         requestViewModel().get(this@HomeFragment) {
@@ -67,6 +69,11 @@ class HomeFragment : ViewModelFragment<HomeViewModel>() {
                     if (allFrg == null)
                         allFrg = AllGenderFragment::class.newInstance(context)
                     allFrg?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
+                }
+                openItem5.setupObserve(activity) {
+                    if (catPrdFrag == null)
+                        catPrdFrag = CategoriesProductsFragment::class.newInstance(context)
+                    catPrdFrag?.let { replaceFragmentToFragment(it, R.id.childContentFrame) }
                 }
             }
             registerLifecycleOwner(this@HomeFragment)

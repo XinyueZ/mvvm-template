@@ -4,14 +4,17 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 
-inline fun <reified T : Any> LiveData<T>.setupObserve(
+inline fun <reified T : Any> LiveData<T>?.setupObserve(
     lifecycleOwner: LifecycleOwner?,
     crossinline block: (T.() -> Unit)
 ) {
     lifecycleOwner?.run {
-        observe(this, Observer {
-            if (it != null)
-                block(it)
-        })
+        this@setupObserve?.apply {
+            removeObservers(this@run)
+            observe(this@run, Observer {
+                if (it != null)
+                    block(it)
+            })
+        }
     }
 }

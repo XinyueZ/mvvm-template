@@ -21,10 +21,10 @@ class MenFragment : ProductsFragment<MenViewModel>()
 class WomenFragment : ProductsFragment<WomenViewModel>()
 class AllGenderFragment : ProductsFragment<AllGendersViewModel>()
 
-abstract class ProductsFragment<VM : ProductsViewModel> : ViewModelFragment<VM>() {
+sealed class ProductsFragment<VM : ProductsViewModel> : ViewModelFragment<VM>() {
     override fun onViewCreated(view: View) = FragmentProductsBinding.bind(view).apply {
         vmItem = BR.vm
-        requestViewModel().get(this@ProductsFragment) {
+        requestViewModel().get(activity) {
             vm = this
             registerLifecycleOwner(this@ProductsFragment)
             onError.setupErrorSnackbar(view, activity)

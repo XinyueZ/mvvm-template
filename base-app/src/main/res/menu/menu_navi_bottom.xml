@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_all_genders"
         android:title="@string/action_all_genders"/>
 
+    <item
+        android:id="@id/action_categories_products"
+        android:icon="@drawable/ic_category_list"
+        android:title="@string/action_categories_products"/>
+
 </menu>

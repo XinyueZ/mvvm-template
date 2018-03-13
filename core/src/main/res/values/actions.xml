@@ -8,4 +8,5 @@
     <item name="action_app_bar_indicator" type="id"/>
     <item name="action_internet" type="id"/>
     <item name="action_software_licenses" type="id"/>
+    <item name="action_categories_products" type="id"/>
 </resources>

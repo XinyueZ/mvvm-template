@@ -48,6 +48,7 @@ class TestHomeViewModel {
             pendingForCommand(openItem2, R.id.action_men)
             pendingForCommand(openItem3, R.id.action_women)
             pendingForCommand(openItem4, R.id.action_all_genders)
+            pendingForCommand(openItem5, R.id.action_categories_products)
         }
     }
 

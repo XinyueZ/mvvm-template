@@ -13,7 +13,7 @@ import com.template.mvvm.core.models.registerLifecycleOwner
 class SoftwareLicensesFragment : ViewModelFragment<SoftwareLicensesViewModel>() {
     override fun onViewCreated(view: View) = FragmentSoftwareLicensesBinding.bind(view).apply {
         vmItem = BR.vm
-        requestViewModel().get(this@SoftwareLicensesFragment) {
+        requestViewModel().get(activity) {
             vm = this
             registerLifecycleOwner(activity)
             onError.setupErrorSnackbar(view, activity)

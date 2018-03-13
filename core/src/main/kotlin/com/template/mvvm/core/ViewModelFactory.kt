@@ -16,6 +16,7 @@ import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
 import com.template.mvvm.core.models.product.ProductItemViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
+import com.template.mvvm.core.models.product.category.CategoriesProductsViewModel
 import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
 import com.template.mvvm.core.models.splash.SplashViewModel
 import com.template.mvvm.repository.RepositoryInjection
@@ -53,6 +54,7 @@ class ViewModelFactory private constructor(
                     application,
                     RepositoryInjection.getInstance().provideRepository(application)
                 )
+                isAssignableFrom(CategoriesProductsViewModel::class.java) -> CategoriesProductsViewModel()
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
