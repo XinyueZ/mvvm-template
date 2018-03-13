@@ -1,3 +1,5 @@
+apply from: 'ci.gradle'
+
 ext {
     // Sdk and tools
     minSdkVersion = 16
