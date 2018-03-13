@@ -58,13 +58,12 @@ fun TextView.bindingBoundLong(
 }
 
 @BindingAdapter(
-    value = ["itemList", "itemLayout", "vmItemLayout", "layout", "onListItemBound", "add"],
+    value = ["itemList", "itemLayout", "layout", "onListItemBound", "add"],
     requireAll = false
 )
 fun RecyclerView.bindingList(
     itemList: LiveData<List<ViewModel>>,
     @LayoutRes itemLayout: Int,
-    vmItemLayout: Int,
     layout: String,
     onListItemBound: OnListItemBoundListener?,
     add: Boolean
@@ -76,7 +75,7 @@ fun RecyclerView.bindingList(
             val sp = (layout.split("-"))[1].toInt()
             GridLayoutManager(context, sp)
         }
-        adapter = MvvmListAdapter(itemLayout, vmItemLayout, onListItemBound).apply {
+        adapter = MvvmListAdapter(itemLayout, onListItemBound).apply {
             (context as FragmentActivity).run {
                 itemList.setupObserve(this, {
                     if (add) add(this)

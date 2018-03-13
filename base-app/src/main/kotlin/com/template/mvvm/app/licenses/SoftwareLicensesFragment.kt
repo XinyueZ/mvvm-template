@@ -1,7 +1,6 @@
 package com.template.mvvm.app.licenses
 
 import android.view.View
-import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentSoftwareLicensesBinding
 import com.template.mvvm.base.ui.ViewModelFragment
@@ -12,7 +11,6 @@ import com.template.mvvm.core.models.registerLifecycleOwner
 
 class SoftwareLicensesFragment : ViewModelFragment<SoftwareLicensesViewModel>() {
     override fun onViewCreated(view: View) = FragmentSoftwareLicensesBinding.bind(view).apply {
-        vmItem = BR.vm
         requestViewModel().get(activity) {
             vm = this
             registerLifecycleOwner(activity)

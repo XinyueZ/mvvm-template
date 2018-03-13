@@ -9,11 +9,6 @@
 
 
         <variable
-            name="vmItem"
-            type="int"/>
-
-
-        <variable
             name="vm"
             type="com.template.mvvm.core.models.license.SoftwareLicensesViewModel"/>
     </data>
@@ -38,7 +33,6 @@
                 app:itemList="@{vm.controller.libraryItemVmList}"
                 app:layout="@{`linear`}"
                 app:onListItemBound="@{vm::onBound}"
-                app:vmItemLayout="@{vmItem}"
                 />
         </android.support.v4.widget.SwipeRefreshLayout>
 

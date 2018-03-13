@@ -1,7 +1,6 @@
 package com.template.mvvm.app.product
 
 import android.view.View
-import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductsBinding
 import com.template.mvvm.app.product.detail.ProductDetailActivity
@@ -23,7 +22,6 @@ class AllGenderFragment : ProductsFragment<AllGendersViewModel>()
 
 sealed class ProductsFragment<VM : ProductsViewModel> : ViewModelFragment<VM>() {
     override fun onViewCreated(view: View) = FragmentProductsBinding.bind(view).apply {
-        vmItem = BR.vm
         requestViewModel().get(activity) {
             vm = this
             registerLifecycleOwner(this@ProductsFragment)

@@ -7,9 +7,6 @@
 
         <import type="com.template.mvvm.app.R"/>
 
-        <variable
-            name="vmItem"
-            type="int"/>
 
         <variable
             name="vm"
@@ -35,13 +32,12 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:itemList="@{vm.controller.productCategoryItemVmList}"
+                    app:add="@{true}"
+                    app:delete="@{vm.state.deleteList}"
                     app:itemLayout="@{R.layout.item_product_category}"
-                    app:vmItemLayout="@{vmItem}"
+                    app:itemList="@{vm.controller.productCategoryItemVmList}"
                     app:layout="@{`linear`}"
                     app:onListItemBound="@{vm::onBound}"
-                    app:add="@{true}"
-                    app:delete = "@{vm.state.deleteList}"
                     />
 
                 <ProgressBar

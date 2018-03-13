@@ -1,7 +1,6 @@
 package com.template.mvvm.app.product.category
 
 import android.view.View
-import com.template.mvvm.app.BR
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentCategoriesProductsBinding
 import com.template.mvvm.base.ui.ViewModelFragment
@@ -14,7 +13,6 @@ class CategoriesProductsFragment : AbstractCategoriesProductsFragment<Categories
 
 sealed class AbstractCategoriesProductsFragment<VM : CategoriesProductsViewModel> : ViewModelFragment<VM>() {
     override fun onViewCreated(view: View) = FragmentCategoriesProductsBinding.bind(view).apply {
-        vmItem = BR.vm
         requestViewModel().get(activity) {
             vm = this
             registerLifecycleOwner(this@AbstractCategoriesProductsFragment)
