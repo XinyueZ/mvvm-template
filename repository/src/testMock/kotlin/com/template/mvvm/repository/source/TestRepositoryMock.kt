@@ -2,15 +2,15 @@ package com.template.mvvm.repository.source
 
 import android.text.TextUtils
 import com.google.gson.Gson
+import com.template.mvvm.base.ext.android.content.res.read
 import com.template.mvvm.repository.RepositoryInjection
 import com.template.mvvm.repository.RepositoryModule
 import com.template.mvvm.repository.RepositoryTestRule
 import com.template.mvvm.repository.context
 import com.template.mvvm.repository.domain.licenses.Library
 import com.template.mvvm.repository.domain.products.Product
-import com.template.mvvm.repository.feeds.products.ProductsData
 import com.template.mvvm.repository.setNetworkErrorPercent
-import com.template.mvvm.base.ext.android.content.res.read
+import com.template.mvvm.repository.source.remote.feeds.products.ProductsData
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.runBlocking

@@ -1,8 +1,8 @@
 package com.template.mvvm.repository.domain.products
 
 import android.net.Uri
-import com.template.mvvm.repository.feeds.products.ProductData
-import com.template.mvvm.repository.feeds.products.SizeType
+import com.template.mvvm.repository.source.remote.feeds.products.ProductData
+import com.template.mvvm.repository.source.remote.feeds.products.SizeType
 import com.template.mvvm.repository.source.local.entities.products.ImageEntity
 
 data class Image(

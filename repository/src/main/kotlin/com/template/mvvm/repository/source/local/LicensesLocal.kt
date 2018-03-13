@@ -9,7 +9,7 @@ import com.template.mvvm.base.ext.android.content.res.read
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
-import com.template.mvvm.repository.feeds.licenses.LicensesData
+import com.template.mvvm.repository.source.remote.feeds.licenses.LicensesData
 import com.template.mvvm.repository.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.repository.source.local.entities.licenses.LicenseEntity
 import kotlinx.coroutines.experimental.channels.ReceiveChannel

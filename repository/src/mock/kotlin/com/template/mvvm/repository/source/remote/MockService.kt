@@ -2,9 +2,9 @@ package com.template.mvvm.repository.source.remote
 
 import android.content.Context
 import com.google.gson.Gson
-import com.template.mvvm.repository.feeds.licenses.LicensesData
-import com.template.mvvm.repository.feeds.products.ProductsData
 import com.template.mvvm.base.ext.android.content.res.read
+import com.template.mvvm.repository.source.remote.feeds.licenses.LicensesData
+import com.template.mvvm.repository.source.remote.feeds.products.ProductsData
 import retrofit2.Call
 import retrofit2.mock.BehaviorDelegate
 

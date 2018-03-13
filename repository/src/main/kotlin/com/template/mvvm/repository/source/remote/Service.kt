@@ -1,7 +1,7 @@
 package com.template.mvvm.repository.source.remote
 
-import com.template.mvvm.repository.feeds.licenses.LicensesData
-import com.template.mvvm.repository.feeds.products.ProductsData
+import com.template.mvvm.repository.source.remote.feeds.licenses.LicensesData
+import com.template.mvvm.repository.source.remote.feeds.products.ProductsData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
