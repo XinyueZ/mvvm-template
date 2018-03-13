@@ -35,12 +35,10 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
     override fun onLifecycleStart() {
         with(controller) {
             lifecycleOwner.run {
-                lifecycle.addObserver(this@ProductsViewModel)
                 collectionSource = collectionSource ?: ProductList().apply {
                     setUpTransform(this@run) {
                         it?.let {
                             collectionItemVmList.value = it
-
                             showSystemUi.value = true
                             with(state) {
                                 dataLoaded.set(true)

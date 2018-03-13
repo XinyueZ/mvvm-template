@@ -36,7 +36,6 @@ class SoftwareLicensesViewModel(
         with(state) {
             with(controller) {
                 lifecycleOwner.run {
-                    lifecycle.addObserver(this@SoftwareLicensesViewModel)
                     libraryListSource = libraryListSource ?: LibraryList().apply {
                         setUpTransform(this@run) {
                             it?.let {
