@@ -112,9 +112,7 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
     ) =
         repository.getAllProducts(coroutineContext, start, true)
 
-    private fun reloadData() {
-        doReloadData()
-    }
+    private fun reloadData() { doReloadData() }
 
     private fun doReloadData() = async(uiContext) {
         delete(bgContext).consumeEach {
