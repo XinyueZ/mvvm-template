@@ -21,29 +21,29 @@ class MvvmListAdapter(
     override fun getItemCount() =
         collection.size + if (isLoading) 1 else 0// The 1 is for the loading progress.
 
-    fun add(collection: Collection<ViewModel>) {
-        val position = this.collection.size
-        if (collection.isEmpty()) {
+    fun add(newCollection: Collection<ViewModel>) {
+        val position = collection.size
+        if (newCollection.isEmpty()) {
             isLoading = true
-            notifyItemInserted(position)
+            if (collection.isNotEmpty()) notifyItemInserted(position)
         } else {
             isLoading = false
             notifyItemRemoved(position) // Remove loading progress.
-            this.collection.addAll(collection)
-            notifyItemRangeInserted(position, collection.size)
+            collection.addAll(newCollection)
+            notifyItemRangeInserted(position, newCollection.size)
         }
     }
 
-    fun update(collection: Collection<ViewModel>) {
-        val position = this.collection.size
-        if (collection.isEmpty()) {
+    fun update(newCollection: Collection<ViewModel>) {
+        val position = collection.size
+        if (newCollection.isEmpty()) {
             isLoading = true
             notifyItemInserted(position)
         } else {
             isLoading = false
             notifyItemRemoved(position)  // Remove loading progress.
-            this.collection.clear()
-            this.collection.addAll(collection)
+            collection.clear()
+            collection.addAll(newCollection)
             notifyDataSetChanged()
         }
     }
@@ -71,7 +71,7 @@ class MvvmListAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int = when (position) {
+    override fun getItemViewType(position: Int) = when (position) {
         itemCount - 1 -> VIEW_TYPE_LOAD
         else -> VIEW_TYPE_ITEM
     }
