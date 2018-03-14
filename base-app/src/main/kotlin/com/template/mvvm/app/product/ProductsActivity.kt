@@ -17,7 +17,7 @@ class ProductsActivity : LiveActivity<ActivityProductsBinding>() {
     @LayoutRes
     override fun getLayout() = R.layout.activity_products
 
-    override fun createLiveFragment() = ProductsFragment::class.newInstance(application)
+    override fun createLiveFragment() = AllGenderFragment::class.newInstance(application)
     override fun onCreate(binding: ActivityProductsBinding) {
         setUpActionBar(binding.toolbar)
         AllGendersViewModel::class.get(this) {
