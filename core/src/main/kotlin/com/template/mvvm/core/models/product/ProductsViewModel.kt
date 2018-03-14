@@ -42,7 +42,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
                             showSystemUi.value = true
                             with(state) {
                                 dataLoaded.set(true)
-                                moreLoaded.set(true)
                                 dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                                 dataHaveNotReloaded.set(true)
                             }
@@ -76,10 +75,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
         controller.collectionSource?.let { source ->
             if (position + 1 >= offset) {
-                if (offset > 0) {
-                    // For progress-loading for more items
-                    state.moreLoaded.set(false)
-                }
                 query(bgContext, offset).consumeEach { ds ->
                     ds?.takeIf { it.isNotEmpty() }?.let { list ->
                         offset += list.size
@@ -140,7 +135,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
                 showSystemUi.value = true
                 dataLoaded.set(true)
                 dataHaveNotReloaded.set(true)
-                moreLoaded.set(true)
 
                 onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
                     loadData()

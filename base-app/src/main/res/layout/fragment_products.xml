@@ -24,30 +24,16 @@
             app:reload="@{vm::onReload}"
             app:stopLoading="@{vm.state.dataHaveNotReloaded}">
 
-
-            <FrameLayout
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:add="@{true}"
-                    app:delete="@{vm.state.deleteList}"
-                    app:itemLayout="@{R.layout.item_product}"
-                    app:itemList="@{vm.controller.collectionItemVmList}"
-                    app:layout="@{`linear`}"
-                    app:onListItemBound="@{vm::onBound}"
-                    />
-
-                <ProgressBar
-                    android:id="@+id/load_more_pb"
-                    style="@style/CircleProgressBar"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:background="@android:color/transparent"
-                    app:dataLoaded="@{vm.state.moreLoaded}"
-                    />
-            </FrameLayout>
+                android:layout_height="match_parent"
+                app:add="@{true}"
+                app:delete="@{vm.state.deleteList}"
+                app:itemLayout="@{R.layout.item_product}"
+                app:itemList="@{vm.controller.collectionItemVmList}"
+                app:layout="@{`linear`}"
+                app:onListItemBound="@{vm::onBound}"
+                />
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <include

@@ -80,10 +80,6 @@ class CategoriesProductsViewModel : AbstractViewModel() {
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
         controller.productCategoryListSource?.let { source ->
             if (position + 1 >= offset) {
-                if (offset > 0) {
-                    // For progress-loading for more items
-                    state.moreLoaded.set(false)
-                }
                 query(bgContext, offset).consumeEach {
                     onQueried(source, it)
                 }

@@ -10,5 +10,4 @@ class CategoriesProductsViewModelState : BaseObservable() {
     val goBack = ObservableBoolean(false)
     //Delete list on UI
     val deleteList = ObservableBoolean(false)
-    val moreLoaded = ObservableBoolean(true)
 }
