@@ -7,56 +7,79 @@ import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.template.mvvm.base.utils.LL
+import com.template.mvvm.core.R
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.isAccessible
 
 class MvvmListAdapter(
     @LayoutRes private val itemLayout: Int,
     private val onListItemBound: OnListItemBoundListener?
-) : RecyclerView.Adapter<MvvmItemViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var isLoading = false
+    private val collection = arrayListOf<ViewModel>()
 
-    private val list = arrayListOf<ViewModel>()
+    override fun getItemCount() =
+        collection.size + if (isLoading) 1 else 0// The 1 is for the loading progress.
 
-    override fun getItemCount() = list.size
-
-    fun add(list: List<ViewModel>) {
-        val position = this.list.size
-        if (list.isEmpty()) {
-            onListItemBound?.onBound(position)
-            LL.d("MvvmListAdapter.add, force on-bound.")
+    fun add(collection: Collection<ViewModel>) {
+        val position = this.collection.size
+        if (collection.isEmpty()) {
+            isLoading = true
+            notifyItemInserted(position)
         } else {
-            this.list.addAll(list)
-            notifyItemRangeInserted(position, list.size)
-
+            isLoading = false
+            notifyItemRemoved(position) // Remove loading progress.
+            this.collection.addAll(collection)
+            notifyItemRangeInserted(position, collection.size)
         }
     }
 
-    fun update(list: List<ViewModel>) {
-        if (list.isEmpty()) {
-            onListItemBound?.onBound(0)
-            LL.d("MvvmListAdapter.update, force on-bound.")
+    fun update(collection: Collection<ViewModel>) {
+        val position = this.collection.size
+        if (collection.isEmpty()) {
+            isLoading = true
+            notifyItemInserted(position)
         } else {
-            this.list.clear()
-            this.list.addAll(list)
+            isLoading = false
+            notifyItemRemoved(position)  // Remove loading progress.
+            this.collection.clear()
+            this.collection.addAll(collection)
             notifyDataSetChanged()
         }
     }
 
     fun delete() {
-        this.list.clear()
+        isLoading = false
+        this.collection.clear()
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: MvvmItemViewHolder, position: Int) {
-        holder.bindViewModel(list[position])
-        onListItemBound?.onBound(position)
-        LL.d("MvvmListAdapter.onBindViewHolder: $position")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
+        VIEW_TYPE_LOAD -> ProgressViewHolder(parent)
+        else -> MvvmItemViewHolder(parent, itemLayout)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        MvvmItemViewHolder(parent, itemLayout)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            VIEW_TYPE_LOAD -> {
+                onListItemBound?.onBound(position)
+            }
+            else -> {
+                (holder as MvvmItemViewHolder).bindViewModel(collection[position])
+                if (position == itemCount - 1) onListItemBound?.onBound(position)
+            }
+        }
+    }
 
+    override fun getItemViewType(position: Int): Int = when (position) {
+        itemCount - 1 -> VIEW_TYPE_LOAD
+        else -> VIEW_TYPE_ITEM
+    }
+
+    companion object {
+        private const val VIEW_TYPE_LOAD = 0x9
+        private const val VIEW_TYPE_ITEM = 0x10
+    }
 }
 
 interface OnListItemBoundListener {
@@ -95,3 +118,12 @@ private fun ViewDataBinding?.setViewModel(vm: ViewModel?): ViewDataBinding? {
     }
 }
 
+class ProgressViewHolder(
+    parent: ViewGroup
+) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context).inflate(
+        R.layout.item_loading_progress,
+        parent,
+        false
+    )
+)
