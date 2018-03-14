@@ -93,6 +93,7 @@ class SoftwareLicensesViewModel(
     fun onBound(@IntRange(from = 0L) position: Int) {
         when (controller.libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
             true -> loadData()
+            else -> controller.libraryListSource?.value = emptyList()
         }
     }
 
