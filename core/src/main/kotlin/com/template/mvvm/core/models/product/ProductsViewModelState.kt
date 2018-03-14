@@ -7,7 +7,6 @@ import com.template.mvvm.core.R
 
 class ProductsViewModelState : BaseObservable() {
     val title = ObservableInt(R.string.product_list_title)
-    val dataLoaded = ObservableBoolean(false)
     val dataHaveNotReloaded = ObservableBoolean(true)
     //Return this view to home
     val goBack = ObservableBoolean(false)

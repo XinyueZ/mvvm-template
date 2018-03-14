@@ -35,8 +35,6 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
                                 it?.let {
                                     productCategoryItemVmList.value = it
                                     with(state) {
-                                        dataLoaded.set(true)
-                                        dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                                         dataHaveNotReloaded.set(true)
                                     }
                                 }
@@ -113,7 +111,6 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
     override fun onUiJobError(it: Throwable) {
         with(state) {
             with(controller) {
-                dataLoaded.set(true)
                 dataHaveNotReloaded.set(true)
                 onError.value = Error(
                     it,
@@ -121,11 +118,6 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
                     R.string.error_retry
                 ) {
                     reloadData()
-
-                    //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
-                    productCategoryListSource?.value?.let {
-                        dataLoaded.set(it.isNotEmpty())
-                    } ?: dataLoaded.set(false)
                 }
             }
         }
@@ -154,7 +146,7 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
 class ProductCategoryItemViewModel : AbstractViewModel() {
     lateinit var productCategory: ProductCategory
     val name: ObservableField<String> = ObservableField()
-    val clickHandler = arrayListOf<((ProductCategory) -> Unit)>()
+    private val clickHandler = arrayListOf<((ProductCategory) -> Unit)>()
 
     companion object {
         fun from(productCategory: ProductCategory): ProductCategoryItemViewModel {

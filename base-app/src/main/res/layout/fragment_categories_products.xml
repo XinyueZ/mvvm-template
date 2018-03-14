@@ -37,13 +37,6 @@
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <include
-            layout="@layout/layout_collection_progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:dataLoaded="@{vm.state.dataLoaded}"/>
-
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

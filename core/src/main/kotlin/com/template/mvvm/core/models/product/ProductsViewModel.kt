@@ -41,8 +41,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
                             collectionItemVmList.value = it
                             showSystemUi.value = true
                             with(state) {
-                                dataLoaded.set(true)
-                                dataLoaded.notifyChange() // Force for multi UI that will handle this "loaded"
                                 dataHaveNotReloaded.set(true)
                             }
                             bindTapHandlers(it)
@@ -133,17 +131,11 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
         with(controller) {
             with(state) {
                 showSystemUi.value = true
-                dataLoaded.set(true)
                 dataHaveNotReloaded.set(true)
 
                 onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
                     loadData()
                     showSystemUi.value = false
-
-                    //Now reload and should show progress-indicator if there's an empty list or doesn't show when there's a list.
-                    collectionSource?.value?.let {
-                        dataLoaded.set(it.isNotEmpty())
-                    } ?: dataLoaded.set(false)
                 }
             }
         }

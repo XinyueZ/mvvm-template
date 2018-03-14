@@ -7,6 +7,9 @@ import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.view.get
+import androidx.view.updateLayoutParams
 import com.template.mvvm.core.R
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.isAccessible
@@ -28,7 +31,7 @@ class MvvmListAdapter(
             /**
              * There's valid [newCollection] coming, the loading progress must be removed,
              * append [newCollection] to [collection], notify [MvvmListAdapter] to load next.
-             * The +1 at [notifyItemRangeInserted] is for next loading progress.
+             * The important +1 at [notifyItemRangeInserted] is for next loading progress.
              */
             notifyItemRemoved(position)
             isLoading = false
@@ -86,7 +89,10 @@ class MvvmListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            VIEW_TYPE_LOAD -> onListItemBound?.onBound(position) // Should load on the bound.
+            VIEW_TYPE_LOAD -> {
+                (holder as ProgressViewHolder).adjustProgressType(collection.isEmpty())
+                onListItemBound?.onBound(position)
+            } // Should load on the bound.
             else -> (holder as MvvmItemViewHolder).bindViewModel(collection[position])
         }
     }
@@ -146,8 +152,17 @@ class ProgressViewHolder(
     parent: ViewGroup
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent.context).inflate(
-        R.layout.item_loading_progress,
+        R.layout.item_load,
         parent,
         false
     )
-)
+) {
+    fun adjustProgressType(init: Boolean) {
+        val pb: ProgressBar = (itemView as ViewGroup)[0] as ProgressBar
+        if(init) {
+            itemView.updateLayoutParams {  height = ViewGroup.LayoutParams.MATCH_PARENT }
+        }  else {
+            itemView.updateLayoutParams {  height = ViewGroup.LayoutParams.WRAP_CONTENT }
+        }
+    }
+}

@@ -4,7 +4,6 @@ import android.databinding.BaseObservable
 import android.databinding.ObservableBoolean
 
 class CategoriesProductsViewModelState : BaseObservable() {
-    val dataLoaded = ObservableBoolean(false)
     val dataHaveNotReloaded = ObservableBoolean(true)
     //Return this view to home
     val goBack = ObservableBoolean(false)
