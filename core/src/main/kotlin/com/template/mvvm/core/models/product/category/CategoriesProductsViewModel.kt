@@ -19,14 +19,14 @@ import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.channels.produce
 import kotlin.coroutines.experimental.CoroutineContext
 
-class CategoriesProductsViewModel : AbstractViewModel() {
+open class CategoriesProductsViewModel : AbstractViewModel() {
     val controller = CategoriesProductsViewModelController()
     val state = CategoriesProductsViewModelState()
     // Error
     var onError = ErrorViewModel()
     private var offset: Int = 0
 
-    override fun onLifecycleCreate() {
+    override fun onLifecycleStart() {
         with(controller) {
             lifecycleOwner.run {
                 productCategoryListSource = productCategoryListSource ?:
@@ -74,6 +74,7 @@ class CategoriesProductsViewModel : AbstractViewModel() {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         when (controller.productCategoryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
             true -> doOnBound(position)
+            else -> controller.productCategoryListSource?.value = emptyList()
         }
     }
 
