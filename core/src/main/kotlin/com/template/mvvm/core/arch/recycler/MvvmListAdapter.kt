@@ -19,32 +19,57 @@ class MvvmListAdapter(
     private val collection = arrayListOf<ViewModel>()
 
     override fun getItemCount() =
-        collection.size + if (isLoading) 1 else 0// The 1 is for the loading progress.
+            /**When [isLoading] true the loading progress as item should be extra added.*/
+        collection.size + if (isLoading) 1 else 0
 
     fun add(newCollection: Collection<ViewModel>) {
         val position = collection.size
-        if (newCollection.isEmpty()) {
-            isLoading = true
-            if (collection.isNotEmpty()) notifyItemInserted(position)
-        } else {
+        if (newCollection.isNotEmpty()) {
+            /**
+             * There's valid [newCollection] coming, the loading progress must be removed,
+             * append [newCollection] to [collection], notify [MvvmListAdapter] to load next.
+             * The +1 at [notifyItemRangeInserted] is for next loading progress.
+             */
+            notifyItemRemoved(position)
             isLoading = false
-            notifyItemRemoved(position) // Remove loading progress.
             collection.addAll(newCollection)
-            notifyItemRangeInserted(position, newCollection.size)
+            isLoading = true
+            notifyItemRangeInserted(
+                position,
+                newCollection.size + 1
+            )
+        } else {
+            /**
+             * When [newCollection] is empty, that means the init-loading
+             * or end-loading if current [collection] is not empty.
+             */
+            if (collection.isEmpty()) {
+                isLoading = true
+                notifyItemInserted(0)
+            } else {
+                isLoading = false
+            }
         }
     }
 
     fun update(newCollection: Collection<ViewModel>) {
-        val position = collection.size
-        if (newCollection.isEmpty()) {
-            isLoading = true
-            notifyItemInserted(position)
-        } else {
+        if (newCollection.isNotEmpty()) {
+            notifyItemRemoved(0)
             isLoading = false
-            notifyItemRemoved(position)  // Remove loading progress.
             collection.clear()
             collection.addAll(newCollection)
             notifyDataSetChanged()
+        } else {
+            /**
+             * When [newCollection] is empty, that means the init-loading
+             * or end-loading if current [collection] is not empty.
+             */
+            if (collection.isEmpty()) {
+                isLoading = true
+                notifyItemInserted(0)
+            } else {
+                isLoading = false
+            }
         }
     }
 
@@ -61,18 +86,17 @@ class MvvmListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            VIEW_TYPE_LOAD -> {
-                onListItemBound?.onBound(position)
-            }
-            else -> {
-                (holder as MvvmItemViewHolder).bindViewModel(collection[position])
-                if (position == itemCount - 1) onListItemBound?.onBound(position)
-            }
+            VIEW_TYPE_LOAD -> onListItemBound?.onBound(position) // Should load on the bound.
+            else -> (holder as MvvmItemViewHolder).bindViewModel(collection[position])
         }
     }
 
     override fun getItemViewType(position: Int) = when (position) {
-        itemCount - 1 -> VIEW_TYPE_LOAD
+    /**
+     * When the [position] equals to size of [collection],
+     * means showing loading progress.
+     */
+        collection.size -> VIEW_TYPE_LOAD
         else -> VIEW_TYPE_ITEM
     }
 
