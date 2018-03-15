@@ -17,6 +17,7 @@ import com.template.mvvm.repository.domain.products.ProductCategoryList
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.channels.produce
+import kotlinx.coroutines.experimental.delay
 import kotlin.coroutines.experimental.CoroutineContext
 
 open class CategoriesProductsViewModel : AbstractViewModel() {
@@ -24,6 +25,9 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
     val state = CategoriesProductsViewModelState()
     // Error
     var onError = ErrorViewModel()
+    //User might delete data with pull2refresh and then the UI should also do it after new data being loaded,
+    //ie. clean recyclerview and it's adapter.
+    private var shouldDeleteList = false
     private var offset: Int = 0
 
     override fun onLifecycleStart() {
@@ -61,11 +65,19 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
     private fun reloadData() = doReloadData()
 
     private fun doReloadData() = async(uiContext) {
-        //        delete(bgContext).consumeEach {
-        offset = 0
-        loadData()
-//            shouldDeleteList = true
-//        }
+        produce<Unit>(bgContext) {
+            /**
+             * Simulate delete operation
+             */
+            delay(1500)
+            send(Unit)
+        }.consumeEach {
+            state.deleteList.set(true)
+
+            offset = 0
+            loadData()
+            shouldDeleteList = true
+        }
     }
 
     fun onBound(@IntRange(from = 0L) position: Int) {
@@ -90,6 +102,13 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
         source: ProductCategoryList,
         it: List<ProductCategory>?
     ) {
+        with(state) {
+            if (shouldDeleteList) {
+                deleteList.set(true)
+                shouldDeleteList = false
+                deleteList.set(false)
+            }
+        }
         source.value = it
     }
 
@@ -139,6 +158,7 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
 
     fun onReload() {
         reloadData()
+        state.dataHaveNotReloaded.set(false)
     }
     //-----------------------------------
 }
