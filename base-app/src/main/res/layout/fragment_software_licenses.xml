@@ -31,7 +31,7 @@
                 app:add="@{false}"
                 app:itemLayout="@{R.layout.item_software_license}"
                 app:itemList="@{vm.controller.libraryItemVmList}"
-                app:layout="@{`linear`}"
+                app:layout="@{`linear-v`}"
                 app:onListItemBound="@{vm::onBound}"
                 />
         </android.support.v4.widget.SwipeRefreshLayout>

@@ -31,7 +31,7 @@
                 app:delete="@{vm.state.deleteList}"
                 app:itemLayout="@{R.layout.item_product_category}"
                 app:itemList="@{vm.controller.productCategoryItemVmList}"
-                app:layout="@{`linear`}"
+                app:layout="@{`linear-v`}"
                 app:onListItemBound="@{vm::onBound}"
                 />
 

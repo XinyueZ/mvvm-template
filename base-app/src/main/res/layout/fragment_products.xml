@@ -31,7 +31,7 @@
                 app:delete="@{vm.state.deleteList}"
                 app:itemLayout="@{R.layout.item_product}"
                 app:itemList="@{vm.controller.collectionItemVmList}"
-                app:layout="@{`linear`}"
+                app:layout="@{`linear-v`}"
                 app:onListItemBound="@{vm::onBound}"
                 />
         </android.support.v4.widget.SwipeRefreshLayout>

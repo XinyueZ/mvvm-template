@@ -25,7 +25,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -69,11 +68,13 @@ fun RecyclerView.bindingList(
     add: Boolean
 ) {
     if (adapter == null) {
-        this.layoutManager = if (TextUtils.equals(layout, "linear"))
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        else {
-            val sp = (layout.split("-"))[1].toInt()
-            GridLayoutManager(context, sp)
+        this.layoutManager = when (layout) {
+            "linear-v" -> LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            "linear-h" -> LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            else -> {
+                val sp = (layout.split("-"))[1].toInt()
+                GridLayoutManager(context, sp)
+            }
         }
         adapter = MvvmListAdapter(itemLayout, onListItemBound).apply {
             (context as FragmentActivity).run {
