@@ -1,16 +1,19 @@
 package com.template.mvvm.core.arch.recycler
 
 import android.arch.lifecycle.ViewModel
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.annotation.LayoutRes
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
+import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ProgressBar
-import androidx.view.get
 import androidx.view.updateLayoutParams
-import com.template.mvvm.core.R
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.isAccessible
 
@@ -151,18 +154,65 @@ private fun ViewDataBinding?.setViewModel(vm: ViewModel?): ViewDataBinding? {
 class ProgressViewHolder(
     parent: ViewGroup
 ) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(
-        R.layout.item_load,
-        parent,
-        false
-    )
+    ProgressViewContainer(parent.context)
 ) {
+
     fun adjustProgressType(init: Boolean) {
-        val pb: ProgressBar = (itemView as ViewGroup)[0] as ProgressBar
-        if(init) {
-            itemView.updateLayoutParams {  height = ViewGroup.LayoutParams.MATCH_PARENT }
-        }  else {
-            itemView.updateLayoutParams {  height = ViewGroup.LayoutParams.WRAP_CONTENT }
+        with(itemView as ViewGroup) {
+            if (init) {
+                itemView.updateLayoutParams { height = ViewGroup.LayoutParams.MATCH_PARENT }
+            } else {
+                itemView.updateLayoutParams { height = ViewGroup.LayoutParams.WRAP_CONTENT }
+            }
+        }
+    }
+}
+
+private class ProgressViewContainer : FrameLayout {
+    constructor(context: Context) : super(context) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        init()
+    }
+
+    private fun init() {
+        /**
+         * Layout for container.
+         */
+        layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        /**
+         * Added a progress UI, default is [FrameLayout.LayoutParams.WRAP_CONTENT].
+         */
+        ProgressBar(context).apply {
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            ).also { it.gravity = Gravity.CENTER }
+
+
+            setBackgroundColor(
+                ResourcesCompat.getColor(
+                    resources,
+                    android.R.color.transparent,
+                    null
+                )
+            )
+
+            addView(this)
         }
     }
 }
