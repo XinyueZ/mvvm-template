@@ -14,6 +14,11 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.view.updateLayoutParams
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.withContext
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.isAccessible
 
@@ -28,32 +33,38 @@ class MvvmListAdapter(
             /**When [isLoading] true the loading progress as item should be extra added.*/
         collection.size + if (isLoading) 1 else 0
 
-    fun add(newCollection: Collection<ViewModel>) {
-        val position = collection.size
-        if (newCollection.isNotEmpty()) {
-            /**
-             * There's valid [newCollection] coming, the loading progress must be removed,
-             * append [newCollection] to [collection], notify [MvvmListAdapter] to load next.
-             * The important +1 at [notifyItemRangeInserted] is for next loading progress.
-             */
-            notifyItemRemoved(position)
-            isLoading = false
-            collection.addAll(newCollection)
-            isLoading = true
-            notifyItemRangeInserted(
-                position,
-                newCollection.size + 1
-            )
-        } else {
-            /**
-             * When [newCollection] is empty, that means the init-loading
-             * or end-loading if current [collection] is not empty.
-             */
-            if (collection.isEmpty()) {
-                isLoading = true
-                notifyItemInserted(0)
-            } else {
+    fun add(newCollection: Collection<ViewModel>) = runBlocking {
+        {
+            val position = collection.size
+            if (newCollection.isNotEmpty()) {
+                /**
+                 * There's valid [newCollection] coming, the loading progress must be removed,
+                 * append [newCollection] to [collection], notify [MvvmListAdapter] to load next.
+                 * The important +1 at [notifyItemRangeInserted] is for next loading progress.
+                 */
+                notifyItemRemoved(position)
                 isLoading = false
+                collection.addAll(newCollection)
+                isLoading = true
+                notifyItemRangeInserted(
+                    position,
+                    newCollection.size + 1
+                )
+            } else {
+                /**
+                 * When [newCollection] is empty, that means the init-loading
+                 * or end-loading if current [collection] is not empty.
+                 */
+                if (collection.isEmpty()) {
+                    isLoading = true
+                    notifyItemInserted(0)
+                } else {
+                    isLoading = false
+                    launch {
+                        delay(500)
+                        withContext(UI) { notifyItemRemoved(position) }
+                    }
+                }
             }
         }
     }
