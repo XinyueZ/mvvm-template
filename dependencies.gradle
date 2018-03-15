@@ -36,7 +36,7 @@ ext {
 
     //Kotlin
     def kotlin = ext.kotlin_version
-    def kotlinCoroutines = "0.22.3"
+    def kotlinCoroutines = "0.22.5"
 
     //Gradle
     def gradle = ext.gradle_version
