@@ -4,7 +4,6 @@ import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
-import android.arch.lifecycle.Observer
 import com.template.mvvm.core.generateLicenseList
 import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile
@@ -45,6 +44,11 @@ class TestLicensesViewModel {
         vm = SoftwareLicensesViewModel(application, dataSource)
     }
 
+    @Test(expected = IndexOutOfBoundsException::class)
+    fun testOnBoundIndexOutOfBoundsException() {
+        vm.onBound(Gen.negativeIntegers().generate())
+    }
+
     @Test
     fun testOnBound() = runBlocking {
         val size = Gen.choose(0, 200).generate()
@@ -55,17 +59,17 @@ class TestLicensesViewModel {
         ).thenReturn(produce(CommonPool) { send(generateLicenseList(size).generate()) })
 
         vm.registerLifecycleOwner(lifeOwner)
-        vm.controller.libraryItemVmList.observe(lifeOwner, Observer {
+        vm.controller.libraryItemVmList.observeForever {
             vm.onBound(0)
-        })
-        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        }
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
         sleepWhile {
-            vm.controller.libraryItemVmList.value?.size != size
+            vm.controller.libraryListSource?.value?.size != size
         }
 
         MatcherAssert.assertThat(
-            vm.controller.libraryItemVmList.value?.size,
+            vm.controller.libraryListSource?.value?.size,
             CoreMatchers.equalTo(size)
         )
     }

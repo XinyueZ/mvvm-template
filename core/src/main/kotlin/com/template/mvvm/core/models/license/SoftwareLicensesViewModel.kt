@@ -89,6 +89,7 @@ class SoftwareLicensesViewModel(
     private fun reloadData() = doOnBound(false)
 
     fun onBound(@IntRange(from = 0L) position: Int) {
+        if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         when (controller.libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
             true -> loadData()
             else -> controller.libraryListSource?.value = emptyList()
