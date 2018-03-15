@@ -3,7 +3,7 @@ package com.template.mvvm.core.models.product
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
-import android.arch.lifecycle.Observer
+import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.core.generateProductList
 import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile
@@ -67,9 +67,9 @@ class TestProductsViewModel {
             }
 
         vm.registerLifecycleOwner(lifeOwner)
-        vm.controller.collectionItemVmList.observe(lifeOwner, Observer {
+        vm.controller.collectionItemVmList.setupObserve(lifeOwner) {
             vm.onBound(if (vm.getCurrentOffset() == 0) 0 else vm.getCurrentOffset() - 1)
-        })
+        }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
         val predication = size * pages
         sleepWhile {
