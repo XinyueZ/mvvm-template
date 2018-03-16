@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{vm.name}"
+            android:layout_marginBottom="@dimen/default_padding_margin"
             android:textAppearance="@style/MaterialTextView.LightTheme.Title"
             android:textColor="@color/material_black"
             />
