@@ -1,19 +1,18 @@
 package com.template.mvvm.core.models.product
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.IntRange
-import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
-import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
+import com.template.mvvm.core.arch.toViewModelList
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
+import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
 import com.template.mvvm.repository.domain.products.ProductList
@@ -36,18 +35,19 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
     override fun onLifecycleStart() {
         with(controller) {
             lifecycleOwner.run {
-                collectionSource = collectionSource ?: ProductList().apply {
-                    setUpTransform(this@run) {
-                        it?.let {
-                            collectionItemVmList.value = it
-                            showSystemUi.value = true
-                            with(state) {
-                                dataHaveNotReloaded.set(true)
-                            }
-                            bindTapHandlers(it)
+                collectionSource = collectionSource ?: ProductList().toViewModelList(
+                    this@run,
+                    { ProductItemViewModel.from(this, it) }) {
+                    it?.let {
+                        collectionItemVmList.value = it
+                        showSystemUi.value = true
+                        with(state) {
+                            dataHaveNotReloaded.set(true)
                         }
+                        bindTapHandlers(it)
                     }
                 }
+
                 collectionItemVmList.apply {
                     value = emptyList()
                 }
@@ -170,11 +170,15 @@ class ProductItemViewModel : AbstractViewModel() {
     val clickHandler = arrayListOf<((Product, Any?) -> Unit)>()
 
     companion object {
-        fun from(product: Product): ProductItemViewModel {
+        fun from(
+            lifecycleOwner: LifecycleOwner,
+            product: Product
+        ): ProductItemViewModel {
             return ProductItemViewModel().apply {
                 this.product = product
                 title.set(product.title)
                 thumbnail.set(product.pictures["Original"]?.uri)
+                registerLifecycleOwner(lifecycleOwner)
             }
         }
     }
@@ -187,19 +191,4 @@ class ProductItemViewModel : AbstractViewModel() {
         super.onCleared()
         clickHandler.clear()
     }
-}
-
-fun ProductList.setUpTransform(
-    lifecycleOwner: LifecycleOwner,
-    body: (itemVmList: List<ProductItemViewModel>?) -> Unit
-) {
-    Transformations.switchMap(this) {
-        SingleLiveData<List<ProductItemViewModel>>().apply {
-            value = arrayListOf<ProductItemViewModel>().apply {
-                it.mapTo(this) {
-                    ProductItemViewModel.from(it)
-                }
-            }
-        }
-    }.setupObserve(lifecycleOwner) { body(this) }
 }

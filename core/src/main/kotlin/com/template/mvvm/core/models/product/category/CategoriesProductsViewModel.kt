@@ -1,14 +1,12 @@
 package com.template.mvvm.core.models.product.category
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.support.annotation.IntRange
-import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
-import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
+import com.template.mvvm.core.arch.toViewModelList
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
@@ -38,19 +36,24 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
         with(controller) {
             lifecycleOwner.run {
                 productCategoryListSource = productCategoryListSource ?:
-                        ProductCategoryList().apply {
-                            setUpTransform(this@run, repository) {
-                                it?.let {
-                                    productCategoryItemVmList.value = it
-                                    with(state) {
-                                        dataHaveNotReloaded.set(true)
-                                    }
+                        ProductCategoryList().toViewModelList(this@run, {
+                            ProductCategoryItemViewModel.from(
+                                this,
+                                repository,
+                                it
+                            )
+                        }) {
+                            it?.let {
+                                productCategoryItemVmList.value = it
+                                with(state) {
+                                    dataHaveNotReloaded.set(true)
                                 }
                             }
                         }
-                productCategoryItemVmList.apply {
-                    value = emptyList()
-                }
+            }
+            productCategoryItemVmList.apply {
+                value = emptyList()
+
             }
         }
     }
@@ -206,20 +209,4 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
         super.onCleared()
         clickHandler.clear()
     }
-}
-
-fun ProductCategoryList.setUpTransform(
-    lifecycleOwner: LifecycleOwner,
-    repository: ProductsDataSource,
-    body: (itemVmList: List<ProductCategoryItemViewModel>?) -> Unit
-) {
-    Transformations.switchMap(this) {
-        SingleLiveData<List<ProductCategoryItemViewModel>>().apply {
-            value = arrayListOf<ProductCategoryItemViewModel>().apply {
-                it.mapTo(this) {
-                    ProductCategoryItemViewModel.from(lifecycleOwner, repository, it)
-                }
-            }
-        }
-    }.setupObserve(lifecycleOwner, { body(this) })
 }

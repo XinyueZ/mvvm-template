@@ -2,17 +2,16 @@ package com.template.mvvm.core.models.license
 
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.support.annotation.IntRange
-import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
-import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
+import com.template.mvvm.core.arch.toViewModelList
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
+import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.core.obtainViewModel
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
@@ -36,14 +35,14 @@ class SoftwareLicensesViewModel(
         with(state) {
             with(controller) {
                 lifecycleOwner.run {
-                    libraryListSource = libraryListSource ?: LibraryList().apply {
-                        setUpTransform(this@run) {
-                            it?.let {
-                                libraryItemVmList.value = it
-                                showSystemUi.value = true
-                                dataHaveNotReloaded.set(true)
-                                bindTapHandlers(it, this@run)
-                            }
+                    libraryListSource = libraryListSource ?: LibraryList().toViewModelList(
+                        this@run,
+                        { SoftwareLicenseItemViewModel.from(this, it) }) {
+                        it?.let {
+                            libraryItemVmList.value = it
+                            showSystemUi.value = true
+                            dataHaveNotReloaded.set(true)
+                            bindTapHandlers(it, this@run)
                         }
                     }
 
@@ -156,11 +155,15 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     internal val clickHandler = arrayListOf<((Library) -> Unit)>()
 
     companion object {
-        fun from(library: Library): SoftwareLicenseItemViewModel {
+        fun from(
+            lifecycleOwner: LifecycleOwner,
+            library: Library
+        ): SoftwareLicenseItemViewModel {
             return SoftwareLicenseItemViewModel().apply {
                 this.library = library
                 title.set(library.name)
                 description.set(library.license.description)
+                registerLifecycleOwner(lifecycleOwner)
             }
         }
     }
@@ -174,19 +177,4 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
         super.onCleared()
         clickHandler.clear()
     }
-}
-
-fun LibraryList.setUpTransform(
-    lifecycleOwner: LifecycleOwner,
-    body: (itemVmList: List<SoftwareLicenseItemViewModel>?) -> Unit
-) {
-    Transformations.switchMap(this) {
-        SingleLiveData<List<SoftwareLicenseItemViewModel>>().apply {
-            value = arrayListOf<SoftwareLicenseItemViewModel>().apply {
-                it.mapTo(this) {
-                    SoftwareLicenseItemViewModel.from(it)
-                }
-            }
-        }
-    }.setupObserve(lifecycleOwner) { body(this) }
 }
