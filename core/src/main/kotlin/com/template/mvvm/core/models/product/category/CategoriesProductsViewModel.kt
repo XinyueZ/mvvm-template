@@ -31,7 +31,6 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
     //User might delete data with pull2refresh and then the UI should also do it after new data being loaded,
     //ie. clean recyclerview and it's adapter.
     private var shouldDeleteList = false
-    private var offset: Int = 0
 
     override fun onLifecycleStart() {
         with(controller) {
@@ -64,7 +63,6 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
             repository.clear()
             productCategoryListSource = null
             state.deleteList.set(false)
-            offset = 0
         }
     }
 
@@ -77,12 +75,9 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
 
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
         controller.productCategoryListSource?.let { source ->
-            if (position + 1 >= offset) {
-                query(bgContext, offset).consumeEach { ds ->
-                    ds?.takeIf { it.isNotEmpty() }?.let { list ->
-                        offset += list.size
-                        onQueried(source, list)
-                    }
+            query(bgContext, position).consumeEach { ds ->
+                ds?.takeIf { it.isNotEmpty() }?.let { list ->
+                    onQueried(source, list)
                 }
             }
         }
@@ -111,7 +106,6 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
 
     private fun doReloadData() = async(uiContext) {
         delete(bgContext).consumeEach {
-            offset = 0
             loadData()
             shouldDeleteList = true
         }
@@ -183,13 +177,13 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
                     it.productCategory = productCategory
                     it.name.set(productCategory.name)
                 }
-                .also {item ->
+                .also { item ->
                     /**
                      * The product-list of each category.
                      */
                     CategoryProductsViewModel(repository, productCategory.cid)
                         .also { item.categoryProductsViewModel.set(it) /*bind*/ }
-                        .also { it.registerLifecycleOwner(lifecycleOwner) /*load products of category(item)*/}
+                        .also { it.registerLifecycleOwner(lifecycleOwner) /*load products of category(item)*/ }
                 }
         }
     }

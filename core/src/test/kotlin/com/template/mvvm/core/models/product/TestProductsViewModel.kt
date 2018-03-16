@@ -20,7 +20,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.util.ReflectionHelpers
 import org.hamcrest.CoreMatchers.`is` as matchIs
 import org.mockito.Mockito.`when` as mockWhen
 
@@ -81,6 +80,5 @@ class TestProductsViewModel {
         )
     }
 
-    private fun ProductsViewModel.getCurrentOffset() =
-        ReflectionHelpers.getField<Int>(this, "offset")
+    private fun ProductsViewModel.getCurrentOffset() = controller.collectionSource?.value?.size ?: 0
 }

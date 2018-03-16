@@ -30,7 +30,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
     //User might delete data with pull2refresh and then the UI should also do it after new data being loaded,
     //ie. clean recyclerview and it's adapter.
     private var shouldDeleteList = false
-    private var offset: Int = 0
 
     override fun onLifecycleStart() {
         with(controller) {
@@ -60,7 +59,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
             repository.clear()
             collectionSource = null
             state.deleteList.set(false)
-            offset = 0
         }
     }
 
@@ -73,12 +71,9 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
 
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
         controller.collectionSource?.let { source ->
-            if (position + 1 >= offset) {
-                query(bgContext, offset).consumeEach { ds ->
-                    ds?.takeIf { it.isNotEmpty() }?.let { list ->
-                        offset += list.size
-                        onQueried(source, list)
-                    }
+            query(bgContext, position).consumeEach { ds ->
+                ds?.takeIf { it.isNotEmpty() }?.let { list ->
+                    onQueried(source, list)
                 }
             }
         }
@@ -108,7 +103,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
 
     private fun doReloadData() = async(uiContext) {
         delete(bgContext).consumeEach {
-            offset = 0
             loadData()
             shouldDeleteList = true
         }
