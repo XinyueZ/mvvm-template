@@ -37,7 +37,7 @@ class SoftwareLicensesViewModel(
                 lifecycleOwner.run {
                     libraryListSource = libraryListSource ?: LibraryList().toViewModelList(
                         this@run,
-                        { SoftwareLicenseItemViewModel.from(this, it) }) {
+                        { SoftwareLicenseItemViewModel.newInstance(this, it) }) {
                         it?.let {
                             libraryItemVmList.value = it
                             showSystemUi.value = true
@@ -155,7 +155,7 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
     internal val clickHandler = arrayListOf<((Library) -> Unit)>()
 
     companion object {
-        fun from(
+        fun newInstance(
             lifecycleOwner: LifecycleOwner,
             library: Library
         ): SoftwareLicenseItemViewModel {

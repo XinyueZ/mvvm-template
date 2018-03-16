@@ -37,7 +37,7 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
             lifecycleOwner.run {
                 collectionSource = collectionSource ?: ProductList().toViewModelList(
                     this@run,
-                    { ProductItemViewModel.from(this, it) }) {
+                    { ProductItemViewModel.newInstance(this, it) }) {
                     it?.let {
                         collectionItemVmList.value = it
                         showSystemUi.value = true
@@ -169,7 +169,7 @@ class ProductItemViewModel : AbstractViewModel() {
     val clickHandler = arrayListOf<((Product, Any?) -> Unit)>()
 
     companion object {
-        fun from(
+        fun newInstance(
             lifecycleOwner: LifecycleOwner,
             product: Product
         ): ProductItemViewModel {

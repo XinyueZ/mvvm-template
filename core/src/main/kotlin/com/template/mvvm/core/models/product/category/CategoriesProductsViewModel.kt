@@ -38,7 +38,7 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
             lifecycleOwner.run {
                 productCategoryListSource = productCategoryListSource ?:
                         ProductCategoryList().toViewModelList(this@run, {
-                            ProductCategoryItemViewModel.from(
+                            ProductCategoryItemViewModel.newInstance(
                                 this,
                                 repository,
                                 it
@@ -172,7 +172,7 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
     var categoryProductsViewModel = ObservableField<CategoryProductsViewModel>()
 
     companion object {
-        fun from(
+        fun newInstance(
             lifecycleOwner: LifecycleOwner,
             repository: ProductsDataSource,
             productCategory: ProductCategory
