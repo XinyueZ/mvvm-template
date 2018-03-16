@@ -1,6 +1,7 @@
 package com.template.mvvm.repository.source.remote
 
 import com.template.mvvm.repository.source.remote.feeds.licenses.LicensesData
+import com.template.mvvm.repository.source.remote.feeds.products.ProductCategoriesData
 import com.template.mvvm.repository.source.remote.feeds.products.ProductsData
 import retrofit2.Call
 import retrofit2.http.GET
@@ -12,6 +13,9 @@ interface ProductsApi {
 
     @GET("products?pid=uid4100-40207790-50&limit=10")
     fun filterArticles(@Query("offset") offset: Int, @Query("fts") keyword: String): Call<ProductsData>
+
+    @GET("categories?pid=uid4100-40207790-50")
+    fun getCategories(): Call<ProductCategoriesData>
 
     companion object {
         lateinit var service: ProductsApi

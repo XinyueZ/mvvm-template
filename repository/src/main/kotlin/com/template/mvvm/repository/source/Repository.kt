@@ -25,6 +25,10 @@ class Repository(private val licensesRepository: LicensesDataSource, private val
 
     override suspend fun getImages(coroutineContext: CoroutineContext, pid: Long) = productsRepository.getImages(coroutineContext, pid)
 
+    override suspend fun getProductCategories(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean) =  productsRepository.getProductCategories(coroutineContext, offset, localOnly)
+
+    override suspend fun deleteProductCategories(coroutineContext: CoroutineContext) = productsRepository.deleteProductCategories(coroutineContext)
+
     // Other...
     override fun clear() {
         licensesRepository.clear()

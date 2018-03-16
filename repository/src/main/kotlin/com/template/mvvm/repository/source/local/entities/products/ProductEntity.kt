@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 import com.template.mvvm.repository.domain.products.Product
 
 @Entity(tableName = "products")
-class ProductEntity(
+data class ProductEntity(
     @PrimaryKey
     @ColumnInfo(name = "pid")
     val pid: Long,

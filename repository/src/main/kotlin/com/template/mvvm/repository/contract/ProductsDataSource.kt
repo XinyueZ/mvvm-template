@@ -2,6 +2,7 @@ package com.template.mvvm.repository.contract
 
 import com.template.mvvm.repository.domain.products.Image
 import com.template.mvvm.repository.domain.products.Product
+import com.template.mvvm.repository.domain.products.ProductCategory
 import com.template.mvvm.repository.domain.products.ProductDetail
 import kotlinx.coroutines.experimental.channels.produce
 import kotlin.coroutines.experimental.CoroutineContext
@@ -18,4 +19,7 @@ interface ProductsDataSource : DataSource {
     suspend fun deleteAll(coroutineContext: CoroutineContext) = produce<Unit>(coroutineContext) {}
     suspend fun deleteAll(coroutineContext: CoroutineContext, keyword: String) = produce<Unit>(coroutineContext) {}
     suspend fun getImages(coroutineContext: CoroutineContext, pid: Long = INVALID_PID) = produce<List<Image>>(coroutineContext) {}
+    suspend fun getProductCategories(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean = true) = produce<List<ProductCategory>?>(coroutineContext) {}
+    suspend fun saveProductCategories(coroutineContext: CoroutineContext, source: List<ProductCategory>) = produce<Unit>(coroutineContext) {}
+    suspend fun deleteProductCategories(coroutineContext: CoroutineContext) = produce<Unit>(coroutineContext) {}
 }

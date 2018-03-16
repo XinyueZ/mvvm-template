@@ -8,6 +8,7 @@ import android.arch.persistence.room.Query
 import com.template.mvvm.repository.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.repository.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.repository.source.local.entities.products.ImageEntity
+import com.template.mvvm.repository.source.local.entities.products.ProductCategoryEntity
 import com.template.mvvm.repository.source.local.entities.products.ProductEntity
 
 @Dao
@@ -71,6 +72,15 @@ interface ProductDao {
 
     @Query("select * from products where filter=:keyword order by create_time asc limit 10 offset :offset")
     fun filterProductList(offset: Int, keyword: String?): List<ProductEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProductCategories(productCategoryEntity: List<ProductCategoryEntity>)
+
+    @Query("delete from product_categories")
+    fun deleteProductCategories()
+
+    @Query("select * from product_categories order by create_time asc limit 10 offset :offset")
+    fun getProductCategoryList(offset: Int): List<ProductCategoryEntity>
 }
 
 

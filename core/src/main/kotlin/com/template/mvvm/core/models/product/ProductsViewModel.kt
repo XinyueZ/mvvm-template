@@ -133,7 +133,6 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
             with(state) {
                 showSystemUi.value = true
                 dataHaveNotReloaded.set(true)
-
                 onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
                     loadData()
                     showSystemUi.value = false
@@ -185,6 +184,11 @@ class ProductItemViewModel : AbstractViewModel() {
 
     fun onCommand(vm: ViewModel, shared: Any?) {
         clickHandler.first()(product, shared)
+    }
+
+    override fun onLifecycleStop() {
+        super.onLifecycleStop()
+        onCleared()
     }
 
     override fun onCleared() {

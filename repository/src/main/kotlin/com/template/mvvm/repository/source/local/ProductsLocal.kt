@@ -5,8 +5,10 @@ import com.template.mvvm.repository.contract.INVALID_PID
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Image
 import com.template.mvvm.repository.domain.products.Product
+import com.template.mvvm.repository.domain.products.ProductCategory
 import com.template.mvvm.repository.domain.products.ProductDetail
 import com.template.mvvm.repository.source.local.entities.products.ImageEntity
+import com.template.mvvm.repository.source.local.entities.products.ProductCategoryEntity
 import com.template.mvvm.repository.source.local.entities.products.ProductEntity
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.produce
@@ -78,6 +80,18 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
+    override suspend fun saveProductCategories(coroutineContext: CoroutineContext, source: List<ProductCategory>) = produce(coroutineContext) {
+        DB.INSTANCE.productDao().apply {
+            insertProductCategories(
+                source.map {
+                    ProductCategoryEntity.from(it)
+                }
+            )
+            LL.w("product-categories write to db")
+            send(Unit)
+        }
+    }
+
     override suspend fun deleteAll(coroutineContext: CoroutineContext) = produce(coroutineContext) {
         DB.INSTANCE.productDao().apply {
             val imagesToDelete = async(coroutineContext) { deleteImages() }
@@ -89,16 +103,33 @@ class ProductsLocal : ProductsDataSource {
         }
     }
 
-    override suspend fun deleteAll(coroutineContext: CoroutineContext, keyword: String) = produce(coroutineContext) {
-        DB.INSTANCE.productDao().apply {
-            val productsToDelete = async(coroutineContext) { getProductList(keyword) }
-            LL.w("deleted products from db with $keyword")
-            val deletedProducts = productsToDelete.await()
-            deletedProducts.forEach {
-                LL.w("deleted image of product from db with $keyword")
-                deleteImages(it.pid)
+    override suspend fun deleteAll(coroutineContext: CoroutineContext, keyword: String)= produce(coroutineContext) {
+            DB.INSTANCE.productDao().apply {
+                val productsToDelete = async(coroutineContext) { getProductList(keyword) }
+                LL.w("deleted products from db with $keyword")
+                val deletedProducts = productsToDelete.await()
+                deletedProducts.forEach {
+                    LL.w("deleted image of product from db with $keyword")
+                    deleteImages(it.pid)
+                }
+                deleteProducts(keyword)
+                send(Unit)
             }
-            deleteProducts(keyword)
+        }
+
+    override suspend fun getProductCategories(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean) = produce(coroutineContext) {
+        DB.INSTANCE.productDao().apply {
+            LL.d("The product-categories loaded from db")
+            send(getProductCategoryList(offset).map {
+                ProductCategory.from(it)
+            })
+        }
+    }
+
+    override suspend fun deleteProductCategories(coroutineContext: CoroutineContext)= produce(coroutineContext) {
+        DB.INSTANCE.productDao().apply {
+            deleteProductCategories()
+            LL.w("deleted product-categories from db")
             send(Unit)
         }
     }

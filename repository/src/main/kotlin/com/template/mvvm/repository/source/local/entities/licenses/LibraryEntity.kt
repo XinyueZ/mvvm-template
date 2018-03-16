@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey
 import com.template.mvvm.repository.domain.licenses.Library
 
 @Entity(tableName = "libraries")
-class LibraryEntity(
+data class LibraryEntity(
         @PrimaryKey
         @ColumnInfo(name = "name")
         var name: String,

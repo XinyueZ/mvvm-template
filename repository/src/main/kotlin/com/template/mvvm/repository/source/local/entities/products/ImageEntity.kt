@@ -5,7 +5,7 @@ import android.net.Uri
 import com.template.mvvm.repository.domain.products.Image
 
 @Entity(tableName = "images", primaryKeys = ["pid", "uri"])
-class ImageEntity(
+data class ImageEntity(
         val pid: Long,
         val size: String,
         val uri: Uri

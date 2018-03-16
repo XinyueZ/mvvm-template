@@ -173,6 +173,11 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
         LL.d("$shared")
     }
 
+    override fun onLifecycleStop() {
+        super.onLifecycleStop()
+        onCleared()
+    }
+
     override fun onCleared() {
         super.onCleared()
         clickHandler.clear()

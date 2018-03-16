@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.template.mvvm.base.ext.android.content.res.read
 import com.template.mvvm.repository.source.remote.feeds.licenses.LicensesData
+import com.template.mvvm.repository.source.remote.feeds.products.ProductCategoriesData
 import com.template.mvvm.repository.source.remote.feeds.products.ProductsData
 import retrofit2.Call
 import retrofit2.mock.BehaviorDelegate
@@ -28,6 +29,10 @@ internal class MockProductsApi(context: Context, private val delegate: BehaviorD
         }
         return delegate.returningResponse(Gson().fromJson(feeds, ProductsData::class.java))
                 .filterArticles(offset, keyword)
+    }
+
+    override fun getCategories(): Call<ProductCategoriesData> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
 

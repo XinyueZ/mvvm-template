@@ -3,22 +3,23 @@ package com.template.mvvm.core.models.product.category
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
+import android.os.Bundle
 import android.support.annotation.IntRange
 import com.template.mvvm.base.utils.LL
+import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.toViewModelList
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.core.models.product.CategoryProductsViewModel
+import com.template.mvvm.core.models.product.ProductItemViewModel
 import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductCategory
 import com.template.mvvm.repository.domain.products.ProductCategoryList
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.channels.produce
-import kotlinx.coroutines.experimental.delay
 import kotlin.coroutines.experimental.CoroutineContext
 
 open class CategoriesProductsViewModel(private val repository: ProductsDataSource) :
@@ -69,37 +70,19 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
 
     private fun loadData() = onBound(0)
 
-    private fun reloadData() = doReloadData()
-
-    private fun doReloadData() = async(uiContext) {
-        produce<Unit>(bgContext) {
-            /**
-             * Simulate delete operation
-             */
-            delay(1500)
-            send(Unit)
-        }.consumeEach {
-            state.deleteList.set(true)
-
-            offset = 0
-            loadData()
-            shouldDeleteList = true
-        }
-    }
-
     fun onBound(@IntRange(from = 0L) position: Int) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
-        when (controller.productCategoryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
-            true -> doOnBound(position)
-            else -> controller.productCategoryListSource?.value = emptyList()
-        }
+        doOnBound(position)
     }
 
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
         controller.productCategoryListSource?.let { source ->
             if (position + 1 >= offset) {
-                query(bgContext, offset).consumeEach {
-                    onQueried(source, it)
+                query(bgContext, offset).consumeEach { ds ->
+                    ds?.takeIf { it.isNotEmpty() }?.let { list ->
+                        offset += list.size
+                        onQueried(source, list)
+                    }
                 }
             }
         }
@@ -122,28 +105,40 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
     private suspend fun query(
         coroutineContext: CoroutineContext,
         start: Int
-    ) =
-        produce(coroutineContext) {
-            send(
-                listOf(
-                    ProductCategory("mens-clothes", "Men's Clothes"),
-                    ProductCategory("mens-athletic", "Men's Activewear"),
-                    ProductCategory("womens-clothes", "Women's Clothes"),
-                    ProductCategory("womens-athletic-clothes", "Women's Athletic Clothes")
-                )
-            )
+    ) = repository.getProductCategories(coroutineContext, start, true)
+
+    private fun reloadData() = doReloadData()
+
+    private fun doReloadData() = async(uiContext) {
+        delete(bgContext).consumeEach {
+            offset = 0
+            loadData()
+            shouldDeleteList = true
         }
+    }
+
+    private suspend fun delete(coroutineContext: CoroutineContext) =
+        repository.deleteProductCategories(coroutineContext)
+
+    private fun bindTapHandlers(it: List<ProductItemViewModel>) {
+        it.forEach {
+            it.clickHandler += { product, shared ->
+                Pair(
+                    Bundle().apply { putLong(ARG_SEL_ID, product.pid) },
+                    shared
+                ).also { controller.openItemDetail.value = it }
+            }
+        }
+    }
 
     override fun onUiJobError(it: Throwable) {
-        with(state) {
-            with(controller) {
+        with(controller) {
+            with(state) {
+                showSystemUi.value = true
                 dataHaveNotReloaded.set(true)
-                onError.value = Error(
-                    it,
-                    R.string.error_load_all_products_categories,
-                    R.string.error_retry
-                ) {
-                    reloadData()
+                onError.value = Error(it, R.string.error_load_all_products, R.string.error_retry) {
+                    loadData()
+                    showSystemUi.value = false
                 }
             }
         }
@@ -191,7 +186,7 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
                 categoryProductsViewModel.set(
                     CategoryProductsViewModel(
                         repository,
-                        productCategory.id
+                        productCategory.cid
                     ).apply {
                         registerLifecycleOwner(lifecycleOwner)
                     }
@@ -203,6 +198,11 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
     fun onCommand(vm: ViewModel, shared: Any?) {
         clickHandler.first()(productCategory)
         LL.d("$shared")
+    }
+
+    override fun onLifecycleStop() {
+        super.onLifecycleStop()
+        onCleared()
     }
 
     override fun onCleared() {

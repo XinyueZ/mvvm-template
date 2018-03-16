@@ -3,6 +3,7 @@ package com.template.mvvm.repository.source.remote
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
+import com.template.mvvm.repository.domain.products.ProductCategory
 import kotlinx.coroutines.experimental.channels.produce
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -29,6 +30,19 @@ class ProductsRemote : ProductsDataSource {
                 LL.d("From $offset to be filtered $keyword products and loaded from net")
                 send(products.map {
                     Product.from(it, listOf(metaData.category.localizedId))
+                })
+            } ?: kotlin.run { send(null) }
+        } ?: kotlin.run { send(null) }
+    }
+
+    override suspend fun getProductCategories(coroutineContext: CoroutineContext, offset: Int, localOnly: Boolean) = produce(coroutineContext) {
+        ProductsApi.service.getCategories().execute().takeIf {
+            it.isSuccessful
+        }?.let {
+            it.body()?.run {
+                LL.d("The product-categories loaded from net")
+                send(products.map {
+                    ProductCategory.from(it)
                 })
             } ?: kotlin.run { send(null) }
         } ?: kotlin.run { send(null) }

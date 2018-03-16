@@ -8,9 +8,13 @@ import android.net.Uri
 import com.template.mvvm.repository.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.repository.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.repository.source.local.entities.products.ImageEntity
+import com.template.mvvm.repository.source.local.entities.products.ProductCategoryEntity
 import com.template.mvvm.repository.source.local.entities.products.ProductEntity
 
-@Database(entities = arrayOf(LicenseEntity::class, LibraryEntity::class, ProductEntity::class, ImageEntity::class), version = 2)
+@Database(
+    entities = [(LicenseEntity::class), (LibraryEntity::class), (ProductEntity::class), (ImageEntity::class), (ProductCategoryEntity::class)],
+    version = 3
+)
 @TypeConverters(FieldConverter::class)
 abstract class DB : RoomDatabase() {
 
@@ -18,7 +22,8 @@ abstract class DB : RoomDatabase() {
     abstract fun productDao(): ProductDao
 
     companion object {
-        @Volatile lateinit var INSTANCE: DB
+        @Volatile
+        lateinit var INSTANCE: DB
     }
 }
 

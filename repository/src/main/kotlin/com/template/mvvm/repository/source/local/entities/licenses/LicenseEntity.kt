@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 import com.template.mvvm.repository.domain.licenses.License
 
 @Entity(tableName = "licenses")
-class LicenseEntity(
+data class LicenseEntity(
         @PrimaryKey
         @ColumnInfo(name = "name")
         var name: String,
