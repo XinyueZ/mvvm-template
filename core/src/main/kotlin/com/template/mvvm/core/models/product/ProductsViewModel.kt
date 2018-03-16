@@ -1,7 +1,6 @@
 package com.template.mvvm.core.models.product
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
@@ -9,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.IntRange
 import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
+import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
 import com.template.mvvm.core.models.AbstractViewModel
@@ -21,7 +21,8 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlin.coroutines.experimental.CoroutineContext
 
-abstract class ProductsViewModel(protected val repository: ProductsDataSource) : AbstractViewModel() {
+abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
+    AbstractViewModel() {
     val state = ProductsViewModelState()
     val controller = ProductsViewModelController()
 
@@ -190,17 +191,15 @@ class ProductItemViewModel : AbstractViewModel() {
 
 fun ProductList.setUpTransform(
     lifecycleOwner: LifecycleOwner,
-    body: (t: List<ProductItemViewModel>?) -> Unit
+    body: (itemVmList: List<ProductItemViewModel>?) -> Unit
 ) {
     Transformations.switchMap(this) {
-        val itemVmList = arrayListOf<ProductItemViewModel>().apply {
-            it.mapTo(this) {
-                ProductItemViewModel.from(it)
+        SingleLiveData<List<ProductItemViewModel>>().apply {
+            value = arrayListOf<ProductItemViewModel>().apply {
+                it.mapTo(this) {
+                    ProductItemViewModel.from(it)
+                }
             }
         }
-        SingleLiveData<List<ProductItemViewModel>>()
-            .apply {
-                value = itemVmList
-            }
-    }.observe(lifecycleOwner, Observer { body(it) })
+    }.setupObserve(lifecycleOwner) { body(this) }
 }

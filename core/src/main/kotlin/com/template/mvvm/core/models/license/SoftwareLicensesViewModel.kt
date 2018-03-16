@@ -2,12 +2,12 @@ package com.template.mvvm.core.models.license
 
 import android.app.Application
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.support.annotation.IntRange
 import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
+import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
 import com.template.mvvm.core.models.AbstractViewModel
@@ -178,17 +178,15 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
 
 fun LibraryList.setUpTransform(
     lifecycleOwner: LifecycleOwner,
-    body: (t: List<SoftwareLicenseItemViewModel>?) -> Unit
+    body: (itemVmList: List<SoftwareLicenseItemViewModel>?) -> Unit
 ) {
     Transformations.switchMap(this) {
-        val itemVmList = arrayListOf<SoftwareLicenseItemViewModel>().apply {
-            it.mapTo(this) {
-                SoftwareLicenseItemViewModel.from(it)
+        SingleLiveData<List<SoftwareLicenseItemViewModel>>().apply {
+            value = arrayListOf<SoftwareLicenseItemViewModel>().apply {
+                it.mapTo(this) {
+                    SoftwareLicenseItemViewModel.from(it)
+                }
             }
         }
-        SingleLiveData<List<SoftwareLicenseItemViewModel>>()
-            .apply {
-                value = itemVmList
-            }
-    }.observe(lifecycleOwner, Observer { body(it) })
+    }.setupObserve(lifecycleOwner) { body(this) }
 }
