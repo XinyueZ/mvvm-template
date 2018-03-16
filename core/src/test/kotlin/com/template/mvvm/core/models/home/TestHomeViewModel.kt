@@ -78,8 +78,8 @@ class TestHomeViewModel {
         vm.registerLifecycleOwner(lifeOwner)
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
         sleepWhile {
-            vm.state.selectItem.get() != R.id.action_women
+            vm.state.selectItem.get() != R.id.action_categories_products
         }
-        assertThat(vm.state.selectItem.get(), `is`(R.id.action_women))
+        assertThat(vm.state.selectItem.get(), `is`(R.id.action_categories_products))
     }
 }

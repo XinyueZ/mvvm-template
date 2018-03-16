@@ -9,7 +9,7 @@ class HomeViewModel : AbstractViewModel() {
 
     override fun onLifecycleCreate() {
         super.onLifecycleCreate()
-        state.selectItem.set(R.id.action_women)
+        state.selectItem.set(R.id.action_categories_products)
     }
 
     //-----------------------------------
