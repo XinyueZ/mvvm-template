@@ -19,7 +19,7 @@ ext {
     def ktx = "0.2"
 
     // Retrofit
-    def retrofit = "2.3.0"
+    def retrofit = "2.4.0"
 
     //Material Design Guideline
     def guideline = "1.0.4"
@@ -42,7 +42,7 @@ ext {
     def gradle = ext.gradle_version
 
     //Tests
-    def robolectric = "3.7.1"
+    def robolectric = "3+"
     def robolectricSupportV4 = "3.4-rc2"
     def shadowsMultidex = "3.4.2"
     def mockitoVersion = "2.13.0"
