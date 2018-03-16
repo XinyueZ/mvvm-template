@@ -16,6 +16,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.template.mvvm.base.ext.android.view.setUpGoldenRatioHeight
+import com.template.mvvm.base.ext.android.view.setUpGoldenRatioInvertedWidth
+import com.template.mvvm.base.ext.android.view.setUpGoldenRatioWidth
 import kotlin.reflect.KClass
 
 fun Activity?.setViewGoldenRatioHeight(view: View): Activity? {
@@ -28,6 +30,20 @@ fun Activity?.setViewGoldenRatioHeight(view: View): Activity? {
 fun Activity?.setUpGoldenRatioInvertedHeight(view: View): Activity? {
     this?.apply {
         view.setUpGoldenRatioHeight(this)
+    }
+    return this
+}
+
+fun Activity?.setViewGoldenRatioWidth(view: View): Activity? {
+    this?.apply {
+        view.setUpGoldenRatioWidth(this)
+    }
+    return this
+}
+
+fun Activity?.setUpGoldenRatioInvertedWidth(view: View): Activity? {
+    this?.apply {
+        view.setUpGoldenRatioInvertedWidth(this)
     }
     return this
 }

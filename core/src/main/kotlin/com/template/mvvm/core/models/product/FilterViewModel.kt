@@ -24,3 +24,8 @@ class WomenViewModel(repository: ProductsDataSource) : FilterViewModel(repositor
 }
 
 class AllGendersViewModel(repository: ProductsDataSource) : ProductsViewModel(repository)
+
+class CategoryProductsViewModel(repository: ProductsDataSource, private val filter: String) :
+    FilterViewModel(repository) {
+    override fun filterKeyword() = filter
+}

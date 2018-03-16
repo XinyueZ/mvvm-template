@@ -12,6 +12,9 @@ import com.template.mvvm.core.R
 import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
+import com.template.mvvm.core.models.product.CategoryProductsViewModel
+import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductCategory
 import com.template.mvvm.repository.domain.products.ProductCategoryList
 import kotlinx.coroutines.experimental.async
@@ -20,7 +23,8 @@ import kotlinx.coroutines.experimental.channels.produce
 import kotlinx.coroutines.experimental.delay
 import kotlin.coroutines.experimental.CoroutineContext
 
-open class CategoriesProductsViewModel : AbstractViewModel() {
+open class CategoriesProductsViewModel(private val repository: ProductsDataSource) :
+    AbstractViewModel() {
     val controller = CategoriesProductsViewModelController()
     val state = CategoriesProductsViewModelState()
     // Error
@@ -35,7 +39,7 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
             lifecycleOwner.run {
                 productCategoryListSource = productCategoryListSource ?:
                         ProductCategoryList().apply {
-                            setUpTransform(this@run) {
+                            setUpTransform(this@run, repository) {
                                 it?.let {
                                     productCategoryItemVmList.value = it
                                     with(state) {
@@ -53,7 +57,7 @@ open class CategoriesProductsViewModel : AbstractViewModel() {
 
     override fun onLifecycleStop() {
         with(controller) {
-            //            repository.clear()
+            repository.clear()
             productCategoryListSource = null
             state.deleteList.set(false)
             offset = 0
@@ -167,12 +171,28 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
     lateinit var productCategory: ProductCategory
     val name: ObservableField<String> = ObservableField()
     private val clickHandler = arrayListOf<((ProductCategory) -> Unit)>()
+    var categoryProductsViewModel = ObservableField<CategoryProductsViewModel>()
 
     companion object {
-        fun from(productCategory: ProductCategory): ProductCategoryItemViewModel {
+        fun from(
+            lifecycleOwner: LifecycleOwner,
+            repository: ProductsDataSource,
+            productCategory: ProductCategory
+        ): ProductCategoryItemViewModel {
             return ProductCategoryItemViewModel().apply {
+                registerLifecycleOwner(lifecycleOwner)
+
                 this.productCategory = productCategory
                 name.set(productCategory.name)
+
+                categoryProductsViewModel.set(
+                    CategoryProductsViewModel(
+                        repository,
+                        productCategory.id
+                    ).apply {
+                        registerLifecycleOwner(lifecycleOwner)
+                    }
+                )
             }
         }
     }
@@ -190,17 +210,16 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
 
 fun ProductCategoryList.setUpTransform(
     lifecycleOwner: LifecycleOwner,
-    body: (t: List<ProductCategoryItemViewModel>?) -> Unit
+    repository: ProductsDataSource,
+    body: (itemVmList: List<ProductCategoryItemViewModel>?) -> Unit
 ) {
     Transformations.switchMap(this) {
-        val itemVmList = arrayListOf<ProductCategoryItemViewModel>().apply {
-            it.mapTo(this) {
-                ProductCategoryItemViewModel.from(it)
+        SingleLiveData<List<ProductCategoryItemViewModel>>().apply {
+            value = arrayListOf<ProductCategoryItemViewModel>().apply {
+                it.mapTo(this) {
+                    ProductCategoryItemViewModel.from(lifecycleOwner, repository, it)
+                }
             }
         }
-        SingleLiveData<List<ProductCategoryItemViewModel>>()
-            .apply {
-                value = itemVmList
-            }
     }.setupObserve(lifecycleOwner, { body(this) })
 }

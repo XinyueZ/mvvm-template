@@ -11,8 +11,7 @@ class ProductsViewModelController : BaseObservable() {
     //Data of this view-model
     var collectionSource: ProductList? = null
     //For recyclerview data
-    val collectionItemVmList: MutableLiveData<List<ViewModel>> =
-        SingleLiveData()
+    val collectionItemVmList = MutableLiveData<List<ViewModel>>()
     // True toggle the system-ui(navi-bar, status-bar etc.)
     val showSystemUi: MutableLiveData<Boolean> =
         SingleLiveData()

@@ -54,7 +54,9 @@ class ViewModelFactory private constructor(
                     application,
                     RepositoryInjection.getInstance().provideRepository(application)
                 )
-                isAssignableFrom(CategoriesProductsViewModel::class.java) -> CategoriesProductsViewModel()
+                isAssignableFrom(CategoriesProductsViewModel::class.java) -> CategoriesProductsViewModel(
+                    RepositoryInjection.getInstance().provideRepository(application)
+                )
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
@@ -106,8 +108,6 @@ fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = w
             ?: kotlin.run { throw IllegalStateException("LifecycleOwner is not a type of fragment or activity.") }
 }
 
-
-
 fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
     activity: FragmentActivity?,
     block: VM.() -> Unit
@@ -118,7 +118,6 @@ fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
         }
     }
 }
-
 
 fun <VM : ViewModel, VMC : KClass<VM>> VMC?.get(
     lifecycleOwner: LifecycleOwner?,

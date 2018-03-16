@@ -76,7 +76,7 @@ fun RecyclerView.bindingList(
                 GridLayoutManager(context, sp)
             }
         }
-        adapter = MvvmListAdapter(itemLayout, onListItemBound).apply {
+        adapter = MvvmListAdapter(itemLayout, onListItemBound, layout).apply {
             (context as FragmentActivity).run {
                 itemList.setupObserve(this, {
                     if (add) add(this)
@@ -93,10 +93,14 @@ fun RecyclerView.bindingDelete(deleteList: Boolean) {
         (adapter as? MvvmListAdapter)?.delete()
 }
 
-@BindingAdapter(value = ["width", "height", "command", "vm"], requireAll = false)
-fun CardView.setUpExt(width: Int?, height: Int?, l: OnItemCommandListener?, vm: ViewModel?) {
+@BindingAdapter(value = ["width", "height"])
+fun View.setSize(width: Int?, height: Int?) {
     width?.let { layoutParams.width = it }
     height?.let { layoutParams.height = it }
+}
+
+@BindingAdapter(value = ["command", "vm"], requireAll = false)
+fun CardView.setUpExt(l: OnItemCommandListener?, vm: ViewModel?) {
     l?.let {
         onClick {
             vm?.let {

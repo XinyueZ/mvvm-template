@@ -60,7 +60,7 @@ class RepositoryInjection private constructor() {
     )
 
     private fun provideRemoteProductsRepository() = ProductsRemote()
-    internal fun provideLocalProductsRepository() = ProductsLocal()
+    private fun provideLocalProductsRepository() = ProductsLocal()
     private fun provideCacheProductsRepository() = ProductsCache()
 
     // Provides repository for licenses

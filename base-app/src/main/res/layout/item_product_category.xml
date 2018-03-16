@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="com.template.mvvm.app.R"/>
         <variable
             name="vm"
             type="com.template.mvvm.core.models.product.category.ProductCategoryItemViewModel"/>
@@ -24,6 +25,16 @@
             android:textColor="@color/material_black"
             />
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:add="@{true}"
+            app:delete="@{vm.categoryProductsViewModel.state.deleteList}"
+            app:itemLayout="@{R.layout.item_product_in_category}"
+            app:itemList="@{vm.categoryProductsViewModel.controller.collectionItemVmList}"
+            app:layout="@{`linear-h`}"
+            app:onListItemBound="@{vm.categoryProductsViewModel::onBound}"
+            />
 
     </LinearLayout>
 </layout>

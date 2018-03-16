@@ -7,7 +7,6 @@ import android.databinding.ViewDataBinding
 import android.support.annotation.LayoutRes
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
-import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,10 +22,12 @@ import kotlin.reflect.jvm.isAccessible
 
 class MvvmListAdapter(
     @LayoutRes private val itemLayout: Int,
-    private val onListItemBound: OnListItemBoundListener?
+    private val onListItemBound: OnListItemBoundListener?,
+    layout: String
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var isLoading = false
     private val collection = arrayListOf<ViewModel>()
+    private val paramsFactory = ProgressViewContainerLayoutParamsFactory(layout)
 
     override fun getItemCount() =
             /**When [isLoading] true the loading progress as item should be extra added.*/
@@ -94,7 +95,7 @@ class MvvmListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
-        VIEW_TYPE_LOAD -> ProgressViewHolder(parent)
+        VIEW_TYPE_LOAD -> ProgressViewHolder(parent, paramsFactory)
         else -> MvvmItemViewHolder(parent, itemLayout)
     }
 
@@ -160,47 +161,63 @@ private fun ViewDataBinding?.setViewModel(vm: ViewModel?): ViewDataBinding? {
 }
 
 class ProgressViewHolder(
-    parent: ViewGroup
+    parent: ViewGroup,
+    private val paramsFactory: ProgressViewContainerLayoutParamsFactory
 ) : RecyclerView.ViewHolder(
-    ProgressViewContainer(parent.context)
+    ProgressViewContainer(parent.context, paramsFactory)
 ) {
 
     fun adjustProgressType(init: Boolean) {
         with(itemView as ViewGroup) {
-            if (init) {
-                itemView.updateLayoutParams { height = ViewGroup.LayoutParams.MATCH_PARENT }
-            } else {
-                itemView.updateLayoutParams { height = ViewGroup.LayoutParams.WRAP_CONTENT }
+            if (init) paramsFactory.init(itemView)
+            else paramsFactory.update(itemView)
+        }
+    }
+}
+
+class ProgressViewContainerLayoutParamsFactory(private val layout: String) {
+    fun create() = when (layout) {
+        "linear-v" -> ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        else -> ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+    }
+
+    fun init(viewGroup: ViewGroup) {
+        viewGroup.updateLayoutParams {
+            width = ViewGroup.LayoutParams.MATCH_PARENT
+            height = ViewGroup.LayoutParams.MATCH_PARENT
+        }
+    }
+
+    fun update(viewGroup: ViewGroup) {
+        when (layout) {
+            "linear-v" -> viewGroup.updateLayoutParams {
+                width = ViewGroup.LayoutParams.MATCH_PARENT
+                height = ViewGroup.LayoutParams.WRAP_CONTENT
+            }
+            else -> viewGroup.updateLayoutParams {
+                width = ViewGroup.LayoutParams.WRAP_CONTENT
+                height = ViewGroup.LayoutParams.MATCH_PARENT
             }
         }
     }
 }
 
-private class ProgressViewContainer : FrameLayout {
-    constructor(context: Context) : super(context) {
-        init()
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init()
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
-        init()
-    }
+private class ProgressViewContainer(
+    context: Context,
+    private val paramsFactory: ProgressViewContainerLayoutParamsFactory
+) : FrameLayout(context) {
 
     private fun init() {
         /**
          * Layout for container.
          */
-        layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        layoutParams = paramsFactory.create()
 
         /**
          * Added a progress UI, default is [FrameLayout.LayoutParams.WRAP_CONTENT].
@@ -222,5 +239,9 @@ private class ProgressViewContainer : FrameLayout {
 
             addView(this)
         }
+    }
+
+    init {
+        init()
     }
 }

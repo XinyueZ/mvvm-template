@@ -50,13 +50,35 @@ fun View.onClick(block: suspend () -> Unit) {
     }
 }
 
+fun View.setUpGoldenRatioWidth(activity: Activity): View? {
+    layoutParams.width = getUpGoldenRatioWidth(activity)
+    return this
+}
+
+fun View.setUpGoldenRatioInvertedWidth(activity: Activity): View? {
+    layoutParams.width = getUpGoldenRatioInvertedWidth(activity)
+    return this
+}
+
 fun View.setUpGoldenRatioHeight(activity: Activity): View? {
-    layoutParams.height = (activity.getScreenSize().height.toFloat() * 0.618339887f).toInt()
+    layoutParams.height = getUpGoldenRatioHeight(activity)
     return this
 }
 
 fun View.setUpGoldenRatioInvertedHeight(activity: Activity): View? {
-    layoutParams.height = (activity.getScreenSize().height.toFloat() * (1f - 0.618339887f)).toInt()
+    layoutParams.height = getUpGoldenRatioInvertedHeight(activity)
     return this
 }
+
+fun View.getUpGoldenRatioWidth(activity: Activity) =
+    (activity.getScreenSize().width.toFloat() * 0.618339887f).toInt()
+
+fun View.getUpGoldenRatioInvertedWidth(activity: Activity) =
+    (activity.getScreenSize().width.toFloat() * (1f - 0.618339887f)).toInt()
+
+fun View.getUpGoldenRatioHeight(activity: Activity) =
+    (activity.getScreenSize().height.toFloat() * 0.618339887f).toInt()
+
+fun View.getUpGoldenRatioInvertedHeight(activity: Activity) =
+    (activity.getScreenSize().height.toFloat() * (1f - 0.618339887f)).toInt()
 
