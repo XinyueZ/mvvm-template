@@ -46,10 +46,7 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
                         bindTapHandlers(it)
                     }
                 }
-
-                collectionItemVmList.apply {
-                    value = emptyList()
-                }
+                collectionItemVmList.value = emptyList()
             }
         }
     }

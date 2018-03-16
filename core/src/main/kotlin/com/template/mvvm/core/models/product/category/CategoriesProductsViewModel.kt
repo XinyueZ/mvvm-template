@@ -51,10 +51,7 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
                             }
                         }
             }
-            productCategoryItemVmList.apply {
-                value = emptyList()
-
-            }
+            productCategoryItemVmList.value = emptyList()
         }
     }
 

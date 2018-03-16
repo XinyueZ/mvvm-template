@@ -45,10 +45,7 @@ class SoftwareLicensesViewModel(
                             bindTapHandlers(it, this@run)
                         }
                     }
-
-                    libraryItemVmList.apply {
-                        value = emptyList()
-                    }
+                    libraryItemVmList.value = emptyList()
                 }
             }
         }
