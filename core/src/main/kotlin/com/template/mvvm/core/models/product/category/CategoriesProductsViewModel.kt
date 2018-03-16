@@ -177,21 +177,20 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
             repository: ProductsDataSource,
             productCategory: ProductCategory
         ): ProductCategoryItemViewModel {
-            return ProductCategoryItemViewModel().apply {
-                registerLifecycleOwner(lifecycleOwner)
-
-                this.productCategory = productCategory
-                name.set(productCategory.name)
-
-                categoryProductsViewModel.set(
-                    CategoryProductsViewModel(
-                        repository,
-                        productCategory.cid
-                    ).apply {
-                        registerLifecycleOwner(lifecycleOwner)
-                    }
-                )
-            }
+            return ProductCategoryItemViewModel()
+                .also { it.registerLifecycleOwner(lifecycleOwner) }
+                .also {
+                    it.productCategory = productCategory
+                    it.name.set(productCategory.name)
+                }
+                .also {item ->
+                    /**
+                     * The product-list of each category.
+                     */
+                    CategoryProductsViewModel(repository, productCategory.cid)
+                        .also { item.categoryProductsViewModel.set(it) /*bind*/ }
+                        .also { it.registerLifecycleOwner(lifecycleOwner) /*load products of category(item)*/}
+                }
         }
     }
 

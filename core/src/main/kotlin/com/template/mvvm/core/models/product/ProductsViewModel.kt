@@ -174,10 +174,10 @@ class ProductItemViewModel : AbstractViewModel() {
             product: Product
         ): ProductItemViewModel {
             return ProductItemViewModel().apply {
+                registerLifecycleOwner(lifecycleOwner)
                 this.product = product
                 title.set(product.title)
                 thumbnail.set(product.pictures["Original"]?.uri)
-                registerLifecycleOwner(lifecycleOwner)
             }
         }
     }

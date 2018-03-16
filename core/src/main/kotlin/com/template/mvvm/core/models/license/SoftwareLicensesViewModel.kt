@@ -160,10 +160,10 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
             library: Library
         ): SoftwareLicenseItemViewModel {
             return SoftwareLicenseItemViewModel().apply {
+                registerLifecycleOwner(lifecycleOwner)
                 this.library = library
                 title.set(library.name)
                 description.set(library.license.description)
-                registerLifecycleOwner(lifecycleOwner)
             }
         }
     }
