@@ -8,10 +8,10 @@ import android.support.annotation.IntRange
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.toViewModelList
-import com.template.mvvm.core.models.AbstractViewModel
+import com.template.mvvm.core.arch.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.obtainViewModel
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library

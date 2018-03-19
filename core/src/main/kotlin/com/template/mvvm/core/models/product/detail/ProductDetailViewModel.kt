@@ -12,7 +12,7 @@ import com.template.mvvm.base.ext.lang.ref.withReferent
 import com.template.mvvm.base.ext.lang.toHtml
 import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.R
-import com.template.mvvm.core.models.AbstractViewModel
+import com.template.mvvm.core.arch.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.repository.contract.ProductsDataSource

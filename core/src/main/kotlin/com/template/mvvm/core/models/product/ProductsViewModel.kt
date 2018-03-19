@@ -8,11 +8,11 @@ import android.os.Bundle
 import android.support.annotation.IntRange
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
+import com.template.mvvm.core.arch.AbstractViewModel
+import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.arch.toViewModelList
-import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
-import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.Product
 import com.template.mvvm.repository.domain.products.ProductList
@@ -159,6 +159,20 @@ class ProductItemViewModel : AbstractViewModel() {
     val thumbnail: ObservableField<Uri> = ObservableField()
     val clickHandler = arrayListOf<((Product, Any?) -> Unit)>()
 
+    fun onCommand(vm: ViewModel, shared: Any?) {
+        clickHandler.first()(product, shared)
+    }
+
+    override fun onLifecycleDestroy() {
+        super.onLifecycleDestroy()
+        clickHandler.clear()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        clickHandler.clear()
+    }
+
     companion object {
         fun newInstance(
             lifecycleOwner: LifecycleOwner,
@@ -171,9 +185,5 @@ class ProductItemViewModel : AbstractViewModel() {
                 thumbnail.set(product.pictures["Original"]?.uri)
             }
         }
-    }
-
-    fun onCommand(vm: ViewModel, shared: Any?) {
-        clickHandler.first()(product, shared)
     }
 }

@@ -1,7 +1,7 @@
 package com.template.mvvm.core.models.about
 
 import com.template.mvvm.core.R
-import com.template.mvvm.core.models.AbstractViewModel
+import com.template.mvvm.core.arch.AbstractViewModel
 
 class AboutViewModel : AbstractViewModel() {
     val state = AboutViewModelState()

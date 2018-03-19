@@ -1,4 +1,4 @@
-package com.template.mvvm.core.models
+package com.template.mvvm.core.arch
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
@@ -6,8 +6,8 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ViewModel
 import android.util.Log
-import com.template.mvvm.core.ViewModelInjection
 import com.template.mvvm.base.utils.LL
+import com.template.mvvm.core.ViewModelInjection
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler
 import kotlinx.coroutines.experimental.cancel
 

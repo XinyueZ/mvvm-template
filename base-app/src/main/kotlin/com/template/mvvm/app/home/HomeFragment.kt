@@ -21,7 +21,7 @@ import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ui.ViewModelFragment
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.home.HomeViewModel
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 
 class HomeFragment : ViewModelFragment<HomeViewModel>() {
     private var menFrg: Fragment? = null

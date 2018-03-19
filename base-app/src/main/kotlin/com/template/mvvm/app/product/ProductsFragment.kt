@@ -14,7 +14,7 @@ import com.template.mvvm.core.models.product.AllGendersViewModel
 import com.template.mvvm.core.models.product.MenViewModel
 import com.template.mvvm.core.models.product.ProductsViewModel
 import com.template.mvvm.core.models.product.WomenViewModel
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 
 class MenFragment : ProductsFragment<MenViewModel>()
 class WomenFragment : ProductsFragment<WomenViewModel>()

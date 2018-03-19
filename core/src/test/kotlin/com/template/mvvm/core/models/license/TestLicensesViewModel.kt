@@ -5,7 +5,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
 import com.template.mvvm.core.generateLicenseList
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile
 import com.template.mvvm.repository.contract.LicensesDataSource
 import io.kotlintest.properties.Gen

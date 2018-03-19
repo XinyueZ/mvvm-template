@@ -5,7 +5,7 @@ import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentSplashBinding
 import com.template.mvvm.base.ui.ViewModelFragment
 import com.template.mvvm.core.get
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.models.splash.SplashViewModel
 
 class SplashFragment : ViewModelFragment<SplashViewModel>() {

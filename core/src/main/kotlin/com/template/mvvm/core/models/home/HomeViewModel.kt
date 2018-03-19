@@ -1,7 +1,7 @@
 package com.template.mvvm.core.models.home
 
 import com.template.mvvm.core.R
-import com.template.mvvm.core.models.AbstractViewModel
+import com.template.mvvm.core.arch.AbstractViewModel
 
 class HomeViewModel : AbstractViewModel() {
     val state = HomeViewModelState()

@@ -14,7 +14,7 @@ import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.product.detail.ProductDetailViewModel
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 
 class ProductDetailFragment : ViewModelFragment<ProductDetailViewModel>() {
 

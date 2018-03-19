@@ -6,7 +6,7 @@ import android.arch.lifecycle.Observer
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.view.View
-import com.template.mvvm.core.models.AbstractViewModel
+import com.template.mvvm.core.arch.AbstractViewModel
 
 class ErrorViewModel : MutableLiveData<Error>() {
     val t: Throwable? = value?.t

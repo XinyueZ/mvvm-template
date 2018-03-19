@@ -7,13 +7,13 @@ import android.os.Bundle
 import android.support.annotation.IntRange
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
+import com.template.mvvm.core.arch.AbstractViewModel
+import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.arch.toViewModelList
-import com.template.mvvm.core.models.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.core.models.product.CategoryProductsViewModel
 import com.template.mvvm.core.models.product.ProductItemViewModel
-import com.template.mvvm.core.models.registerLifecycleOwner
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductCategory
 import com.template.mvvm.repository.domain.products.ProductCategoryList

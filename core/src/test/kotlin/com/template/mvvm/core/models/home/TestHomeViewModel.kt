@@ -7,7 +7,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.IdRes
 import com.template.mvvm.core.R
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.equalTo

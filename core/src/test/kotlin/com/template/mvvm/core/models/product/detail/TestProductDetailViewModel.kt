@@ -7,7 +7,7 @@ import android.arch.lifecycle.LifecycleRegistry
 import android.databinding.Observable
 import com.template.mvvm.base.ext.lang.toHtml
 import com.template.mvvm.core.generateProductDetail
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile
 import com.template.mvvm.repository.contract.ProductsDataSource
 import io.kotlintest.properties.Gen

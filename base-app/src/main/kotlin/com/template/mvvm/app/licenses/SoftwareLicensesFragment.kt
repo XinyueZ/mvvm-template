@@ -7,7 +7,7 @@ import com.template.mvvm.base.ui.ViewModelFragment
 import com.template.mvvm.core.get
 import com.template.mvvm.core.models.error.setupErrorSnackbar
 import com.template.mvvm.core.models.license.SoftwareLicensesViewModel
-import com.template.mvvm.core.models.registerLifecycleOwner
+import com.template.mvvm.core.arch.registerLifecycleOwner
 
 class SoftwareLicensesFragment : ViewModelFragment<SoftwareLicensesViewModel>() {
     override fun onViewCreated(view: View) = FragmentSoftwareLicensesBinding.bind(view).apply {
