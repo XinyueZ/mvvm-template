@@ -176,14 +176,4 @@ class ProductItemViewModel : AbstractViewModel() {
     fun onCommand(vm: ViewModel, shared: Any?) {
         clickHandler.first()(product, shared)
     }
-
-    override fun onLifecycleStop() {
-        super.onLifecycleStop()
-        onCleared()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        clickHandler.clear()
-    }
 }

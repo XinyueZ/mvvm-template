@@ -1,11 +1,10 @@
 package com.template.mvvm.core.models.product.category
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableField
 import android.os.Bundle
 import android.support.annotation.IntRange
-import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.toViewModelList
@@ -40,7 +39,8 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
                             ProductCategoryItemViewModel.newInstance(
                                 this,
                                 repository,
-                                it
+                                it,
+                                openItemDetail
                             )
                         }) {
                             it?.let {
@@ -157,21 +157,19 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
 }
 
 class ProductCategoryItemViewModel : AbstractViewModel() {
-    lateinit var productCategory: ProductCategory
     val name: ObservableField<String> = ObservableField()
-    private val clickHandler = arrayListOf<((ProductCategory) -> Unit)>()
     var categoryProductsViewModel = ObservableField<CategoryProductsViewModel>()
 
     companion object {
         fun newInstance(
             lifecycleOwner: LifecycleOwner,
             repository: ProductsDataSource,
-            productCategory: ProductCategory
+            productCategory: ProductCategory,
+            openItemDetail: MutableLiveData<Pair<Bundle, Any?>>
         ): ProductCategoryItemViewModel {
             return ProductCategoryItemViewModel()
                 .also { it.registerLifecycleOwner(lifecycleOwner) }
                 .also {
-                    it.productCategory = productCategory
                     it.name.set(productCategory.name)
                 }
                 .also { item ->
@@ -180,23 +178,9 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
                      */
                     CategoryProductsViewModel(repository, productCategory.cid)
                         .also { item.categoryProductsViewModel.set(it) /*bind*/ }
+                        .also { it.controller.openItemDetail = openItemDetail}
                         .also { it.registerLifecycleOwner(lifecycleOwner) /*load products of category(item)*/ }
                 }
         }
-    }
-
-    fun onCommand(vm: ViewModel, shared: Any?) {
-        clickHandler.first()(productCategory)
-        LL.d("$shared")
-    }
-
-    override fun onLifecycleStop() {
-        super.onLifecycleStop()
-        onCleared()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        clickHandler.clear()
     }
 }
