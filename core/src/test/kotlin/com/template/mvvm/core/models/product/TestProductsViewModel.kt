@@ -4,8 +4,8 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
-import com.template.mvvm.core.generateProductList
 import com.template.mvvm.core.arch.registerLifecycleOwner
+import com.template.mvvm.core.generateProductList
 import com.template.mvvm.core.sleepWhile
 import com.template.mvvm.repository.contract.ProductsDataSource
 import io.kotlintest.properties.Gen
@@ -50,35 +50,38 @@ class TestProductsViewModel {
 
     @Test
     fun testOffsetAfterPagings() = runBlocking {
+        var offset = 0
         val size = 10
         val pages = Gen.choose(0, 200).generate()
         (0 until pages)
             .asSequence()
             .map { it * size }
-            .forEach { offset ->
+            .forEach {
                 mockWhen(
                     dataSource.getAllProducts(
                         CommonPool,
-                        offset,
+                        it,
                         true
                     )
-                ).thenReturn(produce(CommonPool) { send(generateProductList(size).generate()) })
+                ).thenReturn(produce(CommonPool) {
+                    offset += size
+                    send(generateProductList(size).generate())
+                })
             }
 
         vm.registerLifecycleOwner(lifeOwner)
         vm.controller.collectionItemVmList.setupObserve(lifeOwner) {
-            vm.onBound(if (vm.getCurrentOffset() == 0) 0 else vm.getCurrentOffset() - 1)
+            vm.onBound(if (offset == 0) 0 else offset - 1)
         }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
         val predication = size * pages
         sleepWhile {
-            vm.getCurrentOffset() != predication
+            offset != predication
         }
         assertThat(
-            vm.getCurrentOffset(),
+            offset,
             `equalTo`(predication)
         )
     }
 
-    private fun ProductsViewModel.getCurrentOffset() = controller.collectionSource?.value?.size ?: 0
 }
