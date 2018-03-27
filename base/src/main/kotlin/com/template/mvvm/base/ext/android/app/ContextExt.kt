@@ -17,7 +17,14 @@ import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.widget.Toast
+import com.template.mvvm.base.ext.android.content.res.hasIdentifier
 import kotlin.reflect.KClass
+
+fun Context.hasDrawableRes(@DrawableRes id: Int) = resources.hasIdentifier(id, "drawable", packageName)
+fun Context.hasMenuRes(@DrawableRes id: Int) = resources.hasIdentifier(id, "menu", packageName)
+fun Context.hasStringRes(@StringRes id: Int) = resources.hasIdentifier(id, "string", packageName)
+fun Context.hasDimenRes(@DimenRes id: Int) = resources.hasIdentifier(id, "dimen", packageName)
+fun Context.hasColorRes(@ColorRes id: Int) = resources.hasIdentifier(id, "color", packageName)
 
 fun Context.getDimensionPixel(@DimenRes res: Int) = resources.getDimensionPixelSize(res)
 
@@ -58,15 +65,3 @@ fun <E : Context, T : KClass<out E>> T.showNewTaskActivity(
             ActivityCompat.startActivity(this@run, this, EMPTY)
         }
     }
-
-
-
-​private fun Context.hasResource(id: Int, type: String) =
-    resources.getIdentifier(id.toString(), type, packageName) != 0
-
-fun Context.hasDrawableRes(@DrawableRes id: Int): Boolean = hasResource(id, "drawable")
-fun Context.hasMenuRes(@DrawableRes id: Int): Boolean = hasResource(id, "menu")
-fun Context.hasStringRes(@StringRes id: Int): Boolean = hasResource(id, "string")
-fun Context.hasDimenRes(@DimenRes id: Int): Boolean = hasResource(id, "dimen")
-fun Context.hasColorRes(@ColorRes id: Int): Boolean = hasResource(id, "color")
-​
