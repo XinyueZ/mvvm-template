@@ -10,7 +10,10 @@ import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.os.Bundle.EMPTY
+import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
+import android.support.annotation.DrawableRes
+import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.widget.Toast
@@ -55,3 +58,15 @@ fun <E : Context, T : KClass<out E>> T.showNewTaskActivity(
             ActivityCompat.startActivity(this@run, this, EMPTY)
         }
     }
+
+
+
+​private fun Context.hasResource(id: Int, type: String) =
+    resources.getIdentifier(id.toString(), type, packageName) != 0
+
+fun Context.hasDrawableRes(@DrawableRes id: Int): Boolean = hasResource(id, "drawable")
+fun Context.hasMenuRes(@DrawableRes id: Int): Boolean = hasResource(id, "menu")
+fun Context.hasStringRes(@StringRes id: Int): Boolean = hasResource(id, "string")
+fun Context.hasDimenRes(@DimenRes id: Int): Boolean = hasResource(id, "dimen")
+fun Context.hasColorRes(@ColorRes id: Int): Boolean = hasResource(id, "color")
+​
