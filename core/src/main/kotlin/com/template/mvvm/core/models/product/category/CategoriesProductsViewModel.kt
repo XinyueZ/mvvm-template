@@ -2,10 +2,11 @@ package com.template.mvvm.core.models.product.category
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.os.Bundle
 import android.support.annotation.IntRange
-import com.template.mvvm.core.ARG_SEL_ID
+import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.AbstractViewModel
 import com.template.mvvm.core.arch.registerLifecycleOwner
@@ -13,11 +14,11 @@ import com.template.mvvm.core.arch.toViewModelList
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
 import com.template.mvvm.core.models.product.CategoryProductsViewModel
-import com.template.mvvm.core.models.product.ProductItemViewModel
 import com.template.mvvm.repository.contract.ProductsDataSource
 import com.template.mvvm.repository.domain.products.ProductCategory
 import com.template.mvvm.repository.domain.products.ProductCategoryList
 import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.cancel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -36,7 +37,7 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
             lifecycleOwner.run {
                 productCategoryListSource = productCategoryListSource ?:
                         ProductCategoryList().toViewModelList(this@run, {
-                            ProductCategoryItemViewModel.newInstance(
+                            CategoryProductItemViewModel.newInstance(
                                 this,
                                 repository,
                                 it,
@@ -65,9 +66,17 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
 
     private fun loadData() = onBound(0)
 
-    fun onBound(@IntRange(from = 0L) position: Int) {
+    fun onUnbound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
+        (vm as? CategoryProductItemViewModel)?.onUnbound()
+    }
+
+    fun onBound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         doOnBound(position)
+    }
+
+    fun onShown(position: Int, vm: ViewModel? = null) {
+        if (position > 0) (vm as? CategoryProductItemViewModel)?.onShown()
     }
 
     private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
@@ -91,7 +100,11 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
                 deleteList.set(false)
             }
         }
-        source.value = it
+        source.value = it?.filter {
+            it.cid == "women" || it.cid == "makeup" ||
+                    it.cid == "womens-clothes" || it.cid == "mens-clothes"
+        }
+        LL.d("${source.value}")
     }
 
     private suspend fun query(
@@ -110,17 +123,6 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
 
     private suspend fun delete(coroutineContext: CoroutineContext) =
         repository.deleteProductCategories(coroutineContext)
-
-    private fun bindTapHandlers(it: List<ProductItemViewModel>) {
-        it.forEach {
-            it.clickHandler += { product, shared ->
-                Pair(
-                    Bundle().apply { putLong(ARG_SEL_ID, product.pid) },
-                    shared
-                ).also { controller.openItemDetail.value = it }
-            }
-        }
-    }
 
     override fun onUiJobError(it: Throwable) {
         with(controller) {
@@ -156,9 +158,26 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
     //-----------------------------------
 }
 
-class ProductCategoryItemViewModel : AbstractViewModel() {
+class CategoryProductItemViewModel : AbstractViewModel() {
     val name: ObservableField<String> = ObservableField()
     var categoryProductsViewModel = ObservableField<CategoryProductsViewModel>()
+
+    fun onUnbound() {
+        categoryProductsViewModel.get()?.apply {
+            LL.d("onCleared, delete line list: ${name.get()}")
+            bgContext.cancel()
+            uiContext.cancel()
+//            state.deleteList.set(true)
+        }
+    }
+
+    fun onShown() {
+        LL.d("---------------------------")
+        LL.d("Category: ${name.get()}")
+        LL.d("List: ${categoryProductsViewModel.get()?.controller?.collectionSource?.value?.size}")
+        LL.d("---------------------------")
+//        categoryProductsViewModel.get()?.onBound(0)
+    }
 
     companion object {
         fun newInstance(
@@ -166,21 +185,19 @@ class ProductCategoryItemViewModel : AbstractViewModel() {
             repository: ProductsDataSource,
             productCategory: ProductCategory,
             openItemDetail: MutableLiveData<Pair<Bundle, Any?>>
-        ): ProductCategoryItemViewModel {
-            return ProductCategoryItemViewModel()
-                .also { it.registerLifecycleOwner(lifecycleOwner) }
-                .also {
-                    it.name.set(productCategory.name)
-                }
-                .also { item ->
-                    /**
-                     * The product-list of each category.
-                     */
-                    CategoryProductsViewModel(repository, productCategory.cid)
-                        .also { item.categoryProductsViewModel.set(it) /*bind*/ }
-                        .also { it.controller.openItemDetail = openItemDetail}
-                        .also { it.registerLifecycleOwner(lifecycleOwner) /*load products of category(item)*/ }
-                }
-        }
+        ) = CategoryProductItemViewModel()
+            .also { it.registerLifecycleOwner(lifecycleOwner) }
+            .also {
+                it.name.set(productCategory.name)
+            }
+            .also { item ->
+                /**
+                 * The product-list of each category.
+                 */
+                CategoryProductsViewModel(repository, productCategory.cid)
+                    .also { item.categoryProductsViewModel.set(it) /*bind*/ }
+                    .also { it.controller.openItemDetail = openItemDetail }
+                    .also { it.registerLifecycleOwner(lifecycleOwner) /*load products of category(item)*/ }
+            }
     }
 }

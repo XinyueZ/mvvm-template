@@ -34,6 +34,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.template.mvvm.app.R
+import com.template.mvvm.base.ext.android.app.hasDrawableRes
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.android.view.onClick
 import com.template.mvvm.base.ext.android.widget.onNavigationItemSelected
@@ -43,6 +44,8 @@ import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.arch.OnViewBoundListener
 import com.template.mvvm.core.arch.recycler.MvvmListAdapter
 import com.template.mvvm.core.arch.recycler.OnListItemBoundListener
+import com.template.mvvm.core.arch.recycler.OnListItemShownListener
+import com.template.mvvm.core.arch.recycler.OnListItemUnboundListener
 
 @BindingAdapter(
     value = ["boundLong", "onViewBound"],
@@ -57,7 +60,7 @@ fun TextView.bindingBoundLong(
 }
 
 @BindingAdapter(
-    value = ["itemList", "itemLayout", "layout", "onListItemBound", "add"],
+    value = ["itemList", "itemLayout", "layout", "onListItemBound", "onListItemUnbound", "onListItemShown", "add"],
     requireAll = false
 )
 fun RecyclerView.bindingList(
@@ -65,6 +68,8 @@ fun RecyclerView.bindingList(
     @LayoutRes itemLayout: Int,
     layout: String,
     onListItemBound: OnListItemBoundListener?,
+    onListItemUnbound: OnListItemUnboundListener?,
+    onListItemShownListener: OnListItemShownListener?,
     add: Boolean
 ) {
     if (adapter == null) {
@@ -76,7 +81,13 @@ fun RecyclerView.bindingList(
                 GridLayoutManager(context, sp)
             }
         }
-        adapter = MvvmListAdapter(itemLayout, onListItemBound, layout).apply {
+        adapter = MvvmListAdapter(
+            itemLayout,
+            onListItemBound,
+            onListItemUnbound,
+            onListItemShownListener,
+            layout
+        ).apply {
             (context as FragmentActivity).run {
                 itemList.setupObserve(this, {
                     if (add) add(this)
@@ -89,8 +100,7 @@ fun RecyclerView.bindingList(
 
 @BindingAdapter("delete")
 fun RecyclerView.bindingDelete(deleteList: Boolean) {
-    if (deleteList)
-        (adapter as? MvvmListAdapter)?.delete()
+    if (deleteList) (adapter as? MvvmListAdapter)?.delete()
 }
 
 @BindingAdapter(value = ["width", "height"])
@@ -142,7 +152,6 @@ fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRe
     }
 }
 
-@SuppressLint("ResourceType")
 @BindingAdapter(
     value = ["remoteImageUris", "placeholderRes", "errorDrawableRes"],
     requireAll = false
@@ -150,7 +159,7 @@ fun View.remoteImageUri(uri: Uri?, @DrawableRes placeholderRes: Int, @DrawableRe
 fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRes: Int, @DrawableRes errorDrawableRes: Int) {
     when (imageUris == null || imageUris.isEmpty()) {
         true -> {
-            when (errorDrawableRes > 0) {
+            when (context.hasDrawableRes(errorDrawableRes)) {
                 true -> setImageResource(errorDrawableRes)
                 false -> setImageBitmap(null)
             }
@@ -159,12 +168,12 @@ fun ImageView.remoteImageUris(imageUris: Array<Uri>?, @DrawableRes placeholderRe
     }
 
     imageUris?.let {
-        val error: Drawable? = when (errorDrawableRes <= 0) {
+        val error: Drawable? = when (!context.hasDrawableRes(errorDrawableRes)) {
             true -> null
             else -> AppCompatResources.getDrawable(context, errorDrawableRes)
         }
 
-        val placeholder: Drawable? = when (placeholderRes <= 0) {
+        val placeholder: Drawable? = when (!context.hasDrawableRes(placeholderRes)) {
             true -> null
             else -> AppCompatResources.getDrawable(context, placeholderRes)
         }

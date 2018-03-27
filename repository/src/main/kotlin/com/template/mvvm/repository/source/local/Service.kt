@@ -79,7 +79,7 @@ interface ProductDao {
     @Query("delete from product_categories")
     fun deleteProductCategories()
 
-    @Query("select * from product_categories order by create_time asc limit 10 offset :offset")
+    @Query("select * from product_categories order by create_time asc limit 999999 offset :offset")
     fun getProductCategoryList(offset: Int): List<ProductCategoryEntity>
 }
 

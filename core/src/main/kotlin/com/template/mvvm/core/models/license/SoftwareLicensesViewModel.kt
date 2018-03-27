@@ -7,11 +7,11 @@ import android.databinding.ObservableField
 import android.support.annotation.IntRange
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
-import com.template.mvvm.core.arch.toViewModelList
 import com.template.mvvm.core.arch.AbstractViewModel
+import com.template.mvvm.core.arch.registerLifecycleOwner
+import com.template.mvvm.core.arch.toViewModelList
 import com.template.mvvm.core.models.error.Error
 import com.template.mvvm.core.models.error.ErrorViewModel
-import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.obtainViewModel
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
@@ -84,7 +84,7 @@ class SoftwareLicensesViewModel(
 
     private fun reloadData() = doOnBound(false)
 
-    fun onBound(@IntRange(from = 0L) position: Int) {
+    fun onBound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         when (controller.libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
             true -> loadData()
@@ -155,13 +155,11 @@ class SoftwareLicenseItemViewModel : AbstractViewModel() {
         fun newInstance(
             lifecycleOwner: LifecycleOwner,
             library: Library
-        ): SoftwareLicenseItemViewModel {
-            return SoftwareLicenseItemViewModel().apply {
-                registerLifecycleOwner(lifecycleOwner)
-                this.library = library
-                title.set(library.name)
-                description.set(library.license.description)
-            }
+        ) = SoftwareLicenseItemViewModel().apply {
+            registerLifecycleOwner(lifecycleOwner)
+            this.library = library
+            title.set(library.name)
+            description.set(library.license.description)
         }
     }
 

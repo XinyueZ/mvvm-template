@@ -61,7 +61,7 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
 
     private fun loadData() = onBound(0)
 
-    fun onBound(@IntRange(from = 0L) position: Int) {
+    fun onBound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         doOnBound(position)
     }
@@ -177,13 +177,12 @@ class ProductItemViewModel : AbstractViewModel() {
         fun newInstance(
             lifecycleOwner: LifecycleOwner,
             product: Product
-        ): ProductItemViewModel {
-            return ProductItemViewModel().apply {
-                registerLifecycleOwner(lifecycleOwner)
-                this.product = product
-                title.set(product.title)
-                thumbnail.set(product.pictures["Original"]?.uri)
-            }
+        ) = ProductItemViewModel().apply {
+            registerLifecycleOwner(lifecycleOwner)
+            this.product = product
+            title.set(product.title)
+            thumbnail.set(product.pictures["Original"]?.uri)
         }
+
     }
 }

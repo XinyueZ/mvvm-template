@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.view.updateLayoutParams
+import com.template.mvvm.base.utils.LL
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
@@ -23,6 +24,8 @@ import kotlin.reflect.jvm.isAccessible
 class MvvmListAdapter(
     @LayoutRes private val itemLayout: Int,
     private val onListItemBound: OnListItemBoundListener?,
+    private val onListItemUnbound: OnListItemUnboundListener?,
+    private val onListItemShownListener: OnListItemShownListener?,
     layout: String
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var isLoading = false
@@ -89,8 +92,9 @@ class MvvmListAdapter(
     }
 
     fun delete() {
-        isLoading = false
+        LL.d("Clear adapter")
         collection.clear()
+        isLoading = false
         notifyDataSetChanged()
     }
 
@@ -104,9 +108,17 @@ class MvvmListAdapter(
             VIEW_TYPE_LOAD -> {
                 (holder as ProgressViewHolder).adjustProgressType(collection.isEmpty())
                 onListItemBound?.onBound(position)
-            } // Should load on the bound.
-            else -> (holder as MvvmItemViewHolder).bindViewModel(collection[position])
+            }
+            else -> {
+                (holder as MvvmItemViewHolder).bindViewModel(collection[position])
+                onListItemShownListener?.onShown(position, holder.vm)
+            }
         }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        onListItemUnbound?.onUnbound(holder.adapterPosition, (holder as? MvvmItemViewHolder)?.vm)
     }
 
     override fun getItemViewType(position: Int) = when (position) {
@@ -125,7 +137,15 @@ class MvvmListAdapter(
 }
 
 interface OnListItemBoundListener {
-    fun onBound(position: Int)
+    fun onBound(position: Int, vm: ViewModel? = null)
+}
+
+interface OnListItemUnboundListener {
+    fun onUnbound(position: Int, vm: ViewModel? = null)
+}
+
+interface OnListItemShownListener {
+    fun onShown(position: Int, vm: ViewModel? = null)
 }
 
 class MvvmItemViewHolder(
@@ -139,7 +159,11 @@ class MvvmItemViewHolder(
         )
     )
 ) : RecyclerView.ViewHolder(binding?.root) {
-    fun bindViewModel(vm: ViewModel?) = binding.setViewModel(vm)
+    var vm: ViewModel? = null
+    fun bindViewModel(vm: ViewModel?): ViewDataBinding? {
+        this.vm = vm
+        return binding.setViewModel(vm)
+    }
 }
 
 private fun ViewDataBinding?.setViewModel(vm: ViewModel?): ViewDataBinding? {

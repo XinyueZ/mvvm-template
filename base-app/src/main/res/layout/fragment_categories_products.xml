@@ -27,12 +27,14 @@
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:add="@{true}"
+                app:add="@{false}"
                 app:delete="@{vm.state.deleteList}"
                 app:itemLayout="@{R.layout.item_product_category}"
                 app:itemList="@{vm.controller.productCategoryItemVmList}"
                 app:layout="@{`linear-v`}"
                 app:onListItemBound="@{vm::onBound}"
+                app:onListItemUnbound="@{vm::onUnbound}"
+                app:onListItemShown="@{vm::onShown}"
                 />
 
         </android.support.v4.widget.SwipeRefreshLayout>

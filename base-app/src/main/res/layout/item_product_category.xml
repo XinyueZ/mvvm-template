@@ -7,7 +7,7 @@
         <import type="com.template.mvvm.app.R"/>
         <variable
             name="vm"
-            type="com.template.mvvm.core.models.product.category.ProductCategoryItemViewModel"/>
+            type="com.template.mvvm.core.models.product.category.CategoryProductItemViewModel"/>
     </data>
 
     <LinearLayout
