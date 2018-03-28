@@ -57,6 +57,7 @@ All templates would/have been written in *Kotlin* in order to fellow new tech.
 9. Added ```base-app``` as ```baseFeatrue```. The feature is at moment represent of the whole app, the ```installed``` calls ```base-app``` to start regular app.
 10. Used ```controller``` for every ```ViewModel``` to hold all ```LiveData```s, used ```state``` for every ```ViewModel``` to hold all ```Observable```s .
 11. A little design changes.
+12. Try ```RecyclerView``` contains ```RecyclerView```. See ```CategoriesProductsViewModel```.
 
 See:
 
