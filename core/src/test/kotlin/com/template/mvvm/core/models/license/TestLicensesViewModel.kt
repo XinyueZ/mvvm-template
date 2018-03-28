@@ -4,8 +4,8 @@ import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
-import com.template.mvvm.core.generateLicenseList
 import com.template.mvvm.core.arch.registerLifecycleOwner
+import com.template.mvvm.core.generateLicenseList
 import com.template.mvvm.core.sleepWhile
 import com.template.mvvm.repository.contract.LicensesDataSource
 import io.kotlintest.properties.Gen
@@ -56,15 +56,20 @@ class TestLicensesViewModel {
             dataSource.getAllLibraries(
                 CommonPool
             )
-        ).thenReturn(produce(CommonPool) { send(generateLicenseList(size).generate()) })
+        ).thenReturn(produce(CommonPool) {
+            println("Offset new: $size")
+            send(generateLicenseList(size).generate())
+        })
 
-        vm.registerLifecycleOwner(lifeOwner)
         vm.controller.libraryItemVmList.observeForever {
+            println("Offset onBound: 0")
             vm.onBound(0)
         }
+        vm.registerLifecycleOwner(lifeOwner)
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
         sleepWhile {
+            println("Offset sleep: ${vm.controller.libraryListSource?.value?.size} -> $size ")
             vm.controller.libraryListSource?.value?.size != size
         }
 

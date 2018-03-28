@@ -64,18 +64,24 @@ class TestProductsViewModel {
                         true
                     )
                 ).thenReturn(produce(CommonPool) {
-                    offset += size
+                    println("Offset new: $offset")
                     send(generateProductList(size).generate())
                 })
             }
 
         vm.registerLifecycleOwner(lifeOwner)
         vm.controller.collectionItemVmList.setupObserve(lifeOwner) {
-            vm.onBound(if (offset == 0) 0 else offset - 1)
+            println("Offset onBound: $offset")
+            vm.onBound(offset)
+            offset += size
         }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
         val predication = size * pages
+
+        println("Offset predication: $predication")
+        offset -= size
         sleepWhile {
+            println("Offset sleep: $offset, predication: $predication")
             offset != predication
         }
         assertThat(
