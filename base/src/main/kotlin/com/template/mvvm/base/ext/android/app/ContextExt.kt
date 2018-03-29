@@ -13,6 +13,7 @@ import android.os.Bundle.EMPTY
 import android.support.annotation.ColorRes
 import android.support.annotation.DimenRes
 import android.support.annotation.DrawableRes
+import android.support.annotation.MenuRes
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
@@ -21,7 +22,7 @@ import com.template.mvvm.base.ext.android.content.res.hasIdentifier
 import kotlin.reflect.KClass
 
 fun Context.hasDrawableRes(@DrawableRes id: Int) = resources.hasIdentifier(id, "drawable", packageName)
-fun Context.hasMenuRes(@DrawableRes id: Int) = resources.hasIdentifier(id, "menu", packageName)
+fun Context.hasMenuRes(@MenuRes id: Int) = resources.hasIdentifier(id, "menu", packageName)
 fun Context.hasStringRes(@StringRes id: Int) = resources.hasIdentifier(id, "string", packageName)
 fun Context.hasDimenRes(@DimenRes id: Int) = resources.hasIdentifier(id, "dimen", packageName)
 fun Context.hasColorRes(@ColorRes id: Int) = resources.hasIdentifier(id, "color", packageName)
