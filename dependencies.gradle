@@ -39,7 +39,7 @@ ext {
     def kotlinCoroutines = "0.22.5"
 
     //Tests
-    def robolectric = "3+"
+    def robolectric = "4+"
     def robolectricSupportV4 = "3.4+"
     def shadowsMultidex = "3.4.2"
     def mockitoVersion = "2.13.0"
