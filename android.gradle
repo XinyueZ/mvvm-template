@@ -112,13 +112,14 @@ android {
     }
 }
 
+
 configurations.all { configuration ->
     resolutionStrategy {
-        force "com.android.support:support-v4:$rootProject.ext.support_comp",
-                "com.android.support:appcompat-v7:$rootProject.ext.support_comp",
-                "com.android.support:support-core-utils:$rootProject.ext.support_comp",
-                "android.arch.lifecycle:runtime:$rootProject.ext.arch_comp",
-                "com.android.support:multidex:$rootProject.ext.multiDex"
+        force "com.android.support:support-v4:+",
+                "com.android.support:appcompat-v7:+",
+                "com.android.support:support-core-utils:+",
+                "android.arch.lifecycle:runtime:+",
+                "com.android.support:multidex:+"
     }
 }
 

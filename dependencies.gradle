@@ -8,50 +8,6 @@ allprojects {
 }
 
 ext {
-    // App dependencies
-    def supportLibraryVersion = ext.support_comp
-    def archLifecycleVersion = ext.arch_comp
-    def archRoom = ext.arch_room
-    def paging = "1.0.0-alpha6"
-    def constraint = "1.1.0-beta4"
-    def multiDex = ext.multiDex
-    def instantapps = "1.1.0"
-    def ktx = "0.2"
-
-    // Retrofit
-    def retrofit = "2.4.0"
-
-    //Material Design Guideline
-    def guideline = "1.0.4"
-
-    //Json
-    def gson = "2+"
-
-    //Image-loader
-    def imageLoader = "4.6.1"
-
-    //Debug tool
-    def curl = "0.1"
-    def stetho = "1.5.0"
-
-    //Kotlin
-    def kotlin = ext.kotlin_version
-    def kotlinCoroutines = "0.22.5"
-
-    //Tests
-    def robolectric = "4+"
-    def robolectricSupportV4 = "3.4+"
-    def shadowsMultidex = "3.4.2"
-    def mockitoVersion = "2.13.0"
-    def mockitoAndroidVersion = "2.13.0"
-    def hamcrest = "1.3"
-    def testRunner = "1+"
-    def espresso = "3.0.1"
-    def junit = "4.12"
-    def dexmaker = "1.2"
-    def roomTest = "1.0.0"
-    def multidexInstrumentation = "1.0.2"
-    def kotlinTest = "2+"
 
     plugins = [
             androidInstalled : "com.android.application",
@@ -115,126 +71,130 @@ ext {
     ]
 
     applicationDependencies = [
-            [configuration: "implementation", dependency: [group: "com.google.android.instantapps", name: "instantapps", version: instantapps]],
+            [configuration: "implementation", dependency: [group: "com.google.android.instantapps", name: "instantapps", version: ext.instantapps]],
 
             //Ktx
-            [configuration: "implementation", dependency: [group: "androidx.core", name: "core-ktx", version: ktx]],
+            [configuration: "implementation", dependency: [group: "androidx.core", name: "core-ktx", version: ext.ktx]],
 
             //SUPPORT
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "multidex", version: multiDex]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "design", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "customtabs", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "palette-v7", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "cardview-v7", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "appcompat-v7", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-compat", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "recyclerview-v7", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-core-ui", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-fragment", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support.constraint", name: "constraint-layout", version: constraint]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-core-utils", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-annotations", version: supportLibraryVersion]],
-            [configuration: "implementation", dependency: [group: "com.android.support", name: "support-media-compat", version: supportLibraryVersion]],
+            [configuration: "implementation", dependency: [group: "androidx.multidex", name: "multidex", version: ext.multidex]],
+            [configuration: "implementation", dependency: [group: "com.google.android.material", name: "material", version: ext.material]],
+            [configuration: "implementation", dependency: [group: "androidx.browser", name: "browser", version: ext.browser]],
+            [configuration: "implementation", dependency: [group: "androidx.palette", name: "palette", version:  ext.palette]],
+            [configuration: "implementation", dependency: [group: "androidx.cardview", name: "cardview", version: ext.cardview]],
+            [configuration: "implementation", dependency: [group: "androidx.appcompat", name: "appcompat", version:  ext.appcompat]],
+            [configuration: "implementation", dependency: [group: "androidx.core", name: "core", version:  ext.core]],
+            [configuration: "implementation", dependency: [group: "androidx.recyclerview", name: "recyclerview", version:  ext.recyclerview]],
+            [configuration: "implementation", dependency: [group: "androidx.legacy", name: "legacy-support-core-ui", version: ext.coreUi]],
+            [configuration: "implementation", dependency: [group: "androidx.fragment", name: "fragment", version: ext.fragment]],
+            [configuration: "implementation", dependency: [group: "androidx.legacy", name: "legacy-support-core-utils", version: ext.coreUiUtils]],
+            [configuration: "implementation", dependency: [group: "androidx.annotation", name: "annotation", version: ext.annotation]],
+            [configuration: "implementation", dependency: [group: "androidx.media", name: "media", version:  ext.media]],
+
+            //Constraint-layout
+            [configuration: "implementation", dependency: [group: "androidx.constraintlayout", name: "constraintlayout", version: ext.constraint]],
 
             //JSON
-            [configuration: "implementation", dependency: [group: "com.google.code.gson", name: "gson", version: gson]],
+            [configuration: "implementation", dependency: [group: "com.google.code.gson", name: "gson", version: ext.gson]],
 
             //ARCH
-            [configuration: "implementation", dependency: [group: "android.arch.paging", name: "runtime", version: paging]],
-            [configuration: "kapt", dependency: [group: "android.arch.persistence.room", name: "compiler", version: archRoom]],
-            [configuration: "implementation", dependency: [group: "android.arch.persistence.room", name: "runtime", version: archRoom]],
-            [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "runtime", version: archLifecycleVersion]],
-            [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "extensions", version: archLifecycleVersion]],
-            [configuration: "implementation", dependency: [group: "android.arch.lifecycle", name: "common-java8", version: archLifecycleVersion]],
+            [configuration: "implementation", dependency: [group: "androidx.paging", name: "paging-runtime", version: ext.paging]],
+            [configuration: "kapt", dependency: [group: "androidx.room", name: "room-compiler", version: ext.archRoom]],
+            [configuration: "implementation", dependency: [group: "androidx.room", name: "room-runtime", version: ext.archRoom]],
+            [configuration: "implementation", dependency: [group: "androidx.lifecycle", name: "lifecycle-extensions", version: ext.archComp]],
+            [configuration: "implementation", dependency: [group: "androidx.lifecycle", name: "lifecycle-common-java8", version: ext.archComp]],
 
             //KOTLIN
-            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-stdlib", version: kotlin]],
-            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: kotlin]],
-            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: kotlinCoroutines]],
-            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-android", version: kotlinCoroutines]],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-stdlib", version: ext.kotlin_version]],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: ext.kotlin_version]],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-core", version: ext.kotlinCoroutines]],
+            [configuration: "implementation", dependency: [group: "org.jetbrains.kotlinx", name: "kotlinx-coroutines-android", version: ext.kotlinCoroutines]],
 
             //RETROFIT
-            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit", version: retrofit]],
-            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "converter-gson", version: retrofit]],
-            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit-mock", version: retrofit]],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit", version: ext.retrofit]],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "converter-gson", version: ext.retrofit]],
+            [configuration: "implementation", dependency: [group: "com.squareup.retrofit2", name: "retrofit-mock", version: ext.retrofit]],
 
             //MATERIAL DESIGN GUIDELINE
-            [configuration: "implementation", dependency: [group: "com.github.thekhaeng", name: "material-design-guideline", version: guideline],
+            [configuration: "implementation", dependency: [group: "com.github.thekhaeng", name: "material-design-guideline", version: ext.guideline],
              options      : {
                  exclude group: 'com.android.support', module: 'support-annotations'
              }],
 
             //IMAGE-LOADER
-            [configuration: "implementation", dependency: [group: "com.github.bumptech.glide", name: "glide", version: imageLoader, ext: 'aar'],
+            [configuration: "implementation", dependency: [group: "com.github.bumptech.glide", name: "glide", version: ext.imageLoader, ext: 'aar'],
              options      : {
                  transitive = true
              }],
-            [configuration: "implementation", dependency: [group: "com.github.bumptech.glide", name: "annotations", version: imageLoader]],
-            [configuration: "kapt", dependency: [group: "com.github.bumptech.glide", name: "compiler", version: imageLoader]],
+            [configuration: "implementation", dependency: [group: "com.github.bumptech.glide", name: "annotations", version: ext.imageLoader]],
+            [configuration: "kapt", dependency: [group: "com.github.bumptech.glide", name: "compiler", version: ext.imageLoader]],
 
             //DEBUG TOOL
-            [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: stetho]],
-            [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho-okhttp3", version: stetho]],
-            [configuration: "implementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: curl]],
+            [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: ext.stetho]],
+            [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho-okhttp3", version: ext.stetho]],
+            [configuration: "implementation", dependency: [group: "com.github.grapesnberries", name: "curlloggerinterceptor", version: ext.curl]],
 
             //TESTS
-            [configuration: "testImplementation", dependency: [group: 'android.arch.core', name: 'core-testing', version: archLifecycleVersion]],
-            [configuration: "testImplementation", dependency: [group: 'android.arch.persistence.room', name: 'testing', version: roomTest]],
+            [configuration: "testImplementation", dependency: [group: 'android.arch.core', name: 'core-testing', version: ext.archComp]],
+            [configuration: "testImplementation", dependency: [group: 'androidx.room', name: 'room-testing', version: archRoom]],
+            [configuration: "testImplementation", dependency: [group: "androidx.paging", name: "paging-common", version: ext.paging]],
 
-            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: robolectric]],
-            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'shadows-support-v4', version: robolectricSupportV4]],
-            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: shadowsMultidex]],
-            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-inline', version: mockitoVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-android', version: mockitoAndroidVersion]],
-            [configuration: "testImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: hamcrest]],
-            [configuration: "testImplementation", dependency: [group: "junit", name: "junit", version: junit]],
-            [configuration: "testImplementation", dependency: [group: 'io.kotlintest', name: 'kotlintest', version: kotlinTest]],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'runner', version: testRunner],
+            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'robolectric', version: ext.robolectric]],
+            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'shadows-support-v4', version: ext.robolectricSupportV4]],
+            [configuration: "testImplementation", dependency: [group: 'org.robolectric', name: 'multidex', version: ext.shadowsMultidex]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-core', version: ext.mockitoVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-inline', version: ext.mockitoVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.mockito', name: 'mockito-android', version: ext.mockitoAndroidVersion]],
+            [configuration: "testImplementation", dependency: [group: 'org.hamcrest', name: 'hamcrest-all', version: ext.hamcrest]],
+            [configuration: "testImplementation", dependency: [group: "junit", name: "junit", version: ext.junit]],
+            [configuration: "testImplementation", dependency: [group: 'io.kotlintest', name: 'kotlintest', version: ext.kotlinTest]],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test', name: 'runner', version: ext.testRunner],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test', name: 'rules', version: testRunner],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test', name: 'rules', version: ext.testRules],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: espresso],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test.espresso', name: 'espresso-core', version: ext.espresso],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-contrib', version: espresso],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test.espresso', name: 'espresso-contrib', version: ext.espresso],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-intents', version: espresso],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test.espresso', name: 'espresso-intents', version: ext.espresso],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-web', version: espresso],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test.espresso', name: 'espresso-web', version: ext.espresso],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso', name: 'espresso-idling-resource', version: espresso],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test.espresso', name: 'espresso-idling-resource', version: ext.espresso],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support.test.espresso.idling', name: 'idling-concurrent', version: espresso],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.test.espresso.idling', name: 'idling-concurrent', version: ext.espresso],
              options      : {
                  exclude group: 'com.android.support'
                  exclude group: 'android.arch.lifecycle'
              }],
-            [configuration: "androidTestImplementation", dependency: [group: "android.arch.persistence.room", name: "testing", version: roomTest]],
-            [configuration: "androidTestImplementation", dependency: [group: "junit", name: "junit", version: junit]],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker', version: dexmaker]],
-            [configuration: "androidTestImplementation", dependency: [group: 'com.android.support', name: 'multidex-instrumentation', version: multidexInstrumentation]],
-            [configuration: "androidTestImplementation", dependency: [group: "com.android.support", name: "support-annotations", version: supportLibraryVersion]],
+            [configuration: "androidTestImplementation", dependency: [group: "androidx.room", name: "room-testing", version: archRoom]],
+            [configuration: "androidTestImplementation", dependency: [group: "androidx.paging", name: "paging-common", version: ext.paging]],
+            [configuration: "androidTestImplementation", dependency: [group: "androidx.arch.core", name: "core-testing", version: ext.archComp]],
+            [configuration: "androidTestImplementation", dependency: [group: "junit", name: "junit", version: ext.junit]],
+            [configuration: "androidTestImplementation", dependency: [group: 'com.google.dexmaker', name: 'dexmaker', version: ext.dexmaker]],
+            [configuration: "androidTestImplementation", dependency: [group: 'androidx.multidex', name: 'multidex-instrumentation', version: ext.multidex]],
+            [configuration: "androidTestImplementation", dependency: [group: "androidx.annotation", name: "annotation", version: ext.annotation]],
     ]
 
     appDependencies = applicationDependencies
