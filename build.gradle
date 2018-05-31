@@ -5,8 +5,8 @@ ext {
     minSdkVersion = 16
     minSdkVersionInstant = 21
     targetSdkVersion = 27
-    compileSdkVersion = 27
-    buildToolsVersion = '28.0.0-rc2'
+    compileSdkVersion = "android-P"
+    buildToolsVersion = "28.0.0-rc2"
 
     appId = "com.template.mvvm.application"
     testAppId = "com.template.mvvm.test"
