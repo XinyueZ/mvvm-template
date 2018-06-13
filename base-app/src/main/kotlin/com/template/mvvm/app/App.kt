@@ -1,6 +1,6 @@
 package com.template.mvvm.app
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.template.mvvm.core.CoreModule
 
 class App : MultiDexApplication() {

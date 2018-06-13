@@ -1,7 +1,7 @@
 package com.template.mvvm.core.models.product.category
 
-import android.databinding.BaseObservable
-import android.databinding.ObservableBoolean
+import androidx.databinding.BaseObservable
+import androidx.databinding.ObservableBoolean
 
 class CategoriesProductsViewModelState : BaseObservable() {
     val dataHaveNotReloaded = ObservableBoolean(true)

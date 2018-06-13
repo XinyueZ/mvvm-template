@@ -1,7 +1,7 @@
 package com.template.mvvm.core.models.home
 
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 
 class HomeViewModelController {
     val openProduct = MutableLiveData<Boolean>()

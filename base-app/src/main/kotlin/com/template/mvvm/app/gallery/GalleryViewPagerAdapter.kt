@@ -1,11 +1,11 @@
 package com.template.mvvm.app.gallery
 
-import android.databinding.ObservableList
+import androidx.databinding.ObservableList
 import android.net.Uri
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
-class GalleryViewPagerAdapter private constructor(fm: FragmentManager, private val uris: List<Uri> = emptyList()) : FragmentPagerAdapter(fm) {
+class GalleryViewPagerAdapter private constructor(fm: androidx.fragment.app.FragmentManager, private val uris: List<Uri> = emptyList()) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int) = GalleryImageFragment.newInstance(uris[position])
 
@@ -13,6 +13,6 @@ class GalleryViewPagerAdapter private constructor(fm: FragmentManager, private v
 
     companion object {
         @JvmStatic
-        fun build(fm: FragmentManager, uris: ObservableList<Uri>) = GalleryViewPagerAdapter(fm, uris.toList())
+        fun build(fm: androidx.fragment.app.FragmentManager, uris: ObservableList<Uri>) = GalleryViewPagerAdapter(fm, uris.toList())
     }
 }

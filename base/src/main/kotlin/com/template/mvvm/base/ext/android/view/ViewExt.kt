@@ -16,11 +16,11 @@
 package com.template.mvvm.base.ext.android.view
 
 import android.app.Activity
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.support.design.widget.Snackbar
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.template.mvvm.base.ext.android.app.getScreenSize
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel

@@ -1,11 +1,11 @@
 package com.template.mvvm.base.ui
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.template.mvvm.base.R
 import com.template.mvvm.base.ext.android.app.replaceFragmentInActivity
 import com.template.mvvm.base.utils.SystemUiHelper

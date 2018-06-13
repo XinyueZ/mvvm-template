@@ -2,14 +2,14 @@ package com.template.mvvm.app.gallery
 
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.template.mvvm.app.binding.remoteImageUri
 
-class GalleryImageFragment : Fragment() {
+class GalleryImageFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         private const val EXTRAS_IMAGE_URI = "image-uri"

@@ -1,7 +1,7 @@
 package com.template.mvvm.repository.source.local.entities.products
 
-import android.arch.persistence.room.Entity
 import android.net.Uri
+import androidx.room.Entity
 import com.template.mvvm.repository.domain.products.Image
 
 @Entity(tableName = "images", primaryKeys = ["pid", "uri"])

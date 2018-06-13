@@ -1,11 +1,11 @@
 package com.template.mvvm.base.ext.android.widget
 
 import android.app.Activity
-import android.support.annotation.IdRes
-import android.support.design.internal.NavigationMenuItemView
-import android.support.design.internal.NavigationMenuView
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
+import androidx.annotation.IdRes
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.internal.NavigationMenuItemView
+import com.google.android.material.internal.NavigationMenuView
+import com.google.android.material.navigation.NavigationView
 import com.template.mvvm.base.ext.android.view.setUpGoldenRatioInvertedHeight
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel

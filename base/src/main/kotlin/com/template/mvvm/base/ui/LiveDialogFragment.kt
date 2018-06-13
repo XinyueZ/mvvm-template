@@ -1,12 +1,12 @@
 package com.template.mvvm.base.ui
 
 import android.app.Dialog
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatDialogFragment
 import android.view.View
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.databinding.ViewDataBinding
 
 abstract class LiveDialogFragment : AppCompatDialogFragment() {
     @LayoutRes

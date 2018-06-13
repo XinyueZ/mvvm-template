@@ -1,11 +1,10 @@
 package com.template.mvvm.core.models.product
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
 import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.IntRange
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
 import com.template.mvvm.core.ARG_SEL_ID
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.AbstractViewModel
@@ -61,12 +60,12 @@ abstract class ProductsViewModel(protected val repository: ProductsDataSource) :
 
     private fun loadData() = onBound(0)
 
-    fun onBound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
+    fun onBound(position: Int, vm: ViewModel? = null) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         doOnBound(position)
     }
 
-    private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
+    private fun doOnBound(position: Int) = async(uiContext) {
         controller.collectionSource?.let { source ->
             query(bgContext, position).consumeEach { ds ->
                 ds?.takeIf { it.isNotEmpty() }?.let { list ->

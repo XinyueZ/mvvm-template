@@ -15,7 +15,7 @@
     <color name="colorSplashPrimary">@color/material_white</color>
 
 
-    <color name="naviItemTextColor">@color/material_grey500</color>
+    <color name="naviItemTextColor">@color/material_indigo500</color>
     <!--Toolbar, appbar-->
     <color name="naviMenuBurg">@color/material_white</color>
     <color name="naviMenuBack">@color/material_white</color>

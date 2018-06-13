@@ -1,7 +1,7 @@
 package com.template.mvvm.app.home
 
 import android.net.Uri
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.ActivityHomeBinding
 import com.template.mvvm.base.customtabs.CustomTabUtils

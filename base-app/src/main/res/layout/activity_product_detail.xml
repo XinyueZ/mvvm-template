@@ -9,7 +9,7 @@
             type="com.template.mvvm.core.models.product.detail.ProductDetailViewModel"/>
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@id/contentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

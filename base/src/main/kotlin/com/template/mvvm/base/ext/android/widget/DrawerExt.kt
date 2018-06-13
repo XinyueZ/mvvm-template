@@ -1,10 +1,10 @@
 package com.template.mvvm.base.ext.android.widget
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 fun DrawerLayout.setup(
     lifecycleOwner: LifecycleOwner,

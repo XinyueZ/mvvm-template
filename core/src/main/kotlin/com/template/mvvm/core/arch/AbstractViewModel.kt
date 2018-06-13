@@ -1,11 +1,11 @@
 package com.template.mvvm.core.arch
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.OnLifecycleEvent
-import android.arch.lifecycle.ViewModel
 import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ViewModel
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.ViewModelInjection
 import kotlinx.coroutines.experimental.CoroutineExceptionHandler

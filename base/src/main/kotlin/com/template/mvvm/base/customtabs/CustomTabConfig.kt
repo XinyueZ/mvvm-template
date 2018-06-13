@@ -1,6 +1,6 @@
 package com.template.mvvm.base.customtabs
 
-import android.support.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsIntent
 
 object CustomTabConfig {
 

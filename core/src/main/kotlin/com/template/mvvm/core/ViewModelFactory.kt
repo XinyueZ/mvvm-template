@@ -1,12 +1,10 @@
 package com.template.mvvm.core
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.template.mvvm.core.models.about.AboutViewModel
 import com.template.mvvm.core.models.home.HomeViewModel
 import com.template.mvvm.core.models.license.LicenseDetailViewModel
@@ -79,13 +77,13 @@ class ViewModelFactory private constructor(
     }
 }
 
-fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
+fun <T : ViewModel> androidx.fragment.app.FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
     ViewModelProviders.of(
         this,
         ViewModelFactory.getInstance(this.application)
     ).get(viewModelClass)
 
-fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
+fun <T : ViewModel> androidx.fragment.app.Fragment.obtainViewModel(viewModelClass: Class<T>) =
     activity?.let {
         ViewModelProviders.of(
             it,
@@ -95,8 +93,8 @@ fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
 
 fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = with(
     when (this) {
-        is Fragment -> activity
-        else -> this as FragmentActivity
+        is androidx.fragment.app.Fragment -> activity
+        else -> this as androidx.fragment.app.FragmentActivity
     }
 ) {
     this?.let {
@@ -109,7 +107,7 @@ fun <T : ViewModel> LifecycleOwner.obtainViewModel(viewModelClass: Class<T>) = w
 }
 
 fun <VM : ViewModel, VMC : KClass<VM>> VMC.get(
-    activity: FragmentActivity?,
+    activity: androidx.fragment.app.FragmentActivity?,
     block: VM.() -> Unit
 ) {
     activity?.run {

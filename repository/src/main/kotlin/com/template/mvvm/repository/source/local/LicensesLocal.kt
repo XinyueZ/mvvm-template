@@ -1,17 +1,17 @@
 package com.template.mvvm.repository.source.local
 
 import android.content.Context
-import android.support.v7.util.DiffUtil
-import android.support.v7.util.ListUpdateCallback
 import android.text.TextUtils
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListUpdateCallback
 import com.google.gson.Gson
 import com.template.mvvm.base.ext.android.content.res.read
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.repository.contract.LicensesDataSource
 import com.template.mvvm.repository.domain.licenses.Library
-import com.template.mvvm.repository.source.remote.feeds.licenses.LicensesData
 import com.template.mvvm.repository.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.repository.source.local.entities.licenses.LicenseEntity
+import com.template.mvvm.repository.source.remote.feeds.licenses.LicensesData
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.produce
 import java.io.InputStreamReader

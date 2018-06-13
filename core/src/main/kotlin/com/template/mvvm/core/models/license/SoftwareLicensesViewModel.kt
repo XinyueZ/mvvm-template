@@ -1,10 +1,9 @@
 package com.template.mvvm.core.models.license
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
-import android.support.annotation.IntRange
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.AbstractViewModel
@@ -84,7 +83,7 @@ class SoftwareLicensesViewModel(
 
     private fun reloadData() = doOnBound(false)
 
-    fun onBound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
+    fun onBound(position: Int, vm: ViewModel? = null) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         when (controller.libraryItemVmList.value?.isEmpty() ?: kotlin.run { true }) {
             true -> loadData()

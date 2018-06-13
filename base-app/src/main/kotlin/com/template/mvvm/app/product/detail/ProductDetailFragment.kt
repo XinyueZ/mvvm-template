@@ -1,6 +1,6 @@
 package com.template.mvvm.app.product.detail
 
-import android.support.v4.view.ViewCompat
+import androidx.core.view.ViewCompat
 import android.view.View
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.FragmentProductDetailBinding

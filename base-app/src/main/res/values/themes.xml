@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="BaseTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -40,14 +40,16 @@
     <style name="ProductDetailTheme" parent="ProductDetailThemeBase"/>
 
 
-    <style name="DrawerNavigationViewTheme" parent="@style/Theme.AppCompat.Light">
+    <style name="NavigationView" parent="@style/Theme.MaterialComponents.Light"/>
+
+    <style name="NavigationView.DrawerNavigationViewTheme">
         <item name="itemTextColor">@color/naviItemTextColor</item>
         <item name="itemIconTint">@color/naviMenuItemIconTint</item>
         <item name="itemBackground">@color/naviDrawerBackground</item>
         <item name="android:background">@color/naviDrawerBackground</item>
     </style>
 
-    <style name="BottomNavigationViewTheme" parent="@style/Theme.AppCompat.Light">
+    <style name="NavigationView.BottomNavigationViewTheme">
         <item name="itemTextColor">@color/selector_bottom_navi_tint</item>
         <item name="itemIconTint">@color/selector_bottom_navi_tint</item>
         <item name="itemBackground">@color/naviBottomItemBackground</item>

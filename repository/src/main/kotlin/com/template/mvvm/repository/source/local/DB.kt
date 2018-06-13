@@ -1,10 +1,10 @@
 package com.template.mvvm.repository.source.local
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverter
-import android.arch.persistence.room.TypeConverters
 import android.net.Uri
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.template.mvvm.repository.source.local.entities.licenses.LibraryEntity
 import com.template.mvvm.repository.source.local.entities.licenses.LicenseEntity
 import com.template.mvvm.repository.source.local.entities.products.ImageEntity

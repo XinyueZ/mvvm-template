@@ -1,7 +1,7 @@
 package com.template.mvvm.core.models.splash
 
-import android.arch.lifecycle.MutableLiveData
 import android.os.Handler
+import androidx.lifecycle.MutableLiveData
 import com.template.mvvm.core.arch.AbstractViewModel
 
 class SplashViewModel : AbstractViewModel() {

@@ -1,11 +1,10 @@
 package com.template.mvvm.core.models.product.category
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
 import android.os.Bundle
-import android.support.annotation.IntRange
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.template.mvvm.base.utils.LL
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.AbstractViewModel
@@ -66,11 +65,11 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
 
     private fun loadData() = onBound(0)
 
-    fun onUnbound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
+    fun onUnbound(position: Int, vm: ViewModel? = null) {
         (vm as? CategoryProductItemViewModel)?.onUnbound()
     }
 
-    fun onBound(@IntRange(from = 0L) position: Int, vm: ViewModel? = null) {
+    fun onBound(position: Int, vm: ViewModel? = null) {
         if (position < 0) throw IndexOutOfBoundsException("The position must be >= 0")
         doOnBound(position)
     }
@@ -79,7 +78,7 @@ open class CategoriesProductsViewModel(private val repository: ProductsDataSourc
         if (position > 0) (vm as? CategoryProductItemViewModel)?.onShown()
     }
 
-    private fun doOnBound(@IntRange(from = 0L) position: Int) = async(uiContext) {
+    private fun doOnBound(position: Int) = async(uiContext) {
         controller.productCategoryListSource?.let { source ->
             query(bgContext, position).consumeEach { ds ->
                 ds?.takeIf { it.isNotEmpty() }?.let { list ->

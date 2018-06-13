@@ -15,49 +15,46 @@
  */
 package com.template.mvvm.base.ext.android.app
 
-import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.os.Bundle
 import android.os.Bundle.EMPTY
-import android.support.annotation.DimenRes
-import android.support.annotation.Size
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
+import androidx.annotation.DimenRes
+import androidx.annotation.Size
+import androidx.lifecycle.ViewModel
 import com.template.mvvm.base.ui.ViewModelDialogFragment
 import com.template.mvvm.base.ui.ViewModelFragment
 import kotlin.reflect.KClass
 
-fun Fragment.getDimensionPixel(@DimenRes res: Int) = resources.getDimensionPixelSize(res)
-fun Fragment.getDimension(@DimenRes res: Int) = resources.getDimension(res)
+fun androidx.fragment.app.Fragment.getDimensionPixel(@DimenRes res: Int) = resources.getDimensionPixelSize(res)
+fun androidx.fragment.app.Fragment.getDimension(@DimenRes res: Int) = resources.getDimension(res)
 
 @Size
-fun Fragment.getScreenSize() = com.template.mvvm.base.utils.getScreenSize(context, 0)
+fun androidx.fragment.app.Fragment.getScreenSize() = com.template.mvvm.base.utils.getScreenSize(context, 0)
 
-fun Fragment.addFragmentToFragment(fragment: Fragment, tag: String) {
+fun androidx.fragment.app.Fragment.addFragmentToFragment(fragment: androidx.fragment.app.Fragment, tag: String) {
     childFragmentManager.transact {
         add(fragment, tag)
     }
 }
 
-fun Fragment.replaceFragmentToFragment(fragment: Fragment, frameId: Int) {
+fun androidx.fragment.app.Fragment.replaceFragmentToFragment(fragment: androidx.fragment.app.Fragment, frameId: Int) {
     childFragmentManager.transact {
         replace(frameId, fragment)
     }
 }
 
-fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
+fun androidx.fragment.app.FragmentManager.transact(action: androidx.fragment.app.FragmentTransaction.() -> Unit) {
     beginTransaction().apply {
         action()
     }.commit()
 }
 
-fun <FRG : Fragment> KClass<FRG>.newInstance(
+fun <FRG : androidx.fragment.app.Fragment> KClass<FRG>.newInstance(
     context: Context?,
     args: Bundle? = EMPTY
 ) =
     context?.run {
-        (Fragment.instantiate(
+        (androidx.fragment.app.Fragment.instantiate(
             context,
             java.name
         ) as FRG).apply { arguments = args }
@@ -68,7 +65,7 @@ inline fun <reified FRG : ViewModelFragment<VM>, reified VM : ViewModel> KClass<
     args: Bundle? = EMPTY
 ): ViewModelFragment<VM> =
     context?.run {
-        (Fragment.instantiate(
+        (androidx.fragment.app.Fragment.instantiate(
             context,
             java.name
         ) as ViewModelFragment<VM>).apply {
@@ -85,7 +82,7 @@ inline fun <reified FRG : ViewModelDialogFragment<VM>, reified VM : ViewModel> K
     args: Bundle? = EMPTY
 ): ViewModelDialogFragment<VM> =
     context?.run {
-        (Fragment.instantiate(
+        (androidx.fragment.app.Fragment.instantiate(
             context,
             java.name
         ) as ViewModelDialogFragment<VM>).apply {

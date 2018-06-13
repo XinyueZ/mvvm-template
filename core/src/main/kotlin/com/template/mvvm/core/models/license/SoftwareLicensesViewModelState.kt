@@ -1,8 +1,8 @@
 package com.template.mvvm.core.models.license
 
-import android.databinding.BaseObservable
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableInt
+import androidx.databinding.BaseObservable
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableInt
 import com.template.mvvm.core.R
 
 class SoftwareLicensesViewModelState : BaseObservable(){

@@ -1,12 +1,12 @@
 package com.template.mvvm.base.utils
 
 import android.content.Context
-import android.support.v4.hardware.display.DisplayManagerCompat
 import android.util.DisplayMetrics
+import androidx.core.hardware.display.DisplayManagerCompat
 
 data class Size(val width: Int = 0, val height: Int = 0)
 
-@android.support.annotation.Size
+@androidx.annotation.Size
 fun getScreenSize(cxt: Context?, displayIndex: Int = 0) =
     cxt?.let {
         val displaymetrics = DisplayMetrics()

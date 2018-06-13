@@ -1,8 +1,9 @@
 package com.template.mvvm.base.ext.android.widget
 
-import android.graphics.PorterDuff.Mode.SRC_ATOP
-import android.support.v7.graphics.Palette
-import android.support.v7.widget.Toolbar
+
+import androidx.appcompat.widget.Toolbar
+import androidx.palette.graphics.Palette
+
 import com.template.mvvm.base.ext.lang.inverted
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.channels.Channel
@@ -30,7 +31,7 @@ fun Toolbar.setPalette(palette: Palette) {
                     rgb.inverted().let { inverted ->
                         navigationIcon?.setColorFilter(
                             inverted,
-                            SRC_ATOP
+                            android.graphics.PorterDuff.Mode.SRC_ATOP
                         ) ?: Unit
                     }
                 }

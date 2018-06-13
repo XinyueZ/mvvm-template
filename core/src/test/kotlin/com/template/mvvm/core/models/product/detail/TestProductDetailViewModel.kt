@@ -4,7 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LifecycleRegistry
-import android.databinding.Observable
+import androidx.databinding.Observable
 import com.template.mvvm.base.ext.lang.toHtml
 import com.template.mvvm.core.generateProductDetail
 import com.template.mvvm.core.arch.registerLifecycleOwner

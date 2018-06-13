@@ -1,18 +1,18 @@
 package com.template.mvvm.core.arch.recycler
 
-import android.arch.lifecycle.ViewModel
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.annotation.LayoutRes
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
-import androidx.view.updateLayoutParams
+import androidx.annotation.LayoutRes
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.updateLayoutParams
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
 import com.template.mvvm.base.utils.LL
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.delay
@@ -158,7 +158,7 @@ class MvvmItemViewHolder(
             false
         )
     )
-) : RecyclerView.ViewHolder(binding?.root) {
+) : RecyclerView.ViewHolder(binding?.root!!) {
     var vm: ViewModel? = null
     fun bindViewModel(vm: ViewModel?): ViewDataBinding? {
         this.vm = vm

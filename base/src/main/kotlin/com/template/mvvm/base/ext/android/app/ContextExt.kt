@@ -1,23 +1,23 @@
 package com.template.mvvm.base.ext.android.app
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.os.Bundle.EMPTY
-import android.support.annotation.ColorRes
-import android.support.annotation.DimenRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.MenuRes
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.MenuRes
+import androidx.annotation.StringRes
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.template.mvvm.base.ext.android.content.res.hasIdentifier
 import kotlin.reflect.KClass
 

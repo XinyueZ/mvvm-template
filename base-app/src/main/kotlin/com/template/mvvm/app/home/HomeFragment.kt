@@ -1,7 +1,7 @@
 package com.template.mvvm.app.home
 
 import android.net.Uri
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.View
 import com.template.mvvm.app.R
 import com.template.mvvm.app.about.AboutActivity
@@ -24,10 +24,10 @@ import com.template.mvvm.core.models.home.HomeViewModel
 import com.template.mvvm.core.arch.registerLifecycleOwner
 
 class HomeFragment : ViewModelFragment<HomeViewModel>() {
-    private var menFrg: Fragment? = null
-    private var womenFrg: Fragment? = null
-    private var allFrg: Fragment? = null
-    private var catPrdFrag: Fragment? = null
+    private var menFrg: androidx.fragment.app.Fragment? = null
+    private var womenFrg: androidx.fragment.app.Fragment? = null
+    private var allFrg: androidx.fragment.app.Fragment? = null
+    private var catPrdFrag: androidx.fragment.app.Fragment? = null
 
     override fun onViewCreated(view: View) = FragmentHomeBinding.bind(view).apply {
         requestViewModel().get(this@HomeFragment) {

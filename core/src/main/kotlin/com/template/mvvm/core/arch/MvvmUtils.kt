@@ -1,9 +1,9 @@
 package com.template.mvvm.core.arch
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 

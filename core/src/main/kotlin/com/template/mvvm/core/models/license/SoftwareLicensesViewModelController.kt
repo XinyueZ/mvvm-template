@@ -1,8 +1,8 @@
 package com.template.mvvm.core.models.license
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.databinding.BaseObservable
+import androidx.databinding.BaseObservable
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
 import com.template.mvvm.repository.domain.licenses.LibraryList
 

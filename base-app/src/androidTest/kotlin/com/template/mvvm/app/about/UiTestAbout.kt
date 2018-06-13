@@ -1,13 +1,13 @@
 package com.template.mvvm.app.about
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.BoundedMatcher
-import android.support.test.espresso.matcher.ViewMatchers
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.BoundedMatcher
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import android.support.v7.widget.Toolbar
 import com.template.mvvm.app.BuildConfig
 import com.template.mvvm.app.R

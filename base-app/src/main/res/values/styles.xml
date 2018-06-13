@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="ToolbarBase" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="ToolbarBase" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="elevation">@dimen/material_elevation_toolbar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="android:layout_width">match_parent</item>

@@ -1,8 +1,8 @@
 package com.template.mvvm.base.ext.android.arch.lifecycle
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 inline fun <reified T : Any> LiveData<T>?.setupObserve(
     lifecycleOwner: LifecycleOwner?,

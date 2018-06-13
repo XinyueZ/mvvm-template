@@ -1,6 +1,6 @@
 package com.template.mvvm.app.splash
 
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.ActivitySplashBinding
 import com.template.mvvm.app.home.HomeActivity

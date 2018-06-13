@@ -1,7 +1,7 @@
 package com.template.mvvm.core.models.product.detail
 
-import android.arch.lifecycle.MutableLiveData
-import android.support.v7.graphics.Palette
+import androidx.lifecycle.MutableLiveData
+import androidx.palette.graphics.Palette
 import com.template.mvvm.base.ext.android.arch.lifecycle.SingleLiveData
 import com.template.mvvm.repository.domain.products.ProductDetail
 

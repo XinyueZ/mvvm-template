@@ -1,19 +1,17 @@
 package com.template.mvvm.base.ext.android.app
 
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.IdRes
 
-fun FragmentActivity.findChildFragment(@IdRes parent: Int, @IdRes child: Int): Fragment? =
-    supportFragmentManager.findFragmentById(parent).childFragmentManager.findFragmentById(child)
+fun androidx.fragment.app.FragmentActivity.findChildFragment(@IdRes parent: Int, @IdRes child: Int): androidx.fragment.app.Fragment? =
+    supportFragmentManager.findFragmentById(parent)?.childFragmentManager?.findFragmentById(child)
 
-fun FragmentActivity.addFragmentToActivity(fragment: Fragment, tag: String) {
+fun androidx.fragment.app.FragmentActivity.addFragmentToActivity(fragment: androidx.fragment.app.Fragment, tag: String) {
     supportFragmentManager.transact {
         add(fragment, tag)
     }
 }
 
-fun FragmentActivity.replaceFragmentInActivity(fragment: Fragment, frameId: Int) {
+fun androidx.fragment.app.FragmentActivity.replaceFragmentInActivity(fragment: androidx.fragment.app.Fragment, frameId: Int) {
     supportFragmentManager.transact {
         replace(frameId, fragment)
     }

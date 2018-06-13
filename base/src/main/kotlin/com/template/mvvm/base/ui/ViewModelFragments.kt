@@ -1,6 +1,6 @@
 package com.template.mvvm.base.ui
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 abstract class ViewModelFragment<VM : ViewModel> : LiveFragment() {
     protected fun requestViewModel(): Class<VM>? = arguments?.getSerializable("vm") as? Class<VM>

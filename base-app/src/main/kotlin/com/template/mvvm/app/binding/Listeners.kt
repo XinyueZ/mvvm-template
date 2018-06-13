@@ -1,6 +1,6 @@
 package com.template.mvvm.app.binding
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 interface OnCommandListener {
     fun onCommand(id: Int)

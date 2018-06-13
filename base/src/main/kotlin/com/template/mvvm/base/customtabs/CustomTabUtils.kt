@@ -5,7 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsIntent
 import android.util.Log
 
 object CustomTabUtils {

@@ -1,46 +1,39 @@
 package com.template.mvvm.app.binding
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
-import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.support.annotation.DrawableRes
-import android.support.annotation.IdRes
-import android.support.annotation.LayoutRes
-import android.support.design.internal.BottomNavigationItemView
-import android.support.design.internal.BottomNavigationMenuView
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.FragmentActivity
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.CardView
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.load.DecodeFormat
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
+import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.template.mvvm.app.R
 import com.template.mvvm.base.ext.android.app.hasDrawableRes
 import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.android.view.onClick
 import com.template.mvvm.base.ext.android.widget.onNavigationItemSelected
 import com.template.mvvm.base.ext.android.widget.onNavigationOnClick
-import com.template.mvvm.base.utils.LL
-import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.arch.OnViewBoundListener
 import com.template.mvvm.core.arch.recycler.MvvmListAdapter
 import com.template.mvvm.core.arch.recycler.OnListItemBoundListener
@@ -88,7 +81,7 @@ fun RecyclerView.bindingList(
             onListItemShownListener,
             layout
         ).apply {
-            (context as FragmentActivity).run {
+            (context as androidx.fragment.app.FragmentActivity).run {
                 itemList.setupObserve(this, {
                     if (add) add(this)
                     else update(this)
@@ -103,14 +96,8 @@ fun RecyclerView.bindingDelete(deleteList: Boolean) {
     if (deleteList) (adapter as? MvvmListAdapter)?.delete()
 }
 
-@BindingAdapter(value = ["width", "height"])
-fun View.setSize(width: Int?, height: Int?) {
-    width?.let { layoutParams.width = it }
-    height?.let { layoutParams.height = it }
-}
-
-@BindingAdapter(value = ["command", "vm"], requireAll = false)
-fun CardView.setUpExt(l: OnItemCommandListener?, vm: ViewModel?) {
+@BindingAdapter(value = ["command", "vm", "width", "height"], requireAll = false)
+fun CardView.setupCommandVmSize(l: OnItemCommandListener?, vm: ViewModel?, width: Int?, height: Int?) {
     l?.let {
         onClick {
             vm?.let {
@@ -119,6 +106,8 @@ fun CardView.setUpExt(l: OnItemCommandListener?, vm: ViewModel?) {
         }
     }
 
+    width?.let { layoutParams.width = it }
+    height?.let { layoutParams.height = it }
 }
 
 @BindingAdapter("stopLoading", requireAll = false)
@@ -219,14 +208,8 @@ private fun ImageView.loadImage(
     errorDrawable: Drawable?,
     listener: RequestListener<Drawable>
 ) {
-    GlideApp.with(this)
+    Glide.with(this)
         .load(uri)
-        .format(DecodeFormat.PREFER_RGB_565)
-        .placeholder(placeholder)
-        .error(errorDrawable)
-        .dontAnimate()
-        .skipMemoryCache(false)
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .listener(listener)
         .into(this)
 }
@@ -257,36 +240,12 @@ fun Toolbar.command(l: OnCommandListener?) {
 
 @BindingAdapter("command", requireAll = false)
 fun BottomNavigationView.command(l: OnCommandListener?) {
-    disableShiftMode()
     onNavigationItemSelected { l?.onCommand(it) }
 }
 
 @BindingAdapter("selectItem", requireAll = false)
 fun BottomNavigationView.selectItem(@IdRes id: Int) {
     selectedItemId = id
-}
-
-//
-// Some view-ext, helpers
-//
-@SuppressLint("RestrictedApi")
-fun BottomNavigationView.disableShiftMode() {
-    val menuView = this.getChildAt(0) as BottomNavigationMenuView
-    try {
-        val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
-        shiftingMode.isAccessible = true
-        shiftingMode.setBoolean(menuView, false)
-        shiftingMode.isAccessible = false
-        for (i in 0 until menuView.childCount) {
-            val item = menuView.getChildAt(i) as BottomNavigationItemView
-            item.setShiftingMode(false)
-            item.setChecked(item.itemData.isChecked)
-        }
-    } catch (e: NoSuchFieldException) {
-        LL.e("Unable to get shift mode field", e)
-    } catch (e: IllegalAccessException) {
-        LL.e("Unable to change value of shift mode", e)
-    }
 }
 
 

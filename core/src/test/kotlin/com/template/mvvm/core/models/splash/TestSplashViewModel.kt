@@ -2,7 +2,7 @@ package com.template.mvvm.core.models.splash
 
 import android.arch.lifecycle.Lifecycle.Event.ON_START
 import android.arch.lifecycle.LifecycleRegistry
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import com.template.mvvm.core.arch.registerLifecycleOwner
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -19,15 +19,15 @@ import kotlin.system.measureTimeMillis
 
 @RunWith(RobolectricTestRunner::class)
 class TestSplashViewModel {
-    private lateinit var activityCtrl: ActivityController<FragmentActivity>
-    private val activity: FragmentActivity
+    private lateinit var activityCtrl: ActivityController<androidx.fragment.app.FragmentActivity>
+    private val activity: androidx.fragment.app.FragmentActivity
         get() = activityCtrl.get()
     private lateinit var splashMv: SplashViewModel
 
     @Before
     fun setup() {
         splashMv = SplashViewModel()
-        activityCtrl = Robolectric.buildActivity(FragmentActivity::class.java).setup()
+        activityCtrl = Robolectric.buildActivity(androidx.fragment.app.FragmentActivity::class.java).setup()
     }
 
     @After

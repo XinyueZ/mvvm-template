@@ -1,7 +1,7 @@
 package com.template.mvvm.base.ext.android.widget
 
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v7.graphics.Palette
+import androidx.palette.graphics.Palette
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.template.mvvm.base.ext.lang.inverted
 
 fun CollapsingToolbarLayout.setPalette(palette: Palette) {

@@ -1,6 +1,6 @@
 package com.template.mvvm.app.product.detail
 
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 import com.template.mvvm.app.R
 import com.template.mvvm.app.databinding.ActivityProductDetailBinding
 import com.template.mvvm.base.ext.android.app.newInstance
