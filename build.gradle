@@ -66,13 +66,13 @@ buildscript {
     ext.instantapps = "1.1.0"
 
     // Retrofit
-    ext.retrofit = "2.4.0"
+    ext.retrofit = "+"
 
     //Material Design Guideline
-    ext.guideline = "1.0.4"
+    ext.guideline = "+"
 
     //Json
-    ext.gson = "2+"
+    ext.gson = "+"
 
     //Image-loader
     ext.imageLoader = "+"
@@ -86,7 +86,7 @@ buildscript {
     ext.kotlinCoroutines = "0.22.5"
 
     //Tests
-    ext.robolectric = "4+"
+    ext.robolectric = "+"
     ext.robolectricSupportV4 = "3.4+"
     ext.shadowsMultidex = "3.4.2"
     ext.mockitoVersion = "2.13.0"
