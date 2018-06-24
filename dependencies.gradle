@@ -3,6 +3,10 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven{
+            name 'glide-snapshot'
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
         maven { url "https://jitpack.io" }
     }
 }
@@ -71,7 +75,6 @@ ext {
     ]
 
     applicationDependencies = [
-//            [configuration: "kapt", dependency: [group: "androidx.databinding", name: "databinding-compiler", version: ext.gradle_version]],
             [configuration: "implementation", dependency: [group: "com.google.android.instantapps", name: "instantapps", version: ext.instantapps]],
 
             //Ktx
@@ -128,7 +131,7 @@ ext {
                  transitive = true
              }],
             [configuration: "implementation", dependency: [group: "com.github.bumptech.glide", name: "annotations", version: ext.imageLoader]],
-//            [configuration: "kapt", dependency: [group: "com.github.bumptech.glide", name: "compiler", version: ext.imageLoader]],
+            [configuration: "kapt", dependency: [group: "com.github.bumptech.glide", name: "compiler", version: ext.imageLoader]],
 
             //DEBUG TOOL
             [configuration: "implementation", dependency: [group: "com.facebook.stetho", name: "stetho", version: ext.stetho]],

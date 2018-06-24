@@ -35,7 +35,7 @@ ext {
 
 buildscript {
     ext.kotlin_version = '1.2.41'
-    ext.gradle_version = '3.2.0-alpha18'
+    ext.gradle_version = '3.2.0-beta01'
     ext.archComp = "+"
     ext.archRoom = "+"
     ext.multiDex = "+"
@@ -75,7 +75,7 @@ buildscript {
     ext.gson = "+"
 
     //Image-loader
-    ext.imageLoader = "+"
+    ext.imageLoader = "4.8.0-SNAPSHOT"
 
     //Debug tool
     ext.curl = "0.1"
@@ -87,13 +87,13 @@ buildscript {
 
     //Tests
     ext.robolectric = "+"
-    ext.robolectricSupportV4 = "3.4+"
-    ext.shadowsMultidex = "3.4.2"
+    ext.robolectricSupportV4 = "+"
+    ext.shadowsMultidex = "+"
     ext.mockitoVersion = "2.13.0"
     ext.mockitoAndroidVersion = "2.13.0"
-    ext.hamcrest = "1.3"
-    ext.dexmaker = "1.2"
-    ext.kotlinTest = "2+"
+    ext.hamcrest = "+"
+    ext.dexmaker = "+"
+    ext.kotlinTest = "+"
 
     repositories {
         google()

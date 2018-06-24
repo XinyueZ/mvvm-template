@@ -23,10 +23,10 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
-        testInstrumentationRunner rootProject.testInstrumentationRunner
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
 
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
