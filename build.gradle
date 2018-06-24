@@ -6,7 +6,7 @@ ext {
     minSdkVersionInstant = 21
     targetSdkVersion = 27
     compileSdkVersion = 28
-    buildToolsVersion = "28.0.0-rc2"
+    buildToolsVersion = "28.0.0"
 
     appId = "com.template.mvvm.application"
     testAppId = "com.template.mvvm.test"
@@ -34,7 +34,7 @@ ext {
 
 
 buildscript {
-    ext.kotlin_version = '1.2.41'
+    ext.kotlin_version = '1.2.50'
     ext.gradle_version = '3.2.0-beta01'
     ext.archComp = "+"
     ext.archRoom = "+"

@@ -43,6 +43,15 @@ android {
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+
+            // Temporary workaround for Kotlin 1.2.50 and DataBinding bug. For more context see
+            // https://issuetracker.google.com/issues/110198434 and
+            // https://youtrack.jetbrains.com/issue/KT-24915#comment=27-2914947
+            tasks.whenTaskAdded { task ->
+                if (task.name == 'kaptDebugKotlin') {
+                    task.dependsOn dataBindingExportFeaturePackageIdsDebug
+                }
+            }
         }
 
         release {
@@ -50,6 +59,15 @@ android {
             useProguard rootProject.useProguard
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+
+            // Temporary workaround for Kotlin 1.2.50 and DataBinding bug. For more context see
+            // https://issuetracker.google.com/issues/110198434 and
+            // https://youtrack.jetbrains.com/issue/KT-24915#comment=27-2914947
+            tasks.whenTaskAdded { task ->
+                if (task.name == 'kaptDebugKotlin') {
+                    task.dependsOn dataBindingExportFeaturePackageIdsDebug
+                }
+            }
         }
     }
 
