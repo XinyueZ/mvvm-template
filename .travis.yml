@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 language: python
 
 python:
@@ -7,8 +6,8 @@ python:
 
 before_install:
   - pip install pytest-cov
-  
-  
+
+
 
 script:
     # Print build info that binary is compiled with.
@@ -19,39 +18,4 @@ script:
     - echo $TRAVIS_REPO_SLUG
 
 
- 
-=======
-language: android
-env:
-  - TEST_SUITE=units
-android:
-  components:
-    - tools
-    - platform-tools
-    - android-28
-    - build-tools-28
-    - add-on
-    - extra
-licenses:
-    - 'android-sdk-license-.+'
-jdk:
-    - oraclejdk8
-script:
-    - ./gradlew clean test
-before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-cache:
-  directories:
-    - $HOME/.m2
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-before_install:
-      - chmod +x ./gradlew
-<<<<<<< HEAD
-      - yes | sdkmanager "platforms;android-27"
-      - yes | sdkmanager "build-tools;28.0.0-rc1"
->>>>>>> @{-1}
-=======
-      - yes | sdkmanager "platforms;android-28"
-      - yes | sdkmanager "build-tools;28.0.0"
->>>>>>> @{-1}
+
