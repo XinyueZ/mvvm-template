@@ -27,6 +27,12 @@ Since the official announcement of the Kotlin langauge on Android at Google I/O 
 
 All templates would/have been written in *Kotlin* in order to fellow new tech.
 
+# Kotlin Extensions
+
+Kotlin's extension feature is a very useful tool instead of static method and null-object calls to its own methods. In this way, the Null-check can be fully encapsulated within the extension method.
+- This project has included [ktx](https://github.com/android/android-ktx).
+- There's also some my own extensions [ext in base package](https://github.com/XinyueZ/mvvm-template/tree/dev/base/src/main/kotlin/com/template/mvvm/base/ext).
+
 # History
 
 - [v0.5 in dev](https://github.com/XinyueZ/mvvm-template/tree/dev)
