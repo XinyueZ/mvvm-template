@@ -48,7 +48,7 @@ android {
             // https://issuetracker.google.com/issues/110198434 and
             // https://youtrack.jetbrains.com/issue/KT-24915#comment=27-2914947
             tasks.whenTaskAdded { task ->
-                if (task.name == 'kaptDebugKotlin') {
+                if (task.name == 'kaptReleaseKotlin') {
                     task.dependsOn dataBindingExportFeaturePackageIdsDebug
                 }
             }
