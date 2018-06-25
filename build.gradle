@@ -93,7 +93,7 @@ buildscript {
     ext.mockitoAndroidVersion = "2.13.0"
     ext.hamcrest = "+"
     ext.dexmaker = "+"
-    ext.kotlinTest = "+"
+    ext.kotlinTest = "2.0.7"
 
     repositories {
         google()

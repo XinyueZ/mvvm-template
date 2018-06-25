@@ -5,11 +5,12 @@ import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.palette.graphics.Palette
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.template.mvvm.base.ext.lang.ref.withReferent
 import com.template.mvvm.base.ext.lang.toHtml
+import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.AbstractViewModel
 import com.template.mvvm.core.models.error.Error
@@ -123,9 +124,11 @@ class ProductDetailViewModel(context: Context, private val repository: ProductsD
         cxtRef.withReferent {
             if (state.productImageUris.isNotEmpty()) {
                 val image = state.productImageUris.first()
-                Glide.with(this)
+                GlideApp.with(this)
                     .asBitmap()
                     .load(image)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(false)
                     .into(object : SimpleTarget<Bitmap>() {
                         override fun onResourceReady(
                             resource: Bitmap,

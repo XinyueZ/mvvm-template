@@ -1,9 +1,9 @@
 package com.template.mvvm.core.models.license
 
 import android.app.Application
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.generateLicenseList
 import com.template.mvvm.core.sleepWhile

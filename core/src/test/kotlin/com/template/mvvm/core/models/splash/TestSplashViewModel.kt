@@ -1,8 +1,7 @@
 package com.template.mvvm.core.models.splash
 
-import android.arch.lifecycle.Lifecycle.Event.ON_START
-import android.arch.lifecycle.LifecycleRegistry
-import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleRegistry
 import com.template.mvvm.core.arch.registerLifecycleOwner
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -48,7 +47,7 @@ class TestSplashViewModel {
                 done = true
             }
 
-            lifecycle.handleLifecycleEvent(ON_START)
+            lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
             measureTimeMillis {
                 idleMainLooper(2000, MILLISECONDS)
                 !done

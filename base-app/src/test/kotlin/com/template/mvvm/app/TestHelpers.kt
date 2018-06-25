@@ -1,19 +1,21 @@
 package com.template.mvvm.app
 
 import android.graphics.drawable.ColorDrawable
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
-import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageButton
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
 import com.template.mvvm.base.ext.android.graphics.drawable.bytesEqualTo
 import com.template.mvvm.base.ext.android.graphics.drawable.pixelsEqualTo
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.equalTo
 import kotlin.system.measureTimeMillis
+import com.template.mvvm.app.R
+
 
 fun Toolbar.uiTestAppearance(@StringRes appbarTitle: Int, @ColorRes appbarBackgroundColor: Int, @DrawableRes appbarNavigationButton: Int) {
     navigationContentDescription = "navi-button"

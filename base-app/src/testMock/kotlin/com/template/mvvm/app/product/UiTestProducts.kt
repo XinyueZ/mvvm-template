@@ -1,6 +1,6 @@
 package com.template.mvvm.app.product
 
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import com.template.mvvm.app.AppTestRule
 import com.template.mvvm.app.R
 import com.template.mvvm.app.applyView

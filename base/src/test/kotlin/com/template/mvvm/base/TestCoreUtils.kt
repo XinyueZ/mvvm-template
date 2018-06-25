@@ -1,6 +1,6 @@
 package com.template.mvvm.base
 
 import android.content.Context
-import org.robolectric.shadows.ShadowApplication
+import org.robolectric.RuntimeEnvironment
 
-fun context(): Context = ShadowApplication.getInstance().applicationContext
+fun context(): Context = RuntimeEnvironment.application.applicationContext

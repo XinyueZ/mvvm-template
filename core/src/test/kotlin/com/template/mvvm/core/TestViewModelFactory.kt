@@ -1,7 +1,7 @@
 package com.template.mvvm.core
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import com.template.mvvm.core.models.about.AboutViewModel
 import com.template.mvvm.core.models.home.HomeViewModel
 import com.template.mvvm.core.models.license.LicenseDetailViewModel

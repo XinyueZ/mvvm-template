@@ -3,17 +3,17 @@ package com.template.mvvm.app
 import android.app.Activity
 import android.content.Context
 import android.os.Handler
-import android.support.annotation.IdRes
 import android.view.View
+import androidx.annotation.IdRes
 import org.junit.Assert
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.android.controller.ActivityController
-import org.robolectric.shadows.ShadowApplication
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.util.Scheduler
 import java.util.concurrent.TimeUnit
 
-fun context(): Context = ShadowApplication.getInstance().applicationContext
+fun context(): Context = RuntimeEnvironment.application.applicationContext
 fun <T : Activity> ActivityController<T>.finish() {
     try {
         pause().stop().destroy()

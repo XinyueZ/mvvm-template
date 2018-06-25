@@ -22,7 +22,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -34,6 +35,7 @@ import com.template.mvvm.base.ext.android.arch.lifecycle.setupObserve
 import com.template.mvvm.base.ext.android.view.onClick
 import com.template.mvvm.base.ext.android.widget.onNavigationItemSelected
 import com.template.mvvm.base.ext.android.widget.onNavigationOnClick
+import com.template.mvvm.core.GlideApp
 import com.template.mvvm.core.arch.OnViewBoundListener
 import com.template.mvvm.core.arch.recycler.MvvmListAdapter
 import com.template.mvvm.core.arch.recycler.OnListItemBoundListener
@@ -97,7 +99,12 @@ fun RecyclerView.bindingDelete(deleteList: Boolean) {
 }
 
 @BindingAdapter(value = ["command", "vm", "width", "height"], requireAll = false)
-fun CardView.setupCommandVmSize(l: OnItemCommandListener?, vm: ViewModel?, width: Int?, height: Int?) {
+fun CardView.setupCommandVmSize(
+    l: OnItemCommandListener?,
+    vm: ViewModel?,
+    width: Int?,
+    height: Int?
+) {
     l?.let {
         onClick {
             vm?.let {
@@ -208,8 +215,14 @@ private fun ImageView.loadImage(
     errorDrawable: Drawable?,
     listener: RequestListener<Drawable>
 ) {
-    Glide.with(this)
+    GlideApp.with(this)
         .load(uri)
+        .format(DecodeFormat.PREFER_RGB_565)
+        .placeholder(placeholder)
+        .error(errorDrawable)
+        .dontAnimate()
+        .skipMemoryCache(false)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .listener(listener)
         .into(this)
 }

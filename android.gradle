@@ -48,15 +48,9 @@ android {
             // https://issuetracker.google.com/issues/110198434 and
             // https://youtrack.jetbrains.com/issue/KT-24915#comment=27-2914947
             tasks.whenTaskAdded { task ->
-                if (task.name == 'kaptDebugKotlin') {
-                    task.dependsOn dataBindingExportFeaturePackageIdsDebug
-                }
-                if (task.name == 'kaptProdDebugKotlin') {
-                    task.dependsOn dataBindingExportFeaturePackageIdsProdDebug
-                }
-                if (task.name == 'kaptMockDebugKotlin') {
-                    task.dependsOn dataBindingExportFeaturePackageIdsMockDebug
-                }
+                if (task.name == 'kaptDebugKotlin' && project.tasks.findByName('dataBindingExportFeaturePackageIdsDebug')) task.dependsOn dataBindingExportFeaturePackageIdsDebug
+                if (task.name == 'kaptProdDebugKotlin' && project.tasks.findByName('dataBindingExportFeaturePackageIdsProdDebug')) task.dependsOn dataBindingExportFeaturePackageIdsProdDebug
+                if (task.name == 'kaptMockDebugKotlin' && project.tasks.findByName('dataBindingExportFeaturePackageIdsMockDebug')) task.dependsOn dataBindingExportFeaturePackageIdsMockDebug
             }
         }
 
@@ -70,15 +64,9 @@ android {
             // https://issuetracker.google.com/issues/110198434 and
             // https://youtrack.jetbrains.com/issue/KT-24915#comment=27-2914947
             tasks.whenTaskAdded { task ->
-                if (task.name == 'kaptReleaseKotlin') {
-                    task.dependsOn dataBindingExportFeaturePackageIdsRelease
-                }
-                if (task.name == 'kaptProdReleaseKotlin') {
-                    task.dependsOn dataBindingExportFeaturePackageIdsProdRelease
-                }
-                if (task.name == 'kaptMockReleaseKotlin') {
-                    task.dependsOn dataBindingExportFeaturePackageIdsMockRelease
-                }
+                if (task.name == 'kaptReleaseKotlin' && project.tasks.findByName('dataBindingExportFeaturePackageIdsRelease')) task.dependsOn dataBindingExportFeaturePackageIdsRelease
+                if (task.name == 'kaptProdReleaseKotlin' && project.tasks.findByName('dataBindingExportFeaturePackageIdsProdRelease')) task.dependsOn dataBindingExportFeaturePackageIdsProdRelease
+                if (task.name == 'kaptMockReleaseKotlin' && project.tasks.findByName('dataBindingExportFeaturePackageIdsMockRelease')) task.dependsOn dataBindingExportFeaturePackageIdsMockRelease
             }
         }
     }

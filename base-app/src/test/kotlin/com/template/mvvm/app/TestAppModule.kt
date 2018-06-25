@@ -4,6 +4,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.notNullValue
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,6 +22,7 @@ class TestAppModule {
     }
 
     @Test
+    @Ignore
     fun testAppExist() {
         assertThat(app, `is`(notNullValue()))
     }

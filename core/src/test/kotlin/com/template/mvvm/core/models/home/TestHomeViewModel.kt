@@ -1,11 +1,11 @@
 package com.template.mvvm.core.models.home
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LifecycleRegistry
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.support.annotation.IdRes
+import androidx.annotation.IdRes
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.template.mvvm.core.R
 import com.template.mvvm.core.arch.registerLifecycleOwner
 import com.template.mvvm.core.sleepWhile

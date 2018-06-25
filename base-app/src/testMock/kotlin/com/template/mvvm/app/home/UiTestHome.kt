@@ -1,12 +1,12 @@
 package com.template.mvvm.app.home
 
 import android.content.Intent
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.widget.Toolbar
 import android.view.View
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.template.mvvm.app.AppTestRule
 import com.template.mvvm.app.R
 import com.template.mvvm.app.about.AboutActivity
@@ -14,16 +14,17 @@ import com.template.mvvm.app.advanceToNextPostedRunnable
 import com.template.mvvm.app.applyView
 import com.template.mvvm.app.finish
 import com.template.mvvm.app.licenses.SoftwareLicensesActivity
+import com.template.mvvm.app.product.AllGenderFragment
+import com.template.mvvm.app.product.MenFragment
 import com.template.mvvm.app.product.ProductsActivity
+import com.template.mvvm.app.product.WomenFragment
 import com.template.mvvm.app.uiTestAppearance
 import com.template.mvvm.base.ext.android.app.findChildFragment
 import com.template.mvvm.base.ext.android.view.findSubItem
 import com.template.mvvm.base.ext.android.widget.getMenuItemView
 import com.template.mvvm.base.ext.android.widget.isDrawerTurnOn
-import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
@@ -34,10 +35,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
-import com.template.mvvm.app.product.ProductsFragment
-import com.template.mvvm.app.product.MenFragment
-import com.template.mvvm.app.product.WomenFragment
-import com.template.mvvm.app.product.AllGenderFragment
 
 // TODO Re-do this tests after google fixed data-binding.
 @Ignore
