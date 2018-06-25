@@ -6,7 +6,7 @@ android:
     - tools
     - platform-tools
     - android-28
-    - build-tools-28-rc2
+    - build-tools-28
     - add-on
     - extra
 licenses:
@@ -25,4 +25,4 @@ cache:
 before_install:
       - chmod +x ./gradlew
       - yes | sdkmanager "platforms;android-28"
-      - yes | sdkmanager "build-tools;28.0.0-rc2"
+      - yes | sdkmanager "build-tools;28.0.0"
