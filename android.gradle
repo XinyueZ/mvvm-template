@@ -51,6 +51,12 @@ android {
                 if (task.name == 'kaptDebugKotlin') {
                     task.dependsOn dataBindingExportFeaturePackageIdsDebug
                 }
+                if (task.name == 'kaptProdDebugKotlin') {
+                    task.dependsOn dataBindingExportFeaturePackageIdsProdDebug
+                }
+                if (task.name == 'kaptMockDebugKotlin') {
+                    task.dependsOn dataBindingExportFeaturePackageIdsMockDebug
+                }
             }
         }
 
@@ -66,6 +72,12 @@ android {
             tasks.whenTaskAdded { task ->
                 if (task.name == 'kaptReleaseKotlin') {
                     task.dependsOn dataBindingExportFeaturePackageIdsRelease
+                }
+                if (task.name == 'kaptProdReleaseKotlin') {
+                    task.dependsOn dataBindingExportFeaturePackageIdsProdRelease
+                }
+                if (task.name == 'kaptMockReleaseKotlin') {
+                    task.dependsOn dataBindingExportFeaturePackageIdsMockRelease
                 }
             }
         }
