@@ -30,70 +30,74 @@ ext {
 
     minifyEnabled = true
     useProguard = true
+
+
+
+    archComp = "+"
+    archRoom = "+"
+    multiDex = "+"
+    paging = "+"
+    constraint = "+"
+    ktx = "+"
+    testRunner = "+"
+    espresso = "+"
+    junit = "+"
+    multidex = "+"
+    material = "+"
+    media = "+"
+    browser = "+"
+    palette = "+"
+    cardview = "+"
+    appcompat = "+"
+    core = "+"
+    recyclerview = "+"
+    coreUi = "+"
+    coreUiUtils = "+"
+    fragment = "+"
+    annotation = "+"
+    testRunner = "+"
+    testRules = "+"
+    espresso = "+"
+    junit = "+"
+    roomTest = "+"
+    instantapps = "1.1.0"
+
+    // Retrofit
+    retrofit = "+"
+
+    //Material Design Guideline
+    guideline = "+"
+
+    //Json
+    gson = "+"
+
+    //Image-loader
+    imageLoader = "4.8.0-SNAPSHOT"
+
+    //Debug tool
+    curl = "0.1"
+    stetho = "1.5.0"
+
+    //Kotlin
+    kotlinCoroutines = "+"
+
+    //Tests
+    robolectric = "+"
+    robolectricSupportV4 = "+"
+    shadowsMultidex = "+"
+    mockitoVersion = "2.13.0"
+    mockitoAndroidVersion = "2.13.0"
+    hamcrest = "+"
+    dexmaker = "+"
+    kotlinTest = "2.0.7"
 }
 
 
 buildscript {
-    ext.kotlin_version = '1.2.50'
-    ext.gradle_version = '3.2.0-beta01'
-    ext.archComp = "+"
-    ext.archRoom = "+"
-    ext.multiDex = "+"
-    ext.paging = "+"
-    ext.constraint = "+"
-    ext.ktx = "+"
-    ext.testRunner = "+"
-    ext.espresso = "+"
-    ext.junit = "+"
-    ext.multidex = "+"
-    ext.material = "+"
-    ext.media = "+"
-    ext.browser = "+"
-    ext.palette = "+"
-    ext.cardview = "+"
-    ext.appcompat = "+"
-    ext.core = "+"
-    ext.recyclerview = "+"
-    ext.coreUi = "+"
-    ext.coreUiUtils = "+"
-    ext.fragment = "+"
-    ext.annotation = "+"
-    ext.testRunner ="+"
-    ext.testRules = "+"
-    ext.espresso = "+"
-    ext.junit = "+"
-    ext.roomTest = "+"
-    ext.instantapps = "1.1.0"
-
-    // Retrofit
-    ext.retrofit = "+"
-
-    //Material Design Guideline
-    ext.guideline = "+"
-
-    //Json
-    ext.gson = "+"
-
-    //Image-loader
-    ext.imageLoader = "4.8.0-SNAPSHOT"
-
-    //Debug tool
-    ext.curl = "0.1"
-    ext.stetho = "1.5.0"
-
-    //Kotlin
-    ext.kotlin = ext.kotlin_version
-    ext.kotlinCoroutines = "0.22.5"
-
-    //Tests
-    ext.robolectric = "+"
-    ext.robolectricSupportV4 = "+"
-    ext.shadowsMultidex = "+"
-    ext.mockitoVersion = "2.13.0"
-    ext.mockitoAndroidVersion = "2.13.0"
-    ext.hamcrest = "+"
-    ext.dexmaker = "+"
-    ext.kotlinTest = "2.0.7"
+    ext {
+        kotlin_version = '1.2.50'
+        gradle_version = '3.2.0-beta01'
+    }
 
     repositories {
         google()
